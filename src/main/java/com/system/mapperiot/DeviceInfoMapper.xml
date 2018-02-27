@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.DeviceInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
+        <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
+        <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
+        <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
+        <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseResultAndNodeMap" type="com.system.po.DeviceInfoAndNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
+        <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
+        <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
+        <result column="DI_NODEID" jdbcType="VARCHAR" property="dNodeId"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="dNodeName"/>
+        <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
+        <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseResultNodeMap" type="com.system.po.ORGTreeNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="NODE_ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="NODE_PID" jdbcType="VARCHAR" property="pId"/>
+    </resultMap>
+    <resultMap id="BaseResultBstMap" type="com.system.po.BootStrapTreeNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="NODE_ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="text"/>
+        <result column="NODE_PID" jdbcType="VARCHAR" property="pId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DI_NAME, DI_SERIALNUM,DI_IP,DI_PORT,DI_PROTOCOL,DI_NODEID,DI_SENDDATE,DI_RECEIVEDATE
+    </sql>
+    <select id="selectDeviceByORGId" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from IOT_DEVICEINFO
+        WHERE di_nodeId = #{orgId}
+        order by DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceAndNodeByORGId" parameterType="String" resultMap="BaseResultAndNodeMap">
+        select a.*,b.node_name
+        from IOT_DEVICEINFO a,iot_orgtreenode b
+        where a.di_nodeid=b.node_id
+        AND a.di_nodeId = #{orgId}
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceInfoByIDs" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from IOT_DEVICEINFO
+        where DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectDeviceInfoByID" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from IOT_DEVICEINFO
+        where DI_SERIALNUM = #{deviceId}
+    </select>
+    <select id="selectDeviceInfo" resultMap="BaseResultNodeMap">
+        select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
+        from IOT_DEVICEINFO t
+        order by t.di_serialnum
+    </select>
+    <select id="selectDeviceByOrgId" resultMap="BaseResultNodeMap">
+        select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
+        from IOT_DEVICEINFO t
+        WHERE di_nodeId = #{orgId}
+        order by t.di_serialnum
+    </select>
+    <select id="selectBstDeviceByOrgId" resultMap="BaseResultBstMap">
+        select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
+        from IOT_DEVICEINFO t
+        WHERE di_nodeId = #{orgId}
+        order by t.di_serialnum
+    </select>
+    <update id="updateDeviceOrgId">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="sOrgId != null">
+                DI_NODEID = #{sOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="sDeviceName != null">
+                DI_NAME = #{sDeviceName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DI_SERIALNUM = #{sSerialNum,jdbcType=VARCHAR}
+    </update>
+    <update id="batchUpdateDeviceOrgId">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="sOrgId != null">
+                DI_NODEID = #{sOrgId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>
