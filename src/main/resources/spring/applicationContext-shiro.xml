@@ -18,7 +18,7 @@
 
     <!-- 配置securityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="cacheManager" ref="cacheManager"/>
+       <!-- <property name="cacheManager" ref="cacheManager"/>-->
         <property name="authenticator" ref="authenticator"/>
         <property name="sessionManager" ref="sessionManager"/>
         <property name="realms">
