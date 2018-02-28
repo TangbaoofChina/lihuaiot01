@@ -23,7 +23,7 @@
 
                 <!-- 登陆面板的标题 -->
                 <div class="panel-title" style="text-align: center">
-                    <h2>登录</h2>
+                    <h2>登录test</h2>
                 </div>
 
                 <!-- 登陆面板的主体 -->
