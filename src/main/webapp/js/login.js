@@ -66,7 +66,6 @@ function validatorInit() {
                 url: "/lihuaiot01/account/login",
                 type: "POST",
                 dataType: "json",
-                async: true,   // 轻轻方式-异步
                 data: {username: username, userpwd: encrypedPwd},
                 success: function (response) {
                     // 接收到后端响应
