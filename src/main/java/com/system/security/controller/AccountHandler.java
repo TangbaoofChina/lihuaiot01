@@ -15,6 +15,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +44,7 @@ public class AccountHandler {
     private static final String USER_ID = "id";
     private static final String USER_NAME = "userName";
     private static final String USER_PASSWORD = "password";
-
+    private static Logger logger = LoggerFactory.getLogger("AccountHandler");
 
     @RequestMapping(value = "/beforeLogin", method = {RequestMethod.GET})
     @ResponseBody
@@ -87,19 +89,20 @@ public class AccountHandler {
         /*if (currentUser != null && !currentUser.isAuthenticated()) {*/
         String id = username;
         String password = userpwd;
-        //解密-start
-        byte[] en_result = new BigInteger(password, 16).toByteArray();
-        byte[] de_result = RSAUtil.decrypt(RSAUtil.getKeyPair().getPrivate(), en_result);
-        StringBuffer sb = new StringBuffer();
-        sb.append(new String(de_result));
-        String pwd = sb.reverse().toString();
-        //解密-end
-            /*String id = (String) user.get(USER_ID);
-            String password = (String) user.get(USER_PASSWORD);*/
         Session session = currentUser.getSession();
-        UsernamePasswordToken token = new UsernamePasswordToken(id, pwd);
 
         try {
+            //解密-start
+            //byte[] en_result = new BigInteger(password, 16).toByteArray();
+            byte[] en_result = RSAUtil.hexStringToBytes(password);
+            byte[] de_result = RSAUtil.decrypt(RSAUtil.getKeyPair().getPrivate(), en_result);
+            StringBuffer sb = new StringBuffer();
+            sb.append(new String(de_result));
+            String pwd = sb.reverse().toString();
+            //解密-end
+            /*String id = (String) user.get(USER_ID);
+            String password = (String) user.get(USER_PASSWORD);*/
+            UsernamePasswordToken token = new UsernamePasswordToken(id, pwd);
             // 执行登陆操作
             currentUser.login(token);
 
@@ -122,6 +125,8 @@ public class AccountHandler {
             e.printStackTrace();
         } catch (Exception e) {
             errorMsg = "ServerError";
+            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             // 当登陆失败则清除session中的用户信息
             if (result.equals(Response.RESPONSE_RESULT_ERROR)){

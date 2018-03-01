@@ -3,6 +3,7 @@ package com.system.util;
 /**
  *
  */
+
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -26,10 +27,10 @@ import java.security.spec.RSAPublicKeySpec;
 /**
  * RSA 工具类。提供加密，解密，生成密钥对等方法。
  * 需要到http://www.bouncycastle.org下载bcprov-jdk14-123.jar。
- *
  */
 public class RSAUtil {
     private static String RSAKeyStore = "../RSAKey.txt";
+
     /**
      * * 生成密钥对 *
      *
@@ -76,7 +77,7 @@ public class RSAUtil {
     /**
      * * 生成公钥 *
      *
-     * @param modulus *
+     * @param modulus        *
      * @param publicExponent *
      * @return RSAPublicKey *
      * @throws Exception
@@ -103,7 +104,7 @@ public class RSAUtil {
     /**
      * * 生成私钥 *
      *
-     * @param modulus *
+     * @param modulus         *
      * @param privateExponent *
      * @return RSAPrivateKey *
      * @throws Exception
@@ -130,10 +131,8 @@ public class RSAUtil {
     /**
      * * 加密 *
      *
-     * @param pk
-     *            加密的密钥 *
-     * @param data
-     *            待加密的明文数据 *
+     * @param pk   加密的密钥 *
+     * @param data 待加密的明文数据 *
      * @return 加密后的数据 *
      * @throws Exception
      */
@@ -174,10 +173,8 @@ public class RSAUtil {
     /**
      * * 解密 *
      *
-     * @param pk
-     *            解密的密钥 *
-     * @param raw
-     *            已经加密的数据 *
+     * @param pk  解密的密钥 *
+     * @param raw 已经加密的数据 *
      * @return 解密后的明文 *
      * @throws Exception
      */
@@ -198,5 +195,49 @@ public class RSAUtil {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+
+    /**
+     * 16进制 To byte[] * @param hexString * @return byte[]
+     */
+
+    public static byte[] hexStringToBytes(String hexString) {
+
+        if (hexString == null || hexString.equals("")) {
+
+            return null;
+
+        }
+
+        hexString = hexString.toUpperCase();
+
+        int length = hexString.length() / 2;
+
+        char[] hexChars = hexString.toCharArray();
+
+        byte[] d = new byte[length];
+
+        for (int i = 0; i < length; i++) {
+
+            int pos = i * 2;
+
+            d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
+
+        }
+
+        return d;
+
+    }
+
+
+    /**
+     * Convert char to byte * @param c char * @return byte
+     */
+
+    private static byte charToByte(char c) {
+
+        return (byte) "0123456789ABCDEF".indexOf(c);
+
     }
 }
