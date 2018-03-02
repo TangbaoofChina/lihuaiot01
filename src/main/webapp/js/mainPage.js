@@ -1,4 +1,5 @@
 var mainNowTab;
+var mianid_of_setinterval;
 $(function () {
     menuClickAction();
     /*welcomePageInit();*/
@@ -18,6 +19,12 @@ $(function () {
         //阻止默认事件
         return false;
     };
+
+    //定时刷新报警条数
+    mianid_of_setinterval = setInterval(function () {
+        mainRealAlarmCountRefresh();
+    }, 3000);
+
 });
 
 //关闭右键菜单，很简单
@@ -49,9 +56,39 @@ var delay = (function () {
     };
 })();
 
+function mainRealAlarmCountRefresh() {
+    $.ajax({
+        type: "GET",
+        url: "/lihuaiot01/realAlarm/selectDeviceRealAlarmCount",
+        dataType: "json",
+        async: true,   // 轻轻方式-异步
+        success: function (response) {
+            console.log(response);
+            document.getElementById('mainRealAlarmCountlab').innerHTML = response.alarmCount;
+        }, error: function (XMLHttpRequest) {
+            if (mianid_of_setinterval !== undefined) {
+                clearInterval(mianid_of_setinterval);
+            }
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    })
+}
 
 // 侧边栏连接点击动作
 function menuClickAction() {
+    $("#realalarm").click(function () {
+        var url = $(this).attr("name");
+        var val = $(this)[0].innerText;
+        var id = $(this).attr("id");
+        delay(function () {
+            $("#tabContent").data("tabs").addTab({
+                id: id + "tab",
+                text: "设备列表",
+                closeable: true,
+                url: url
+            })
+        }, 200);
+    });
     $(".menu_item").click(function () {
         var url = $(this).attr("name");
         var val = $(this)[0].innerText;
@@ -65,10 +102,10 @@ function menuClickAction() {
             })
         }, 200);
     });
-/*    $(".shortcut").click(function () {
-        var url = $(this).attr("name");
-        console.log(url);
-    });*/
+    /*    $(".shortcut").click(function () {
+            var url = $(this).attr("name");
+            console.log(url);
+        });*/
 }
 
 function removeOneTabContent(tabName) {
@@ -105,7 +142,7 @@ function mainAllTabClose() {
     var tabChildNodes = $('.tab-content')[0].childNodes;
     var tabChildNodesName = [];
     for (var i = 0; i < tabChildNodes.length; i++) {
-        if(tabChildNodes[i].id === 'home')
+        if (tabChildNodes[i].id === 'home')
             continue;
         tabChildNodesName.push(tabChildNodes[i].id);
     }
@@ -116,9 +153,9 @@ function mainOthersTabClose() {
     var tabChildNodes = $('.tab-content')[0].childNodes;
     var tabChildNodesName = [];
     for (var i = 0; i < tabChildNodes.length; i++) {
-        if(tabChildNodes[i].id === 'home')
+        if (tabChildNodes[i].id === 'home')
             continue;
-        if(tabChildNodes[i].id === mainNowTab)
+        if (tabChildNodes[i].id === mainNowTab)
             continue;
         tabChildNodesName.push(tabChildNodes[i].id);
     }

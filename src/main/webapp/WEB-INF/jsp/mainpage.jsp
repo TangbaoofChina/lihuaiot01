@@ -40,6 +40,7 @@
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/daterangepicker.css">
     <link rel="shortcut icon" href="/lihuaiot01/images/lihuaiotweb01.ico"/>
+
 </head>
 <body>
 
@@ -81,6 +82,16 @@
                         </ul>
                     </li>
                 </ul>
+            </div>
+
+            <div class="nav navbar-nav navbar-right" style="position: relative;">
+                <div class="realAlarmCount">
+                    <label id="mainRealAlarmCountlab">0</label>
+                </div>
+                <a href="javascript:void(0)" id="realalarm" class="navbar-brand"
+                   name="/lihuaiot01/jsp/userpage/devicelist.jsp">
+                    <img alt="Brand" src="images/realalarm.png" height="25">
+                </a>
             </div>
         </div>
     </nav>

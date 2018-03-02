@@ -1,15 +1,17 @@
 var rdlNowTreeNode;
 var rdlTableColumns;
 var rdlTreeNodes;
+var realid_of_setintervalDeviceList;
+var realid_of_setintervalDeviceOne;
 $(function () {
     rdlInitTreeNode();
     rdlInitTable();
     rdlExportStorageAction();
     //定时刷新数据
-    setInterval(function () {
+    realid_of_setintervalDeviceList = setInterval(function () {
         rdlTableRefresh();
     }, 3000);
-    setInterval(function () {
+    realid_of_setintervalDeviceOne = setInterval(function () {
         rdlSelectInfoByDeviceId();
     }, 3000);
 })
@@ -223,6 +225,9 @@ function rdlSelectInfoByDeviceId() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if (realid_of_setintervalDeviceOne !== undefined) {
+                clearInterval(realid_of_setintervalDeviceOne);
+            }
             //alert(XMLHttpRequest.status);
             handleAjaxError(XMLHttpRequest.status);
             //alert(XMLHttpRequest.readyState);
@@ -290,10 +295,22 @@ function rdlTableRefresh() {
     if (queryParameter.length === 4) {
         return;
     }
-    $('#rdlDeviceList').bootstrapTable('refresh', {
-        query: {},
-        silent: true,
-    });
+    try {
+        $('#rdlDeviceList').bootstrapTable('refresh', {
+            query: {},
+            silent: true,
+        });
+    }
+    catch(err){
+        if (realid_of_setintervalDeviceList !== undefined) {
+            clearInterval(realid_of_setintervalDeviceList);
+        }
+        var type = 'error';
+        var msg = '实时数据列表定时刷新出错';
+        var append = '对不起，实时数据列表定时刷新出错:'+err;
+        showMsg(type, msg, append);
+    }
+
 }
 
 function rdlSelectDeviceByTreeId() {
