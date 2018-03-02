@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.RoleInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.RoleInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="ROLE_DESCRIBE" jdbcType="VARCHAR" property="roleDescribe"/>
+        <result column="ROLE_CREATUSERID" jdbcType="VARCHAR" property="roleCreatUserId"/>
+        <result column="ROLE_CREATDATE" jdbcType="VARCHAR" property="roleCreatDate"/>
+    </resultMap>
+    <select id="selectRoleInfo" resultMap="BaseResultMap">
+        SELECT * from iot_role
+    </select>
+
+</mapper>

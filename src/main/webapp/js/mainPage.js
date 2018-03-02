@@ -63,9 +63,9 @@ function mainRealAlarmCountRefresh() {
         dataType: "json",
         async: true,   // 轻轻方式-异步
         success: function (response) {
-            console.log(response);
+            /*console.log(response);*/
             document.getElementById('mainRealAlarmCountlab').innerHTML = response.alarmCount;
-        }, error: function (XMLHttpRequest) {
+        }, error: function (e,XMLHttpRequest, textStatus, errorThrown) {
             if (mianid_of_setinterval !== undefined) {
                 clearInterval(mianid_of_setinterval);
             }

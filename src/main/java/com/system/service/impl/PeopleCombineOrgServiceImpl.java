@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class peopleCombineOrgServiceImple implements PeopleCombineOrgService {
+public class PeopleCombineOrgServiceImpl implements PeopleCombineOrgService {
     @Autowired
     private PeopleInfoMapper peopleInfoMapper;
     @Autowired
