@@ -50,6 +50,11 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
+    public List<DeviceInfo> selectDeviceInfoByRoleId(String roleId) throws Exception {
+        return deviceInfoMapper.selectDeviceInfoByRoleId(roleId);
+    }
+
+    @Override
     public int updateDeviceOrgId(String sSerialNum,String deviceName, String sOrgId) throws Exception {
         return deviceInfoMapper.updateDeviceOrgId(sSerialNum,deviceName,sOrgId);
     }

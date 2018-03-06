@@ -10,7 +10,30 @@
         <result column="ROLE_CREATDATE" jdbcType="VARCHAR" property="roleCreatDate"/>
     </resultMap>
     <select id="selectRoleInfo" resultMap="BaseResultMap">
-        SELECT * from iot_role
+        SELECT * from iot_role order by iot_role.ROLE_NAME
     </select>
-
+    <select id="selectRoleInfoByRoleName" parameterType="String" resultMap="BaseResultMap">
+        SELECT * from iot_role where iot_role.ROLE_NAME = #{roleName}
+        order by iot_role.ROLE_NAME
+    </select>
+    <insert id="insertNewRoleInfo">
+        <selectKey keyProperty="sId" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        INSERT INTO iot_role(ROLE_ID,ROLE_NAME,ROLE_DESCRIBE,ROLE_CREATUSERID,ROLE_CREATDATE)
+        values (#{sId,jdbcType=VARCHAR},#{roleInfo.roleName,jdbcType=VARCHAR},#{roleInfo.roleDescribe,jdbcType=VARCHAR}
+                ,#{roleInfo.roleCreatUserId,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateRoleInfoByRoleId">
+        UPDATE iot_role
+        SET ROLE_NAME = #{roleInfo.roleName,jdbcType=VARCHAR},
+            ROLE_DESCRIBE = #{roleInfo.roleDescribe,jdbcType=VARCHAR},
+            ROLE_CREATUSERID = #{roleInfo.roleCreatUserId,jdbcType=VARCHAR},
+            ROLE_CREATDATE = #{createDate,jdbcType=TIMESTAMP}
+        WHERE ROLE_ID = #{roleInfo.roleId,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteRoleInfoByRoleId" parameterType="String">
+        DELETE from iot_role
+        WHERE ROLE_ID = #{roleId}
+    </delete>
 </mapper>

@@ -84,6 +84,14 @@
         WHERE di_nodeId = #{orgId}
         order by t.di_serialnum
     </select>
+    <select id="selectDeviceInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
+        select
+        a.*
+        from IOT_DEVICEINFO a,iot_devicerole b
+        WHERE a.di_serialnum = b.devrole_devnum
+        and b.devrole_roleid = #{roleId}
+        order by a.DI_SERIALNUM asc
+    </select>
     <update id="updateDeviceOrgId">
         update IOT_DEVICEINFO
         <set>

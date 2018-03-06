@@ -69,7 +69,8 @@ function mainRealAlarmCountRefresh() {
             if (mianid_of_setinterval !== undefined) {
                 clearInterval(mianid_of_setinterval);
             }
-            handleAjaxError(XMLHttpRequest.status);
+            document.getElementById('mainRealAlarmCountlab').innerHTML = "-1";
+            //handleAjaxError(XMLHttpRequest.status);
         }
     })
 }

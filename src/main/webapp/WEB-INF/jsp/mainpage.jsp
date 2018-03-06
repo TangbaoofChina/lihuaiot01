@@ -19,6 +19,8 @@
           href="/lihuaiot01/css/bootstrap-multiselect.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-tab.css">
+<%--    <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/bootstrap/bootstrap-select/css/bootstrap-select.min.css">--%>
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css"
@@ -350,6 +352,8 @@
         src="/lihuaiot01/bootstrap/bootstrap-multiselect.js"></script>
 <script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-tab.js"></script>
+<%--<script type="text/javascript"
+        src="/lihuaiot01/bootstrap/bootstrap-select/js/bootstrap-select.min.js"></script>--%>
 <%--contextmenu start 与 tab有冲突--%>
 <%--<script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-contextmenu.js"></script>--%>

@@ -219,11 +219,11 @@ function peopleOrgAddNewShow() {
 
     });*/
     //取消按钮
-    $('#addNew-cancel').bind('click', function (e) {
+    $('#peopleOrgaddNew-cancel').bind('click', function (e) {
         $('#peopleOrgaddNew-popup').hide('slow');
     });
     //x按钮
-    $('#addNew-close').bind('click', function (e) {
+    $('#peopleOrgaddNew-close').bind('click', function (e) {
         $('#peopleOrgaddNew-popup').hide('slow');
     });
 }

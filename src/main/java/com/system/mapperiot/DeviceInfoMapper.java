@@ -15,7 +15,9 @@ public interface DeviceInfoMapper {
     List<DeviceInfo> selectDeviceByORGId(String orgId);
     List<DeviceInfoAndNode> selectDeviceAndNodeByORGId(String orgId);
     List<DeviceInfo> selectDeviceInfoByIDs(@Param("deviceIds") String[] deviceIds);
+    List<DeviceInfo> selectDeviceInfoByRoleId(String roleId);
     DeviceInfo selectDeviceInfoByID(String deviceId);
     Integer updateDeviceOrgId(@Param("sSerialNum")String sSerialNum,@Param("sDeviceName")String deviceName,@Param("sOrgId")String sOrgId);
     void batchUpdateDeviceOrgId(@Param("deviceIds")String[] deviceIds,@Param("sOrgId")String sOrgId);
+
 }

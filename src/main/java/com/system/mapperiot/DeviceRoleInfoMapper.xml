@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.DeviceRoleInfoMapper">
+    <insert id="insertDeviceRoleInfo" parameterType="java.util.List">
+        INSERT INTO iot_devicerole(DEVROLE_DEVNUM,DEVROLE_ROLEID)
+        (
+        <foreach collection="deviceRoleInfoList" item="item" index="index" open="(" close=")" separator="union all">
+            SELECT #{item.devNum} as DEVROLE_DEVNUM, #{item.roleId} as DEVROLE_ROLEID FROM DUAL
+        </foreach>
+        )
+    </insert>
+    <delete id="deleteDeviceRoleInfoByRoleId" parameterType="String">
+        DELETE FROM iot_devicerole
+        WHERE DEVROLE_ROLEID = #{roleId}
+    </delete>
+</mapper>

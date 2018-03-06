@@ -1,6 +1,17 @@
 var roleTableColumns;
+var roleOrgTreeNodes;
+var roleSelectORG;
+var roleSelectRole;
 $(function () {
     roleInitTableHead();
+    roleOrgInitTreeNode();
+    /*// 缺一不可
+    $('#roleDeviceSelBefore').selectpicker('refresh');
+    $('#roleDeviceSelBefore').selectpicker('render');
+    // 缺一不可
+    $('#roleDeviceSelEnd').selectpicker('refresh');
+    $('#roleDeviceSelEnd').selectpicker('render');*/
+    roleOperateDevice();
 });
 
 function roleInitTableHead() {
@@ -22,7 +33,7 @@ function roleInitTableHead() {
                 title: '操作',
                 formatter: function (value, row, index) {
                     var s = '<a class = "roleChangeDevice" href="javascript:void(0)">分配</a>';
-                    var d = '<a class = "roleRemoveDevice" href="javascript:void(0)">删除</a>';
+                    var d = '<a class = "roleRemoveRole" href="javascript:void(0)">删除</a>';
                     return s + ' ' + d;
                 },
                 events: 'operateEvents'
@@ -66,7 +77,7 @@ function roleInitTableContent() {
         //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],
         //是否显示搜索
-        search: false,
+        search: true,
         //是否显示列头
         showHeader: true,
         //data:json,
@@ -78,14 +89,171 @@ function roleInitTableContent() {
         //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
         //queryParamsType:'',
         ////查询参数,每次调用是会带上这个参数，可自定义
-        queryParamsType: 'limit',//查询参数组织方式
-        queryParams: roleQueryParams,
+        /*queryParamsType: 'limit',//查询参数组织方式
+        queryParams: roleQueryParams,*/
         //分页方式：client客户端分页，server服务端分页（*）
-        sidePagination: "server",
+        sidePagination: "client",
         locale: 'zh-CN',//中文支持
         /* toolbar: '#toolbar',//指定工作栏*/
         columns: roleTableColumns,
     });
+}
+
+function roleOrgInitTreeNode() {
+    // Some logic to retrieve, or generate tree structure
+    $.ajax({
+        url: "/lihuaiot01/bootStrapTreeNode/selectTreeNode",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "json",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: {},
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                var json = eval(result); //数组
+                roleOrgTreeNodes = json;
+                $('#roleOrgTree01').treeview({
+                    data: roleOrgTreeNodes,
+                    showTags: true,
+                    highlightSelected: true,    //是否高亮选中
+                    emptyIcon: '',    //没有子节点的节点图标
+                    selectedBackColor: "#8D9CAA",
+                    onNodeSelected: roleOrgNodeSelected01,
+                });
+            } else {
+                //alert("未查询到树形组织数据");
+                var type = 'warning';
+                var msg = '未查询到树形组织数据';
+                var append = '对不起，未查询到您要的树形组织数据';
+                showMsg(type, msg, append);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //alert(XMLHttpRequest.status);
+            handleAjaxError(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.readyState);
+            //alert(textStatus);
+        }
+    });
+}
+
+function roleOrgNodeSelected01(event, data) {
+    roleSelectORG = data;
+    if (data.nodes != null) {
+        var select_node = $('#roleOrgTree01').treeview('getSelected');
+        if (select_node[0].state.expanded) {
+            $('#roleOrgTree01').treeview('collapseNode', select_node);
+            select_node[0].state.selected = false;
+        }
+        else {
+            $('#roleOrgTree01').treeview('expandNode', select_node);
+            select_node[0].state.selected = false;
+        }
+    }
+    roleSelectDeviceByOrgId();
+}
+
+function roleSelectDeviceByOrgId() {
+    var sORGId;
+    if (typeof(roleSelectORG) !== "undefined") {
+        sORGId = roleSelectORG.id;
+    } else
+        return;
+    $.ajax({
+        url: "/lihuaiot01/roleCombineDev/selectDeviceByORGId",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "json",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: {sORGId: sORGId},
+        success: function (result) {
+            $('#roleDeviceSelBefore').empty();
+            if (JSON.stringify(result) !== '[]') {
+                /*console.log(result);*/
+                for (var i = 0; i < result.length; i++) {
+                    //先创建好select里面的option元素
+                    //var length = $("#").find("option[value=0001]").size();
+                    var selEndlength = $("option[value=" + result[i].dSerialNum + "]", "#roleDeviceSelEnd").length;
+                    if (selEndlength > 0)
+                        continue;
+                    var option = document.createElement("option");
+                    //转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+                    $(option).val(result[i].dSerialNum);
+                    //给option的text赋值,这就是你点开下拉框能够看到的东西
+                    $(option).attr("title", result[i].dName);
+                    $(option).text(result[i].dName);
+                    //获取select 下拉框对象,并将option添加进select
+                    $('#roleDeviceSelBefore').append(option);
+                }
+            }
+        },
+        error: function (XMLHttpRequest) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function roleOperateDevice() {
+    $('#roleDeviceSelBefore').dblclick(function () {
+        var operationBefore = $('#roleDeviceSelBefore option:selected');
+        operationBefore[0].selected = false;
+        $('#roleDeviceSelEnd').append(operationBefore);
+        $('#roleDeviceSelBefore option:selected').remove();
+    });
+    $('#roleDeviceSelEnd').dblclick(function () {
+        var operationEnd = $('#roleDeviceSelEnd option:selected');
+        operationEnd[0].selected = false;
+        $('#roleDeviceSelBefore').append(operationEnd);
+        $('#roleDeviceSelEnd option:selected').remove();
+    });
+}
+
+function roleOneDeviceToRight() {
+    var operationBefore = $('#roleDeviceSelBefore option:selected');
+    for (i = 0; i < operationBefore.length; i++) {
+        operationBefore[i].selected = false;
+    }
+    $('#roleDeviceSelEnd').append(operationBefore);
+    $('#roleDeviceSelBefore option:selected').remove();
+}
+
+function roleAllDeviceToRight() {
+    var operationBefore = $('#roleDeviceSelBefore option');
+    for (i = 0; i < operationBefore.length; i++) {
+        operationBefore[i].selected = false;
+        $('#roleDeviceSelEnd').append(operationBefore[i]);
+    }
+    /*    $("#roleDeviceSelBefore option").each(function (){
+            $(this).selected = false;
+            $('#roleDeviceSelEnd').append($(this));
+        });*/
+    $('#roleDeviceSelBefore').empty();
+}
+
+function roleOneDeviceToLeft() {
+    var operationEnd = $('#roleDeviceSelEnd option:selected');
+    for (i = 0; i < operationEnd.length; i++) {
+        operationEnd[i].selected = false;
+    }
+    $('#roleDeviceSelBefore').append(operationEnd);
+    $('#roleDeviceSelEnd option:selected').remove();
+}
+
+function roleAllDeviceToLeft() {
+    var operationEnd = $('#roleDeviceSelEnd option');
+    for (i = 0; i < operationEnd.length; i++) {
+        operationEnd[i].selected = false;
+        $('#roleDeviceSelBefore').append(operationEnd[i]);
+    }
+    /*$("#roleDeviceSelEnd option").each(function (){
+        $(this).selected = false;
+        $('#roleDeviceSelBefore').append($(this));
+    });*/
+    $('#roleDeviceSelEnd').empty();
 }
 
 function roleShowAdd() {
@@ -97,16 +265,174 @@ function roleShowAdd() {
  * 新增页面
  * */
 function roleAddNewShow() {
-    //保存按钮
-    /*    $('#addNew-save').bind('click', function (e) {
-
-        });*/
     //取消按钮
-    $('#addNew-cancel').bind('click', function (e) {
+    $('#roleaddNew-cancel').bind('click', function (e) {
         $('#roleaddNew-popup').hide('slow');
     });
     //x按钮
-    $('#addNew-close').bind('click', function (e) {
+    $('#roleaddNew-close').bind('click', function (e) {
         $('#roleaddNew-popup').hide('slow');
+    });
+}
+
+function roleInsertRoleInfo() {
+    var mRoleName = $('#roleNewName').val();
+    var mRoleDescribe = $('#roleNewDescribe').val();
+    $.ajax({
+        url: "/lihuaiot01/roleCombineDev/insertRoleInfo",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "text",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: {roleNewName: mRoleName, roleNewDescribe: mRoleDescribe},
+        success: function (result) {
+            $('#roleaddNew-popup').hide('slow');
+            roleInitTableContent();
+            if (result !== "新增完成") {
+                var type = 'warning';
+                var msg = '新增角色失败';
+                var append = '对不起，新增角色失败：' + result;
+                showMsg(type, msg, append);
+            }
+        },
+        error: function (XMLHttpRequest) {
+            $('#roleaddNew-popup').hide('slow');
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function roleShowModify() {
+    $('#roleModify-popup').show('slow');
+    roleModifyShow();
+}
+
+/**
+ * 修改页面
+ * */
+function roleModifyShow() {
+    //取消按钮
+    $('#roleModify-cancel').bind('click', function (e) {
+        $('#roleModify-popup').hide('slow');
+    });
+    //x按钮
+    $('#roleModify-close').bind('click', function (e) {
+        $('#roleModify-popup').hide('slow');
+    });
+}
+
+function roleUpdateRoleDevice() {
+    var mRoleId = roleSelectRole.roleId;
+    var mRoleName = $('#roleModifyName').val();
+    var mRoleDescribe = $('#roleModifyDescribe').val();
+    var operationEnd = $('#roleDeviceSelEnd option');
+    var deviceList = new Array();
+    $.each(operationEnd, function (id, obj) {
+        var object = new Object();
+        object.devNum = obj.value;
+        object.devName = obj.text;
+        object.roleId = mRoleId;
+        object.roleName = mRoleName;
+        object.roleDescribe = mRoleDescribe;
+        deviceList.push(object);
+    });
+    var deviceListstr = JSON.stringify(deviceList);
+    $.ajax({
+        url: "/lihuaiot01/roleCombineDev/insertUpdateRoleDeviceList",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "text",
+        contentType : 'application/json;charset=utf-8', //设置请求头信息
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: JSON.stringify(deviceList),
+        success: function (result) {
+            $('#roleModify-popup').hide('slow');
+            roleInitTableContent();
+            if (result !== "更新角色完成") {
+                var type = 'warning';
+                var msg = '更新角色失败';
+                var append = '对不起，更新角色失败：' + result;
+                showMsg(type, msg, append);
+            }
+        },
+        error: function (XMLHttpRequest) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+window.operateEvents = {
+    'click .roleChangeDevice': function (e, value, row, index) {
+        roleSelectRole = row;
+        updateRoleDeviceSelEnd();
+        var $txt = $('.roleModify-content').find('input');
+        $($txt[0]).val(row.roleName);
+        $($txt[1]).val(row.roleDescribe);
+        roleShowModify();
+    },
+    'click .roleRemoveRole': function (e, value, row, index) {
+        roleSelectRole = row;
+        $('#delcfmModel').modal();
+    }
+};
+
+function updateRoleDeviceSelEnd() {
+    var mRoleId = roleSelectRole.roleId;
+    $.ajax({
+        url: "/lihuaiot01/roleCombineDev/selectDeviceByRoleId",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "json",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: {roleId: mRoleId},
+        success: function (result) {
+            $('#roleDeviceSelEnd').empty();
+            if (JSON.stringify(result) !== '[]') {
+                /*console.log(result);*/
+                for (var i = 0; i < result.length; i++) {
+                    //先创建好select里面的option元素
+                    var option = document.createElement("option");
+                    //转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+                    $(option).val(result[i].dSerialNum);
+                    //给option的text赋值,这就是你点开下拉框能够看到的东西
+                    $(option).attr("title", result[i].dName);
+                    $(option).text(result[i].dName);
+                    //获取select 下拉框对象,并将option添加进select
+                    $('#roleDeviceSelEnd').append(option);
+                }
+            }
+        },
+        error: function (XMLHttpRequest) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function roleDeleteRole() {
+    var mRoleId = roleSelectRole.roleId;
+    $.ajax({
+        url: "/lihuaiot01/roleCombineDev/deleteRoleInfo",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "text",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: {roleId:mRoleId},
+        success: function (result) {
+            if(result === "删除成功")
+            {
+                roleInitTableContent();
+            }
+        },
+        error: function (XMLHttpRequest) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
     });
 }

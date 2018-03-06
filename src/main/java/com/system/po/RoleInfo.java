@@ -1,11 +1,13 @@
 package com.system.po;
 
+import java.util.Date;
+
 public class RoleInfo {
     private String roleId;
     private String roleName;
     private String roleDescribe;
     private String roleCreatUserId;
-    private String roleCreatDate;
+    private Date roleCreatDate;
 
     public String getRoleId() {
         return roleId;
@@ -39,11 +41,11 @@ public class RoleInfo {
         this.roleCreatUserId = roleCreatUserId;
     }
 
-    public String getRoleCreatDate() {
+    public Date getRoleCreatDate() {
         return roleCreatDate;
     }
 
-    public void setRoleCreatDate(String roleCreatDate) {
+    public void setRoleCreatDate(Date roleCreatDate) {
         this.roleCreatDate = roleCreatDate;
     }
 }

@@ -90,7 +90,7 @@
     <div class="addNew-wrap">
         <div class="delete-point">
             <h3 id="addNew-title">授权人员</h3>
-            <button class="close" id="addNew-close">&times;</button>
+            <button class="close" id="peopleOrgaddNew-close">&times;</button>
         </div>
         <div class="addNew-content">
          <%--   <form action="" method="post">--%>
@@ -118,7 +118,7 @@
         </div>
         <div class="delete-btn">
             <button class="btn btn-danger" id="addNew-save" onclick="peopleOrgUpdatePeopleOrg()">保存</button>
-            <button class="btn btn-default" id="addNew-cancel">取消</button>
+            <button class="btn btn-default" id="peopleOrgaddNew-cancel">取消</button>
         </div>
     </div>
 </div>
