@@ -8,7 +8,7 @@ var deviceOrgTableChecked = new Array();  //全局数组
 $(function () {
     deviceOrgInitTreeNode();
     deviceOrgInitTable();
-    deviceOrgInitORG();
+    /*deviceOrgInitORG();*/
     deviceOrgBatchTransferInit();
     $('#deviceOrgTable').on('uncheck.bs.table check.bs.table check-all.bs.table uncheck-all.bs.table', function (e, rows) {
         var datas = $.isArray(rows) ? rows : [rows];        // 点击时获取选中的行或取消选中的行
@@ -220,7 +220,7 @@ function deviceOrgInitTable() {
                 field: 'operation',
                 title: '操作',
                 formatter: function (value, row, index) {
-                    var s = '<a class = "deviceOrgChangeORG" href="javascript:void(0)">转移/重命名</a>';
+                    var s = '<a class = "deviceOrgChangeORG" href="#">转移/重命名</a>';
                     return s;
                 },
                 events: 'operateEvents'
@@ -243,9 +243,7 @@ function deviceOrgInitTable() {
 }
 
 function deviceOrgShowAdd() {
-    if (typeof(deviceOrgNowTreeNode) !== "undefined") {
-        $("#deviceOrgOrg").val(deviceOrgNowTreeNode.name);
-    }
+
     $('#deviceOrgaddNew-popup').show('slow');
     deviceOrgAddNewInit();
 }
@@ -336,20 +334,6 @@ function deviceOrgInitORG() {
     });
 }
 
-window.operateEvents = {
-    'click .deviceOrgChangeORG': function (e, value, row, index) {
-        deviceOrgShowAdd();
-        var $txt = $('.addNew-content').find('input');
-        $($txt[0]).val(row.dSerialNum);
-        $($txt[1]).val(row.dName);
-        deviceOrgSelectDevice = row;
-    },
-    'click .deviceOrgRemoveORG': function (e, value, row, index) {
-        deviceOrgSelectDevice = row;
-        $('#delcfmModel').modal();
-    }
-};
-
 function deviceOrgUpdateDeviceOrg() {
     var deviceId = deviceOrgSelectDevice.dSerialNum;
     var deviceName = $('#deviceOrgName').val();
@@ -376,7 +360,7 @@ function deviceOrgUpdateDeviceOrg() {
 
 function deviceOrgUpdateDeviceOrg02() {
     var deviceIds = deviceOrgTableChecked;
-    if (deviceIds.length <1) {
+    if (deviceIds.length < 1) {
         showMsg("error", "未选择设备", "请先选择批量转移设备");
         return;
     }

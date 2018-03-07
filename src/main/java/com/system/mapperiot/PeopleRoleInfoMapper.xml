@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.PeopleRoleInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.PeopleRoleInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="userrole_userid" jdbcType="VARCHAR" property="userId"/>
+        <result column="userrole_username" jdbcType="VARCHAR" property="userName"/>
+        <result column="userrole_roleid" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    </resultMap>
+    <select id="selectPeopleRoleInfo" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByPeopleId" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_userid = #{userId}
+        order by a.userrole_username ASC
+    </select>
+    <insert id="insertPeopleRoleInfo">
+        INSERT INTO iot_userrole(USERROLE_USERID,USERROLE_USERNAME,USERROLE_ROLEID)
+        values (#{peopleRoleInfo.userId,jdbcType=VARCHAR},#{peopleRoleInfo.userName,jdbcType=VARCHAR}
+                ,#{peopleRoleInfo.roleId,jdbcType=VARCHAR})
+    </insert>
+    <update id="updatePeopleRoleInfoByPeopleId">
+        UPDATE iot_userrole
+        SET USERROLE_USERNAME = #{peopleRoleInfo.userName,jdbcType=VARCHAR},
+            USERROLE_ROLEID = #{peopleRoleInfo.roleId,jdbcType=VARCHAR}
+        WHERE USERROLE_USERID = #{peopleRoleInfo.userId,jdbcType=VARCHAR}
+    </update>
+    <delete id="deletePeopleRoleInfoByPeopleId" parameterType="String">
+        DELETE from iot_userrole
+        WHERE USERROLE_USERID = #{userId}
+    </delete>
+</mapper>

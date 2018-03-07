@@ -90,7 +90,7 @@ public class RoleCombineDevController {
     @ResponseBody
     public String insertUpdateRoleDeviceList(@RequestBody List<DeviceRoleInfo> roleDeviceList) throws Exception {
         String jsonString = "更新角色完成";
-        if (roleDeviceList != null) {
+        if (roleDeviceList != null && roleDeviceList.size()>0) {
             //更新角色信息表
             Subject currentSubject = SecurityUtils.getSubject();
             Session session = currentSubject.getSession();

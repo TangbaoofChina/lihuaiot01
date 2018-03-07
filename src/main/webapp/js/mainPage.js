@@ -318,3 +318,51 @@ function removealljsfile() {
 
     removejscssfile("/lihuaiot01/js/login.js", "js");
 }
+
+window.operateEvents = {
+    /*设备组织配置*/
+    'click .deviceOrgChangeORG': function (e, value, row, index) {
+        $('#deviceOrgNum').val(row.dSerialNum);
+        $('#deviceOrgName').val(row.dName);
+        deviceOrgSelectDevice = row;
+        deviceOrgShowAdd();
+    },
+
+    /*用户组织配置*/
+    'click .peopleOrgChangeORG': function (e, value, row, index) {
+        $('#peopleOrgPeople').val(row.personName);
+        peopleOrgSelectPerson = row;
+        peopleOrgShowAdd();
+    },
+    'click .peopleOrgRemoveORG': function (e, value, row, index) {
+        peopleOrgSelectPerson = row;
+        $('#peopleOrgdelcfmModel').modal();
+    },
+
+    /*用户角色配置 */
+    'click .rolePeopleChangeDevice': function (e, value, row, index) {
+        rolePeopleSelectPeopleRole = row;
+        $("#rolePeoplePeopleName").val(rolePeopleSelectPeopleRole.userName);
+        $("#rolePeopleRoleName").val(rolePeopleSelectPeopleRole.roleName);
+        rolePeopleSelectPeople = rolePeopleSelectPeopleRole;
+        rolePeopleSelectRole = rolePeopleSelectPeopleRole;
+        rolePeopleShowAdd();
+    },
+    'click .rolePeopleRemoveRole': function (e, value, row, index) {
+        rolePeopleSelectPeopleRole = row;
+        $('#rolePeopledelcfmModel').modal();
+    },
+
+    /*角色配置*/
+    'click .roleChangeDevice': function (e, value, row, index) {
+        roleSelectRole = row;
+        updateRoleDeviceSelEnd();
+        $('#roleModifyName').val(row.roleName);
+        $('#roleModifyDescribe').val(row.roleDescribe);
+        roleShowModify();
+    },
+    'click .roleRemoveRole': function (e, value, row, index) {
+        roleSelectRole = row;
+        $('#roledelcfmModel').modal();
+    }
+};

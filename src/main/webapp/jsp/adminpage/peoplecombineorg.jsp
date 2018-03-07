@@ -124,7 +124,7 @@
 </div>
 
 <!-- 信息删除确认 -->
-<div class="modal fade" id="delcfmModel">
+<div class="modal fade" id="peopleOrgdelcfmModel">
     <div class="modal-dialog">
         <div class="modal-content message_align">
             <div class="modal-header">

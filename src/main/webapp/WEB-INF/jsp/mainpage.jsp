@@ -188,6 +188,10 @@
                                            name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
                                     </li>
                                     <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="rolecombinepeople" class="menu_item"
+                                           name="/lihuaiot01/jsp/adminpage/rolecombinepeople.jsp">用户管理</a>
+                                    </li>
+                                    <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
                                     </li>

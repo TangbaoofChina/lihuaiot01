@@ -83,7 +83,7 @@
             <h3 id="deviceOrgaddNew-title">转移设备</h3>
             <button class="close" id="deviceOrgaddNew-close">&times;</button>
         </div>
-        <div class="addNew-content">
+        <div class="addNew-content deviceOrgAddNew-Content">
             <%--<form action="" method="post">--%>
                 <div class="form-num">
                     <label for="deviceOrgNum">序号</label>

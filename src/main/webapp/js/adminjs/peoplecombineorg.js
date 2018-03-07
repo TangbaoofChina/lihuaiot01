@@ -180,8 +180,8 @@ function peopleOrgInitTable() {
                 field: 'operation',
                 title: '操作',
                 formatter: function (value, row, index) {
-                    var s = '<a class = "peopleOrgChangeORG" href="javascript:void(0)">转移</a>';
-                    var d = '<a class = "peopleOrgRemoveORG" href="javascript:void(0)">删除</a>';
+                    var s = '<a class = "peopleOrgChangeORG" href="#">转移</a>';
+                    var d = '<a class = "peopleOrgRemoveORG" href="#">删除</a>';
                     return s + ' ' + d;
                 },
                 events: 'operateEvents'
@@ -203,9 +203,6 @@ function peopleOrgInitTable() {
 }
 
 function peopleOrgShowAdd() {
-    if(typeof(peopleOrgNowTreeNode) !== "undefined"){
-        $("#peopleOrgOrg").val(peopleOrgNowTreeNode.name);
-    }
     $('#peopleOrgaddNew-popup').show('slow');
     peopleOrgAddNewShow();
 }
@@ -227,6 +224,7 @@ function peopleOrgAddNewShow() {
         $('#peopleOrgaddNew-popup').hide('slow');
     });
 }
+
 
 
 function peopleOrgInitPeople() {
@@ -368,18 +366,3 @@ function peopleOrgDeletePeople() {
     });
 }
 
-window.operateEvents = {
-    'click .peopleOrgChangeORG': function (e, value, row, index) {
-        peopleOrgShowAdd();
-        var $txt = $('.addNew-content').find('input');
-        $($txt[0]).val(row.personName);
-        peopleOrgSelectPerson = row;
-        if(typeof(peopleOrgNowTreeNode) !== "undefined"){
-            $("#peopleOrgOrg").val(peopleOrgNowTreeNode.name);
-        }
-    },
-    'click .peopleOrgRemoveORG': function (e, value, row, index) {
-        peopleOrgSelectPerson = row;
-        $('#delcfmModel').modal();
-    }
-};

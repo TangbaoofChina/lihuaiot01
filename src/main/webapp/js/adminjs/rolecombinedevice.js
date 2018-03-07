@@ -32,8 +32,8 @@ function roleInitTableHead() {
                 field: 'operation',
                 title: '操作',
                 formatter: function (value, row, index) {
-                    var s = '<a class = "roleChangeDevice" href="javascript:void(0)">分配</a>';
-                    var d = '<a class = "roleRemoveRole" href="javascript:void(0)">删除</a>';
+                    var s = '<a class = "roleChangeDevice" href="#">分配</a>';
+                    var d = '<a class = "roleRemoveRole" href="#">删除</a>';
                     return s + ' ' + d;
                 },
                 events: 'operateEvents'
@@ -288,7 +288,6 @@ function roleInsertRoleInfo() {
 // 要传递的数据
         data: {roleNewName: mRoleName, roleNewDescribe: mRoleDescribe},
         success: function (result) {
-            $('#roleaddNew-popup').hide('slow');
             roleInitTableContent();
             if (result !== "新增完成") {
                 var type = 'warning';
@@ -298,10 +297,10 @@ function roleInsertRoleInfo() {
             }
         },
         error: function (XMLHttpRequest) {
-            $('#roleaddNew-popup').hide('slow');
             handleAjaxError(XMLHttpRequest.status);
         }
     });
+    $('#roleaddNew-popup').hide('slow');
 }
 
 function roleShowModify() {
@@ -329,6 +328,9 @@ function roleUpdateRoleDevice() {
     var mRoleDescribe = $('#roleModifyDescribe').val();
     var operationEnd = $('#roleDeviceSelEnd option');
     var deviceList = new Array();
+    $('#roleModify-popup').hide('slow');
+    if(operationEnd.length ===0)
+        return;
     $.each(operationEnd, function (id, obj) {
         var object = new Object();
         object.devNum = obj.value;
@@ -350,7 +352,6 @@ function roleUpdateRoleDevice() {
 // 要传递的数据
         data: JSON.stringify(deviceList),
         success: function (result) {
-            $('#roleModify-popup').hide('slow');
             roleInitTableContent();
             if (result !== "更新角色完成") {
                 var type = 'warning';
@@ -364,21 +365,6 @@ function roleUpdateRoleDevice() {
         }
     });
 }
-
-window.operateEvents = {
-    'click .roleChangeDevice': function (e, value, row, index) {
-        roleSelectRole = row;
-        updateRoleDeviceSelEnd();
-        var $txt = $('.roleModify-content').find('input');
-        $($txt[0]).val(row.roleName);
-        $($txt[1]).val(row.roleDescribe);
-        roleShowModify();
-    },
-    'click .roleRemoveRole': function (e, value, row, index) {
-        roleSelectRole = row;
-        $('#delcfmModel').modal();
-    }
-};
 
 function updateRoleDeviceSelEnd() {
     var mRoleId = roleSelectRole.roleId;
