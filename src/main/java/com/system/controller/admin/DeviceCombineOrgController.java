@@ -2,11 +2,10 @@ package com.system.controller.admin;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.DataTablePageing;
+import com.system.po.DeviceLongNodeInfo;
 import com.system.po.MydataTableColumn;
 import com.system.po.ORGTreeNode;
-import com.system.service.DeviceCombineOrgService;
-import com.system.service.DeviceInfoService;
-import com.system.service.ORGTreeNodeService;
+import com.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,10 @@ public class DeviceCombineOrgController {
     private ORGTreeNodeService orgTreeNodeService;
     @Autowired
     private DeviceInfoService deviceInfoService;
+    @Autowired
+    private BootStrapTreeNodeService bootStrapTreeNodeService;
+    @Autowired
+    private DeviceLongNodeInfoService deviceLongNodeInfoService;
 
     @RequestMapping(value = "selectZTreeNode", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -60,8 +63,12 @@ public class DeviceCombineOrgController {
     @RequestMapping(value="/deviceCombineOrgUpdate",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String deviceCombineOrgUpdate(String deviceId,String deviceName,String orgId) throws Exception{
-
         deviceInfoService.updateDeviceOrgId(deviceId,deviceName,orgId);
+        orgId = bootStrapTreeNodeService.selectParentLongIdByOrgId(orgId);
+        DeviceLongNodeInfo deviceLongNodeInfo = new DeviceLongNodeInfo();
+        deviceLongNodeInfo.setDeviceNum(deviceId);
+        deviceLongNodeInfo.setLongNode(orgId);
+        deviceLongNodeInfoService.updateDeviceLongNodeInfo(deviceLongNodeInfo);
         String jsonString = "修改成功";
         return jsonString;
     }
@@ -69,8 +76,9 @@ public class DeviceCombineOrgController {
     @RequestMapping(value="/deviceCombineOrgBatchUpdate",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String deviceCombineOrgBatchUpdate(String[] deviceIds,String orgId) throws Exception{
-
         deviceInfoService.batchUpdateDeviceOrgId(deviceIds,orgId);
+        orgId = bootStrapTreeNodeService.selectParentLongIdByOrgId(orgId);
+        deviceLongNodeInfoService.batchUpdateDeviceLongNodeInfo(deviceIds,orgId);
         String jsonString = "修改成功";
         return jsonString;
     }
@@ -91,7 +99,6 @@ public class DeviceCombineOrgController {
 
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
-
 
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/

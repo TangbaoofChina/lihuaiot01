@@ -110,7 +110,7 @@ public class AccountHandler {
             Userlogin userInfo = (Userlogin) session.getAttribute("userInfo");
             // 设置登陆IP
             userInfo.setAccessIP(session.getHost());
-            // 查询并设置用户所属的仓库ID
+            // 插入登录时间
             userloginService.insertLoginRecord(userInfo, "login", userInfo.getAccessIP());
 
             // 设置登陆成功响应

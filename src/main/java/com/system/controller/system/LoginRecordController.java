@@ -1,12 +1,10 @@
 package com.system.controller.system;
 
 import com.alibaba.fastjson.JSON;
-import com.system.po.DataTablePageing;
-import com.system.po.MydataTableColumn;
-import com.system.po.PeopleInfo;
-import com.system.po.Userlogin;
+import com.system.po.*;
 import com.system.service.BootStrapTreeNodeService;
 import com.system.service.PeopleCombineOrgService;
+import com.system.service.PeopleRoleInfoService;
 import com.system.service.UserloginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -24,30 +22,26 @@ import java.util.List;
 @RequestMapping("/loginRecord")
 public class LoginRecordController {
     @Autowired
-    private PeopleCombineOrgService peopleCombineOrgService;
-    @Autowired
     private UserloginService userloginService;
     @Autowired
-    private BootStrapTreeNodeService bootStrapTreeNodeService;
+    private PeopleRoleInfoService peopleRoleInfoService;
 
-    @RequestMapping(value = "selectPeopleByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectPeopleInfoByRoleId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String selectDeviceByORGId(String sORGId) throws Exception {
+    public String selectPeopleInfoByRoleId() throws Exception {
         String jsonString = "[]";
         //获取用户角色
         Subject currentSubject = SecurityUtils.getSubject();
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
-        List<PeopleInfo> peopleInfoList = new ArrayList<PeopleInfo>();
-        if (userlogin.getOrgid().equals("002")) {
-            peopleInfoList = peopleCombineOrgService.selectPeopleByORGId(sORGId);
+        List<PeopleRoleInfo> peopleRoleInfoList = new ArrayList<PeopleRoleInfo>();
+        if (userlogin.getRoleName().equals("admin")) {
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfo();
         } else {
-            if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
-                peopleInfoList = peopleCombineOrgService.selectPeopleByORGId(sORGId);
-            }
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByPeopleId(userlogin.getUserid());
         }
-        if (peopleInfoList.size()>0)
-            jsonString = JSON.toJSONString(peopleInfoList);
+        if (peopleRoleInfoList.size()>0)
+            jsonString = JSON.toJSONString(peopleRoleInfoList);
         return jsonString;
     }
 
@@ -96,7 +90,7 @@ public class LoginRecordController {
         mdtc4.setTitle("时间");
 
         MydataTableColumn mdtc5 = new MydataTableColumn();
-        mdtc5.setData("loginDate");
+        mdtc5.setData("loginIp");
         mdtc5.setDefaultContent("5");
         mdtc5.setTitle("登陆IP");
         mdtc5.setVisible(false);

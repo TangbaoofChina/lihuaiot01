@@ -10,9 +10,12 @@ import java.util.List;
 public interface DeviceInfoService {
 
     List<DeviceInfo> selectDeviceInfoByORGId(String orgId) throws Exception;
+    List<DeviceInfo> selectDeviceInfoByORGIdAndRoleId(String orgId,String roleId) throws Exception;
     List<DeviceInfo> selectDeviceInfoByIDs(String[] sDeviceIds) throws Exception;
     //查询该节点以及下层所有子节点的设备
     List<DeviceInfoAndNode> selectDeviceInfoByOrgIdAll(String orgId) throws Exception;
+    //查询该用户角色下所有设备
+    List<DeviceInfoAndNode> selectDeviceInfoByRoleIdAll(String roleId) throws Exception;
     /**
      * 根据角色ID查找所有相关联的设备信息
      * @return 返回设备信息

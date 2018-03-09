@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/treeNode")
+@RequestMapping("/treeNode-BackUp")
 public class TreeNodeController {
     @Autowired
     private ORGTreeNodeService orgTreeNodeService;
@@ -30,7 +30,7 @@ public class TreeNodeController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<ORGTreeNode> zTreeNodeList = null;
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             zTreeNodeList = orgTreeNodeService.selectORGInfo();
         } else {
             zTreeNodeList = orgTreeNodeService.selectORGInfoByOrgId(userlogin.getOrgid());
@@ -49,7 +49,7 @@ public class TreeNodeController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<ORGTreeNode> zTreeNodeList = null;
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             zTreeNodeList = orgTreeNodeService.selectORGAndDeviceInfo();
         } else {
             zTreeNodeList = orgTreeNodeService.selectORGAndDeviceByOrgId(userlogin.getOrgid());

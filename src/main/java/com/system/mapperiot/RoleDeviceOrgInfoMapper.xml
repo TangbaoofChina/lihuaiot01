@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.RoleDeviceOrgInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.RoleDeviceOrgInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="role_id" jdbcType="VARCHAR" property="deviceRoleInfo.roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="deviceRoleInfo.roleName"/>
+        <result column="role_describe" jdbcType="VARCHAR" property="deviceRoleInfo.roleDescribe"/>
+        <result column="di_name" jdbcType="VARCHAR" property="deviceRoleInfo.devName"/>
+        <result column="di_serialnum" jdbcType="VARCHAR" property="deviceRoleInfo.devNum"/>
+        <result column="node_id" jdbcType="VARCHAR" property="bootStrapTreeNode.id"/>
+        <result column="node_name" jdbcType="VARCHAR" property="bootStrapTreeNode.text"/>
+        <result column="node_pid" jdbcType="VARCHAR" property="bootStrapTreeNode.pId"/>
+        <result column="devorg_orglongid" jdbcType="VARCHAR" property="bootStrapTreeNode.lPid"/>
+    </resultMap>
+    <select id="selectRoleDeviceOrgInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
+        select a.role_id,a.role_name,a.role_describe,
+                c.di_name,c.di_serialnum,
+                d.node_id,d.node_name,d.node_pid,e.devorg_orglongid
+        from iot_role a,iot_devicerole b,iot_deviceinfo c,iot_orgtreenode d,iot_deviceorg e
+        where b.devrole_roleid = a.role_id
+        and c.di_serialnum = b.devrole_devnum
+        and e.devorg_devnum = b.devrole_devnum
+        and d.node_id = c.di_nodeid
+        and a.role_id = #{roleId}
+    </select>
+</mapper>

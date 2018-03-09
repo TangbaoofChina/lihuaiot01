@@ -2,7 +2,9 @@ package com.system.security.realms;
 
 import com.system.mapperiot.PeopleInfoMapper;
 import com.system.po.PeopleInfo;
+import com.system.po.PeopleRoleInfo;
 import com.system.po.Userlogin;
+import com.system.service.PeopleRoleInfoService;
 import com.system.service.UserloginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -30,6 +32,8 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
     private UserloginService userloginService;
     @Autowired
     private PeopleInfoMapper peopleInfoMapper;
+    @Autowired
+    private PeopleRoleInfoService peopleRoleInfoService;
 
     /**
      * 对用户进行角色授权
@@ -51,7 +55,7 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
         //通过用户名从数据库获取权限/角色信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         if (userlogin != null) {
-            if (userlogin.getOrgid().equals("002"))
+            if (userlogin.getRoleName().equals("admin"))
                 roles.add("admin");
             else
                 roles.add("user");
@@ -75,7 +79,8 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
         String realmName = getName();
 
         Userlogin userlogin = null;
-        List<PeopleInfo> peopleInfoList = null;
+        /*List<PeopleInfo> peopleInfoList = null;*/
+        List<PeopleRoleInfo> peopleRoleInfolist = null;
         try {
             // 获取用户名对应的用户账户信息
             /*UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;*/
@@ -87,10 +92,13 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
             /*String principal = usernamePasswordToken.getUsername();*/
 
             userlogin = userloginService.findByNameLiHua(username);
-            peopleInfoList = peopleInfoMapper.selectPeopleByPeopleId(userlogin.getUserid());
-            if (peopleInfoList.size() > 0) //如果物联网系统中没有配置
+            /*peopleInfoList = peopleInfoMapper.selectPeopleByPeopleId(userlogin.getUserid());*/
+            peopleRoleInfolist = peopleRoleInfoService.selectPeopleRoleInfoByPeopleId(userlogin.getUserid());
+            if (peopleRoleInfolist.size() > 0) //如果物联网系统中已经配置
             {
-                userlogin.setOrgid(peopleInfoList.get(0).getOrgId());
+                /*userlogin.setOrgid(peopleInfoList.get(0).getOrgId());*/
+                userlogin.setRoleId(peopleRoleInfolist.get(0).getRoleId());
+                userlogin.setRoleName(peopleRoleInfolist.get(0).getRoleName());
             } else {
                 userlogin = null;
                 username = "";

@@ -4,4 +4,10 @@
     <select id="selectDeviceRealAlarmCount" resultType="Integer">
       SELECT count(*) from iot_realalarm
     </select>
+    <select id="selectDeviceRealAlarmCountByRoleId" parameterType="String" resultType="Integer">
+        select count(a.alarm_id)
+        from iot_realalarm a,iot_devicerole b
+        where a.device_id = b.devrole_devnum
+        and b.devrole_roleid = #{roleId}
+    </select>
 </mapper>

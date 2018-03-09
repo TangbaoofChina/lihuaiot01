@@ -22,6 +22,11 @@ public class PeopleRoleInfoServiceImpl implements PeopleRoleInfoService {
     }
 
     @Override
+    public List<PeopleRoleInfo> selectPeopleRoleInfoByPeopleId(String userId) throws Exception {
+        return peopleRoleInfoMapper.selectPeopleRoleInfoByPeopleId(userId);
+    }
+
+    @Override
     public void insertUpdatePeopleRole(PeopleRoleInfo peopleRoleInfo) throws Exception {
         try {
             if (peopleRoleInfoMapper.selectPeopleRoleInfoByPeopleId(peopleRoleInfo.getUserId()).size() >0)

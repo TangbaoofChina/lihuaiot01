@@ -1,5 +1,6 @@
 package com.system.po;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BootStrapTreeNode {
@@ -12,6 +13,8 @@ public class BootStrapTreeNode {
 父节点ID
  */
     private String pId;
+    //父节点至根节点id
+    private String lPid;
     /**
      * 节点名称
      */
@@ -19,7 +22,7 @@ public class BootStrapTreeNode {
     /**
      * 子节点
      */
-    private List<BootStrapTreeNode> nodes;
+    private List<BootStrapTreeNode> nodes = null;
 
     private String icon = "glyphicon glyphicon-home";
  /*    private String selectedIcon="glyphicon glyphicon-stop";
@@ -37,6 +40,14 @@ public class BootStrapTreeNode {
 
     public void setpId(String pId) {
         this.pId = pId;
+    }
+
+    public String getlPid() {
+        return lPid;
+    }
+
+    public void setlPid(String lPid) {
+        this.lPid = lPid;
     }
 
     public String getId() {

@@ -14,4 +14,9 @@ public class DeviceAlarmServiceImpl implements DeviceAlarmService {
     public int selectDeviceRealAlarmCount() {
         return deviceAlarmMapper.selectDeviceRealAlarmCount();
     }
+
+    @Override
+    public int selectDeviceRealAlarmCountByRoleId(String roleId) {
+        return deviceAlarmMapper.selectDeviceRealAlarmCountByRoleId(roleId);
+    }
 }

@@ -36,21 +36,19 @@ public class RealDeviceListController {
     @ResponseBody
     public String selectEC01ByORGId(String sORGId) throws Exception {
         String jsonString = "[]";
-        if (sORGId !=null) {
+        if (sORGId != null) {
             //获取用户角色
             Subject currentSubject = SecurityUtils.getSubject();
             Session session = currentSubject.getSession();
             Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
-            List<EC01DeviceMessage> deviceInfoList = new ArrayList<EC01DeviceMessage>();
-            if (userlogin.getOrgid().equals("002")) {
-                deviceInfoList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
+            List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
+            if (userlogin.getRoleName().equals("admin")) {
+                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
             } else {
-                if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
-                    deviceInfoList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
-                }
+                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleId());
             }
-            if (deviceInfoList.size()>0)
-                jsonString = JSON.toJSONString(deviceInfoList);
+            if (ec01DeviceMessageList.size() > 0)
+                jsonString = JSON.toJSONString(ec01DeviceMessageList);
         }
         return jsonString;
     }
@@ -59,7 +57,7 @@ public class RealDeviceListController {
     @ResponseBody
     public String selectEC01ByDeviceId(String sDeviceId) throws Exception {
         String jsonString = "[]";
-        if (sDeviceId !=null) {
+        if (sDeviceId != null) {
             EC01DeviceMessage ec01DeviceMessage = ec01DeviceMessageService.selectEC01ByDeviceId(sDeviceId);
             if (ec01DeviceMessage != null)
                 jsonString = JSON.toJSONString(ec01DeviceMessage);
@@ -73,7 +71,7 @@ public class RealDeviceListController {
                                  HttpServletResponse response) throws Exception {
         String fileName = "realdevicelist.xlsx";
         List<EC01DeviceMessage> ec01DeviceMessageList = null;
-        if (sORGId !=null) {
+        if (sORGId != null) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
         }
         File file = ec01DeviceMessageService.exportStorage(ec01DeviceMessageList);
@@ -95,11 +93,11 @@ public class RealDeviceListController {
         }
     }
 
-    @RequestMapping(value="/ec01DeviceHead",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/ec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String ec01DeviceHead() throws Exception{
+    public String ec01DeviceHead() throws Exception {
 
-        List<MydataTableColumn> ec01HeadColumnList =  ec01DeviceMessageService.selectEC01DeviceHead();
+        List<MydataTableColumn> ec01HeadColumnList = ec01DeviceMessageService.selectEC01DeviceHead();
 
         String jsonString = JSON.toJSONString(ec01HeadColumnList);
 

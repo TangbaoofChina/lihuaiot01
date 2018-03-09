@@ -43,12 +43,13 @@ public class DeviceListController {
             Session session = currentSubject.getSession();
             Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
             List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
-            if (userlogin.getOrgid().equals("002")) {
+            if(userlogin.getRoleName().equals("admin")){
                 deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
             } else {
-                if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
+                /*if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
                     deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
-                }
+                }*/
+                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleId());
             }
             if (deviceInfoList.size() > 0)
                 jsonString = JSON.toJSONString(deviceInfoList);

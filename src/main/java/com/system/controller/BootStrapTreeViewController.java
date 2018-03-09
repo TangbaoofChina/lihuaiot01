@@ -3,10 +3,7 @@ package com.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.system.exception.BootStrapTreeViewException;
 import com.system.po.*;
-import com.system.service.BootStrapTreeNodeService;
-import com.system.service.DeviceCombineOrgService;
-import com.system.service.DeviceInfoService;
-import com.system.service.PeopleCombineOrgService;
+import com.system.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -29,6 +26,8 @@ public class BootStrapTreeViewController {
     private PeopleCombineOrgService peopleCombineOrgService;
     @Autowired
     private DeviceInfoService deviceInfoService;
+    @Autowired
+    private RoleDeviceOrgInfoService roleDeviceOrgInfoService;
 
     @RequestMapping(value = "selectTreeNode", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -38,10 +37,11 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId(userlogin.getOrgid());
+            BootStrapTreeNode bootStrapTreeNode =roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleId());
+            //BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId(userlogin.getOrgid());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
 
@@ -58,10 +58,10 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGAndDeviceInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGAndDeviceByOrgId(userlogin.getOrgid());
+            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(userlogin.getRoleId());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
         String jsonString = JSON.toJSONString(bootStrapTreeNodeList);

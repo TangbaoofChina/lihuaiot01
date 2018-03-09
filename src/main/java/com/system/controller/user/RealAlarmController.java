@@ -30,10 +30,10 @@ public class RealAlarmController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         int alarmCount = 0;
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             alarmCount = deviceAlarmService.selectDeviceRealAlarmCount();
         } else {
-
+            alarmCount = deviceAlarmService.selectDeviceRealAlarmCountByRoleId(userlogin.getRoleId());
         }
         jsonString = "{";
         jsonString += "\"" + "alarmCount" + "\"";

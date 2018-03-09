@@ -6,10 +6,11 @@ var lrSearch_end_date = null;
 var lrNowSelectPeople = [];
 
 $(function () {
-    lrInitTreeNode();
+    //lrInitTreeNode();
     lrInitTable();
     lrDateRangePickerInit();
     lrSearchAction();
+    lrSelectPeopleInfo();
 });
 
 function lrInitTreeNode() {
@@ -67,7 +68,7 @@ function lrNodeSelected(event, data) {
             select_node[0].state.selected = false;
         }
     }
-    lrSelectPeopleByOrgId();
+    //lrSelectPeopleByOrgId();
 }
 
 function lrSearchTreeNode() {
@@ -82,17 +83,16 @@ function lrSearchTreeNode() {
             }]);
 }
 
-function lrSelectPeopleByOrgId() {
-    var sORGId = lrNowTreeNode.id;
+function lrSelectPeopleInfo() {
     $.ajax({
-        url: "/lihuaiot01/loginRecord/selectPeopleByORGId",
+        url: "/lihuaiot01/loginRecord/selectPeopleInfoByRoleId",
 // 数据发送方式
         type: "POST",
 // 接受数据格式
         dataType: "json",
         async: true,   // 轻轻方式-异步
 // 要传递的数据
-        data: {sORGId: sORGId},
+        data: {},
         success: function (result) {
             $('#lrPeopleSelect').empty();
             if (JSON.stringify(result) !== '[]') {
@@ -101,9 +101,9 @@ function lrSelectPeopleByOrgId() {
                     //先创建好select里面的option元素
                     var option = document.createElement("option");
                     //转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-                    $(option).val(result[i].personId);
+                    $(option).val(result[i].userId);
                     //给option的text赋值,这就是你点开下拉框能够看到的东西
-                    $(option).text(result[i].personName);
+                    $(option).text(result[i].userName);
                     //获取select 下拉框对象,并将option添加进select
                     $('#lrPeopleSelect').append(option);
                 }

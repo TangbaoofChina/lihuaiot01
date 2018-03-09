@@ -329,7 +329,7 @@ function roleUpdateRoleDevice() {
     var operationEnd = $('#roleDeviceSelEnd option');
     var deviceList = new Array();
     $('#roleModify-popup').hide('slow');
-    if(operationEnd.length ===0)
+    if (operationEnd.length === 0)
         return;
     $.each(operationEnd, function (id, obj) {
         var object = new Object();
@@ -347,7 +347,7 @@ function roleUpdateRoleDevice() {
         type: "POST",
 // 接受数据格式
         dataType: "text",
-        contentType : 'application/json;charset=utf-8', //设置请求头信息
+        contentType: 'application/json;charset=utf-8', //设置请求头信息
         async: true,   // 轻轻方式-异步
 // 要传递的数据
         data: JSON.stringify(deviceList),
@@ -402,6 +402,10 @@ function updateRoleDeviceSelEnd() {
 
 function roleDeleteRole() {
     var mRoleId = roleSelectRole.roleId;
+    var mRoleName = roleSelectRole.roleName;
+    if (mRoleName === "admin") {
+        return;
+    }
     $.ajax({
         url: "/lihuaiot01/roleCombineDev/deleteRoleInfo",
 // 数据发送方式
@@ -410,10 +414,9 @@ function roleDeleteRole() {
         dataType: "text",
         async: true,   // 轻轻方式-异步
 // 要传递的数据
-        data: {roleId:mRoleId},
+        data: {roleId: mRoleId, roleName: mRoleName},
         success: function (result) {
-            if(result === "删除成功")
-            {
+            if (result === "删除成功") {
                 roleInitTableContent();
             }
         },

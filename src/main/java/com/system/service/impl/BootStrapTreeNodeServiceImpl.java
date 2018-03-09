@@ -57,8 +57,23 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     }
 
     @Override
+    public String selectParentLongIdByOrgId(String orgId) throws Exception {
+        String longNodeId = orgId;
+        BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(orgId);
+        while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
+            String myOrgId = bootStrapTreeNodeParent.getpId();
+            longNodeId = myOrgId + "." +  longNodeId;
+            bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
+            if (bootStrapTreeNodeParent == null) {
+                break;
+            }
+        }
+        return longNodeId;
+    }
+
+    @Override
     public Boolean isParentId(String ordId, String userOrgId) throws Exception {
-        return checkIsParentId(ordId,userOrgId);
+        return checkIsParentId(ordId, userOrgId);
     }
 
     @Override
@@ -190,10 +205,16 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
                 node.setpId(bootStrapTreeNode.getpId());
                 deviceList = getDevicesList(bootStrapTreeNode.getId());
                 childList = getChildNodeAndDevice(bootStrapTreeNode.getId());
-                if (childList != null && childList.size() > 0) {
+                if (childList != null && childList.size() > 0) { //存在子节点
                     if (deviceList != null && deviceList.size() > 0)
                         childList.addAll(deviceList);
                     node.setNodes(childList);
+                } else {      //不存在子节点，存在子设备
+                    if (deviceList != null && deviceList.size() > 0) {
+                        childList = new ArrayList<BootStrapTreeNode>();
+                        childList.addAll(deviceList);
+                        node.setNodes(childList);
+                    }
                 }
                 rootList.add(node);
             }
@@ -232,7 +253,7 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     private boolean checkIsParentId(String parentOrgId, String myOrgId) throws Exception {
         BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
         if (bootStrapTreeNodeParent != null) {
-            if ( bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
+            if (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
                 if (bootStrapTreeNodeParent.getpId().equals(parentOrgId))
                     return true;
                 else

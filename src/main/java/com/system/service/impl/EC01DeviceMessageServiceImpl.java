@@ -36,18 +36,14 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     @Override
     public List<EC01DeviceMessage> selectEC01ByORGId(String ORGId) throws Exception {
         List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGId(ORGId);
-        for (EC01DeviceMessage deviceInfo:ec01DeviceMessageList
-                ) {
-            SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String toDate = simpleFormat.format(new Date());
-            long from =  simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
-            long to = simpleFormat.parse(toDate).getTime();
-            int minutes = (int) ((to - from) / (1000 * 60));
-            if (minutes > 15)
-                deviceInfo.setDState("离线");
-            else
-                deviceInfo.setDState("在线");
-        }
+        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList);
+        return ec01DeviceMessageList;
+    }
+
+    @Override
+    public List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId, String roleId) throws Exception {
+        List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGIdAndRoleId(ORGId,roleId);
+        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList);
         return ec01DeviceMessageList;
     }
 
@@ -183,6 +179,23 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     //************************************私有函数********************************************//
+    private List<EC01DeviceMessage> judgeDeviceOnlineState(List<EC01DeviceMessage> ec01DeviceMessageList) throws Exception
+    {
+        for (EC01DeviceMessage deviceInfo:ec01DeviceMessageList
+                ) {
+            SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String toDate = simpleFormat.format(new Date());
+            long from =  simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
+            long to = simpleFormat.parse(toDate).getTime();
+            int minutes = (int) ((to - from) / (1000 * 60));
+            if (minutes > 15)
+                deviceInfo.setDState("离线");
+            else
+                deviceInfo.setDState("在线");
+        }
+        return ec01DeviceMessageList;
+    }
+
     //根据数据生成JSON字符串，返回到datatable显示
     private static String formatDataDetailsToJson(List<List<OneDataDetail>> dataDetailList) throws Exception
     {

@@ -216,11 +216,6 @@
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="javascript:void(0)" id=""
-                                       class="menu_item"
-                                       name="/lihuaiot01/jsp/systempage/loginrecord.jsp">系统日志</a>
-                                </li>
-                                <li class="list-group-item">
                                     <a href="javascript:void(0)" id="loginrecord"
                                        class="menu_item" name="/lihuaiot01/jsp/systempage/loginrecord.jsp">登陆日志</a>
                                 </li>

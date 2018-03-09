@@ -10,6 +10,8 @@ public interface BootStrapTreeNodeService {
     List<BootStrapTreeNode> selectORGInfo() throws Exception;
     //通过组织ID，查询所有该ID的父节点信息和该ID的子信息
     BootStrapTreeNode selectORGInfoByOrgId(String orgId) throws Exception;
+    //查询当前节点及以上至根节点的ID组合
+    String selectParentLongIdByOrgId(String orgId) throws Exception;
     //判断是否是当前用户节点的父节点ID
     Boolean isParentId(String ordId,String userOrgId) throws Exception;
     //查询所有的组织信息和设备信息

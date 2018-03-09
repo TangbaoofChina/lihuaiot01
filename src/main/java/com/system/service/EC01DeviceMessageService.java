@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface EC01DeviceMessageService {
     List<EC01DeviceMessage> selectEC01ByORGId(String ORGId) throws Exception;
+    List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId,String roleId) throws Exception;
     EC01DeviceMessage selectEC01ByDeviceId(String sDeviceId) throws Exception;
     List<EC01DeviceMessage> selectEC01ByORGIdAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
     List<MydataTableColumn> selectEC01DeviceHead() throws Exception;

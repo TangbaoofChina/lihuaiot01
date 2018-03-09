@@ -90,7 +90,7 @@ public class RoleCombineDevController {
     @ResponseBody
     public String insertUpdateRoleDeviceList(@RequestBody List<DeviceRoleInfo> roleDeviceList) throws Exception {
         String jsonString = "更新角色完成";
-        if (roleDeviceList != null && roleDeviceList.size()>0) {
+        if (roleDeviceList != null && roleDeviceList.size() > 0) {
             //更新角色信息表
             Subject currentSubject = SecurityUtils.getSubject();
             Session session = currentSubject.getSession();
@@ -107,16 +107,20 @@ public class RoleCombineDevController {
         return jsonString;
     }
 
-    @RequestMapping(value="/deleteRoleInfo",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/deleteRoleInfo", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String deleteRoleInfo(String roleId) throws Exception{
+    public String deleteRoleInfo(String roleId, String roleName) throws Exception {
         String jsonString = "删除成功";
         //首先要判断角色是否关联了用户，如果已经关联，则不能删除
         //如果没有关联，则执行下面的步骤
         //删除角色设备关联表
-        deviceRoleInfoService.deleteDeviceRoleByRoleId(roleId);
-        //删除角色表
-        roleInfoService.deleteRoleInfoByRoleId(roleId);
+        if (roleName.equals("admin")) {
+            jsonString = "管理员角色不可删除";
+        } else {
+            deviceRoleInfoService.deleteDeviceRoleByRoleId(roleId);
+            //删除角色表
+            roleInfoService.deleteRoleInfoByRoleId(roleId);
+        }
         return jsonString;
     }
 

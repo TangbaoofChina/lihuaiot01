@@ -13,6 +13,9 @@ public class Userlogin implements Serializable {
 
     private String orgid;
 
+    private String roleId;
+    private String roleName;
+
     /**
      * 是否为初次登陆
      */
@@ -81,5 +84,21 @@ public class Userlogin implements Serializable {
 
     public void setRole(List<String> role) {
         this.role = role;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

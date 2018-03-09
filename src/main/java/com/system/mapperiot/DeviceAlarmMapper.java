@@ -6,4 +6,11 @@ public interface DeviceAlarmMapper {
      * @return 实时报警个数
      */
     int selectDeviceRealAlarmCount();
+
+    /**
+     * 根据用户权限查询当前的所有实时报警个数
+     * @param roleId 用户权限
+     * @return 实时报警个数
+     */
+    int selectDeviceRealAlarmCountByRoleId(String roleId);
 }

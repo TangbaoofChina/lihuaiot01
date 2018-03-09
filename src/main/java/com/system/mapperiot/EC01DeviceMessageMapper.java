@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface EC01DeviceMessageMapper {
     List<EC01DeviceMessage> selectEC01ByORGId(String ORGId);
+    List<EC01DeviceMessage> selectEC01ByORGIdAndRoleId(@Param("orgId") String orgId,@Param("roleId") String roleId);
     EC01DeviceMessage selectEC01ByDeviceId(String sDeviceId);
     List<EC01DeviceMessage> selectEC01ByDeviceIdAndDate(@Param("deviceId") String sDeviceId,
                                                         @Param("startDate") String sStartTime,

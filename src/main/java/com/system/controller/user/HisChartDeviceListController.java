@@ -50,13 +50,11 @@ public class HisChartDeviceListController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<DeviceInfoAndNode> deviceInfoList = new ArrayList<DeviceInfoAndNode>();
-        if (userlogin.getOrgid().equals("002")) {
+        if (userlogin.getRoleName().equals("admin")) {
             deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll("001");
             deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("002"));
-
         } else {
-            deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll(userlogin.getOrgid());
-
+            deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleId());
         }
         jsonString = JSON.toJSONString(deviceInfoList);
         return jsonString;

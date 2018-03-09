@@ -14,7 +14,7 @@ $(function () {
     realid_of_setintervalDeviceOne = setInterval(function () {
         rdlSelectInfoByDeviceId();
     }, 3000);
-})
+});
 
 function rdlInitTreeNode() {
     // Some logic to retrieve, or generate tree structure

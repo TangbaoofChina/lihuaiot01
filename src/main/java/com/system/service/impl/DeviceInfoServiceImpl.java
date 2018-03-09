@@ -28,19 +28,16 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Override
     public List<DeviceInfo> selectDeviceInfoByORGId(String orgId) throws Exception {
         List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGId(orgId);
-        for (DeviceInfo deviceInfo:list
-                ) {
+        //判断设备的在线状态
+        list = judgeDeviceOnlineState(list);
+        return list;
+    }
 
-            SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String toDate = simpleFormat.format(new Date());
-            long from =  simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
-            long to = simpleFormat.parse(toDate).getTime();
-            int minutes = (int) ((to - from) / (1000 * 60));
-            if (minutes > 15)
-                deviceInfo.setDState("离线");
-            else
-                deviceInfo.setDState("在线");
-        }
+    @Override
+    public List<DeviceInfo> selectDeviceInfoByORGIdAndRoleId(String orgId, String roleId) throws Exception {
+        List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGIdAndRoleId(orgId,roleId);
+        //判断设备的在线状态
+        list = judgeDeviceOnlineState(list);
         return list;
     }
 
@@ -55,13 +52,13 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
-    public int updateDeviceOrgId(String sSerialNum,String deviceName, String sOrgId) throws Exception {
-        return deviceInfoMapper.updateDeviceOrgId(sSerialNum,deviceName,sOrgId);
+    public int updateDeviceOrgId(String sSerialNum, String deviceName, String sOrgId) throws Exception {
+        return deviceInfoMapper.updateDeviceOrgId(sSerialNum, deviceName, sOrgId);
     }
 
     @Override
     public void batchUpdateDeviceOrgId(String[] deviceIds, String sOrgId) throws Exception {
-        deviceInfoMapper.batchUpdateDeviceOrgId(deviceIds,sOrgId);
+        deviceInfoMapper.batchUpdateDeviceOrgId(deviceIds, sOrgId);
     }
 
     @Override
@@ -75,7 +72,28 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         return deviceInfoList;
     }
 
-    private void getDeviceChildList(List<DeviceInfoAndNode> deviceInfoList,List<ORGTreeNode> orgTreeNodeList) throws Exception {
+    @Override
+    public List<DeviceInfoAndNode> selectDeviceInfoByRoleIdAll(String roleId) throws Exception {
+        return deviceInfoMapper.selectDeviceAndNodeByRoleId(roleId);
+    }
+
+    private List<DeviceInfo> judgeDeviceOnlineState(List<DeviceInfo> deviceInfoList) throws Exception {
+        for (DeviceInfo deviceInfo : deviceInfoList
+                ) {
+            SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String toDate = simpleFormat.format(new Date());
+            long from = simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
+            long to = simpleFormat.parse(toDate).getTime();
+            int minutes = (int) ((to - from) / (1000 * 60));
+            if (minutes > 15)
+                deviceInfo.setDState("离线");
+            else
+                deviceInfo.setDState("在线");
+        }
+        return deviceInfoList;
+    }
+
+    private void getDeviceChildList(List<DeviceInfoAndNode> deviceInfoList, List<ORGTreeNode> orgTreeNodeList) throws Exception {
         String myOrgId = "";
         for (ORGTreeNode orgTreeNode : orgTreeNodeList
                 ) {
@@ -87,7 +105,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
             //以当前节点为父节点，查询所有子节点
             List<ORGTreeNode> orgTreeNodeList1 = orgTreeNodeMapper.selectORGInfoByParentId(myOrgId);
             if (orgTreeNodeList1.size() > 0) {
-                getDeviceChildList(deviceInfoList,orgTreeNodeList1);
+                getDeviceChildList(deviceInfoList, orgTreeNodeList1);
             }
         }
     }
