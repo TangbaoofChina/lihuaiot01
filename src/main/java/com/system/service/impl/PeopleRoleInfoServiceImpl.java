@@ -27,23 +27,27 @@ public class PeopleRoleInfoServiceImpl implements PeopleRoleInfoService {
     }
 
     @Override
-    public void insertUpdatePeopleRole(PeopleRoleInfo peopleRoleInfo) throws Exception {
+    public List<PeopleRoleInfo> selectPeopleRoleInfoDistinct() throws Exception {
+        return peopleRoleInfoMapper.selectPeopleRoleInfoDistinct();
+    }
+
+    @Override
+    public List<PeopleRoleInfo> selectPeopleRoleInfoByPeopleIdDistinct(String userId) throws Exception {
+        return peopleRoleInfoMapper.selectPeopleRoleInfoByPeopleIdDistinct(userId);
+    }
+
+    @Override
+    public void insertUpdatePeopleRoles(List<PeopleRoleInfo> peopleRoleInfoList) throws Exception {
         try {
-            if (peopleRoleInfoMapper.selectPeopleRoleInfoByPeopleId(peopleRoleInfo.getUserId()).size() >0)
-                peopleRoleInfoMapper.updatePeopleRoleInfoByPeopleId(peopleRoleInfo);
-            else
-                peopleRoleInfoMapper.insertPeopleRoleInfo(peopleRoleInfo);
-        }catch (Exception ex) {
-            if (ex.getMessage().contains("java.sql.SQLIntegrityConstraintViolationException")) {
-                peopleRoleInfoMapper.updatePeopleRoleInfoByPeopleId(peopleRoleInfo);
-            }
-            else
-                logger.error("insertUpdatePeopleRole出错："+ex.getMessage());
+            peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleId(peopleRoleInfoList.get(0).getUserId());
+            peopleRoleInfoMapper.insertPeopleRoleInfo(peopleRoleInfoList);
+        } catch (Exception ex) {
+            logger.error("insertUpdatePeopleRole出错：" + ex.getMessage());
         }
     }
 
     @Override
-    public void deletePeopleRoleInfoByPeopleId(String userId) throws Exception {
-        peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleId(userId);
+    public void deletePeopleRoleInfoByPeopleIdAndRoleId(String userId,String roleId) throws Exception {
+        peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleIdAndRoleId(userId,roleId);
     }
 }

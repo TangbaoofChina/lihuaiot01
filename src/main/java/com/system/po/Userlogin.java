@@ -11,11 +11,6 @@ public class Userlogin implements Serializable {
 
     private String password;
 
-    private String orgid;
-
-    private String roleId;
-    private String roleName;
-
     /**
      * 是否为初次登陆
      */
@@ -28,7 +23,7 @@ public class Userlogin implements Serializable {
     /**
      * 用户角色
      */
-    private List<String> role = new ArrayList<>();
+    private List<RoleInfo> roleInfoList = new ArrayList<RoleInfo>();
 
     public String getUserid() {
         return userid;
@@ -54,14 +49,6 @@ public class Userlogin implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getOrgid() {
-        return orgid;
-    }
-
-    public void setOrgid(String orgid) {
-        this.orgid = orgid;
-    }
-
     public boolean isFirstLogin() {
         return firstLogin;
     }
@@ -78,27 +65,11 @@ public class Userlogin implements Serializable {
         this.accessIP = accessIP;
     }
 
-    public List<String> getRole() {
-        return role;
+    public List<RoleInfo> getRoleInfoList() {
+        return roleInfoList;
     }
 
-    public void setRole(List<String> role) {
-        this.role = role;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleInfoList(List<RoleInfo> roleInfoList) {
+        this.roleInfoList = roleInfoList;
     }
 }

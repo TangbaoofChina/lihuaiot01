@@ -3,9 +3,11 @@ package com.system.controller.user;
 import com.alibaba.fastjson.JSON;
 import com.system.po.EC01DeviceMessage;
 import com.system.po.MydataTableColumn;
+import com.system.po.RoleInfo;
 import com.system.po.Userlogin;
 import com.system.service.BootStrapTreeNodeService;
 import com.system.service.EC01DeviceMessageService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -29,8 +31,6 @@ public class RealDeviceListController {
 
     @Autowired
     private EC01DeviceMessageService ec01DeviceMessageService;
-    @Autowired
-    private BootStrapTreeNodeService bootStrapTreeNodeService;
 
     @RequestMapping(value = "selectEC01ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -42,10 +42,10 @@ public class RealDeviceListController {
             Session session = currentSubject.getSession();
             Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
             List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
-            if (userlogin.getRoleName().equals("admin")) {
+            if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
                 ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
             } else {
-                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleId());
+                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
             }
             if (ec01DeviceMessageList.size() > 0)
                 jsonString = JSON.toJSONString(ec01DeviceMessageList);

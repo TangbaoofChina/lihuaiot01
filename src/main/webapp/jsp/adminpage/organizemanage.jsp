@@ -8,7 +8,7 @@
 </style>
 <div class="panel panel-default">
     <ol class="breadcrumb" style="margin-bottom: 0px;">
-        <li>组织管理信息</li>
+        <li>部门管理信息</li>
     </ol>
     <div class="panel-body">
 <%--        <div class="columns-left">

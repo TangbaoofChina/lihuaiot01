@@ -26,6 +26,11 @@ public class RoleInfoServiceImpl implements RoleInfoService {
     }
 
     @Override
+    public List<RoleInfo> selectRoleInfoByUserId(String userId) throws Exception {
+        return roleInfoMapper.selectRoleInfoByUserId(userId);
+    }
+
+    @Override
     public void insertNewRoleInfo(RoleInfo roleInfo) throws Exception {
         roleInfoMapper.insertNewRoleInfo(roleInfo, new Date());
     }

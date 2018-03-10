@@ -22,6 +22,9 @@
         and c.di_serialnum = b.devrole_devnum
         and e.devorg_devnum = b.devrole_devnum
         and d.node_id = c.di_nodeid
-        and a.role_id = #{roleId}
+        and a.role_id IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

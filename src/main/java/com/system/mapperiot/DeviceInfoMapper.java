@@ -13,9 +13,9 @@ public interface DeviceInfoMapper {
     List<ORGTreeNode> selectDeviceByOrgId(String orgId);
     List<BootStrapTreeNode> selectBstDeviceByOrgId(String orgId);
     List<DeviceInfo> selectDeviceByORGId(String orgId);
-    List<DeviceInfo> selectDeviceByORGIdAndRoleId(@Param("orgId") String orgId,@Param("roleId") String roleId);
+    List<DeviceInfo> selectDeviceByORGIdAndRoleId(@Param("orgId") String orgId,@Param("roleIds") List<String> roleIds);
     List<DeviceInfoAndNode> selectDeviceAndNodeByORGId(String orgId);
-    List<DeviceInfoAndNode> selectDeviceAndNodeByRoleId(String roleId);
+    List<DeviceInfoAndNode> selectDeviceAndNodeByRoleId(@Param("roleIds") List<String> roleIds);
     List<DeviceInfo> selectDeviceInfoByIDs(@Param("deviceIds") String[] deviceIds);
     List<DeviceInfo> selectDeviceInfoByRoleId(String roleId);
     DeviceInfo selectDeviceInfoByID(String deviceId);

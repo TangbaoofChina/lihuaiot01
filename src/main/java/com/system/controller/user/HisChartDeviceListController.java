@@ -6,6 +6,7 @@ import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 import com.system.service.DeviceInfoService;
 import com.system.service.EC01DeviceMessageService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -50,11 +51,11 @@ public class HisChartDeviceListController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<DeviceInfoAndNode> deviceInfoList = new ArrayList<DeviceInfoAndNode>();
-        if (userlogin.getRoleName().equals("admin")) {
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll("001");
             deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("002"));
         } else {
-            deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleId());
+            deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleInfoList());
         }
         jsonString = JSON.toJSONString(deviceInfoList);
         return jsonString;

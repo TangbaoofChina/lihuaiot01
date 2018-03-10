@@ -5,8 +5,10 @@ import com.system.mapperiot.ORGTreeNodeMapper;
 import com.system.po.DeviceInfo;
 import com.system.po.DeviceInfoAndNode;
 import com.system.po.ORGTreeNode;
+import com.system.po.RoleInfo;
 import com.system.service.DeviceInfoService;
 import com.system.util.EJConvertor;
+import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,9 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
-    public List<DeviceInfo> selectDeviceInfoByORGIdAndRoleId(String orgId, String roleId) throws Exception {
-        List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGIdAndRoleId(orgId,roleId);
+    public List<DeviceInfo> selectDeviceInfoByORGIdAndRoleId(String orgId, List<RoleInfo> roleInfoList) throws Exception {
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGIdAndRoleId(orgId,roleIds);
         //判断设备的在线状态
         list = judgeDeviceOnlineState(list);
         return list;
@@ -73,8 +76,9 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
-    public List<DeviceInfoAndNode> selectDeviceInfoByRoleIdAll(String roleId) throws Exception {
-        return deviceInfoMapper.selectDeviceAndNodeByRoleId(roleId);
+    public List<DeviceInfoAndNode> selectDeviceInfoByRoleIdAll(List<RoleInfo> roleInfoList) throws Exception {
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        return deviceInfoMapper.selectDeviceAndNodeByRoleId(roleIds);
     }
 
     private List<DeviceInfo> judgeDeviceOnlineState(List<DeviceInfo> deviceInfoList) throws Exception {

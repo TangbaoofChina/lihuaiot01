@@ -5,9 +5,12 @@
       SELECT count(*) from iot_realalarm
     </select>
     <select id="selectDeviceRealAlarmCountByRoleId" parameterType="String" resultType="Integer">
-        select count(a.alarm_id)
+        select count(DISTINCT a.alarm_id)
         from iot_realalarm a,iot_devicerole b
         where a.device_id = b.devrole_devnum
-        and b.devrole_roleid = #{roleId}
+        and b.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

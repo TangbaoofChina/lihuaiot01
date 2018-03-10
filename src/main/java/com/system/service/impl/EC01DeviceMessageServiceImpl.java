@@ -4,16 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.system.mapperiot.DeviceInfoMapper;
 import com.system.mapperiot.EC01DeviceMessageMapper;
-import com.system.po.DataTablePageing;
-import com.system.po.DeviceInfo;
-import com.system.po.EC01DeviceMessage;
-import com.system.po.MydataTableColumn;
+import com.system.po.*;
 import com.system.po.parameter.DeviceCharts01;
 import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 import com.system.po.parameter.ParameterData;
 import com.system.service.EC01DeviceMessageService;
 import com.system.util.EJConvertor;
+import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +39,9 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     @Override
-    public List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId, String roleId) throws Exception {
-        List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGIdAndRoleId(ORGId,roleId);
+    public List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGIdAndRoleId(ORGId,roleIds);
         ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList);
         return ec01DeviceMessageList;
     }

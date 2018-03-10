@@ -6,6 +6,7 @@ import com.system.service.BootStrapTreeNodeService;
 import com.system.service.PeopleCombineOrgService;
 import com.system.service.PeopleRoleInfoService;
 import com.system.service.UserloginService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -35,11 +36,12 @@ public class LoginRecordController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<PeopleRoleInfo> peopleRoleInfoList = new ArrayList<PeopleRoleInfo>();
-        if (userlogin.getRoleName().equals("admin")) {
-            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfo();
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoDistinct();
         } else {
-            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByPeopleId(userlogin.getUserid());
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByPeopleIdDistinct(userlogin.getUserid());
         }
+        //有的用户有三四个权限，需要去掉重复的，查出来有三四条
         if (peopleRoleInfoList.size()>0)
             jsonString = JSON.toJSONString(peopleRoleInfoList);
         return jsonString;

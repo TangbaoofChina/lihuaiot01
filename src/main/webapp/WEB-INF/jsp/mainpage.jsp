@@ -19,6 +19,8 @@
           href="/lihuaiot01/css/bootstrap-multiselect.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-tab.css">
+    <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/select2/css/select2.css">
 <%--    <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/bootstrap/bootstrap-select/css/bootstrap-select.min.css">--%>
     <link rel="stylesheet" type="text/css"
@@ -181,16 +183,12 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="organizemanage" class="menu_item"
-                                           name="/lihuaiot01/jsp/adminpage/organizemanage.jsp">组织管理</a>
+                                           name="/lihuaiot01/jsp/adminpage/organizemanage.jsp">部门管理</a>
                                     </li>
-                                    <li class="list-group-item">
+                                    <%--<li class="list-group-item">
                                         <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="javascript:void(0)" id="rolecombinepeople" class="menu_item"
-                                           name="/lihuaiot01/jsp/adminpage/rolecombinepeople.jsp">用户管理</a>
-                                    </li>
+                                    </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
@@ -198,6 +196,10 @@
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="rolecombinedevice" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/rolecombinedevice.jsp">角色管理</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="rolecombinepeople" class="menu_item"
+                                           name="/lihuaiot01/jsp/adminpage/rolecombinepeople.jsp">用户管理</a>
                                     </li>
                                 </ul>
                             </div>
@@ -351,6 +353,8 @@
         src="/lihuaiot01/bootstrap/bootstrap-multiselect.js"></script>
 <script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript"
+        src="/lihuaiot01/select2/js/select2.js"></script>
 <%--<script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-select/js/bootstrap-select.min.js"></script>--%>
 <%--contextmenu start 与 tab有冲突--%>

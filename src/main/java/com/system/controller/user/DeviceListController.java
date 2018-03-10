@@ -6,6 +6,7 @@ import com.system.po.MydataTableColumn;
 import com.system.po.Userlogin;
 import com.system.service.BootStrapTreeNodeService;
 import com.system.service.DeviceInfoService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -43,13 +44,13 @@ public class DeviceListController {
             Session session = currentSubject.getSession();
             Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
             List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
-            if(userlogin.getRoleName().equals("admin")){
+            if(RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())){
                 deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
             } else {
                 /*if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
                     deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
                 }*/
-                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleId());
+                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleInfoList());
             }
             if (deviceInfoList.size() > 0)
                 jsonString = JSON.toJSONString(deviceInfoList);

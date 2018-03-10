@@ -2,10 +2,12 @@ var rolePeopleTableColumns;
 var rolePeopleSelectPeople;
 var rolePeopleSelectRole;
 var rolePeopleSelectPeopleRole;
+var rolePeopleSelectPeopleRoles;
 $(function () {
     rolePeopleInitTableHead();
     rolePeopleInitPeople();
     rolePeopleInitRole();
+    rolePeopleInitRoles();
 });
 
 function rolePeopleInitTableHead() {
@@ -133,7 +135,7 @@ function rolePeopleInitPeople() {
 
 function rolePeopleInitRole() {
     $("#rolePeopleRoleName").bsSuggest('init', {
-        effectiveFieldsAlias: {roleName: "人员", roleDescribe: "部门"},
+        effectiveFieldsAlias: {roleName: "角色", roleDescribe: "描述"},
         searchFields: ["roleName", "roleDescribe"],
         effectiveFields: ["roleName", "roleDescribe"],
         showHeader: true,//显示 header
@@ -178,15 +180,66 @@ function rolePeopleInitRole() {
     });
 }
 
+var rolePeopleMultiselectset = {
+    enableFiltering: true,//搜索
+    includeSelectAllOption: true,//全选
+    nonSelectedText: '请选择...',//没有值的时候button显示值
+    inheritClass: true,//继承原来select的button的class
+    buttonContainer: '<div class="btn-group" />',//承载按钮和下拉框
+    selectedClass: 'multiselect-selected',//选中项样式
+    nSelectedText: '个被选中',//有n个值的时候显示n个被选中
+    allSelectedText: '全选',//所有被选中的时候 全选（n）
+    buttonWidth: '320px',//button宽度
+    numberDisplayed: 11,//当超过10个标签的时候显示n个被选中
+    selectAllText: '全选',
+    disableIfEmpty: true,//没有选项时readonly
+    templates: {
+        button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown" style="text-align:center;background-color: #ffffff;border: 1px solid #e5e5e5;"><span class="multiselect-selected-text"></span></button>',
+        ul: '<ul class="multiselect-container dropdown-menu" style="max-height: 200px;overflow-x: hidden;overflow-y: auto;-webkit-tap-highlight-color: rgba(0,0,0,0);"></ul>',
+        filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+        filterClearBtn: '<span class="input-group-btn"></span>',
+        li: '<li><a tabindex="0"><label style="margin-left:2%;"></label></a></li>',
+        divider: '<li class="multiselect-item divider"></li>',
+        liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+    }
+};
+
+function rolePeopleInitRoles() {
+    $.ajax({
+        type: 'GET',
+        data: {},
+        async: true,   // 轻轻方式-异步
+        url: '/lihuaiot01/roleCombinePeople/selectRoleInfo',
+        dataType: "json",
+        success: function (result) {
+            $("#rolePeopleRoleName_search").html("");
+            for (var i = 0; i < result.length; i++) {
+                $("#rolePeopleRoleName_search").append("<option value='" + result[i].roleId + "' title='" + result[i].roleDescribe + "'>" + result[i].roleName + "</option>");
+            }
+            $('#rolePeopleRoleName_search').multiselect(rolePeopleMultiselectset);
+        },
+        error: function (XMLHttpRequest) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
 function rolePeopleSaveRolePeople() {
-    var personId = rolePeopleSelectPeople.userId;
-    var personName = rolePeopleSelectPeople.userName;
-    var roleId = rolePeopleSelectRole.roleId;
-    var roleName = rolePeopleSelectRole.roleName;
+    var selectRoles = new Array();
+    $("#rolePeopleRoleName_search option:selected").each(function () {
+        var object = new Object();
+        object.userId = rolePeopleSelectPeople.userId;
+        object.userName = rolePeopleSelectPeople.userName;
+        object.roleId = $(this).val();
+        object.roleName = $(this).text();
+        selectRoles.push(object);
+    });
     $.ajax({
         type: 'POST',
-        data: {personId: personId, personName: personName, roleId: roleId, roleName: roleName},
+        data: JSON.stringify(selectRoles),
         url: '/lihuaiot01/roleCombinePeople/roleCombinePeopleUpdate',
+        contentType: 'application/json;charset=utf-8', //设置请求头信息
+        async: true,   // 轻轻方式-异步
         dataType: "text",
         success: function (result) {
             rolePeopleInitTableContent();
@@ -224,9 +277,9 @@ function rolePeopleAddNewShow() {
 }
 
 
-
 function rolePeopleDeletePeopleRole() {
     var mPeopleId = rolePeopleSelectPeopleRole.userId;
+    var mRoleId = rolePeopleSelectPeopleRole.roleId;
     $.ajax({
         url: "/lihuaiot01/roleCombinePeople/deletePeopleRoleInfo",
 // 数据发送方式
@@ -235,7 +288,7 @@ function rolePeopleDeletePeopleRole() {
         dataType: "text",
         async: true,   // 轻轻方式-异步
 // 要传递的数据
-        data: {userId: mPeopleId},
+        data: {userId: mPeopleId, roleId: mRoleId},
         success: function (result) {
             if (result === "删除成功") {
                 rolePeopleInitTableContent();

@@ -90,6 +90,15 @@ public class BootStrapTreeNode {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "BootStrapTreeNode{" +
+                "id='" + id + '\'' +
+                ", pId='" + pId + '\'' +
+                ", lPid='" + lPid + '\'' +
+                '}';
+    }
+
     /*   public String getSelectedIcon() {
             return selectedIcon;
         }

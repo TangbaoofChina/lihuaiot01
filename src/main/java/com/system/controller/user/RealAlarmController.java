@@ -3,6 +3,7 @@ package com.system.controller.user;
 import com.alibaba.fastjson.JSON;
 import com.system.po.Userlogin;
 import com.system.service.DeviceAlarmService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -30,10 +31,10 @@ public class RealAlarmController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         int alarmCount = 0;
-        if (userlogin.getRoleName().equals("admin")) {
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             alarmCount = deviceAlarmService.selectDeviceRealAlarmCount();
         } else {
-            alarmCount = deviceAlarmService.selectDeviceRealAlarmCountByRoleId(userlogin.getRoleId());
+            alarmCount = deviceAlarmService.selectDeviceRealAlarmCountByRoleId(userlogin.getRoleInfoList());
         }
         jsonString = "{";
         jsonString += "\"" + "alarmCount" + "\"";

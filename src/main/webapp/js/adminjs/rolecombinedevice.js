@@ -340,7 +340,6 @@ function roleUpdateRoleDevice() {
         object.roleDescribe = mRoleDescribe;
         deviceList.push(object);
     });
-    var deviceListstr = JSON.stringify(deviceList);
     $.ajax({
         url: "/lihuaiot01/roleCombineDev/insertUpdateRoleDeviceList",
 // 数据发送方式

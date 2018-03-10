@@ -8,6 +8,7 @@ import com.system.service.PeopleRoleInfoService;
 import com.system.service.RoleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,23 +42,18 @@ public class RoleCombinePeopleController {
 
     @RequestMapping(value="/roleCombinePeopleUpdate",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String roleCombinePeopleUpdate(String personId,String personName,String roleId,String roleName) throws Exception{
-        PeopleRoleInfo peopleRoleInfo = new PeopleRoleInfo();
-        peopleRoleInfo.setUserId(personId);
-        peopleRoleInfo.setUserName(personName);
-        peopleRoleInfo.setRoleId(roleId);
-        peopleRoleInfo.setRoleName(roleName);
-        peopleRoleInfoService.insertUpdatePeopleRole(peopleRoleInfo);
+    public String roleCombinePeopleUpdate(@RequestBody List<PeopleRoleInfo> peopleRoleInfoList) throws Exception{
+        peopleRoleInfoService.insertUpdatePeopleRoles(peopleRoleInfoList);
         String jsonString = "更新成功";
         return jsonString;
     }
 
     @RequestMapping(value="/deletePeopleRoleInfo",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String deleteRoleInfo(String userId) throws Exception{
+    public String deleteRoleInfo(String userId,String roleId) throws Exception{
         String jsonString = "删除成功";
         //删除用户角色关联表
-        peopleRoleInfoService.deletePeopleRoleInfoByPeopleId(userId);
+        peopleRoleInfoService.deletePeopleRoleInfoByPeopleIdAndRoleId(userId,roleId);
         return jsonString;
     }
 

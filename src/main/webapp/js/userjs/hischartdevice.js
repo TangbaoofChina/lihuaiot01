@@ -143,11 +143,11 @@ function hisChartInitChart(hisChartoption) {
     var mainChart = echarts.init(mainContainer, 'macarons');
     mainChart.clear();
     mainChart.setOption(hisChartoption);
-/*    $(window).on('resize',function(){//
-        //屏幕大小自适应，重置容器高宽
-        resizeMainContainer();
-        mainChart.resize();
-    });*/
+    /*    $(window).on('resize',function(){//
+            //屏幕大小自适应，重置容器高宽
+            resizeMainContainer();
+            mainChart.resize();
+        });*/
 }
 
 function hisChartSelectDeviceByIdsChart() {
@@ -414,7 +414,7 @@ function hisChartInitMultiselect() {
         success: function (result) {
             $("#hisChartsel_search").html("");
             for (var i = 0; i < result.length; i++) {
-                $("#hisChartsel_search").append("<option value='" + result[i].dSerialNum + "'>" + result[i].dName + "-" + result[i].dNodeName + "</option>");
+                $("#hisChartsel_search").append("<option value='" + result[i].dSerialNum + "' title='" + result[i].dNodeName + "'>" + result[i].dName + "</option>");
             }
             $('#hisChartsel_search').multiselect(hisChartMultiselectset);
         },

@@ -31,28 +31,36 @@
             <h3 id="addNew-title">授权用户</h3>
             <button class="close" id="rolePeopleaddNew-close">&times;</button>
         </div>
-        <div class="addNew-content">
+        <div class="rolePeopleaddNew-content">
             <%--   <form action="" method="post">--%>
-            <div class="form-num">
-                <label for="rolePeoplePeopleName">用户名</label>
+            <div class="rolePeopleform-name">
+                <label class="col-md-2" for="rolePeoplePeopleName">用户名</label>
                 <%--<input type="text" class="form-control" id="rolePeoplePeopleName"/>--%>
-                <div class="input-group">
+                <div class="col-md-8 input-group">
                     <input type="text" class="form-control" id="rolePeoplePeopleName"
-                           style="width:240px;margin-right:0px">
+                           style="width:240px;">
                     <div class="input-group-btn" style="width:20px;">
                         <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
                     </div>
                 </div>
             </div>
-            <div class="form-name">
-                <label for="rolePeopleRoleName">角色名</label>
+            <%--            <div class="form-name">
+                            <label for="rolePeopleRoleName">角色名</label>
+                            &lt;%&ndash;<input type="text" class="form-control" id="rolePeopleRoleName"/>&ndash;%&gt;
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="rolePeopleRoleName"
+                                       style="width:240px;margin-right:0px">
+                                <div class="input-group-btn" style="width:20px;">
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                                </div>
+                            </div>
+                        </div>--%>
+            <div class="rolePeopleform-name">
+                <label class="col-md-2" for="rolePeopleRoleName_search">角色名</label>
                 <%--<input type="text" class="form-control" id="rolePeopleRoleName"/>--%>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="rolePeopleRoleName"
-                           style="width:240px;margin-right:0px">
-                    <div class="input-group-btn" style="width:20px;">
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
-                    </div>
+                <div class="col-md-8 input-group">
+                    <select class="form-control" id="rolePeopleRoleName_search" multiple="multiple">
+                    </select>
                 </div>
             </div>
         </div>

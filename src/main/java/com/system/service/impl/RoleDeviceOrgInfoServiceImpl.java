@@ -1,10 +1,13 @@
 package com.system.service.impl;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.system.mapperiot.BootStrapTreeNodeMapper;
 import com.system.mapperiot.RoleDeviceOrgInfoMapper;
 import com.system.po.BootStrapTreeNode;
 import com.system.po.RoleDeviceOrgInfo;
+import com.system.po.RoleInfo;
 import com.system.service.RoleDeviceOrgInfoService;
+import com.system.util.RoleInfoListUtil;
 import com.system.util.TreeNodeMerger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,24 +23,26 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
     private BootStrapTreeNodeMapper bootStrapTreeNodeMapper;
 
     @Override
-    public List<RoleDeviceOrgInfo> selectRoleDeviceOrgInfoByRoleId(String roleId) {
-        return roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleId);
+    public List<RoleDeviceOrgInfo> selectRoleDeviceOrgInfoByRoleId(List<RoleInfo> roleInfoList) {
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        return roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
     }
 
     @Override
-    public BootStrapTreeNode selectBstnByRoleId(String roleId) {
+    public BootStrapTreeNode selectBstnByRoleId(List<RoleInfo> roleInfoList) {
         //显示组织结构树
         //根据节点id查找根节点
         //1、先列出当前设备列表的所有节点与根节点
         //2、查找每个根节点直到最终根节点
-        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleId);
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
         //3、整合成节点列表
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
         BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
         bootStrapTreeNodeList.add(bootStrapTreeNodeRoot);
         for (RoleDeviceOrgInfo roleDeviceOrgInfo : roleDeviceOrgInfoList) {
-            //如果有完全相同的节点，则不添加
-            if (!bootStrapTreeNodeList.contains(roleDeviceOrgInfo.getBootStrapTreeNode())) {
+            //去掉重复的节点
+            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList, roleDeviceOrgInfo.getBootStrapTreeNode())) {
                 bootStrapTreeNodeList.add(roleDeviceOrgInfo.getBootStrapTreeNode());
             }
         }
@@ -47,12 +52,13 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
     }
 
     @Override
-    public BootStrapTreeNode selectBstnAndDeviceByRoleId(String roleId) {
+    public BootStrapTreeNode selectBstnAndDeviceByRoleId(List<RoleInfo> roleInfoList) {
         //显示组织结构树
         //根据节点id查找根节点
         //1、先列出当前设备列表的所有节点与根节点
         //2、查找每个根节点直到最终根节点
-        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleId);
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
         //3、整合成节点列表
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
         BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
@@ -63,12 +69,25 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             bootStrapTreeNode.setId(roleDeviceOrgInfo.getDeviceRoleInfo().getDevNum());
             bootStrapTreeNode.setText(roleDeviceOrgInfo.getDeviceRoleInfo().getDevName());
             bootStrapTreeNode.setpId(roleDeviceOrgInfo.getBootStrapTreeNode().getId());
-            bootStrapTreeNodeList.add(bootStrapTreeNode);
-            if (!bootStrapTreeNodeList.contains(roleDeviceOrgInfo.getBootStrapTreeNode())) {
+            //去掉重复的设备
+            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList,bootStrapTreeNode)) {
+                bootStrapTreeNodeList.add(bootStrapTreeNode);
+            }
+            //去掉重复的节点
+            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList, roleDeviceOrgInfo.getBootStrapTreeNode())) {
                 bootStrapTreeNodeList.add(roleDeviceOrgInfo.getBootStrapTreeNode());
             }
         }
         return formatBootStrapTreeNode(bootStrapTreeNodeList);
+    }
+
+    private Boolean judgeContainBootStrapTreeNode(List<BootStrapTreeNode> bootStrapTreeNodeList, BootStrapTreeNode bootStrapTreeNode) {
+        for (BootStrapTreeNode bstn : bootStrapTreeNodeList
+                ) {
+            if (bstn.toString().equals(bootStrapTreeNode.toString()))
+                return true;
+        }
+        return false;
     }
 
     private BootStrapTreeNode formatBootStrapTreeNode(List<BootStrapTreeNode> bootStrapTreeNodeList) {

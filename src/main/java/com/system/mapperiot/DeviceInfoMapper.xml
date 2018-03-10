@@ -46,11 +46,14 @@
         order by DI_SERIALNUM asc
     </select>
     <select id="selectDeviceByORGIdAndRoleId" resultMap="BaseResultMap">
-        select a.*
+        select DISTINCT a.*
         from IOT_DEVICEINFO a,iot_devicerole c
         where  c.devrole_devnum = a.di_serialnum
         AND a.di_nodeId = #{orgId}
-        and c.devrole_roleid = #{roleId}
+        and c.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         order by a.DI_SERIALNUM asc
     </select>
     <select id="selectDeviceAndNodeByORGId" parameterType="String" resultMap="BaseResultAndNodeMap">
@@ -61,11 +64,14 @@
         order by a.DI_SERIALNUM asc
     </select>
     <select id="selectDeviceAndNodeByRoleId" parameterType="String" resultMap="BaseResultAndNodeMap">
-        select a.*,b.node_name
+        select DISTINCT a.*,b.node_name
         from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
         where a.di_nodeid=b.node_id
         and a.di_serialnum = c.devrole_devnum
-        AND c.devrole_roleid = #{roleId}
+        AND c.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         order by a.DI_SERIALNUM asc
     </select>
     <select id="selectDeviceInfoByIDs" resultMap="BaseResultMap">

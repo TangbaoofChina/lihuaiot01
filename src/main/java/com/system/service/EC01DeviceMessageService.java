@@ -1,9 +1,6 @@
 package com.system.service;
 
-import com.system.po.DataTablePageing;
-import com.system.po.DeviceInfo;
-import com.system.po.EC01DeviceMessage;
-import com.system.po.MydataTableColumn;
+import com.system.po.*;
 import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 
@@ -12,7 +9,7 @@ import java.util.List;
 
 public interface EC01DeviceMessageService {
     List<EC01DeviceMessage> selectEC01ByORGId(String ORGId) throws Exception;
-    List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId,String roleId) throws Exception;
+    List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId,List<RoleInfo> roleInfoList) throws Exception;
     EC01DeviceMessage selectEC01ByDeviceId(String sDeviceId) throws Exception;
     List<EC01DeviceMessage> selectEC01ByORGIdAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
     List<MydataTableColumn> selectEC01DeviceHead() throws Exception;

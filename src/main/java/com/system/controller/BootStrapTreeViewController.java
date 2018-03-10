@@ -1,7 +1,7 @@
 package com.system.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.system.exception.BootStrapTreeViewException;
+import com.system.util.RoleInfoListUtil;
 import com.system.po.*;
 import com.system.service.*;
 import org.apache.shiro.SecurityUtils;
@@ -37,10 +37,10 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        if (userlogin.getRoleName().equals("admin")) {
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode =roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleId());
+            BootStrapTreeNode bootStrapTreeNode =roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
             //BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId(userlogin.getOrgid());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
@@ -58,10 +58,10 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        if (userlogin.getRoleName().equals("admin")) {
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGAndDeviceInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(userlogin.getRoleId());
+            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(userlogin.getRoleInfoList());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
         String jsonString = JSON.toJSONString(bootStrapTreeNodeList);
