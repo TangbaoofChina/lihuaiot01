@@ -39,12 +39,6 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     public BootStrapTreeNode selectORGInfoByOrgId(String orgId) throws Exception {
         String myOrgId = orgId;
         BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
-        /*List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        bootStrapTreeNodeList.add(bootStrapTreeNode);
-        if (bootStrapTreeNode.getpId() != "") {
-            //取出当前节点的上级节点
-            List<BootStrapTreeNode> bootStrapTreeNodeParentList = getParentNode(bootStrapTreeNode.getpId());
-        }*/
 
         //取出当前节点的下级节点
         List<BootStrapTreeNode> bootStrapTreeNodeChildList = getChildNode(orgId);
@@ -62,7 +56,7 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
         BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(orgId);
         while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
             String myOrgId = bootStrapTreeNodeParent.getpId();
-            longNodeId = myOrgId + "." +  longNodeId;
+            longNodeId = myOrgId + "." + longNodeId;
             bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
             if (bootStrapTreeNodeParent == null) {
                 break;
@@ -81,17 +75,21 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
         //立华牧业节点
         BootStrapTreeNode bootStrapTreeNode01 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
+        //获取根节点上下挂的设备
         List<BootStrapTreeNode> deviceNodeList01 = getDevicesList("001");
         List<BootStrapTreeNode> bootStrapTreeNodeChildList = getChildNodeAndDevice("001");
         //添加设备
-        bootStrapTreeNodeChildList.addAll(deviceNodeList01);
-        bootStrapTreeNode01.setNodes(bootStrapTreeNodeChildList);
+        if (deviceNodeList01.size() > 0)
+            bootStrapTreeNodeChildList.addAll(deviceNodeList01);
+        if (bootStrapTreeNodeChildList.size() > 0)
+            bootStrapTreeNode01.setNodes(bootStrapTreeNodeChildList);
 
         //未分组节点
         BootStrapTreeNode bootStrapTreeNode02 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("002");
         List<BootStrapTreeNode> deviceNodeList02 = getDevicesList("002");
         //添加设备
-        bootStrapTreeNode02.setNodes(deviceNodeList02);
+        if (deviceNodeList02.size() > 0)
+            bootStrapTreeNode02.setNodes(deviceNodeList02);
         //未分组放在上面
         bootStrapTreeNodeList.add(bootStrapTreeNode02);
         bootStrapTreeNodeList.add(bootStrapTreeNode01);

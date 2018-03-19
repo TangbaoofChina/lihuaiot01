@@ -243,7 +243,7 @@ function hisExportStorageAction() {
                 sStartDate: queryStartDate,
                 sEndDate: queryEndDate
             }
-            var url = "/lihuaiot01/hisDeviceList/exportHisDeviceList?" + $.param(data)
+            var url = "/lihuaiot01/hisDeviceList/exportHisDeviceList?" + $.param(data);
             window.open(url, '_blank');
         } else {
             var type = 'error';

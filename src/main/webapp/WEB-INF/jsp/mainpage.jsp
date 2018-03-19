@@ -21,8 +21,8 @@
           href="/lihuaiot01/css/bootstrap-tab.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/select2/css/select2.css">
-<%--    <link rel="stylesheet" type="text/css"
-          href="/lihuaiot01/bootstrap/bootstrap-select/css/bootstrap-select.min.css">--%>
+    <%--    <link rel="stylesheet" type="text/css"
+              href="/lihuaiot01/bootstrap/bootstrap-select/css/bootstrap-select.min.css">--%>
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css"
@@ -33,12 +33,6 @@
           href="/lihuaiot01/css/mainPage.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bidType.css">
-    <%--bootstrap-contextmenu 与 tab有冲突 --%>
-    <%--    <link rel="stylesheet" type="text/css"
-              href="/lihuaiot01/css/prettify.css">
-        <link rel="stylesheet" type="text/css"
-              href="/lihuaiot01/css/bootstrap-combined.min.css">--%>
-    <!-- jQuery ztree -->
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/ztree/css/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" type="text/css"
@@ -72,12 +66,6 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <!-分割线--->
                             <li role="presentation" class="divider"></li>
-                            <%-- <li role="presentation">
-                                 <a role="menuitem" tabindex="-1" id="signOut" >
-                                     <span class="glyphicon glyphicon-off pull-right"></span>
-                                     注销
-                                 </a>
-                             </li>--%>
                             <li>
                                 <a href="javascript:void(0)" id="signOut"> <span
                                         class="glyphicon glyphicon-off pull-right"></span> &nbsp;&nbsp;注销登录
@@ -92,8 +80,8 @@
                 <div class="realAlarmCount">
                     <label id="mainRealAlarmCountlab">0</label>
                 </div>
-                <a href="javascript:void(0)" id="realalarm" class="navbar-brand"
-                   name="/lihuaiot01/jsp/userpage/devicelist.jsp">
+                <a href="javascript:void(0)" id="realalarmpng" class="navbar-brand"
+                   name="/lihuaiot01/jsp/userpage/realalarmlist.jsp">
                     <img alt="Brand" src="images/realalarm.png" height="25">
                 </a>
             </div>
@@ -153,9 +141,19 @@
                                        name="/lihuaiot01/jsp/userpage/realdevicelist.jsp">实时数据</a>
                                 </li>
                                 <li class="list-group-item">
+                                    <a href="javascript:void(0);" id="realalarmlist"
+                                       class="menu_item"
+                                       name="/lihuaiot01/jsp/userpage/realalarmlist.jsp">实时报警</a>
+                                </li>
+                                <li class="list-group-item">
                                     <a href="javascript:void(0);" id="hisdevicelist"
                                        class="menu_item"
                                        name="/lihuaiot01/jsp/userpage/hisdevicelist.jsp">历史数据</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="javascript:void(0);" id="hisalarmlist"
+                                       class="menu_item"
+                                       name="/lihuaiot01/jsp/userpage/hisalarmlist.jsp">历史报警</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0);" id="hischartdevice"
@@ -185,10 +183,10 @@
                                         <a href="javascript:void(0)" id="organizemanage" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/organizemanage.jsp">部门管理</a>
                                     </li>
-                                    <%--<li class="list-group-item">
-                                        <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
-                                           name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
-                                    </li>--%>
+                                        <%--<li class="list-group-item">
+                                            <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
+                                               name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
+                                        </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>

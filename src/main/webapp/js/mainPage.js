@@ -77,14 +77,12 @@ function mainRealAlarmCountRefresh() {
 
 // 侧边栏连接点击动作
 function menuClickAction() {
-    $("#realalarm").click(function () {
+    $("#realalarmpng").click(function () {
         var url = $(this).attr("name");
-        var val = $(this)[0].innerText;
-        var id = $(this).attr("id");
         delay(function () {
             $("#tabContent").data("tabs").addTab({
-                id: id + "tab",
-                text: "设备列表",
+                id: "realalarmlisttab",
+                text: "实时报警",
                 closeable: true,
                 url: url
             })

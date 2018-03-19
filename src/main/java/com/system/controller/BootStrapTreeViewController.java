@@ -41,7 +41,6 @@ public class BootStrapTreeViewController {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
         } else {
             BootStrapTreeNode bootStrapTreeNode =roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
-            //BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId(userlogin.getOrgid());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
 

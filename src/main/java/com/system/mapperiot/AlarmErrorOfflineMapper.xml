@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.AlarmErrorOfflineMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceAlarmInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="dAlarmId" jdbcType="VARCHAR" property="dAlarmId"/>
+        <result column="dSerialNum" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+        <result column="dAlarmCode" jdbcType="VARCHAR" property="dAlarmCode"/>
+        <result column="dAlarmInfo" jdbcType="VARCHAR" property="dAlarmInfo"/>
+        <result column="dAlarmTime" jdbcType="VARCHAR" property="dAlarmTime"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+    </resultMap>
+    <select id="selectDeviceAlarmInfoList" resultMap="BaseResultMap">
+        select a.alarm_id as dAlarmId,a.device_id as dSerialNum,a.alarm_code as dAlarmCode,
+        a.alarm_describe as dAlarmInfo,a.alarm_date as dAlarmTime,
+        b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c
+        where a.device_id = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        union all
+        select d.drerror_id as dAlarmId,d.drerror_devnum as dSerialNum,d.drerror_code as dAlarmCode,
+        d.drerror_describe as dAlarmInfo,d.drerror_receivetime as dAlarmTime,
+        b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_realerror d,iot_deviceinfo b1,iot_orgtreenode c1
+        where d.drerror_devnum = b1.di_serialnum
+        and b1.di_nodeid = c1.node_id
+        union all
+        select e.droffline_id as dAlarmId,e.droffline_devnum as dSerialNum,'01' dAlarmCode,
+        e.droffline_describe as dAlarmInfo,e.droffline_devreceivetime as dAlarmTime,
+        b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_realoffline e,iot_deviceinfo b2,iot_orgtreenode c2
+        where e.droffline_devnum = b2.di_serialnum
+        and b2.di_nodeid = c2.node_id
+        order by dAlarmTime
+    </select>
+    <select id="selectDeviceAlarmInfoByRoleId" resultMap="BaseResultMap">
+        select a.alarm_id as dAlarmId,a.device_id as dSerialNum,a.alarm_code as dAlarmCode,
+        a.alarm_describe as dAlarmInfo,a.alarm_date as dAlarmTime,
+        b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole f
+        where a.device_id = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        and f.devrole_devnum = a.device_id
+        and f.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        union all
+        select d.drerror_id as dAlarmId,d.drerror_devnum as dSerialNum,d.drerror_code as dAlarmCode,
+        d.drerror_describe as dAlarmInfo,d.drerror_receivetime as dAlarmTime,
+        b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_realerror d,iot_deviceinfo b1,iot_orgtreenode c1,iot_devicerole f1
+        where d.drerror_devnum = b1.di_serialnum
+        and b1.di_nodeid = c1.node_id
+        and f1.devrole_devnum = d.drerror_devnum
+        and f1.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        union all
+        select e.droffline_id as dAlarmId,e.droffline_devnum as dSerialNum,'01' dAlarmCode,
+        e.droffline_describe as dAlarmInfo,e.droffline_devreceivetime as dAlarmTime,
+        b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_realoffline e,iot_deviceinfo b2,iot_orgtreenode c2,iot_devicerole f2
+        where e.droffline_devnum = b2.di_serialnum
+        and b2.di_nodeid = c2.node_id
+        and f2.devrole_devnum = e.droffline_devnum
+        and f2.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by dAlarmTime
+    </select>
+    <select id="selectDeviceHisAlarmInfoList" resultMap="BaseResultMap">
+        select a.hisalarm_id as dAlarmId,a.device_id as dSerialNum,a.hisalarm_code as dAlarmCode,
+        a.hisalarm_describe as dAlarmInfo,a.hisalarm_date as dAlarmTime,
+        b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        from iot_hisalarm a,iot_deviceinfo b,iot_orgtreenode c
+        where a.device_id = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        AND a.hisalarm_date BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        union all
+        select d.dherror_id as dAlarmId,d.dherror_devnum as dSerialNum,d.dherror_code as dAlarmCode,
+        d.dherror_describe as dAlarmInfo,d.dherror_receivetime as dAlarmTime,
+        b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_hiserror d,iot_deviceinfo b1,iot_orgtreenode c1
+        where d.dherror_devnum = b1.di_serialnum
+        and b1.di_nodeid = c1.node_id
+        AND d.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        union all
+        select e.dhoffline_id as dAlarmId,e.dhoffline_devnum as dSerialNum,'01' dAlarmCode,
+        e.dhoffline_describe as dAlarmInfo,e.dhoffline_devreceivetime as dAlarmTime,
+        b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_hisoffline e,iot_deviceinfo b2,iot_orgtreenode c2
+        where e.dhoffline_devnum = b2.di_serialnum
+        and b2.di_nodeid = c2.node_id
+        AND e.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by dAlarmTime
+    </select>
+    <select id="selectDeviceHisAlarmInfoListByRoleId" resultMap="BaseResultMap">
+        select a.hisalarm_id as dAlarmId,a.device_id as dSerialNum,a.hisalarm_code as dAlarmCode,
+        a.hisalarm_describe as dAlarmInfo,a.hisalarm_date as dAlarmTime,
+        b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        from iot_hisalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole f
+        where a.device_id = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        and f.devrole_devnum = a.device_id
+        AND a.hisalarm_date BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and f.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        union all
+        select d.dherror_id as dAlarmId,d.dherror_devnum as dSerialNum,d.dherror_code as dAlarmCode,
+        d.dherror_describe as dAlarmInfo,d.dherror_receivetime as dAlarmTime,
+        b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_hiserror d,iot_deviceinfo b1,iot_orgtreenode c1,iot_devicerole f1
+        where d.dherror_devnum = b1.di_serialnum
+        and b1.di_nodeid = c1.node_id
+        and f1.devrole_devnum = d.dherror_devnum
+        AND d.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and f1.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        union all
+        select e.dhoffline_id as dAlarmId,e.dhoffline_devnum as dSerialNum,'01' dAlarmCode,
+        e.dhoffline_describe as dAlarmInfo,e.dhoffline_devreceivetime as dAlarmTime,
+        b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_hisoffline e,iot_deviceinfo b2,iot_orgtreenode c2,iot_devicerole f2
+        where e.dhoffline_devnum = b2.di_serialnum
+        and b2.di_nodeid = c2.node_id
+        and f2.devrole_devnum = e.dhoffline_devnum
+        AND e.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and f2.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by dAlarmTime
+    </select>
+</mapper>

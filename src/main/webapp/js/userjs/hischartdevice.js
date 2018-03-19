@@ -97,40 +97,6 @@ $(function () {
 
 });
 
-function hisChartInitBootstrapSuggest() {
-    $("#devicearray").bsSuggest('init', {
-        clearable: true,   // 是否可清除已输入的内容
-        url: "/lihuaiot01/hisChartDevice/selectDevices",
-        idField: "id",
-        keyField: "name",
-        allowNoKeyword: false, //无输入时不执行过滤请求
-        multiWord: true, //以分隔符号分割的多关键字支持
-        separator: ",", //多关键字支持时的分隔符
-        processData: function (json) {// url 获取数据时，对数据的处理，作为 getData 的回调函数
-            var i, len, data = {value: []};
-            if (!json || json.length == 0) {
-                return false;
-            }
-            len = json.length;
-            for (i = 0; i < len; i++) {
-                data.value.push({
-                    "name": json[i].dName,
-                    "id": json[i].dSerialNum,
-                });
-            }
-            return data;
-        }
-    }).on('onDataRequestSuccess', function (e, result) {
-        //console.log('onDataRequestSuccess: ', result);
-    }).on('onSetSelectValue', function (e, keyword, data) {
-        // console.log('onSetSelectValue: ', keyword, data);
-        hisChartNowDeviceIds.push(data);
-    }).on('onUnsetSelectValue', function () {
-        //console.log('onUnsetSelectValue');
-    });
-}
-
-
 function hisChartInitChart(hisChartoption) {
     var mainContainer = document.getElementById('echartsmain');
     //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽

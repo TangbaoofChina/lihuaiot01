@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.DeviceErrorMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceAlarmInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DRERROR_ID" jdbcType="VARCHAR" property="dAlarmId"/>
+        <result column="DRERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+        <result column="DRERROR_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
+        <result column="DRERROR_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
+        <result column="DRERROR_RECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.DeviceAlarmInfo">
+    <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+    <id column="DHERROR_ID" jdbcType="VARCHAR" property="dAlarmId"/>
+    <result column="DHERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+    <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+    <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+    <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+    <result column="DHERROR_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
+    <result column="DHERROR_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
+    <result column="DHERROR_RECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
+    <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+</resultMap>
+    <select id="selectErrorInfoCount" resultType="Integer">
+        SELECT count(*) from iot_realerror
+    </select>
+    <select id="selectErrorInfoCountByRoleId" resultType="Integer">
+        select count(DISTINCT a.drerror_devnum)
+        from iot_realerror a,iot_devicerole b
+        where a.drerror_devnum = b.devrole_devnum
+        and b.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectErrorInfo" resultMap="BaseResultMap">
+        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_realerror a,iot_deviceinfo b,iot_orgtreenode c
+        where a.drerror_devnum = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        order by a.drerror_receivetime desc
+    </select>
+    <select id="selectErrorInfoByRoleId" resultMap="BaseResultMap">
+        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_realerror a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
+        where a.drerror_devnum = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        and d.devrole_devnum = a.drerror_devnum
+        and d.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.drerror_receivetime desc
+    </select>
+    <select id="selectHisErrorInfoByDate" resultMap="BaseHisResultMap">
+        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_hiserror a,iot_deviceinfo b,iot_orgtreenode c
+        where a.dherror_devnum = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        AND a.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by a.dherror_receivetime desc
+    </select>
+    <select id="selectHisErrorInfoByDateAndRoleId" resultMap="BaseHisResultMap">
+        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        from iot_hiserror a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
+        where a.dherror_devnum = b.di_serialnum
+        and b.di_nodeid = c.node_id
+        and d.devrole_devnum = a.dherror_devnum
+        AND a.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and d.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.dherror_receivetime desc
+    </select>
+</mapper>

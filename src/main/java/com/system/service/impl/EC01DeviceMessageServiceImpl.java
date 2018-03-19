@@ -180,17 +180,17 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     //************************************私有函数********************************************//
     private List<EC01DeviceMessage> judgeDeviceOnlineState(List<EC01DeviceMessage> ec01DeviceMessageList) throws Exception
     {
-        for (EC01DeviceMessage deviceInfo:ec01DeviceMessageList
+        for (EC01DeviceMessage ec01DeviceMessage:ec01DeviceMessageList
                 ) {
             SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String toDate = simpleFormat.format(new Date());
-            long from =  simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
+            long from =  simpleFormat.parse(ec01DeviceMessage.getDReceiveTime()).getTime();
             long to = simpleFormat.parse(toDate).getTime();
             int minutes = (int) ((to - from) / (1000 * 60));
             if (minutes > 15)
-                deviceInfo.setDState("离线");
+                ec01DeviceMessage.setDState("离线");
             else
-                deviceInfo.setDState("在线");
+                ec01DeviceMessage.setDState("在线");
         }
         return ec01DeviceMessageList;
     }

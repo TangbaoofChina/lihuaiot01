@@ -37,16 +37,7 @@ public class RealDeviceListController {
     public String selectEC01ByORGId(String sORGId) throws Exception {
         String jsonString = "[]";
         if (sORGId != null) {
-            //获取用户角色
-            Subject currentSubject = SecurityUtils.getSubject();
-            Session session = currentSubject.getSession();
-            Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
-            List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
-            if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
-                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
-            } else {
-                ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
-            }
+            List<EC01DeviceMessage> ec01DeviceMessageList = selectEC01DeviceMessageList(sORGId);
             if (ec01DeviceMessageList.size() > 0)
                 jsonString = JSON.toJSONString(ec01DeviceMessageList);
         }
@@ -72,7 +63,7 @@ public class RealDeviceListController {
         String fileName = "realdevicelist.xlsx";
         List<EC01DeviceMessage> ec01DeviceMessageList = null;
         if (sORGId != null) {
-            ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
+            ec01DeviceMessageList = selectEC01DeviceMessageList(sORGId);
         }
         File file = ec01DeviceMessageService.exportStorage(ec01DeviceMessageList);
         if (file != null) {
@@ -96,11 +87,22 @@ public class RealDeviceListController {
     @RequestMapping(value = "/ec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String ec01DeviceHead() throws Exception {
-
         List<MydataTableColumn> ec01HeadColumnList = ec01DeviceMessageService.selectEC01DeviceHead();
-
         String jsonString = JSON.toJSONString(ec01HeadColumnList);
-
         return jsonString;
+    }
+
+    private List<EC01DeviceMessage> selectEC01DeviceMessageList(String sORGId) throws Exception {
+        List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
+        //获取用户角色
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
+        } else {
+            ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+        }
+        return ec01DeviceMessageList;
     }
 }

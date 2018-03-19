@@ -31,27 +31,13 @@ public class DeviceListController {
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @Autowired
-    private BootStrapTreeNodeService bootStrapTreeNodeService;
-
     @RequestMapping(value = "selectDeviceByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectDeviceByORGId(String sORGId) throws Exception {
         String jsonString = "[]";
+        List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
         if (sORGId != null) {
-            //获取用户角色
-            Subject currentSubject = SecurityUtils.getSubject();
-            Session session = currentSubject.getSession();
-            Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
-            List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
-            if(RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())){
-                deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
-            } else {
-                /*if(userlogin.getOrgid().equals(sORGId) || !bootStrapTreeNodeService.isParentId(sORGId,userlogin.getOrgid())) {
-                    deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
-                }*/
-                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleInfoList());
-            }
+            deviceInfoList = selectDeviceInfoList(sORGId);
             if (deviceInfoList.size() > 0)
                 jsonString = JSON.toJSONString(deviceInfoList);
         }
@@ -65,7 +51,7 @@ public class DeviceListController {
         String fileName = "devicelist.xlsx";
         List<DeviceInfo> deviceInfoList = null;
         if (sORGId != null) {
-            deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
+            deviceInfoList = selectDeviceInfoList(sORGId);
         }
         File file = deviceInfoService.exportStorage(deviceInfoList);
         if (file != null) {
@@ -144,5 +130,21 @@ public class DeviceListController {
         String jsonString = JSON.toJSONString(myDTCList);
 
         return jsonString;
+    }
+
+    private List<DeviceInfo> selectDeviceInfoList(String sORGId) throws Exception{
+        List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
+        if (sORGId != null) {
+            //获取用户角色
+            Subject currentSubject = SecurityUtils.getSubject();
+            Session session = currentSubject.getSession();
+            Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+            if(RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())){
+                deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
+            } else {
+                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleInfoList());
+            }
+        }
+        return deviceInfoList;
     }
 }

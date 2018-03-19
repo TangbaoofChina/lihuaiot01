@@ -3,15 +3,6 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <%--<div class="columns-left">
-            <div class="zTreeDemoBackground left col-md-2" style="width:230px;height: 410px;overflow: scroll">
-                <div>
-                    <input class="text-input" type="text" style="width:120px;" id="txtSearchTreeNode">
-                    <button class="btn btn-default" onclick="searchTreeNode()">搜索</button>
-                </div>
-                <ul id="tree" class="ztree"></ul>
-            </div>
-        </div>--%>
         <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto">
             <div class="input-group">
                 <input class="text-input" type="text" style="width:120px;margin-right: 2px;"

@@ -233,4 +233,43 @@
             <value>状态</value>
         </property>
     </entity>
+
+    <entity class="com.system.po.DeviceAlarmInfo" sheetName="实时报警" boldHeading="true">
+        <property>
+            <field>dAlarmId</field>
+            <value>报警ID</value>
+        </property>
+        <property>
+            <field>dSerialNum</field>
+            <value>设备ID</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>设备</value>
+        </property>
+        <property>
+            <field>dAlarmCode</field>
+            <value>报警编码</value>
+        </property>
+        <property>
+            <field>dAlarmInfo</field>
+            <value>报警信息</value>
+        </property>
+        <property>
+            <field>dAlarmTime</field>
+            <value>报警时间</value>
+        </property>
+        <property>
+            <field>dOrgId</field>
+            <value>部门ID</value>
+        </property>
+        <property>
+            <field>dOrgName</field>
+            <value>部门</value>
+        </property>
+        <property>
+            <field>dAlarmType</field>
+            <value>报警类型</value>
+        </property>
+    </entity>
 </configuration>

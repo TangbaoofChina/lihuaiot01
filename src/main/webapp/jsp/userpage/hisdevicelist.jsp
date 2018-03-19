@@ -30,21 +30,6 @@
                     <span class="glyphicon glyphicon-refresh"></span> <span>刷新</span>
                 </button>--%>
                 <div class="form-inline">
-                    <%--<label class="form-label">日期范围：</label>
-                    <input class="form_date form-control" value="" id="hisSearch_start_date" name="" placeholder="开始日期">
-                    <label class="form-label">&nbsp;&nbsp;-&nbsp;&nbsp;</label>
-                    <input class="form_date form-control" value="" id="hisSearch_end_date" name="" placeholder="结束日期">
-
-                    <select name="HisDeviceTimeSelName" id="HisDeviceTimeSelID" class="input-sm"
-                            onchange="hisSelectTimeChange()">
-                        <option value="0">1小时</option>
-                        <option value="1">3小时</option>
-                        <option value="2" selected="selected">24小时</option>
-                        <option value="3">今日</option>
-                        <option value="4">昨日</option>
-                        <option value="5">当月</option>
-                        <option value="6">今年</option>
-                    </select>--%>
                     <label>时间：</label>
                     <div class="btn-group">
                         <input type="text" id="hisDateInterval" class="form-control" style="width: 320px;">
