@@ -2,6 +2,7 @@ var hisChartNowDeviceIds = [];
 var hisChartTableColumns;
 var hisChartbeginTimeStore = '';
 var hisChartendTimeStore = '';
+var hisChart;
 // 指定图表的配置项和数据
 var hisChartoptionInit = {
     title: {
@@ -102,18 +103,25 @@ function hisChartInitChart(hisChartoption) {
     //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
     var resizeMainContainer = function () {
         mainContainer.style.width = window.innerWidth * 0.7 + 'px';
-        mainContainer.style.height = window.innerHeight * 0.5 + 'px';
+        mainContainer.style.height = window.innerHeight * 0.42 + 'px';
+        /*mainContainer.height = window.innerWidth * 0.7 + 'px';
+        mainContainer.width = window.innerHeight * 0.42 + 'px';*/
     };
     resizeMainContainer();
     // 初始化图表
-    var mainChart = echarts.init(mainContainer, 'macarons');
-    mainChart.clear();
-    mainChart.setOption(hisChartoption);
-    /*    $(window).on('resize',function(){//
-            //屏幕大小自适应，重置容器高宽
-            resizeMainContainer();
-            mainChart.resize();
-        });*/
+    hisChart = echarts.init(mainContainer, 'macarons');
+    hisChart.clear();
+    hisChart.setOption(hisChartoption);
+    $(window).on('resize', function () {//
+        //屏幕大小自适应，重置容器高宽
+        resizeMainContainer();
+        hisChart.resize();
+    });
+}
+
+function hisChartRepaintChart(hisChartoption) {
+    hisChart.clear();
+    hisChart.setOption(hisChartoption);
 }
 
 function hisChartSelectDeviceByIdsChart() {
@@ -150,7 +158,7 @@ function hisChartSelectDeviceByIdsChart() {
                 }
                 // 使用刚指定的配置项和数据显示图表。
                 //myChart.clear();
-                hisChartInitChart(hisChartoption);
+                hisChartRepaintChart(hisChartoption);
                 //myChart.setOption(hisChartoption);
             } else {
                 var type = 'warning';

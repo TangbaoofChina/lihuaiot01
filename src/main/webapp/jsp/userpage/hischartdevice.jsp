@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
-<div class="panel panel-default">
+<div class="panel panel-default" style="height:100%;width:100%;">
     <%--<div class="tab-pane">--%>
     <%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
             <li>历史曲线信息</li>
         </ol>--%>
-    <div class="panel-body">
+    <div class="panel-body" style="height:100%;width:100%;">
         <div class="form-inline">
             <div class="input-group">
                 <label>设备：</label>
@@ -31,8 +31,8 @@
             </button>
         </div>
 
-        <div class="col-md-11 col-sm-10">
-            <div id="echartsmain" style="height: 300px;margin-top: 15px;"></div>
+        <div class="col-md-11 col-sm-10" style="height:100%;width:100%;">
+            <div id="echartsmain" style="margin-top: 15px;"></div>
             <div id="hisCharttoolbar">
                 <button class="btn btn-default" id="hisChartExport_storage">
                     <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出

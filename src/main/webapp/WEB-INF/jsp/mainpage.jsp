@@ -8,8 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>立华牧业物联网管理系统</title>
     <link rel="stylesheet" type="text/css"
-          href="/lihuaiot01/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-table.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-datetimepicker.min.css">
@@ -19,6 +17,8 @@
           href="/lihuaiot01/css/bootstrap-multiselect.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-tab.css">
+    <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/css/bootstrap.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/select2/css/select2.css">
     <%--    <link rel="stylesheet" type="text/css"
@@ -183,13 +183,17 @@
                                         <a href="javascript:void(0)" id="organizemanage" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/organizemanage.jsp">部门管理</a>
                                     </li>
-                                        <%--<li class="list-group-item">
-                                            <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
-                                               name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
-                                        </li>--%>
+                                    <%--<li class="list-group-item">
+                                        <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
+                                           name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
+                                    </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="devicecode" class="menu_item"
+                                           name="/lihuaiot01/jsp/adminpage/devicecode.jsp">代码管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="rolecombinedevice" class="menu_item"

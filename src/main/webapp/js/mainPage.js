@@ -65,7 +65,7 @@ function mainRealAlarmCountRefresh() {
         success: function (response) {
             /*console.log(response);*/
             document.getElementById('mainRealAlarmCountlab').innerHTML = response.alarmCount;
-        }, error: function (e,XMLHttpRequest, textStatus, errorThrown) {
+        }, error: function (e, XMLHttpRequest, textStatus, errorThrown) {
             if (mianid_of_setinterval !== undefined) {
                 clearInterval(mianid_of_setinterval);
             }
@@ -362,5 +362,26 @@ window.operateEvents = {
     'click .roleRemoveRole': function (e, value, row, index) {
         roleSelectRole = row;
         $('#roledelcfmModel').modal();
+    },
+
+    /*代码配置*/
+    'click .dcChangeCodeDescribe': function (e, value, row, index) {
+        dcSelectRole = row;
+        var dcDevType = $('#dcDeviceType').val();
+        var dcDevMsg = $('#dcDeviceMessage').val();
+        $('#dcDeviceTypeUpdate').val(dcDevType);
+        $('#dcDeviceMessageUpdate').val(dcDevMsg);
+        if(dcDevMsg === "01"){
+            $('#dcModifyCode').val(row.alarmCode);
+            $('#dcModifyDescribe').val(row.alarmDescribe);
+        }else if(dcDevMsg === "02"){
+            $('#dcModifyCode').val(row.errorCode);
+            $('#dcModifyDescribe').val(row.errorDescribe);
+        }
+        dcShowModify();
+    },
+    'click .dcRemoveCode': function (e, value, row, index) {
+        dcSelectRole = row;
+        $('#dcdelcfmModel').modal();
     }
 };

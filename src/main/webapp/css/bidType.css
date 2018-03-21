@@ -125,7 +125,7 @@
     border-radius: 12px;
     background-color: #fff;
 }
-.roleModify-wrap{
+.roleModify-wrap,.dcModify-wrap{
     position: absolute;
     left: 50%;
     top: 40%;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.AlarmDescribeMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.AlarmDescribe">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="alarmstate_id" jdbcType="VARCHAR" property="sid"/>
+        <result column="devtype_serialnum" jdbcType="VARCHAR" property="devType"/>
+        <result column="devtype_describe" jdbcType="VARCHAR" property="devTypeDescribe"/>
+        <result column="alarmstate_code" jdbcType="VARCHAR" property="alarmCode"/>
+        <result column="alarmstate_describe" jdbcType="VARCHAR" property="alarmDescribe"/>
+    </resultMap>
+    <select id="selectAlarmDescribeByCodeAndType" resultMap="BaseResultMap">
+        select b.alarmstate_id,a.devtype_serialnum,a.devtype_describe,
+        b.alarmstate_code,b.alarmstate_describe
+        from iot_devicetype a,iot_alarmstate b
+        where a.devtype_serialnum = b.devtype_serialnum
+        AND b.devtype_serialnum = #{devType}
+        and b.alarmstate_code = #{alarmCode}
+    </select>
+    <select id="selectAlarmDescribeByType" resultMap="BaseResultMap">
+        select b.alarmstate_id,a.devtype_serialnum,a.devtype_describe,
+        b.alarmstate_code,b.alarmstate_describe
+        from iot_devicetype a,iot_alarmstate b
+        where a.devtype_serialnum = b.devtype_serialnum
+        AND b.devtype_serialnum = #{devType}
+        ORDER by b.alarmstate_code ASC
+    </select>
+    <insert id="insertAlarmDescribe" parameterType="com.system.po.AlarmDescribe">
+        <selectKey keyProperty="sid" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        INSERT INTO IOT_ALARMSTATE(ALARMSTATE_ID,DEVTYPE_SERIALNUM,ALARMSTATE_CODE,ALARMSTATE_DESCRIBE)
+        values (#{sid,jdbcType=VARCHAR},#{devType,jdbcType=VARCHAR},#{alarmCode,jdbcType=VARCHAR}
+        ,#{alarmDescribe,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateAlarmDescribeByTypeAndCode" parameterType="com.system.po.AlarmDescribe">
+        UPDATE IOT_ALARMSTATE
+        SET ALARMSTATE_DESCRIBE = #{alarmDescribe,jdbcType=VARCHAR}
+        WHERE DEVTYPE_SERIALNUM = #{devType,jdbcType=VARCHAR}
+        and ALARMSTATE_CODE = #{alarmCode,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteAlarmDescribeByTypeAndCode" parameterType="com.system.po.AlarmDescribe">
+        DELETE FROM IOT_ALARMSTATE
+        WHERE DEVTYPE_SERIALNUM = #{devType,jdbcType=VARCHAR}
+        and ALARMSTATE_CODE = #{alarmCode,jdbcType=VARCHAR}
+    </delete>
+</mapper>
