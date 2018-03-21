@@ -417,6 +417,11 @@ function roleDeleteRole() {
         success: function (result) {
             if (result === "删除成功") {
                 roleInitTableContent();
+            }else{
+                var type = 'warning';
+                var msg = '删除失败';
+                var append = '对不起，删除角色失败：' + result;
+                showMsg(type, msg, append);
             }
         },
         error: function (XMLHttpRequest) {

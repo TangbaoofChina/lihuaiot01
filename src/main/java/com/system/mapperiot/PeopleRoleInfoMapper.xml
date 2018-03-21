@@ -21,6 +21,13 @@
         and a.userrole_userid = #{userId}
         order by a.userrole_username ASC
     </select>
+    <select id="selectPeopleRoleInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_roleid = #{roleId}
+        order by a.userrole_username ASC
+    </select>
     <select id="selectPeopleRoleInfoDistinct" resultMap="BaseResultMap">
         select distinct a.userrole_userid,a.userrole_username
         from iot_userrole a,iot_role b

@@ -186,7 +186,6 @@ function hisChartInitTable() {
             var json = eval(result); //数组
             for (var i = 0; i < json.length; i++) {
                 var temp = "";
-
                 temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
                 questionColumns.push(temp);
             }

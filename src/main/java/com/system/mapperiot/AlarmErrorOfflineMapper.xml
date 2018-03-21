@@ -37,7 +37,7 @@
         order by dAlarmTime
     </select>
     <select id="selectDeviceAlarmInfoByRoleId" resultMap="BaseResultMap">
-        select a.alarm_id as dAlarmId,a.device_id as dSerialNum,a.alarm_code as dAlarmCode,
+        select DISTINCT a.alarm_id as dAlarmId,a.device_id as dSerialNum,a.alarm_code as dAlarmCode,
         a.alarm_describe as dAlarmInfo,a.alarm_date as dAlarmTime,
         b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole f
@@ -49,7 +49,7 @@
             #{item}
         </foreach>
         union all
-        select d.drerror_id as dAlarmId,d.drerror_devnum as dSerialNum,d.drerror_code as dAlarmCode,
+        select DISTINCT d.drerror_id as dAlarmId,d.drerror_devnum as dSerialNum,d.drerror_code as dAlarmCode,
         d.drerror_describe as dAlarmInfo,d.drerror_receivetime as dAlarmTime,
         b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_realerror d,iot_deviceinfo b1,iot_orgtreenode c1,iot_devicerole f1
@@ -61,7 +61,7 @@
             #{item}
         </foreach>
         union all
-        select e.droffline_id as dAlarmId,e.droffline_devnum as dSerialNum,'01' dAlarmCode,
+        select DISTINCT e.droffline_id as dAlarmId,e.droffline_devnum as dSerialNum,'01' dAlarmCode,
         e.droffline_describe as dAlarmInfo,e.droffline_devreceivetime as dAlarmTime,
         b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline e,iot_deviceinfo b2,iot_orgtreenode c2,iot_devicerole f2

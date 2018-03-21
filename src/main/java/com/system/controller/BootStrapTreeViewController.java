@@ -23,8 +23,6 @@ public class BootStrapTreeViewController {
     @Autowired
     private BootStrapTreeNodeService bootStrapTreeNodeService;
     @Autowired
-    private PeopleCombineOrgService peopleCombineOrgService;
-    @Autowired
     private DeviceInfoService deviceInfoService;
     @Autowired
     private RoleDeviceOrgInfoService roleDeviceOrgInfoService;
@@ -40,7 +38,7 @@ public class BootStrapTreeViewController {
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode =roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
+            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
             bootStrapTreeNodeList.add(bootStrapTreeNode);
         }
 
@@ -93,15 +91,15 @@ public class BootStrapTreeViewController {
             return "根节点不允许删除";
         }
         List<BootStrapTreeNode> bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfoByParentId(nodeId);
-        List<PeopleInfo> peopleInfoList = peopleCombineOrgService.selectPeopleByORGId(nodeId);
+        //List<PeopleInfo> peopleInfoList = peopleCombineOrgService.selectPeopleByORGId(nodeId);
         List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(nodeId);
         String jsonString = "删除成功";
         if (deviceInfoList.size() > 0) {
             return "存在关联设备，不能删除";
         }
-        if (peopleInfoList.size() > 0) {
+        /*if (peopleInfoList.size() > 0) {
             return "存在关联用户，不能删除";
-        }
+        }*/
         if (bootStrapTreeNodeList.size() > 0) {
             return "存在子节点，不能删除";
         }

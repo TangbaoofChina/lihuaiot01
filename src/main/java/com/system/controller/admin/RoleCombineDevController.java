@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.system.po.*;
 import com.system.service.DeviceInfoService;
 import com.system.service.DeviceRoleInfoService;
+import com.system.service.PeopleRoleInfoService;
 import com.system.service.RoleInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -25,6 +26,8 @@ public class RoleCombineDevController {
     private DeviceInfoService deviceInfoService;
     @Autowired
     private DeviceRoleInfoService deviceRoleInfoService;
+    @Autowired
+    private PeopleRoleInfoService peopleRoleInfoService;
 
     @RequestMapping(value = "selectRoleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -112,11 +115,18 @@ public class RoleCombineDevController {
     public String deleteRoleInfo(String roleId, String roleName) throws Exception {
         String jsonString = "删除成功";
         //首先要判断角色是否关联了用户，如果已经关联，则不能删除
+        List<PeopleRoleInfo> peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByRoleId(roleId);
+        if(peopleRoleInfoList.size()>0)
+        {
+            jsonString = "该角色正关联用户，不可删除";
+            return jsonString;
+        }
         //如果没有关联，则执行下面的步骤
         //删除角色设备关联表
         if (roleName.equals("admin")) {
             jsonString = "管理员角色不可删除";
         } else {
+            //删除角色设备关联表
             deviceRoleInfoService.deleteDeviceRoleByRoleId(roleId);
             //删除角色表
             roleInfoService.deleteRoleInfoByRoleId(roleId);
