@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.system.mapperiot.DeviceRoleInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceRoleInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="di_serialnum" jdbcType="VARCHAR" property="devNum"/>
+        <result column="di_name" jdbcType="VARCHAR" property="devName"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_describe" jdbcType="VARCHAR" property="roleDescribe"/>
+    </resultMap>
+    <select id="selectDeviceRoleInfoByRoleIds" resultMap="BaseResultMap">
+        select distinct b.di_serialnum,b.di_name,c.role_id,c.role_name,c.role_describe
+        from iot_devicerole a,iot_deviceinfo b,iot_role c
+        where b.di_serialnum = a.devrole_devnum
+        and c.role_id = a.devrole_roleid
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by b.di_serialnum
+    </select>
     <insert id="insertDeviceRoleInfo" parameterType="java.util.List">
         INSERT INTO iot_devicerole(DEVROLE_DEVNUM,DEVROLE_ROLEID)
         (

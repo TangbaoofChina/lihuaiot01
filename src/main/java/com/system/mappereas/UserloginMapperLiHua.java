@@ -1,4 +1,4 @@
-package com.system.mapperoa;
+package com.system.mappereas;
 
 import com.system.po.Userlogin;
 import org.apache.ibatis.annotations.Param;

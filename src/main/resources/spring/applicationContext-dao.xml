@@ -175,6 +175,7 @@
         <!--数据源-->
         <property name="dataSource" ref="dataSource01"/>
     </bean>
+
     <!--Mapper批量扫描，从Mapper包扫描接口，自动创建代理对象，并在Spring容器中自动注册
     使用 Mybatis与Spring整合包的这个 Mapper 扫描器后， Mybatis 配置文件里的扫描器，就可以取消掉了
     遵循的规范 不变
@@ -188,8 +189,9 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--如果需要扫描多个报下的mapper,每个包中间使用半角逗号分开-->
-        <property name="basePackage" value="com.system.mapperoa" />
+        <property name="basePackage" value="com.system.mappereas" />
         <property name="sqlSessionFactoryBeanName" value="sessionFactory01" />
     </bean>
+
 
 </beans>

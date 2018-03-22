@@ -3,7 +3,7 @@ package com.system.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.system.exception.BootStrapTreeViewException;
 import com.system.mapperiot.PeopleInfoMapper;
-import com.system.mapperoa.PeopleInfoMapperLiHua;
+import com.system.mappereas.PeopleInfoMapperLiHua;
 import com.system.po.DataTablePageing;
 import com.system.po.PeopleInfo;
 import com.system.service.PeopleCombineOrgService;
