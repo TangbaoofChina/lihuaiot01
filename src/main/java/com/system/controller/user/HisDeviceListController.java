@@ -25,9 +25,9 @@ public class HisDeviceListController {
     @Autowired
     private EC01DeviceMessageService ec01DeviceMessageService;
 
-    @RequestMapping(value = "selectEC01ByORGIdAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectEC01ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String selectEC01ByORGIdByPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
+    public String selectEC01ByDevNumAndDateAndPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
         String jsonString = "[]";
         if (sDeviceId !=null) {
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectEC01ByDeviceIdAndDateAndPaging(pageNumber,pageSize,sDeviceId,sStartDate,sEndDate);
@@ -53,7 +53,7 @@ public class HisDeviceListController {
         String fileName = "hisdevicelist.xlsx";
         List<EC01DeviceMessage> ec01DeviceMessageList = null;
         if (sDeviceId !=null) {
-            ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGIdAndDate(sDeviceId,sStartDate,sEndDate);
+            ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByDevNumAndDate(sDeviceId,sStartDate,sEndDate);
         }
         File file = ec01DeviceMessageService.exportStorage(ec01DeviceMessageList);
         if (file != null) {

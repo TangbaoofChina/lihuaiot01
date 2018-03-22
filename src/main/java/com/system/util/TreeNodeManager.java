@@ -41,7 +41,8 @@ public class TreeNodeManager {
      */
     public BootStrapTreeNode getRoot() {
         for (BootStrapTreeNode treeNode : list) {
-            if (treeNode.getpId() == null || treeNode.getpId().equals(""))
+            if (treeNode.getpId() == null || treeNode.getpId().equals("")
+                    || treeNode.getpId().equals("-1"))
                 return treeNode;
         }
         return null;

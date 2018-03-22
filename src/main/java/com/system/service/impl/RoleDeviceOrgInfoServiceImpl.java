@@ -1,6 +1,5 @@
 package com.system.service.impl;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.system.mapperiot.BootStrapTreeNodeMapper;
 import com.system.mapperiot.RoleDeviceOrgInfoMapper;
 import com.system.po.BootStrapTreeNode;
@@ -69,7 +68,7 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             bootStrapTreeNode.setId(roleDeviceOrgInfo.getDeviceRoleInfo().getDevNum());
             bootStrapTreeNode.setText(roleDeviceOrgInfo.getDeviceRoleInfo().getDevName());
             bootStrapTreeNode.setpId(roleDeviceOrgInfo.getBootStrapTreeNode().getId());
-            //去掉重复的设备
+            //去掉数据库查询过程中重复的设备
             if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList,bootStrapTreeNode)) {
                 bootStrapTreeNodeList.add(bootStrapTreeNode);
             }
@@ -91,7 +90,16 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
     }
 
     private BootStrapTreeNode formatBootStrapTreeNode(List<BootStrapTreeNode> bootStrapTreeNodeList) {
-        BootStrapTreeNode mBootStrapTreeNode = new BootStrapTreeNode();
+        //1、找出所有的ID和PID
+        //2、形成节点树
+        List<BootStrapTreeNode> bootStrapTreeNodeList01 = selectBootStrapTreeNodeByLPid(bootStrapTreeNodeList);
+        //这里貌似没有去掉重复的？？？
+        BootStrapTreeNode mBootStrapTreeNode = TreeNodeMerger.merge(bootStrapTreeNodeList01);
+        return mBootStrapTreeNode;
+    }
+
+    private List<BootStrapTreeNode> selectBootStrapTreeNodeByLPid(List<BootStrapTreeNode> bootStrapTreeNodeList)
+    {
         List<BootStrapTreeNode> bootStrapTreeNodeList01 = new ArrayList<BootStrapTreeNode>();
         for (BootStrapTreeNode bootStrapTreeNode : bootStrapTreeNodeList
                 ) {  //找出所有的ID和PID
@@ -100,8 +108,7 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             else
                 bootStrapTreeNodeList01.addAll(releaseOneLongNodeId(bootStrapTreeNode.getlPid()));
         }
-        mBootStrapTreeNode = TreeNodeMerger.merge(bootStrapTreeNodeList01);
-        return mBootStrapTreeNode;
+        return bootStrapTreeNodeList01;
     }
 
     private List<BootStrapTreeNode> releaseOneLongNodeId(String longNodeId) {

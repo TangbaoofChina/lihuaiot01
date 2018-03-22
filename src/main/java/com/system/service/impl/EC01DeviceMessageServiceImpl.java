@@ -52,7 +52,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     @Override
-    public List<EC01DeviceMessage> selectEC01ByORGIdAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+    public List<EC01DeviceMessage> selectEC01ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
         return ec01DeviceMessageMapper.selectEC01ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
     }
 

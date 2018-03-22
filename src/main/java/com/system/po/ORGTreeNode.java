@@ -37,4 +37,12 @@ public class ORGTreeNode {
     public void setOpen(String open) {
         this.open = open;
     }
+
+    @Override
+    public String toString() {
+        return "ORGTreeNode{" +
+                "id='" + id + '\'' +
+                ", pId='" + pId + '\'' +
+                '}';
+    }
 }

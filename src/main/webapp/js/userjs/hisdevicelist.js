@@ -211,7 +211,7 @@ function hisSelectDeviceByTreeId() {
         /*onlyInfoPagination:true,*/
         //data:json,
         //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
-        url: "/lihuaiot01/hisDeviceList/selectEC01ByORGIdAndDateAndPaging",
+        url: "/lihuaiot01/hisDeviceList/selectEC01ByDevNumAndDateAndPaging",
         contentType: "application/x-www-form-urlencoded",//必须要有！！！！
         method: 'post',                      //请求方式（*）
         dataType: "json",

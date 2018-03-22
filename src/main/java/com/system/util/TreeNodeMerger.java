@@ -21,7 +21,8 @@ public class TreeNodeMerger {
     public static BootStrapTreeNode merge(BootStrapTreeNode[] items) {
         TreeNodeManager treeNodeManager = new TreeNodeManager(items);
         for (BootStrapTreeNode treeNode : items) {
-            if (treeNode.getpId() != null && !treeNode.getpId().equals("")) {
+            if (treeNode.getpId() != null && !treeNode.getpId().equals("")
+                    && !treeNode.getpId().equals("-1")) {
                 BootStrapTreeNode t = treeNodeManager.getTreeNodeAT(treeNode.getpId());
                 t.getNodes().add(treeNode);
             }
@@ -39,7 +40,8 @@ public class TreeNodeMerger {
     public static BootStrapTreeNode merge(List<BootStrapTreeNode> items) {
         TreeNodeManager treeNodeManager = new TreeNodeManager(items);
         for (BootStrapTreeNode treeNode : items) {
-            if (treeNode.getpId() != null && !treeNode.getpId().equals("")) {
+            if (treeNode.getpId() != null && !treeNode.getpId().equals("")
+                    && !treeNode.getpId().equals("-1")) {
                 BootStrapTreeNode t = treeNodeManager.getTreeNodeAT(treeNode.getpId());
                 if (t.getNodes() == null)
                     t.setNodes(new ArrayList<BootStrapTreeNode>());

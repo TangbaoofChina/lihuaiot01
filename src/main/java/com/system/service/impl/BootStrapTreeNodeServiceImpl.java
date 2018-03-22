@@ -54,7 +54,8 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     public String selectParentLongIdByOrgId(String orgId) throws Exception {
         String longNodeId = orgId;
         BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(orgId);
-        while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
+        while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")
+                && !bootStrapTreeNodeParent.getpId().equals("-1")) {
             String myOrgId = bootStrapTreeNodeParent.getpId();
             longNodeId = myOrgId + "." + longNodeId;
             bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
@@ -148,7 +149,8 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     //***************私有方法*************************/
     private BootStrapTreeNode getParentNode(BootStrapTreeNode bootStrapTreeNode) throws Exception {
         BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNode;
-        while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
+        while (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")
+                && !bootStrapTreeNodeParent.getpId().equals("-1")) {
             List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
             bootStrapTreeNodeList.add(bootStrapTreeNodeParent);
             String myOrgId = bootStrapTreeNodeParent.getpId();
@@ -251,7 +253,8 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     private boolean checkIsParentId(String parentOrgId, String myOrgId) throws Exception {
         BootStrapTreeNode bootStrapTreeNodeParent = bootStrapTreeNodeMapper.selectORGInfoByNodeId(myOrgId);
         if (bootStrapTreeNodeParent != null) {
-            if (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")) {
+            if (bootStrapTreeNodeParent.getpId() != null && !bootStrapTreeNodeParent.getpId().equals("")
+                    && !bootStrapTreeNodeParent.getpId().equals("-1")) {
                 if (bootStrapTreeNodeParent.getpId().equals(parentOrgId))
                     return true;
                 else
