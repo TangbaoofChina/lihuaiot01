@@ -70,7 +70,6 @@ public class PhoneController {
             ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(orgId);
         } else {
             ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(orgId, roleInfoList);
-            ;
         }
         String jsonString = "[]";
         if (ec01DeviceMessageList.size() > 0)
