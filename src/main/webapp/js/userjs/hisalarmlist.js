@@ -105,6 +105,7 @@ function haDateRangePickerInit() {
     $('#haDateInterval').daterangepicker({
         "timePicker": true,
         "timePicker24Hour": true,
+        timePickerSeconds: true, //时间显示到秒
         /*"linkedCalendars": false,
         "autoUpdateInput": false,*/
         applyClass: 'btn-sm btn-success',

@@ -1,5 +1,8 @@
 package com.system.po;
 
+import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.util.DataConvertor;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -829,4 +832,187 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc48);
         return myDTCList;
     }
+
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoDetail()
+    {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("inTemp1");
+        phoneRealMsgInfo01.setTitle("舍前");
+        phoneRealMsgInfo01.setValue(String.valueOf(inTemp1));
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("inTemp2");
+        phoneRealMsgInfo02.setTitle("舍中");
+        phoneRealMsgInfo02.setValue(String.valueOf(inTemp2));
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("inTemp3");
+        phoneRealMsgInfo03.setTitle("舍后");
+        phoneRealMsgInfo03.setValue(String.valueOf(inTemp3));
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("inAveTemp");
+        phoneRealMsgInfo04.setTitle("室内平均");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp));
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo015 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo015.setId("outTemp4");
+        phoneRealMsgInfo015.setTitle("舍外");
+        phoneRealMsgInfo015.setValue(String.valueOf(outTemp4));
+        phoneRealMsgInfo015.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo015);
+
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("humidityVal");
+        phoneRealMsgInfo05.setTitle("湿度");
+        phoneRealMsgInfo05.setValue(String.valueOf(humidityVal));
+        phoneRealMsgInfo05.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("chickenAge");
+        phoneRealMsgInfo06.setTitle("日龄");
+        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge));
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo07.setId("nh3Val");
+        phoneRealMsgInfo07.setTitle("氨气");
+        phoneRealMsgInfo07.setValue(String.valueOf(nh3Val));
+        phoneRealMsgInfo07.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+
+        PhoneRealMsgInfo phoneRealMsgInfo08 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo08.setId("negativePressure");
+        phoneRealMsgInfo08.setTitle("负压");
+        phoneRealMsgInfo08.setValue(String.valueOf(negativePressure));
+        phoneRealMsgInfo08.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo08);
+
+        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo13.setId("negativePressure");
+        phoneRealMsgInfo13.setTitle("饮水");
+        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal));
+        phoneRealMsgInfo13.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo13);
+
+        PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo09.setId("fan1On");
+        phoneRealMsgInfo09.setTitle("风机1");
+        phoneRealMsgInfo09.setValue(String.valueOf(DataConvertor.getBoolState01On(fan1On)));
+        phoneRealMsgInfo09.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo09);
+
+        PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo10.setId("fan2On");
+        phoneRealMsgInfo10.setTitle("风机2");
+        phoneRealMsgInfo10.setValue(String.valueOf(DataConvertor.getBoolState01On(fan2On)));
+        phoneRealMsgInfo10.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo10);
+
+        PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo11.setId("fan3On");
+        phoneRealMsgInfo11.setTitle("风机3");
+        phoneRealMsgInfo11.setValue(String.valueOf(DataConvertor.getBoolState01On(fan3On)));
+        phoneRealMsgInfo11.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo11);
+
+        PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo12.setId("fan4On");
+        phoneRealMsgInfo12.setTitle("风机4");
+        phoneRealMsgInfo12.setValue(String.valueOf(DataConvertor.getBoolState01On(fan4On)));
+        phoneRealMsgInfo12.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo12);
+
+        PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo14.setId("dState");
+        phoneRealMsgInfo14.setTitle("状态");
+        phoneRealMsgInfo14.setValue(getDState());
+        phoneRealMsgInfo14.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo14);
+
+        return phoneRealMsgInfoList;
+    }
+
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary()
+    {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("inAveTemp");
+        phoneRealMsgInfo04.setTitle("室内平均");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp));
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("humidityVal");
+        phoneRealMsgInfo05.setTitle("湿度");
+        phoneRealMsgInfo05.setValue(String.valueOf(humidityVal));
+        phoneRealMsgInfo05.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("chickenAge");
+        phoneRealMsgInfo06.setTitle("日龄");
+        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge));
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo13.setId("negativePressure");
+        phoneRealMsgInfo13.setTitle("饮水");
+        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal));
+        phoneRealMsgInfo13.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo13);
+
+        PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo09.setId("fan1On");
+        phoneRealMsgInfo09.setTitle("风机1");
+        phoneRealMsgInfo09.setValue(String.valueOf(DataConvertor.getBoolState01On(fan1On)));
+        phoneRealMsgInfo09.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo09);
+
+        PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo10.setId("fan2On");
+        phoneRealMsgInfo10.setTitle("风机2");
+        phoneRealMsgInfo10.setValue(String.valueOf(DataConvertor.getBoolState01On(fan2On)));
+        phoneRealMsgInfo10.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo10);
+
+        PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo11.setId("fan3On");
+        phoneRealMsgInfo11.setTitle("风机3");
+        phoneRealMsgInfo11.setValue(String.valueOf(DataConvertor.getBoolState01On(fan3On)));
+        phoneRealMsgInfo11.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo11);
+
+        PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo12.setId("fan4On");
+        phoneRealMsgInfo12.setTitle("风机4");
+        phoneRealMsgInfo12.setValue(String.valueOf(DataConvertor.getBoolState01On(fan4On)));
+        phoneRealMsgInfo12.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo12);
+
+        PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo14.setId("dState");
+        phoneRealMsgInfo14.setTitle("状态");
+        phoneRealMsgInfo14.setValue(getDState());
+        phoneRealMsgInfo14.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo14);
+
+        return phoneRealMsgInfoList;
+    }
+
 }

@@ -32,19 +32,19 @@ public class DeviceCharts01 {
         List<String> deviceParameterTime = new ArrayList<String>();
         List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
 
-        deviceParameterName.add("室内温度01");
-        deviceParameterName.add("室内温度02");
-        deviceParameterName.add("室内温度03");
-        deviceParameterName.add("室外温度");
+        deviceParameterName.add("舍前");
+        deviceParameterName.add("舍中");
+        deviceParameterName.add("舍后");
+        deviceParameterName.add("舍外");
 
         ParameterData01 parameterInTemp1 = new ParameterData01();
-        parameterInTemp1.setName("室内温度01");
+        parameterInTemp1.setName("舍前");
         ParameterData01 parameterInTemp2 = new ParameterData01();
-        parameterInTemp2.setName("室内温度02");
+        parameterInTemp2.setName("舍中");
         ParameterData01 parameterInTemp3 = new ParameterData01();
-        parameterInTemp3.setName("室内温度03");
+        parameterInTemp3.setName("舍后");
         ParameterData01 parameterOutTemp4 = new ParameterData01();
-        parameterOutTemp4.setName("室外温度");
+        parameterOutTemp4.setName("舍外");
 
         List<OneDataDetail> inTemp01List = new ArrayList<OneDataDetail>();
         List<OneDataDetail> inTemp02List = new ArrayList<OneDataDetail>();

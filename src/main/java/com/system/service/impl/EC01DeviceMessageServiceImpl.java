@@ -12,6 +12,8 @@ import com.system.po.parameter.ParameterData;
 import com.system.service.EC01DeviceMessageService;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
+import org.apache.tools.ant.taskdefs.Echo;
+import org.bouncycastle.jcajce.provider.asymmetric.ec.KeyFactorySpi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +50,9 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
 
     @Override
     public EC01DeviceMessage selectEC01ByDeviceId(String sDeviceId) throws Exception {
-        return ec01DeviceMessageMapper.selectEC01ByDeviceId(sDeviceId);
+        EC01DeviceMessage ec01DeviceMessage = ec01DeviceMessageMapper.selectEC01ByDeviceId(sDeviceId);
+        judgeOneDeviceOnlineState(ec01DeviceMessage);
+        return ec01DeviceMessage;
     }
 
     @Override
@@ -182,17 +186,22 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     {
         for (EC01DeviceMessage ec01DeviceMessage:ec01DeviceMessageList
                 ) {
-            SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String toDate = simpleFormat.format(new Date());
-            long from =  simpleFormat.parse(ec01DeviceMessage.getDReceiveTime()).getTime();
-            long to = simpleFormat.parse(toDate).getTime();
-            int minutes = (int) ((to - from) / (1000 * 60));
-            if (minutes > 15)
-                ec01DeviceMessage.setDState("离线");
-            else
-                ec01DeviceMessage.setDState("在线");
+            judgeOneDeviceOnlineState(ec01DeviceMessage);
         }
         return ec01DeviceMessageList;
+    }
+
+    private void judgeOneDeviceOnlineState(EC01DeviceMessage ec01DeviceMessage) throws Exception
+    {
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String toDate = simpleFormat.format(new Date());
+        long from =  simpleFormat.parse(ec01DeviceMessage.getDReceiveTime()).getTime();
+        long to = simpleFormat.parse(toDate).getTime();
+        int minutes = (int) ((to - from) / (1000 * 60));
+        if (minutes > 15)
+            ec01DeviceMessage.setDState("离线");
+        else
+            ec01DeviceMessage.setDState("在线");
     }
 
     //根据数据生成JSON字符串，返回到datatable显示

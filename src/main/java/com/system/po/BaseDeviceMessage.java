@@ -4,7 +4,7 @@ public class BaseDeviceMessage {
     private String dSerialNum;
     private String dName;
     private String dReceiveTime;
-    private String dState = "";
+    private String dState = "在线";
 
     public String getDSerialNum() {
         return dSerialNum;

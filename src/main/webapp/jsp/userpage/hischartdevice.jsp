@@ -16,10 +16,10 @@
             <div class="input-group">
                 <label>参数：</label>
                 <select name="hisChartSelName_Param" id="hisChartSelId_Param" class="input-sm">
-                    <option value="0" selected="selected">室内温度01</option>
-                    <option value="1">室内温度02</option>
-                    <option value="2">室内温度03</option>
-                    <option value="3">室外温度</option>
+                    <option value="0" selected="selected">舍前</option>
+                    <option value="1">舍中</option>
+                    <option value="2">舍后</option>
+                    <option value="3">舍外</option>
                 </select>
             </div>
             <label>时间：</label>
