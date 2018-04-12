@@ -5,6 +5,7 @@ public class PhoneRealMsgInfo {
     private String title;
     private String value;
     private String flag;
+    private boolean hasHis = false;
 
     public String getId() {
         return id;
@@ -36,5 +37,13 @@ public class PhoneRealMsgInfo {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public boolean isHasHis() {
+        return hasHis;
+    }
+
+    public void setHasHis(boolean hasHis) {
+        this.hasHis = hasHis;
     }
 }

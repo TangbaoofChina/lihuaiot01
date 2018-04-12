@@ -31,7 +31,7 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         //根据节点id查找根节点
         //1、先列出当前设备列表的所有节点与根节点
-        //2、查找每个根节点直到最终根节点
+        //2、查找每个设备的父节点直到最终根节点
         List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
         //3、整合成节点列表
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
@@ -69,6 +69,7 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
         for (BootStrapTreeNode bootStrapTreeNode : bootStrapTreeNodeList
                 ) {  //找出所有的ID和PID
             if (bootStrapTreeNode.getlPid() == null || bootStrapTreeNode.getlPid().equals("")) {
+                //如果没有父节点
                 ORGTreeNode orgTreeNode = new ORGTreeNode();
                 orgTreeNode.setId(bootStrapTreeNode.getId());
                 orgTreeNode.setpId(bootStrapTreeNode.getpId());
@@ -81,16 +82,37 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
         return orgTreeNodeList;
     }
 
-    private List<ORGTreeNode> releaseOneLongNodeId(String longNodeId) {
+/*    private List<ORGTreeNode> releaseOneLongNodeId(String longNodeId) {
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         if (longNodeId.indexOf(".") > 0) {
             String[] sNodeId = longNodeId.split("\\.");
             for (int i = 0; i < sNodeId.length; i++) {
-                //需要加上节点ID，父节点ID，节点名称
+                //需要加上节点ID，父节点ID，节点名称 跳过根节点
                 ORGTreeNode orgTreeNode = orgTreeNodeMapper.selectORGInfoByNodeId(sNodeId[i + 1]);
                 orgTreeNodeList.add(orgTreeNode);
-                if (sNodeId.length == (i + 1 + 1)) //如果有3个，就是1-2,2-3的组合，
+                //如果有3个，就是1-2,2-3的组合， 最终叶子节点
+                if (sNodeId.length == (i + 1 + 1))
                     break;
+            }
+        } else {
+            ORGTreeNode orgTreeNode = orgTreeNodeMapper.selectORGInfoByNodeId(longNodeId);
+            orgTreeNodeList.add(orgTreeNode);
+        }
+        return orgTreeNodeList;
+    }*/
+
+    private List<ORGTreeNode> releaseOneLongNodeId(String longNodeId) {
+        List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
+        if (longNodeId.indexOf(".") > 0) {
+            String[] sNodeId = longNodeId.split("\\.");
+            for (int i = 1; i < sNodeId.length; i++) { // 跳过根节点
+                //需要加上节点ID，父节点ID，节点名称
+                ORGTreeNode orgTreeNode = orgTreeNodeMapper.selectORGInfoByNodeId(sNodeId[i]);
+                orgTreeNodeList.add(orgTreeNode);
+                // 最终叶子节点
+                /*if (sNodeId.length == (i + 1))
+                    break;*/
+
             }
         } else {
             ORGTreeNode orgTreeNode = orgTreeNodeMapper.selectORGInfoByNodeId(longNodeId);
