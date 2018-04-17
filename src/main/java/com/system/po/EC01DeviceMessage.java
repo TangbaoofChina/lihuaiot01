@@ -988,35 +988,35 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
 
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
         phoneRealMsgInfo09.setId("fan1On");
-        phoneRealMsgInfo09.setTitle("风机1");
+        phoneRealMsgInfo09.setTitle("风机1：");
         phoneRealMsgInfo09.setValue(String.valueOf(DataConvertor.getBoolState01On(fan1On)));
         phoneRealMsgInfo09.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo09);
 
         PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
         phoneRealMsgInfo10.setId("fan2On");
-        phoneRealMsgInfo10.setTitle("风机2");
+        phoneRealMsgInfo10.setTitle("风机2：");
         phoneRealMsgInfo10.setValue(String.valueOf(DataConvertor.getBoolState01On(fan2On)));
         phoneRealMsgInfo10.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo10);
 
         PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
         phoneRealMsgInfo11.setId("fan3On");
-        phoneRealMsgInfo11.setTitle("风机3");
+        phoneRealMsgInfo11.setTitle("风机3：");
         phoneRealMsgInfo11.setValue(String.valueOf(DataConvertor.getBoolState01On(fan3On)));
         phoneRealMsgInfo11.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo11);
 
         PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
         phoneRealMsgInfo12.setId("fan4On");
-        phoneRealMsgInfo12.setTitle("风机4");
+        phoneRealMsgInfo12.setTitle("风机4：");
         phoneRealMsgInfo12.setValue(String.valueOf(DataConvertor.getBoolState01On(fan4On)));
         phoneRealMsgInfo12.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo12);
 
         PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
         phoneRealMsgInfo14.setId("dState");
-        phoneRealMsgInfo14.setTitle("状态");
+        phoneRealMsgInfo14.setTitle("状态：");
         phoneRealMsgInfo14.setValue(getDState());
         phoneRealMsgInfo14.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo14);
