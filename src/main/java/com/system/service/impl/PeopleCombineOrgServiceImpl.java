@@ -6,6 +6,7 @@ import com.system.mapperiot.PeopleInfoMapper;
 import com.system.mappereas.PeopleInfoMapperLiHua;
 import com.system.po.DataTablePageing;
 import com.system.po.PeopleInfo;
+import com.system.po.PeopleInfoEas;
 import com.system.service.PeopleCombineOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class PeopleCombineOrgServiceImpl implements PeopleCombineOrgService {
     }
 
     @Override
-    public List<PeopleInfo> selectAllPeopleInfo() throws Exception {
+    public List<PeopleInfoEas> selectAllPeopleInfo() throws Exception {
         return peopleInfoMapperLiHua.selectAllPeopleInfo();
     }
 

@@ -229,9 +229,9 @@ function peopleOrgAddNewShow() {
 
 function peopleOrgInitPeople() {
     $("#peopleOrgPeople").bsSuggest('init', {
-        effectiveFieldsAlias: { personName: "人员",orgName:"部门"},
-        searchFields: ["personName","orgName"],
-        effectiveFields: ["personName","orgName"],
+        effectiveFieldsAlias: { personName: "人员",company:"公司",department:"部门"},
+        searchFields: ["personName","company","department"],
+        effectiveFields: ["personName","company","department"],
         showHeader: true,//显示 header
         url: "/lihuaiot01/peopleCombineOrg/selectPeopleInfo",
         idField: "personId",
@@ -258,7 +258,8 @@ function peopleOrgInitPeople() {
                 data.value.push({
                     "personName": json[i].personName,
                     "personId": json[i].personId,
-                    "orgName": json[i].orgName,
+                    "company": json[i].company,
+                    "department": json[i].department
                 });
             }
             //console.log(data);

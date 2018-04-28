@@ -1,10 +1,7 @@
 package com.system.controller.admin;
 
 import com.alibaba.fastjson.JSON;
-import com.system.po.DataTablePageing;
-import com.system.po.MydataTableColumn;
-import com.system.po.ORGTreeNode;
-import com.system.po.PeopleInfo;
+import com.system.po.*;
 import com.system.service.ORGTreeNodeService;
 import com.system.service.PeopleCombineOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +55,7 @@ public class PeopleCombineOrgController {
     @ResponseBody
     public String selectPeopleInfo() throws Exception {
 
-        List<PeopleInfo> peopleInfoList = peopleCombineOrgService.selectAllPeopleInfo();
+        List<PeopleInfoEas> peopleInfoList = peopleCombineOrgService.selectAllPeopleInfo();
 
         String jsonString = JSON.toJSONString(peopleInfoList);
 
