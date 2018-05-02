@@ -86,7 +86,7 @@ function rolePeopleInitTableContent() {
     });
 }
 
-function rolePeopleInitPeople() {
+function rolePeopleInitPeopleOld() {
     $("#rolePeoplePeopleName").bsSuggest('init', {
         effectiveFieldsAlias: {userName: "人员", orgName: "部门"},
         searchFields: ["userName", "orgName"],
@@ -118,6 +118,54 @@ function rolePeopleInitPeople() {
                     "userName": json[i].personName,
                     "userId": json[i].personId,
                     "orgName": json[i].orgName,
+                });
+            }
+            //console.log(data);
+            return data;
+        }
+    }).on('onDataRequestSuccess', function (e, result) {
+        //console.log('onDataRequestSuccess: ', result);
+    }).on('onSetSelectValue', function (e, keyword, data) {
+        //console.log('onSetSelectValue: ', keyword, data);
+        rolePeopleSelectPeople = data;
+    }).on('onUnsetSelectValue', function () {
+        //console.log('onUnsetSelectValue');
+    });
+}
+
+function rolePeopleInitPeople() {
+    $("#rolePeoplePeopleName").bsSuggest('init', {
+        effectiveFieldsAlias: {userName: "人员", company: "公司",department:"部门"},
+        searchFields: ["userName", "company","department"],
+        effectiveFields: ["userName", "company","department"],
+        showHeader: true,//显示 header
+        url: "/lihuaiot01/peopleCombineOrg/selectPeopleInfo",
+        idField: "userId",
+        keyField: "userName",
+        inputWarnColor: 'rgba(255,0,0,.1)', //输入框内容不是下拉列表选择时的警告色
+        listStyle: {
+            'padding-top': 0,
+            'max-height': '300px',
+            'max-width': '800px',
+            'overflow': 'auto',
+            'width': 'auto',
+            'transition': '0.3s',
+            '-webkit-transition': '0.3s',
+            '-moz-transition': '0.3s',
+            '-o-transition': '0.3s'
+        },               //列表的样式控制
+        processData: function (json) {// url 获取数据时，对数据的处理，作为 getData 的回调函数
+            var i, len, data = {value: []};
+            if (!json || json.length == 0) {
+                return false;
+            }
+            len = json.length;
+            for (i = 0; i < len; i++) {
+                data.value.push({
+                    "userName": json[i].personName,
+                    "userId": json[i].personId,
+                    "company": json[i].company,
+                    "department": json[i].department
                 });
             }
             //console.log(data);

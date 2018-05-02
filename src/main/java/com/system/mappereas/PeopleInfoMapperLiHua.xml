@@ -24,11 +24,11 @@
     </select>
     <select id="selectAllPeopleInfo" resultMap="BaseResultMapEas">
         SELECT
-        u.fid
-        u.fnumber
+        u.fid,
+        u.fnumber,
         o.fname_l2 company,
-        adm.fname_l2 department,
-        FROM T_ORG_PositionMember pwe --任职情况
+        adm.fname_l2 department
+        FROM T_ORG_PositionMember pwe
         left JOIN t_org_position pot ON pwe.fpositionid=pot.fid
         left join T_ORG_Job jb on jb.fid=pot.fjobid
         left join t_bd_person p on p.fid = pwe.fpersonid
@@ -38,5 +38,6 @@
         WHERE pwe.fbegindate &lt; sysdate
         And pwe.FIsPrimary=1
         and u.fnumber is not NULL
+        order by NLSSORT(u.fnumber,'NLS_SORT = SCHINESE_PINYIN_M') asc
     </select>
 </mapper>
