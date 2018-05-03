@@ -8,7 +8,7 @@
                 <span class="glyphicon glyphicon-export"></span> <span>导出</span>
             </button>
         </div>
-        <div class="container col-md-11">
+        <div class="container col-md-11" style="white-space: nowrap;">
             <table id="raDeviceList">
             </table>
         </div>

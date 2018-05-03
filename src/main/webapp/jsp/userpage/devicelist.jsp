@@ -9,7 +9,7 @@
                        id="dlTxtSearchTreeNode">
                 <button class="btn btn-default" onclick="dlSearchTreeNode()">搜索</button>
             </div>
-            <div id="dlOrgTree" style="margin-top: 5px;"></div>
+            <div id="dlOrgTree" style="margin-top: 5px;white-space: nowrap;"></div>
         </div>
         <div class="columns-right">
             <div class="btn-group" id="dltoolbar">
@@ -21,7 +21,7 @@
                     <span class="glyphicon glyphicon-export"></span> <span>导出</span>
                 </button>
             </div>
-            <div class="col-md-9 col-sm-8">
+            <div class="col-md-9 col-sm-8" style="white-space: nowrap;">
                 <table class="table table-striped" id="dlDeviceList" align="center"
                        striped="true" data-click-to-select="true"
                        data-toolbar="#dltoolbar"<%--设置装按钮的容器为id为toolbar--%>

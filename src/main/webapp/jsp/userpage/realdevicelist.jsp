@@ -16,15 +16,15 @@
                 <ul id="tree" class="ztree"></ul>
             </div>
         </div>--%>
-        <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto">
+        <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto;">
             <div class="input-group">
                 <input class="text-input" type="text" style="width:120px;margin-right: 2px;"
                        id="rdlTxtSearchTreeNode">
                 <button class="btn btn-default" onclick="rdlSearchTreeNode()">搜索</button>
             </div>
-            <div id="rdlOrgTree" style="margin-top: 5px;"></div>
+            <div id="rdlOrgTree" style="margin-top: 5px;white-space: nowrap;overflow: auto;"></div>
         </div>
-        <div class="columns-right" id="rdlDeviceListDiv" style="display: block">
+        <div class="columns-right" id="rdlDeviceListDiv" style="display: block;white-space: nowrap;">
             <div id="rdltoolbar" class="btn-group">
                 <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
                         onclick="tableRefresh()">

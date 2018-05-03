@@ -21,9 +21,9 @@
                        id="hisTxtSearchTreeNode">
                 <button class="btn btn-default" onclick="hisSearchTreeNode()">搜索</button>
             </div>
-            <div id="hisOrgTree" style="margin-top: 5px;"></div>
+            <div id="hisOrgTree" style="white-space: nowrap;margin-top: 5px;"></div>
         </div>
-        <div class="columns-right" id="hisDeviceListDiv" style="display: block">
+        <div class="columns-right" id="hisDeviceListDiv" style="white-space: nowrap;display: block">
             <div id="histoolbar" class="btn-group">
                 <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
                         onclick="tableRefresh()">
