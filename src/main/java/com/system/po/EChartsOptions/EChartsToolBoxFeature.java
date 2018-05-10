@@ -7,6 +7,7 @@ public class EChartsToolBoxFeature {
     private EctbfDataView dataView;
     private EctbfMagicType magicType;
     private EctbfRestore restore;
+    private EctbfDataZoom dataZoom;
     private EctbfSaveAsImage saveAsImage;
 
     public EctbfMark getMark() {
@@ -41,6 +42,14 @@ public class EChartsToolBoxFeature {
         this.restore = restore;
     }
 
+    public EctbfDataZoom getDataZoom() {
+        return dataZoom;
+    }
+
+    public void setDataZoom(EctbfDataZoom dataZoom) {
+        this.dataZoom = dataZoom;
+    }
+
     public EctbfSaveAsImage getSaveAsImage() {
         return saveAsImage;
     }
@@ -55,6 +64,7 @@ public class EChartsToolBoxFeature {
         setDataView(new EctbfDataView());
         setMagicType(new EctbfMagicType());
         setRestore(new EctbfRestore());
+        setDataZoom(new EctbfDataZoom());
         setSaveAsImage(new EctbfSaveAsImage());
     }
 }

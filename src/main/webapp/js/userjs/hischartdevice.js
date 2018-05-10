@@ -14,8 +14,8 @@ var hisChartoptionInit = {
         feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['bar']},
-            restore: {show: true},
+            magicType: {show: true, type: ["line","bar"]},
+            restore: {show: false},
             saveAsImage: {show: true}
         }
     },
@@ -44,8 +44,8 @@ var hisChartoption = {
         feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['bar']},
-            restore: {show: true},
+            magicType: {show: true, type: ["line","bar"]},
+            restore: {show: false},
             saveAsImage: {show: true}
         }
     },

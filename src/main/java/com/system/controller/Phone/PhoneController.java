@@ -242,10 +242,14 @@ public class PhoneController {
     }
 
     private PhoneEChartsOptions getEChartsOptions(ChartsParameters chartsParameters){
+        //默认一天
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
-
+        /*String getTime =  chartsParameters.getdParameterTime().get(0);
+        String getTimeDate = getTime.substring(0,getTime.indexOf(" "));
+        String getTimeTime = getTime.substring(getTime.indexOf(" ")+1,getTime.length());*/
         EChartsTitle eChartsTitle = new EChartsTitle();
         eChartsTitle.setText("温度曲线");
+        eChartsTitle.setSubtext("");
         phoneEChartsOptions.setTitle(eChartsTitle);
 
         EChartsLegend eChartsLegend = new EChartsLegend();
