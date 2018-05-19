@@ -37,8 +37,8 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
         List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
         //3、整合成节点列表
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
-        bootStrapTreeNodeList.add(bootStrapTreeNodeRoot);
+        /*BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId(rootId);
+        bootStrapTreeNodeList.add(bootStrapTreeNodeRoot);*/
         for (RoleDeviceOrgInfo roleDeviceOrgInfo : roleDeviceOrgInfoList) {
             //去掉重复的节点
             if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList, roleDeviceOrgInfo.getBootStrapTreeNode())) {
@@ -60,8 +60,8 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
         List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
         //3、整合成节点列表
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
-        bootStrapTreeNodeList.add(bootStrapTreeNodeRoot);
+        /*BootStrapTreeNode bootStrapTreeNodeRoot = bootStrapTreeNodeMapper.selectORGInfoByNodeId(rootId);
+        bootStrapTreeNodeList.add(bootStrapTreeNodeRoot);*/
         for (RoleDeviceOrgInfo roleDeviceOrgInfo : roleDeviceOrgInfoList) {
             //把设备当成节点添加进去
             BootStrapTreeNode bootStrapTreeNode = new BootStrapTreeNode();
@@ -117,12 +117,12 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             String[] sNodeId = longNodeId.split("\\.");
             for (int i = 0; i < sNodeId.length; i++) {
                 //需要加上节点ID，父节点ID，节点名称
-                BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeMapper.selectORGInfoByNodeId(sNodeId[i + 1]);
+                BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeMapper.selectORGInfoByNodeId(sNodeId[i]);
                 /*bootStrapTreeNode.setpId(sNodeId[i]);
                 bootStrapTreeNode.setId(sNodeId[i + 1]);*/
                 bootStrapTreeNodeList.add(bootStrapTreeNode);
-                if (sNodeId.length == (i + 1 + 1)) //如果有3个，就是1-2,2-3的组合，
-                    break;
+                /*if (sNodeId.length == (i + 1 + 1)) //如果有3个，就是1-2,2-3的组合，
+                    break;*/
             }
         } else {
             BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeMapper.selectORGInfoByNodeId(longNodeId);

@@ -36,8 +36,8 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
         //3、整合成节点列表
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         //默认要增加根节点
-        ORGTreeNode orgTreeNodeRoot =  orgTreeNodeMapper.selectORGInfoByNodeId("001");
-        orgTreeNodeList.add(orgTreeNodeRoot);
+        /*ORGTreeNode orgTreeNodeRoot =  orgTreeNodeMapper.selectORGInfoByNodeId(rootId);
+        orgTreeNodeList.add(orgTreeNodeRoot);*/
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
         for (RoleDeviceOrgInfo roleDeviceOrgInfo : roleDeviceOrgInfoList
              ) {
@@ -105,7 +105,7 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         if (longNodeId.indexOf(".") > 0) {
             String[] sNodeId = longNodeId.split("\\.");
-            for (int i = 1; i < sNodeId.length; i++) { // 跳过根节点
+            for (int i = 0; i < sNodeId.length; i++) { // 跳过根节点
                 //需要加上节点ID，父节点ID，节点名称
                 ORGTreeNode orgTreeNode = orgTreeNodeMapper.selectORGInfoByNodeId(sNodeId[i]);
                 orgTreeNodeList.add(orgTreeNode);

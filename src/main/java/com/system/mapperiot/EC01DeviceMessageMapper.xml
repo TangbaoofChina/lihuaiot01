@@ -8,46 +8,57 @@
         <result column="EC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
         <result column="EC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>
         <result column="EC01_INTEMP3" jdbcType="FLOAT" property="inTemp3"/>
-        <result column="EC01_OUTTEMP4" jdbcType="FLOAT" property="outTemp4"/>
-        <result column="EC01_BOILERTEMP5" jdbcType="FLOAT" property="boilerTemp5"/>
+        <result column="EC01_INTEMP4" jdbcType="FLOAT" property="inTemp4"/>
+        <result column="EC01_INTEMP5" jdbcType="FLOAT" property="inTemp5"/>
+        <result column="EC01_INTEMP6" jdbcType="FLOAT" property="inTemp6"/>
+        <result column="EC01_OUTTEMP" jdbcType="FLOAT" property="outTemp"/>
+        <result column="EC01_BOILERTEMP" jdbcType="FLOAT" property="boilerTemp"/>
         <result column="EC01_HUMIDITYVAL" jdbcType="FLOAT" property="humidityVal"/>
         <result column="EC01_CO2VAL" jdbcType="FLOAT" property="co2Val"/>
         <result column="EC01_WATERFLOWVAL" jdbcType="FLOAT" property="waterFlowVal"/>
         <result column="EC01_INAVETEMP" jdbcType="FLOAT" property="inAveTemp"/>
         <result column="EC01_TEMPCURVERUNDAYS" jdbcType="INTEGER" property="tempCurveRunDays"/>
-        <result column="EC01_TEMPCURVERUNSTAGE" jdbcType="TINYINT" property="tempCurveRunStage"/>
+        <result column="EC01_TEMPCURVERUNSTAGE" jdbcType="INTEGER" property="tempCurveRunStage"/>
         <result column="EC01_STANDARDTEMP" jdbcType="FLOAT" property="standardTemp"/>
-        <result column="EC01_AIRLV" jdbcType="TINYINT" property="airLevel"/>
-        <result column="EC01_WINDOWPCT" jdbcType="TINYINT" property="windowPct"/>
-        <result column="EC01_FRONTGUIDEPLATEPCT" jdbcType="TINYINT" property="frontGuidePlatePct"/>
-        <result column="EC01_SIDEGUIDEPLATEPCT" jdbcType="TINYINT" property="sideGuidePlatePct"/>
-        <result column="EC01_ROLLERBLIND01" jdbcType="TINYINT" property="rollerblind01Pct"/>
-        <result column="EC01_ROLLERBLIND02" jdbcType="TINYINT" property="rollerblind02Pct"/>
-        <result column="EC01_WETCURTAINWP" jdbcType="VARCHAR" property="wetCurtainWP"/>
-        <result column="EC01_FAN1ON" jdbcType="TINYINT" property="fan1On"/>
-        <result column="EC01_FAN2ON" jdbcType="TINYINT" property="fan2On"/>
-        <result column="EC01_FAN3ON" jdbcType="TINYINT" property="fan3On"/>
-        <result column="EC01_FAN4ON" jdbcType="TINYINT" property="fan4On"/>
-        <result column="EC01_FAN5ON" jdbcType="TINYINT" property="fan5On"/>
-        <result column="EC01_FAN6ON" jdbcType="TINYINT" property="fan6On"/>
-        <result column="EC01_FAN7ON" jdbcType="TINYINT" property="fan7On"/>
-        <result column="EC01_FAN8ON" jdbcType="TINYINT" property="fan8On"/>
-        <result column="EC01_FAN9ON" jdbcType="TINYINT" property="fan9On"/>
-        <result column="EC01_FAN10ON" jdbcType="TINYINT" property="fan10On"/>
-        <result column="EC01_FANCLOCKENABLE" jdbcType="TINYINT" property="fanClockEnable"/>
-        <result column="EC01_FANCHANGEENABLE" jdbcType="TINYINT" property="fanChangeEnable"/>
-        <result column="EC01_BOILERON" jdbcType="TINYINT" property="boilerOn"/>
-        <result column="EC01_HEATSINKON" jdbcType="TINYINT" property="heatSinkOn"/>
-        <result column="EC01_WETCURTAINWPENABLE" jdbcType="TINYINT" property="wetCurtainWPEnable"/>
-        <result column="EC01_WETCURTAINMOTORON" jdbcType="TINYINT" property="wetCurtainMotorOn"/>
-        <result column="EC01_ALARMCLOCKENABLE" jdbcType="TINYINT" property="alarmClockEnable"/>
-        <result column="EC01_TEMPCURVEENABLE" jdbcType="TINYINT" property="tempCurveEnable"/>
-        <result column="EC01_MINAIRCURVEENABLE" jdbcType="TINYINT" property="minAirCurveEnable"/>
+        <result column="EC01_AIRLV" jdbcType="INTEGER" property="airLevel"/>
+        <result column="EC01_WINDOWPCT" jdbcType="INTEGER" property="windowPct"/>
+        <result column="EC01_GUIDEPLATE01PCT" jdbcType="INTEGER" property="guidePlate01Pct"/>
+        <result column="EC01_GUIDEPLATE02PCT" jdbcType="INTEGER" property="guidePlate02Pct"/>
         <result column="EC01_CHICKENAGE" jdbcType="INTEGER" property="chickenAge"/>
         <result column="EC01_NH3VAL" jdbcType="FLOAT" property="nh3Val"/>
+        <result column="EC01_H2SVAL" jdbcType="FLOAT" property="h2sVal"/>
         <result column="EC01_NEGATIVEPRESSURE" jdbcType="FLOAT" property="negativePressure"/>
-        <result column="ERROR_CODE" jdbcType="VARCHAR" property="errorCode"/>
-        <result column="ALARM_CODE" jdbcType="VARCHAR" property="alarmCode"/>
+        <result column="EC01_LIGHTINTENSITY" jdbcType="FLOAT" property="lightIntensity"/>
+        <result column="EC01_VENTILATIONVOLUME" jdbcType="FLOAT" property="ventilationVolume"/>
+        <result column="EC01_SIGNALINTENSITY" jdbcType="FLOAT" property="signalIntensity"/>
+        <result column="EC01_RELAY09" jdbcType="INTEGER" property="relay09"/>
+        <result column="EC01_RELAY10" jdbcType="INTEGER" property="relay10"/>
+        <result column="EC01_RELAY11" jdbcType="INTEGER" property="relay11"/>
+        <result column="EC01_RELAY12" jdbcType="INTEGER" property="relay12"/>
+        <result column="EC01_RELAY13" jdbcType="INTEGER" property="relay13"/>
+        <result column="EC01_RELAY14" jdbcType="INTEGER" property="relay14"/>
+        <result column="EC01_FAN01ON" jdbcType="BOOLEAN" property="fan01On"/>
+        <result column="EC01_FAN02ON" jdbcType="BOOLEAN" property="fan02On"/>
+        <result column="EC01_FAN03ON" jdbcType="BOOLEAN" property="fan03On"/>
+        <result column="EC01_FAN04ON" jdbcType="BOOLEAN" property="fan04On"/>
+        <result column="EC01_FAN05ON" jdbcType="BOOLEAN" property="fan05On"/>
+        <result column="EC01_FAN06ON" jdbcType="BOOLEAN" property="fan06On"/>
+        <result column="EC01_FAN07ON" jdbcType="BOOLEAN" property="fan07On"/>
+        <result column="EC01_FAN08ON" jdbcType="BOOLEAN" property="fan08On"/>
+        <result column="EC01_RELAY09ON" jdbcType="BOOLEAN" property="relay09On"/>
+        <result column="EC01_RELAY10ON" jdbcType="BOOLEAN" property="relay10On"/>
+        <result column="EC01_RELAY11ON" jdbcType="BOOLEAN" property="relay11On"/>
+        <result column="EC01_RELAY12ON" jdbcType="BOOLEAN" property="relay12On"/>
+        <result column="EC01_RELAY13ON" jdbcType="BOOLEAN" property="relay13On"/>
+        <result column="EC01_RELAY14ON" jdbcType="BOOLEAN" property="relay14On"/>
+        <result column="EC01_WETCURTAINON" jdbcType="BOOLEAN" property="wetCurtainOn"/>
+        <result column="EC01_ALARMON" jdbcType="BOOLEAN" property="alarmOn"/>
+        <result column="EC01_FANCLOCKENABLE" jdbcType="BOOLEAN" property="fanClockEnable"/>
+        <result column="EC01_FANCHANGEENABLE" jdbcType="BOOLEAN" property="fanChangeEnable"/>
+        <result column="EC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
+        <result column="EC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
+        <result column="EC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="EC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
         <result column="EC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="EC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
@@ -58,59 +69,70 @@
         <result column="HEC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
         <result column="HEC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>
         <result column="HEC01_INTEMP3" jdbcType="FLOAT" property="inTemp3"/>
-        <result column="HEC01_OUTTEMP4" jdbcType="FLOAT" property="outTemp4"/>
-        <result column="HEC01_BOILERTEMP5" jdbcType="FLOAT" property="boilerTemp5"/>
+        <result column="HEC01_INTEMP4" jdbcType="FLOAT" property="inTemp4"/>
+        <result column="HEC01_INTEMP5" jdbcType="FLOAT" property="inTemp5"/>
+        <result column="HEC01_INTEMP6" jdbcType="FLOAT" property="inTemp6"/>
+        <result column="HEC01_OUTTEMP" jdbcType="FLOAT" property="outTemp"/>
+        <result column="HEC01_BOILERTEMP" jdbcType="FLOAT" property="boilerTemp"/>
         <result column="HEC01_HUMIDITYVAL" jdbcType="FLOAT" property="humidityVal"/>
         <result column="HEC01_CO2VAL" jdbcType="FLOAT" property="co2Val"/>
         <result column="HEC01_WATERFLOWVAL" jdbcType="FLOAT" property="waterFlowVal"/>
         <result column="HEC01_INAVETEMP" jdbcType="FLOAT" property="inAveTemp"/>
         <result column="HEC01_TEMPCURVERUNDAYS" jdbcType="INTEGER" property="tempCurveRunDays"/>
-        <result column="HEC01_TEMPCURVERUNSTAGE" jdbcType="TINYINT" property="tempCurveRunStage"/>
+        <result column="HEC01_TEMPCURVERUNSTAGE" jdbcType="INTEGER" property="tempCurveRunStage"/>
         <result column="HEC01_STANDARDTEMP" jdbcType="FLOAT" property="standardTemp"/>
-        <result column="HEC01_AIRLV" jdbcType="TINYINT" property="airLevel"/>
-        <result column="HEC01_WINDOWPCT" jdbcType="TINYINT" property="windowPct"/>
-        <result column="HEC01_FRONTGUIDEPLATEPCT" jdbcType="TINYINT" property="frontGuidePlatePct"/>
-        <result column="HEC01_SIDEGUIDEPLATEPCT" jdbcType="TINYINT" property="sideGuidePlatePct"/>
-        <result column="HEC01_ROLLERBLIND01" jdbcType="TINYINT" property="rollerblind01Pct"/>
-        <result column="HEC01_ROLLERBLIND02" jdbcType="TINYINT" property="rollerblind02Pct"/>
-        <result column="HEC01_WETCURTAINWP" jdbcType="VARCHAR" property="wetCurtainWP"/>
-        <result column="HEC01_FAN1ON" jdbcType="TINYINT" property="fan1On"/>
-        <result column="HEC01_FAN2ON" jdbcType="TINYINT" property="fan2On"/>
-        <result column="HEC01_FAN3ON" jdbcType="TINYINT" property="fan3On"/>
-        <result column="HEC01_FAN4ON" jdbcType="TINYINT" property="fan4On"/>
-        <result column="HEC01_FAN5ON" jdbcType="TINYINT" property="fan5On"/>
-        <result column="HEC01_FAN6ON" jdbcType="TINYINT" property="fan6On"/>
-        <result column="HEC01_FAN7ON" jdbcType="TINYINT" property="fan7On"/>
-        <result column="HEC01_FAN8ON" jdbcType="TINYINT" property="fan8On"/>
-        <result column="HEC01_FAN9ON" jdbcType="TINYINT" property="fan9On"/>
-        <result column="HEC01_FAN10ON" jdbcType="TINYINT" property="fan10On"/>
-        <result column="HEC01_FANCLOCKENABLE" jdbcType="TINYINT" property="fanClockEnable"/>
-        <result column="HEC01_FANCHANGEENABLE" jdbcType="TINYINT" property="fanChangeEnable"/>
-        <result column="HEC01_BOILERON" jdbcType="TINYINT" property="boilerOn"/>
-        <result column="HEC01_HEATSINKON" jdbcType="TINYINT" property="heatSinkOn"/>
-        <result column="HEC01_WETCURTAINWPENABLE" jdbcType="TINYINT" property="wetCurtainWPEnable"/>
-        <result column="HEC01_WETCURTAINMOTORON" jdbcType="TINYINT" property="wetCurtainMotorOn"/>
-        <result column="HEC01_ALARMCLOCKENABLE" jdbcType="TINYINT" property="alarmClockEnable"/>
-        <result column="HEC01_TEMPCURVEENABLE" jdbcType="TINYINT" property="tempCurveEnable"/>
-        <result column="HEC01_MINAIRCURVEENABLE" jdbcType="TINYINT" property="minAirCurveEnable"/>
+        <result column="HEC01_AIRLV" jdbcType="INTEGER" property="airLevel"/>
+        <result column="HEC01_WINDOWPCT" jdbcType="INTEGER" property="windowPct"/>
+        <result column="HEC01_GUIDEPLATE01PCT" jdbcType="INTEGER" property="guidePlate01Pct"/>
+        <result column="HEC01_GUIDEPLATE02PCT" jdbcType="INTEGER" property="guidePlate02Pct"/>
         <result column="HEC01_CHICKENAGE" jdbcType="INTEGER" property="chickenAge"/>
         <result column="HEC01_NH3VAL" jdbcType="FLOAT" property="nh3Val"/>
+        <result column="HEC01_H2SVAL" jdbcType="FLOAT" property="h2sVal"/>
         <result column="HEC01_NEGATIVEPRESSURE" jdbcType="FLOAT" property="negativePressure"/>
-        <result column="ERROR_CODE" jdbcType="VARCHAR" property="errorCode"/>
-        <result column="ALARM_CODE" jdbcType="VARCHAR" property="alarmCode"/>
+        <result column="HEC01_LIGHTINTENSITY" jdbcType="FLOAT" property="lightIntensity"/>
+        <result column="HEC01_VENTILATIONVOLUME" jdbcType="FLOAT" property="ventilationVolume"/>
+        <result column="HEC01_SIGNALINTENSITY" jdbcType="FLOAT" property="signalIntensity"/>
+        <result column="HEC01_RELAY09" jdbcType="INTEGER" property="relay09"/>
+        <result column="HEC01_RELAY10" jdbcType="INTEGER" property="relay10"/>
+        <result column="HEC01_RELAY11" jdbcType="INTEGER" property="relay11"/>
+        <result column="HEC01_RELAY12" jdbcType="INTEGER" property="relay12"/>
+        <result column="HEC01_RELAY13" jdbcType="INTEGER" property="relay13"/>
+        <result column="HEC01_RELAY14" jdbcType="INTEGER" property="relay14"/>
+        <result column="HEC01_FAN01ON" jdbcType="BOOLEAN" property="fan01On"/>
+        <result column="HEC01_FAN02ON" jdbcType="BOOLEAN" property="fan02On"/>
+        <result column="HEC01_FAN03ON" jdbcType="BOOLEAN" property="fan03On"/>
+        <result column="HEC01_FAN04ON" jdbcType="BOOLEAN" property="fan04On"/>
+        <result column="HEC01_FAN05ON" jdbcType="BOOLEAN" property="fan05On"/>
+        <result column="HEC01_FAN06ON" jdbcType="BOOLEAN" property="fan06On"/>
+        <result column="HEC01_FAN07ON" jdbcType="BOOLEAN" property="fan07On"/>
+        <result column="HEC01_FAN08ON" jdbcType="BOOLEAN" property="fan08On"/>
+        <result column="HEC01_RELAY09ON" jdbcType="BOOLEAN" property="relay09On"/>
+        <result column="HEC01_RELAY10ON" jdbcType="BOOLEAN" property="relay10On"/>
+        <result column="HEC01_RELAY11ON" jdbcType="BOOLEAN" property="relay11On"/>
+        <result column="HEC01_RELAY12ON" jdbcType="BOOLEAN" property="relay12On"/>
+        <result column="HEC01_RELAY13ON" jdbcType="BOOLEAN" property="relay13On"/>
+        <result column="HEC01_RELAY14ON" jdbcType="BOOLEAN" property="relay14On"/>
+        <result column="HEC01_WETCURTAINON" jdbcType="BOOLEAN" property="wetCurtainOn"/>
+        <result column="HEC01_ALARMON" jdbcType="BOOLEAN" property="alarmOn"/>
+        <result column="HEC01_FANCLOCKENABLE" jdbcType="BOOLEAN" property="fanClockEnable"/>
+        <result column="HEC01_FANCHANGEENABLE" jdbcType="BOOLEAN" property="fanChangeEnable"/>
+        <result column="HEC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
+        <result column="HEC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
+        <result column="HEC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="HEC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
         <result column="HEC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="HEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
     <select id="selectEC01ByORGId" parameterType="string"  resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
-        from iot_evncon_01 t,iot_deviceinfo u
+        from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_nodeid = #{ORGId}
         order by u.di_serialnum asc
     </select>
     <select id="selectEC01ByORGIdAndRoleId" resultMap="BaseResultMap">
         select DISTINCT u.di_name,u.di_serialnum,t.*
-        from iot_evncon_01 t,iot_deviceinfo u,iot_devicerole a
+        from iot_envcon_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
         and u.di_serialnum = a.devrole_devnum
         and u.di_nodeid = #{orgId}
@@ -122,14 +144,14 @@
     </select>
     <select id="selectEC01ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
-        from iot_evncon_01 t,iot_deviceinfo u
+        from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_serialnum = #{sDeviceId}
     </select>
     <select id="selectEC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
         select
         a.di_name,a.di_serialnum,b.*
-        from IOT_DEVICEINFO a,IOT_HISEVNCON_01 b
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
         AND b.HEC01_DATASENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -139,7 +161,7 @@
     <select id="selectEC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select
         a.di_name,a.di_serialnum,b.*
-        from IOT_DEVICEINFO a,IOT_HISEVNCON_01 b
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM in
         <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">

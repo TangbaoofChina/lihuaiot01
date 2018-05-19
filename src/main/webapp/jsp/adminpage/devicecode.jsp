@@ -15,8 +15,8 @@
             <div class="input-group">
                 <label>类型：</label>
                 <select name="dcDeviceType" id="dcDeviceType" class="input-sm">
-                    <option value="0001" selected="selected">纳捷环控器</option>
-                    <option value="0002">污水环控器</option>
+                    <option value="111" selected="selected">鸡舍环控器</option>
+                    <option value="211">污水控制器/option>
                 </select>
             </div>
             <div class="input-group">
@@ -53,8 +53,8 @@
             <div class="form-num input-group" disabled="false">
                 <label>类型：</label>
                 <select name="dcDeviceTypeNew" id="dcDeviceTypeUpdate" class="input-sm">
-                    <option value="0001">纳捷环控器</option>
-                    <option value="0002">污水环控器</option>
+                    <option value="111">纳捷环控器</option>
+                    <option value="211">污水环控器</option>
                 </select>
             </div>
             <div class="form-num input-group" disabled="false">
@@ -92,8 +92,8 @@
             <div class="form-num input-group">
                 <label>类型：</label>
                 <select name="dcDeviceTypeNew" id="dcDeviceTypeNew" class="input-sm">
-                    <option value="0001">纳捷环控器</option>
-                    <option value="0002">污水环控器</option>
+                    <option value="111">纳捷环控器</option>
+                    <option value="211">污水环控器</option>
                 </select>
             </div>
             <div class="form-num input-group">

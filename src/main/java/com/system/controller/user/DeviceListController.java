@@ -132,17 +132,17 @@ public class DeviceListController {
         return jsonString;
     }
 
-    private List<DeviceInfo> selectDeviceInfoList(String sORGId) throws Exception{
+    private List<DeviceInfo> selectDeviceInfoList(String sORGId) throws Exception {
         List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
         if (sORGId != null) {
             //获取用户角色
             Subject currentSubject = SecurityUtils.getSubject();
             Session session = currentSubject.getSession();
             Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
-            if(RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())){
+            if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
                 deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(sORGId);
-            } else {
-                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId,userlogin.getRoleInfoList());
+            }  else {
+                deviceInfoList = deviceInfoService.selectDeviceInfoByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
             }
         }
         return deviceInfoList;

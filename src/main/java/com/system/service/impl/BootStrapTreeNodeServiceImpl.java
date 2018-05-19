@@ -23,15 +23,23 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     @Override
     public List<BootStrapTreeNode> selectORGInfo() throws Exception {
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        //立华牧业节点
-        BootStrapTreeNode bootStrapTreeNode1 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
-        List<BootStrapTreeNode> bootStrapTreeNodeChildList = getChildNode("001");
-        bootStrapTreeNode1.setNodes(bootStrapTreeNodeChildList);
-        //未分组节点
-        BootStrapTreeNode bootStrapTreeNode2 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("002");
+        //立华牧业节点-鸡舍环控器
+        BootStrapTreeNode bootStrapTreeNode1 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("111");
+        List<BootStrapTreeNode> bootStrapTreeNodeChildList1 = getChildNode("111");
+        bootStrapTreeNode1.setNodes(bootStrapTreeNodeChildList1);
+        //立华牧业节点-污水控制器
+        BootStrapTreeNode bootStrapTreeNode2 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("211");
+        List<BootStrapTreeNode> bootStrapTreeNodeChildList2 = getChildNode("211");
+        bootStrapTreeNode2.setNodes(bootStrapTreeNodeChildList2);
+        /*//未分组节点-鸡舍环控器
+        BootStrapTreeNode bootStrapTreeNode3 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("101");
+        //未分组节点-污水控制器
+        BootStrapTreeNode bootStrapTreeNode4 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("201");*/
         //未分组放在上面
-        bootStrapTreeNodeList.add(bootStrapTreeNode2);
+        /*bootStrapTreeNodeList.add(bootStrapTreeNode3);
+        bootStrapTreeNodeList.add(bootStrapTreeNode4);*/
         bootStrapTreeNodeList.add(bootStrapTreeNode1);
+        bootStrapTreeNodeList.add(bootStrapTreeNode2);
         return bootStrapTreeNodeList;
     }
 
@@ -74,26 +82,48 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
     @Override
     public List<BootStrapTreeNode> selectORGAndDeviceInfo() throws Exception {
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
-        //立华牧业节点
-        BootStrapTreeNode bootStrapTreeNode01 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("001");
-        //获取根节点上下挂的设备
-        List<BootStrapTreeNode> deviceNodeList01 = getDevicesList("001");
-        List<BootStrapTreeNode> bootStrapTreeNodeChildList = getChildNodeAndDevice("001");
+        //立华牧业节点-鸡舍环控器
+        BootStrapTreeNode bootStrapTreeNode01 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("111");
+        //获取根节点下挂的设备
+        List<BootStrapTreeNode> deviceNodeList01 = getDevicesList("111");
+        List<BootStrapTreeNode> bootStrapTreeNodeChildList01 = getChildNodeAndDevice("111");
         //添加设备
         if (deviceNodeList01.size() > 0)
-            bootStrapTreeNodeChildList.addAll(deviceNodeList01);
-        if (bootStrapTreeNodeChildList.size() > 0)
-            bootStrapTreeNode01.setNodes(bootStrapTreeNodeChildList);
+            bootStrapTreeNodeChildList01.addAll(deviceNodeList01);
+        if (bootStrapTreeNodeChildList01.size() > 0)
+            bootStrapTreeNode01.setNodes(bootStrapTreeNodeChildList01);
 
-        //未分组节点
-        BootStrapTreeNode bootStrapTreeNode02 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("002");
-        List<BootStrapTreeNode> deviceNodeList02 = getDevicesList("002");
+        //未分组节点-鸡舍环控器
+        /*BootStrapTreeNode bootStrapTreeNode02 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("101");
+        List<BootStrapTreeNode> deviceNodeList02 = getDevicesList("101");
         //添加设备
         if (deviceNodeList02.size() > 0)
-            bootStrapTreeNode02.setNodes(deviceNodeList02);
+            bootStrapTreeNode02.setNodes(deviceNodeList02);*/
+
+        //立华牧业节点-污水控制器
+        BootStrapTreeNode bootStrapTreeNode03 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("211");
+        //获取根节点下挂的设备
+        List<BootStrapTreeNode> deviceNodeList03 = getDevicesList("211");
+        List<BootStrapTreeNode> bootStrapTreeNodeChildList03 = getChildNodeAndDevice("211");
+        //添加设备
+        if (deviceNodeList03.size() > 0)
+            bootStrapTreeNodeChildList03.addAll(deviceNodeList03);
+        if (bootStrapTreeNodeChildList03.size() > 0)
+            bootStrapTreeNode03.setNodes(bootStrapTreeNodeChildList03);
+
+        //未分组节点-污水控制器
+        /*BootStrapTreeNode bootStrapTreeNode04 = bootStrapTreeNodeMapper.selectORGInfoByNodeId("201");
+        List<BootStrapTreeNode> deviceNodeList04 = getDevicesList("201");
+        //添加设备
+        if (deviceNodeList04.size() > 0)
+            bootStrapTreeNode04.setNodes(deviceNodeList04);*/
+
         //未分组放在上面
-        bootStrapTreeNodeList.add(bootStrapTreeNode02);
+        /*bootStrapTreeNodeList.add(bootStrapTreeNode02);
+        bootStrapTreeNodeList.add(bootStrapTreeNode04);*/
         bootStrapTreeNodeList.add(bootStrapTreeNode01);
+        bootStrapTreeNodeList.add(bootStrapTreeNode03);
+
         return bootStrapTreeNodeList;
     }
 

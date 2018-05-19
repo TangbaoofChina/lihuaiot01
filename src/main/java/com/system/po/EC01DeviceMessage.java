@@ -14,10 +14,16 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
     private float inTemp2;
     //室内温度3
     private float inTemp3;
-    //室外温度4
-    private float outTemp4;
-    //锅炉温度5
-    private float boilerTemp5;
+    //室内温度4
+    private float inTemp4;
+    //室内温度5
+    private float inTemp5;
+    //室内温度6
+    private float inTemp6;
+    //室外温度
+    private float outTemp;
+    //锅炉温度
+    private float boilerTemp;
     //湿度
     private float humidityVal;
     //二氧化碳
@@ -36,68 +42,96 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
     private Byte airLevel;
     //小窗开启百分比
     private Byte windowPct;
-    //正面导流板开启百分比
-    private Byte frontGuidePlatePct;
-    //侧面导流板开启百分比
-    private Byte sideGuidePlatePct;
-    //卷帘1开启百分比
-    private Byte rollerblind01Pct;
-    //卷帘2开启百分比
-    private Byte rollerblind02Pct;
-    //湿帘水泵状态
-    private String wetCurtainWP;
-    //风机1状态
-    private Byte fan1On;
-    //风机2状态
-    private Byte fan2On;
-    //风机3状态
-    private Byte fan3On;
-    //风机4状态
-    private Byte fan4On;
-    //风机5状态
-    private Byte fan5On;
-    //风机6状态
-    private Byte fan6On;
-    //风机7状态
-    private Byte fan7On;
-    //风机8状态
-    private Byte fan8On;
-    //风机9状态
-    private Byte fan9On;
-    //风机10状态
-    private Byte fan10On;
-    //风机定时使能 只对风机1和风机2有效
-    private Byte fanClockEnable;
-    //风机切换使能
-    private Byte fanChangeEnable;
-    //锅炉状态
-    private Byte boilerOn;
-    //散热器状态
-    private Byte heatSinkOn;
-    //湿帘水泵使能
-    private Byte wetCurtainWPEnable;
-    //湿帘电机状态
-    private Byte wetCurtainMotorOn;
-    //定时报警使能
-    private Byte alarmClockEnable;
-    //温度曲线使能
-    private Byte tempCurveEnable;
-    //最小通风曲线使能
-    private Byte minAirCurveEnable;
-    //设备发送数据时间
-    private String sendDate;
-    //错误代码
-    private String errorCode;
-    //报警代码
-    private String alarmCode;
+    //导流板1开启百分比
+    private Byte guidePlate01Pct;
+    //导流板2开启百分比
+    private Byte guidePlate02Pct;
     //日龄
-    private int chickenAge ;
+    private int chickenAge;
     //NH3
     private float nh3Val;
+    //H2S
+    private float h2sVal;
     //负压
     private float negativePressure;
-    //备用
-    private String prepareCode04;
+    //光照强度
+    private float lightIntensity;
+    //换气量
+    private float ventilationVolume;
+    //信号强度
+    private Byte signalIntensity;
+    //继电器9含义
+    private Byte relay09;
+    //继电器10含义
+    private Byte relay10;
+    //继电器11含义
+    private Byte relay11;
+    //继电器12含义
+    private Byte relay12;
+    //继电器13含义
+    private Byte relay13;
+    //继电器14含义
+    private Byte relay14;
+    //风机1状态
+    private Boolean fan01On;
+    //风机2状态
+    private Boolean fan02On;
+    //风机3状态
+    private Boolean fan03On;
+    //风机4状态
+    private Boolean fan04On;
+    //风机5状态
+    private Boolean fan05On;
+    //风机6状态
+    private Boolean fan06On;
+    //风机7状态
+    private Boolean fan07On;
+    //风机8状态
+    private Boolean fan08On;
+    //继电器9状态
+    private Boolean relay09On;
+    //继电器10状态
+    private Boolean relay10On;
+    //继电器11状态
+    private Boolean relay11On;
+    //继电器12状态
+    private Boolean relay12On;
+    //继电器13状态
+    private Boolean relay13On;
+    //继电器14状态
+    private Boolean relay14On;
+    //湿帘水泵状态
+    private Boolean wetCurtainOn;
+    //报警状态
+    private Boolean alarmOn;
+    //风机定时使能 只对风机1和风机2有效
+    private Boolean fanClockEnable;
+    //风机切换使能
+    private Boolean fanChangeEnable;
+    //湿帘水泵使能
+    private Boolean wetCurtainWPEnable;
+    //温度曲线使能
+    private Boolean tempCurveEnable;
+    //最小通风曲线使能
+    private Boolean minAirCurveEnable;
+    //预留2.5
+    private Boolean spare05On;
+    //预留2.6
+    private Boolean spare06On;
+    //预留2.7
+    private Boolean spare07On;
+    //设备发送数据时间
+    private String sendDate;
+    //报警故障代码
+    private String alarmErrorCode;
+    //备用1
+    private int spareCode01;
+    //备用2
+    private int spareCode02;
+    //备用3
+    private int spareCode03;
+    //备用4
+    private int spareCode04;
 
     public float getInTemp1() {
         return inTemp1;
@@ -123,20 +157,44 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.inTemp3 = inTemp3;
     }
 
-    public float getOutTemp4() {
-        return outTemp4;
+    public float getInTemp4() {
+        return inTemp4;
     }
 
-    public void setOutTemp4(float outTemp4) {
-        this.outTemp4 = outTemp4;
+    public void setInTemp4(float inTemp4) {
+        this.inTemp4 = inTemp4;
     }
 
-    public float getBoilerTemp5() {
-        return boilerTemp5;
+    public float getInTemp5() {
+        return inTemp5;
     }
 
-    public void setBoilerTemp5(float boilerTemp5) {
-        this.boilerTemp5 = boilerTemp5;
+    public void setInTemp5(float inTemp5) {
+        this.inTemp5 = inTemp5;
+    }
+
+    public float getInTemp6() {
+        return inTemp6;
+    }
+
+    public void setInTemp6(float inTemp6) {
+        this.inTemp6 = inTemp6;
+    }
+
+    public float getOutTemp() {
+        return outTemp;
+    }
+
+    public void setOutTemp(float outTemp) {
+        this.outTemp = outTemp;
+    }
+
+    public float getBoilerTemp() {
+        return boilerTemp;
+    }
+
+    public void setBoilerTemp(float boilerTemp) {
+        this.boilerTemp = boilerTemp;
     }
 
     public float getHumidityVal() {
@@ -211,220 +269,20 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.windowPct = windowPct;
     }
 
-    public Byte getFrontGuidePlatePct() {
-        return frontGuidePlatePct;
+    public Byte getGuidePlate01Pct() {
+        return guidePlate01Pct;
     }
 
-    public void setFrontGuidePlatePct(Byte frontGuidePlatePct) {
-        this.frontGuidePlatePct = frontGuidePlatePct;
+    public void setGuidePlate01Pct(Byte guidePlate01Pct) {
+        this.guidePlate01Pct = guidePlate01Pct;
     }
 
-    public Byte getSideGuidePlatePct() {
-        return sideGuidePlatePct;
+    public Byte getGuidePlate02Pct() {
+        return guidePlate02Pct;
     }
 
-    public void setSideGuidePlatePct(Byte sideGuidePlatePct) {
-        this.sideGuidePlatePct = sideGuidePlatePct;
-    }
-
-    public Byte getRollerblind01Pct() {
-        return rollerblind01Pct;
-    }
-
-    public void setRollerblind01Pct(Byte rollerblind01Pct) {
-        this.rollerblind01Pct = rollerblind01Pct;
-    }
-
-    public Byte getRollerblind02Pct() {
-        return rollerblind02Pct;
-    }
-
-    public void setRollerblind02Pct(Byte rollerblind02Pct) {
-        this.rollerblind02Pct = rollerblind02Pct;
-    }
-
-    public String getWetCurtainWP() {
-        return wetCurtainWP;
-    }
-
-    public void setWetCurtainWP(String wetCurtainWP) {
-        this.wetCurtainWP = wetCurtainWP;
-    }
-
-    public Byte getFan1On() {
-        return fan1On;
-    }
-
-    public void setFan1On(Byte fan1On) {
-        this.fan1On = fan1On;
-    }
-
-    public Byte getFan2On() {
-        return fan2On;
-    }
-
-    public void setFan2On(Byte fan2On) {
-        this.fan2On = fan2On;
-    }
-
-    public Byte getFan3On() {
-        return fan3On;
-    }
-
-    public void setFan3On(Byte fan3On) {
-        this.fan3On = fan3On;
-    }
-
-    public Byte getFan4On() {
-        return fan4On;
-    }
-
-    public void setFan4On(Byte fan4On) {
-        this.fan4On = fan4On;
-    }
-
-    public Byte getFan5On() {
-        return fan5On;
-    }
-
-    public void setFan5On(Byte fan5On) {
-        this.fan5On = fan5On;
-    }
-
-    public Byte getFan6On() {
-        return fan6On;
-    }
-
-    public void setFan6On(Byte fan6On) {
-        this.fan6On = fan6On;
-    }
-
-    public Byte getFan7On() {
-        return fan7On;
-    }
-
-    public void setFan7On(Byte fan7On) {
-        this.fan7On = fan7On;
-    }
-
-    public Byte getFan8On() {
-        return fan8On;
-    }
-
-    public void setFan8On(Byte fan8On) {
-        this.fan8On = fan8On;
-    }
-
-    public Byte getFan9On() {
-        return fan9On;
-    }
-
-    public void setFan9On(Byte fan9On) {
-        this.fan9On = fan9On;
-    }
-
-    public Byte getFan10On() {
-        return fan10On;
-    }
-
-    public void setFan10On(Byte fan10On) {
-        this.fan10On = fan10On;
-    }
-
-    public Byte getFanClockEnable() {
-        return fanClockEnable;
-    }
-
-    public void setFanClockEnable(Byte fanClockEnable) {
-        this.fanClockEnable = fanClockEnable;
-    }
-
-    public Byte getFanChangeEnable() {
-        return fanChangeEnable;
-    }
-
-    public void setFanChangeEnable(Byte fanChangeEnable) {
-        this.fanChangeEnable = fanChangeEnable;
-    }
-
-    public Byte getBoilerOn() {
-        return boilerOn;
-    }
-
-    public void setBoilerOn(Byte boilerOn) {
-        this.boilerOn = boilerOn;
-    }
-
-    public Byte getHeatSinkOn() {
-        return heatSinkOn;
-    }
-
-    public void setHeatSinkOn(Byte heatSinkOn) {
-        this.heatSinkOn = heatSinkOn;
-    }
-
-    public Byte getWetCurtainWPEnable() {
-        return wetCurtainWPEnable;
-    }
-
-    public void setWetCurtainWPEnable(Byte wetCurtainWPEnable) {
-        this.wetCurtainWPEnable = wetCurtainWPEnable;
-    }
-
-    public Byte getWetCurtainMotorOn() {
-        return wetCurtainMotorOn;
-    }
-
-    public void setWetCurtainMotorOn(Byte wetCurtainMotorOn) {
-        this.wetCurtainMotorOn = wetCurtainMotorOn;
-    }
-
-    public Byte getAlarmClockEnable() {
-        return alarmClockEnable;
-    }
-
-    public void setAlarmClockEnable(Byte alarmClockEnable) {
-        this.alarmClockEnable = alarmClockEnable;
-    }
-
-    public Byte getTempCurveEnable() {
-        return tempCurveEnable;
-    }
-
-    public void setTempCurveEnable(Byte tempCurveEnable) {
-        this.tempCurveEnable = tempCurveEnable;
-    }
-
-    public Byte getMinAirCurveEnable() {
-        return minAirCurveEnable;
-    }
-
-    public void setMinAirCurveEnable(Byte minAirCurveEnable) {
-        this.minAirCurveEnable = minAirCurveEnable;
-    }
-
-    public String getSendDate() {
-        return sendDate;
-    }
-
-    public void setSendDate(String sendDate) {
-        this.sendDate = sendDate;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getAlarmCode() {
-        return alarmCode;
-    }
-
-    public void setAlarmCode(String alarmCode) {
-        this.alarmCode = alarmCode;
+    public void setGuidePlate02Pct(Byte guidePlate02Pct) {
+        this.guidePlate02Pct = guidePlate02Pct;
     }
 
     public int getChickenAge() {
@@ -443,6 +301,14 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.nh3Val = nh3Val;
     }
 
+    public float getH2sVal() {
+        return h2sVal;
+    }
+
+    public void setH2sVal(float h2sVal) {
+        this.h2sVal = h2sVal;
+    }
+
     public float getNegativePressure() {
         return negativePressure;
     }
@@ -451,12 +317,316 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.negativePressure = negativePressure;
     }
 
-    public String getPrepareCode04() {
-        return prepareCode04;
+    public float getLightIntensity() {
+        return lightIntensity;
     }
 
-    public void setPrepareCode04(String prepareCode04) {
-        this.prepareCode04 = prepareCode04;
+    public void setLightIntensity(float lightIntensity) {
+        this.lightIntensity = lightIntensity;
+    }
+
+    public float getVentilationVolume() {
+        return ventilationVolume;
+    }
+
+    public void setVentilationVolume(float ventilationVolume) {
+        this.ventilationVolume = ventilationVolume;
+    }
+
+    public Byte getSignalIntensity() {
+        return signalIntensity;
+    }
+
+    public void setSignalIntensity(Byte signalIntensity) {
+        this.signalIntensity = signalIntensity;
+    }
+
+    public Byte getRelay09() {
+        return relay09;
+    }
+
+    public void setRelay09(Byte relay09) {
+        this.relay09 = relay09;
+    }
+
+    public Byte getRelay10() {
+        return relay10;
+    }
+
+    public void setRelay10(Byte relay10) {
+        this.relay10 = relay10;
+    }
+
+    public Byte getRelay11() {
+        return relay11;
+    }
+
+    public void setRelay11(Byte relay11) {
+        this.relay11 = relay11;
+    }
+
+    public Byte getRelay12() {
+        return relay12;
+    }
+
+    public void setRelay12(Byte relay12) {
+        this.relay12 = relay12;
+    }
+
+    public Byte getRelay13() {
+        return relay13;
+    }
+
+    public void setRelay13(Byte relay13) {
+        this.relay13 = relay13;
+    }
+
+    public Byte getRelay14() {
+        return relay14;
+    }
+
+    public void setRelay14(Byte relay14) {
+        this.relay14 = relay14;
+    }
+
+    public Boolean getFan01On() {
+        return fan01On;
+    }
+
+    public void setFan01On(Boolean fan01On) {
+        this.fan01On = fan01On;
+    }
+
+    public Boolean getFan02On() {
+        return fan02On;
+    }
+
+    public void setFan02On(Boolean fan02On) {
+        this.fan02On = fan02On;
+    }
+
+    public Boolean getFan03On() {
+        return fan03On;
+    }
+
+    public void setFan03On(Boolean fan03On) {
+        this.fan03On = fan03On;
+    }
+
+    public Boolean getFan04On() {
+        return fan04On;
+    }
+
+    public void setFan04On(Boolean fan04On) {
+        this.fan04On = fan04On;
+    }
+
+    public Boolean getFan05On() {
+        return fan05On;
+    }
+
+    public void setFan05On(Boolean fan05On) {
+        this.fan05On = fan05On;
+    }
+
+    public Boolean getFan06On() {
+        return fan06On;
+    }
+
+    public void setFan06On(Boolean fan06On) {
+        this.fan06On = fan06On;
+    }
+
+    public Boolean getFan07On() {
+        return fan07On;
+    }
+
+    public void setFan07On(Boolean fan07On) {
+        this.fan07On = fan07On;
+    }
+
+    public Boolean getFan08On() {
+        return fan08On;
+    }
+
+    public void setFan08On(Boolean fan08On) {
+        this.fan08On = fan08On;
+    }
+
+    public Boolean getRelay09On() {
+        return relay09On;
+    }
+
+    public void setRelay09On(Boolean relay09On) {
+        this.relay09On = relay09On;
+    }
+
+    public Boolean getRelay10On() {
+        return relay10On;
+    }
+
+    public void setRelay10On(Boolean relay10On) {
+        this.relay10On = relay10On;
+    }
+
+    public Boolean getRelay11On() {
+        return relay11On;
+    }
+
+    public void setRelay11On(Boolean relay11On) {
+        this.relay11On = relay11On;
+    }
+
+    public Boolean getRelay12On() {
+        return relay12On;
+    }
+
+    public void setRelay12On(Boolean relay12On) {
+        this.relay12On = relay12On;
+    }
+
+    public Boolean getRelay13On() {
+        return relay13On;
+    }
+
+    public void setRelay13On(Boolean relay13On) {
+        this.relay13On = relay13On;
+    }
+
+    public Boolean getRelay14On() {
+        return relay14On;
+    }
+
+    public void setRelay14On(Boolean relay14On) {
+        this.relay14On = relay14On;
+    }
+
+    public Boolean getWetCurtainOn() {
+        return wetCurtainOn;
+    }
+
+    public void setWetCurtainOn(Boolean wetCurtainOn) {
+        this.wetCurtainOn = wetCurtainOn;
+    }
+
+    public Boolean getAlarmOn() {
+        return alarmOn;
+    }
+
+    public void setAlarmOn(Boolean alarmOn) {
+        this.alarmOn = alarmOn;
+    }
+
+    public Boolean getFanClockEnable() {
+        return fanClockEnable;
+    }
+
+    public void setFanClockEnable(Boolean fanClockEnable) {
+        this.fanClockEnable = fanClockEnable;
+    }
+
+    public Boolean getFanChangeEnable() {
+        return fanChangeEnable;
+    }
+
+    public void setFanChangeEnable(Boolean fanChangeEnable) {
+        this.fanChangeEnable = fanChangeEnable;
+    }
+
+    public Boolean getWetCurtainWPEnable() {
+        return wetCurtainWPEnable;
+    }
+
+    public void setWetCurtainWPEnable(Boolean wetCurtainWPEnable) {
+        this.wetCurtainWPEnable = wetCurtainWPEnable;
+    }
+
+    public Boolean getTempCurveEnable() {
+        return tempCurveEnable;
+    }
+
+    public void setTempCurveEnable(Boolean tempCurveEnable) {
+        this.tempCurveEnable = tempCurveEnable;
+    }
+
+    public Boolean getMinAirCurveEnable() {
+        return minAirCurveEnable;
+    }
+
+    public void setMinAirCurveEnable(Boolean minAirCurveEnable) {
+        this.minAirCurveEnable = minAirCurveEnable;
+    }
+
+    public Boolean getSpare05On() {
+        return spare05On;
+    }
+
+    public void setSpare05On(Boolean spare05On) {
+        this.spare05On = spare05On;
+    }
+
+    public Boolean getSpare06On() {
+        return spare06On;
+    }
+
+    public void setSpare06On(Boolean spare06On) {
+        this.spare06On = spare06On;
+    }
+
+    public Boolean getSpare07On() {
+        return spare07On;
+    }
+
+    public void setSpare07On(Boolean spare07On) {
+        this.spare07On = spare07On;
+    }
+
+    public String getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(String sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    public String getAlarmErrorCode() {
+        return alarmErrorCode;
+    }
+
+    public void setAlarmErrorCode(String alarmErrorCode) {
+        this.alarmErrorCode = alarmErrorCode;
+    }
+
+    public int getSpareCode01() {
+        return spareCode01;
+    }
+
+    public void setSpareCode01(int spareCode01) {
+        this.spareCode01 = spareCode01;
+    }
+
+    public int getSpareCode02() {
+        return spareCode02;
+    }
+
+    public void setSpareCode02(int spareCode02) {
+        this.spareCode02 = spareCode02;
+    }
+
+    public int getSpareCode03() {
+        return spareCode03;
+    }
+
+    public void setSpareCode03(int spareCode03) {
+        this.spareCode03 = spareCode03;
+    }
+
+    public int getSpareCode04() {
+        return spareCode04;
+    }
+
+    public void setSpareCode04(int spareCode04) {
+        this.spareCode04 = spareCode04;
     }
 
     public List<MydataTableColumn> getDeviceHead()
@@ -490,12 +660,12 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc5.setTitle("舍后");
 
         MydataTableColumn mdtc6 = new MydataTableColumn();
-        mdtc6.setData("outTemp4");
+        mdtc6.setData("outTemp");
         mdtc6.setDefaultContent("6");
         mdtc6.setTitle("舍外");
 
         MydataTableColumn mdtc7 = new MydataTableColumn();
-        mdtc7.setData("boilerTemp5");
+        mdtc7.setData("boilerTemp");
         mdtc7.setDefaultContent("7");
         mdtc7.setTitle("炉温");
 
@@ -518,11 +688,13 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc11.setData("inAveTemp");
         mdtc11.setDefaultContent("11");
         mdtc11.setTitle("舍内平均");
+
         //温度曲线运行到第几天
         MydataTableColumn mdtc12 = new MydataTableColumn();
         mdtc12.setData("tempCurveRunDays");
         mdtc12.setDefaultContent("12");
         mdtc12.setTitle("天数");
+
         //温度曲线运行到第几阶段
         MydataTableColumn mdtc13 = new MydataTableColumn();
         mdtc13.setData("tempCurveRunStage");
@@ -547,188 +719,240 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc16.setVisible(false);
 
         MydataTableColumn mdtc17 = new MydataTableColumn();
-        mdtc17.setData("frontGuidePlatePct");
+        mdtc17.setData("guidePlate01Pct");
         mdtc17.setDefaultContent("17");
-        mdtc17.setTitle("正面导流板");
+        mdtc17.setTitle("导流板1");
         mdtc17.setVisible(false);
 
         MydataTableColumn mdtc18 = new MydataTableColumn();
-        mdtc18.setData("sideGuidePlatePct");
+        mdtc18.setData("guidePlate02Pct");
         mdtc18.setDefaultContent("18");
-        mdtc18.setTitle("侧面导流板");
+        mdtc18.setTitle("导流板2");
         mdtc18.setVisible(false);
 
         MydataTableColumn mdtc19 = new MydataTableColumn();
-        mdtc19.setData("rollerblind01Pct");
+        mdtc19.setData("chickenAge");
         mdtc19.setDefaultContent("19");
-        mdtc19.setTitle("卷帘1");
+        mdtc19.setTitle("日龄");
         mdtc19.setVisible(false);
 
         MydataTableColumn mdtc20 = new MydataTableColumn();
-        mdtc20.setData("rollerblind02Pct");
+        mdtc20.setData("nh3Val");
         mdtc20.setDefaultContent("20");
-        mdtc20.setTitle("卷帘2");
+        mdtc20.setTitle("NH3");
         mdtc20.setVisible(false);
 
         MydataTableColumn mdtc21 = new MydataTableColumn();
-        mdtc21.setData("wetCurtainWP");
+        mdtc21.setData("h2sVal");
         mdtc21.setDefaultContent("21");
-        mdtc21.setTitle("湿帘水泵");
+        mdtc21.setTitle("H2S");
         mdtc21.setVisible(false);
 
         MydataTableColumn mdtc22 = new MydataTableColumn();
-        mdtc22.setData("fan1On");
+        mdtc22.setData("negativePressure");
         mdtc22.setDefaultContent("22");
-        mdtc22.setTitle("风机1");
+        mdtc22.setTitle("负压");
         mdtc22.setVisible(false);
 
         MydataTableColumn mdtc23 = new MydataTableColumn();
-        mdtc23.setData("fan2On");
+        mdtc23.setData("lightIntensity");
         mdtc23.setDefaultContent("23");
-        mdtc23.setTitle("风机2");
+        mdtc23.setTitle("光照强度");
         mdtc23.setVisible(false);
 
         MydataTableColumn mdtc24 = new MydataTableColumn();
-        mdtc24.setData("fan3On");
+        mdtc24.setData("ventilationVolume");
         mdtc24.setDefaultContent("24");
-        mdtc24.setTitle("风机3");
+        mdtc24.setTitle("换气量");
         mdtc24.setVisible(false);
 
         MydataTableColumn mdtc25 = new MydataTableColumn();
-        mdtc25.setData("fan4On");
+        mdtc25.setData("signalIntensity");
         mdtc25.setDefaultContent("25");
-        mdtc25.setTitle("风机4");
+        mdtc25.setTitle("信号强度");
         mdtc25.setVisible(false);
 
         MydataTableColumn mdtc26 = new MydataTableColumn();
-        mdtc26.setData("fan5On");
+        mdtc26.setData("relay09");
         mdtc26.setDefaultContent("26");
-        mdtc26.setTitle("风机5");
+        mdtc26.setTitle("继电器9含义");
         mdtc26.setVisible(false);
 
         MydataTableColumn mdtc27 = new MydataTableColumn();
-        mdtc27.setData("fan6On");
+        mdtc27.setData("relay10");
         mdtc27.setDefaultContent("27");
-        mdtc27.setTitle("风机6");
+        mdtc27.setTitle("继电器10含义");
         mdtc27.setVisible(false);
 
         MydataTableColumn mdtc28 = new MydataTableColumn();
-        mdtc28.setData("fan7On");
+        mdtc28.setData("relay11");
         mdtc28.setDefaultContent("28");
-        mdtc28.setTitle("风机7");
+        mdtc28.setTitle("继电器11含义");
         mdtc28.setVisible(false);
 
         MydataTableColumn mdtc29 = new MydataTableColumn();
-        mdtc29.setData("fan8On");
+        mdtc29.setData("relay12");
         mdtc29.setDefaultContent("29");
-        mdtc29.setTitle("风机8");
+        mdtc29.setTitle("继电器12含义");
         mdtc29.setVisible(false);
 
         MydataTableColumn mdtc30 = new MydataTableColumn();
-        mdtc30.setData("fan9On");
+        mdtc30.setData("relay13");
         mdtc30.setDefaultContent("30");
-        mdtc30.setTitle("风机9");
+        mdtc30.setTitle("继电器13含义");
         mdtc30.setVisible(false);
 
         MydataTableColumn mdtc31 = new MydataTableColumn();
-        mdtc31.setData("fan10On");
+        mdtc31.setData("relay14");
         mdtc31.setDefaultContent("31");
-        mdtc31.setTitle("风机10");
+        mdtc31.setTitle("继电器14含义");
         mdtc31.setVisible(false);
 
         MydataTableColumn mdtc32 = new MydataTableColumn();
-        mdtc32.setData("fanClockEnable");
+        mdtc32.setData("fan01On");
         mdtc32.setDefaultContent("32");
-        mdtc32.setTitle("风机定时");
+        mdtc32.setTitle("风机1");
         mdtc32.setVisible(false);
 
         MydataTableColumn mdtc33 = new MydataTableColumn();
-        mdtc33.setData("fanChangeEnable");
+        mdtc33.setData("fan02On");
         mdtc33.setDefaultContent("33");
-        mdtc33.setTitle("风机切换");
+        mdtc33.setTitle("风机2");
         mdtc33.setVisible(false);
 
         MydataTableColumn mdtc34 = new MydataTableColumn();
-        mdtc34.setData("boilerOn");
+        mdtc34.setData("fan03On");
         mdtc34.setDefaultContent("34");
-        mdtc34.setTitle("锅炉");
+        mdtc34.setTitle("风机3");
         mdtc34.setVisible(false);
 
         MydataTableColumn mdtc35 = new MydataTableColumn();
-        mdtc35.setData("heatSinkOn");
+        mdtc35.setData("fan04On");
         mdtc35.setDefaultContent("35");
-        mdtc35.setTitle("散热器");
+        mdtc35.setTitle("风机4");
         mdtc35.setVisible(false);
 
         MydataTableColumn mdtc36 = new MydataTableColumn();
-        mdtc36.setData("wetCurtainWPEnable");
+        mdtc36.setData("fan05On");
         mdtc36.setDefaultContent("36");
-        mdtc36.setTitle("湿帘水泵");
+        mdtc36.setTitle("风机5");
         mdtc36.setVisible(false);
 
         MydataTableColumn mdtc37 = new MydataTableColumn();
-        mdtc37.setData("wetCurtainMotorOn");
+        mdtc37.setData("fan06On");
         mdtc37.setDefaultContent("37");
-        mdtc37.setTitle("湿帘电机");
+        mdtc37.setTitle("风机6");
         mdtc37.setVisible(false);
 
         MydataTableColumn mdtc38 = new MydataTableColumn();
-        mdtc38.setData("alarmClockEnable");
+        mdtc38.setData("fan07On");
         mdtc38.setDefaultContent("38");
-        mdtc38.setTitle("定时报警");
+        mdtc38.setTitle("风机7");
         mdtc38.setVisible(false);
 
         MydataTableColumn mdtc39 = new MydataTableColumn();
-        mdtc39.setData("tempCurveEnable");
+        mdtc39.setData("fan08On");
         mdtc39.setDefaultContent("39");
-        mdtc39.setTitle("温度曲线");
+        mdtc39.setTitle("风机8");
         mdtc39.setVisible(false);
 
         MydataTableColumn mdtc40 = new MydataTableColumn();
-        mdtc40.setData("minAirCurveEnable");
+        mdtc40.setData("relay09On");
         mdtc40.setDefaultContent("40");
-        mdtc40.setTitle("最小通风曲线");
+        mdtc40.setTitle("继电器9状态");
         mdtc40.setVisible(false);
 
         MydataTableColumn mdtc41 = new MydataTableColumn();
-        mdtc41.setData("chickenAge");
+        mdtc41.setData("relay10On");
         mdtc41.setDefaultContent("41");
-        mdtc41.setTitle("日龄");
+        mdtc41.setTitle("继电器10状态");
+        mdtc41.setVisible(false);
 
         MydataTableColumn mdtc42 = new MydataTableColumn();
-        mdtc42.setData("nh3Val");
+        mdtc42.setData("relay11On");
         mdtc42.setDefaultContent("42");
-        mdtc42.setTitle("NH3");
+        mdtc42.setTitle("继电器11状态");
+        mdtc42.setVisible(false);
 
         MydataTableColumn mdtc43 = new MydataTableColumn();
-        mdtc43.setData("negativePressure");
+        mdtc43.setData("relay12On");
         mdtc43.setDefaultContent("43");
-        mdtc43.setTitle("负压");
+        mdtc43.setTitle("继电器12状态");
+        mdtc43.setVisible(false);
 
         MydataTableColumn mdtc44 = new MydataTableColumn();
-        mdtc44.setData("alarmCode");
+        mdtc44.setData("relay13On");
         mdtc44.setDefaultContent("44");
-        mdtc44.setTitle("报警");
+        mdtc44.setTitle("继电器13状态");
+        mdtc44.setVisible(false);
 
         MydataTableColumn mdtc45 = new MydataTableColumn();
-        mdtc45.setData("errorCode");
+        mdtc45.setData("relay14On");
         mdtc45.setDefaultContent("45");
-        mdtc45.setTitle("错误");
+        mdtc45.setTitle("继电器14状态");
+        mdtc45.setVisible(false);
 
         MydataTableColumn mdtc46 = new MydataTableColumn();
-        mdtc46.setData("sendDate");
+        mdtc46.setData("wetCurtainOn");
         mdtc46.setDefaultContent("46");
-        mdtc46.setTitle("发送");
+        mdtc46.setTitle("湿帘水泵");
+        mdtc46.setVisible(false);
 
         MydataTableColumn mdtc47 = new MydataTableColumn();
-        mdtc47.setData("dReceiveTime");
+        mdtc47.setData("alarmOn");
         mdtc47.setDefaultContent("47");
-        mdtc47.setTitle("接收");
+        mdtc47.setTitle("报警状态");
+        mdtc47.setVisible(false);
 
         MydataTableColumn mdtc48 = new MydataTableColumn();
-        mdtc48.setData("dState");
+        mdtc48.setData("fanClockEnable");
         mdtc48.setDefaultContent("48");
-        mdtc48.setTitle("状态");
+        mdtc48.setTitle("风机定时使能");
+        mdtc48.setVisible(false);
+
+        MydataTableColumn mdtc49 = new MydataTableColumn();
+        mdtc49.setData("fanChangeEnable");
+        mdtc49.setDefaultContent("49");
+        mdtc49.setTitle("风机切换使能");
+        mdtc49.setVisible(false);
+
+        MydataTableColumn mdtc50 = new MydataTableColumn();
+        mdtc50.setData("wetCurtainWPEnable");
+        mdtc50.setDefaultContent("50");
+        mdtc50.setTitle("湿帘水泵使能");
+        mdtc50.setVisible(false);
+
+        MydataTableColumn mdtc51 = new MydataTableColumn();
+        mdtc51.setData("tempCurveEnable");
+        mdtc51.setDefaultContent("51");
+        mdtc51.setTitle("温度曲线使能");
+        mdtc51.setVisible(false);
+
+        MydataTableColumn mdtc52 = new MydataTableColumn();
+        mdtc52.setData("minAirCurveEnable");
+        mdtc52.setDefaultContent("52");
+        mdtc52.setTitle("最小通风曲线使能");
+        mdtc52.setVisible(false);
+
+        MydataTableColumn mdtc53 = new MydataTableColumn();
+        mdtc53.setData("alarmErrorCode");
+        mdtc53.setDefaultContent("53");
+        mdtc53.setTitle("错误");
+
+        MydataTableColumn mdtc54 = new MydataTableColumn();
+        mdtc54.setData("sendDate");
+        mdtc54.setDefaultContent("54");
+        mdtc54.setTitle("发送");
+
+        MydataTableColumn mdtc55 = new MydataTableColumn();
+        mdtc55.setData("dReceiveTime");
+        mdtc55.setDefaultContent("55");
+        mdtc55.setTitle("接收");
+
+        MydataTableColumn mdtc56 = new MydataTableColumn();
+        mdtc56.setData("dState");
+        mdtc56.setDefaultContent("56");
+        mdtc56.setTitle("状态");
 
         //序号
         myDTCList.add(mdtc1);
@@ -751,14 +975,8 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         //湿度
         myDTCList.add(mdtc8);
 
-        //负压
-        myDTCList.add(mdtc43);
-        //co2
-        myDTCList.add(mdtc9);
-        //nh3
-        myDTCList.add(mdtc42);
         //日龄
-        myDTCList.add(mdtc41);
+        myDTCList.add(mdtc19);
         //目标温度
         myDTCList.add(mdtc14);
         //炉温
@@ -771,65 +989,51 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc15);
         //小窗
         myDTCList.add(mdtc16);
-        //正面导流板
+        //导流板1
         myDTCList.add(mdtc17);
-        //侧面导流板
+        //导流板2
         myDTCList.add(mdtc18);
-        //卷帘1
-        myDTCList.add(mdtc19);
-        //卷帘2
-        myDTCList.add(mdtc20);
-        //湿帘水泵
-        myDTCList.add(mdtc21);
+
         //风机1
-        myDTCList.add(mdtc22);
-        //风机2
-        myDTCList.add(mdtc23);
-        //风机3
-        myDTCList.add(mdtc24);
-        //风机4
-        myDTCList.add(mdtc25);
-        //风机5
-        myDTCList.add(mdtc26);
-        //风机6
-        myDTCList.add(mdtc27);
-        //风机7
-        myDTCList.add(mdtc28);
-        //风机8
-        myDTCList.add(mdtc29);
-        //风机9
-        myDTCList.add(mdtc30);
-        //风机10
-        myDTCList.add(mdtc31);
-        //风机定时
         myDTCList.add(mdtc32);
-        //风机切换
+        //风机2
         myDTCList.add(mdtc33);
-        //锅炉
+        //风机3
         myDTCList.add(mdtc34);
-        //散热器
+        //风机4
         myDTCList.add(mdtc35);
-        //湿帘水泵
+        //风机5
         myDTCList.add(mdtc36);
-        //湿帘电机
+        //风机6
         myDTCList.add(mdtc37);
-        //定时报警
+        //风机7
         myDTCList.add(mdtc38);
-        //温度曲线
+        //风机8
         myDTCList.add(mdtc39);
+        //湿帘水泵
+        myDTCList.add(mdtc46);
+        //报警状态
+        myDTCList.add(mdtc47);
+
+        //风机定时
+        myDTCList.add(mdtc48);
+        //风机切换
+        myDTCList.add(mdtc49);
+        //湿帘水泵
+        myDTCList.add(mdtc50);
+        //温度曲线
+        myDTCList.add(mdtc51);
         //最小通风曲线
-        myDTCList.add(mdtc40);
+        myDTCList.add(mdtc52);
 
         //报警
-        myDTCList.add(mdtc44);
-        //错误
-        myDTCList.add(mdtc45);
+        myDTCList.add(mdtc53);
         //发送
-        myDTCList.add(mdtc46);
+        myDTCList.add(mdtc54);
         //接收
-        myDTCList.add(mdtc47);
+        myDTCList.add(mdtc55);
         //状态
-        myDTCList.add(mdtc48);
+        myDTCList.add(mdtc56);
         return myDTCList;
     }
 
@@ -866,9 +1070,9 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfoList.add(phoneRealMsgInfo04);
 
         PhoneRealMsgInfo phoneRealMsgInfo015 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo015.setId("outTemp4");
+        phoneRealMsgInfo015.setId("outTemp");
         phoneRealMsgInfo015.setTitle("舍外：");
-        phoneRealMsgInfo015.setValue(String.valueOf(outTemp4)+ "℃");
+        phoneRealMsgInfo015.setValue(String.valueOf(outTemp)+ "℃");
         phoneRealMsgInfo015.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo015);
 
@@ -909,30 +1113,30 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfoList.add(phoneRealMsgInfo13);
 
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo09.setId("fan1On");
+        phoneRealMsgInfo09.setId("fan01On");
         phoneRealMsgInfo09.setTitle("风机1：");
-        phoneRealMsgInfo09.setValue(String.valueOf(DataConvertor.getBoolState01On(fan1On)));
+        phoneRealMsgInfo09.setValue(String.valueOf(fan01On));
         phoneRealMsgInfo09.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo09);
 
         PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo10.setId("fan2On");
+        phoneRealMsgInfo10.setId("fan02On");
         phoneRealMsgInfo10.setTitle("风机2：");
-        phoneRealMsgInfo10.setValue(String.valueOf(DataConvertor.getBoolState01On(fan2On)));
+        phoneRealMsgInfo10.setValue(String.valueOf(fan02On));
         phoneRealMsgInfo10.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo10);
 
         PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo11.setId("fan3On");
+        phoneRealMsgInfo11.setId("fan03On");
         phoneRealMsgInfo11.setTitle("风机3：");
-        phoneRealMsgInfo11.setValue(String.valueOf(DataConvertor.getBoolState01On(fan3On)));
+        phoneRealMsgInfo11.setValue(String.valueOf(fan03On));
         phoneRealMsgInfo11.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo11);
 
         PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo12.setId("fan4On");
+        phoneRealMsgInfo12.setId("fan04On");
         phoneRealMsgInfo12.setTitle("风机4：");
-        phoneRealMsgInfo12.setValue(String.valueOf(DataConvertor.getBoolState01On(fan4On)));
+        phoneRealMsgInfo12.setValue(String.valueOf(fan04On));
         phoneRealMsgInfo12.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo12);
 
@@ -987,30 +1191,30 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfoList.add(phoneRealMsgInfo13);
 
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo09.setId("fan1On");
+        phoneRealMsgInfo09.setId("fan01On");
         phoneRealMsgInfo09.setTitle("风机1：");
-        phoneRealMsgInfo09.setValue(String.valueOf(DataConvertor.getBoolState01On(fan1On)));
+        phoneRealMsgInfo09.setValue(String.valueOf(fan01On));
         phoneRealMsgInfo09.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo09);
 
         PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo10.setId("fan2On");
+        phoneRealMsgInfo10.setId("fan02On");
         phoneRealMsgInfo10.setTitle("风机2：");
-        phoneRealMsgInfo10.setValue(String.valueOf(DataConvertor.getBoolState01On(fan2On)));
+        phoneRealMsgInfo10.setValue(String.valueOf(fan02On));
         phoneRealMsgInfo10.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo10);
 
         PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo11.setId("fan3On");
+        phoneRealMsgInfo11.setId("fan03On");
         phoneRealMsgInfo11.setTitle("风机3：");
-        phoneRealMsgInfo11.setValue(String.valueOf(DataConvertor.getBoolState01On(fan3On)));
+        phoneRealMsgInfo11.setValue(String.valueOf(fan03On));
         phoneRealMsgInfo11.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo11);
 
         PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo12.setId("fan4On");
+        phoneRealMsgInfo12.setId("fan04On");
         phoneRealMsgInfo12.setTitle("风机4：");
-        phoneRealMsgInfo12.setValue(String.valueOf(DataConvertor.getBoolState01On(fan4On)));
+        phoneRealMsgInfo12.setValue(String.valueOf(fan04On));
         phoneRealMsgInfo12.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo12);
 
@@ -1024,7 +1228,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo15 = new PhoneRealMsgInfo();
         phoneRealMsgInfo15.setId("sendDate");
         phoneRealMsgInfo15.setTitle("");
-        phoneRealMsgInfo15.setValue(getSendDate());
+        phoneRealMsgInfo15.setValue(this.getSendDate());
         phoneRealMsgInfo15.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo15);
 

@@ -1,0 +1,964 @@
+package com.system.po;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * 污水站控制器01信息-徐州吕滩污水项目
+ */
+public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
+    /*************  运行状态  ******************/
+    //集水池搅拌机停止/运行
+    private Boolean collectMixerRun;
+    //除磷投加机停止/运行
+    private Boolean dephosphorizeRun;
+    //集水池提升泵停止/运行
+    private Boolean collectPumpRun;
+    //污泥泵1停止/运行
+    private Boolean sludgePump01Run;
+    //SBR进水泵停止/运行
+    private Boolean sbrIntakePumpRun;
+    //SBR池搅拌机停止/运行
+    private Boolean sbrMixerRun;
+    //回转式风机1停止/运行
+    private Boolean fan01Run;
+    //回转式风机2停止/运行
+    private Boolean fan02Run;
+    //污泥泵2停止/运行
+    private Boolean sludgePump02Run;
+    //滗水器停止/运行
+    private Boolean decanterRun;
+
+    /***********  故障指示  *********************/
+    //集水池搅拌机正常/故障
+    private Boolean collectMixerFault;
+    //备用91
+    private Boolean spare91;
+    //集水池提升泵正常/故障
+    private Boolean collectPumpFault;
+    //污泥泵1正常/故障
+    private Boolean sludgePump01Fault;
+    //SBR进水泵正常/故障
+    private Boolean sbrIntakePumpFault;
+    //SBR池搅拌机1正常/故障
+    private Boolean sbrMixer01Fault;
+    //SBR池搅拌机2正常/故障
+    private Boolean sbrMixer02Fault;
+    //回转式风机1正常/故障
+    private Boolean fan01Fault;
+    //回转式风机2正常/故障
+    private Boolean fan02Fault;
+    //污泥泵2正常/故障
+    private Boolean sludgePump02Fault;
+    //滗水器正常/故障
+    private Boolean decanterFault;
+    //PLC电量不足
+    private Boolean plcElecLack;
+    /***********  公共参数  *********************/
+    //系统手动模式/自动模式
+    private Boolean systemAuto;
+    //SBR周期运行标识
+    private Boolean sbrCycle;
+    //集水池液位高未到/到了
+    private Boolean collectHighOn;
+    //集水池液位低未到/到了
+    private Boolean collectLowOn;
+    //调节池液位高未到/到了
+    private Boolean regulatHighOn;
+    //调节池液位低未到/到了
+    private Boolean regulatLowOn;
+    //SBR池液位高未到/到了
+    private Boolean sbrHighOn;
+    //SBR池液位低未到/到了
+    private Boolean sbrLowOn;
+
+    /***********  数据-设定时间  *********************/
+    //除磷投加机时间 （设定分钟）
+    private int dephosphorizeSetMinute;
+    //污泥泵1（设定分钟）
+    private int sludgePump01SetMinute;
+    //SBR一次搅拌（设定分钟）
+    private int sbrMixerOnceSetMinute;
+    //SBR曝气（设定分钟）
+    private int fanSetMinute;
+    //SBR混合（设定分钟）
+    private int sbrMixerSetMinute;
+    //SBR静置（设定分钟）
+    private int sbrStaticSetMinute;
+    //SBR污泥泵2（设定分钟）
+    private int sludgePump02SetMinute;
+    //SBR活化（设定分钟）
+    private int sbrActiveSetMinute;
+    /***********  数据-运行时间  *********************/
+    //除磷投加机时间 （运行分钟）
+    private int dephosphorizeRunMinute;
+    //污泥泵1（运行分钟）
+    private int sludgePump01RunMinute;
+    //SBR一次搅拌（运行分钟）
+    private int sbrMixerOnceRunMinute;
+    //SBR曝气（运行分钟）
+    private int fanRunMinute;
+    //SBR混合（运行分钟）
+    private int sbrMixerRunMinute;
+    //SBR静置（运行分钟）
+    private int sbrStaticRunMinute;
+    //SBR污泥泵2（运行分钟）
+    private int sludgePump02RunMinute;
+    //SBR活化（运行分钟）
+    private int sbrActiveRunMinute;
+    //集水池搅拌机（运行时间）
+    private int collectMixerRunMinute;
+    //集水池提升泵时间（运行分钟）
+    private int collectPumpRunMinute;
+    //SBR进水泵（运行时间）
+    private int sbrIntakePumpRunMinute;
+    //流量计（m³）
+    private long flowmeter;
+    //设备发送数据时间
+    private String sendDate;
+
+    public Boolean getCollectMixerRun() {
+        return collectMixerRun;
+    }
+
+    public void setCollectMixerRun(Boolean collectMixerRun) {
+        this.collectMixerRun = collectMixerRun;
+    }
+
+    public Boolean getDephosphorizeRun() {
+        return dephosphorizeRun;
+    }
+
+    public void setDephosphorizeRun(Boolean dephosphorizeRun) {
+        this.dephosphorizeRun = dephosphorizeRun;
+    }
+
+    public Boolean getCollectPumpRun() {
+        return collectPumpRun;
+    }
+
+    public void setCollectPumpRun(Boolean collectPumpRun) {
+        this.collectPumpRun = collectPumpRun;
+    }
+
+    public Boolean getSludgePump01Run() {
+        return sludgePump01Run;
+    }
+
+    public void setSludgePump01Run(Boolean sludgePump01Run) {
+        this.sludgePump01Run = sludgePump01Run;
+    }
+
+    public Boolean getSbrIntakePumpRun() {
+        return sbrIntakePumpRun;
+    }
+
+    public void setSbrIntakePumpRun(Boolean sbrIntakePumpRun) {
+        this.sbrIntakePumpRun = sbrIntakePumpRun;
+    }
+
+    public Boolean getSbrMixerRun() {
+        return sbrMixerRun;
+    }
+
+    public void setSbrMixerRun(Boolean sbrMixerRun) {
+        this.sbrMixerRun = sbrMixerRun;
+    }
+
+    public Boolean getFan01Run() {
+        return fan01Run;
+    }
+
+    public void setFan01Run(Boolean fan01Run) {
+        this.fan01Run = fan01Run;
+    }
+
+    public Boolean getFan02Run() {
+        return fan02Run;
+    }
+
+    public void setFan02Run(Boolean fan02Run) {
+        this.fan02Run = fan02Run;
+    }
+
+    public Boolean getSludgePump02Run() {
+        return sludgePump02Run;
+    }
+
+    public void setSludgePump02Run(Boolean sludgePump02Run) {
+        this.sludgePump02Run = sludgePump02Run;
+    }
+
+    public Boolean getDecanterRun() {
+        return decanterRun;
+    }
+
+    public void setDecanterRun(Boolean decanterRun) {
+        this.decanterRun = decanterRun;
+    }
+
+    public Boolean getCollectMixerFault() {
+        return collectMixerFault;
+    }
+
+    public void setCollectMixerFault(Boolean collectMixerFault) {
+        this.collectMixerFault = collectMixerFault;
+    }
+
+    public Boolean getSpare91() {
+        return spare91;
+    }
+
+    public void setSpare91(Boolean spare91) {
+        this.spare91 = spare91;
+    }
+
+    public Boolean getCollectPumpFault() {
+        return collectPumpFault;
+    }
+
+    public void setCollectPumpFault(Boolean collectPumpFault) {
+        this.collectPumpFault = collectPumpFault;
+    }
+
+    public Boolean getSludgePump01Fault() {
+        return sludgePump01Fault;
+    }
+
+    public void setSludgePump01Fault(Boolean sludgePump01Fault) {
+        this.sludgePump01Fault = sludgePump01Fault;
+    }
+
+    public Boolean getSbrIntakePumpFault() {
+        return sbrIntakePumpFault;
+    }
+
+    public void setSbrIntakePumpFault(Boolean sbrIntakePumpFault) {
+        this.sbrIntakePumpFault = sbrIntakePumpFault;
+    }
+
+    public Boolean getSbrMixer01Fault() {
+        return sbrMixer01Fault;
+    }
+
+    public void setSbrMixer01Fault(Boolean sbrMixer01Fault) {
+        this.sbrMixer01Fault = sbrMixer01Fault;
+    }
+
+    public Boolean getSbrMixer02Fault() {
+        return sbrMixer02Fault;
+    }
+
+    public void setSbrMixer02Fault(Boolean sbrMixer02Fault) {
+        this.sbrMixer02Fault = sbrMixer02Fault;
+    }
+
+    public Boolean getFan01Fault() {
+        return fan01Fault;
+    }
+
+    public void setFan01Fault(Boolean fan01Fault) {
+        this.fan01Fault = fan01Fault;
+    }
+
+    public Boolean getFan02Fault() {
+        return fan02Fault;
+    }
+
+    public void setFan02Fault(Boolean fan02Fault) {
+        this.fan02Fault = fan02Fault;
+    }
+
+    public Boolean getSludgePump02Fault() {
+        return sludgePump02Fault;
+    }
+
+    public void setSludgePump02Fault(Boolean sludgePump02Fault) {
+        this.sludgePump02Fault = sludgePump02Fault;
+    }
+
+    public Boolean getDecanterFault() {
+        return decanterFault;
+    }
+
+    public void setDecanterFault(Boolean decanterFault) {
+        this.decanterFault = decanterFault;
+    }
+
+    public Boolean getPlcElecLack() {
+        return plcElecLack;
+    }
+
+    public void setPlcElecLack(Boolean plcElecLack) {
+        this.plcElecLack = plcElecLack;
+    }
+
+    public Boolean getSystemAuto() {
+        return systemAuto;
+    }
+
+    public void setSystemAuto(Boolean systemAuto) {
+        this.systemAuto = systemAuto;
+    }
+
+    public Boolean getSbrCycle() {
+        return sbrCycle;
+    }
+
+    public void setSbrCycle(Boolean sbrCycle) {
+        this.sbrCycle = sbrCycle;
+    }
+
+    public Boolean getCollectHighOn() {
+        return collectHighOn;
+    }
+
+    public void setCollectHighOn(Boolean collectHighOn) {
+        this.collectHighOn = collectHighOn;
+    }
+
+    public Boolean getCollectLowOn() {
+        return collectLowOn;
+    }
+
+    public void setCollectLowOn(Boolean collectLowOn) {
+        this.collectLowOn = collectLowOn;
+    }
+
+    public Boolean getRegulatHighOn() {
+        return regulatHighOn;
+    }
+
+    public void setRegulatHighOn(Boolean regulatHighOn) {
+        this.regulatHighOn = regulatHighOn;
+    }
+
+    public Boolean getRegulatLowOn() {
+        return regulatLowOn;
+    }
+
+    public void setRegulatLowOn(Boolean regulatLowOn) {
+        this.regulatLowOn = regulatLowOn;
+    }
+
+    public Boolean getSbrHighOn() {
+        return sbrHighOn;
+    }
+
+    public void setSbrHighOn(Boolean sbrHighOn) {
+        this.sbrHighOn = sbrHighOn;
+    }
+
+    public Boolean getSbrLowOn() {
+        return sbrLowOn;
+    }
+
+    public void setSbrLowOn(Boolean sbrLowOn) {
+        this.sbrLowOn = sbrLowOn;
+    }
+
+    public int getDephosphorizeSetMinute() {
+        return dephosphorizeSetMinute;
+    }
+
+    public void setDephosphorizeSetMinute(int dephosphorizeSetMinute) {
+        this.dephosphorizeSetMinute = dephosphorizeSetMinute;
+    }
+
+    public int getSludgePump01SetMinute() {
+        return sludgePump01SetMinute;
+    }
+
+    public void setSludgePump01SetMinute(int sludgePump01SetMinute) {
+        this.sludgePump01SetMinute = sludgePump01SetMinute;
+    }
+
+    public int getSbrMixerOnceSetMinute() {
+        return sbrMixerOnceSetMinute;
+    }
+
+    public void setSbrMixerOnceSetMinute(int sbrMixerOnceSetMinute) {
+        this.sbrMixerOnceSetMinute = sbrMixerOnceSetMinute;
+    }
+
+    public int getFanSetMinute() {
+        return fanSetMinute;
+    }
+
+    public void setFanSetMinute(int fanSetMinute) {
+        this.fanSetMinute = fanSetMinute;
+    }
+
+    public int getSbrMixerSetMinute() {
+        return sbrMixerSetMinute;
+    }
+
+    public void setSbrMixerSetMinute(int sbrMixerSetMinute) {
+        this.sbrMixerSetMinute = sbrMixerSetMinute;
+    }
+
+    public int getSbrStaticSetMinute() {
+        return sbrStaticSetMinute;
+    }
+
+    public void setSbrStaticSetMinute(int sbrStaticSetMinute) {
+        this.sbrStaticSetMinute = sbrStaticSetMinute;
+    }
+
+    public int getSludgePump02SetMinute() {
+        return sludgePump02SetMinute;
+    }
+
+    public void setSludgePump02SetMinute(int sludgePump02SetMinute) {
+        this.sludgePump02SetMinute = sludgePump02SetMinute;
+    }
+
+    public int getSbrActiveSetMinute() {
+        return sbrActiveSetMinute;
+    }
+
+    public void setSbrActiveSetMinute(int sbrActiveSetMinute) {
+        this.sbrActiveSetMinute = sbrActiveSetMinute;
+    }
+
+    public int getDephosphorizeRunMinute() {
+        return dephosphorizeRunMinute;
+    }
+
+    public void setDephosphorizeRunMinute(int dephosphorizeRunMinute) {
+        this.dephosphorizeRunMinute = dephosphorizeRunMinute;
+    }
+
+    public int getSludgePump01RunMinute() {
+        return sludgePump01RunMinute;
+    }
+
+    public void setSludgePump01RunMinute(int sludgePump01RunMinute) {
+        this.sludgePump01RunMinute = sludgePump01RunMinute;
+    }
+
+    public int getSbrMixerOnceRunMinute() {
+        return sbrMixerOnceRunMinute;
+    }
+
+    public void setSbrMixerOnceRunMinute(int sbrMixerOnceRunMinute) {
+        this.sbrMixerOnceRunMinute = sbrMixerOnceRunMinute;
+    }
+
+    public int getFanRunMinute() {
+        return fanRunMinute;
+    }
+
+    public void setFanRunMinute(int fanRunMinute) {
+        this.fanRunMinute = fanRunMinute;
+    }
+
+    public int getSbrMixerRunMinute() {
+        return sbrMixerRunMinute;
+    }
+
+    public void setSbrMixerRunMinute(int sbrMixerRunMinute) {
+        this.sbrMixerRunMinute = sbrMixerRunMinute;
+    }
+
+    public int getSbrStaticRunMinute() {
+        return sbrStaticRunMinute;
+    }
+
+    public void setSbrStaticRunMinute(int sbrStaticRunMinute) {
+        this.sbrStaticRunMinute = sbrStaticRunMinute;
+    }
+
+    public int getSludgePump02RunMinute() {
+        return sludgePump02RunMinute;
+    }
+
+    public void setSludgePump02RunMinute(int sludgePump02RunMinute) {
+        this.sludgePump02RunMinute = sludgePump02RunMinute;
+    }
+
+    public int getSbrActiveRunMinute() {
+        return sbrActiveRunMinute;
+    }
+
+    public void setSbrActiveRunMinute(int sbrActiveRunMinute) {
+        this.sbrActiveRunMinute = sbrActiveRunMinute;
+    }
+
+    public int getCollectMixerRunMinute() {
+        return collectMixerRunMinute;
+    }
+
+    public void setCollectMixerRunMinute(int collectMixerRunMinute) {
+        this.collectMixerRunMinute = collectMixerRunMinute;
+    }
+
+    public int getCollectPumpRunMinute() {
+        return collectPumpRunMinute;
+    }
+
+    public void setCollectPumpRunMinute(int collectPumpRunMinute) {
+        this.collectPumpRunMinute = collectPumpRunMinute;
+    }
+
+    public int getSbrIntakePumpRunMinute() {
+        return sbrIntakePumpRunMinute;
+    }
+
+    public void setSbrIntakePumpRunMinute(int sbrIntakePumpRunMinute) {
+        this.sbrIntakePumpRunMinute = sbrIntakePumpRunMinute;
+    }
+
+    public long getFlowmeter() {
+        return flowmeter;
+    }
+
+    public void setFlowmeter(long flowmeter) {
+        this.flowmeter = flowmeter;
+    }
+
+    public String getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(String sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    public List<MydataTableColumn> getDeviceHead(){
+        List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
+
+        MydataTableColumn mdtc1 = new MydataTableColumn();
+        mdtc1.setData("dSerialNum");
+        mdtc1.setDefaultContent("1");
+        mdtc1.setTitle("序号");
+        mdtc1.setVisible(false);
+
+        MydataTableColumn mdtc2 = new MydataTableColumn();
+        mdtc2.setData("dName");
+        mdtc2.setDefaultContent("2");
+        mdtc2.setTitle("名称");
+
+        //集水池搅拌机停止/运行
+        MydataTableColumn mdtc3 = new MydataTableColumn();
+        mdtc3.setData("collectMixerRun");
+        mdtc3.setDefaultContent("3");
+        mdtc3.setTitle("集水池搅拌机运行");
+
+        //除磷投加机停止/运行
+        MydataTableColumn mdtc4 = new MydataTableColumn();
+        mdtc4.setData("dephosphorizeRun");
+        mdtc4.setDefaultContent("4");
+        mdtc4.setTitle("除磷投加机运行");
+
+        //集水池提升泵停止/运行
+        MydataTableColumn mdtc5 = new MydataTableColumn();
+        mdtc5.setData("collectPumpRun");
+        mdtc5.setDefaultContent("5");
+        mdtc5.setTitle("集水池提升泵运行");
+
+        //污泥泵1停止/运行
+        MydataTableColumn mdtc6 = new MydataTableColumn();
+        mdtc6.setData("sludgePump01Run");
+        mdtc6.setDefaultContent("6");
+        mdtc6.setTitle("污泥泵1运行");
+
+        //SBR进水泵停止/运行
+        MydataTableColumn mdtc7 = new MydataTableColumn();
+        mdtc7.setData("sbrIntakePumpRun");
+        mdtc7.setDefaultContent("7");
+        mdtc7.setTitle("SBR池进水泵运行");
+
+        //SBR池搅拌机停止/运行
+        MydataTableColumn mdtc8 = new MydataTableColumn();
+        mdtc8.setData("sbrMixerRun");
+        mdtc8.setDefaultContent("8");
+        mdtc8.setTitle("SBR池搅拌机运行");
+
+        //回转式风机1停止/运行
+        MydataTableColumn mdtc9 = new MydataTableColumn();
+        mdtc9.setData("fan01Run");
+        mdtc9.setDefaultContent("9");
+        mdtc9.setTitle("回转式风机1运行");
+
+        //回转式风机2停止/运行
+        MydataTableColumn mdtc10 = new MydataTableColumn();
+        mdtc10.setData("fan02Run");
+        mdtc10.setDefaultContent("10");
+        mdtc10.setTitle("回转式风机2运行");
+
+        //污泥泵2停止/运行
+        MydataTableColumn mdtc11 = new MydataTableColumn();
+        mdtc11.setData("sludgePump02Run");
+        mdtc11.setDefaultContent("11");
+        mdtc11.setTitle("污泥泵2运行");
+
+        //滗水器停止/运行
+        MydataTableColumn mdtc12 = new MydataTableColumn();
+        mdtc12.setData("decanterRun");
+        mdtc12.setDefaultContent("12");
+        mdtc12.setTitle("滗水器运行");
+
+        //集水池搅拌机正常/故障
+        MydataTableColumn mdtc13 = new MydataTableColumn();
+        mdtc13.setData("collectMixerFault");
+        mdtc13.setDefaultContent("13");
+        mdtc13.setTitle("集水池搅拌机故障");
+
+        //集水池提升泵正常/故障
+        MydataTableColumn mdtc14 = new MydataTableColumn();
+        mdtc14.setData("collectPumpFault");
+        mdtc14.setDefaultContent("14");
+        mdtc14.setTitle("集水池提升泵故障");
+
+        //污泥泵1正常/故障
+        MydataTableColumn mdtc15 = new MydataTableColumn();
+        mdtc15.setData("sludgePump01Fault");
+        mdtc15.setDefaultContent("15");
+        mdtc15.setTitle("污泥泵1故障");
+
+        //SBR进水泵正常/故障
+        MydataTableColumn mdtc16 = new MydataTableColumn();
+        mdtc16.setData("sbrIntakePumpFault");
+        mdtc16.setDefaultContent("16");
+        mdtc16.setTitle("SBR池进水泵故障");
+
+        //SBR池搅拌机1正常/故障
+        MydataTableColumn mdtc17 = new MydataTableColumn();
+        mdtc17.setData("sbrMixer01Fault");
+        mdtc17.setDefaultContent("17");
+        mdtc17.setTitle("SBR池搅拌机1故障");
+
+        //SBR池搅拌机2正常/故障
+        MydataTableColumn mdtc18 = new MydataTableColumn();
+        mdtc18.setData("sbrMixer02Fault");
+        mdtc18.setDefaultContent("18");
+        mdtc18.setTitle("SBR池搅拌机2故障");
+
+        //回转式风机1正常/故障
+        MydataTableColumn mdtc19 = new MydataTableColumn();
+        mdtc19.setData("fan01Fault");
+        mdtc19.setDefaultContent("19");
+        mdtc19.setTitle("回转式风机1故障");
+
+        //回转式风机2正常/故障
+        MydataTableColumn mdtc20 = new MydataTableColumn();
+        mdtc20.setData("fan02Fault");
+        mdtc20.setDefaultContent("20");
+        mdtc20.setTitle("回转式风机2故障");
+
+        //污泥泵2正常/故障
+        MydataTableColumn mdtc21 = new MydataTableColumn();
+        mdtc21.setData("sludgePump02Fault");
+        mdtc21.setDefaultContent("21");
+        mdtc21.setTitle("污泥泵2故障");
+
+        //滗水器正常/故障
+        MydataTableColumn mdtc22 = new MydataTableColumn();
+        mdtc22.setData("decanterFault");
+        mdtc22.setDefaultContent("22");
+        mdtc22.setTitle("滗水器故障");
+
+        //PLC电量不足
+        MydataTableColumn mdtc23 = new MydataTableColumn();
+        mdtc23.setData("plcElecLack");
+        mdtc23.setDefaultContent("23");
+        mdtc23.setTitle("PLC电量不足");
+
+        //系统手动模式/自动模式
+        MydataTableColumn mdtc24 = new MydataTableColumn();
+        mdtc24.setData("systemAuto");
+        mdtc24.setDefaultContent("24");
+        mdtc24.setTitle("自动模式");
+
+        //SBR周期运行标识
+        MydataTableColumn mdtc25 = new MydataTableColumn();
+        mdtc25.setData("sbrCycle");
+        mdtc25.setDefaultContent("25");
+        mdtc25.setTitle("SBR周期运行");
+
+        //集水池液位高未到/到了
+        MydataTableColumn mdtc26 = new MydataTableColumn();
+        mdtc26.setData("collectHighOn");
+        mdtc26.setDefaultContent("26");
+        mdtc26.setTitle("集水池液位高到了");
+
+        //集水池液位低未到/到了
+        MydataTableColumn mdtc27 = new MydataTableColumn();
+        mdtc27.setData("collectLowOn");
+        mdtc27.setDefaultContent("27");
+        mdtc27.setTitle("集水池液位低到了");
+
+        //调节池液位高未到/到了
+        MydataTableColumn mdtc28 = new MydataTableColumn();
+        mdtc28.setData("regulatHighOn");
+        mdtc28.setDefaultContent("28");
+        mdtc28.setTitle("调节池液位高到了");
+
+        //调节池液位低未到/到了
+        MydataTableColumn mdtc29 = new MydataTableColumn();
+        mdtc29.setData("regulatLowOn");
+        mdtc29.setDefaultContent("29");
+        mdtc29.setTitle("调节池液位低到了");
+
+        //SBR池液位高未到/到了
+        MydataTableColumn mdtc30 = new MydataTableColumn();
+        mdtc30.setData("sbrHighOn");
+        mdtc30.setDefaultContent("30");
+        mdtc30.setTitle("SBR池液位高到了");
+
+        //SBR池液位低未到/到了
+        MydataTableColumn mdtc31 = new MydataTableColumn();
+        mdtc31.setData("sbrLowOn");
+        mdtc31.setDefaultContent("31");
+        mdtc31.setTitle("SBR池液位低到了");
+
+        //除磷投加机时间 （设定分钟）
+        MydataTableColumn mdtc32 = new MydataTableColumn();
+        mdtc32.setData("dephosphorizeSetMinute");
+        mdtc32.setDefaultContent("32");
+        mdtc32.setTitle("除磷投加机设定时间");
+
+        //污泥泵1（设定分钟）
+        MydataTableColumn mdtc33 = new MydataTableColumn();
+        mdtc33.setData("sludgePump01SetMinute");
+        mdtc33.setDefaultContent("33");
+        mdtc33.setTitle("污泥泵1设定时间");
+
+        //SBR一次搅拌（设定分钟）
+        MydataTableColumn mdtc34 = new MydataTableColumn();
+        mdtc34.setData("sbrMixerOnceSetMinute");
+        mdtc34.setDefaultContent("34");
+        mdtc34.setTitle("SBR一次搅拌设定时间");
+
+        //SBR曝气（设定分钟）
+        MydataTableColumn mdtc35 = new MydataTableColumn();
+        mdtc35.setData("fanSetMinute");
+        mdtc35.setDefaultContent("35");
+        mdtc35.setTitle("SBR曝气设定时间");
+
+        //SBR混合（设定分钟）
+        MydataTableColumn mdtc36 = new MydataTableColumn();
+        mdtc36.setData("sbrMixerSetMinute");
+        mdtc36.setDefaultContent("36");
+        mdtc36.setTitle("SBR混合设定时间");
+
+        //SBR静置（设定分钟）
+        MydataTableColumn mdtc37 = new MydataTableColumn();
+        mdtc37.setData("sbrStaticSetMinute");
+        mdtc37.setDefaultContent("37");
+        mdtc37.setTitle("SBR静置设定时间");
+
+        //SBR污泥泵2（设定分钟）
+        MydataTableColumn mdtc38 = new MydataTableColumn();
+        mdtc38.setData("sludgePump02SetMinute");
+        mdtc38.setDefaultContent("38");
+        mdtc38.setTitle("SBR污泥泵2设定时间");
+
+        //SBR活化（设定分钟）
+        MydataTableColumn mdtc39 = new MydataTableColumn();
+        mdtc39.setData("sbrActiveSetMinute");
+        mdtc39.setDefaultContent("39");
+        mdtc39.setTitle("SBR活化设定时间");
+
+        //除磷投加机时间 （运行分钟）
+        MydataTableColumn mdtc40 = new MydataTableColumn();
+        mdtc40.setData("dephosphorizeRunMinute");
+        mdtc40.setDefaultContent("40");
+        mdtc40.setTitle("除磷投加机运行时间");
+
+        //污泥泵1（运行分钟）
+        MydataTableColumn mdtc41 = new MydataTableColumn();
+        mdtc41.setData("sludgePump01RunMinute");
+        mdtc41.setDefaultContent("41");
+        mdtc41.setTitle("污泥泵1运行时间");
+
+        //SBR一次搅拌（运行分钟）
+        MydataTableColumn mdtc42 = new MydataTableColumn();
+        mdtc42.setData("sbrMixerOnceRunMinute");
+        mdtc42.setDefaultContent("42");
+        mdtc42.setTitle("SBR一次搅拌运行时间");
+
+        //SBR曝气（运行分钟）
+        MydataTableColumn mdtc43 = new MydataTableColumn();
+        mdtc43.setData("fanRunMinute");
+        mdtc43.setDefaultContent("43");
+        mdtc43.setTitle("SBR曝气运行时间");
+
+        //SBR混合（运行分钟）
+        MydataTableColumn mdtc44 = new MydataTableColumn();
+        mdtc44.setData("sbrMixerRunMinute");
+        mdtc44.setDefaultContent("44");
+        mdtc44.setTitle("SBR混合运行时间");
+
+        //SBR静置（运行分钟）
+        MydataTableColumn mdtc45 = new MydataTableColumn();
+        mdtc45.setData("sbrStaticRunMinute");
+        mdtc45.setDefaultContent("45");
+        mdtc45.setTitle("SBR静置运行时间");
+
+        //SBR污泥泵2（运行分钟）
+        MydataTableColumn mdtc46 = new MydataTableColumn();
+        mdtc46.setData("sludgePump02RunMinute");
+        mdtc46.setDefaultContent("46");
+        mdtc46.setTitle("SBR污泥泵2运行时间");
+
+        //SBR活化（运行分钟）
+        MydataTableColumn mdtc47 = new MydataTableColumn();
+        mdtc47.setData("sbrActiveRunMinute");
+        mdtc47.setDefaultContent("47");
+        mdtc47.setTitle("SBR活化运行时间");
+
+        //集水池搅拌机（运行时间）
+        MydataTableColumn mdtc48 = new MydataTableColumn();
+        mdtc48.setData("collectMixerRunMinute");
+        mdtc48.setDefaultContent("48");
+        mdtc48.setTitle("集水池搅拌机运行时间");
+
+        //集水池提升泵时间（运行分钟）
+        MydataTableColumn mdtc49 = new MydataTableColumn();
+        mdtc49.setData("collectPumpRunMinute");
+        mdtc49.setDefaultContent("49");
+        mdtc49.setTitle("集水池提升泵运行时间");
+
+        //SBR进水泵（运行时间）
+        MydataTableColumn mdtc50 = new MydataTableColumn();
+        mdtc50.setData("sbrIntakePumpRunMinute");
+        mdtc50.setDefaultContent("50");
+        mdtc50.setTitle("SBR池进水泵运行时间");
+
+        //流量计（m³）
+        MydataTableColumn mdtc51 = new MydataTableColumn();
+        mdtc51.setData("flowmeter");
+        mdtc51.setDefaultContent("51");
+        mdtc51.setTitle("流量计");
+
+
+        //设备发送数据时间
+        MydataTableColumn mdtc52 = new MydataTableColumn();
+        mdtc52.setData("sendDate");
+        mdtc52.setDefaultContent("52");
+        mdtc52.setTitle("时间");
+
+        MydataTableColumn mdtc53 = new MydataTableColumn();
+        mdtc53.setData("dState");
+        mdtc53.setDefaultContent("53");
+        mdtc53.setTitle("状态");
+
+        //序号
+        myDTCList.add(mdtc1);
+        //名称
+        myDTCList.add(mdtc2);
+        //集水池搅拌机停止/运行
+        myDTCList.add(mdtc3);
+        //除磷投加机停止/运行
+        myDTCList.add(mdtc4);
+        //集水池提升泵停止/运行
+        myDTCList.add(mdtc5);
+        //污泥泵1停止/运行
+        myDTCList.add(mdtc6);
+        //SBR进水泵停止/运行
+        myDTCList.add(mdtc7);
+        //SBR池搅拌机停止/运行
+        myDTCList.add(mdtc8);
+        //回转式风机1停止/运行
+        myDTCList.add(mdtc9);
+        //回转式风机2停止/运行
+        myDTCList.add(mdtc10);
+        //污泥泵2停止/运行
+        myDTCList.add(mdtc11);
+        //滗水器停止/运行
+        myDTCList.add(mdtc12);
+
+        /***********  故障指示  *********************/
+        //集水池搅拌机正常/故障
+        myDTCList.add(mdtc13);
+        //集水池提升泵正常/故障
+        myDTCList.add(mdtc14);
+        //污泥泵1正常/故障
+        myDTCList.add(mdtc15);
+        //SBR进水泵正常/故障
+        myDTCList.add(mdtc16);
+        //SBR池搅拌机1正常/故障
+        myDTCList.add(mdtc17);
+        //SBR池搅拌机2正常/故障
+        myDTCList.add(mdtc18);
+        //回转式风机1正常/故障
+        myDTCList.add(mdtc19);
+        //回转式风机2正常/故障
+        myDTCList.add(mdtc20);
+        //污泥泵2正常/故障
+        myDTCList.add(mdtc21);
+        //滗水器正常/故障
+        myDTCList.add(mdtc22);
+        //PLC电量不足
+        myDTCList.add(mdtc23);
+        /***********  公共参数  *********************/
+        //系统手动模式/自动模式
+        myDTCList.add(mdtc24);
+        //SBR周期运行标识
+        myDTCList.add(mdtc25);
+        //集水池液位高未到/到了
+        myDTCList.add(mdtc26);
+        //集水池液位低未到/到了
+        myDTCList.add(mdtc27);
+        //调节池液位高未到/到了
+        myDTCList.add(mdtc28);
+        //调节池液位低未到/到了
+        myDTCList.add(mdtc29);
+        //SBR池液位高未到/到了
+        myDTCList.add(mdtc30);
+        //SBR池液位低未到/到了
+        myDTCList.add(mdtc31);
+
+        /***********  数据-设定时间  *********************/
+        //除磷投加机时间 （设定分钟）
+        myDTCList.add(mdtc32);
+        //污泥泵1（设定分钟）
+        myDTCList.add(mdtc33);
+        //SBR一次搅拌（设定分钟）
+        myDTCList.add(mdtc34);
+        //SBR曝气（设定分钟）
+        myDTCList.add(mdtc35);
+        //SBR混合（设定分钟）
+        myDTCList.add(mdtc36);
+        //SBR静置（设定分钟）
+        myDTCList.add(mdtc37);
+        //SBR污泥泵2（设定分钟）
+        myDTCList.add(mdtc38);
+        //SBR活化（设定分钟）
+        myDTCList.add(mdtc39);
+        /***********  数据-运行时间  *********************/
+        //除磷投加机时间 （运行分钟）
+        myDTCList.add(mdtc40);
+        //污泥泵1（运行分钟）
+        myDTCList.add(mdtc41);
+        //SBR一次搅拌（运行分钟）
+        myDTCList.add(mdtc42);
+        //SBR曝气（运行分钟）
+        myDTCList.add(mdtc43);
+        //SBR混合（运行分钟）
+        myDTCList.add(mdtc44);
+        //SBR静置（运行分钟）
+        myDTCList.add(mdtc45);
+        //SBR污泥泵2（运行分钟）
+        myDTCList.add(mdtc46);
+        //SBR活化（运行分钟）
+        myDTCList.add(mdtc47);
+        //集水池搅拌机（运行时间）
+        myDTCList.add(mdtc48);
+        //集水池提升泵时间（运行分钟）
+        myDTCList.add(mdtc49);
+        //SBR进水泵（运行时间）
+        myDTCList.add(mdtc50);
+        //流量计（m³）
+        myDTCList.add(mdtc51);
+        //设备发送数据时间
+        myDTCList.add(mdtc52);
+        //状态
+        myDTCList.add(mdtc53);
+
+        return myDTCList;
+    }
+}

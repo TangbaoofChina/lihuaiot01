@@ -43,7 +43,6 @@ public class BootStrapTreeViewController {
         }
 
         String jsonString = JSON.toJSONString(bootStrapTreeNodeList);
-
         return jsonString;
     }
 
@@ -69,9 +68,12 @@ public class BootStrapTreeViewController {
     @RequestMapping(value = "addZTreeNodeChild", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String addZTreeNodeChild(String parentId, String childName) throws Exception {
-        if (parentId.equals("002")) {
+        /*if (parentId.equals("101")) {
             return "未分组不允许增加子节点";
         }
+        if (parentId.equals("201")) {
+            return "未分组不允许增加子节点";
+        }*/
         List<BootStrapTreeNode> bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfoByNameAndParentId(parentId, childName);
         if (bootStrapTreeNodeList.size() == 0) {
             bootStrapTreeNodeService.insertORGInfo(parentId, childName);
@@ -84,12 +86,12 @@ public class BootStrapTreeViewController {
     @RequestMapping(value = "removeZTreeNode", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String removeZTreeNode(String nodeId) throws Exception {
-        if (nodeId.equals("002")) {
-            return "未分组不允许删除";
+        if (nodeId.length() == 3) {
+            return "固定分组不允许删除";
         }
-        if (nodeId.equals("001")) {
+/*        if (nodeId.equals("001")) {
             return "根节点不允许删除";
-        }
+        }*/
         List<BootStrapTreeNode> bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfoByParentId(nodeId);
         //List<PeopleInfo> peopleInfoList = peopleCombineOrgService.selectPeopleByORGId(nodeId);
         List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByORGId(nodeId);

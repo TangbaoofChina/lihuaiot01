@@ -33,14 +33,14 @@ public class HisChartDeviceListController {
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @RequestMapping(value = "selectDevices", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+/*    @RequestMapping(value = "selectDevices", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectDevices() throws Exception {
         String jsonString = "[]";
         List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByORGId("002");
         jsonString = JSON.toJSONString(deviceInfoList);
         return jsonString;
-    }
+    }*/
 
     @RequestMapping(value = "selectDevicesPost", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -52,9 +52,11 @@ public class HisChartDeviceListController {
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<DeviceInfoAndNode> deviceInfoList = new ArrayList<DeviceInfoAndNode>();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
-            deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll("001");
-            deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("002"));
-        } else {
+            //deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll("101");
+            deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("111"));
+            /*deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("201"));
+            deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("211"));*/
+        }  else {
             deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleInfoList());
         }
         jsonString = JSON.toJSONString(deviceInfoList);

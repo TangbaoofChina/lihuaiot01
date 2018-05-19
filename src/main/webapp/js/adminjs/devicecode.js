@@ -170,7 +170,7 @@ function dcDeleteAlarmDeviceCode(dcmDevType, dcmDevCode) {
 function dcAddDeviceType() {
     $.ajax({
         type: 'POST',
-        data: {sDevType: "0001", sDevTypeDescribe: "纳捷环控器"},
+        data: {sDevType: "111", sDevTypeDescribe: "纳捷环控器"},
         url: '/lihuaiot01/deviceCode/insertDeviceTypeInfo',
         dataType: "text",
         success: function (result) {

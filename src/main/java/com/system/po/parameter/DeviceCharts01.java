@@ -69,7 +69,7 @@ public class DeviceCharts01 {
 
             OneDataDetail oneDataDetailOutTemp4 = new OneDataDetail();
             oneDataDetailOutTemp4.setName(deviceMessage.getSendDate());
-            oneDataDetailOutTemp4.setValue(String.valueOf(deviceMessage.getOutTemp4()));
+            oneDataDetailOutTemp4.setValue(String.valueOf(deviceMessage.getOutTemp()));
             inTemp01List.add(oneDataDetailInTemp1);
             inTemp02List.add(oneDataDetailInTemp2);
             inTemp03List.add(oneDataDetailInTemp3);

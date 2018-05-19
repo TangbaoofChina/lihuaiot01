@@ -2,15 +2,21 @@ package com.system.controller.Phone;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.*;
-import com.system.po.EChartsOptions.*;
+import com.system.po.EChartsOptions.EChartsLegend;
+import com.system.po.EChartsOptions.EChartsTitle;
+import com.system.po.EChartsOptions.EChartsXAxis;
 import com.system.po.Phone.PhoneEChartsOptions;
 import com.system.po.Phone.PhoneRealDeviceInfo;
 import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.po.parameter.ChartsParameters;
+import com.system.po.parameter.DeviceType;
 import com.system.po.parameter.ParameterCharts;
-import com.system.service.*;
+import com.system.service.DeviceRoleInfoService;
+import com.system.service.DeviceTypeService;
+import com.system.service.EC01DeviceMessageService;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
+import com.system.service.RoleInfoService;
 import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,15 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/phone")
-public class PhoneController {
+@RequestMapping("/sewageC01phone")
+public class SewageC01PhoneController {
 
     @Autowired
     private RoleInfoService roleInfoService;
@@ -38,6 +41,8 @@ public class PhoneController {
     private PhoneUserOaEasService phoneUserOaEasService;
     @Autowired
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
+    @Autowired
+    private DeviceTypeService deviceTypeService;
 
     @RequestMapping(value = "selectOrgByUserId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -51,7 +56,15 @@ public class PhoneController {
             return "[]";
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
+            RoleInfo roleInfoAdmin = new RoleInfo();
+            //用鸡舍的admin代替
+            roleInfoAdmin.setRoleId("6AE5C6025D7B1035E0536800A8C0C8FD");
+            roleInfoAdmin.setRoleName("211");
+            roleInfoAdmin.setRoleDescribe("污水处理");
+            List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
+            roleInfoListAdmin.add(roleInfoAdmin);
+            //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoListAdmin);
         } else {
             orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoList);
         }
@@ -143,6 +156,19 @@ public class PhoneController {
         if (ec01DeviceMessage != null) {
             PhoneRealDeviceInfo  phoneRealDeviceInfo = getOneRealDeviceInfoDetail(ec01DeviceMessage);
             jsonString = JSON.toJSONString(phoneRealDeviceInfo);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "insertDeviceTypeInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String insertDeviceTypeInfo(String sDevType, String sDevTypeDescribe) throws Exception {
+        String jsonString = "新增完成";
+        if (sDevType != null) {
+            DeviceType deviceType = new DeviceType();
+            deviceType.setDevType(sDevType);
+            deviceType.setDevTypeDescribe(sDevTypeDescribe);
+            deviceTypeService.insertDeviceType(deviceType);
         }
         return jsonString;
     }
@@ -264,4 +290,6 @@ public class PhoneController {
 
         return phoneEChartsOptions;
     }
+
+
 }

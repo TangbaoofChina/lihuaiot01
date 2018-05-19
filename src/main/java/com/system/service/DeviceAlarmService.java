@@ -36,7 +36,7 @@ public interface DeviceAlarmService {
     List<DeviceAlarmInfo> selectDeviceAlarmInfoByRoleId(List<RoleInfo> roleInfoList) throws Exception;
 
     /**
-     * 读取历史报警数据
+     * 读取历史报警数据-分页
      * @return
      */
     DataTablePageing selectDeviceHisAlarmInfoAndPaging(Integer pageNumber,
@@ -46,7 +46,7 @@ public interface DeviceAlarmService {
                                                        String sEndDate) throws Exception;
 
     /**
-     * 根据用户权限读取历史报警数据
+     * 根据用户权限读取历史报警数据-分页
      * @param roleInfoList 用户权限
      * @return 报警数据
      */
@@ -58,7 +58,7 @@ public interface DeviceAlarmService {
                                                            List<RoleInfo> roleInfoList) throws Exception;
 
     /**
-     * 读取历史报警数据
+     * 读取历史报警数据-不分页
      * @return
      */
     List<DeviceAlarmInfo> selectDeviceHisAlarmInfo(String alarmType,
@@ -66,7 +66,7 @@ public interface DeviceAlarmService {
                                                        String sEndDate) throws Exception;
 
     /**
-     * 根据用户权限读取历史报警数据
+     * 根据用户权限读取历史报警数据-不分页
      * @param roleInfoList 用户权限
      * @return 报警数据
      */
