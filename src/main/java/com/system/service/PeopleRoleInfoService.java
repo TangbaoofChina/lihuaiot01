@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface PeopleRoleInfoService {
     List<PeopleRoleInfo> selectPeopleRoleInfo() throws Exception;
+    List<PeopleRoleInfo> selectPeopleRoleInfoByRoleAdmin(String roleAdmin) throws Exception;
     List<PeopleRoleInfo> selectPeopleRoleInfoByPeopleId(String userId) throws Exception;
     List<PeopleRoleInfo> selectPeopleRoleInfoByRoleId(String roleId) throws Exception;
     List<PeopleRoleInfo> selectPeopleRoleInfoDistinct() throws Exception;

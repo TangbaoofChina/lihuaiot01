@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PeopleRoleInfoMapper {
     List<PeopleRoleInfo> selectPeopleRoleInfo();
+    List<PeopleRoleInfo> selectPeopleRoleInfoByRoleAdmin(String roleAdmin);
     List<PeopleRoleInfo> selectPeopleRoleInfoByPeopleId(String userId);
     List<PeopleRoleInfo> selectPeopleRoleInfoByRoleId(String roleId);
     List<PeopleRoleInfo> selectPeopleRoleInfoDistinct();

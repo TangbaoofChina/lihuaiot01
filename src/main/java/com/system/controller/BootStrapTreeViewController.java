@@ -37,6 +37,12 @@ public class BootStrapTreeViewController {
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
+        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
+            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId("111");
+            bootStrapTreeNodeList.add(bootStrapTreeNode);
+        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
+            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId("211");
+            bootStrapTreeNodeList.add(bootStrapTreeNode);
         } else {
             BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
             bootStrapTreeNodeList.add(bootStrapTreeNode);

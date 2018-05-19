@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -24,6 +25,7 @@
             </div>
             <div id="rdlOrgTree" style="margin-top: 5px;white-space: nowrap;overflow: auto;"></div>
         </div>
+
         <div class="columns-right" id="rdlEC01DeviceListDiv" style="display: block;white-space: nowrap;">
             <div id="rdlec01toolbar" class="btn-group">
                 <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
@@ -48,6 +50,7 @@
             </div>
 
         </div>
+
         <div class="columns-right" id="rdlSewageC01DeviceListDiv"
              style="display: none;white-space: nowrap;">
             <div id="rdlSewageC01toolbar" class="btn-group">
@@ -73,6 +76,7 @@
             </div>
 
         </div>
+
         <div class="columns-right" id="rdlEC01OneDeviceDiv" style="display:none">
             <!--主体-->
             <div class="col-md-9 col-sm-8 row" id="main">

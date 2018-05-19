@@ -6,6 +6,7 @@ import com.system.service.DeviceInfoService;
 import com.system.service.DeviceRoleInfoService;
 import com.system.service.PeopleRoleInfoService;
 import com.system.service.RoleInfoService;
+import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 角色管理，角色关联设备
+ */
 @Controller
 @RequestMapping("/roleCombineDev")
 public class RoleCombineDevController {
@@ -32,7 +36,17 @@ public class RoleCombineDevController {
     @RequestMapping(value = "selectRoleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRoleInfo() throws Exception {
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfo();
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        List<RoleInfo> roleInfoList = new ArrayList<RoleInfo>();
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfo();
+        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("111");
+        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("211");
+        }
         String jsonString = JSON.toJSONString(roleInfoList);
         return jsonString;
     }
@@ -67,7 +81,7 @@ public class RoleCombineDevController {
 
     @RequestMapping(value = "insertRoleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String insertRoleInfo(String roleNewName, String roleNewDescribe) throws Exception {
+    public String insertRoleInfo(String roleNewName, String roleNewDescribe,String roleBelong) throws Exception {
         String jsonString = "新增完成";
         if (roleNewName != null) {
             //先判断名称是否存在

@@ -278,6 +278,7 @@ function roleAddNewShow() {
 function roleInsertRoleInfo() {
     var mRoleName = $('#roleNewName').val();
     var mRoleDescribe = $('#roleNewDescribe').val();
+    var mRoleAdmin = $('#roleAdminType').val();
     $.ajax({
         url: "/lihuaiot01/roleCombineDev/insertRoleInfo",
 // 数据发送方式
@@ -286,7 +287,7 @@ function roleInsertRoleInfo() {
         dataType: "text",
         async: true,   // 轻轻方式-异步
 // 要传递的数据
-        data: {roleNewName: mRoleName, roleNewDescribe: mRoleDescribe},
+        data: {roleNewName: mRoleName, roleNewDescribe: mRoleDescribe,roleBelong:mRoleAdmin},
         success: function (result) {
             roleInitTableContent();
             if (result !== "新增完成") {

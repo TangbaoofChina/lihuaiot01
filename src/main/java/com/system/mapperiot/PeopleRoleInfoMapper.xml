@@ -14,6 +14,13 @@
         where a.userrole_roleid=b.role_id
         order by a.userrole_username ASC
     </select>
+    <select id="selectPeopleRoleInfoByRoleAdmin" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and b.ROLE_BELONG = #{roleAdmin}
+        order by a.userrole_username ASC
+    </select>
     <select id="selectPeopleRoleInfoByPeopleId" parameterType="String" resultMap="BaseResultMap">
         select a.userrole_userid,a.userrole_username,a.userrole_roleid,b.role_name
         from iot_userrole a,iot_role b

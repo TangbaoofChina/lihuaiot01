@@ -8,6 +8,7 @@ public class RoleInfo {
     private String roleDescribe;
     private String roleCreatUserId;
     private Date roleCreatDate;
+    private String roleBelong;
 
     public String getRoleId() {
         return roleId;
@@ -47,5 +48,13 @@ public class RoleInfo {
 
     public void setRoleCreatDate(Date roleCreatDate) {
         this.roleCreatDate = roleCreatDate;
+    }
+
+    public String getRoleBelong() {
+        return roleBelong;
+    }
+
+    public void setRoleBelong(String roleBelong) {
+        this.roleBelong = roleBelong;
     }
 }

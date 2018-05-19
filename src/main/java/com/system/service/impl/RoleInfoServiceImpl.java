@@ -21,6 +21,11 @@ public class RoleInfoServiceImpl implements RoleInfoService {
     }
 
     @Override
+    public List<RoleInfo> selectRoleInfoByRoldAdmin(String roleAdmin) throws Exception {
+        return roleInfoMapper.selectRoleInfoByRoleAdmin(roleAdmin);
+    }
+
+    @Override
     public List<RoleInfo> selectRoleInfoByRoleName(String roleName) throws Exception {
         return roleInfoMapper.selectRoleInfoByRoleName(roleName);
     }

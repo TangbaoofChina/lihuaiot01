@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <style>
@@ -126,6 +127,17 @@
             <div class="form-name">
                 <label for="roleNewDescribe">描述</label>
                 <input type="text" class="form-control" id="roleNewDescribe"/>
+            </div>
+            <div class="form-name">
+                <label for="roleAdminType">类型</label>
+                <select name="roleAdminType" id="roleAdminType" class="input-sm">
+                    <shiro:hasAnyRoles name="admin,111">
+                        <option value="111" selected="selected">鸡舍环控器</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,211">
+                        <option value="211">污水控制器</option>
+                    </shiro:hasAnyRoles>
+                </select>
             </div>
         </div>
         <div class="delete-btn">

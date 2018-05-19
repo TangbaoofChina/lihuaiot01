@@ -8,9 +8,13 @@
         <result column="ROLE_DESCRIBE" jdbcType="VARCHAR" property="roleDescribe"/>
         <result column="ROLE_CREATUSERID" jdbcType="VARCHAR" property="roleCreatUserId"/>
         <result column="ROLE_CREATDATE" jdbcType="VARCHAR" property="roleCreatDate"/>
+        <result column="ROLE_BELONG" jdbcType="VARCHAR" property="roleBelong"/>
     </resultMap>
     <select id="selectRoleInfo" resultMap="BaseResultMap">
         SELECT * from iot_role order by iot_role.ROLE_NAME
+    </select>
+    <select id="selectRoleInfoByRoleAdmin"  parameterType="String" resultMap="BaseResultMap">
+        SELECT * from iot_role where iot_role.ROLE_BELONG = #{roleAdmin} order by iot_role.ROLE_NAME
     </select>
     <select id="selectRoleInfoByRoleName" parameterType="String" resultMap="BaseResultMap">
         SELECT * from iot_role where iot_role.ROLE_NAME = #{roleName}
@@ -26,9 +30,9 @@
         <selectKey keyProperty="sId" resultType="String" order="BEFORE">
             select sys_guid() from dual
         </selectKey>
-        INSERT INTO iot_role(ROLE_ID,ROLE_NAME,ROLE_DESCRIBE,ROLE_CREATUSERID,ROLE_CREATDATE)
+        INSERT INTO iot_role(ROLE_ID,ROLE_NAME,ROLE_DESCRIBE,ROLE_CREATUSERID,ROLE_CREATDATE,ROLE_BELONG)
         values (#{sId,jdbcType=VARCHAR},#{roleInfo.roleName,jdbcType=VARCHAR},#{roleInfo.roleDescribe,jdbcType=VARCHAR}
-                ,#{roleInfo.roleCreatUserId,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP})
+                ,#{roleInfo.roleCreatUserId,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP},#{roleInfo.roleBelong,jdbcType=VARCHAR})
     </insert>
     <update id="updateRoleInfoByRoleId">
         UPDATE iot_role

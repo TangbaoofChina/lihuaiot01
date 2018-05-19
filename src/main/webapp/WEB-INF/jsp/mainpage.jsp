@@ -164,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <shiro:hasRole name="admin">
+                <shiro:hasAnyRoles  name="admin,211,111">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -207,7 +207,7 @@
                             </div>
                         </div>
                     </div>
-                </shiro:hasRole>
+                </shiro:hasAnyRoles>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">

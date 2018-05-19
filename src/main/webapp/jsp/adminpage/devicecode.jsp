@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <style>
@@ -15,8 +16,12 @@
             <div class="input-group">
                 <label>类型：</label>
                 <select name="dcDeviceType" id="dcDeviceType" class="input-sm">
-                    <option value="111" selected="selected">鸡舍环控器</option>
-                    <option value="211">污水控制器/option>
+                    <shiro:hasAnyRoles name="admin,111">
+                        <option value="111" selected="selected">鸡舍环控器</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,211">
+                        <option value="211">污水控制器</option>
+                    </shiro:hasAnyRoles>
                 </select>
             </div>
             <div class="input-group">

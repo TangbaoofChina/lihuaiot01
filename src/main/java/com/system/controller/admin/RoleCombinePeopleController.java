@@ -4,8 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.system.po.MydataTableColumn;
 import com.system.po.PeopleRoleInfo;
 import com.system.po.RoleInfo;
+import com.system.po.Userlogin;
 import com.system.service.PeopleRoleInfoService;
 import com.system.service.RoleInfoService;
+import com.system.util.RoleInfoListUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +32,17 @@ public class RoleCombinePeopleController {
     @RequestMapping(value = "selectRolePeopleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRolePeopleInfo() throws Exception {
-        List<PeopleRoleInfo> peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfo();
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        List<PeopleRoleInfo> peopleRoleInfoList = new ArrayList<PeopleRoleInfo>();
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfo();
+        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByRoleAdmin("111");
+        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
+            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByRoleAdmin("211");
+        }
         String jsonString = JSON.toJSONString(peopleRoleInfoList);
         return jsonString;
     }
@@ -35,7 +50,17 @@ public class RoleCombinePeopleController {
     @RequestMapping(value = "selectRoleInfo", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRoleInfo() throws Exception {
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfo();
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        List<RoleInfo> roleInfoList = new ArrayList<RoleInfo>();
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfo();
+        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("111");
+        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
+            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("211");
+        }
         String jsonString = JSON.toJSONString(roleInfoList);
         return jsonString;
     }
