@@ -104,8 +104,8 @@ public class EC01PhoneController {
         calendar.add(Calendar.DAY_OF_MONTH, mDay);
         date = calendar.getTime();
         String sStartDate = simpleFormat.format(date);*/
-        String sEndDate = "2017/12/30 23:59:59";
-        String sStartDate = "2017/12/01 00:00:00";
+        String sEndDate = "2018/05/21 23:59:59";
+        String sStartDate = "2018/05/21 00:00:00";
         //获取时间-end
         String[] deviceNums = new String[1];
         deviceNums[0] = devNum;

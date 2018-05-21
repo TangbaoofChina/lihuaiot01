@@ -168,8 +168,8 @@ function rdlSelectInfoByDeviceIdAndType() {
 }
 
 function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
-    var wetCurtainMotorOpen = document.getElementById("wetCurtainMotorOpen");
-    if (wetCurtainMotorOpen === null)
+    var wetCurtainWPOpenDiv = document.getElementById("wetCurtainWPOpen");
+    if (wetCurtainWPOpenDiv === null)
         return;
     $.ajax({
         url: "/lihuaiot01/realDeviceList/selectEC01ByDeviceId",
@@ -181,13 +181,9 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
         data: {sDeviceId: queryParameter},
         success: function (result) {
             if (JSON.stringify(result) !== '[]') {
-                console.log(result);
-                var wetCurtainMotorOpen = document.getElementById("wetCurtainMotorOpen");
-                var wetCurtainMotorClose = document.getElementById("wetCurtainMotorClose");
+                //console.log(result);
                 var wetCurtainWPOpen = document.getElementById("wetCurtainWPOpen");
                 var wetCurtainWPClose = document.getElementById("wetCurtainWPClose");
-                var boilerOpen = document.getElementById("boilerOpen");
-                var boilerClose = document.getElementById("boilerClose");
                 var fan01Open = document.getElementById("fan01Open");
                 var fan01Close = document.getElementById("fan01Close");
                 var fan02Open = document.getElementById("fan02Open");
@@ -198,15 +194,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var fan04Close = document.getElementById("fan04Close");
                 var fan05Open = document.getElementById("fan05Open");
                 var fan05Close = document.getElementById("fan05Close");
-                if (result.wetCurtainMotorOn === 0)  //湿帘电机
-                {
-                    wetCurtainMotorOpen.style.display = "none";
-                    wetCurtainMotorClose.style.display = "block";
-                } else {
-                    wetCurtainMotorOpen.style.display = "block";
-                    wetCurtainMotorClose.style.display = "none";
-                }
-                if (result.wetCurtainWPEnable === 0)  //湿帘水泵
+                if (result.wetCurtainWPEnable === false)  //湿帘水泵
                 {
                     wetCurtainWPOpen.style.display = "none";
                     wetCurtainWPClose.style.display = "block";
@@ -214,15 +202,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     wetCurtainWPOpen.style.display = "block";
                     wetCurtainWPClose.style.display = "none";
                 }
-                if (result.boilerOn === 0)  //锅炉
-                {
-                    boilerOpen.style.display = "none";
-                    boilerClose.style.display = "block";
-                } else {
-                    boilerOpen.style.display = "block";
-                    boilerClose.style.display = "none";
-                }
-                if (result.fan1On === 0)  //风机1
+                if (result.fan01On === false)  //风机1
                 {
                     fan01Open.style.display = "none";
                     fan01Close.style.display = "block";
@@ -230,7 +210,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan01Open.style.display = "block";
                     fan01Close.style.display = "none";
                 }
-                if (result.fan2On === 0)  //风机2
+                if (result.fan02On === false)  //风机2
                 {
                     fan02Open.style.display = "none";
                     fan02Close.style.display = "block";
@@ -238,7 +218,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan02Open.style.display = "block";
                     fan02Close.style.display = "none";
                 }
-                if (result.fan3On === 0)  //风机3
+                if (result.fan03On === false)  //风机3
                 {
                     fan03Open.style.display = "none";
                     fan03Close.style.display = "block";
@@ -246,7 +226,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan03Open.style.display = "block";
                     fan03Close.style.display = "none";
                 }
-                if (result.fan4On === 0)  //风机4
+                if (result.fan04On === false)  //风机4
                 {
                     fan04Open.style.display = "none";
                     fan04Close.style.display = "block";
@@ -254,7 +234,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan04Open.style.display = "block";
                     fan04Close.style.display = "none";
                 }
-                if (result.fan5On === 0)  //风机5
+                if (result.fan05On === false)  //风机5
                 {
                     fan05Open.style.display = "none";
                     fan05Close.style.display = "block";
@@ -274,8 +254,8 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 inTemp1.innerHTML = result.inTemp1 + " ℃";
                 inTemp2.innerHTML = result.inTemp2 + " ℃";
                 inTemp3.innerHTML = result.inTemp3 + " ℃";
-                outTemp.innerHTML = result.outTemp4 + " ℃";
-                boilerTemp.innerHTML = result.boilerTemp5 + " ℃";
+                outTemp.innerHTML = result.outTemp + " ℃";
+                boilerTemp.innerHTML = result.boilerTemp + " ℃";
                 avgTemp.innerHTML = result.inAveTemp + " ℃";
                 humidityVal.innerHTML = result.humidityVal + " %";
                 nh3Val.innerHTML = result.nh3Val + " ppm";
@@ -300,8 +280,74 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
     });
 }
 
-function rdlSelectInfoByDeviceIdAndSewageC01() {
-
+function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
+    $.ajax({
+        url: "/lihuaiot01/realDeviceList/selectSewageC01ByDeviceId",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "json",
+// 要传递的数据
+        data: {sDeviceId: queryParameter},
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                console.log(result);
+                var collectMixerRun = document.getElementById("collectMixerRun");
+                var collectMixerStop = document.getElementById("collectMixerStop");
+                var dephosphorizeRun = document.getElementById("dephosphorizeRun");
+                var dephosphorizeStop = document.getElementById("dephosphorizeStop");
+                var collectPumpRun = document.getElementById("collectPumpRun");
+                var collectPumpStop = document.getElementById("collectPumpStop");
+                var sludgePump01Run = document.getElementById("sludgePump01Run");
+                var sludgePump01Stop = document.getElementById("sludgePump01Stop");
+                if (result.collectMixerRun === false)  //集水池搅拌机
+                {
+                    collectMixerRun.style.display = "none";
+                    collectMixerStop.style.display = "block";
+                } else {
+                    collectMixerRun.style.display = "block";
+                    collectMixerStop.style.display = "none";
+                }
+                if (result.dephosphorizeRun === false)  //除磷投加机
+                {
+                    dephosphorizeRun.style.display = "none";
+                    dephosphorizeStop.style.display = "block";
+                } else {
+                    dephosphorizeRun.style.display = "block";
+                    dephosphorizeStop.style.display = "none";
+                }
+                if (result.collectPumpRun === false)  //集水池提升泵
+                {
+                    collectPumpRun.style.display = "none";
+                    collectPumpStop.style.display = "block";
+                } else {
+                    collectPumpRun.style.display = "block";
+                    collectPumpStop.style.display = "none";
+                }
+                if (result.sludgePump01Run === false)  //污泥泵1
+                {
+                    sludgePump01Run.style.display = "none";
+                    sludgePump01Stop.style.display = "block";
+                } else {
+                    sludgePump01Run.style.display = "block";
+                    sludgePump01Stop.style.display = "none";
+                }
+                var co2Val = document.getElementById("co2Val");
+                var co2Val = document.getElementById("co2Val");
+            } else {
+                var type = 'error';
+                var msg = '未查询到设备数据';
+                var append = '对不起，未查询到该设备的实时数据';
+                showMsg(type, msg, append);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if (realid_of_setintervalDeviceOne !== undefined) {
+                clearInterval(realid_of_setintervalDeviceOne);
+            }
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
 }
 
 function rdlSelectInfoByDeviceId() {

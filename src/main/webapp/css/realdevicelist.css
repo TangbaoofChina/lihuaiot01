@@ -58,6 +58,7 @@
     background: green;
     color: #fff;
 }
+
 .leftWrap{
     position: absolute;
     top: 75px;
@@ -106,4 +107,28 @@
     top: 50%;
     left: 83px;
     margin-top: -50px;
+}
+
+.rectangleClose{
+    width: 20px;
+    height: 20px;
+    background: pink;
+}
+.rectangleOpen{
+    width: 20px;
+    height: 20px;
+    background: lightgreen;
+}
+.rectangle02Close{
+    width: 40px;
+    height: 20px;
+    background: pink;
+}
+.rectangle02Open{
+    width: 40px;
+    height: 20px;
+    background: lightgreen;
+}
+.SewageC01border{
+    border:1px dashed #999
 }
