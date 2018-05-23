@@ -967,7 +967,7 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         MydataTableColumn mdtc51 = new MydataTableColumn();
         mdtc51.setData("flowmeter");
         mdtc51.setDefaultContent("51");
-        mdtc51.setTitle("流量计");
+        mdtc51.setTitle("累积流量");
 
         //当日流量(m³)
         MydataTableColumn mdtc60 = new MydataTableColumn();

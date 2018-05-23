@@ -240,7 +240,6 @@
             <field>alarmOn</field>
             <value>报警状态</value>
         </property>
-
         <property>
             <field>fanClockEnable</field>
             <value>风机定时</value>
@@ -368,6 +367,26 @@
             <value>滗水器运行</value>
         </property>
         <property>
+            <field>sbrMixerOnceRun</field>
+            <value>SBR池一次搅拌</value>
+        </property>
+        <property>
+            <field>sbrMixerSecRun</field>
+            <value>SBR池二次搅拌</value>
+        </property>
+        <property>
+            <field>sbrStaticRun</field>
+            <value>SBR池静置</value>
+        </property>
+        <property>
+            <field>decanterCycleRun</field>
+            <value>滗水器周期</value>
+        </property>
+        <property>
+            <field>sbrActiveRun</field>
+            <value>活化周期</value>
+        </property>
+        <property>
             <field>collectMixerFault</field>
             <value>集水池搅拌机故障</value>
         </property>
@@ -452,6 +471,10 @@
             <value>污泥泵1设定时间</value>
         </property>
         <property>
+            <field>sbrCycleSetMinute</field>
+            <value>SBR设定周期</value>
+        </property>
+        <property>
             <field>sbrMixerOnceSetMinute</field>
             <value>SBR一次搅拌设定时间</value>
         </property>
@@ -521,7 +544,11 @@
         </property>
         <property>
             <field>flowmeter</field>
-            <value>流量计</value>
+            <value>累积流量</value>
+        </property>
+        <property>
+            <field>todayFlowmeter</field>
+            <value>当日流量</value>
         </property>
         <property>
             <field>sendDate</field>
