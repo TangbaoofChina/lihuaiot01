@@ -357,6 +357,7 @@ window.operateEvents = {
         updateRoleDeviceSelEnd();
         $('#roleModifyName').val(row.roleName);
         $('#roleModifyDescribe').val(row.roleDescribe);
+        $('#roleDeviceSelBefore').empty();
         roleShowModify();
     },
     'click .roleRemoveRole': function (e, value, row, index) {

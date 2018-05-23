@@ -121,6 +121,7 @@
                 <!--左边-->
                 <div class="leftWrap">
                     <div class="temp">
+
                         <div>
                             <!--<div>-->
                             <p>(前)温度1</p>
@@ -182,6 +183,12 @@
                             <p>锅炉温度</p>
                             <span id="boilerTemp">28.9℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
+                        </div>
+                        <div>
+                            <!--<div>-->
+                            <p>时间</p>
+                            <span id="sc01date">2018-05-23 01:01:01</span>
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -467,7 +474,7 @@
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR混合</span>
+                        <span>SBR二次搅拌</span>
                     </div>
                     <div class="col-md-3 col-sm-3 SewageC01border">
                         <span id="sbrMixerSetMinute">50</span>

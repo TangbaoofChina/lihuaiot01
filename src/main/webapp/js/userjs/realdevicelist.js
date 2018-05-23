@@ -194,7 +194,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var fan04Close = document.getElementById("fan04Close");
                 var fan05Open = document.getElementById("fan05Open");
                 var fan05Close = document.getElementById("fan05Close");
-                if (result.wetCurtainWPEnable === false)  //湿帘水泵
+                if (result.wetCurtainOn === false)  //湿帘水泵
                 {
                     wetCurtainWPOpen.style.display = "none";
                     wetCurtainWPClose.style.display = "block";
@@ -251,6 +251,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var humidityVal = document.getElementById("humidityVal");
                 var nh3Val = document.getElementById("nh3Val");
                 var co2Val = document.getElementById("co2Val");
+                var sc01date = document.getElementById("sc01date");
                 inTemp1.innerHTML = result.inTemp1 + " ℃";
                 inTemp2.innerHTML = result.inTemp2 + " ℃";
                 inTemp3.innerHTML = result.inTemp3 + " ℃";
@@ -260,6 +261,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 humidityVal.innerHTML = result.humidityVal + " %";
                 nh3Val.innerHTML = result.nh3Val + " ppm";
                 co2Val.innerHTML = result.co2Val + " ppm";
+                sc01date.innerHTML = result.sendDate;
 
             } else {
                 var type = 'error';
@@ -787,146 +789,6 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 clearInterval(realid_of_setintervalDeviceOne);
             }
             handleAjaxError(XMLHttpRequest.status);
-        }
-    });
-}
-
-function rdlSelectInfoByDeviceId() {
-    rdlSelectInfoByDeviceIdAndType();
-    if (typeof(rdlNowTreeNode) == "undefined")
-        return;
-    var wetCurtainMotorOpen = document.getElementById("wetCurtainMotorOpen");
-    if (wetCurtainMotorOpen === null)
-        return;
-    var queryParameter = rdlNowTreeNode.id;
-    if (queryParameter.length !== 4) {
-        return;
-    }
-    $.ajax({
-        url: "/lihuaiot01/realDeviceList/selectEC01ByDeviceId",
-// 数据发送方式
-        type: "POST",
-// 接受数据格式
-        dataType: "json",
-// 要传递的数据
-        data: {sDeviceId: queryParameter},
-        success: function (result) {
-            if (JSON.stringify(result) !== '[]') {
-                console.log(result);
-                var wetCurtainMotorOpen = document.getElementById("wetCurtainMotorOpen");
-                var wetCurtainMotorClose = document.getElementById("wetCurtainMotorClose");
-                var wetCurtainWPOpen = document.getElementById("wetCurtainWPOpen");
-                var wetCurtainWPClose = document.getElementById("wetCurtainWPClose");
-                var boilerOpen = document.getElementById("boilerOpen");
-                var boilerClose = document.getElementById("boilerClose");
-                var fan01Open = document.getElementById("fan01Open");
-                var fan01Close = document.getElementById("fan01Close");
-                var fan02Open = document.getElementById("fan02Open");
-                var fan02Close = document.getElementById("fan02Close");
-                var fan03Open = document.getElementById("fan03Open");
-                var fan03Close = document.getElementById("fan03Close");
-                var fan04Open = document.getElementById("fan04Open");
-                var fan04Close = document.getElementById("fan04Close");
-                var fan05Open = document.getElementById("fan05Open");
-                var fan05Close = document.getElementById("fan05Close");
-                if (result.wetCurtainMotorOn === 0)  //湿帘电机
-                {
-                    wetCurtainMotorOpen.style.display = "none";
-                    wetCurtainMotorClose.style.display = "block";
-                } else {
-                    wetCurtainMotorOpen.style.display = "block";
-                    wetCurtainMotorClose.style.display = "none";
-                }
-                if (result.wetCurtainWPEnable === 0)  //湿帘水泵
-                {
-                    wetCurtainWPOpen.style.display = "none";
-                    wetCurtainWPClose.style.display = "block";
-                } else {
-                    wetCurtainWPOpen.style.display = "block";
-                    wetCurtainWPClose.style.display = "none";
-                }
-                if (result.boilerOn === 0)  //锅炉
-                {
-                    boilerOpen.style.display = "none";
-                    boilerClose.style.display = "block";
-                } else {
-                    boilerOpen.style.display = "block";
-                    boilerClose.style.display = "none";
-                }
-                if (result.fan1On === 0)  //风机1
-                {
-                    fan01Open.style.display = "none";
-                    fan01Close.style.display = "block";
-                } else {
-                    fan01Open.style.display = "block";
-                    fan01Close.style.display = "none";
-                }
-                if (result.fan2On === 0)  //风机2
-                {
-                    fan02Open.style.display = "none";
-                    fan02Close.style.display = "block";
-                } else {
-                    fan02Open.style.display = "block";
-                    fan02Close.style.display = "none";
-                }
-                if (result.fan3On === 0)  //风机3
-                {
-                    fan03Open.style.display = "none";
-                    fan03Close.style.display = "block";
-                } else {
-                    fan03Open.style.display = "block";
-                    fan03Close.style.display = "none";
-                }
-                if (result.fan4On === 0)  //风机4
-                {
-                    fan04Open.style.display = "none";
-                    fan04Close.style.display = "block";
-                } else {
-                    fan04Open.style.display = "block";
-                    fan04Close.style.display = "none";
-                }
-                if (result.fan5On === 0)  //风机5
-                {
-                    fan05Open.style.display = "none";
-                    fan05Close.style.display = "block";
-                } else {
-                    fan05Open.style.display = "block";
-                    fan05Close.style.display = "none";
-                }
-                var inTemp1 = document.getElementById("inTemp1");
-                var inTemp2 = document.getElementById("inTemp2");
-                var inTemp3 = document.getElementById("inTemp3");
-                var outTemp = document.getElementById("outTemp");
-                var boilerTemp = document.getElementById("boilerTemp");
-                var avgTemp = document.getElementById("avgTemp");
-                var humidityVal = document.getElementById("humidityVal");
-                var nh3Val = document.getElementById("nh3Val");
-                var co2Val = document.getElementById("co2Val");
-                inTemp1.innerHTML = result.inTemp1 + " ℃";
-                inTemp2.innerHTML = result.inTemp2 + " ℃";
-                inTemp3.innerHTML = result.inTemp3 + " ℃";
-                outTemp.innerHTML = result.outTemp4 + " ℃";
-                boilerTemp.innerHTML = result.boilerTemp5 + " ℃";
-                avgTemp.innerHTML = result.inAveTemp + " ℃";
-                humidityVal.innerHTML = result.humidityVal + " %";
-                nh3Val.innerHTML = result.nh3Val + " ppm";
-                co2Val.innerHTML = result.co2Val + " ppm";
-
-            } else {
-                var type = 'error';
-                var msg = '未查询到设备数据';
-                var append = '对不起，未查询到该设备的实时数据';
-                showMsg(type, msg, append);
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            if (realid_of_setintervalDeviceOne !== undefined) {
-                clearInterval(realid_of_setintervalDeviceOne);
-            }
-            //alert(XMLHttpRequest.status);
-            handleAjaxError(XMLHttpRequest.status);
-            //alert(XMLHttpRequest.readyState);
-            //alert(textStatus);
         }
     });
 }

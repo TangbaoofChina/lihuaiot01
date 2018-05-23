@@ -615,152 +615,179 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         mdtc3.setData("collectMixerRun");
         mdtc3.setDefaultContent("3");
         mdtc3.setTitle("集水池搅拌机运行");
+        mdtc3.setVisible(false);
 
         //除磷投加机停止/运行
         MydataTableColumn mdtc4 = new MydataTableColumn();
         mdtc4.setData("dephosphorizeRun");
         mdtc4.setDefaultContent("4");
         mdtc4.setTitle("除磷投加机运行");
+        mdtc4.setVisible(false);
 
         //集水池提升泵停止/运行
         MydataTableColumn mdtc5 = new MydataTableColumn();
         mdtc5.setData("collectPumpRun");
         mdtc5.setDefaultContent("5");
         mdtc5.setTitle("集水池提升泵运行");
+        mdtc5.setVisible(false);
 
         //污泥泵1停止/运行
         MydataTableColumn mdtc6 = new MydataTableColumn();
         mdtc6.setData("sludgePump01Run");
         mdtc6.setDefaultContent("6");
         mdtc6.setTitle("污泥泵1运行");
+        mdtc6.setVisible(false);
 
         //SBR进水泵停止/运行
         MydataTableColumn mdtc7 = new MydataTableColumn();
         mdtc7.setData("sbrIntakePumpRun");
         mdtc7.setDefaultContent("7");
         mdtc7.setTitle("SBR池进水泵运行");
+        mdtc7.setVisible(false);
 
         //SBR池搅拌机停止/运行
         MydataTableColumn mdtc8 = new MydataTableColumn();
         mdtc8.setData("sbrMixerRun");
         mdtc8.setDefaultContent("8");
         mdtc8.setTitle("SBR池搅拌机运行");
+        mdtc8.setVisible(false);
 
         //回转式风机1停止/运行
         MydataTableColumn mdtc9 = new MydataTableColumn();
         mdtc9.setData("fan01Run");
         mdtc9.setDefaultContent("9");
         mdtc9.setTitle("回转式风机1运行");
+        mdtc9.setVisible(false);
 
         //回转式风机2停止/运行
         MydataTableColumn mdtc10 = new MydataTableColumn();
         mdtc10.setData("fan02Run");
         mdtc10.setDefaultContent("10");
         mdtc10.setTitle("回转式风机2运行");
+        mdtc10.setVisible(false);
 
         //污泥泵2停止/运行
         MydataTableColumn mdtc11 = new MydataTableColumn();
         mdtc11.setData("sludgePump02Run");
         mdtc11.setDefaultContent("11");
         mdtc11.setTitle("污泥泵2运行");
+        mdtc11.setVisible(false);
 
         //滗水器停止/运行
         MydataTableColumn mdtc12 = new MydataTableColumn();
         mdtc12.setData("decanterRun");
         mdtc12.setDefaultContent("12");
         mdtc12.setTitle("滗水器运行");
+        mdtc12.setVisible(false);
 
         //备用83   SBR池一次搅拌
         MydataTableColumn mdtc54 = new MydataTableColumn();
         mdtc54.setData("sbrMixerOnceRun");
         mdtc54.setDefaultContent("54");
         mdtc54.setTitle("SBR池一次搅拌");
+        mdtc54.setVisible(false);
+
         //备用84   SBR池二次搅拌
         MydataTableColumn mdtc55 = new MydataTableColumn();
         mdtc55.setData("sbrMixerSecRun");
         mdtc55.setDefaultContent("55");
         mdtc55.setTitle("SBR池二次搅拌");
+        mdtc55.setVisible(false);
         //备用85   SBR池静置
         MydataTableColumn mdtc56 = new MydataTableColumn();
         mdtc56.setData("sbrStaticRun");
         mdtc56.setDefaultContent("56");
         mdtc56.setTitle("SBR池静置");
+        mdtc56.setVisible(false);
         //备用86   滗水器周期
         MydataTableColumn mdtc57 = new MydataTableColumn();
         mdtc57.setData("decanterCycleRun");
         mdtc57.setDefaultContent("57");
         mdtc57.setTitle("滗水器周期");
+        mdtc57.setVisible(false);
         //备用87   活化周期
         MydataTableColumn mdtc58 = new MydataTableColumn();
         mdtc58.setData("sbrActiveRun");
         mdtc58.setDefaultContent("58");
         mdtc58.setTitle("活化周期");
+        mdtc58.setVisible(false);
 
         //集水池搅拌机正常/故障
         MydataTableColumn mdtc13 = new MydataTableColumn();
         mdtc13.setData("collectMixerFault");
         mdtc13.setDefaultContent("13");
         mdtc13.setTitle("集水池搅拌机故障");
+        mdtc13.setVisible(false);
 
         //集水池提升泵正常/故障
         MydataTableColumn mdtc14 = new MydataTableColumn();
         mdtc14.setData("collectPumpFault");
         mdtc14.setDefaultContent("14");
         mdtc14.setTitle("集水池提升泵故障");
+        mdtc14.setVisible(false);
 
         //污泥泵1正常/故障
         MydataTableColumn mdtc15 = new MydataTableColumn();
         mdtc15.setData("sludgePump01Fault");
         mdtc15.setDefaultContent("15");
         mdtc15.setTitle("污泥泵1故障");
+        mdtc15.setVisible(false);
 
         //SBR进水泵正常/故障
         MydataTableColumn mdtc16 = new MydataTableColumn();
         mdtc16.setData("sbrIntakePumpFault");
         mdtc16.setDefaultContent("16");
         mdtc16.setTitle("SBR池进水泵故障");
+        mdtc16.setVisible(false);
 
         //SBR池搅拌机1正常/故障
         MydataTableColumn mdtc17 = new MydataTableColumn();
         mdtc17.setData("sbrMixer01Fault");
         mdtc17.setDefaultContent("17");
         mdtc17.setTitle("SBR池搅拌机1故障");
+        mdtc17.setVisible(false);
 
         //SBR池搅拌机2正常/故障
         MydataTableColumn mdtc18 = new MydataTableColumn();
         mdtc18.setData("sbrMixer02Fault");
         mdtc18.setDefaultContent("18");
         mdtc18.setTitle("SBR池搅拌机2故障");
+        mdtc18.setVisible(false);
 
         //回转式风机1正常/故障
         MydataTableColumn mdtc19 = new MydataTableColumn();
         mdtc19.setData("fan01Fault");
         mdtc19.setDefaultContent("19");
         mdtc19.setTitle("回转式风机1故障");
+        mdtc19.setVisible(false);
 
         //回转式风机2正常/故障
         MydataTableColumn mdtc20 = new MydataTableColumn();
         mdtc20.setData("fan02Fault");
         mdtc20.setDefaultContent("20");
         mdtc20.setTitle("回转式风机2故障");
+        mdtc20.setVisible(false);
 
         //污泥泵2正常/故障
         MydataTableColumn mdtc21 = new MydataTableColumn();
         mdtc21.setData("sludgePump02Fault");
         mdtc21.setDefaultContent("21");
         mdtc21.setTitle("污泥泵2故障");
+        mdtc21.setVisible(false);
 
         //滗水器正常/故障
         MydataTableColumn mdtc22 = new MydataTableColumn();
         mdtc22.setData("decanterFault");
         mdtc22.setDefaultContent("22");
         mdtc22.setTitle("滗水器故障");
+        mdtc22.setVisible(false);
 
         //PLC电量不足
         MydataTableColumn mdtc23 = new MydataTableColumn();
         mdtc23.setData("plcElecLack");
         mdtc23.setDefaultContent("23");
         mdtc23.setTitle("PLC电量不足");
+        mdtc23.setVisible(false);
 
         //系统手动模式/自动模式
         MydataTableColumn mdtc24 = new MydataTableColumn();
@@ -779,36 +806,42 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         mdtc26.setData("collectHighOn");
         mdtc26.setDefaultContent("26");
         mdtc26.setTitle("集水池液位高到了");
+        mdtc26.setVisible(false);
 
         //集水池液位低未到/到了
         MydataTableColumn mdtc27 = new MydataTableColumn();
         mdtc27.setData("collectLowOn");
         mdtc27.setDefaultContent("27");
         mdtc27.setTitle("集水池液位低到了");
+        mdtc27.setVisible(false);
 
         //调节池液位高未到/到了
         MydataTableColumn mdtc28 = new MydataTableColumn();
         mdtc28.setData("regulatHighOn");
         mdtc28.setDefaultContent("28");
         mdtc28.setTitle("调节池液位高到了");
+        mdtc28.setVisible(false);
 
         //调节池液位低未到/到了
         MydataTableColumn mdtc29 = new MydataTableColumn();
         mdtc29.setData("regulatLowOn");
         mdtc29.setDefaultContent("29");
         mdtc29.setTitle("调节池液位低到了");
+        mdtc29.setVisible(false);
 
         //SBR池液位高未到/到了
         MydataTableColumn mdtc30 = new MydataTableColumn();
         mdtc30.setData("sbrHighOn");
         mdtc30.setDefaultContent("30");
         mdtc30.setTitle("SBR池液位高到了");
+        mdtc30.setVisible(false);
 
         //SBR池液位低未到/到了
         MydataTableColumn mdtc31 = new MydataTableColumn();
         mdtc31.setData("sbrLowOn");
         mdtc31.setDefaultContent("31");
         mdtc31.setTitle("SBR池液位低到了");
+        mdtc31.setVisible(false);
 
         //除磷投加机时间 （设定分钟）
         MydataTableColumn mdtc32 = new MydataTableColumn();
@@ -826,7 +859,7 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         MydataTableColumn mdtc59 = new MydataTableColumn();
         mdtc59.setData("sbrCycleSetMinute");
         mdtc59.setDefaultContent("59");
-        mdtc59.setTitle("SBR一次搅拌设定时间");
+        mdtc59.setTitle("sbr设定周期时间");
 
         //SBR一次搅拌（设定分钟）
         MydataTableColumn mdtc34 = new MydataTableColumn();
@@ -957,6 +990,79 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc1);
         //名称
         myDTCList.add(mdtc2);
+        //状态
+        myDTCList.add(mdtc53);
+        //设备发送数据时间
+        myDTCList.add(mdtc52);
+        //流量计（m³）
+        myDTCList.add(mdtc51);
+        //SBR水流量
+        myDTCList.add(mdtc60);
+        //系统手动模式/自动模式
+        myDTCList.add(mdtc24);
+        /***********  数据-运行时间  *********************/
+        //SBR周期运行标识
+        myDTCList.add(mdtc25);
+        //SBR进水泵（运行时间）
+        myDTCList.add(mdtc50);
+        //SBR一次搅拌（运行分钟）
+        myDTCList.add(mdtc42);
+        //SBR曝气（运行分钟）
+        myDTCList.add(mdtc43);
+        //SBR混合（运行分钟）
+        myDTCList.add(mdtc44);
+        //SBR静置（运行分钟）
+        myDTCList.add(mdtc45);
+        //SBR污泥泵2（运行分钟）
+        myDTCList.add(mdtc46);
+        //SBR活化（运行分钟）
+        myDTCList.add(mdtc47);
+        //集水池搅拌机（运行时间）
+        myDTCList.add(mdtc48);
+        //集水池提升泵时间（运行分钟）
+        myDTCList.add(mdtc49);
+        //除磷投加机时间 （运行分钟）
+        myDTCList.add(mdtc40);
+        //污泥泵1（运行分钟）
+        myDTCList.add(mdtc41);
+/***********  数据-设定时间  *********************/
+        //除磷投加机时间 （设定分钟）
+        myDTCList.add(mdtc32);
+        //污泥泵1（设定分钟）
+        myDTCList.add(mdtc33);
+        //SBR设定周期时间
+        myDTCList.add(mdtc59);
+        //SBR一次搅拌（设定分钟）
+        myDTCList.add(mdtc34);
+        //SBR曝气（设定分钟）
+        myDTCList.add(mdtc35);
+        //SBR混合（设定分钟）
+        myDTCList.add(mdtc36);
+        //SBR静置（设定分钟）
+        myDTCList.add(mdtc37);
+        //SBR污泥泵2（设定分钟）
+        myDTCList.add(mdtc38);
+        //SBR活化（设定分钟）
+        myDTCList.add(mdtc39);
+        /***********设备运行状态*********************************/
+        //SBR进水泵停止/运行
+        myDTCList.add(mdtc7);
+        //备用83   SBR池一次搅拌
+        myDTCList.add(mdtc54);
+        //回转式风机1停止/运行
+        myDTCList.add(mdtc9);
+        //回转式风机2停止/运行
+        myDTCList.add(mdtc10);
+        //备用84   SBR池二次搅拌
+        myDTCList.add(mdtc55);
+        //备用85   SBR池静置
+        myDTCList.add(mdtc56);
+        //污泥泵2停止/运行
+        myDTCList.add(mdtc11);
+        //备用86   滗水器周期
+        myDTCList.add(mdtc57);
+        //备用87   活化周期
+        myDTCList.add(mdtc58);
         //集水池搅拌机停止/运行
         myDTCList.add(mdtc3);
         //除磷投加机停止/运行
@@ -965,28 +1071,10 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc5);
         //污泥泵1停止/运行
         myDTCList.add(mdtc6);
-        //SBR进水泵停止/运行
-        myDTCList.add(mdtc7);
         //SBR池搅拌机停止/运行
         myDTCList.add(mdtc8);
-        //回转式风机1停止/运行
-        myDTCList.add(mdtc9);
-        //回转式风机2停止/运行
-        myDTCList.add(mdtc10);
-        //污泥泵2停止/运行
-        myDTCList.add(mdtc11);
         //滗水器停止/运行
         myDTCList.add(mdtc12);
-        //备用83   SBR池一次搅拌
-        myDTCList.add(mdtc54);
-        //备用84   SBR池二次搅拌
-        myDTCList.add(mdtc55);
-        //备用85   SBR池静置
-        myDTCList.add(mdtc56);
-        //备用86   滗水器周期
-        myDTCList.add(mdtc57);
-        //备用87   活化周期
-        myDTCList.add(mdtc58);
         /***********  故障指示  *********************/
         //集水池搅拌机正常/故障
         myDTCList.add(mdtc13);
@@ -1011,10 +1099,8 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         //PLC电量不足
         myDTCList.add(mdtc23);
         /***********  公共参数  *********************/
-        //系统手动模式/自动模式
-        myDTCList.add(mdtc24);
-        //SBR周期运行标识
-        myDTCList.add(mdtc25);
+
+
         //集水池液位高未到/到了
         myDTCList.add(mdtc26);
         //集水池液位低未到/到了
@@ -1028,56 +1114,11 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         //SBR池液位低未到/到了
         myDTCList.add(mdtc31);
 
-        /***********  数据-设定时间  *********************/
-        //除磷投加机时间 （设定分钟）
-        myDTCList.add(mdtc32);
-        //污泥泵1（设定分钟）
-        myDTCList.add(mdtc33);
-        //SBR设定周期时间
-        myDTCList.add(mdtc59);
-        //SBR一次搅拌（设定分钟）
-        myDTCList.add(mdtc34);
-        //SBR曝气（设定分钟）
-        myDTCList.add(mdtc35);
-        //SBR混合（设定分钟）
-        myDTCList.add(mdtc36);
-        //SBR静置（设定分钟）
-        myDTCList.add(mdtc37);
-        //SBR污泥泵2（设定分钟）
-        myDTCList.add(mdtc38);
-        //SBR活化（设定分钟）
-        myDTCList.add(mdtc39);
-        /***********  数据-运行时间  *********************/
-        //除磷投加机时间 （运行分钟）
-        myDTCList.add(mdtc40);
-        //污泥泵1（运行分钟）
-        myDTCList.add(mdtc41);
-        //SBR一次搅拌（运行分钟）
-        myDTCList.add(mdtc42);
-        //SBR曝气（运行分钟）
-        myDTCList.add(mdtc43);
-        //SBR混合（运行分钟）
-        myDTCList.add(mdtc44);
-        //SBR静置（运行分钟）
-        myDTCList.add(mdtc45);
-        //SBR污泥泵2（运行分钟）
-        myDTCList.add(mdtc46);
-        //SBR活化（运行分钟）
-        myDTCList.add(mdtc47);
-        //集水池搅拌机（运行时间）
-        myDTCList.add(mdtc48);
-        //集水池提升泵时间（运行分钟）
-        myDTCList.add(mdtc49);
-        //SBR进水泵（运行时间）
-        myDTCList.add(mdtc50);
-        //流量计（m³）
-        myDTCList.add(mdtc51);
-        //SBR水流量
-        myDTCList.add(mdtc60);
-        //设备发送数据时间
-        myDTCList.add(mdtc52);
-        //状态
-        myDTCList.add(mdtc53);
+
+
+
+
+
 
         return myDTCList;
     }

@@ -180,6 +180,11 @@ function orgaddNewChildNode() {
 }
 
 function orgremoveSelectNode() {
+    //需要判断是否确定删除
+    $('#orgdelcfmModel').modal();
+}
+
+function orgsureRemoveSelectNode() {
     var inputFatherId = document.getElementById("orginputFatherId");
     var inputFatherIdVal = inputFatherId.value;
     if (inputFatherIdVal.length == 0)

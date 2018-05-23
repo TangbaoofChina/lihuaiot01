@@ -942,7 +942,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         MydataTableColumn mdtc54 = new MydataTableColumn();
         mdtc54.setData("sendDate");
         mdtc54.setDefaultContent("54");
-        mdtc54.setTitle("发送");
+        mdtc54.setTitle("时间");
 
         MydataTableColumn mdtc55 = new MydataTableColumn();
         mdtc55.setData("dReceiveTime");
@@ -958,6 +958,10 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc1);
         //名称
         myDTCList.add(mdtc2);
+        //状态
+        myDTCList.add(mdtc56);
+        //发送
+        myDTCList.add(mdtc54);
         //天数
         myDTCList.add(mdtc12);
         //舍内平均
@@ -1025,15 +1029,11 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc51);
         //最小通风曲线
         myDTCList.add(mdtc52);
-
         //报警
         myDTCList.add(mdtc53);
-        //发送
-        myDTCList.add(mdtc54);
         //接收
         myDTCList.add(mdtc55);
-        //状态
-        myDTCList.add(mdtc56);
+
         return myDTCList;
     }
 

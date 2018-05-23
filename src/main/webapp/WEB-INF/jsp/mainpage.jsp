@@ -191,10 +191,10 @@
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
                                     </li>
-                                    <li class="list-group-item">
+                                    <%--<li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecode" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecode.jsp">代码管理</a>
-                                    </li>
+                                    </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="rolecombinedevice" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/rolecombinedevice.jsp">角色管理</a>
