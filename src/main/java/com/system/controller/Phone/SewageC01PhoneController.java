@@ -24,11 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sewageC01phone")
+@RequestMapping("/phone/sewagec01")
 public class SewageC01PhoneController {
 
     @Autowired
@@ -57,7 +60,7 @@ public class SewageC01PhoneController {
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
             RoleInfo roleInfoAdmin = new RoleInfo();
-            //用鸡舍的admin代替
+            //用污水处理的admin代替
             roleInfoAdmin.setRoleId("6AE5C6025D7B1035E0536800A8C0C8FD");
             roleInfoAdmin.setRoleName("211");
             roleInfoAdmin.setRoleDescribe("污水处理");
@@ -96,7 +99,8 @@ public class SewageC01PhoneController {
             return "[]";
         List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
         //获取时间-start
-        /*int mDay = Integer.parseInt(day);
+        //正式时间
+        int mDay = Integer.parseInt(day);
         mDay = -1 * mDay;
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -105,9 +109,9 @@ public class SewageC01PhoneController {
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, mDay);
         date = calendar.getTime();
-        String sStartDate = simpleFormat.format(date);*/
-        String sEndDate = "2017/12/30 23:59:59";
-        String sStartDate = "2017/12/01 00:00:00";
+        String sStartDate = simpleFormat.format(date);
+        /*String sEndDate = "2017/12/30 23:59:59";
+        String sStartDate = "2017/12/01 00:00:00";*/
         //获取时间-end
         String[] deviceNums = new String[1];
         deviceNums[0] = devNum;

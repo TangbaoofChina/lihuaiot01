@@ -32,6 +32,7 @@ public class DeviceCharts01 {
         List<String> deviceParameterTime = new ArrayList<String>();
         List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
 
+        deviceParameterName.add("舍内");
         deviceParameterName.add("舍前");
         deviceParameterName.add("舍中");
         deviceParameterName.add("舍后");
@@ -43,13 +44,16 @@ public class DeviceCharts01 {
         parameterInTemp2.setName("舍中");
         ParameterData01 parameterInTemp3 = new ParameterData01();
         parameterInTemp3.setName("舍后");
-        ParameterData01 parameterOutTemp4 = new ParameterData01();
-        parameterOutTemp4.setName("舍外");
+        ParameterData01 parameterOutTemp = new ParameterData01();
+        parameterOutTemp.setName("舍外");
+        ParameterData01 parameterInAveTemp = new ParameterData01();
+        parameterInTemp1.setName("舍内");
 
         List<OneDataDetail> inTemp01List = new ArrayList<OneDataDetail>();
         List<OneDataDetail> inTemp02List = new ArrayList<OneDataDetail>();
         List<OneDataDetail> inTemp03List = new ArrayList<OneDataDetail>();
-        List<OneDataDetail> outTemp04List = new ArrayList<OneDataDetail>();
+        List<OneDataDetail> outTempList = new ArrayList<OneDataDetail>();
+        List<OneDataDetail> inAveTempList = new ArrayList<OneDataDetail>();
 
         for (EC01DeviceMessage deviceMessage:deviceMessageList
                 ) {
@@ -67,24 +71,32 @@ public class DeviceCharts01 {
             oneDataDetailInTemp3.setName(deviceMessage.getSendDate());
             oneDataDetailInTemp3.setValue(String.valueOf(deviceMessage.getInTemp3()));
 
-            OneDataDetail oneDataDetailOutTemp4 = new OneDataDetail();
-            oneDataDetailOutTemp4.setName(deviceMessage.getSendDate());
-            oneDataDetailOutTemp4.setValue(String.valueOf(deviceMessage.getOutTemp()));
+            OneDataDetail oneDataDetailOutTemp = new OneDataDetail();
+            oneDataDetailOutTemp.setName(deviceMessage.getSendDate());
+            oneDataDetailOutTemp.setValue(String.valueOf(deviceMessage.getOutTemp()));
+
+            OneDataDetail oneDataDetailInAveTemp = new OneDataDetail();
+            oneDataDetailInAveTemp.setName(deviceMessage.getSendDate());
+            oneDataDetailInAveTemp.setValue(String.valueOf(deviceMessage.getInAveTemp()));
+
             inTemp01List.add(oneDataDetailInTemp1);
             inTemp02List.add(oneDataDetailInTemp2);
             inTemp03List.add(oneDataDetailInTemp3);
-            outTemp04List.add(oneDataDetailOutTemp4);
+            outTempList.add(oneDataDetailOutTemp);
+            inAveTempList.add(oneDataDetailInAveTemp);
         }
 
         parameterInTemp1.setData(inTemp01List);
         parameterInTemp2.setData(inTemp02List);
         parameterInTemp3.setData(inTemp03List);
-        parameterOutTemp4.setData(outTemp04List);
+        parameterOutTemp.setData(outTempList);
+        parameterInAveTemp.setData(inAveTempList);
 
         parameterDataList.add(parameterInTemp1);
         parameterDataList.add(parameterInTemp2);
         parameterDataList.add(parameterInTemp3);
-        parameterDataList.add(parameterOutTemp4);
+        parameterDataList.add(parameterOutTemp);
+        parameterDataList.add(parameterInAveTemp);
         DeviceInfo deviceInfo = new DeviceInfo();
         deviceInfo.setDName(deviceMessageList.get(0).getDName());
         deviceInfo.setDSerialNum(deviceMessageList.get(0).getDSerialNum());

@@ -94,7 +94,8 @@ public class EC01PhoneController {
             return "[]";
         List<EC01DeviceMessage> ec01DeviceMessageList = new ArrayList<EC01DeviceMessage>();
         //获取时间-start
-        /*int mDay = Integer.parseInt(day);
+        //正式时间
+        int mDay = Integer.parseInt(day);
         mDay = -1 * mDay;
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -103,9 +104,10 @@ public class EC01PhoneController {
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, mDay);
         date = calendar.getTime();
-        String sStartDate = simpleFormat.format(date);*/
-        String sEndDate = "2018/05/21 23:59:59";
-        String sStartDate = "2018/05/21 00:00:00";
+        String sStartDate = simpleFormat.format(date);
+        //模拟测试时间
+        /*String sEndDate = "2018/05/21 23:59:59";
+        String sStartDate = "2018/05/21 00:00:00";*/
         //获取时间-end
         String[] deviceNums = new String[1];
         deviceNums[0] = devNum;
