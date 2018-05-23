@@ -61,11 +61,23 @@
             <value>舍后</value>
         </property>
         <property>
-            <field>outTemp4</field>
+            <field>inTemp4</field>
+            <value>温度备用1</value>
+        </property>
+        <property>
+            <field>inTemp5</field>
+            <value>温度备用2</value>
+        </property>
+        <property>
+            <field>inTemp6</field>
+            <value>温度备用3</value>
+        </property>
+        <property>
+            <field>outTemp</field>
             <value>舍外</value>
         </property>
         <property>
-            <field>boilerTemp5</field>
+            <field>boilerTemp</field>
             <value>炉温</value>
         </property>
         <property>
@@ -105,100 +117,12 @@
             <value>小窗开启</value>
         </property>
         <property>
-            <field>frontGuidePlatePct</field>
-            <value>正面导流板</value>
+            <field>guidePlate01Pct</field>
+            <value>导流板01</value>
         </property>
         <property>
-            <field>sideGuidePlatePct</field>
-            <value>侧面导流板</value>
-        </property>
-        <property>
-            <field>rollerblind01Pct</field>
-            <value>卷帘1</value>
-        </property>
-        <property>
-            <field>rollerblind02Pct</field>
-            <value>卷帘2</value>
-        </property>
-        <property>
-            <field>wetCurtainWP</field>
-            <value>湿帘水泵</value>
-        </property>
-        <property>
-            <field>fan1On</field>
-            <value>风机1</value>
-        </property>
-        <property>
-            <field>fan2On</field>
-            <value>风机2</value>
-        </property>
-        <property>
-            <field>fan3On</field>
-            <value>风机3</value>
-        </property>
-        <property>
-            <field>fan4On</field>
-            <value>风机4</value>
-        </property>
-        <property>
-            <field>fan5On</field>
-            <value>风机5</value>
-        </property>
-        <property>
-            <field>fan6On</field>
-            <value>风机6</value>
-        </property>
-        <property>
-            <field>fan7On</field>
-            <value>风机7</value>
-        </property>
-        <property>
-            <field>fan8On</field>
-            <value>风机8</value>
-        </property>
-        <property>
-            <field>fan9On</field>
-            <value>风机9</value>
-        </property>
-        <property>
-            <field>fan10On</field>
-            <value>风机10</value>
-        </property>
-        <property>
-            <field>fanClockEnable</field>
-            <value>风机定时</value>
-        </property>
-        <property>
-            <field>fanChangeEnable</field>
-            <value>风机切换</value>
-        </property>
-        <property>
-            <field>boilerOn</field>
-            <value>锅炉</value>
-        </property>
-        <property>
-            <field>heatSinkOn</field>
-            <value>散热器</value>
-        </property>
-        <property>
-            <field>wetCurtainWPEnable</field>
-            <value>湿帘水泵</value>
-        </property>
-        <property>
-            <field>wetCurtainMotorOn</field>
-            <value>湿帘电机</value>
-        </property>
-        <property>
-            <field>alarmClockEnable</field>
-            <value>定时报警</value>
-        </property>
-        <property>
-            <field>tempCurveEnable</field>
-            <value>温度曲线</value>
-        </property>
-        <property>
-            <field>minAirCurveEnable</field>
-            <value>最小通风曲线</value>
+            <field>guidePlate01Pct</field>
+            <value>导流板02</value>
         </property>
         <property>
             <field>chickenAge</field>
@@ -209,16 +133,137 @@
             <value>NH3</value>
         </property>
         <property>
+            <field>h2sVal</field>
+            <value>H2S</value>
+        </property>
+        <property>
             <field>negativePressure</field>
             <value>负压</value>
         </property>
         <property>
-            <field>alarmCode</field>
-            <value>报警</value>
+            <field>lightIntensity</field>
+            <value>光照强度</value>
         </property>
         <property>
-            <field>errorCode</field>
-            <value>错误</value>
+            <field>ventilationVolume</field>
+            <value>换气量</value>
+        </property>
+        <property>
+            <field>signalIntensity</field>
+            <value>信号强度</value>
+        </property>
+        <property>
+            <field>relay09</field>
+            <value>继电器09</value>
+        </property>
+        <property>
+            <field>relay10</field>
+            <value>继电器10</value>
+        </property>
+        <property>
+            <field>relay11</field>
+            <value>继电器11</value>
+        </property>
+        <property>
+            <field>relay12</field>
+            <value>继电器12</value>
+        </property>
+        <property>
+            <field>relay13</field>
+            <value>继电器13</value>
+        </property>
+        <property>
+            <field>relay14</field>
+            <value>继电器14</value>
+        </property>
+        <property>
+            <field>fan01On</field>
+            <value>风机1</value>
+        </property>
+        <property>
+            <field>fan02On</field>
+            <value>风机2</value>
+        </property>
+        <property>
+            <field>fan03On</field>
+            <value>风机3</value>
+        </property>
+        <property>
+            <field>fan04On</field>
+            <value>风机4</value>
+        </property>
+        <property>
+            <field>fan05On</field>
+            <value>风机5</value>
+        </property>
+        <property>
+            <field>fan06On</field>
+            <value>风机6</value>
+        </property>
+        <property>
+            <field>fan07On</field>
+            <value>风机7</value>
+        </property>
+        <property>
+            <field>fan08On</field>
+            <value>风机8</value>
+        </property>
+        <property>
+            <field>relay09On</field>
+            <value>继电器09状态</value>
+        </property>
+        <property>
+            <field>relay10On</field>
+            <value>继电器10状态</value>
+        </property>
+        <property>
+            <field>relay11On</field>
+            <value>继电器11状态</value>
+        </property>
+        <property>
+            <field>relay12On</field>
+            <value>继电器12状态</value>
+        </property>
+        <property>
+            <field>relay13On</field>
+            <value>继电器13状态</value>
+        </property>
+        <property>
+            <field>relay14On</field>
+            <value>继电器14状态</value>
+        </property>
+        <property>
+            <field>wetCurtainOn</field>
+            <value>湿帘水泵状态</value>
+        </property>
+        <property>
+            <field>alarmOn</field>
+            <value>报警状态</value>
+        </property>
+
+        <property>
+            <field>fanClockEnable</field>
+            <value>风机定时</value>
+        </property>
+        <property>
+            <field>fanChangeEnable</field>
+            <value>风机切换</value>
+        </property>
+        <property>
+            <field>wetCurtainWPEnable</field>
+            <value>湿帘水泵</value>
+        </property>
+        <property>
+            <field>tempCurveEnable</field>
+            <value>温度曲线</value>
+        </property>
+        <property>
+            <field>minAirCurveEnable</field>
+            <value>最小通风曲线</value>
+        </property>
+        <property>
+            <field>alarmErrorCode</field>
+            <value>报警</value>
         </property>
         <property>
             <field>sendDate</field>
