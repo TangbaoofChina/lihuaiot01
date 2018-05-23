@@ -29,6 +29,16 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
     private Boolean sludgePump02Run;
     //滗水器停止/运行
     private Boolean decanterRun;
+    //备用83   SBR池一次搅拌
+    private Boolean sbrMixerOnceRun;
+    //备用84   SBR池二次搅拌
+    private Boolean sbrMixerSecRun;
+    //备用85   SBR池静置
+    private Boolean sbrStaticRun;
+    //备用86   滗水器周期
+    private Boolean decanterCycleRun;
+    //备用87   活化周期
+    private Boolean sbrActiveRun;
 
     /***********  故障指示  *********************/
     //集水池搅拌机正常/故障
@@ -74,6 +84,8 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
     private Boolean sbrLowOn;
 
     /***********  数据-设定时间  *********************/
+    //sbr设定总时间
+    private int sbrCycleSetMinute;
     //除磷投加机时间 （设定分钟）
     private int dephosphorizeSetMinute;
     //污泥泵1（设定分钟）
@@ -115,6 +127,8 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
     private int sbrIntakePumpRunMinute;
     //流量计（m³）
     private long flowmeter;
+    //当日流量(m³)
+    private long todayFlowmeter;
     //设备发送数据时间
     private String sendDate;
 
@@ -196,6 +210,46 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
 
     public void setDecanterRun(Boolean decanterRun) {
         this.decanterRun = decanterRun;
+    }
+
+    public Boolean getSbrMixerOnceRun() {
+        return sbrMixerOnceRun;
+    }
+
+    public void setSbrMixerOnceRun(Boolean sbrMixerOnceRun) {
+        this.sbrMixerOnceRun = sbrMixerOnceRun;
+    }
+
+    public Boolean getSbrMixerSecRun() {
+        return sbrMixerSecRun;
+    }
+
+    public void setSbrMixerSecRun(Boolean sbrMixerSecRun) {
+        this.sbrMixerSecRun = sbrMixerSecRun;
+    }
+
+    public Boolean getSbrStaticRun() {
+        return sbrStaticRun;
+    }
+
+    public void setSbrStaticRun(Boolean sbrStaticRun) {
+        this.sbrStaticRun = sbrStaticRun;
+    }
+
+    public Boolean getDecanterCycleRun() {
+        return decanterCycleRun;
+    }
+
+    public void setDecanterCycleRun(Boolean decanterCycleRun) {
+        this.decanterCycleRun = decanterCycleRun;
+    }
+
+    public Boolean getSbrActiveRun() {
+        return sbrActiveRun;
+    }
+
+    public void setSbrActiveRun(Boolean sbrActiveRun) {
+        this.sbrActiveRun = sbrActiveRun;
     }
 
     public Boolean getCollectMixerFault() {
@@ -526,6 +580,22 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         this.sendDate = sendDate;
     }
 
+    public int getSbrCycleSetMinute() {
+        return sbrCycleSetMinute;
+    }
+
+    public void setSbrCycleSetMinute(int sbrCycleSetMinute) {
+        this.sbrCycleSetMinute = sbrCycleSetMinute;
+    }
+
+    public long getTodayFlowmeter() {
+        return todayFlowmeter;
+    }
+
+    public void setTodayFlowmeter(long todayFlowmeter) {
+        this.todayFlowmeter = todayFlowmeter;
+    }
+
     public List<MydataTableColumn> getDeviceHead(){
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
 
@@ -599,6 +669,32 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         mdtc12.setData("decanterRun");
         mdtc12.setDefaultContent("12");
         mdtc12.setTitle("滗水器运行");
+
+        //备用83   SBR池一次搅拌
+        MydataTableColumn mdtc54 = new MydataTableColumn();
+        mdtc54.setData("sbrMixerOnceRun");
+        mdtc54.setDefaultContent("54");
+        mdtc54.setTitle("SBR池一次搅拌");
+        //备用84   SBR池二次搅拌
+        MydataTableColumn mdtc55 = new MydataTableColumn();
+        mdtc55.setData("sbrMixerSecRun");
+        mdtc55.setDefaultContent("55");
+        mdtc55.setTitle("SBR池二次搅拌");
+        //备用85   SBR池静置
+        MydataTableColumn mdtc56 = new MydataTableColumn();
+        mdtc56.setData("sbrStaticRun");
+        mdtc56.setDefaultContent("56");
+        mdtc56.setTitle("SBR池静置");
+        //备用86   滗水器周期
+        MydataTableColumn mdtc57 = new MydataTableColumn();
+        mdtc57.setData("decanterCycleRun");
+        mdtc57.setDefaultContent("57");
+        mdtc57.setTitle("滗水器周期");
+        //备用87   活化周期
+        MydataTableColumn mdtc58 = new MydataTableColumn();
+        mdtc58.setData("sbrActiveRun");
+        mdtc58.setDefaultContent("58");
+        mdtc58.setTitle("活化周期");
 
         //集水池搅拌机正常/故障
         MydataTableColumn mdtc13 = new MydataTableColumn();
@@ -726,6 +822,12 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         mdtc33.setDefaultContent("33");
         mdtc33.setTitle("污泥泵1设定时间");
 
+        //sbr设定总时间
+        MydataTableColumn mdtc59 = new MydataTableColumn();
+        mdtc59.setData("sbrCycleSetMinute");
+        mdtc59.setDefaultContent("59");
+        mdtc59.setTitle("SBR一次搅拌设定时间");
+
         //SBR一次搅拌（设定分钟）
         MydataTableColumn mdtc34 = new MydataTableColumn();
         mdtc34.setData("sbrMixerOnceSetMinute");
@@ -834,6 +936,11 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         mdtc51.setDefaultContent("51");
         mdtc51.setTitle("流量计");
 
+        //当日流量(m³)
+        MydataTableColumn mdtc60 = new MydataTableColumn();
+        mdtc60.setData("todayFlowmeter");
+        mdtc60.setDefaultContent("51");
+        mdtc60.setTitle("当日流量");
 
         //设备发送数据时间
         MydataTableColumn mdtc52 = new MydataTableColumn();
@@ -870,7 +977,16 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc11);
         //滗水器停止/运行
         myDTCList.add(mdtc12);
-
+        //备用83   SBR池一次搅拌
+        myDTCList.add(mdtc54);
+        //备用84   SBR池二次搅拌
+        myDTCList.add(mdtc55);
+        //备用85   SBR池静置
+        myDTCList.add(mdtc56);
+        //备用86   滗水器周期
+        myDTCList.add(mdtc57);
+        //备用87   活化周期
+        myDTCList.add(mdtc58);
         /***********  故障指示  *********************/
         //集水池搅拌机正常/故障
         myDTCList.add(mdtc13);
@@ -917,6 +1033,8 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc32);
         //污泥泵1（设定分钟）
         myDTCList.add(mdtc33);
+        //SBR设定周期时间
+        myDTCList.add(mdtc59);
         //SBR一次搅拌（设定分钟）
         myDTCList.add(mdtc34);
         //SBR曝气（设定分钟）
@@ -954,6 +1072,8 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc50);
         //流量计（m³）
         myDTCList.add(mdtc51);
+        //SBR水流量
+        myDTCList.add(mdtc60);
         //设备发送数据时间
         myDTCList.add(mdtc52);
         //状态

@@ -57,6 +57,13 @@
         <result column="SWC01_FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
         <result column="SWC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="SWC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="SWC01_SBRMIXERONCERUN" jdbcType="BOOLEAN" property="sbrMixerOnceRun"/>
+        <result column="SWC01_SBRMIXERSECRUN" jdbcType="BOOLEAN" property="sbrMixerSecRun"/>
+        <result column="SWC01_SBRSTATICRUN" jdbcType="BOOLEAN" property="sbrStaticRun"/>
+        <result column="SWC01_DECANTERCYCLERUN" jdbcType="BOOLEAN" property="decanterCycleRun"/>
+        <result column="SWC01_SBRACTIVERUN" jdbcType="BOOLEAN" property="sbrActiveRun"/>
+        <result column="SWC01_SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
+        <result column="SWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
     </resultMap>
     <resultMap id="BaseHisResultMap" type="com.system.po.SewageC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -114,6 +121,13 @@
         <result column="HSWC01_FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
         <result column="HSWC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="HSWC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="HSWC01_SBRMIXERONCERUN" jdbcType="BOOLEAN" property="sbrMixerOnceRun"/>
+        <result column="HSWC01_SBRMIXERSECRUN" jdbcType="BOOLEAN" property="sbrMixerSecRun"/>
+        <result column="HSWC01_SBRSTATICRUN" jdbcType="BOOLEAN" property="sbrStaticRun"/>
+        <result column="HSWC01_DECANTERCYCLERUN" jdbcType="BOOLEAN" property="decanterCycleRun"/>
+        <result column="HSWC01_SBRACTIVERUN" jdbcType="BOOLEAN" property="sbrActiveRun"/>
+        <result column="HSWC01_SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
+        <result column="HSWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
     </resultMap>
 
     <select id="selectSewageC01ByORGId" parameterType="string"  resultMap="BaseResultMap">

@@ -191,21 +191,33 @@
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="sewageC01Main" style="text-align: center;">
                 <div class="col-md-9 col-sm-9 row">
+                <div class="col-md-2 col-sm-2 SewageC01border">
+                    <span>时间</span>
+                </div>
+                <div class="col-md-5 col-sm-5 SewageC01border">
+                    <span id="sewagec01sendDate">2018-05-19 12:21:12</span>
+                </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>流量计(m³)</span>
+                        <span>累计流量(m³)</span>
                     </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
                         <span id="flowmeter">50</span>
                     </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span>时间</span>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>当日流量(m³)</span>
                     </div>
-                    <div class="col-md-5 col-sm-5 SewageC01border">
-                        <span id="sendDate">2018-05-19 12:21:12</span>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="todayFlowmeter">50</span>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
                     <span style="font-weight: bold"></span>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">污水处理前期工艺(分钟)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
@@ -226,9 +238,6 @@
                     <div class="col-md-2 col-sm-2 SewageC01border">
                         <span>运行时间</span>
                     </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">污水处理前期工艺(分钟)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
@@ -279,6 +288,42 @@
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>系统自动模式</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <div id="systemAutoStop" class="rectangle02Close" style="display: block">手动</div>
+                        <div id="systemAutoRun" class="rectangle02Open" style="display: none">自动</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR周期运行</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <div id="sbrCycleStop" class="rectangle02Close" style="display: block">停止</div>
+                        <div id="sbrCycleRun" class="rectangle02Open" style="display: none">周期</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span>运行时间</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span>运行时间</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
                         <span>SBR池进水泵</span>
                     </div>
                     <div class="col-md-1 col-sm-1 SewageC01border">
@@ -289,15 +334,153 @@
                         <span id="sbrIntakePumpRunMinute">50</span>
                     </div>
                     <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR池搅拌机</span>
+                        <span>SBR静置</span>
                     </div>
                     <div class="col-md-1 col-sm-1 SewageC01border">
-                        <div id="sbrMixerStop" class="rectangleClose" style="display: block">停</div>
-                        <div id="sbrMixerRun" class="rectangleOpen" style="display: none">运</div>
+                        <div id="sbrStaticStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrStaticRun" class="rectangleOpen" style="display: none">运</div>
                     </div>
                     <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span>/</span>
+                        <span id="sbrStaticRunMinute">50</span>
                     </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR一次搅拌</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="sbrMixerOnceStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixerOnceRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span id="sbrMixerOnceRunMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR污泥泵2</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="sludgePump02Stop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sludgePump02Run" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span id="sludgePump02RunMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR曝气</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="fanStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="fanRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span id="fanRunMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>滗水器(排水)</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="decanterCycleStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="decanterCycleRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border" style="position: center">
+                        <div id="decanterStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="decanterRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR二次搅拌</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="sbrMixerSecStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixerSecRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span id="sbrMixerRunMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR静置活化</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="sbrActiveStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrActiveRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
+                        <span id="sbrActiveRunMinute">50</span>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">工艺流程设定时间(分钟)</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>除磷投加机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="dephosphorizeSetMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>污泥泵1</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sludgePump01SetMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR设定周期</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sbrCycleSetMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR一次搅拌</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sbrMixerOnceSetMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR静置</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sbrStaticSetMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR曝气</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="fanSetMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR污泥泵2</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sludgePump02SetMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR混合</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sbrMixerSetMinute">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span>SBR活化</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC01border">
+                        <span id="sbrActiveSetMinute">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">设备运行状态</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
@@ -323,157 +506,20 @@
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR一次搅拌</span>
+                        <span>SBR池搅拌机</span>
                     </div>
                     <div class="col-md-1 col-sm-1 SewageC01border">
+                        <div id="sbrMixerStop" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixerRun" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC01border">
                         <span>/</span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="sbrMixerOnceRunMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR曝气</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <span>/</span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="fanRunMinute">50</span>
-                    </div>
-
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR混合</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <span>/</span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="sbrMixerRunMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR静置</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <span>/</span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="sbrStaticRunMinute">50</span>
-                    </div>
-
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR污泥泵2</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <div id="sludgePump02Stop" class="rectangleClose" style="display: block">停</div>
-                        <div id="sludgePump02Run" class="rectangleOpen" style="display: none">运</div>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="sludgePump02RunMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR活化</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <span>/</span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="sbrActiveRunMinute">50</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>滗水器</span>
-                    </div>
-                    <div class="col-md-1 col-sm-1 SewageC01border">
-                        <div id="decanterStop" class="rectangleClose" style="display: block">停</div>
-                        <div id="decanterRun" class="rectangleOpen" style="display: none">运</div>
-                    </div>
-                    <div class="col-md-2 col-sm-2 SewageC01border">
-                        <span id="decanterRunMinute">50</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">工艺流程设定时间(分钟)</span>
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>除磷投加机</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="dephosphorizeSetMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>污泥泵1</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sludgePump01SetMinute">50</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR一次搅拌</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sbrMixerOnceSetMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR曝气</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="fanSetMinute">50</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR混合</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sbrMixerSetMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR静置</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sbrStaticSetMinute">50</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR污泥泵2</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sludgePump02SetMinute">50</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR活化</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span id="sbrActiveSetMinute">50</span>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
                     <span style="font-weight: bold">公共参数</span>
                 </div>
-                <div class="col-md-9 col-sm-9 row">
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>系统自动模式</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <div id="systemAutoStop" class="rectangle02Close" style="display: block">手动</div>
-                        <div id="systemAutoRun" class="rectangle02Open" style="display: none">自动</div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <span>SBR周期运行</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 SewageC01border">
-                        <div id="sbrCycleStop" class="rectangle02Close" style="display: block">停止</div>
-                        <div id="sbrCycleRun" class="rectangle02Open" style="display: none">周期</div>
-                    </div>
-                </div>
+
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC01border">
                         <span>集水池液位高</span>
