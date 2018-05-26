@@ -28,7 +28,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
     private float humidityVal;
     //二氧化碳
     private float co2Val;
-    //水流量
+    //水流量-饮水
     private float waterFlowVal;
     //室内平均温度
     private float inAveTemp;
@@ -667,17 +667,20 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         MydataTableColumn mdtc7 = new MydataTableColumn();
         mdtc7.setData("boilerTemp");
         mdtc7.setDefaultContent("7");
-        mdtc7.setTitle("炉温");
+        mdtc7.setTitle("水温");
+        mdtc7.setVisible(false);
 
         MydataTableColumn mdtc8 = new MydataTableColumn();
         mdtc8.setData("humidityVal");
         mdtc8.setDefaultContent("8");
         mdtc8.setTitle("湿度");
+        mdtc8.setVisible(false);
 
         MydataTableColumn mdtc9 = new MydataTableColumn();
         mdtc9.setData("co2Val");
         mdtc9.setDefaultContent("9");
         mdtc9.setTitle("CO2");
+        mdtc9.setVisible(false);
 
         MydataTableColumn mdtc10 = new MydataTableColumn();
         mdtc10.setData("waterFlowVal");
@@ -690,16 +693,17 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc11.setTitle("舍内平均");
 
         //温度曲线运行到第几天
-        MydataTableColumn mdtc12 = new MydataTableColumn();
+/*        MydataTableColumn mdtc12 = new MydataTableColumn();
         mdtc12.setData("tempCurveRunDays");
         mdtc12.setDefaultContent("12");
-        mdtc12.setTitle("天数");
+        mdtc12.setTitle("天数");*/
 
         //温度曲线运行到第几阶段
         MydataTableColumn mdtc13 = new MydataTableColumn();
         mdtc13.setData("tempCurveRunStage");
         mdtc13.setDefaultContent("13");
-        mdtc13.setTitle("阶段");
+        mdtc13.setTitle("温曲");
+        mdtc13.setVisible(true);
 
         MydataTableColumn mdtc14 = new MydataTableColumn();
         mdtc14.setData("standardTemp");
@@ -716,25 +720,25 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc16.setData("windowPct");
         mdtc16.setDefaultContent("16");
         mdtc16.setTitle("小窗");
-        mdtc16.setVisible(false);
+        mdtc16.setVisible(true);
 
         MydataTableColumn mdtc17 = new MydataTableColumn();
         mdtc17.setData("guidePlate01Pct");
         mdtc17.setDefaultContent("17");
         mdtc17.setTitle("导流板1");
-        mdtc17.setVisible(false);
+        mdtc17.setVisible(true);
 
         MydataTableColumn mdtc18 = new MydataTableColumn();
         mdtc18.setData("guidePlate02Pct");
         mdtc18.setDefaultContent("18");
         mdtc18.setTitle("导流板2");
-        mdtc18.setVisible(false);
+        mdtc18.setVisible(true);
 
         MydataTableColumn mdtc19 = new MydataTableColumn();
         mdtc19.setData("chickenAge");
         mdtc19.setDefaultContent("19");
         mdtc19.setTitle("日龄");
-        mdtc19.setVisible(false);
+        mdtc19.setVisible(true);
 
         MydataTableColumn mdtc20 = new MydataTableColumn();
         mdtc20.setData("nh3Val");
@@ -764,7 +768,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         mdtc24.setData("ventilationVolume");
         mdtc24.setDefaultContent("24");
         mdtc24.setTitle("换气量");
-        mdtc24.setVisible(false);
+        mdtc24.setVisible(true);
 
         MydataTableColumn mdtc25 = new MydataTableColumn();
         mdtc25.setData("signalIntensity");
@@ -962,8 +966,14 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc56);
         //发送
         myDTCList.add(mdtc54);
-        //天数
-        myDTCList.add(mdtc12);
+/*        //天数
+        myDTCList.add(mdtc12);*/
+       //日龄
+        myDTCList.add(mdtc19);
+        //目标温度
+        myDTCList.add(mdtc14);
+        //阶段-温曲
+        myDTCList.add(mdtc13);
         //舍内平均
         myDTCList.add(mdtc11);
         //舍前
@@ -976,28 +986,44 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc6);
         //饮水
         myDTCList.add(mdtc10);
-        //湿度
-        myDTCList.add(mdtc8);
-
-        //日龄
-        myDTCList.add(mdtc19);
-        //目标温度
-        myDTCList.add(mdtc14);
-        //炉温
-        myDTCList.add(mdtc7);
-
-        //阶段
-        myDTCList.add(mdtc13);
-
-        //通风级别
-        myDTCList.add(mdtc15);
+        //换气量
+        myDTCList.add(mdtc24);
         //小窗
         myDTCList.add(mdtc16);
-        //导流板1
+        //导板1
         myDTCList.add(mdtc17);
-        //导流板2
+        //导板2
         myDTCList.add(mdtc18);
-
+        //炉温
+        myDTCList.add(mdtc7);
+        //湿度
+        myDTCList.add(mdtc8);
+        //二氧化碳
+        myDTCList.add(mdtc9);
+        //通风级别
+        myDTCList.add(mdtc15);
+        //NH3
+        myDTCList.add(mdtc20);
+        //H2S
+        myDTCList.add(mdtc21);
+        //负压
+        myDTCList.add(mdtc22);
+        //光照强度
+        myDTCList.add(mdtc23);
+        //信号强度
+        myDTCList.add(mdtc25);
+        //继电器9含义
+        myDTCList.add(mdtc26);
+        //继电器10含义
+        myDTCList.add(mdtc27);
+        //继电器11含义
+        myDTCList.add(mdtc28);
+        //继电器12含义
+        myDTCList.add(mdtc29);
+        //继电器13含义
+        myDTCList.add(mdtc30);
+        //继电器14含义
+        myDTCList.add(mdtc31);
         //风机1
         myDTCList.add(mdtc32);
         //风机2
@@ -1014,11 +1040,22 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc38);
         //风机8
         myDTCList.add(mdtc39);
+        //继电器9状态
+        myDTCList.add(mdtc40);
+        //继电器10状态
+        myDTCList.add(mdtc41);
+        //继电器11状态
+        myDTCList.add(mdtc42);
+        //继电器12状态
+        myDTCList.add(mdtc43);
+        //继电器13状态
+        myDTCList.add(mdtc44);
+        //继电器14状态
+        myDTCList.add(mdtc45);
         //湿帘水泵
         myDTCList.add(mdtc46);
         //报警状态
         myDTCList.add(mdtc47);
-
         //风机定时
         myDTCList.add(mdtc48);
         //风机切换
@@ -1040,6 +1077,35 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
     public List<PhoneRealMsgInfo> getPhoneRealMsgInfoDetail()
     {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("chickenAge");
+        phoneRealMsgInfo06.setTitle("日龄：");
+        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge)+ "天");
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        PhoneRealMsgInfo phoneRealMsgInfo16 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo16.setId("standardTemp");
+        phoneRealMsgInfo16.setTitle("目标温度：");
+        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp)+ "℃");
+        phoneRealMsgInfo16.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo16);
+
+        PhoneRealMsgInfo phoneRealMsgInfo17 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo17.setId("tempCurveRunStage");
+        phoneRealMsgInfo17.setTitle("温曲：");
+        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage)+ "");
+        phoneRealMsgInfo17.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo17);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("inAveTemp");
+        phoneRealMsgInfo04.setTitle("舍内：");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfo04.setHasHis(true);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
         PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
         phoneRealMsgInfo01.setId("inTemp1");
         phoneRealMsgInfo01.setTitle("舍前：");
@@ -1062,13 +1128,6 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo03.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
-        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo04.setId("inAveTemp");
-        phoneRealMsgInfo04.setTitle("室内平均：");
-        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
-        phoneRealMsgInfo04.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
-
         PhoneRealMsgInfo phoneRealMsgInfo015 = new PhoneRealMsgInfo();
         phoneRealMsgInfo015.setId("outTemp");
         phoneRealMsgInfo015.setTitle("舍外：");
@@ -1076,41 +1135,63 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo015.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo015);
 
+        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo13.setId("negativePressure");
+        phoneRealMsgInfo13.setTitle("饮水：");
+        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal) + "m³");
+        phoneRealMsgInfo13.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo13);
 
-        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        PhoneRealMsgInfo phoneRealMsgInfo18 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo18.setId("ventilationVolume");
+        phoneRealMsgInfo18.setTitle("换气量：");
+        phoneRealMsgInfo18.setValue(String.valueOf(ventilationVolume) + "m³/h");
+        phoneRealMsgInfo18.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo18);
+
+        PhoneRealMsgInfo phoneRealMsgInfo19 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo19.setId("windowPct");
+        phoneRealMsgInfo19.setTitle("小窗：");
+        phoneRealMsgInfo19.setValue(String.valueOf(windowPct) + "%");
+        phoneRealMsgInfo19.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo19);
+
+        PhoneRealMsgInfo phoneRealMsgInfo20 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo20.setId("guidePlate01Pct");
+        phoneRealMsgInfo20.setTitle("导板1：");
+        phoneRealMsgInfo20.setValue(String.valueOf(guidePlate01Pct) + "%");
+        phoneRealMsgInfo20.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo20);
+
+        PhoneRealMsgInfo phoneRealMsgInfo21 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo21.setId("guidePlate02Pct");
+        phoneRealMsgInfo21.setTitle("导板2：");
+        phoneRealMsgInfo21.setValue(String.valueOf(guidePlate02Pct) + "%");
+        phoneRealMsgInfo21.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo21);
+
+/*        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
         phoneRealMsgInfo05.setId("humidityVal");
         phoneRealMsgInfo05.setTitle("湿度：");
         phoneRealMsgInfo05.setValue(String.valueOf(humidityVal)+ "%");
         phoneRealMsgInfo05.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);*/
 
-        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo06.setId("chickenAge");
-        phoneRealMsgInfo06.setTitle("日龄：");
-        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge)+ "天");
-        phoneRealMsgInfo06.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
-        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+
+/*        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
         phoneRealMsgInfo07.setId("nh3Val");
         phoneRealMsgInfo07.setTitle("氨气：");
         phoneRealMsgInfo07.setValue(String.valueOf(nh3Val)+"PPM");
         phoneRealMsgInfo07.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);*/
 
-        PhoneRealMsgInfo phoneRealMsgInfo08 = new PhoneRealMsgInfo();
+/*        PhoneRealMsgInfo phoneRealMsgInfo08 = new PhoneRealMsgInfo();
         phoneRealMsgInfo08.setId("negativePressure");
         phoneRealMsgInfo08.setTitle("负压：");
         phoneRealMsgInfo08.setValue(String.valueOf(negativePressure)+"Pa");
         phoneRealMsgInfo08.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo08);
-
-        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo13.setId("negativePressure");
-        phoneRealMsgInfo13.setTitle("饮水：");
-        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal) + "L/Min");
-        phoneRealMsgInfo13.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo13);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo08);*/
 
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
         phoneRealMsgInfo09.setId("fan01On");
@@ -1140,6 +1221,13 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo12.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo12);
 
+        PhoneRealMsgInfo phoneRealMsgInfo22 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo22.setId("fan05On");
+        phoneRealMsgInfo22.setTitle("风机5：");
+        phoneRealMsgInfo22.setValue(String.valueOf(fan05On));
+        phoneRealMsgInfo22.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo22);
+
         PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
         phoneRealMsgInfo14.setId("dState");
         phoneRealMsgInfo14.setTitle("状态：");
@@ -1163,19 +1251,6 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
 
-        phoneRealMsgInfo04.setId("inAveTemp");
-        phoneRealMsgInfo04.setTitle("室内平均：");
-        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
-        phoneRealMsgInfo04.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
-
-        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo05.setId("humidityVal");
-        phoneRealMsgInfo05.setTitle("湿度：");
-        phoneRealMsgInfo05.setValue(String.valueOf(humidityVal)+ "%");
-        phoneRealMsgInfo05.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
-
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("chickenAge");
         phoneRealMsgInfo06.setTitle("日龄：");
@@ -1183,12 +1258,39 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
-        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
+        PhoneRealMsgInfo phoneRealMsgInfo16 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo16.setId("standardTemp");
+        phoneRealMsgInfo16.setTitle("目标温度：");
+        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp)+ "℃");
+        phoneRealMsgInfo16.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo16);
+
+        PhoneRealMsgInfo phoneRealMsgInfo17 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo17.setId("tempCurveRunStage");
+        phoneRealMsgInfo17.setTitle("温曲：");
+        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage)+ "");
+        phoneRealMsgInfo17.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo17);
+
+        phoneRealMsgInfo04.setId("inAveTemp");
+        phoneRealMsgInfo04.setTitle("舍内：");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+/*        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("humidityVal");
+        phoneRealMsgInfo05.setTitle("湿度：");
+        phoneRealMsgInfo05.setValue(String.valueOf(humidityVal)+ "%");
+        phoneRealMsgInfo05.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);*/
+
+/*        PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
         phoneRealMsgInfo13.setId("negativePressure");
         phoneRealMsgInfo13.setTitle("饮水：");
         phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal)+ "L/Min");
         phoneRealMsgInfo13.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo13);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo13);*/
 
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
         phoneRealMsgInfo09.setId("fan01On");

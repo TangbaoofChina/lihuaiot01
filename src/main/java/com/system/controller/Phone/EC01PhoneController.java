@@ -4,15 +4,20 @@ import com.alibaba.fastjson.JSON;
 import com.system.po.*;
 import com.system.po.EChartsOptions.*;
 import com.system.po.Phone.PhoneEChartsOptions;
+import com.system.po.Phone.PhoneLoginMsg;
 import com.system.po.Phone.PhoneRealDeviceInfo;
 import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.po.parameter.ChartsParameters;
 import com.system.po.parameter.DeviceType;
 import com.system.po.parameter.ParameterCharts;
+import com.system.security.realms.MdPasswordUtil;
 import com.system.service.*;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
 import com.system.util.RoleInfoListUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +46,50 @@ public class EC01PhoneController {
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
     @Autowired
     private DeviceTypeService deviceTypeService;
+
+    @Autowired
+    private UserloginService userloginService;
+
+
+    @RequestMapping(value = "login", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String login(String userName, String userPwd) throws Exception {
+        String jsonString = "[]";
+        Userlogin userlogin = userloginService.findByNameLiHua(userName);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userlogin.getUserid());
+        PhoneLoginMsg phoneLoginMsg = new PhoneLoginMsg();
+        if (roleInfoList.size() > 0) //如果物联网系统中已经配置
+        {
+            userlogin.setRoleInfoList(roleInfoList);
+        } else {
+            userlogin = null;
+            phoneLoginMsg.setOaId("");
+            phoneLoginMsg.setMessage("无登录权限");
+        }
+        if (userlogin != null) {
+            //获取正式的密码(立华牧业用户表)
+            String realPassword = MdPasswordUtil.encodePassword(userlogin.getUserid(), userPwd);
+            if (!realPassword.equals(userlogin.getPassword())) {
+                //密码错误
+                userlogin = null;
+                phoneLoginMsg.setOaId("");
+                phoneLoginMsg.setMessage("密码错误");
+            } else {
+                Subject currentSubject = SecurityUtils.getSubject();
+                Session session = currentSubject.getSession();
+                // 清除 session 中的 userInfo 密码敏感信息
+                userlogin.setPassword(null);
+                // 设置用户信息到 Session
+                session.setAttribute("userInfo", userlogin);
+                UserOAEas userOAEas =  phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
+
+                phoneLoginMsg.setOaId(userOAEas.getOaId());
+                phoneLoginMsg.setMessage("登录成功");
+            }
+        }
+        jsonString = JSON.toJSONString(phoneLoginMsg);
+        return jsonString;
+    }
 
     @RequestMapping(value = "selectOrgByUserId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -82,7 +131,7 @@ public class EC01PhoneController {
 
     @RequestMapping(value = "selectHisDeviceInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String selectHisDeviceInfo(String userId,String sQueryParam, String devNum, String day) throws Exception {
+    public String selectHisDeviceInfo(String userId, String sQueryParam, String devNum, String day) throws Exception {
         if (userId == null || userId.equals(""))
             return "[]";
         if (devNum == null || devNum.equals(""))
@@ -129,7 +178,7 @@ public class EC01PhoneController {
             }
         }
         String jsonString = "[]";
-        if (parameterCharts !=null) {
+        if (parameterCharts != null) {
             PhoneEChartsOptions phoneEChartsOptions = getEChartsOptions(parameterCharts.getChartsParameters());
             jsonString = JSON.toJSONString(phoneEChartsOptions);
         }
@@ -154,7 +203,7 @@ public class EC01PhoneController {
         EC01DeviceMessage ec01DeviceMessage = getRealEC01DeviceMessageByUserIdAndDevNum(userId, devNum);
         String jsonString = "[]";
         if (ec01DeviceMessage != null) {
-            PhoneRealDeviceInfo  phoneRealDeviceInfo = getOneRealDeviceInfoDetail(ec01DeviceMessage);
+            PhoneRealDeviceInfo phoneRealDeviceInfo = getOneRealDeviceInfoDetail(ec01DeviceMessage);
             jsonString = JSON.toJSONString(phoneRealDeviceInfo);
         }
         return jsonString;
@@ -175,6 +224,7 @@ public class EC01PhoneController {
 
     /**
      * 通过用户ID和组织ID查询设备实时数据-概要信息
+     *
      * @param userId
      * @param orgId
      * @return
@@ -201,12 +251,12 @@ public class EC01PhoneController {
 
     /**
      * 通过用户ID和设备ID查询设备实时数据-详细信息
+     *
      * @param userId
      * @param devNum
      * @return
      */
-    private EC01DeviceMessage getRealEC01DeviceMessageByUserIdAndDevNum(String userId, String devNum) throws Exception
-    {
+    private EC01DeviceMessage getRealEC01DeviceMessageByUserIdAndDevNum(String userId, String devNum) throws Exception {
         EC01DeviceMessage ec01DeviceMessage = null;
         if (userId == null || userId.equals(""))
             return null;
@@ -267,7 +317,7 @@ public class EC01PhoneController {
         return phoneRealDeviceInfo;
     }
 
-    private PhoneEChartsOptions getEChartsOptions(ChartsParameters chartsParameters){
+    private PhoneEChartsOptions getEChartsOptions(ChartsParameters chartsParameters) {
         //默认一天
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
         /*String getTime =  chartsParameters.getdParameterTime().get(0);

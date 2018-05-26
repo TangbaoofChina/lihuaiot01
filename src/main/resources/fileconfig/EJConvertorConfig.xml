@@ -49,6 +49,22 @@
             <value>名称</value>
         </property>
         <property>
+            <field>chickenAge</field>
+            <value>日龄</value>
+        </property>
+        <property>
+            <field>standardTemp</field>
+            <value>目标温度</value>
+        </property>
+        <property>
+            <field>tempCurveRunStage</field>
+            <value>温曲</value>
+        </property>
+        <property>
+            <field>inAveTemp</field>
+            <value>舍内</value>
+        </property>
+        <property>
             <field>inTemp1</field>
             <value>舍前</value>
         </property>
@@ -60,7 +76,7 @@
             <field>inTemp3</field>
             <value>舍后</value>
         </property>
-        <property>
+        <!--<property>
             <field>inTemp4</field>
             <value>温度备用1</value>
         </property>
@@ -71,14 +87,22 @@
         <property>
             <field>inTemp6</field>
             <value>温度备用3</value>
-        </property>
+        </property>-->
         <property>
             <field>outTemp</field>
             <value>舍外</value>
         </property>
         <property>
+            <field>waterFlowVal</field>
+            <value>饮水</value>
+        </property>
+        <property>
+            <field>ventilationVolume</field>
+            <value>换气量</value>
+        </property>
+        <property>
             <field>boilerTemp</field>
-            <value>炉温</value>
+            <value>水温</value>
         </property>
         <property>
             <field>humidityVal</field>
@@ -88,26 +112,14 @@
             <field>co2Val</field>
             <value>二氧化碳</value>
         </property>
-        <property>
-            <field>waterFlowVal</field>
-            <value>水流量</value>
-        </property>
-        <property>
-            <field>inAveTemp</field>
-            <value>舍内平均</value>
-        </property>
+
+
         <property>
             <field>tempCurveRunDays</field>
             <value>天数</value>
         </property>
-        <property>
-            <field>tempCurveRunStage</field>
-            <value>阶段</value>
-        </property>
-        <property>
-            <field>standardTemp</field>
-            <value>目标温度</value>
-        </property>
+
+
         <property>
             <field>airLevel</field>
             <value>通风级别</value>
@@ -124,10 +136,7 @@
             <field>guidePlate01Pct</field>
             <value>导流板02</value>
         </property>
-        <property>
-            <field>chickenAge</field>
-            <value>日龄</value>
-        </property>
+
         <property>
             <field>nh3Val</field>
             <value>NH3</value>
@@ -144,10 +153,7 @@
             <field>lightIntensity</field>
             <value>光照强度</value>
         </property>
-        <property>
-            <field>ventilationVolume</field>
-            <value>换气量</value>
-        </property>
+
         <property>
             <field>signalIntensity</field>
             <value>信号强度</value>
@@ -266,12 +272,12 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>发送</value>
+            <value>时间</value>
         </property>
-        <property>
+        <!--<property>
             <field>dReceiveTime</field>
             <value>接收</value>
-        </property>
+        </property>-->
         <property>
             <field>dState</field>
             <value>状态</value>

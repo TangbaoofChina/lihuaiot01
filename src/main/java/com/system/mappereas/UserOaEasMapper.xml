@@ -15,4 +15,11 @@
         left join lihua.t_bd_person b on s.easuser_id =b.fid
         where  s.id = #{oaId}
     </select>
+    <select id="selectUserOaEasByEasId" parameterType="String" resultMap="BaseResultMap">
+        select s.username as pname, s.id as oaid,p.fid as easid,b.fid as personId
+        from oadb.system_users s
+        left join lihua.t_pm_user p on s.easuser_id = p.fpersonid
+        left join lihua.t_bd_person b on s.easuser_id =b.fid
+        where  p.fid = #{easId}
+    </select>
 </mapper>

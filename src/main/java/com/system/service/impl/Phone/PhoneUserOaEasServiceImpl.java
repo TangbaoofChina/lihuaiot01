@@ -16,4 +16,9 @@ public class PhoneUserOaEasServiceImpl implements PhoneUserOaEasService {
     public UserOAEas selectUserOaEasByOaId(String oaId) {
         return userOaEasMapper.selectUserOaEasByOaId(oaId);
     }
+
+    @Override
+    public UserOAEas selectUserOaEasByEasId(String easId) {
+        return userOaEasMapper.selectUserOaEasByEasId(easId);
+    }
 }

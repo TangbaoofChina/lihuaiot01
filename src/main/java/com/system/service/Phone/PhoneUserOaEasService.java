@@ -9,4 +9,11 @@ public interface PhoneUserOaEasService {
      * @return
      */
     UserOAEas selectUserOaEasByOaId(String oaId);
+
+    /**
+     * 根据eas的ID获取OA的ID
+     * @param easId
+     * @return
+     */
+    UserOAEas selectUserOaEasByEasId(String easId);
 }
