@@ -116,10 +116,10 @@
             <field>co2Val</field>
             <value>CO2</value>
         </property>
-        <property>
+        <!--<property>
             <field>tempCurveRunDays</field>
             <value>天数</value>
-        </property>
+        </property>-->
         <property>
             <field>airLevel</field>
             <value>通风级别</value>

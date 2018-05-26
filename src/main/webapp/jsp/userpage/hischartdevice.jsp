@@ -16,10 +16,11 @@
             <div class="input-group">
                 <label>参数：</label>
                 <select name="hisChartSelName_Param" id="hisChartSelId_Param" class="input-sm">
-                    <option value="0" selected="selected">舍前</option>
-                    <option value="1">舍中</option>
-                    <option value="2">舍后</option>
-                    <option value="3">舍外</option>
+                    <option value="0" selected="selected">舍内</option>
+                    <option value="1">舍前</option>
+                    <option value="2">舍中</option>
+                    <option value="3">舍后</option>
+                    <option value="4">舍外</option>
                 </select>
             </div>
             <label>时间：</label>
