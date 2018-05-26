@@ -49,6 +49,10 @@
             <value>名称</value>
         </property>
         <property>
+            <field>sendDate</field>
+            <value>时间</value>
+        </property>
+        <property>
             <field>chickenAge</field>
             <value>日龄</value>
         </property>
@@ -110,16 +114,12 @@
         </property>
         <property>
             <field>co2Val</field>
-            <value>二氧化碳</value>
+            <value>CO2</value>
         </property>
-
-
         <property>
             <field>tempCurveRunDays</field>
             <value>天数</value>
         </property>
-
-
         <property>
             <field>airLevel</field>
             <value>通风级别</value>
@@ -136,7 +136,6 @@
             <field>guidePlate01Pct</field>
             <value>导流板02</value>
         </property>
-
         <property>
             <field>nh3Val</field>
             <value>NH3</value>
@@ -153,7 +152,6 @@
             <field>lightIntensity</field>
             <value>光照强度</value>
         </property>
-
         <property>
             <field>signalIntensity</field>
             <value>信号强度</value>
@@ -269,10 +267,6 @@
         <property>
             <field>alarmErrorCode</field>
             <value>报警</value>
-        </property>
-        <property>
-            <field>sendDate</field>
-            <value>时间</value>
         </property>
         <!--<property>
             <field>dReceiveTime</field>

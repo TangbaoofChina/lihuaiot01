@@ -690,7 +690,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         MydataTableColumn mdtc11 = new MydataTableColumn();
         mdtc11.setData("inAveTemp");
         mdtc11.setDefaultContent("11");
-        mdtc11.setTitle("舍内平均");
+        mdtc11.setTitle("舍内");
 
         //温度曲线运行到第几天
 /*        MydataTableColumn mdtc12 = new MydataTableColumn();
