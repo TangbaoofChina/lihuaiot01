@@ -124,20 +124,24 @@
 
                         <div>
                             <!--<div>-->
-                            <p>(前)温度1</p>
+                            <p>舍前</p>
                             <span id="inTemp1">0℃</span>
                             <!--</div>-->
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
-                            <p>(中)温度2</p>
+                            <p>舍中</p>
                             <span id="inTemp2">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
-                            <p>(后)温度3</p>
+                            <p>舍后</p>
                             <span id="inTemp3">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
+                        </div>
+                        <div>
+                            <p>饮水量</p>
+                            <span id="waterFlowVal">0m³/h</span>
                         </div>
                     </div>
                 </div>

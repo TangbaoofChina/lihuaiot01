@@ -252,6 +252,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var nh3Val = document.getElementById("nh3Val");
                 var co2Val = document.getElementById("co2Val");
                 var lightIntensity = document.getElementById("lightIntensity");
+                var waterFlowVal = document.getElementById("waterFlowVal");
                 var sc01date = document.getElementById("sc01date");
                 inTemp1.innerHTML = result.inTemp1 + " ℃";
                 inTemp2.innerHTML = result.inTemp2 + " ℃";
@@ -264,7 +265,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 co2Val.innerHTML = result.co2Val + " ppm";
                 sc01date.innerHTML = result.sendDate;
                 lightIntensity.innerHTML = result.lightIntensity + " Lux";
-
+                waterFlowVal.innerHTML = result.waterFlowVal + " m³/h";
             } else {
                 var type = 'error';
                 var msg = '未查询到设备数据';

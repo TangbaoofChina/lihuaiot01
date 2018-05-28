@@ -326,7 +326,7 @@ function hisSelectDeviceByTreeIdEC01() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 10,
+        pageSize: 25,
 /*        //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],*/
         //是否显示搜索
