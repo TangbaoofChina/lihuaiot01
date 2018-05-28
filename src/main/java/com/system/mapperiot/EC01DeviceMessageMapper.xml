@@ -156,7 +156,7 @@
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
         AND b.HEC01_DATASENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
-        order by b.HEC01_DATASENDDATE ASC
+        order by b.HEC01_DATASENDDATE DESC
     </select>
     <select id="selectEC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select
