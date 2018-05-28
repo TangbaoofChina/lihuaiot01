@@ -251,6 +251,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var humidityVal = document.getElementById("humidityVal");
                 var nh3Val = document.getElementById("nh3Val");
                 var co2Val = document.getElementById("co2Val");
+                var lightIntensity = document.getElementById("lightIntensity");
                 var sc01date = document.getElementById("sc01date");
                 inTemp1.innerHTML = result.inTemp1 + " ℃";
                 inTemp2.innerHTML = result.inTemp2 + " ℃";
@@ -262,6 +263,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 nh3Val.innerHTML = result.nh3Val + " ppm";
                 co2Val.innerHTML = result.co2Val + " ppm";
                 sc01date.innerHTML = result.sendDate;
+                lightIntensity.innerHTML = result.lightIntensity + " Lux";
 
             } else {
                 var type = 'error';
@@ -295,7 +297,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
             if (JSON.stringify(result) !== '[]') {
                 //console.log(result);
                 /*************污水处理前期工艺***************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerRun = document.getElementById("collectMixerRun");
                 var collectMixerStop = document.getElementById("collectMixerStop");
                 //除磷投加机
@@ -340,7 +342,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                     sludgePump01Stop.style.display = "none";
                 }
                 /*************SBR污水处理控制系统***************/
-                //SBR池进水泵
+                    //SBR池进水泵
                 var sbrIntakePumpRun = document.getElementById("sbrIntakePumpRun");
                 var sbrIntakePumpStop = document.getElementById("sbrIntakePumpStop");
                 //SBR池搅拌机
@@ -395,10 +397,10 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                     fan02Stop.style.display = "none";
                 }
                 //SBR曝气
-                if(result.fan01Run === false && result.fan02Run === false){
+                if (result.fan01Run === false && result.fan02Run === false) {
                     fanRun.style.display = "none";
                     fanStop.style.display = "block";
-                }else {
+                } else {
                     fanRun.style.display = "block";
                     fanStop.style.display = "none";
                 }
@@ -493,7 +495,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 todayFlowmeter.innerHTML = result.todayFlowmeter + "m³";
 
                 /*************污水处理前期工艺***************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerRunMinute = document.getElementById("collectMixerRunMinute");
                 //除磷投加机
                 var dephosphorizeRunMinute = document.getElementById("dephosphorizeRunMinute");
@@ -510,7 +512,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //污泥泵1
                 sludgePump01RunMinute.innerText = result.sludgePump01RunMinute;
                 /*************SBR污水处理控制系统***************/
-                //SBR池进水泵
+                    //SBR池进水泵
                 var sbrIntakePumpRunMinute = document.getElementById("sbrIntakePumpRunMinute");
                 //SBR一次搅拌
                 var sbrMixerOnceRunMinute = document.getElementById("sbrMixerOnceRunMinute");
@@ -539,7 +541,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR活化
                 sbrActiveRunMinute.innerText = result.sbrActiveRunMinute;
                 /***************工艺流程设定时间*************************/
-                //除磷投加机
+                    //除磷投加机
                 var dephosphorizeSetMinute = document.getElementById("dephosphorizeSetMinute");
                 dephosphorizeSetMinute.innerText = result.dephosphorizeSetMinute;
                 //污泥泵1
@@ -567,11 +569,10 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 var sbrActiveSetMinute = document.getElementById("sbrActiveSetMinute");
                 sbrActiveSetMinute.innerText = result.sbrActiveSetMinute;
                 /***************公共参数*************************/
-                //系统自动模式
+                    //系统自动模式
                 var systemAutoRun = document.getElementById("systemAutoRun");
                 var systemAutoStop = document.getElementById("systemAutoStop");
-                if (result.systemAuto === false)
-                {
+                if (result.systemAuto === false) {
                     systemAutoRun.style.display = "none";
                     systemAutoStop.style.display = "block";
                 } else {
@@ -581,8 +582,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR周期运行
                 var sbrCycleRun = document.getElementById("sbrCycleRun");
                 var sbrCycleStop = document.getElementById("sbrCycleStop");
-                if (result.sbrCycle === false)
-                {
+                if (result.sbrCycle === false) {
                     sbrCycleRun.style.display = "none";
                     sbrCycleStop.style.display = "block";
                 } else {
@@ -592,8 +592,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //集水池液位高
                 var collectHighOn = document.getElementById("collectHighOn");
                 var collectHighOff = document.getElementById("collectHighOff");
-                if (result.collectHighOn === false)
-                {
+                if (result.collectHighOn === false) {
                     collectHighOn.style.display = "none";
                     collectHighOff.style.display = "block";
                 } else {
@@ -603,8 +602,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //集水池液位低
                 var collectLowOn = document.getElementById("collectLowOn");
                 var collectLowOff = document.getElementById("collectLowOff");
-                if (result.collectLowOn === false)
-                {
+                if (result.collectLowOn === false) {
                     collectLowOn.style.display = "none";
                     collectLowOff.style.display = "block";
                 } else {
@@ -614,8 +612,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //调节池液位高
                 var regulatHighOn = document.getElementById("regulatHighOn");
                 var regulatHighOff = document.getElementById("regulatHighOff");
-                if (result.regulatHighOn === false)
-                {
+                if (result.regulatHighOn === false) {
                     regulatHighOn.style.display = "none";
                     regulatHighOff.style.display = "block";
                 } else {
@@ -625,8 +622,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //调节池液位低
                 var regulatLowOn = document.getElementById("regulatLowOn");
                 var regulatLowOff = document.getElementById("regulatLowOff");
-                if (result.regulatLowOn === false)
-                {
+                if (result.regulatLowOn === false) {
                     regulatLowOn.style.display = "none";
                     regulatLowOff.style.display = "block";
                 } else {
@@ -636,8 +632,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR池液位高
                 var sbrHighOn = document.getElementById("sbrHighOn");
                 var sbrHighOff = document.getElementById("sbrHighOff");
-                if (result.sbrHighOn === false)
-                {
+                if (result.sbrHighOn === false) {
                     sbrHighOn.style.display = "none";
                     sbrHighOff.style.display = "block";
                 } else {
@@ -647,8 +642,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR池液位低
                 var sbrLowOn = document.getElementById("sbrLowOn");
                 var sbrLowOff = document.getElementById("sbrLowOff");
-                if (result.sbrLowOn === false)
-                {
+                if (result.sbrLowOn === false) {
                     sbrLowOn.style.display = "none";
                     sbrLowOff.style.display = "block";
                 } else {
@@ -656,11 +650,10 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                     sbrLowOff.style.display = "none";
                 }
                 /***************故障状态*************************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerNormal = document.getElementById("collectMixerNormal");
                 var collectMixerFault = document.getElementById("collectMixerFault");
-                if (result.collectMixerFault === true)
-                {
+                if (result.collectMixerFault === true) {
                     collectMixerNormal.style.display = "none";
                     collectMixerFault.style.display = "block";
                 } else {
@@ -670,8 +663,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //集水池提升泵
                 var collectPumpNormal = document.getElementById("collectPumpNormal");
                 var collectPumpFault = document.getElementById("collectPumpFault");
-                if (result.collectPumpFault === true)
-                {
+                if (result.collectPumpFault === true) {
                     collectPumpNormal.style.display = "none";
                     collectPumpFault.style.display = "block";
                 } else {
@@ -681,8 +673,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //污泥泵1
                 var sludgePump01Normal = document.getElementById("sludgePump01Normal");
                 var sludgePump01Fault = document.getElementById("sludgePump01Fault");
-                if (result.sludgePump01Fault === true)
-                {
+                if (result.sludgePump01Fault === true) {
                     sludgePump01Normal.style.display = "none";
                     sludgePump01Fault.style.display = "block";
                 } else {
@@ -692,8 +683,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR池进水泵
                 var sbrIntakePumpNormal = document.getElementById("sbrIntakePumpNormal");
                 var sbrIntakePumpFault = document.getElementById("sbrIntakePumpFault");
-                if (result.sbrIntakePumpFault === true)
-                {
+                if (result.sbrIntakePumpFault === true) {
                     sbrIntakePumpNormal.style.display = "none";
                     sbrIntakePumpFault.style.display = "block";
                 } else {
@@ -703,8 +693,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR池搅拌机1
                 var sbrMixer01Normal = document.getElementById("sbrMixer01Normal");
                 var sbrMixer01Fault = document.getElementById("sbrMixer01Fault");
-                if (result.sbrMixer01Fault === true)
-                {
+                if (result.sbrMixer01Fault === true) {
                     sbrMixer01Normal.style.display = "none";
                     sbrMixer01Fault.style.display = "block";
                 } else {
@@ -714,8 +703,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //SBR池搅拌机2
                 var sbrMixer02Normal = document.getElementById("sbrMixer02Normal");
                 var sbrMixer02Fault = document.getElementById("sbrMixer02Fault");
-                if (result.sbrMixer02Fault === true)
-                {
+                if (result.sbrMixer02Fault === true) {
                     sbrMixer02Normal.style.display = "none";
                     sbrMixer02Fault.style.display = "block";
                 } else {
@@ -725,8 +713,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //回转式风机1
                 var fan01Normal = document.getElementById("fan01Normal");
                 var fan01Fault = document.getElementById("fan01Fault");
-                if (result.fan01Fault === true)
-                {
+                if (result.fan01Fault === true) {
                     fan01Normal.style.display = "none";
                     fan01Fault.style.display = "block";
                 } else {
@@ -736,8 +723,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //回转式风机2
                 var fan02Normal = document.getElementById("fan02Normal");
                 var fan02Fault = document.getElementById("fan02Fault");
-                if (result.fan02Fault === true)
-                {
+                if (result.fan02Fault === true) {
                     fan02Normal.style.display = "none";
                     fan02Fault.style.display = "block";
                 } else {
@@ -747,8 +733,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //污泥泵2
                 var sludgePump02Normal = document.getElementById("sludgePump02Normal");
                 var sludgePump02Fault = document.getElementById("sludgePump02Fault");
-                if (result.sludgePump02Fault === true)
-                {
+                if (result.sludgePump02Fault === true) {
                     sludgePump02Normal.style.display = "none";
                     sludgePump02Fault.style.display = "block";
                 } else {
@@ -758,8 +743,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //滗水器
                 var decanterNormal = document.getElementById("decanterNormal");
                 var decanterFault = document.getElementById("decanterFault");
-                if (result.decanterFault === true)
-                {
+                if (result.decanterFault === true) {
                     decanterNormal.style.display = "none";
                     decanterFault.style.display = "block";
                 } else {
@@ -769,8 +753,7 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
                 //PLC电量
                 var plcElecNormal = document.getElementById("plcElecNormal");
                 var plcElecLack = document.getElementById("plcElecLack");
-                if (result.plcElecLack === true)
-                {
+                if (result.plcElecLack === true) {
                     plcElecNormal.style.display = "none";
                     plcElecLack.style.display = "block";
                 } else {

@@ -56,7 +56,7 @@
         </foreach>
         order by a.droffline_devreceivetime desc
     </select>
-    <select id="selectHisOfflineInfoByDate" resultMap="BaseResultMap">
+    <select id="selectHisOfflineInfoByDate" resultMap="BaseHisResultMap">
         select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c
         where a.dhoffline_devnum = b.di_serialnum
@@ -65,7 +65,7 @@
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         order by a.dhoffline_devreceivetime desc
     </select>
-    <select id="selectHisOfflineInfoByDateAndRoleId" resultMap="BaseResultMap">
+    <select id="selectHisOfflineInfoByDateAndRoleId" resultMap="BaseHisResultMap">
         select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.dhoffline_devnum = b.di_serialnum

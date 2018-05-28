@@ -125,18 +125,18 @@
                         <div>
                             <!--<div>-->
                             <p>(前)温度1</p>
-                            <span id="inTemp1">28.9℃</span>
+                            <span id="inTemp1">0℃</span>
                             <!--</div>-->
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
                             <p>(中)温度2</p>
-                            <span id="inTemp2">28.9℃</span>
+                            <span id="inTemp2">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
                             <p>(后)温度3</p>
-                            <span id="inTemp3">28.9℃</span>
+                            <span id="inTemp3">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                     </div>
@@ -146,27 +146,27 @@
                     <div class="temp">
                         <div>
                             <p>平均温度</p>
-                            <span id="avgTemp">31.5℃</span>
+                            <span id="avgTemp">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
                             <p>湿度</p>
-                            <span id="humidityVal">44%</span>
+                            <span id="humidityVal">0%</span>
                             <img src="/lihuaiot01/images/onedevice/rain.png">
                         </div>
                         <div>
                             <p>光照</p>
-                            <span>28.9℃</span>
+                            <span id="lightIntensity">0Lux</span>
                             <img src="/lihuaiot01/images/onedevice/light.png">
                         </div>
                         <div>
                             <p>氨气</p>
-                            <span id="nh3Val">1.3ppm</span>
+                            <span id="nh3Val">0ppm</span>
                             <img src="/lihuaiot01/images/onedevice/NH3.png">
                         </div>
                         <div>
                             <p>CO2</p>
-                            <span id="co2Val">405ppm</span>
+                            <span id="co2Val">0ppm</span>
                             <img src="/lihuaiot01/images/onedevice/CO2.png">
                         </div>
                     </div>
@@ -176,12 +176,12 @@
                     <div class="temp">
                         <div>
                             <p>室外温度</p>
-                            <span id="outTemp">28.9℃</span>
+                            <span id="outTemp">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>
-                            <p>锅炉温度</p>
-                            <span id="boilerTemp">28.9℃</span>
+                            <p>锅炉水温</p>
+                            <span id="boilerTemp">0℃</span>
                             <img src="/lihuaiot01/images/onedevice/temp.png">
                         </div>
                         <div>

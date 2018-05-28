@@ -15,7 +15,7 @@
                         <option value="0" selected="selected">全部</option>
                         <option value="1">报警</option>
                         <option value="2">离线</option>
-                        <option value="3">错误</option>
+                        <%--<option value="3">错误</option>--%>
                     </select>
                 </div>
                 <button class="btn btn-default" id="haQuery_storage">
