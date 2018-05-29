@@ -99,7 +99,7 @@ public class DeviceCharts01 {
             inTemp02List.add(oneDataDetailInTemp2);
             inTemp03List.add(oneDataDetailInTemp3);
             outTempList.add(oneDataDetailOutTemp);
-            waterFlowList.add(oneDataDetailOutTemp);
+            waterFlowList.add(oneDataDetailWaterFlow);
 
         }
 
