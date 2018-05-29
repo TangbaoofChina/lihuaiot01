@@ -1,4 +1,4 @@
-package com.system.po;
+package com.system.po.Device;
 
 public class BaseDeviceMessage {
     private String dSerialNum;

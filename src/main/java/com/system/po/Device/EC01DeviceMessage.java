@@ -1,10 +1,9 @@
-package com.system.po;
+package com.system.po.Device;
 
+import com.system.po.MydataTableColumn;
 import com.system.po.Phone.PhoneRealMsgInfo;
-import com.system.util.DataConvertor;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EC01DeviceMessage extends BaseDeviceMessage {

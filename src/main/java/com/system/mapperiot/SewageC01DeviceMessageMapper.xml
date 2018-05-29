@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.system.mapperiot.SewageC01DeviceMessageMapper">
-    <resultMap id="BaseResultMap" type="com.system.po.SewageC01DeviceMessage">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.SewageC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
@@ -65,7 +65,7 @@
         <result column="SWC01_SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
         <result column="SWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
     </resultMap>
-    <resultMap id="BaseHisResultMap" type="com.system.po.SewageC01DeviceMessage">
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.SewageC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
@@ -130,6 +130,21 @@
         <result column="HSWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
     </resultMap>
 
+    <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.SewageC01DMHis">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="HSWC01_SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
+        <result column="HSWC01_SBRMIXERONCESETMINUTE" jdbcType="INTEGER" property="sbrMixerOnceSetMinute"/>
+        <result column="HSWC01_FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="HSWC01_SBRMIXERSETMINUTE" jdbcType="INTEGER" property="sbrMixerSetMinute"/>
+        <result column="HSWC01_SBRSTATICSETMINUTE" jdbcType="INTEGER" property="sbrStaticSetMinute"/>
+        <result column="HSWC01_SLUDGEPUMP02SETMINUTE" jdbcType="INTEGER" property="sludgePump02SetMinute"/>
+        <result column="HSWC01_SBRACTIVESETMINUTE" jdbcType="INTEGER" property="sbrActiveSetMinute"/>
+        <result column="HSWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="HSWC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+    </resultMap>
+
     <select id="selectSewageC01ByORGId" parameterType="string"  resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
         from IOT_SEWAGECON_01 t,iot_deviceinfo u
@@ -178,4 +193,16 @@
         AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         order by b.HSWC01_DATASENDDATE ASC
     </select>
+    <select id="selectPhoneHisSewageC01ByDateAndId" resultMap="BasePhoneHisResultMap">
+         select u.di_name,u.di_serialnum,c.*
+          from (select t.*,
+               row_number() over(partition by t.device_serialnum,to_char(t.hswc01_datasenddate,'yyyy-mm-dd') order by t.hswc01_datasenddate desc) rn
+          from IOT_HISSEWAGECON_01 t
+          where t.hswc01_datasenddate between to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+          and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+          and t.device_serialnum = #{deviceId,jdbcType=VARCHAR}
+          ) c,iot_deviceinfo u
+          where rn = 1 and u.di_serialnum=c.device_serialnum
+    </select>
+
 </mapper>

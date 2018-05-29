@@ -1,6 +1,6 @@
 package com.system.mapperiot;
 
-import com.system.po.EC01DeviceMessage;
+import com.system.po.Device.EC01DeviceMessage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

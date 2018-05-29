@@ -1,8 +1,8 @@
 package com.system.service;
 
 import com.system.po.*;
-import com.system.po.parameter.OneDataDetail;
-import com.system.po.parameter.ParameterCharts;
+import com.system.po.Device.SewageC01DMHis;
+import com.system.po.Device.SewageC01DeviceMessage;
 
 import java.io.File;
 import java.util.List;
@@ -69,6 +69,17 @@ public interface SewageC01DeviceMessageService {
      * @throws Exception
      */
     DataTablePageing selectHisSewageC01ByDateAndIDsAndPage(Integer pageNumber, Integer pageSize, List<DeviceInfo> deviceInfoList, String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception;
+
+
+    /**
+     * 手机端查询历史数据
+     * @param sDeviceId 设备ID
+     * @param sStartDate 起始时间
+     * @param sEndDate 截止时间
+     * @return
+     * @throws Exception
+     */
+    List<SewageC01DMHis> selectPhoneHisSewageC01ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
      * 污水控制器表头

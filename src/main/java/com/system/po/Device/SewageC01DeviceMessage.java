@@ -1,13 +1,17 @@
-package com.system.po;
+package com.system.po.Device;
+
+import com.system.po.MydataTableColumn;
+import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealData;
+import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealOneData;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * 污水站控制器01信息-徐州吕滩污水项目
  */
-public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
+public class SewageC01DeviceMessage extends BaseDeviceMessage {
     /*************  运行状态  ******************/
     //集水池搅拌机停止/运行
     private Boolean collectMixerRun;
@@ -29,6 +33,7 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
     private Boolean sludgePump02Run;
     //滗水器停止/运行
     private Boolean decanterRun;
+    //备用82   未启用
     //备用83   SBR池一次搅拌
     private Boolean sbrMixerOnceRun;
     //备用84   SBR池二次搅拌
@@ -596,7 +601,7 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         this.todayFlowmeter = todayFlowmeter;
     }
 
-    public List<MydataTableColumn> getDeviceHead(){
+    public List<MydataTableColumn> getDeviceHead() {
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
 
         MydataTableColumn mdtc1 = new MydataTableColumn();
@@ -972,7 +977,7 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         //当日流量(m³)
         MydataTableColumn mdtc60 = new MydataTableColumn();
         mdtc60.setData("todayFlowmeter");
-        mdtc60.setDefaultContent("51");
+        mdtc60.setDefaultContent("60");
         mdtc60.setTitle("当日流量");
 
         //设备发送数据时间
@@ -994,9 +999,9 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         myDTCList.add(mdtc53);
         //设备发送数据时间
         myDTCList.add(mdtc52);
-        //流量计（m³）
+        //累计流量计（m³）
         myDTCList.add(mdtc51);
-        //SBR水流量
+        //当日流量
         myDTCList.add(mdtc60);
         //系统手动模式/自动模式
         myDTCList.add(mdtc24);
@@ -1114,12 +1119,316 @@ public class SewageC01DeviceMessage  extends BaseDeviceMessage  {
         //SBR池液位低未到/到了
         myDTCList.add(mdtc31);
 
-
-
-
-
-
-
         return myDTCList;
+    }
+
+    public List<PhoneSewageC01RealData> getPhoneRealMsgInfoDetail() {
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#FFFF00";   //Yellow
+        List<PhoneSewageC01RealData> phoneSewageC01RealDataList = new ArrayList<PhoneSewageC01RealData>();
+
+        PhoneSewageC01RealData phoneSewageC01RealData01 = new PhoneSewageC01RealData();
+        phoneSewageC01RealData01.setColumn(2);
+        phoneSewageC01RealData01.setScale("0.6,0.4");
+        List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList01 = new ArrayList<PhoneSewageC01RealOneData>();
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData01 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData01.setTitle("时间：");
+        phoneSewageC01RealOneData01.setValue1(sendDate);
+        phoneSewageC01RealOneData01.setColor1(defaultColor);
+        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData01);
+
+        //累计流量（m³）
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData02 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData02.setTitle("累计流量：");
+        phoneSewageC01RealOneData02.setValue1(String.valueOf(flowmeter) + "m³");
+        phoneSewageC01RealOneData02.setColor1("#000000");
+        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData02);
+
+        //当日流量(m³)
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData03 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData03.setTitle("当日流量：");
+        phoneSewageC01RealOneData03.setValue1(String.valueOf(todayFlowmeter) + "m³");
+        phoneSewageC01RealOneData03.setColor1("#000000");
+        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData03);
+
+        //系统自动模式
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData04 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData04.setTitle("系统自动模式：");
+        if (systemAuto) {
+            phoneSewageC01RealOneData04.setValue1("自动");
+            phoneSewageC01RealOneData04.setColor1(normalRunColor);
+        }else{
+            phoneSewageC01RealOneData04.setValue1("手动");
+            phoneSewageC01RealOneData04.setColor1(normalStopColor);
+        }
+        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData04);
+
+        //SBR周期运行
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData05 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData05.setTitle("SBR周期运行：");
+        if (sbrCycle) {
+            phoneSewageC01RealOneData05.setValue1("运行");
+            phoneSewageC01RealOneData05.setColor1(normalRunColor);
+        }else{
+            phoneSewageC01RealOneData05.setValue1("停止");
+            phoneSewageC01RealOneData05.setColor1(normalStopColor);
+        }
+        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData05);
+        //第一部分的两列
+        phoneSewageC01RealData01.setPhoneSewageC01RealOneDataList(phoneSewageC01RealOneDataList01);
+        phoneSewageC01RealDataList.add(phoneSewageC01RealData01);
+
+        //第二部分的三列
+        PhoneSewageC01RealData phoneSewageC01RealData02 = new PhoneSewageC01RealData();
+        phoneSewageC01RealData02.setColumn(3);
+        phoneSewageC01RealData02.setScale("0.5,0.3,0.2");
+        List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList02 = new ArrayList<PhoneSewageC01RealOneData>();
+        //除磷投加机
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData06 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData06.setTitle("除磷投加机：");
+        if(dephosphorizeRun){
+            phoneSewageC01RealOneData06.setValue1("运行");
+            phoneSewageC01RealOneData06.setColor1(normalRunColor);
+        }else{
+            phoneSewageC01RealOneData06.setValue1("停止");
+            phoneSewageC01RealOneData06.setColor1(normalStopColor);
+        }
+        phoneSewageC01RealOneData06.setValue2(String.valueOf(dephosphorizeRunMinute) + "");
+        phoneSewageC01RealOneData06.setColor2(defaultColor);
+        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData06);
+
+        //污泥泵1
+        PhoneSewageC01RealOneData phoneSewageC01RealOneData07 = new PhoneSewageC01RealOneData();
+        phoneSewageC01RealOneData07.setTitle("污泥泵1：");
+        if(sludgePump01Run){
+            phoneSewageC01RealOneData07.setValue1("运行");
+            phoneSewageC01RealOneData07.setColor1(normalRunColor);
+        }else{
+            phoneSewageC01RealOneData07.setValue1("停止");
+            phoneSewageC01RealOneData07.setColor1(normalStopColor);
+        }
+        phoneSewageC01RealOneData07.setValue2(String.valueOf(sludgePump01RunMinute) + "");
+        phoneSewageC01RealOneData07.setColor2(defaultColor);
+        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData07);
+
+        phoneSewageC01RealData02.setPhoneSewageC01RealOneDataList(phoneSewageC01RealOneDataList02);
+        phoneSewageC01RealDataList.add(phoneSewageC01RealData01);
+
+        /*
+        //SBR池进水泵停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo14.setId("sbrIntakePumpRun");
+        phoneRealMsgInfo14.setTitle("SBR池进水泵运行：");
+        phoneRealMsgInfo14.setValue(String.valueOf(sbrIntakePumpRun) + "");
+        phoneRealMsgInfo14.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo14);
+
+        //SBR池进水泵运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo15 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo15.setId("sbrIntakePumpRunMinute");
+        phoneRealMsgInfo15.setTitle("SBR池进水泵运行时间：");
+        phoneRealMsgInfo15.setValue(String.valueOf(sbrIntakePumpRunMinute) + "");
+        phoneRealMsgInfo15.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo15);
+
+        //SBR一次搅拌停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo16 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo16.setId("sbrMixerOnceRun");
+        phoneRealMsgInfo16.setTitle("SBR一次搅拌运行：");
+        phoneRealMsgInfo16.setValue(String.valueOf(sbrMixerOnceRun) + "");
+        phoneRealMsgInfo16.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo16);
+
+        //SBR一次搅拌运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo17 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo17.setId("sbrMixerOnceRunMinute");
+        phoneRealMsgInfo17.setTitle("SBR一次搅拌运行时间：");
+        phoneRealMsgInfo17.setValue(String.valueOf(sbrMixerOnceRunMinute) + "");
+        phoneRealMsgInfo17.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo17);
+
+        //SBR曝气停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo18 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo18.setId("sbrFanRun");
+        phoneRealMsgInfo18.setTitle("SBR曝气运行：");
+        if (fan01Run || fan01Run) {
+            phoneRealMsgInfo18.setValue(String.valueOf(true) + "");
+        } else {
+            phoneRealMsgInfo18.setValue(String.valueOf(false) + "");
+        }
+        phoneRealMsgInfo18.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo18);
+
+        //SBR曝气运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo19 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo19.setId("fanRunMinute");
+        phoneRealMsgInfo19.setTitle("SBR曝气运行时间：");
+        phoneRealMsgInfo19.setValue(String.valueOf(fanRunMinute) + "");
+        phoneRealMsgInfo19.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo19);
+
+        //SBR二次搅拌停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo20 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo20.setId("sbrMixerSecRun");
+        phoneRealMsgInfo20.setTitle("SBR二次搅拌运行：");
+        phoneRealMsgInfo20.setValue(String.valueOf(sbrMixerSecRun) + "");
+        phoneRealMsgInfo20.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo20);
+
+        //SBR二次搅拌运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo21 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo21.setId("sbrMixerRunMinute");
+        phoneRealMsgInfo21.setTitle("SBR二次搅拌运行时间：");
+        phoneRealMsgInfo21.setValue(String.valueOf(sbrMixerRunMinute) + "");
+        phoneRealMsgInfo21.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo21);
+
+        //SBR静置停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo22 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo22.setId("sbrStaticRun");
+        phoneRealMsgInfo22.setTitle("SBR静置运行：");
+        phoneRealMsgInfo22.setValue(String.valueOf(sbrStaticRun) + "");
+        phoneRealMsgInfo22.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo22);
+
+        //SBR静置运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo23 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo23.setId("sbrStaticRunMinute");
+        phoneRealMsgInfo23.setTitle("SBR静置运行时间：");
+        phoneRealMsgInfo23.setValue(String.valueOf(sbrStaticRunMinute) + "");
+        phoneRealMsgInfo23.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo23);
+
+        //SBR污泥泵2停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo24 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo24.setId("sludgePump02Run");
+        phoneRealMsgInfo24.setTitle("SBR污泥泵2运行：");
+        phoneRealMsgInfo24.setValue(String.valueOf(sludgePump02Run) + "");
+        phoneRealMsgInfo24.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo24);
+
+        //SBR污泥泵2运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo25 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo25.setId("sludgePump02RunMinute");
+        phoneRealMsgInfo25.setTitle("SBR污泥泵2运行时间：");
+        phoneRealMsgInfo25.setValue(String.valueOf(sludgePump02RunMinute) + "");
+        phoneRealMsgInfo25.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo25);
+
+        //滗水器(排水)停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo26 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo26.setId("decanterCycleRun");
+        phoneRealMsgInfo26.setTitle("滗水器(排水)运行：");
+        phoneRealMsgInfo26.setValue(String.valueOf(decanterCycleRun) + "");
+        phoneRealMsgInfo26.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo26);
+
+        //滗水器(排水)运行
+        PhoneRealMsgInfo phoneRealMsgInfo27 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo27.setId("decanterRun");
+        phoneRealMsgInfo27.setTitle("滗水器运行：");
+        phoneRealMsgInfo27.setValue(String.valueOf(decanterRun) + "");
+        phoneRealMsgInfo27.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo27);
+
+        //SBR静置活化停止/运行
+        PhoneRealMsgInfo phoneRealMsgInfo28 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo28.setId("sbrActiveRun");
+        phoneRealMsgInfo28.setTitle("SBR静置活化运行：");
+        phoneRealMsgInfo28.setValue(String.valueOf(sbrActiveRun) + "");
+        phoneRealMsgInfo28.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo28);
+
+        //SBR静置活化运行时间
+        PhoneRealMsgInfo phoneRealMsgInfo29 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo29.setId("sbrActiveRunMinute");
+        phoneRealMsgInfo29.setTitle("SBR静置活化运行时间：");
+        phoneRealMsgInfo29.setValue(String.valueOf(sbrActiveRunMinute) + "");
+        phoneRealMsgInfo29.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo29);
+
+        //除磷投加机设定时间
+        PhoneRealMsgInfo phoneRealMsgInfo30 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo30.setId("dephosphorizeSetMinute");
+        phoneRealMsgInfo30.setTitle("除磷投加机设定时间：");
+        phoneRealMsgInfo30.setValue(String.valueOf(dephosphorizeSetMinute) + "");
+        phoneRealMsgInfo30.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo30);
+
+        //污泥泵1设定时间
+        PhoneRealMsgInfo phoneRealMsgInfo31 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo31.setId("sludgePump01SetMinute");
+        phoneRealMsgInfo31.setTitle("污泥泵1设定时间：");
+        phoneRealMsgInfo31.setValue(String.valueOf(sludgePump01SetMinute) + "");
+        phoneRealMsgInfo31.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo31);
+
+        //SBR设定周期
+        PhoneRealMsgInfo phoneRealMsgInfo32 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo32.setId("sbrCycleSetMinute");
+        phoneRealMsgInfo32.setTitle("SBR设定周期：");
+        phoneRealMsgInfo32.setValue(String.valueOf(sbrCycleSetMinute) + "");
+        phoneRealMsgInfo32.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo32);
+
+        //SBR一次搅拌
+        PhoneRealMsgInfo phoneRealMsgInfo33 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo33.setId("sbrMixerOnceSetMinute");
+        phoneRealMsgInfo33.setTitle("SBR一次搅拌设定时间：");
+        phoneRealMsgInfo33.setValue(String.valueOf(sbrMixerOnceSetMinute) + "");
+        phoneRealMsgInfo33.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo33);
+
+        //SBR曝气
+        PhoneRealMsgInfo phoneRealMsgInfo34 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo34.setId("fanSetMinute");
+        phoneRealMsgInfo34.setTitle("SBR曝气设定时间：");
+        phoneRealMsgInfo34.setValue(String.valueOf(fanSetMinute) + "");
+        phoneRealMsgInfo34.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo34);
+
+        //SBR二次搅拌
+        PhoneRealMsgInfo phoneRealMsgInfo35 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo35.setId("sbrMixerSetMinute");
+        phoneRealMsgInfo35.setTitle("SBR二次搅拌设定时间：");
+        phoneRealMsgInfo35.setValue(String.valueOf(sbrMixerSetMinute) + "");
+        phoneRealMsgInfo35.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo35);
+
+        //SBR静置
+        PhoneRealMsgInfo phoneRealMsgInfo36 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo36.setId("sbrStaticSetMinute");
+        phoneRealMsgInfo36.setTitle("SBR静置设定时间：");
+        phoneRealMsgInfo36.setValue(String.valueOf(sbrStaticSetMinute) + "");
+        phoneRealMsgInfo36.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo36);
+
+        //SBR污泥泵2
+        PhoneRealMsgInfo phoneRealMsgInfo37 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo37.setId("sludgePump02SetMinute");
+        phoneRealMsgInfo37.setTitle("SBR污泥泵2设定时间：");
+        phoneRealMsgInfo37.setValue(String.valueOf(sludgePump02SetMinute) + "");
+        phoneRealMsgInfo37.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo37);
+
+        //SBR活化
+        PhoneRealMsgInfo phoneRealMsgInfo38 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo38.setId("sbrActiveSetMinute");
+        phoneRealMsgInfo38.setTitle("SBR静置活化设定时间：");
+        phoneRealMsgInfo38.setValue(String.valueOf(sbrActiveSetMinute) + "");
+        phoneRealMsgInfo38.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo38);
+
+        PhoneRealMsgInfo phoneRealMsgInfo39 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo39.setId("dState");
+        phoneRealMsgInfo39.setTitle("状态：");
+        phoneRealMsgInfo39.setValue(getDState());
+        phoneRealMsgInfo39.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo39);
+        */
+
+        return phoneSewageC01RealDataList;
     }
 }

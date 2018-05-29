@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.system.mapperiot.EC01DeviceMessageMapper">
-    <resultMap id="BaseResultMap" type="com.system.po.EC01DeviceMessage">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.EC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
@@ -62,7 +62,7 @@
         <result column="EC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="EC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
-    <resultMap id="BaseHisResultMap" type="com.system.po.EC01DeviceMessage">
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.EC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>

@@ -1,6 +1,6 @@
 package com.system.po.parameter;
 
-import com.system.po.EC01DeviceMessage;
+import com.system.po.Device.EC01DeviceMessage;
 
 import java.util.ArrayList;
 import java.util.List;

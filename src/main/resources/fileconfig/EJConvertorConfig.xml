@@ -39,7 +39,7 @@
         </property>
     </entity>
 
-    <entity class="com.system.po.EC01DeviceMessage" sheetName="环控器01数据" boldHeading="true">
+    <entity class="com.system.po.Device.EC01DeviceMessage" sheetName="环控器01数据" boldHeading="true">
         <property>
             <field>dSerialNum</field>
             <value>序号</value>
@@ -317,7 +317,7 @@
         </property>
     </entity>
 
-    <entity class="com.system.po.SewageC01DeviceMessage" sheetName="污水控制器" boldHeading="true">
+    <entity class="com.system.po.Device.SewageC01DeviceMessage" sheetName="污水控制器" boldHeading="true">
         <property>
             <field>dSerialNum</field>
             <value>序号</value>

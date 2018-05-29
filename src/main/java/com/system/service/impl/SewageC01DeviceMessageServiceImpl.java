@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.system.mapperiot.DeviceInfoMapper;
 import com.system.mapperiot.SewageC01DeviceMessageMapper;
 import com.system.po.*;
+import com.system.po.Device.BaseDeviceMessage;
+import com.system.po.Device.SewageC01DMHis;
+import com.system.po.Device.SewageC01DeviceMessage;
 import com.system.service.SewageC01DeviceMessageService;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
@@ -93,6 +96,11 @@ public class SewageC01DeviceMessageServiceImpl implements SewageC01DeviceMessage
         if (storageList == null)
             return null;
         return ejConvertor.excelWriter(SewageC01DeviceMessage.class, storageList);
+    }
+
+    @Override
+    public List<SewageC01DMHis> selectPhoneHisSewageC01ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+        return sewageC01DeviceMessageMapper.selectPhoneHisSewageC01ByDateAndId(sDeviceId,sStartDate,sEndDate);
     }
 
     //************************************私有函数********************************************//

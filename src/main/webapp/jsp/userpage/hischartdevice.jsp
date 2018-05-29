@@ -21,6 +21,7 @@
                     <option value="2">舍中</option>
                     <option value="3">舍后</option>
                     <option value="4">舍外</option>
+                    <option value="5">饮水量</option>
                 </select>
             </div>
             <label>时间：</label>

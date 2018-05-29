@@ -1,6 +1,7 @@
 package com.system.service;
 
 import com.system.po.*;
+import com.system.po.Device.EC01DeviceMessage;
 import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 

@@ -2,9 +2,9 @@ package com.system.controller.user;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.DataTablePageing;
-import com.system.po.EC01DeviceMessage;
+import com.system.po.Device.EC01DeviceMessage;
 import com.system.po.MydataTableColumn;
-import com.system.po.SewageC01DeviceMessage;
+import com.system.po.Device.SewageC01DeviceMessage;
 import com.system.service.EC01DeviceMessageService;
 import com.system.service.SewageC01DeviceMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
