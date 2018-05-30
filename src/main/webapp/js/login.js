@@ -2,7 +2,6 @@ var loginPubExponent;
 var loginPubModules;
 
 $(function () {
-    validatorInit();
     $.ajax({
         url:"/lihuaiot01/account/beforeLogin",
         dataType:"text",
@@ -15,7 +14,8 @@ $(function () {
         error:function (XMLHttpRequest) {
             alert(XMLHttpRequest.status);
         }
-    })
+    });
+    validatorInit();
 });
 
 function validatorInit() {
