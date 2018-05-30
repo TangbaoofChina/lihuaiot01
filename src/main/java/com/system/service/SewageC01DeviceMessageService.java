@@ -81,6 +81,8 @@ public interface SewageC01DeviceMessageService {
      */
     List<SewageC01DMHis> selectPhoneHisSewageC01ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
+
+
     /**
      * 污水控制器表头
      * @return

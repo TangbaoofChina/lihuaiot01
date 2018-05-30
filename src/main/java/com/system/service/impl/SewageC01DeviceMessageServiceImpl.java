@@ -78,7 +78,7 @@ public class SewageC01DeviceMessageServiceImpl implements SewageC01DeviceMessage
                 bigIndex = ewagec01DeviceMessageListAll.size();
             sewageC01DeviceMessageList.addAll(ewagec01DeviceMessageListAll.subList(smallIndex,bigIndex));
         }
-        String str= JSON.toJSON(sewageC01DeviceMessageList).toString();
+        //String str= JSON.toJSON(sewageC01DeviceMessageList).toString();
         String sReturnJson = JSON.toJSONString(sewageC01DeviceMessageList);
         dataTablePageing.setTotal(ewagec01DeviceMessageListAll.size());
         dataTablePageing.setsReturnJson(sReturnJson);

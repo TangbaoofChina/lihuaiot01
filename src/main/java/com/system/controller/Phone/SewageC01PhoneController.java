@@ -6,6 +6,7 @@ import com.system.po.Device.SewageC01DMHis;
 import com.system.po.Device.SewageC01DeviceMessage;
 import com.system.po.Phone.PhoneRealDeviceInfo;
 import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.po.Phone.PhoneSewageC01.PSC01HisMsgInfo;
 import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealData;
 import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealMsgInfo;
 import com.system.service.*;
@@ -116,7 +117,8 @@ public class SewageC01PhoneController {
         }
         String jsonString = "[]";
         if (sewageC01DMHisList.size() > 0) {
-            jsonString = JSON.toJSONString(sewageC01DMHisList);
+            PSC01HisMsgInfo psc01HisMsgInfo = new PSC01HisMsgInfo(sewageC01DMHisList);
+            jsonString = JSON.toJSONString(psc01HisMsgInfo);
         }
         return jsonString;
     }

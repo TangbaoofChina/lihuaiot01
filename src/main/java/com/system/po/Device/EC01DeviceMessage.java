@@ -628,8 +628,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.spareCode04 = spareCode04;
     }
 
-    public List<MydataTableColumn> getDeviceHead()
-    {
+    public List<MydataTableColumn> getDeviceHead() {
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
 
         MydataTableColumn mdtc1 = new MydataTableColumn();
@@ -967,7 +966,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc54);
 /*        //天数
         myDTCList.add(mdtc12);*/
-       //日龄
+        //日龄
         myDTCList.add(mdtc19);
         //目标温度
         myDTCList.add(mdtc14);
@@ -1073,34 +1072,33 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         return myDTCList;
     }
 
-    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoDetail()
-    {
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoDetail() {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("chickenAge");
         phoneRealMsgInfo06.setTitle("日龄：");
-        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge)+ "天");
+        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge) + "天");
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
         PhoneRealMsgInfo phoneRealMsgInfo16 = new PhoneRealMsgInfo();
         phoneRealMsgInfo16.setId("standardTemp");
         phoneRealMsgInfo16.setTitle("目标温度：");
-        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp)+ "℃");
+        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp) + "℃");
         phoneRealMsgInfo16.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo16);
 
         PhoneRealMsgInfo phoneRealMsgInfo17 = new PhoneRealMsgInfo();
         phoneRealMsgInfo17.setId("tempCurveRunStage");
         phoneRealMsgInfo17.setTitle("温曲：");
-        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage)+ "");
+        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage) + "");
         phoneRealMsgInfo17.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo17);
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
         phoneRealMsgInfo04.setId("inAveTemp");
         phoneRealMsgInfo04.setTitle("舍内：");
-        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp) + "℃");
         phoneRealMsgInfo04.setFlag("0");
         phoneRealMsgInfo04.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo04);
@@ -1116,21 +1114,21 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
         phoneRealMsgInfo02.setId("inTemp2");
         phoneRealMsgInfo02.setTitle("舍中：");
-        phoneRealMsgInfo02.setValue(String.valueOf(inTemp2)+ "℃");
+        phoneRealMsgInfo02.setValue(String.valueOf(inTemp2) + "℃");
         phoneRealMsgInfo02.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo02);
 
         PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
         phoneRealMsgInfo03.setId("inTemp3");
         phoneRealMsgInfo03.setTitle("舍后：");
-        phoneRealMsgInfo03.setValue(String.valueOf(inTemp3)+ "℃");
+        phoneRealMsgInfo03.setValue(String.valueOf(inTemp3) + "℃");
         phoneRealMsgInfo03.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
         PhoneRealMsgInfo phoneRealMsgInfo015 = new PhoneRealMsgInfo();
         phoneRealMsgInfo015.setId("outTemp");
         phoneRealMsgInfo015.setTitle("舍外：");
-        phoneRealMsgInfo015.setValue(String.valueOf(outTemp)+ "℃");
+        phoneRealMsgInfo015.setValue(String.valueOf(outTemp) + "℃");
         phoneRealMsgInfo015.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo015);
 
@@ -1195,35 +1193,55 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo09 = new PhoneRealMsgInfo();
         phoneRealMsgInfo09.setId("fan01On");
         phoneRealMsgInfo09.setTitle("风机1：");
-        phoneRealMsgInfo09.setValue(String.valueOf(fan01On));
+        if (fan01On) {
+            phoneRealMsgInfo09.setValue("开");
+        } else {
+            phoneRealMsgInfo09.setValue("关");
+        }
         phoneRealMsgInfo09.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo09);
 
         PhoneRealMsgInfo phoneRealMsgInfo10 = new PhoneRealMsgInfo();
         phoneRealMsgInfo10.setId("fan02On");
         phoneRealMsgInfo10.setTitle("风机2：");
-        phoneRealMsgInfo10.setValue(String.valueOf(fan02On));
+        if (fan02On) {
+            phoneRealMsgInfo10.setValue("开");
+        } else {
+            phoneRealMsgInfo10.setValue("关");
+        }
         phoneRealMsgInfo10.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo10);
 
         PhoneRealMsgInfo phoneRealMsgInfo11 = new PhoneRealMsgInfo();
         phoneRealMsgInfo11.setId("fan03On");
         phoneRealMsgInfo11.setTitle("风机3：");
-        phoneRealMsgInfo11.setValue(String.valueOf(fan03On));
+        if (fan03On) {
+            phoneRealMsgInfo11.setValue("开");
+        } else {
+            phoneRealMsgInfo11.setValue("关");
+        }
         phoneRealMsgInfo11.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo11);
 
         PhoneRealMsgInfo phoneRealMsgInfo12 = new PhoneRealMsgInfo();
         phoneRealMsgInfo12.setId("fan04On");
         phoneRealMsgInfo12.setTitle("风机4：");
-        phoneRealMsgInfo12.setValue(String.valueOf(fan04On));
+        if (fan04On) {
+            phoneRealMsgInfo12.setValue("开");
+        } else {
+            phoneRealMsgInfo12.setValue("关");
+        }
         phoneRealMsgInfo12.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo12);
 
         PhoneRealMsgInfo phoneRealMsgInfo22 = new PhoneRealMsgInfo();
         phoneRealMsgInfo22.setId("fan05On");
         phoneRealMsgInfo22.setTitle("风机5：");
-        phoneRealMsgInfo22.setValue(String.valueOf(fan05On));
+        if (fan05On) {
+            phoneRealMsgInfo22.setValue("开");
+        } else {
+            phoneRealMsgInfo22.setValue("关");
+        }
         phoneRealMsgInfo22.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo22);
 
@@ -1244,8 +1262,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         return phoneRealMsgInfoList;
     }
 
-    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary()
-    {
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
@@ -1253,27 +1270,27 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("chickenAge");
         phoneRealMsgInfo06.setTitle("日龄：");
-        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge)+ "天");
+        phoneRealMsgInfo06.setValue(String.valueOf(chickenAge) + "天");
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
         PhoneRealMsgInfo phoneRealMsgInfo16 = new PhoneRealMsgInfo();
         phoneRealMsgInfo16.setId("standardTemp");
         phoneRealMsgInfo16.setTitle("目标温度：");
-        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp)+ "℃");
+        phoneRealMsgInfo16.setValue(String.valueOf(standardTemp) + "℃");
         phoneRealMsgInfo16.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo16);
 
         PhoneRealMsgInfo phoneRealMsgInfo17 = new PhoneRealMsgInfo();
         phoneRealMsgInfo17.setId("tempCurveRunStage");
         phoneRealMsgInfo17.setTitle("温曲：");
-        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage)+ "");
+        phoneRealMsgInfo17.setValue(String.valueOf(tempCurveRunStage) + "");
         phoneRealMsgInfo17.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo17);
 
         phoneRealMsgInfo04.setId("inAveTemp");
         phoneRealMsgInfo04.setTitle("舍内：");
-        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp)+ "℃");
+        phoneRealMsgInfo04.setValue(String.valueOf(inAveTemp) + "℃");
         phoneRealMsgInfo04.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo04);
 
