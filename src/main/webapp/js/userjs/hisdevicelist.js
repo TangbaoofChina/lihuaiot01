@@ -174,17 +174,18 @@ function hisSearchTreeNode() {
 
 function hisGetRootNode(tree, treeNode) {
     if (treeNode.parentId === undefined)
-        return treeNode;
+        hisNowTreeNodeRoot = treeNode;
+        return;
     var parentNode = tree.treeview('getNode', treeNode.parentId);
     if (parentNode.parentId !== undefined)
-        hisGetRootNode(tree, parentNode)
+        hisGetRootNode(tree, parentNode);
     else
-        return parentNode;
+        hisNowTreeNodeRoot = parentNode;
 }
 
 function hisNodeSelected(event, data) {
     hisNowTreeNode = data;
-    hisNowTreeNodeRoot = hisGetRootNode($('#hisOrgTree'), hisNowTreeNode);
+    hisGetRootNode($('#hisOrgTree'), hisNowTreeNode);
     var uiEC01List = document.getElementById("hisEC01DeviceListDiv");
     var uiSewageC01List = document.getElementById("hisSewageC01DeviceListDiv");
     $('#hisOrgTree').treeview('clearSearch');

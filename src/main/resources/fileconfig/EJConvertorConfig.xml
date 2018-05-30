@@ -327,6 +327,107 @@
             <value>名称</value>
         </property>
         <property>
+            <field>sendDate</field>
+            <value>时间</value>
+        </property>
+        <property>
+            <field>todayFlowmeter</field>
+            <value>当日流量</value>
+        </property>
+        <property>
+            <field>flowmeter</field>
+            <value>累积流量</value>
+        </property>
+        <property>
+            <field>systemAuto</field>
+            <value>自动模式</value>
+        </property>
+        <property>
+            <field>sbrCycle</field>
+            <value>SBR周期运行</value>
+        </property>
+        <property>
+            <field>dephosphorizeSetMinute</field>
+            <value>除磷投加机设定时间</value>
+        </property>
+        <property>
+            <field>sludgePump01SetMinute</field>
+            <value>污泥泵1设定时间</value>
+        </property>
+        <property>
+            <field>sbrCycleSetMinute</field>
+            <value>SBR设定周期</value>
+        </property>
+        <property>
+            <field>sbrMixerOnceSetMinute</field>
+            <value>SBR一次搅拌设定时间</value>
+        </property>
+        <property>
+            <field>fanSetMinute</field>
+            <value>SBR曝气设定时间</value>
+        </property>
+        <property>
+            <field>sbrMixerSetMinute</field>
+            <value>SBR混合设定时间</value>
+        </property>
+        <property>
+            <field>sbrStaticSetMinute</field>
+            <value>SBR静置设定时间</value>
+        </property>
+        <property>
+            <field>sludgePump02SetMinute</field>
+            <value>SBR污泥泵2设定时间</value>
+        </property>
+        <property>
+            <field>sbrActiveSetMinute</field>
+            <value>SBR活化设定时间</value>
+        </property>
+
+        <property>
+            <field>collectMixerRunMinute</field>
+            <value>集水池搅拌机运行时间</value>
+        </property>
+        <property>
+            <field>collectPumpRunMinute</field>
+            <value>集水池提升泵运行时间</value>
+        </property>
+        <property>
+            <field>dephosphorizeRunMinute</field>
+            <value>除磷投加机运行时间</value>
+        </property>
+        <property>
+            <field>sludgePump01RunMinute</field>
+            <value>污泥泵1运行时间</value>
+        </property>
+        <property>
+            <field>sbrIntakePumpRunMinute</field>
+            <value>SBR池进水泵运行时间</value>
+        </property>
+        <property>
+            <field>sbrMixerOnceRunMinute</field>
+            <value>SBR一次搅拌运行时间</value>
+        </property>
+        <property>
+            <field>fanRunMinute</field>
+            <value>SBR曝气运行时间</value>
+        </property>
+        <property>
+            <field>sbrMixerRunMinute</field>
+            <value>SBR混合运行时间</value>
+        </property>
+        <property>
+            <field>sbrStaticRunMinute</field>
+            <value>SBR静置运行时间</value>
+        </property>
+        <property>
+            <field>sludgePump02RunMinute</field>
+            <value>SBR污泥泵2运行时间</value>
+        </property>
+        <property>
+            <field>sbrActiveRunMinute</field>
+            <value>SBR活化运行时间</value>
+        </property>
+        <property>
             <field>collectMixerRun</field>
             <value>集水池搅拌机运行</value>
         </property>
@@ -347,8 +448,8 @@
             <value>SBR池进水泵运行</value>
         </property>
         <property>
-            <field>sbrMixerRun</field>
-            <value>SBR池搅拌机运行</value>
+            <field>sbrMixerOnceRun</field>
+            <value>SBR池一次搅拌</value>
         </property>
         <property>
             <field>fan01Run</field>
@@ -359,18 +460,6 @@
             <value>回转式风机2运行</value>
         </property>
         <property>
-            <field>sludgePump02Run</field>
-            <value>污泥泵2运行</value>
-        </property>
-        <property>
-            <field>decanterRun</field>
-            <value>滗水器运行</value>
-        </property>
-        <property>
-            <field>sbrMixerOnceRun</field>
-            <value>SBR池一次搅拌</value>
-        </property>
-        <property>
             <field>sbrMixerSecRun</field>
             <value>SBR池二次搅拌</value>
         </property>
@@ -379,12 +468,48 @@
             <value>SBR池静置</value>
         </property>
         <property>
+            <field>sludgePump02Run</field>
+            <value>污泥泵2运行</value>
+        </property>
+        <property>
             <field>decanterCycleRun</field>
             <value>滗水器周期</value>
         </property>
         <property>
+            <field>decanterRun</field>
+            <value>滗水器运行</value>
+        </property>
+        <property>
             <field>sbrActiveRun</field>
-            <value>活化周期</value>
+            <value>静置活化</value>
+        </property>
+        <property>
+            <field>sbrMixerRun</field>
+            <value>SBR池搅拌机运行</value>
+        </property>
+        <property>
+            <field>collectHighOn</field>
+            <value>集水池液位高到了</value>
+        </property>
+        <property>
+            <field>collectLowOn</field>
+            <value>集水池液位低到了</value>
+        </property>
+        <property>
+            <field>regulatHighOn</field>
+            <value>调节池液位高到了</value>
+        </property>
+        <property>
+            <field>regulatLowOn</field>
+            <value>调节池液位低到了</value>
+        </property>
+        <property>
+            <field>sbrHighOn</field>
+            <value>SBR池液位高到了</value>
+        </property>
+        <property>
+            <field>sbrLowOn</field>
+            <value>SBR池液位低到了</value>
         </property>
         <property>
             <field>collectMixerFault</field>
@@ -429,130 +554,6 @@
         <property>
             <field>plcElecLack</field>
             <value>PLC电量不足</value>
-        </property>
-        <property>
-            <field>systemAuto</field>
-            <value>自动模式</value>
-        </property>
-        <property>
-            <field>sbrCycle</field>
-            <value>SBR周期运行</value>
-        </property>
-        <property>
-            <field>collectHighOn</field>
-            <value>集水池液位高到了</value>
-        </property>
-        <property>
-            <field>collectLowOn</field>
-            <value>集水池液位低到了</value>
-        </property>
-        <property>
-            <field>regulatHighOn</field>
-            <value>调节池液位高到了</value>
-        </property>
-        <property>
-            <field>regulatLowOn</field>
-            <value>调节池液位低到了</value>
-        </property>
-        <property>
-            <field>sbrHighOn</field>
-            <value>SBR池液位高到了</value>
-        </property>
-        <property>
-            <field>sbrLowOn</field>
-            <value>SBR池液位低到了</value>
-        </property>
-        <property>
-            <field>dephosphorizeSetMinute</field>
-            <value>除磷投加机设定时间</value>
-        </property>
-        <property>
-            <field>sludgePump01SetMinute</field>
-            <value>污泥泵1设定时间</value>
-        </property>
-        <property>
-            <field>sbrCycleSetMinute</field>
-            <value>SBR设定周期</value>
-        </property>
-        <property>
-            <field>sbrMixerOnceSetMinute</field>
-            <value>SBR一次搅拌设定时间</value>
-        </property>
-        <property>
-            <field>fanSetMinute</field>
-            <value>SBR曝气设定时间</value>
-        </property>
-        <property>
-            <field>sbrMixerSetMinute</field>
-            <value>SBR混合设定时间</value>
-        </property>
-        <property>
-            <field>sbrStaticSetMinute</field>
-            <value>SBR静置设定时间</value>
-        </property>
-        <property>
-            <field>sludgePump02SetMinute</field>
-            <value>SBR污泥泵2设定时间</value>
-        </property>
-        <property>
-            <field>sbrActiveSetMinute</field>
-            <value>SBR活化设定时间</value>
-        </property>
-        <property>
-            <field>dephosphorizeRunMinute</field>
-            <value>除磷投加机运行时间</value>
-        </property>
-        <property>
-            <field>sludgePump01RunMinute</field>
-            <value>污泥泵1运行时间</value>
-        </property>
-        <property>
-            <field>sbrMixerOnceRunMinute</field>
-            <value>SBR一次搅拌运行时间</value>
-        </property>
-        <property>
-            <field>fanRunMinute</field>
-            <value>SBR曝气运行时间</value>
-        </property>
-        <property>
-            <field>sbrMixerRunMinute</field>
-            <value>SBR混合运行时间</value>
-        </property>
-        <property>
-            <field>sbrStaticRunMinute</field>
-            <value>SBR静置运行时间</value>
-        </property>
-        <property>
-            <field>sludgePump02RunMinute</field>
-            <value>SBR污泥泵2运行时间</value>
-        </property>
-        <property>
-            <field>sbrActiveRunMinute</field>
-            <value>SBR活化运行时间</value>
-        </property>
-        <property>
-            <field>collectMixerRunMinute</field>
-            <value>集水池搅拌机运行时间</value>
-        </property>
-        <property>
-            <field>collectPumpRunMinute</field>
-            <value>集水池提升泵运行时间</value>
-        </property>
-        <property>
-            <field>sbrIntakePumpRunMinute</field>
-            <value>SBR池进水泵运行时间</value>
-        </property>
-        <property>
-            <field>flowmeter</field>
-            <value>累积流量</value>
-        </property>
-        <property>
-            <field>todayFlowmeter</field>
-            <value>当日流量</value>
-        </property>
-        <property>
-            <field>sendDate</field>
-            <value>时间</value>
         </property>
         <property>
             <field>dState</field>
