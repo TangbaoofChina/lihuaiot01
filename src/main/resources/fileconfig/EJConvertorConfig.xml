@@ -382,7 +382,6 @@
             <field>sbrActiveSetMinute</field>
             <value>SBR活化设定时间</value>
         </property>
-
         <property>
             <field>collectMixerRunMinute</field>
             <value>集水池搅拌机运行时间</value>
