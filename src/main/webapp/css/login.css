@@ -1,7 +1,10 @@
 body {
-	background: url(../../lihuaiot01/images/b.jpg);
+	background: url(../../lihuaiot01/images/c.png);
+	/*background: lightskyblue;*/
 	background-size: 100%;
-	background-position: center;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
 
 	margin-top:150px;
 }

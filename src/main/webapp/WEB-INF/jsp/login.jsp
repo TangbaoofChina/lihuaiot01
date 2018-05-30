@@ -23,7 +23,7 @@
 
                 <!-- 登陆面板的标题 -->
                 <div class="panel-title" style="text-align: center">
-                    <h2>登录</h2>
+                    <h2>立华物联网</h2>
                 </div>
 
                 <!-- 登陆面板的主体 -->
@@ -33,21 +33,21 @@
                     <form id="login_form" class="form-horizontal" style="">
                         <%--<div id="login_form" class="form-horizontal">--%>
                         <div class="form-group">
-                            <label class="control-label col-md-4 col-sm-4">用户ID：</label>
+                            <label class="control-label col-md-4 col-sm-4">用户名称：</label>
                             <div class="col-md-7 col-sm-7">
                                 <input type="text" id="userID" class="form-control"
-                                       placeholder="用户ID" name="userID"/>
+                                       placeholder="用户名称" name="userID"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-4 col-sm-4">
                                 <!-- <span class="glyphicon glyphicon-lock"></span> -->
-                                密码：
+                                用户密码：
                             </label>
                             <div class="col-md-7 col-sm-7">
                                 <input type="password" id="password" class="form-control"
-                                       placeholder="密码" name="password">
+                                       placeholder="用户密码" name="password">
                             </div>
                         </div>
 
