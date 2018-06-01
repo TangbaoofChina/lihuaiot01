@@ -28,7 +28,6 @@ import java.util.LinkedList;
  */
 public class KickoutSessionControlFilter extends AccessControlFilter {
 
-    private static final Logger log = LoggerFactory.getLogger(FormAuthenticationFilter.class);
     /**
      * 用户踢出后跳转地址
      */
@@ -127,7 +126,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
                 e.printStackTrace();
             }
         }
-        Object value =session.getAttribute("kickOut");
+
         // 如果当前登陆用户被踢出，则退出并跳转
         if (session.getAttribute("kickOut") != null && Boolean.TRUE.equals(session.getAttribute("kickOut"))) {
             try {
