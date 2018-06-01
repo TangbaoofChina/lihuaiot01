@@ -7,7 +7,10 @@ import org.apache.shiro.session.mgt.DefaultSessionKey;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -25,6 +28,7 @@ import java.util.LinkedList;
  */
 public class KickoutSessionControlFilter extends AccessControlFilter {
 
+    private static final Logger log = LoggerFactory.getLogger(FormAuthenticationFilter.class);
     /**
      * 用户踢出后跳转地址
      */
@@ -115,6 +119,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
             try {
                 Session kickOutSession = sessionManager.getSession(new DefaultSessionKey(kickOutSessionId));
                 if (kickOutSession != null) {
+                    //设置会话的kickout属性表示踢出了
                     kickOutSession.setAttribute("kickOut", true);
                 }
             } catch (Exception e) {
@@ -122,7 +127,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
                 e.printStackTrace();
             }
         }
-
+        Object value =session.getAttribute("kickOut");
         // 如果当前登陆用户被踢出，则退出并跳转
         if (session.getAttribute("kickOut") != null && Boolean.TRUE.equals(session.getAttribute("kickOut"))) {
             try {

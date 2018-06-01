@@ -1,8 +1,9 @@
 package com.system.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RoleInfo {
+public class RoleInfo implements Serializable {
     private String roleId;
     private String roleName;
     private String roleDescribe;

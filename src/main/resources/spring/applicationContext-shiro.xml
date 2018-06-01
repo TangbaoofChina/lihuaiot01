@@ -29,9 +29,9 @@
     </bean>
 
     <!-- 缓存管理器 -->
-<!--    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
-    </bean>-->
+    </bean>
 
     <!-- Realm 验证器， 配置验证策略 -->
     <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
@@ -77,7 +77,7 @@
             </list>
         </property>
         <!-- Session 缓存管理器 -->
-        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
     <!-- 会话DAO， 保存 session -->
@@ -134,7 +134,7 @@
         <property name="kickOutAfter" value="false"/>
         <property name="maxSessionNum" value="1"/>
         <property name="sessionManager" ref="sessionManager"/>
-        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
     <!-- 配置获取 URL 权限信息的 Factory -->
