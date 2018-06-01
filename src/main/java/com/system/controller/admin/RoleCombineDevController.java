@@ -97,6 +97,7 @@ public class RoleCombineDevController {
                 roleInfo.setRoleName(roleNewName);
                 roleInfo.setRoleDescribe(roleNewDescribe);
                 roleInfo.setRoleCreatUserId(userlogin.getUserid());
+                roleInfo.setRoleBelong(roleBelong);
                 roleInfoService.insertNewRoleInfo(roleInfo);
             }
         }
