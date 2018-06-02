@@ -17,4 +17,5 @@ public interface PhoneBootStrapTreeNodeService {
      * @return
      */
     List<ORGTreeNode> selectOrgTreeNodeInfoByRoleId(List<RoleInfo> roleInfoList);
+
 }

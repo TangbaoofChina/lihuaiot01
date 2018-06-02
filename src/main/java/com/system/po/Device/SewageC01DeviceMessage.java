@@ -1122,6 +1122,61 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         return myDTCList;
     }
 
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("flowmeter");
+        phoneRealMsgInfo01.setTitle("累计流量：");
+        phoneRealMsgInfo01.setValue(String.valueOf(flowmeter) + "m³");
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("todayFlowmeter");
+        phoneRealMsgInfo02.setTitle("当日流量：");
+        phoneRealMsgInfo02.setValue(String.valueOf(todayFlowmeter) + "m³");
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("systemAuto");
+        phoneRealMsgInfo03.setTitle("自动模式：");
+        if (systemAuto) {
+            phoneRealMsgInfo03.setValue("自动");
+        } else {
+            phoneRealMsgInfo03.setValue("手动");
+        }
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("sbrCycle");
+        phoneRealMsgInfo04.setTitle("SBR周期运行：");
+        if (sbrCycle) {
+            phoneRealMsgInfo04.setValue("运行");
+        } else {
+            phoneRealMsgInfo04.setValue("停止");
+        }
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("dState");
+        phoneRealMsgInfo05.setTitle("状态：");
+        phoneRealMsgInfo05.setValue(getDState());
+        phoneRealMsgInfo05.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("sendDate");
+        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setValue(this.getSendDate());
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        return phoneRealMsgInfoList;
+    }
+
     public List<PhoneSewageC01RealData> getPhoneRealMsgInfoDetail() {
         String defaultColor = "#000000"; //Black
         String normalRunColor = "#00FF00"; //Green

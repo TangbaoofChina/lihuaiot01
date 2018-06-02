@@ -47,10 +47,8 @@ public class EC01PhoneController {
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
     @Autowired
     private DeviceTypeService deviceTypeService;
-
     @Autowired
     private UserloginService userloginService;
-
 
     @RequestMapping(value = "login", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
