@@ -87,7 +87,7 @@ public class RoleCombineDevController {
             //先判断名称是否存在
             //如果存在，则返回，不能新增
             //如果不存在，则继续保存
-            if (roleInfoService.selectRoleInfoByRoleName(roleNewName).size() > 0) {
+            if (roleInfoService.selectRoleInfoByRoleNameAndBelong(roleNewName,roleBelong).size() > 0) {
                 jsonString = "角色名称已经存在，请更换";
             } else {
                 Subject currentSubject = SecurityUtils.getSubject();
@@ -173,8 +173,15 @@ public class RoleCombineDevController {
         mdtc2.setDefaultContent("2");
         mdtc2.setTitle("数据范围");
 
+        MydataTableColumn mdtc3 = new MydataTableColumn();
+        mdtc3.setData("roleBelong");
+        mdtc3.setDefaultContent("3");
+        mdtc3.setTitle("所属");
+        mdtc3.setVisible(false);
+
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
+        myDTCList.add(mdtc3);
 
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/

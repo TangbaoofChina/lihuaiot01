@@ -1188,6 +1188,7 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         PhoneSewageC01RealData phoneSewageC01RealData01 = new PhoneSewageC01RealData();
         phoneSewageC01RealData01.setColumn(2);
         phoneSewageC01RealData01.setScale("0.6,0.4");
+        phoneSewageC01RealData01.setTitle("总体信息");
         List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList01 = new ArrayList<PhoneSewageC01RealOneData>();
         PhoneSewageC01RealOneData phoneSewageC01RealOneData01 = new PhoneSewageC01RealOneData();
         phoneSewageC01RealOneData01.setTitle("时间：");
@@ -1240,6 +1241,7 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         PhoneSewageC01RealData phoneSewageC01RealData02 = new PhoneSewageC01RealData();
         phoneSewageC01RealData02.setColumn(3);
         phoneSewageC01RealData02.setScale("0.5,0.3,0.2");
+        phoneSewageC01RealData02.setTitle("SBR污水处理控制系统(分钟)");
         List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList02 = new ArrayList<PhoneSewageC01RealOneData>();
         //除磷投加机
         PhoneSewageC01RealOneData phoneSewageC01RealOneData06 = new PhoneSewageC01RealOneData();
@@ -1393,6 +1395,7 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         PhoneSewageC01RealData phoneSewageC01RealData03 = new PhoneSewageC01RealData();
         phoneSewageC01RealData03.setColumn(2);
         phoneSewageC01RealData03.setScale("0.6,0.4");
+        phoneSewageC01RealData03.setTitle("SBR工艺流程设定时间(分钟)");
         List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList03 = new ArrayList<PhoneSewageC01RealOneData>();
 
         //除磷投加机

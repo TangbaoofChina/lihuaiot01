@@ -5,7 +5,16 @@ import java.util.List;
 public class PhoneSewageC01RealData {
     private int column;
     private String scale;
+    private String title;
     private List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getColumn() {
         return column;

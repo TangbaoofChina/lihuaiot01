@@ -20,6 +20,12 @@
         SELECT * from iot_role where iot_role.ROLE_NAME = #{roleName}
         order by iot_role.ROLE_NAME
     </select>
+    <select id="selectRoleInfoByRoleNameAndBelong" resultMap="BaseResultMap">
+        SELECT * from iot_role
+        where iot_role.ROLE_NAME = #{roleName}
+        and iot_role.role_belong = #{roleBelong}
+        order by iot_role.ROLE_NAME
+    </select>
     <select id="selectRoleInfoByUserId" parameterType="String" resultMap="BaseResultMap">
         select a.* from iot_role a,iot_userrole b
         where a.role_id = b.userrole_roleid

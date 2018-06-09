@@ -2,6 +2,7 @@ package com.system.po.Phone.PhoneSewageC01;
 
 public class PhoneSewageC01RealOneData {
     private String title;
+    private String titleAlign = "left";
     private String align ="center";
     private String value1;
     private String color1;
@@ -90,5 +91,13 @@ public class PhoneSewageC01RealOneData {
 
     public void setAlign(String align) {
         this.align = align;
+    }
+
+    public String getTitleAlign() {
+        return titleAlign;
+    }
+
+    public void setTitleAlign(String titleAlign) {
+        this.titleAlign = titleAlign;
     }
 }

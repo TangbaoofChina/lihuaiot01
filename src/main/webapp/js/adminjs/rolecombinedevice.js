@@ -25,7 +25,7 @@ function roleInitTableHead() {
             /*alert("1");*/
             var json = eval(result); //数组
             for (var i = 0; i < json.length; i++) {
-                var temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                var temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
                 questionColumns.push(temp);
             }
             var temp1 = {
@@ -80,6 +80,10 @@ function roleInitTableContent() {
         search: true,
         //是否显示列头
         showHeader: true,
+        // 显示下拉框勾选要显示的列
+        showColumns: false,
+        // 设置最少显示列个数
+        minimumCountColumns: 3,
         //data:json,
         //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
         url: "/lihuaiot01/roleCombineDev/selectRoleInfo",
