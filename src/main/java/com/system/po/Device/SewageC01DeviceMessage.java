@@ -1461,8 +1461,13 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         //状态
         PhoneSewageC01RealOneData phoneSewageC01RealOneData25 = new PhoneSewageC01RealOneData();
         phoneSewageC01RealOneData25.setTitle("状态：");
-        phoneSewageC01RealOneData25.setValue1(getDState());
-        phoneSewageC01RealOneData25.setColor1(defaultColor);
+        if (getDState().equals("离线") ) {
+            phoneSewageC01RealOneData25.setValue1(getDState());
+            phoneSewageC01RealOneData25.setColor1(alarmColor);
+        } else {
+            phoneSewageC01RealOneData25.setValue1(getDState());
+            phoneSewageC01RealOneData25.setColor1(defaultColor);
+        }
         phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData25);
 
         //第三部分两列收尾
