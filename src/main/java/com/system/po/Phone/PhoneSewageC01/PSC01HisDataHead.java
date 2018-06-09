@@ -4,6 +4,7 @@ public class PSC01HisDataHead {
     private String title;
     private String width;
     private String dataName;
+    private String align = "left";
 
     public String getTitle() {
         return title;
@@ -27,6 +28,14 @@ public class PSC01HisDataHead {
 
     public void setDataName(String dataName) {
         this.dataName = dataName;
+    }
+
+    public String getAlign() {
+        return align;
+    }
+
+    public void setAlign(String align) {
+        this.align = align;
     }
 
     public PSC01HisDataHead(String sTitle, String sWidth, String sDataName) {

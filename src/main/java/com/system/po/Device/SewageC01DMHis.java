@@ -223,31 +223,31 @@ public class SewageC01DMHis extends BaseDeviceMessage {
         psc01HisDataHeadList.add(psc01HisDataHead02);
 
         //sbr设定总时间
-        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("sbr设定周期","0.1","sbrCycleSetMinute");
+        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("设定周期","0.1","sbrCycleSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead03);
 
         //SBR一次搅拌（设定分钟）
-        PSC01HisDataHead psc01HisDataHead04 = new PSC01HisDataHead("SBR一次搅拌","0.1","sbrMixerOnceSetMinute");
+        PSC01HisDataHead psc01HisDataHead04 = new PSC01HisDataHead("一次搅拌","0.1","sbrMixerOnceSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead04);
 
         //SBR曝气（设定分钟）
-        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("SBR曝气","0.1","fanSetMinute");
+        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("曝气","0.1","fanSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead05);
 
         //SBR混合（设定分钟）
-        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("SBR混合","0.1","sbrMixerSetMinute");
+        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("混合","0.1","sbrMixerSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead06);
 
         //SBR静置（设定分钟）
-        PSC01HisDataHead psc01HisDataHead07 = new PSC01HisDataHead("SBR静置","0.1","sbrStaticSetMinute");
+        PSC01HisDataHead psc01HisDataHead07 = new PSC01HisDataHead("静置","0.1","sbrStaticSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead07);
 
         //SBR污泥泵2（设定分钟）
-        PSC01HisDataHead psc01HisDataHead08 = new PSC01HisDataHead("SBR污泥泵2","0.1","sludgePump02SetMinute");
+        PSC01HisDataHead psc01HisDataHead08 = new PSC01HisDataHead("污泥泵2","0.1","sludgePump02SetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead08);
 
         //SBR静置活化（设定分钟）
-        PSC01HisDataHead psc01HisDataHead09 = new PSC01HisDataHead("SBR静置活化","0.1","sbrActiveSetMinute");
+        PSC01HisDataHead psc01HisDataHead09 = new PSC01HisDataHead("静置活化","0.1","sbrActiveSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead09);
 
         return psc01HisDataHeadList;
