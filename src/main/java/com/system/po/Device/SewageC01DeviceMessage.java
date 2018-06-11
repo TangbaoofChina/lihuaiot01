@@ -1181,13 +1181,13 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         String defaultColor = "#000000"; //Black
         String normalRunColor = "#00FF00"; //Green
         String normalStopColor = "#FFA500"; //Orange
-        String alarmColor = "#FFFF00";   //Yellow
+        String alarmColor = "#CDCD00";   //LightYellow
         List<PhoneSewageC01RealData> phoneSewageC01RealDataList = new ArrayList<PhoneSewageC01RealData>();
 
         //第一部分的两列
         PhoneSewageC01RealData phoneSewageC01RealData01 = new PhoneSewageC01RealData();
         phoneSewageC01RealData01.setColumn(2);
-        phoneSewageC01RealData01.setScale("0.6,0.4");
+        phoneSewageC01RealData01.setScale("0.5,0.5");
         phoneSewageC01RealData01.setTitle("总体信息");
         List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList01 = new ArrayList<PhoneSewageC01RealOneData>();
         PhoneSewageC01RealOneData phoneSewageC01RealOneData01 = new PhoneSewageC01RealOneData();
@@ -1394,7 +1394,7 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         //第三部分的两列--设定时间
         PhoneSewageC01RealData phoneSewageC01RealData03 = new PhoneSewageC01RealData();
         phoneSewageC01RealData03.setColumn(2);
-        phoneSewageC01RealData03.setScale("0.6,0.4");
+        phoneSewageC01RealData03.setScale("0.5,0.5");
         phoneSewageC01RealData03.setTitle("SBR工艺流程设定时间(分钟)");
         List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList03 = new ArrayList<PhoneSewageC01RealOneData>();
 
