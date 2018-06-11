@@ -32,7 +32,7 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 
     @Override
     public List<RoleInfo> selectRoleInfoByRoleNameAndBelong(String roleName, String roleBelong) throws Exception {
-        return null;
+        return roleInfoMapper.selectRoleInfoByRoleNameAndBelong(roleName,roleBelong);
     }
 
     @Override
