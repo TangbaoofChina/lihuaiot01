@@ -14,7 +14,7 @@ var hisChartoptionInit = {
         feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ["line","bar"]},
+            magicType: {show: true, type: ["line", "bar"]},
             restore: {show: false},
             saveAsImage: {show: true}
         }
@@ -25,7 +25,14 @@ var hisChartoptionInit = {
     xAxis: {
         data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     },
-    yAxis: {},
+    yAxis: {
+        min: function (value) {
+            return value.min - 5;
+        },
+        max: function (value) {
+            return value.max + 5;
+        }
+    },
     series: [{
         name: '销量1',
         type: 'line',
@@ -44,7 +51,7 @@ var hisChartoption = {
         feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ["line","bar"]},
+            magicType: {show: true, type: ["line", "bar"]},
             restore: {show: false},
             saveAsImage: {show: true}
         }
@@ -55,7 +62,14 @@ var hisChartoption = {
     xAxis: {
         data: []
     },
-    yAxis: {},
+    yAxis: {
+        min: function (value) {
+            return Math.floor(value.min - 3);
+        },
+        max: function (value) {
+            return Math.floor(value.max + 3);
+        }
+    },
     series: []
 };
 
@@ -126,9 +140,9 @@ function hisChartRepaintChart(hisChartoption) {
 
 function hisChartSelectDeviceByIdsChart01() {
     var queryUserId = "41235";
-    var queryParameter ="舍前";
-    var queryDeviceId ="0001";
-    var queryDay ="1";
+    var queryParameter = "舍前";
+    var queryDeviceId = "0001";
+    var queryDay = "1";
     var data = {
         userId: queryUserId,
         sQueryParam: queryParameter,
