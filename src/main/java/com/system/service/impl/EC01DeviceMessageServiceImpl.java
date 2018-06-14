@@ -194,7 +194,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         long from = simpleFormat.parse(ec01DeviceMessage.getDReceiveTime()).getTime();
         long to = simpleFormat.parse(toDate).getTime();
         int minutes = (int) ((to - from) / (1000 * 60));
-        if (minutes > 15)
+        if (minutes > 30)
             ec01DeviceMessage.setDState("离线");
         else
             ec01DeviceMessage.setDState("在线");
