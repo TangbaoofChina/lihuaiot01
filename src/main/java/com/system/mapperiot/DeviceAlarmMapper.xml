@@ -5,6 +5,7 @@
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="ALARM_ID" jdbcType="VARCHAR" property="dAlarmId"/>
         <result column="DEVICE_ID" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DEVICE_ID" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
         <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
@@ -17,6 +18,7 @@
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="HISALARM_ID" jdbcType="VARCHAR" property="dAlarmId"/>
         <result column="DEVICE_ID" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DEVICE_ID" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
         <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>

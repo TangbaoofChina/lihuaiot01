@@ -1,11 +1,14 @@
 package com.system.po;
 
+import com.system.util.DataConvertor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceAlarmInfo {
     private String dAlarmId;
     private String dSerialNum;
+    private String dSerialNumDec;
     private String dName;
     private String dAlarmCode;
     private String dAlarmInfo;
@@ -28,6 +31,14 @@ public class DeviceAlarmInfo {
 
     public void setDSerialNum(String dSerialNum) {
         this.dSerialNum = dSerialNum;
+    }
+
+    public String getDSerialNumDec() {
+        return DataConvertor.ConvertHexToDec(dSerialNumDec,5);
+    }
+
+    public void setdSerialNumDec(String dSerialNumDec) {
+        this.dSerialNumDec = dSerialNumDec;
     }
 
     public String getDName() {
@@ -90,7 +101,7 @@ public class DeviceAlarmInfo {
     {
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
         MydataTableColumn mdtc1 = new MydataTableColumn();
-        mdtc1.setData("dSerialNum");
+        mdtc1.setData("dSerialNumDec");
         mdtc1.setDefaultContent("1");
         mdtc1.setTitle("设备ID");
         mdtc1.setVisible(false);

@@ -605,7 +605,7 @@ public class SewageC01DeviceMessage extends BaseDeviceMessage {
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
 
         MydataTableColumn mdtc1 = new MydataTableColumn();
-        mdtc1.setData("dSerialNum");
+        mdtc1.setData("dSerialNumDec");
         mdtc1.setDefaultContent("1");
         mdtc1.setTitle("序号");
         mdtc1.setVisible(false);

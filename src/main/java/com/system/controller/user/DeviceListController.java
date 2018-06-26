@@ -77,7 +77,7 @@ public class DeviceListController {
     public String DeviceHead() throws Exception {
         List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
         MydataTableColumn mdtc1 = new MydataTableColumn();
-        mdtc1.setData("dSerialNum");
+        mdtc1.setData("dSerialNumDec");
         mdtc1.setDefaultContent("1");
         mdtc1.setTitle("序号");
 

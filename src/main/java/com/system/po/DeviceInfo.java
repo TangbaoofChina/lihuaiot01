@@ -1,7 +1,10 @@
 package com.system.po;
 
+import com.system.util.DataConvertor;
+
 public class DeviceInfo {
     private String dSerialNum;
+    private String dSerialNumDec;
     private String dName = "";
     private String dIp="";
     private String dPort="";
@@ -16,6 +19,14 @@ public class DeviceInfo {
 
     public void setDSerialNum(String dSerialNum) {
         this.dSerialNum = dSerialNum;
+    }
+
+    public String getDSerialNumDec() {
+        return DataConvertor.ConvertHexToDec(dSerialNumDec,5);
+    }
+
+    public void setDSerialNumDec(String dSerialNumDec) {
+        this.dSerialNumDec = dSerialNumDec;
     }
 
     public String getDName() {

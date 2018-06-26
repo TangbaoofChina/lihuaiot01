@@ -10,6 +10,10 @@
             <value>序号</value>
         </property>
         <property>
+            <field>dSerialNumDec</field>
+            <value>序号(10)</value>
+        </property>
+        <property>
             <field>dName</field>
             <value>名称</value>
         </property>
@@ -43,6 +47,10 @@
         <property>
             <field>dSerialNum</field>
             <value>序号</value>
+        </property>
+        <property>
+            <field>dSerialNumDec</field>
+            <value>序号(10)</value>
         </property>
         <property>
             <field>dName</field>
@@ -288,6 +296,10 @@
             <value>设备ID</value>
         </property>
         <property>
+            <field>dSerialNumDec</field>
+            <value>设备ID(10)</value>
+        </property>
+        <property>
             <field>dName</field>
             <value>设备</value>
         </property>
@@ -321,6 +333,10 @@
         <property>
             <field>dSerialNum</field>
             <value>序号</value>
+        </property>
+        <property>
+            <field>dSerialNumDec</field>
+            <value>序号(10)</value>
         </property>
         <property>
             <field>dName</field>

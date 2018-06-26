@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.system.po.Device.SewageC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="SWC01_COLLECTMIXERRUN" jdbcType="BOOLEAN" property="collectMixerRun"/>
         <result column="SWC01_DEPHOSPHORIZERUN" jdbcType="BOOLEAN" property="dephosphorizeRun"/>
@@ -68,6 +69,7 @@
     <resultMap id="BaseHisResultMap" type="com.system.po.Device.SewageC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="HSWC01_COLLECTMIXERRUN" jdbcType="BOOLEAN" property="collectMixerRun"/>
         <result column="HSWC01_DEPHOSPHORIZERUN" jdbcType="BOOLEAN" property="dephosphorizeRun"/>
@@ -133,6 +135,7 @@
     <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.SewageC01DMHis">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="HSWC01_SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
         <result column="HSWC01_SBRMIXERONCESETMINUTE" jdbcType="INTEGER" property="sbrMixerOnceSetMinute"/>

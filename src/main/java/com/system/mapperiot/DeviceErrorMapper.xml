@@ -5,6 +5,7 @@
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DRERROR_ID" jdbcType="VARCHAR" property="dAlarmId"/>
         <result column="DRERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DRERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
         <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
@@ -14,17 +15,18 @@
         <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
     </resultMap>
     <resultMap id="BaseHisResultMap" type="com.system.po.DeviceAlarmInfo">
-    <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
-    <id column="DHERROR_ID" jdbcType="VARCHAR" property="dAlarmId"/>
-    <result column="DHERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
-    <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
-    <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
-    <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
-    <result column="DHERROR_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
-    <result column="DHERROR_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
-    <result column="DHERROR_RECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
-    <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
-</resultMap>
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DHERROR_ID" jdbcType="VARCHAR" property="dAlarmId"/>
+        <result column="DHERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DHERROR_DEVNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+        <result column="DHERROR_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
+        <result column="DHERROR_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
+        <result column="DHERROR_RECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+    </resultMap>
     <select id="selectErrorInfoCount" resultType="Integer">
         SELECT count(*) from iot_realerror
     </select>

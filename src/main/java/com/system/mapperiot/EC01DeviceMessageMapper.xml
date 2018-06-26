@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.system.po.Device.EC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="EC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
         <result column="EC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>
@@ -65,6 +66,7 @@
     <resultMap id="BaseHisResultMap" type="com.system.po.Device.EC01DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="HEC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
         <result column="HEC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>

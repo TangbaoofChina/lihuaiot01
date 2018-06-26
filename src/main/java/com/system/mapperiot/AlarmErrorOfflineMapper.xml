@@ -5,6 +5,7 @@
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="dAlarmId" jdbcType="VARCHAR" property="dAlarmId"/>
         <result column="dSerialNum" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="dSerialNum" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
         <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>

@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.system.po.DeviceInfo">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
         <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
@@ -14,6 +15,7 @@
     <resultMap id="BaseResultAndNodeMap" type="com.system.po.DeviceInfoAndNode">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
         <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
         <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
