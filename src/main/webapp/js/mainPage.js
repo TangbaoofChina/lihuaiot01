@@ -321,6 +321,7 @@ window.operateEvents = {
     /*设备组织配置*/
     'click .deviceOrgChangeORG': function (e, value, row, index) {
         $('#deviceOrgNum').val(row.dSerialNum);
+        $('#deviceOrgNumDec').val(row.dSerialNumDec);
         $('#deviceOrgName').val(row.dName);
         deviceOrgSelectDevice = row;
         deviceOrgShowAdd();

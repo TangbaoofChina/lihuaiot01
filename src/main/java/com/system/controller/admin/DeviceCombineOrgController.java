@@ -91,14 +91,21 @@ public class DeviceCombineOrgController {
         mdtc1.setData("dSerialNum");
         mdtc1.setDefaultContent("1");
         mdtc1.setTitle("序号");
+        mdtc1.setVisible(false);
 
         MydataTableColumn mdtc2 = new MydataTableColumn();
-        mdtc2.setData("dName");
-        mdtc2.setDefaultContent("2");
-        mdtc2.setTitle("名称");
+        mdtc2.setData("dSerialNumDec");
+        mdtc2.setDefaultContent("1");
+        mdtc2.setTitle("序号");
+
+        MydataTableColumn mdtc3 = new MydataTableColumn();
+        mdtc3.setData("dName");
+        mdtc3.setDefaultContent("2");
+        mdtc3.setTitle("名称");
 
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
+        myDTCList.add(mdtc3);
 
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/

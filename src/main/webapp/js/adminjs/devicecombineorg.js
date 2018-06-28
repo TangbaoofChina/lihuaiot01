@@ -213,7 +213,7 @@ function deviceOrgInitTable() {
             var temp0 = {field: 'checkStatus', checkbox: true};
             questionColumns.push(temp0)
             for (var i = 0; i < json.length; i++) {
-                var temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                var temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
                 questionColumns.push(temp);
             }
             var temp1 = {
