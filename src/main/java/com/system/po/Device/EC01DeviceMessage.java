@@ -2,6 +2,7 @@ package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
 import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.util.DataConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -388,192 +389,192 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         this.relay14 = relay14;
     }
 
-    public Boolean getFan01On() {
-        return fan01On;
+    public String getFan01On() {
+        return DataConvertor.getBoolState(fan01On) ;
     }
 
     public void setFan01On(Boolean fan01On) {
         this.fan01On = fan01On;
     }
 
-    public Boolean getFan02On() {
-        return fan02On;
+    public String getFan02On() {
+        return DataConvertor.getBoolState(fan02On);
     }
 
     public void setFan02On(Boolean fan02On) {
         this.fan02On = fan02On;
     }
 
-    public Boolean getFan03On() {
-        return fan03On;
+    public String getFan03On() {
+        return DataConvertor.getBoolState(fan03On);
     }
 
     public void setFan03On(Boolean fan03On) {
         this.fan03On = fan03On;
     }
 
-    public Boolean getFan04On() {
-        return fan04On;
+    public String getFan04On() {
+        return DataConvertor.getBoolState(fan04On);
     }
 
     public void setFan04On(Boolean fan04On) {
         this.fan04On = fan04On;
     }
 
-    public Boolean getFan05On() {
-        return fan05On;
+    public String getFan05On() {
+        return DataConvertor.getBoolState(fan05On);
     }
 
     public void setFan05On(Boolean fan05On) {
         this.fan05On = fan05On;
     }
 
-    public Boolean getFan06On() {
-        return fan06On;
+    public String getFan06On() {
+        return DataConvertor.getBoolState(fan06On);
     }
 
     public void setFan06On(Boolean fan06On) {
         this.fan06On = fan06On;
     }
 
-    public Boolean getFan07On() {
-        return fan07On;
+    public String getFan07On() {
+        return DataConvertor.getBoolState(fan07On);
     }
 
     public void setFan07On(Boolean fan07On) {
         this.fan07On = fan07On;
     }
 
-    public Boolean getFan08On() {
-        return fan08On;
+    public String getFan08On() {
+        return DataConvertor.getBoolState(fan08On);
     }
 
     public void setFan08On(Boolean fan08On) {
         this.fan08On = fan08On;
     }
 
-    public Boolean getRelay09On() {
-        return relay09On;
+    public String getRelay09On() {
+        return DataConvertor.getBoolState(relay09On);
     }
 
     public void setRelay09On(Boolean relay09On) {
         this.relay09On = relay09On;
     }
 
-    public Boolean getRelay10On() {
-        return relay10On;
+    public String getRelay10On() {
+        return DataConvertor.getBoolState(relay10On);
     }
 
     public void setRelay10On(Boolean relay10On) {
         this.relay10On = relay10On;
     }
 
-    public Boolean getRelay11On() {
-        return relay11On;
+    public String getRelay11On() {
+        return DataConvertor.getBoolState(relay11On);
     }
 
     public void setRelay11On(Boolean relay11On) {
         this.relay11On = relay11On;
     }
 
-    public Boolean getRelay12On() {
-        return relay12On;
+    public String getRelay12On() {
+        return DataConvertor.getBoolState(relay12On);
     }
 
     public void setRelay12On(Boolean relay12On) {
         this.relay12On = relay12On;
     }
 
-    public Boolean getRelay13On() {
-        return relay13On;
+    public String getRelay13On() {
+        return DataConvertor.getBoolState(relay13On);
     }
 
     public void setRelay13On(Boolean relay13On) {
         this.relay13On = relay13On;
     }
 
-    public Boolean getRelay14On() {
-        return relay14On;
+    public String getRelay14On() {
+        return DataConvertor.getBoolState(relay14On);
     }
 
     public void setRelay14On(Boolean relay14On) {
         this.relay14On = relay14On;
     }
 
-    public Boolean getWetCurtainOn() {
-        return wetCurtainOn;
+    public String getWetCurtainOn() {
+        return DataConvertor.getBoolState(wetCurtainOn);
     }
 
     public void setWetCurtainOn(Boolean wetCurtainOn) {
         this.wetCurtainOn = wetCurtainOn;
     }
 
-    public Boolean getAlarmOn() {
-        return alarmOn;
+    public String getAlarmOn() {
+        return DataConvertor.getBoolState(alarmOn);
     }
 
     public void setAlarmOn(Boolean alarmOn) {
         this.alarmOn = alarmOn;
     }
 
-    public Boolean getFanClockEnable() {
-        return fanClockEnable;
+    public String getFanClockEnable() {
+        return DataConvertor.getBoolState(fanClockEnable);
     }
 
     public void setFanClockEnable(Boolean fanClockEnable) {
         this.fanClockEnable = fanClockEnable;
     }
 
-    public Boolean getFanChangeEnable() {
-        return fanChangeEnable;
+    public String getFanChangeEnable() {
+        return DataConvertor.getBoolState(fanChangeEnable);
     }
 
     public void setFanChangeEnable(Boolean fanChangeEnable) {
         this.fanChangeEnable = fanChangeEnable;
     }
 
-    public Boolean getWetCurtainWPEnable() {
-        return wetCurtainWPEnable;
+    public String getWetCurtainWPEnable() {
+        return DataConvertor.getBoolState(wetCurtainWPEnable);
     }
 
     public void setWetCurtainWPEnable(Boolean wetCurtainWPEnable) {
         this.wetCurtainWPEnable = wetCurtainWPEnable;
     }
 
-    public Boolean getTempCurveEnable() {
-        return tempCurveEnable;
+    public String getTempCurveEnable() {
+        return DataConvertor.getBoolState(tempCurveEnable);
     }
 
     public void setTempCurveEnable(Boolean tempCurveEnable) {
         this.tempCurveEnable = tempCurveEnable;
     }
 
-    public Boolean getMinAirCurveEnable() {
-        return minAirCurveEnable;
+    public String getMinAirCurveEnable() {
+        return DataConvertor.getBoolState(minAirCurveEnable);
     }
 
     public void setMinAirCurveEnable(Boolean minAirCurveEnable) {
         this.minAirCurveEnable = minAirCurveEnable;
     }
 
-    public Boolean getSpare05On() {
-        return spare05On;
+    public String getSpare05On() {
+        return DataConvertor.getBoolState(spare05On);
     }
 
     public void setSpare05On(Boolean spare05On) {
         this.spare05On = spare05On;
     }
 
-    public Boolean getSpare06On() {
-        return spare06On;
+    public String getSpare06On() {
+        return DataConvertor.getBoolState(spare06On);
     }
 
     public void setSpare06On(Boolean spare06On) {
         this.spare06On = spare06On;
     }
 
-    public Boolean getSpare07On() {
-        return spare07On;
+    public String getSpare07On() {
+        return DataConvertor.getBoolState(spare07On);
     }
 
     public void setSpare07On(Boolean spare07On) {

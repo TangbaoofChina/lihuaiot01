@@ -4,8 +4,14 @@ import java.text.DecimalFormat;
 
 public class DataConvertor {
 
-    public static String getBoolState01On(Byte byteValue) {
+    public static String getByteState(Byte byteValue) {
         if (byteValue == 1)
+            return "开";
+        else return "关";
+    }
+
+    public static String getBoolState(boolean bValue) {
+        if (bValue == true)
             return "开";
         else return "关";
     }

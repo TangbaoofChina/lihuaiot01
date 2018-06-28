@@ -194,7 +194,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 var fan04Close = document.getElementById("fan04Close");
                 var fan05Open = document.getElementById("fan05Open");
                 var fan05Close = document.getElementById("fan05Close");
-                if (result.wetCurtainOn === false)  //湿帘水泵
+                if (result.wetCurtainOn === "关")  //湿帘水泵
                 {
                     wetCurtainWPOpen.style.display = "none";
                     wetCurtainWPClose.style.display = "block";
@@ -202,7 +202,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     wetCurtainWPOpen.style.display = "block";
                     wetCurtainWPClose.style.display = "none";
                 }
-                if (result.fan01On === false)  //风机1
+                if (result.fan01On === "关")  //风机1
                 {
                     fan01Open.style.display = "none";
                     fan01Close.style.display = "block";
@@ -210,7 +210,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan01Open.style.display = "block";
                     fan01Close.style.display = "none";
                 }
-                if (result.fan02On === false)  //风机2
+                if (result.fan02On === "关")  //风机2
                 {
                     fan02Open.style.display = "none";
                     fan02Close.style.display = "block";
@@ -218,7 +218,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan02Open.style.display = "block";
                     fan02Close.style.display = "none";
                 }
-                if (result.fan03On === false)  //风机3
+                if (result.fan03On === "关")  //风机3
                 {
                     fan03Open.style.display = "none";
                     fan03Close.style.display = "block";
@@ -226,7 +226,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan03Open.style.display = "block";
                     fan03Close.style.display = "none";
                 }
-                if (result.fan04On === false)  //风机4
+                if (result.fan04On === "关")  //风机4
                 {
                     fan04Open.style.display = "none";
                     fan04Close.style.display = "block";
@@ -234,7 +234,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                     fan04Open.style.display = "block";
                     fan04Close.style.display = "none";
                 }
-                if (result.fan05On === false)  //风机5
+                if (result.fan05On === "关")  //风机5
                 {
                     fan05Open.style.display = "none";
                     fan05Close.style.display = "block";

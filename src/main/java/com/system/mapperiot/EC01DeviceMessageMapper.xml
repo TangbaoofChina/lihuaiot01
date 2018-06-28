@@ -59,6 +59,9 @@
         <result column="EC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
         <result column="EC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
         <result column="EC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="EC01_SPARE05ON" jdbcType="BOOLEAN" property="spare05On"/>
+        <result column="EC01_SPARE06ON" jdbcType="BOOLEAN" property="spare06On"/>
+        <result column="EC01_SPARE07ON" jdbcType="BOOLEAN" property="spare07On"/>
         <result column="EC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
         <result column="EC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="EC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
@@ -121,6 +124,9 @@
         <result column="HEC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
         <result column="HEC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
         <result column="HEC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="HEC01_SPARE05ON" jdbcType="BOOLEAN" property="spare05On"/>
+        <result column="HEC01_SPARE06ON" jdbcType="BOOLEAN" property="spare06On"/>
+        <result column="HEC01_SPARE07ON" jdbcType="BOOLEAN" property="spare07On"/>
         <result column="HEC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
         <result column="HEC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="HEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
