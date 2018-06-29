@@ -60,7 +60,12 @@ var hisChartoption = {
         data: []
     },
     xAxis: {
-        data: []
+        data: [],
+        axisLabel: {
+            formatter: function (category) {
+                return category.substring(0, 16);
+            }
+        }
     },
     yAxis: {
         min: function (value) {
@@ -198,7 +203,7 @@ function hisChartSelectDeviceByIdsChart() {
                 var optionstring1 = json.chartsParameters.dParameterName;
                 var optionstring2 = json.chartsParameters.dParameterTime;
                 var optionstring3 = json.chartsParameters.dParameterdata;
-                hisChartoption.title.text = "温度曲线";
+                hisChartoption.title.text = "数据曲线";
                 hisChartoption.legend.data = optionstring1;
                 hisChartoption.xAxis.data = optionstring2;
                 hisChartoption.series = [];
@@ -380,7 +385,7 @@ function hisChartDateRangePickerInit() {
         opens: 'right',    // 日期选择框的弹出位置
         separator: ' 至 ',
         locale: {
-            format: 'YYYY/MM/DD HH:mm:ss',
+            format: 'YYYY-MM-DD HH:mm:ss',
             separator: ' ~ ',
             applyLabel: "应用",
             cancelLabel: "取消",

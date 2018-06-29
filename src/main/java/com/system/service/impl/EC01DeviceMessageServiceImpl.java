@@ -113,7 +113,18 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
      */
     @Override
     public ParameterCharts selectHisEC01ByDateAndIDsChart(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
-        List<EC01DeviceMessage> deviceMessageList = ec01DeviceMessageMapper.selectEC01ByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
+        List<EC01DeviceMessage> deviceMessageList = new ArrayList<>();
+        if (sQueryParam.equals("日饮水量")) {
+            /*SimpleDateFormat sdfOld = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date startDate = sdfOld.parse(sStartDate);
+            Date endDate = sdfOld.parse(sEndDate);*/
+            sStartDate = sStartDate.substring(0, 10);
+            sEndDate = sEndDate.substring(0, 10);
+            deviceMessageList = ec01DeviceMessageMapper.selectEC01WaterByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
+        } else {
+            deviceMessageList = ec01DeviceMessageMapper.selectEC01ByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
+        }
         ParameterCharts returnParamChats = getParameterChartsByDeviceMessageList(deviceMessageList, sDeviceIds, sQueryParam);
         return returnParamChats;
     }

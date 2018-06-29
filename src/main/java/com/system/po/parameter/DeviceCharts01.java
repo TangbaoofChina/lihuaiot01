@@ -38,6 +38,7 @@ public class DeviceCharts01 {
         deviceParameterName.add("舍后");
         deviceParameterName.add("舍外");
         deviceParameterName.add("饮水量");
+        deviceParameterName.add("日饮水量");
 
         ParameterData01 parameterInAveTemp = new ParameterData01();
         parameterInAveTemp.setName("舍内");
@@ -51,6 +52,8 @@ public class DeviceCharts01 {
         parameterOutTemp.setName("舍外");
         ParameterData01 parameterWaterFlow = new ParameterData01();
         parameterWaterFlow.setName("饮水量");
+        ParameterData01 parameterDayWaterFlow = new ParameterData01();
+        parameterDayWaterFlow.setName("日饮水量");
 
 
         List<OneDataDetail> inAveTempList = new ArrayList<OneDataDetail>();
@@ -59,6 +62,7 @@ public class DeviceCharts01 {
         List<OneDataDetail> inTemp03List = new ArrayList<OneDataDetail>();
         List<OneDataDetail> outTempList = new ArrayList<OneDataDetail>();
         List<OneDataDetail> waterFlowList = new ArrayList<OneDataDetail>();
+        List<OneDataDetail> dayWaterFlowList = new ArrayList<OneDataDetail>();
 
         for (EC01DeviceMessage deviceMessage:deviceMessageList
                 ) {
@@ -94,13 +98,18 @@ public class DeviceCharts01 {
             oneDataDetailWaterFlow.setName(deviceMessage.getSendDate());
             oneDataDetailWaterFlow.setValue(String.valueOf(deviceMessage.getWaterFlowVal()));
 
+            //日饮水量
+            OneDataDetail oneDataDetailDayWaterFlow = new OneDataDetail();
+            oneDataDetailDayWaterFlow.setName(deviceMessage.getSendDate());
+            oneDataDetailDayWaterFlow.setValue(String.valueOf(deviceMessage.getWaterFlowVal()));
+
             inAveTempList.add(oneDataDetailInAveTemp);
             inTemp01List.add(oneDataDetailInTemp1);
             inTemp02List.add(oneDataDetailInTemp2);
             inTemp03List.add(oneDataDetailInTemp3);
             outTempList.add(oneDataDetailOutTemp);
             waterFlowList.add(oneDataDetailWaterFlow);
-
+            dayWaterFlowList.add(oneDataDetailDayWaterFlow);
         }
 
         parameterInAveTemp.setData(inAveTempList);
@@ -109,6 +118,7 @@ public class DeviceCharts01 {
         parameterInTemp3.setData(inTemp03List);
         parameterOutTemp.setData(outTempList);
         parameterWaterFlow.setData(waterFlowList);
+        parameterDayWaterFlow.setData(dayWaterFlowList);
 
         parameterDataList.add(parameterInAveTemp);
         parameterDataList.add(parameterInTemp1);
@@ -116,6 +126,7 @@ public class DeviceCharts01 {
         parameterDataList.add(parameterInTemp3);
         parameterDataList.add(parameterOutTemp);
         parameterDataList.add(parameterWaterFlow);
+        parameterDataList.add(parameterDayWaterFlow);
 
         DeviceInfo deviceInfo = new DeviceInfo();
         deviceInfo.setDName(deviceMessageList.get(0).getDName());

@@ -131,7 +131,7 @@
         <result column="HEC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="HEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
-    <select id="selectEC01ByORGId" parameterType="string"  resultMap="BaseResultMap">
+    <select id="selectEC01ByORGId" parameterType="string" resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
         from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
@@ -150,7 +150,7 @@
         </foreach>
         order by u.di_serialnum asc
     </select>
-    <select id="selectEC01ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
+    <select id="selectEC01ByDeviceId" parameterType="string" resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
         from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
@@ -178,5 +178,20 @@
         AND b.HEC01_DATASENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         order by b.HEC01_DATASENDDATE ASC
+    </select>
+    <select id="selectEC01WaterByDeviceIdsAndDate" resultMap="BaseHisResultMap">
+        select u.di_name,u.di_serialnum,c.*
+        from (select t.*,
+        row_number() over(partition by t.device_serialnum,to_char(t.hec01_datasenddate,'yyyy-mm-dd') order by t.hec01_datasenddate desc) rn
+        from iot_hisenvcon_01 t
+        where t.hec01_datasenddate BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and t.device_serialnum in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ) c,iot_deviceinfo u
+        where rn = 1 and u.di_serialnum=c.device_serialnum
+        order by c.hec01_datasenddate asc
     </select>
 </mapper>

@@ -323,7 +323,7 @@ public class EC01PhoneController {
         String getTimeDate = getTime.substring(0,getTime.indexOf(" "));
         String getTimeTime = getTime.substring(getTime.indexOf(" ")+1,getTime.length());*/
         EChartsTitle eChartsTitle = new EChartsTitle();
-        eChartsTitle.setText("温度曲线");
+        eChartsTitle.setText("数据曲线");
         eChartsTitle.setSubtext("");
         phoneEChartsOptions.setTitle(eChartsTitle);
 

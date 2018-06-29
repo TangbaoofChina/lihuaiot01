@@ -15,4 +15,7 @@ public interface EC01DeviceMessageMapper {
     List<EC01DeviceMessage> selectEC01ByDeviceIdsAndDate(@Param("deviceIds") String[] sDeviceIds,
                                                         @Param("startDate") String sStartTime,
                                                         @Param("endDate") String sEndDate);
+    List<EC01DeviceMessage> selectEC01WaterByDeviceIdsAndDate(@Param("deviceIds") String[] sDeviceIds,
+                                                         @Param("startDate") String sStartTime,
+                                                         @Param("endDate") String sEndDate);
 }
