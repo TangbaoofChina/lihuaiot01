@@ -198,9 +198,9 @@
                 </div>
             </div>
         </div>
-        <div class="columns-right" id="rdlSewageC01OneDeviceDiv" style="display:none">
+        <div class="columns-right" id="rdlSewageC01OneDeviceDiv" style="display:none;">
             <!--主体-->
-            <div class="col-md-9 col-sm-9 row" id="sewageC01Main" style="text-align: center;">
+            <div class="col-md-9 col-sm-9 row" id="sewageC01Main" style="text-align: center;margin-left: 20px;">
                 <div class="col-md-9 col-sm-9 row">
                 <div class="col-md-2 col-sm-2 SewageC01border">
                     <span>时间</span>
