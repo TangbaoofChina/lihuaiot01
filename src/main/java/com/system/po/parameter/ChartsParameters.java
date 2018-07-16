@@ -8,7 +8,6 @@ public class ChartsParameters {
     private List<ParameterData> dParameterdata;
     private List<String> dParameterTime;
     private List<String> dParameterName;
-
     private String min;
     private String max;
 
@@ -58,8 +57,8 @@ public class ChartsParameters {
         List<String> minValues = new ArrayList<>();
         for (ParameterData parameterData : parameterDataList
                 ) {
-            maxValues.add(parameterData.getMaxValue());
-            minValues.add(parameterData.getMinValue());
+            maxValues.add(parameterData.findMaxValue());
+            minValues.add(parameterData.findMinValue());
         }
         this.max = Collections.max(maxValues);
         this.min = Collections.min(minValues);

@@ -70,9 +70,24 @@ public class PhoneEChartsOptions {
         this.series = series;
     }
 
-    public PhoneEChartsOptions(){
+    public PhoneEChartsOptions() {
         this.setTooltip(new EChartsTooltip());
         this.setToolbox(new EChartsToolBox());
-        this.setyAxis(new EChartsYAxis());
+    }
+
+    public void showPoint(boolean showAvgPoint, boolean showMaxMinPoint) {
+        if (showMaxMinPoint) {
+            for (ParameterData parameterData : series
+                    ) {
+                parameterData.setMarkPoint(new EcsMarkPoint());
+            }
+        }
+        if (showAvgPoint) {
+            for (ParameterData parameterData : series
+                    ) {
+                parameterData.setMarkLine(new EcsMarkLine());
+                ;
+            }
+        }
     }
 }

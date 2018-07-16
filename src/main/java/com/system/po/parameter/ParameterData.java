@@ -16,11 +16,11 @@ public class ParameterData extends ParameterBase {
         this.data = data;
     }
 
-    public String getMaxValue() {
+    public String findMaxValue() {
         return Collections.max(data);
     }
 
-    public String getMinValue() {
+    public String findMinValue() {
         return Collections.min(data);
     }
 }

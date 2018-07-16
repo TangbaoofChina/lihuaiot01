@@ -1,13 +1,16 @@
 package com.system.po.EChartsOptions.EChartsTBF;
 
 public class EctbfMagicType extends EctbfBase {
-    private String type = "[\"line\",\"bar\"]";
+    private String[] type;
 
-    public String getType() {
-        return type;
+    public void setType(String[] type) {
+        this.type = type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String[] getType() {
+        String[] myType = new String[2];
+        myType[0] = "line";
+        myType[1] = "bar";
+        return myType;
     }
 }

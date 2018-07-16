@@ -333,15 +333,21 @@ public class EC01PhoneController {
 
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
         eChartsXAxis.setData(chartsParameters.getdParameterTime());
+        EcSplitLine ecxSplitLine = new EcSplitLine();
+        ecxSplitLine.setShow(false);
+        eChartsXAxis.setSplitLine(ecxSplitLine);
         phoneEChartsOptions.setxAxis(eChartsXAxis);
 
         EChartsYAxis eChartsYAxis = new EChartsYAxis();
         eChartsYAxis.setMin(String.valueOf((int) (Float.parseFloat(chartsParameters.getMin()) - 3)));
         eChartsYAxis.setMax(String.valueOf((int) (Float.parseFloat(chartsParameters.getMax()) + 3)));
+        eChartsYAxis.setType("value");
+        EcSplitLine ecySplitLine = new EcSplitLine();
+        eChartsYAxis.setSplitLine(ecySplitLine);
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
         phoneEChartsOptions.setSeries(chartsParameters.getdParameterdata());
-
+        phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
     }
 
