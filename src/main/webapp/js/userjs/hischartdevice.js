@@ -128,7 +128,9 @@ function hisChartInitChart(hisChartoption) {
     };
     resizeMainContainer();
     // 初始化图表
-    hisChart = echarts.init(mainContainer, 'macarons');
+    //hisChart = echarts.init(mainContainer, 'macarons');
+    // 初始化图表-不带主题
+    hisChart = echarts.init(mainContainer);
     hisChart.clear();
     hisChart.setOption(hisChartoption);
     $(window).on('resize', function () {//
@@ -141,41 +143,6 @@ function hisChartInitChart(hisChartoption) {
 function hisChartRepaintChart(hisChartoption) {
     hisChart.clear();
     hisChart.setOption(hisChartoption);
-}
-
-function hisChartSelectDeviceByIdsChart01() {
-    var queryUserId = "41235";
-    var queryParameter = "舍前";
-    var queryDeviceId = "0001";
-    var queryDay = "1";
-    var data = {
-        userId: queryUserId,
-        sQueryParam: queryParameter,
-        deviceId: queryDeviceId,
-        day: queryDay
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/lihuaiot01/phone/selectHisDeviceInfo',
-        dataType: 'json',
-        async: true,   // 轻轻方式-异步
-        data: data,
-        success: function (result) {
-            if (JSON.stringify(result) !== '[]') {
-                // 使用刚指定的配置项和数据显示图表。
-                console.log(result);
-                hisChartRepaintChart(result);
-            } else {
-                var type = 'warning';
-                var msg = '未查询到历史数据';
-                var append = '对不起，未查询到您要的数据，请重新选择设备或时间';
-                showMsg(type, msg, append);
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            handleAjaxError(XMLHttpRequest.status);
-        }
-    });
 }
 
 function hisChartSelectDeviceByIdsChart() {

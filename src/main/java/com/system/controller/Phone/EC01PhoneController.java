@@ -80,7 +80,7 @@ public class EC01PhoneController {
                 userlogin.setPassword(null);
                 // 设置用户信息到 Session
                 session.setAttribute("userInfo", userlogin);
-                UserOAEas userOAEas =  phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
+                UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
 
                 phoneLoginMsg.setOaId(userOAEas.getOaId());
                 phoneLoginMsg.setMessage("登录成功");
@@ -334,6 +334,11 @@ public class EC01PhoneController {
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
         eChartsXAxis.setData(chartsParameters.getdParameterTime());
         phoneEChartsOptions.setxAxis(eChartsXAxis);
+
+        EChartsYAxis eChartsYAxis = new EChartsYAxis();
+        eChartsYAxis.setMin(String.valueOf((int) (Float.parseFloat(chartsParameters.getMin()) - 3)));
+        eChartsYAxis.setMax(String.valueOf((int) (Float.parseFloat(chartsParameters.getMax()) + 3)));
+        phoneEChartsOptions.setyAxis(eChartsYAxis);
 
         phoneEChartsOptions.setSeries(chartsParameters.getdParameterdata());
 

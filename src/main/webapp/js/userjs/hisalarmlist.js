@@ -168,7 +168,7 @@ function haExportStorageAction() {
             alarmType: queryAlarmType,
             sStartDate: queryStartDate,
             sEndDate: queryEndDate,
-        }
+        };
         var url = "/lihuaiot01/hisAlarm/exportHisAlarmList?"+ $.param(data);
         window.open(url, '_blank');
         $('#haExport_modal').modal("hide");
