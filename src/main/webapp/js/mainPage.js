@@ -342,7 +342,12 @@ window.operateEvents = {
     'click .rolePeopleChangeDevice': function (e, value, row, index) {
         rolePeopleSelectPeopleRole = row;
         $("#rolePeoplePeopleName").val(rolePeopleSelectPeopleRole.userName);
-        $("#rolePeopleRoleName").val(rolePeopleSelectPeopleRole.roleName);
+        $("#rolePeopleRoleName_search").val(rolePeopleSelectPeopleRole.roleId);
+        $("#rolePeopleRoleName_search").multiselect('refresh');
+        //document.getElementById("rolePeopleRoleName_search").disabled = true;
+        //$('#rolePeopleRoleName_search').attr("disabled", "disabled");
+        $("#rolePeopleRoleName_search").multiselect('disable');
+        $("#rolePeopleMsgSend").prop("checked", rolePeopleSelectPeopleRole.userMsgPush);
         rolePeopleSelectPeople = rolePeopleSelectPeopleRole;
         rolePeopleSelectRole = rolePeopleSelectPeopleRole;
         rolePeopleShowAdd();
@@ -373,10 +378,10 @@ window.operateEvents = {
         var dcDevMsg = $('#dcDeviceMessage').val();
         $('#dcDeviceTypeUpdate').val(dcDevType);
         $('#dcDeviceMessageUpdate').val(dcDevMsg);
-        if(dcDevMsg === "01"){
+        if (dcDevMsg === "01") {
             $('#dcModifyCode').val(row.alarmCode);
             $('#dcModifyDescribe').val(row.alarmDescribe);
-        }else if(dcDevMsg === "02"){
+        } else if (dcDevMsg === "02") {
             $('#dcModifyCode').val(row.errorCode);
             $('#dcModifyDescribe').val(row.errorDescribe);
         }

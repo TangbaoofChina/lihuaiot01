@@ -49,15 +49,22 @@ public class PeopleRoleInfoServiceImpl implements PeopleRoleInfoService {
     @Override
     public void insertUpdatePeopleRoles(List<PeopleRoleInfo> peopleRoleInfoList) throws Exception {
         try {
-            peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleId(peopleRoleInfoList.get(0).getUserId());
-            peopleRoleInfoMapper.insertPeopleRoleInfo(peopleRoleInfoList);
+            for (PeopleRoleInfo peopleRoleInfo : peopleRoleInfoList
+                    ) {
+                if (peopleRoleInfoMapper.selectPeopleRoleInfoByUserIdAndRoleId(peopleRoleInfo.getUserId(), peopleRoleInfo.getRoleId()).size() > 0) {
+                    peopleRoleInfoMapper.updatePeopleRoleInfo(peopleRoleInfo);
+                } else {
+                    peopleRoleInfoMapper.insertOnePeopleRoleInfo(peopleRoleInfo);
+                }
+            }
+
         } catch (Exception ex) {
             logger.error("insertUpdatePeopleRole出错：" + ex.getMessage());
         }
     }
 
     @Override
-    public void deletePeopleRoleInfoByPeopleIdAndRoleId(String userId,String roleId) throws Exception {
-        peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleIdAndRoleId(userId,roleId);
+    public void deletePeopleRoleInfoByPeopleIdAndRoleId(String userId, String roleId) throws Exception {
+        peopleRoleInfoMapper.deletePeopleRoleInfoByPeopleIdAndRoleId(userId, roleId);
     }
 }

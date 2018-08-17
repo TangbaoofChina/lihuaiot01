@@ -11,7 +11,7 @@
     </ol>
     <div class="panel-body">
         <div id="rolePeopletoolbar" class="btn-group">
-            <button class="btn btn-default btnwidth" onclick="rolePeopleShowAdd()">新增</button>
+            <button class="btn btn-default btnwidth" onclick="rolePeopleShowAddNew()">新增</button>
         </div>
         <div class="container col-md-11">
             <table class="table table-striped" id="rolePeopleTable" align="center"
@@ -42,6 +42,12 @@
                     <div class="input-group-btn" style="width:20px;">
                         <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
                     </div>
+                </div>
+            </div>
+            <div class="rolePeopleform-name" style="margin-top: 20px;margin-bottom: 20px;">
+                <label class="col-md-3" for="rolePeopleMsgSend">消息推送</label>
+                <div class="col-md-4 input-group">
+                    <input type="checkbox" id="rolePeopleMsgSend" checked="checked" style="width: 18px;height: 18px;"/>
                 </div>
             </div>
             <%--            <div class="form-name">

@@ -65,20 +65,20 @@ public class RoleCombinePeopleController {
         return jsonString;
     }
 
-    @RequestMapping(value="/roleCombinePeopleUpdate",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/roleCombinePeopleUpdate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String roleCombinePeopleUpdate(@RequestBody List<PeopleRoleInfo> peopleRoleInfoList) throws Exception{
+    public String roleCombinePeopleUpdate(@RequestBody List<PeopleRoleInfo> peopleRoleInfoList) throws Exception {
         peopleRoleInfoService.insertUpdatePeopleRoles(peopleRoleInfoList);
         String jsonString = "更新成功";
         return jsonString;
     }
 
-    @RequestMapping(value="/deletePeopleRoleInfo",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/deletePeopleRoleInfo", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String deleteRoleInfo(String userId,String roleId) throws Exception{
+    public String deleteRoleInfo(String userId, String roleId) throws Exception {
         String jsonString = "删除成功";
         //删除用户角色关联表
-        peopleRoleInfoService.deletePeopleRoleInfoByPeopleIdAndRoleId(userId,roleId);
+        peopleRoleInfoService.deletePeopleRoleInfoByPeopleIdAndRoleId(userId, roleId);
         return jsonString;
     }
 
@@ -96,8 +96,14 @@ public class RoleCombinePeopleController {
         mdtc2.setDefaultContent("1");
         mdtc2.setTitle("角色");
 
+        MydataTableColumn mdtc3 = new MydataTableColumn();
+        mdtc3.setData("userMsgPush");
+        mdtc3.setDefaultContent("1");
+        mdtc3.setTitle("消息推送");
+
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
+        myDTCList.add(mdtc3);
 
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/

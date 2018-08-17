@@ -13,6 +13,7 @@ public class PhoneEChartsOptions {
     private EChartsXAxis xAxis;
     private EChartsYAxis yAxis;
     private List<ParameterData> series;
+    private String[] color;
 
     public EChartsTitle getTitle() {
         return title;
@@ -70,9 +71,21 @@ public class PhoneEChartsOptions {
         this.series = series;
     }
 
+    public String[] getColor() {
+        return color;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
     public PhoneEChartsOptions() {
         this.setTooltip(new EChartsTooltip());
         this.setToolbox(new EChartsToolBox());
+        String[] myColor = new String[2];
+        myColor[0] = "#c23531";
+        myColor[1] = "#2f4554";
+        this.color = myColor;
     }
 
     public void showPoint(boolean showAvgPoint, boolean showMaxMinPoint) {

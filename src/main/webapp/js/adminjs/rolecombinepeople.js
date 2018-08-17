@@ -6,7 +6,7 @@ var rolePeopleSelectPeopleRoles;
 $(function () {
     rolePeopleInitTableHead();
     rolePeopleInitPeople();
-    rolePeopleInitRole();
+    //rolePeopleInitRole();
     rolePeopleInitRoles();
 });
 
@@ -135,9 +135,9 @@ function rolePeopleInitPeopleOld() {
 
 function rolePeopleInitPeople() {
     $("#rolePeoplePeopleName").bsSuggest('init', {
-        effectiveFieldsAlias: {userName: "人员", company: "公司",department:"部门"},
-        searchFields: ["userName", "company","department"],
-        effectiveFields: ["userName", "company","department"],
+        effectiveFieldsAlias: {userName: "人员", company: "公司", department: "部门"},
+        searchFields: ["userName", "company", "department"],
+        effectiveFields: ["userName", "company", "department"],
         showHeader: true,//显示 header
         url: "/lihuaiot01/peopleCombineOrg/selectPeopleInfo",
         idField: "userId",
@@ -274,10 +274,16 @@ function rolePeopleInitRoles() {
 
 function rolePeopleSaveRolePeople() {
     var selectRoles = new Array();
+    var userMsgPush = 0;
+    if (document.getElementById("rolePeopleMsgSend").checked) {
+        userMsgPush = 1;
+    }
+    $("#rolePeopleRoleName_search").multiselect('enable');
     $("#rolePeopleRoleName_search option:selected").each(function () {
         var object = new Object();
         object.userId = rolePeopleSelectPeople.userId;
         object.userName = rolePeopleSelectPeople.userName;
+        object.userMsgPush = userMsgPush;
         object.roleId = $(this).val();
         object.roleName = $(this).text();
         selectRoles.push(object);
@@ -308,6 +314,15 @@ function rolePeopleSaveRolePeople() {
 function rolePeopleShowAdd() {
     $('#rolePeopleaddNew-popup').show('slow');
     rolePeopleAddNewShow();
+}
+
+function rolePeopleShowAddNew() {
+    $("#rolePeoplePeopleName").val("");
+    $("#rolePeopleRoleName_search").multiselect('enable');
+    $("#rolePeopleRoleName_search").val("");
+    $("#rolePeopleRoleName_search").multiselect('refresh');
+    $("#rolePeopleMsgSend").prop("checked", false);
+    rolePeopleShowAdd();
 }
 
 /**
