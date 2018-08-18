@@ -27,4 +27,19 @@
             #{item}
         </foreach>
     </select>
+    <select id="selectRoleDeviceOrgInfoByRoleIdAndDevType" resultMap="BaseResultMap">
+        select a.role_id,a.role_name,a.role_describe,
+        c.di_name,c.di_serialnum,
+        d.node_id,d.node_name,d.node_pid,e.devorg_orglongid
+        from iot_role a,iot_devicerole b,iot_deviceinfo c,iot_orgtreenode d,iot_deviceorg e
+        where b.devrole_roleid = a.role_id
+        and c.di_serialnum = b.devrole_devnum
+        and e.devorg_devnum = b.devrole_devnum
+        and d.node_id = c.di_nodeid
+        and c.devtype_serialnum = #{devType,jdbcType=VARCHAR}
+        and a.role_id IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

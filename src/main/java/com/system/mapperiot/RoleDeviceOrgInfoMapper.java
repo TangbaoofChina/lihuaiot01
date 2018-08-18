@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoleDeviceOrgInfoMapper {
     List<RoleDeviceOrgInfo> selectRoleDeviceOrgInfoByRoleId(@Param("roleIds") List<String> roleIds);
+    List<RoleDeviceOrgInfo> selectRoleDeviceOrgInfoByRoleIdAndDevType(@Param("devType")String devType,@Param("roleIds") List<String> roleIds);
 }

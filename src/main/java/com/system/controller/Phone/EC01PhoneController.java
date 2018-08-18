@@ -110,9 +110,9 @@ public class EC01PhoneController {
             List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
             roleInfoListAdmin.add(roleInfoAdmin);
             //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoListAdmin);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("111",roleInfoListAdmin);
         } else {
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoList);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("111",roleInfoList);
         }
         String jsonString = JSON.toJSONString(orgTreeNodeList);
         return jsonString;

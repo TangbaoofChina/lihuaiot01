@@ -27,12 +27,12 @@ public class PhoneBootStrapTreeNodeServiceImpl implements PhoneBootStrapTreeNode
     }
 
     @Override
-    public List<ORGTreeNode> selectOrgTreeNodeInfoByRoleId(List<RoleInfo> roleInfoList) {
+    public List<ORGTreeNode> selectOrgTreeNodeInfoByRoleId(String devType,List<RoleInfo> roleInfoList) {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         //根据节点id查找根节点
         //1、先列出当前设备列表的所有节点与根节点
         //2、查找每个设备的父节点直到最终根节点
-        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleId(roleIds);
+        List<RoleDeviceOrgInfo> roleDeviceOrgInfoList = roleDeviceOrgInfoMapper.selectRoleDeviceOrgInfoByRoleIdAndDevType(devType,roleIds);
         //3、整合成节点列表
         List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
         //默认要增加根节点

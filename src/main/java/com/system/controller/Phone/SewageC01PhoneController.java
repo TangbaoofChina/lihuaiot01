@@ -109,9 +109,9 @@ public class SewageC01PhoneController {
             List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
             roleInfoListAdmin.add(roleInfoAdmin);
             //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoListAdmin);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("211",roleInfoListAdmin);
         } else {
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId(roleInfoList);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("211",roleInfoList);
         }
         String jsonString = JSON.toJSONString(orgTreeNodeList);
         return jsonString;

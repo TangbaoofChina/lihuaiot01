@@ -16,6 +16,6 @@ public interface PhoneBootStrapTreeNodeService {
      * 查询所有组织信息
      * @return
      */
-    List<ORGTreeNode> selectOrgTreeNodeInfoByRoleId(List<RoleInfo> roleInfoList);
+    List<ORGTreeNode> selectOrgTreeNodeInfoByRoleId(String devType,List<RoleInfo> roleInfoList);
 
 }
