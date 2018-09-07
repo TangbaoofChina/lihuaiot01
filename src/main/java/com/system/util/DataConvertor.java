@@ -76,6 +76,8 @@ public class DataConvertor {
     }
 
     public static String findMaxValue(List<String> maxValues) {
+        if(maxValues.size()<1)
+            return "0";
         float max = Float.valueOf(maxValues.get(0));
         for (int i = 0; i < maxValues.size(); i++) {
             float nowValue = Float.valueOf(maxValues.get(i));
@@ -87,6 +89,8 @@ public class DataConvertor {
     }
 
     public static String findMinValue(List<String> minValues) {
+        if(minValues.size()<1)
+            return "0";
         float min = Float.valueOf(minValues.get(0));
         for (int i = 0; i < minValues.size(); i++) {
             float nowValue = Float.valueOf(minValues.get(i));

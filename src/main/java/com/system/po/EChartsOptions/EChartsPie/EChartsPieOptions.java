@@ -3,6 +3,7 @@ package com.system.po.EChartsOptions.EChartsPie;
 import com.system.po.EChartsOptions.EChartsLegend;
 import com.system.po.EChartsOptions.EChartsTitle;
 import com.system.po.EChartsOptions.EChartsTooltip;
+import com.system.util.EChartsUtil;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class EChartsPieOptions {
     private EChartsTooltip tooltip;
     private EChartsLegend legend;
     private List<EChartsPieOneSerie> series;
+    private String[] color;
 
     public EChartsTitle getTitle() {
         return title;
@@ -44,7 +46,16 @@ public class EChartsPieOptions {
         this.series = series;
     }
 
+    public String[] getColor() {
+        return color;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
     public EChartsPieOptions() {
+        this.setColor(EChartsUtil.Color());
         EChartsTooltip eChartsTooltip = new EChartsTooltip();
         eChartsTooltip.setTrigger("item");
         eChartsTooltip.setFormatter("{a} <br/>{b}: {c} ({d}%)");

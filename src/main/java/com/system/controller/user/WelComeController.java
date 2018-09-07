@@ -12,6 +12,7 @@ import com.system.po.Phone.PhoneEChartsOptions;
 import com.system.service.DeviceAlarmService;
 import com.system.service.DeviceInfoService;
 import com.system.service.DeviceOfflineService;
+import com.system.util.EChartsUtil;
 import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -149,14 +150,16 @@ public class WelComeController {
     private PhoneEChartsOptions getEChartsOfflineOptions(List<DeviceOfflineRate> deviceOfflineRateList) {
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
 
+        phoneEChartsOptions.setColor(EChartsUtil.Color());
+
         EChartsTitle eChartsTitle = new EChartsTitle();
         eChartsTitle.setText("设备离线(次)");
         eChartsTitle.setSubtext("");
         phoneEChartsOptions.setTitle(eChartsTitle);
 
-        EChartsLegend eChartsLegend = new EChartsLegend();
+        /*EChartsLegend eChartsLegend = new EChartsLegend();
         eChartsLegend.setData(DeviceOfflineRate.getOfflineData(deviceOfflineRateList));
-        phoneEChartsOptions.setLegend(eChartsLegend);
+        phoneEChartsOptions.setLegend(eChartsLegend);*/
 
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
         eChartsXAxis.setData(DeviceOfflineRate.getOfflineData(deviceOfflineRateList));
@@ -189,15 +192,16 @@ public class WelComeController {
     //报警率前N的柱状图
     private PhoneEChartsOptions getEChartsAlarmOptions(List<DeviceAlarmRate> deviceAlarmRateList) {
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
+        phoneEChartsOptions.setColor(EChartsUtil.Color());
 
         EChartsTitle eChartsTitle = new EChartsTitle();
         eChartsTitle.setText("设备报警(次)");
         eChartsTitle.setSubtext("");
         phoneEChartsOptions.setTitle(eChartsTitle);
 
-        EChartsLegend eChartsLegend = new EChartsLegend();
+/*        EChartsLegend eChartsLegend = new EChartsLegend();
         eChartsLegend.setData(DeviceAlarmRate.getAlarmData(deviceAlarmRateList));
-        phoneEChartsOptions.setLegend(eChartsLegend);
+        phoneEChartsOptions.setLegend(eChartsLegend);*/
 
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
         eChartsXAxis.setData(DeviceAlarmRate.getAlarmData(deviceAlarmRateList));

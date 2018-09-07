@@ -18,6 +18,7 @@ public class EChartsYAxis {
     private ECAxisLabel axisLabel;
     private String splitNumber;
     private String interval;
+    private String minInterval;
     private String min;
     private String max;
     private String type;
@@ -77,6 +78,14 @@ public class EChartsYAxis {
 
     public void setInterval(String interval) {
         this.interval = interval;
+    }
+
+    public String getMinInterval() {
+        return minInterval;
+    }
+
+    public void setMinInterval(String minInterval) {
+        this.minInterval = minInterval;
     }
 
     public String getMin() {

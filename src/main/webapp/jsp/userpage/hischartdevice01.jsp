@@ -49,8 +49,8 @@
                 </div>
                 <div id="hisChartTempWaterDiv" class="form-inline" style="margin-top: 10px;display: none">
                     <div class="input-group" style="margin-left: 15px;">
-                        <label>日平均温度参照：</label>
-                        <select class="form-control" id="hisChartDeviceTempSelect" multiple="multiple">
+                        <label>日温参照：</label>
+                        <select class="input-sm" id="hisChartDeviceTempSelect" style="width: 200px;">
                         </select>
                     </div>
                 </div>
@@ -70,17 +70,17 @@
                 <button class="btn btn-default" id="hisChartAddDate" onclick="hisChartAddDateToList()">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>增加
                 </button>
-                <button class="btn btn-default" id="hisChartRemoveDate" onclick="hisChartRemoveDateToList()">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>移除
-                </button>
-                <select name="hisChartDateTimeList"  id="hisChartDateTimeList" style="width: 200px;"
+                <select name="hisChartDateTimeList" id="hisChartDateTimeList" style="width: 200px;"
                         class="input-sm">
                 </select>
+                <button class="btn btn-default" id="hisChartRemoveDate" onclick="hisChartRemoveDateToList()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>移除
+                </button>
                 <button class="btn btn-default" id="hisChartClearByDateList" onclick="hisChartClearDateToList()">
-                    <span class="glyphicon glyphicon-trash"  aria-hidden="true"></span>清空
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>清空
                 </button>
                 <button class="btn btn-default" id="hisChartQueryByDateList" onclick="hisChartQueryDateToList()">
-                    <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>查询
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
                 </button>
             </div>
         </div>

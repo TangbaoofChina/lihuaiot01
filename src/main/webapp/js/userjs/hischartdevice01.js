@@ -163,7 +163,7 @@ function hisChartAddDateToList() {
 }
 
 function hisChartRemoveDateToList() {
-    var selectDate = $("#hisChartSelectDate").val();
+    var selectDate = $("#hisChartDateTimeList").val();
     var dateTimeList = $("#hisChartDateTimeList");
     $("#hisChartDateTimeList option").each(function () {
         var val = selectDate;
@@ -316,13 +316,6 @@ function hisChartNodeSelected(event, data) {
         }
     }
 }
-
-Array.prototype.remove = function (val) {
-    var index = this.indexOf(val);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
 
 function hisChartInitChart(hisChartoption) {
     var mainContainer = document.getElementById('echartsmain');
@@ -745,9 +738,21 @@ function hisChartSearchAction() {
     $('#hisChartQuery_storage').click(function () {
         var selectValueStr = [];
         hisChartNowDeviceIds = [];
-        $("#hisChartsel_search option:selected").each(function () {
-            selectValueStr.push($(this).val());
-        });
+        var queryValue = $("#hisChartSelId_Param").val(); // 选中文本的value值
+        //如果是“日温饮水”需要把参照的日温放在第一个
+        if (queryValue === "7") {
+            var firstVal = $("#hisChartDeviceTempSelect").val();
+            selectValueStr.push(firstVal);
+            $("#hisChartsel_search option:selected").each(function () {
+                if ($(this).val() !== firstVal) {
+                    selectValueStr.push($(this).val());
+                }
+            });
+        } else {
+            $("#hisChartsel_search option:selected").each(function () {
+                selectValueStr.push($(this).val());
+            });
+        }
         hisChartNowDeviceIds = selectValueStr;
         hisChartSelectDeviceByIdsChart();
         hisChartReSelectHisDataTableHead();
@@ -769,11 +774,6 @@ function hisChartInitMultiselect() {
                 $("#hisChartsel_search").append("<option value='" + result[i].dSerialNum + "' title='" + result[i].dNodeName + "'>" + result[i].dName + "</option>");
             }
             $('#hisChartsel_search').multiselect(hisChartMultiselectset);
-            $("#hisChartDeviceTempSelect").html("");
-            for (var i = 0; i < result.length; i++) {
-                $("#hisChartDeviceTempSelect").append("<option value='" + result[i].dSerialNum + "' title='" + result[i].dNodeName + "'>" + result[i].dName + "</option>");
-            }
-            $('#hisChartDeviceTempSelect').multiselect(hisChartMultiselectset);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             /*alert(XMLHttpRequest.status);
@@ -792,6 +792,11 @@ function hisChartParamChange() {
     } else {
         $("#hisChartThresholdDiv").css("display", "none");//
     }
+    if (paramValue === "7") {
+        $("#hisChartTempWaterDiv").css("display", "block");//
+    } else {
+        $("#hisChartTempWaterDiv").css("display", "none");//
+    }
     if (paramValue === "8" || paramValue === "9") {
         $("#hisChartDateRangeDiv").css("display", "none");//
         $("#hisChartDateTimeDiv").css("display", "block");//
@@ -802,25 +807,83 @@ function hisChartParamChange() {
 
 }
 
-/***************************级联勾选*********************/
-function nodeChecked(event, node) {
-    var queryParameter = node.id;
-    if (queryParameter.length == 4) {
-        checkAllParent(node);
-        hisChartSelectDeviceIds.push(queryParameter);
-        $("#hisChartsel_search").val(hisChartSelectDeviceIds);
-        $("#hisChartsel_search").multiselect('refresh');
-    }
+function hisChartAddDeviceToList(selectValue, selectName) {
+    if (selectValue === "")
+        return;
+    var deviceList = $("#hisChartDeviceTempSelect");
+    deviceList.append("<option value='" + selectValue + "'>" + selectName + "</option>");
+    $("#hisChartDeviceTempSelect option").each(function () {
+        if ($("#hisChartDeviceTempSelect option[value='" + selectValue + "']").length > 1) {
+            $("#hisChartDeviceTempSelect option[value='" + selectValue + "']:gt(0)").remove();
+        }
+    });
 }
 
-function nodeUnchecked(event, node) {
+function hisChartRemoveDeviceToList(selectValue) {
+    if (selectValue === "")
+        return;
+    $("#hisChartDeviceTempSelect option").each(function () {
+        if ($("#hisChartDeviceTempSelect option[value='" + selectValue + "']").length > 0) {
+            $("#hisChartDeviceTempSelect option[value='" + selectValue + "']").remove();
+        }
+    });
+}
+
+/***************************级联勾选*********************/
+function hisChartSelectDeviceIdsRemove(queryParameter) {
+    var index = hisChartSelectDeviceIds.indexOf(queryParameter);
+    if (index > -1) {
+        hisChartSelectDeviceIds.splice(index, 1);
+    }
+};
+
+function hisChartSelectDeviceIdsContains(queryParameter) {
+    var i = hisChartSelectDeviceIds.length;
+    while (i--) {
+        if (hisChartSelectDeviceIds[i] === queryParameter) {
+            return true;
+        }
+    }
+    return false;
+};
+var nodeCheckedSilent = false;
+
+function nodeChecked(event, node) {
+    if (nodeCheckedSilent) {
+        return;
+    }
+    nodeCheckedSilent = true;
     var queryParameter = node.id;
     if (queryParameter.length == 4) {
-        uncheckAllParent(node);
-        hisChartSelectDeviceIds.remove(queryParameter);
-        $("#hisChartsel_search").val(hisChartSelectDeviceIds);
-        $("#hisChartsel_search").multiselect('refresh');
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
     }
+    checkAllParent(node);
+    checkAllSon(node);
+    $("#hisChartsel_search").val(hisChartSelectDeviceIds);
+    $("#hisChartsel_search").multiselect('refresh');
+    nodeCheckedSilent = false;
+}
+
+var nodeUncheckedSilent = false;
+
+function nodeUnchecked(event, node) {
+    if (nodeUncheckedSilent)
+        return;
+    nodeUncheckedSilent = true;
+    var queryParameter = node.id;
+    if (queryParameter.length == 4) {
+        hisChartSelectDeviceIdsRemove(queryParameter);
+        hisChartRemoveDeviceToList(queryParameter);
+    }
+    uncheckAllParent(node);
+    uncheckAllSon(node);
+    $("#hisChartsel_search").val(hisChartSelectDeviceIds);
+    $("#hisChartsel_search").multiselect('refresh');
+    nodeUncheckedSilent = false;
 }
 
 
@@ -845,9 +908,6 @@ function uncheckAllParent(node) {
     }
     var isAllUnchecked = true;  //是否全部没选中
     for (var i in siblings) {
-        if (i === "remove") {
-            continue;
-        }
         if (siblings[i].state.checked) {
             isAllUnchecked = false;
             break;
@@ -861,6 +921,14 @@ function uncheckAllParent(node) {
 //级联选中所有子节点
 function checkAllSon(node) {
     $('#hisChartOrgTree').treeview('checkNode', node.nodeId, {silent: true});
+    var queryParameter = node.id;
+    if (queryParameter.length == 4) {
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
+    }
     if (node.nodes != null && node.nodes.length > 0) {
         for (var i in node.nodes) {
             checkAllSon(node.nodes[i]);
@@ -869,14 +937,25 @@ function checkAllSon(node) {
 }
 
 //级联取消所有子节点
-
 function uncheckAllSon(node) {
     $('#hisChartOrgTree').treeview('uncheckNode', node.nodeId, {silent: true});
+    var queryParameter = node.id;
+    if (queryParameter.length == 4) {
+        if (hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIdsRemove(queryParameter);
+            hisChartRemoveDeviceToList(queryParameter);
+        }
+    }
     if (node.nodes != null && node.nodes.length > 0) {
         for (var i in node.nodes) {
             uncheckAllSon(node.nodes[i]);
         }
     }
 }
+
+
+
+
+
 
 

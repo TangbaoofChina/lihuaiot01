@@ -329,6 +329,7 @@ public class EC01PhoneController {
 
         EChartsLegend eChartsLegend = new EChartsLegend();
         eChartsLegend.setData(chartsParameters.getdParameterName());
+        eChartsLegend.setLeft("center");
         phoneEChartsOptions.setLegend(eChartsLegend);
 
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
