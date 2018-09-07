@@ -2,9 +2,16 @@ package com.system.po.parameter;
 
 import com.system.po.DeviceInfo;
 import com.system.po.Device.EC01DeviceMessage;
+import com.system.po.EC01.EC01DayAvgTemp;
+import com.system.po.EC01.EC01DayWater;
+import com.system.po.EC01.EC01DeviceDayAvgTemp;
+import com.system.po.EC01.EC01DeviceDayWater;
+import com.system.po.PeopleRoleInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DeviceCharts01 {
     private DeviceInfo deviceInfo;
@@ -26,8 +33,12 @@ public class DeviceCharts01 {
         this.chartsParameters01 = chartsParameters01;
     }
 
-    public DeviceCharts01(List<EC01DeviceMessage> deviceMessageList)
-    {
+    public DeviceCharts01() {
+    }
+
+    ;
+
+    public DeviceCharts01(List<EC01DeviceMessage> deviceMessageList) {
         List<String> deviceParameterName = new ArrayList<String>();
         List<String> deviceParameterTime = new ArrayList<String>();
         List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
@@ -64,7 +75,7 @@ public class DeviceCharts01 {
         List<OneDataDetail> waterFlowList = new ArrayList<OneDataDetail>();
         List<OneDataDetail> dayWaterFlowList = new ArrayList<OneDataDetail>();
 
-        for (EC01DeviceMessage deviceMessage:deviceMessageList
+        for (EC01DeviceMessage deviceMessage : deviceMessageList
                 ) {
             deviceParameterTime.add(deviceMessage.getSendDate());
 
@@ -132,8 +143,198 @@ public class DeviceCharts01 {
         deviceInfo.setDName(deviceMessageList.get(0).getDName());
         deviceInfo.setDSerialNum(deviceMessageList.get(0).getDSerialNum());
         this.deviceInfo = deviceInfo;
-        this.chartsParameters01 = new ChartsParameters01(deviceParameterName,parameterDataList,deviceParameterTime);
+        this.chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
     }
+
+    /**
+     * 日平均温度曲线
+     *
+     * @param ec01DeviceDayAvgTemp
+     */
+    public DeviceCharts01(EC01DeviceDayAvgTemp ec01DeviceDayAvgTemp) {
+        List<String> deviceParameterName = new ArrayList<String>();
+        List<String> deviceParameterTime = new ArrayList<String>();
+        List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
+        deviceParameterName.add("日温饮水");
+        ParameterData01 parameterDayTemp = new ParameterData01();
+        parameterDayTemp.setName("日温饮水");
+        List<OneDataDetail> dayTempList = new ArrayList<OneDataDetail>();
+        for (EC01DayAvgTemp ec01DayAvgTemp : ec01DeviceDayAvgTemp.getEc01DayAvgTempList()
+                ) {
+            deviceParameterTime.add(ec01DayAvgTemp.getSendDate());
+
+            //日温
+            OneDataDetail oneDataDetailDayTemp = new OneDataDetail();
+            oneDataDetailDayTemp.setName(ec01DayAvgTemp.getSendDate());
+            oneDataDetailDayTemp.setValue(String.valueOf(ec01DayAvgTemp.getAvgTemp()));
+
+            dayTempList.add(oneDataDetailDayTemp);
+        }
+        parameterDayTemp.setData(dayTempList);
+        parameterDataList.add(parameterDayTemp);
+
+        DeviceInfo deviceInfo = new DeviceInfo();
+        deviceInfo.setDName(ec01DeviceDayAvgTemp.getDName() + "-日温");
+        deviceInfo.setDSerialNum(ec01DeviceDayAvgTemp.getDSerialNum());
+        this.deviceInfo = deviceInfo;
+        this.chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
+    }
+
+    /**
+     * 日饮水量曲线
+     *
+     * @param ec01DeviceDayWater
+     */
+    public DeviceCharts01(EC01DeviceDayWater ec01DeviceDayWater) {
+        List<String> deviceParameterName = new ArrayList<String>();
+        List<String> deviceParameterTime = new ArrayList<String>();
+        List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
+        deviceParameterName.add("日温饮水");
+        ParameterData01 parameterDayWater = new ParameterData01();
+        parameterDayWater.setName("日温饮水");
+        List<OneDataDetail> dayWaterList = new ArrayList<OneDataDetail>();
+        for (EC01DayWater ec01DayWater : ec01DeviceDayWater.getEc01DayWaterList()
+                ) {
+            deviceParameterTime.add(ec01DayWater.getSendDate());
+
+            //日饮水
+            OneDataDetail oneDataDetailDayWater = new OneDataDetail();
+            oneDataDetailDayWater.setName(ec01DayWater.getSendDate());
+            oneDataDetailDayWater.setValue(String.valueOf(ec01DayWater.getWaterFlowVal()));
+
+            dayWaterList.add(oneDataDetailDayWater);
+        }
+        parameterDayWater.setData(dayWaterList);
+        parameterDataList.add(parameterDayWater);
+
+        DeviceInfo deviceInfo = new DeviceInfo();
+        deviceInfo.setDName(ec01DeviceDayWater.getDName() + "-饮水");
+        deviceInfo.setDSerialNum(ec01DeviceDayWater.getDSerialNum());
+        this.deviceInfo = deviceInfo;
+        this.chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
+    }
+
+    /**
+     * 获取单个设备、单日的曲线
+     *
+     * @param deviceMessageList
+     * @param sDateTime
+     * @param sQueryParam
+     */
+    public DeviceCharts01(List<EC01DeviceMessage> deviceMessageList, String sDateTime, String sQueryParam) {
+        DeviceInfo deviceInfo = new DeviceInfo();
+        deviceInfo.setDName(deviceMessageList.get(0).getDName() + "-" + sDateTime);
+        deviceInfo.setDSerialNum(deviceMessageList.get(0).getDSerialNum());
+        this.deviceInfo = deviceInfo;
+        if (sQueryParam.equals("单舍饮水量")) {
+            this.chartsParameters01 = this.getChartByOneDeviceWaterAndDt(deviceMessageList, sDateTime);
+        } else if (sQueryParam.equals("单舍温度")) {
+            this.chartsParameters01 = this.getChartByOneDeviceTempAndDt(deviceMessageList, sDateTime);
+        }
+    }
+
+    /**
+     * 获取多个设备日饮水量累加的曲线
+     *
+     * @param ec01DeviceDate
+     * @param deviceMessageList
+     */
+    public DeviceCharts01(List<String> ec01DeviceDate, List<EC01DeviceMessage> deviceMessageList) {
+        Map<String, Float> dayWaterMap = new HashMap<String, Float>();
+        for (String sDate : ec01DeviceDate
+                ) {
+            float fDayWater = 0;
+            for (EC01DeviceMessage ec01DeviceMessage : deviceMessageList
+                    ) {
+                String sMsgDate = ec01DeviceMessage.getSendDate().substring(0, 10);
+                if (sDate.equals(sMsgDate)) {
+                    fDayWater = fDayWater + ec01DeviceMessage.getWaterFlowVal();
+                }
+            }
+            dayWaterMap.put(sDate, fDayWater);
+        }
+        List<String> deviceParameterName = new ArrayList<String>();
+        List<String> deviceParameterTime = new ArrayList<String>();
+        List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
+        deviceParameterName.add("多舍日饮水量");
+        ParameterData01 parameterOneDevice = new ParameterData01();
+        parameterOneDevice.setName("多舍日饮水量");
+        List<OneDataDetail> oneDataDetailList = new ArrayList<OneDataDetail>();
+        for (Map.Entry<String, Float> entry : dayWaterMap.entrySet()) {
+            String sOneDateTime = entry.getKey();
+            deviceParameterTime.add(sOneDateTime);
+
+            //日饮水数据
+            OneDataDetail oneDataDetail = new OneDataDetail();
+            oneDataDetail.setName(sOneDateTime);
+            oneDataDetail.setValue(String.valueOf(entry.getValue()));
+            oneDataDetailList.add(oneDataDetail);
+        }
+        parameterOneDevice.setData(oneDataDetailList);
+        parameterDataList.add(parameterOneDevice);
+        this.chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
+        DeviceInfo deviceInfo = new DeviceInfo();
+        deviceInfo.setDName("多舍日饮水量");
+        this.deviceInfo = deviceInfo;
+    }
+
+    private ChartsParameters01 getChartByOneDeviceWaterAndDt(List<EC01DeviceMessage> deviceMessageList, String sDateTime) {
+        List<String> deviceParameterName = new ArrayList<String>();
+        List<String> deviceParameterTime = new ArrayList<String>();
+        List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
+        deviceParameterName.add("单舍饮水量");
+        ParameterData01 parameterOneDevice = new ParameterData01();
+        parameterOneDevice.setName("单舍饮水量");
+        List<OneDataDetail> oneDataDetailList = new ArrayList<OneDataDetail>();
+        for (EC01DeviceMessage ec01DeviceMessage : deviceMessageList
+                ) {
+            String sOneDateTime = ec01DeviceMessage.getSendDate().substring(11, 19);
+            deviceParameterTime.add(sOneDateTime);
+
+            //饮水数据
+            OneDataDetail oneDataDetail = new OneDataDetail();
+            oneDataDetail.setName(sOneDateTime);
+            oneDataDetail.setValue(String.valueOf(ec01DeviceMessage.getWaterFlowVal()));
+
+            oneDataDetailList.add(oneDataDetail);
+        }
+        parameterOneDevice.setData(oneDataDetailList);
+        parameterDataList.add(parameterOneDevice);
+
+        ChartsParameters01 chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
+
+        return chartsParameters01;
+    }
+
+    private ChartsParameters01 getChartByOneDeviceTempAndDt(List<EC01DeviceMessage> deviceMessageList, String sDateTime) {
+        List<String> deviceParameterName = new ArrayList<String>();
+        List<String> deviceParameterTime = new ArrayList<String>();
+        List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
+        deviceParameterName.add("单舍温度");
+        ParameterData01 parameterOneDevice = new ParameterData01();
+        parameterOneDevice.setName("单舍温度");
+        List<OneDataDetail> oneDataDetailList = new ArrayList<OneDataDetail>();
+        for (EC01DeviceMessage ec01DeviceMessage : deviceMessageList
+                ) {
+            String sOneDateTime = ec01DeviceMessage.getSendDate().substring(11, 19);
+            deviceParameterTime.add(sOneDateTime);
+
+            //温度数据
+            OneDataDetail oneDataDetail = new OneDataDetail();
+            oneDataDetail.setName(sOneDateTime);
+            oneDataDetail.setValue(String.valueOf(ec01DeviceMessage.getInAveTemp()));
+
+            oneDataDetailList.add(oneDataDetail);
+        }
+        parameterOneDevice.setData(oneDataDetailList);
+        parameterDataList.add(parameterOneDevice);
+
+
+        ChartsParameters01 chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
+
+        return chartsParameters01;
+    }
+
 }
 
 

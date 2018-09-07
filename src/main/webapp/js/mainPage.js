@@ -248,15 +248,15 @@ function passwordEncrying(userID, password) {
 //动态加载一个js/css文件
 function loadjscssfile(filename, filetype) {
     if (filetype == "js") {
-        var fileref = document.createElement('script')
-        fileref.setAttribute("type", "text/javascript")
-        fileref.setAttribute("src", filename)
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type", "text/javascript");
+        fileref.setAttribute("src", filename);
     }
     else if (filetype == "css") {
-        var fileref = document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
+        var fileref = document.createElement("link");
+        fileref.setAttribute("rel", "stylesheet");
+        fileref.setAttribute("type", "text/css");
+        fileref.setAttribute("href", filename);
     }
     if (typeof fileref != "undefined")
         document.getElementsByTagName("head")[0].appendChild(fileref)
@@ -264,38 +264,38 @@ function loadjscssfile(filename, filetype) {
 
 //移除已经加载过的js/css
 function removejscssfile(filename, filetype) {
-    var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"
-    var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none"
-    var allsuspects = document.getElementsByTagName(targetelement)
+    var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none";
+    var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none";
+    var allsuspects = document.getElementsByTagName(targetelement);
     for (var i = allsuspects.length; i >= 0; i--) {
         if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
-            allsuspects[i].parentNode.removeChild(allsuspects[i])
+            allsuspects[i].parentNode.removeChild(allsuspects[i]);
     }
 }
 
 function createjscssfile(filename, filetype) {
     if (filetype == "js") {
-        var fileref = document.createElement('script')
-        fileref.setAttribute("type", "text/javascript")
-        fileref.setAttribute("src", filename)
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type", "text/javascript");
+        fileref.setAttribute("src", filename);
     }
     else if (filetype == "css") {
-        var fileref = document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
+        var fileref = document.createElement("link");
+        fileref.setAttribute("rel", "stylesheet");
+        fileref.setAttribute("type", "text/css");
+        fileref.setAttribute("href", filename);
     }
-    return fileref
+    return fileref;
 }
 
 function replacejscssfile(oldfilename, newfilename, filetype) {
-    var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"
-    var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none"
-    var allsuspects = document.getElementsByTagName(targetelement)
+    var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none";
+    var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none";
+    var allsuspects = document.getElementsByTagName(targetelement);
     for (var i = allsuspects.length; i >= 0; i--) {
         if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(oldfilename) != -1) {
-            var newelement = createjscssfile(newfilename, filetype)
-            allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i])
+            var newelement = createjscssfile(newfilename, filetype);
+            allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i]);
         }
     }
 }

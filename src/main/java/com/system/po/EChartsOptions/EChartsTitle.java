@@ -3,6 +3,7 @@ package com.system.po.EChartsOptions;
 public class EChartsTitle {
     private String text = "历史曲线";
     private String subtext = "";
+    private String left = "auto";
 
     public String getText() {
         return text;
@@ -18,5 +19,13 @@ public class EChartsTitle {
 
     public void setSubtext(String subtext) {
         this.subtext = subtext;
+    }
+
+    public String getLeft() {
+        return left;
+    }
+
+    public void setLeft(String left) {
+        this.left = left;
     }
 }

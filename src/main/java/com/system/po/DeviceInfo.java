@@ -8,6 +8,7 @@ public class DeviceInfo {
     private String dName = "";
     private String dIp="";
     private String dPort="";
+    private String dDevType="";
     private String dProtocol = "";
     private String dSendTime = "";
     private String dReceiveTime = "";
@@ -83,5 +84,13 @@ public class DeviceInfo {
 
     public void setDState(String dState) {
         this.dState = dState;
+    }
+
+    public String getDDevType() {
+        return dDevType;
+    }
+
+    public void setDDevType(String dDevType) {
+        this.dDevType = dDevType;
     }
 }

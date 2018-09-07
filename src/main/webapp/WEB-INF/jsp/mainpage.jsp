@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-table.css">
     <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/css/bootstrap-table-fixed-columns.css">
+    <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/bootstrap-treeview.css">
@@ -37,6 +39,10 @@
           href="/lihuaiot01/ztree/css/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/daterangepicker.css">
+<%--    <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/easyui/css/easyui.css">--%>
+<%--    <link rel="stylesheet" type="text/css"
+          href="/lihuaiot01/easyui/css/icon.css">--%>
     <link rel="shortcut icon" href="/lihuaiot01/images/lihuaiotweb01.ico"/>
 
 </head>
@@ -160,11 +166,16 @@
                                        class="menu_item"
                                        name="/lihuaiot01/jsp/userpage/hischartdevice.jsp">历史曲线</a>
                                 </li>
+                                <li class="list-group-item">
+                                    <a href="javascript:void(0);" id="hischartdevice01"
+                                       class="menu_item"
+                                       name="/lihuaiot01/jsp/userpage/hischartdevice01.jsp">历史曲线01</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <shiro:hasAnyRoles  name="admin,211,111">
+                <shiro:hasAnyRoles name="admin,211,111">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -183,18 +194,18 @@
                                         <a href="javascript:void(0)" id="organizemanage" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/organizemanage.jsp">部门管理</a>
                                     </li>
-                                    <%--<li class="list-group-item">
-                                        <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
-                                           name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
-                                    </li>--%>
+                                        <%--<li class="list-group-item">
+                                            <a href="javascript:void(0)" id="peoplecombineorg" class="menu_item"
+                                               name="/lihuaiot01/jsp/adminpage/peoplecombineorg.jsp">人员管理</a>
+                                        </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
                                     </li>
-                                    <%--<li class="list-group-item">
-                                        <a href="javascript:void(0)" id="devicecode" class="menu_item"
-                                           name="/lihuaiot01/jsp/adminpage/devicecode.jsp">代码管理</a>
-                                    </li>--%>
+                                        <%--<li class="list-group-item">
+                                            <a href="javascript:void(0)" id="devicecode" class="menu_item"
+                                               name="/lihuaiot01/jsp/adminpage/devicecode.jsp">代码管理</a>
+                                        </li>--%>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="rolecombinedevice" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/rolecombinedevice.jsp">角色管理</a>
@@ -316,10 +327,10 @@
     </div>
 </div>
 
+<%--<script type="text/javascript"
+        src="/lihuaiot01/js/jquery-3.2.1.min.js"></script>--%>
 <script type="text/javascript"
-        src="/lihuaiot01/js/jquery-3.2.1.min.js"></script>
-
-
+        src="/lihuaiot01/easyui/js/jquery.min.js"></script>
 <script type="text/javascript"
         src="/lihuaiot01/js/jquery.md5.js"></script>
 <script type="text/javascript"
@@ -339,13 +350,15 @@
 <script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript"
+        src="/lihuaiot01/bootstrap/bootstrap-table-fixed-columns.js"></script>
+<script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
 <%--daterangepicker--%>
 <script type="text/javascript"
         src="/lihuaiot01/bootstrap/moment.js"></script>
-<script
+<script type="text/javascript"
         src="/lihuaiot01/bootstrap/daterangepicker.js"></script>
 <!-- 引入bootstrap-suggest.js-->
 <script type="text/javascript"
@@ -357,6 +370,8 @@
         src="/lihuaiot01/bootstrap/bootstrap-tab.js"></script>
 <script type="text/javascript"
         src="/lihuaiot01/select2/js/select2.js"></script>
+<%--<script type="text/javascript"
+        src="/lihuaiot01/easyui/js/jquery.easyui.min.js"></script>--%>
 <%--<script type="text/javascript"
         src="/lihuaiot01/bootstrap/bootstrap-select/js/bootstrap-select.min.js"></script>--%>
 <%--contextmenu start 与 tab有冲突--%>

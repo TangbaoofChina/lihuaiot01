@@ -131,6 +131,10 @@
         <result column="HEC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="HEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
+    <resultMap id="DayAvgTempResult" type="com.system.po.EC01.EC01DayAvgTemp">
+        <result column="senddate" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="avgtemp" jdbcType="FLOAT" property="avgTemp"/>
+    </resultMap>
     <select id="selectEC01ByORGId" parameterType="string" resultMap="BaseResultMap">
         select u.di_name,u.di_serialnum,t.*
         from iot_envcon_01 t,iot_deviceinfo u
@@ -182,7 +186,8 @@
     <select id="selectEC01WaterByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select u.di_name,u.di_serialnum,c.*
         from (select t.*,
-        row_number() over(partition by t.device_serialnum,to_char(t.hec01_datasenddate,'yyyy-mm-dd') order by t.hec01_datasenddate desc) rn
+        row_number() over(partition by t.device_serialnum,to_char(t.hec01_datasenddate,'yyyy-mm-dd') order by
+        t.hec01_datasenddate desc) rn
         from iot_hisenvcon_01 t
         where t.hec01_datasenddate BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
         and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
@@ -193,5 +198,39 @@
         ) c,iot_deviceinfo u
         where rn = 1 and u.di_serialnum=c.device_serialnum
         order by c.hec01_datasenddate asc
+    </select>
+    <select id="selectEC01DayAvgTempByDeviceIdAndDate" resultMap="DayAvgTempResult">
+        select to_char(a.hec01_datasenddate,'yyyy-mm-dd') senddate,
+        avg(a.hec01_inavetemp) avgtemp
+        from iot_hisenvcon_01 a
+        where a.hec01_datasenddate BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and a.device_serialnum= #{deviceId,jdbcType=VARCHAR}
+        group by to_char(a.hec01_datasenddate,'yyyy-mm-dd')
+        order by senddate asc
+    </select>
+    <select id="selectEC01ByDeviceIdsAndDtl" resultMap="BaseHisResultMap">
+        select
+        a.di_name,a.di_serialnum,b.*
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item1" index="index1" open="(" separator="," close=")">
+            #{item1,jdbcType=VARCHAR}
+        </foreach>
+        AND to_char(b.HEC01_DATASENDDATE,'yyyy-mm-dd') in
+        <foreach collection="dateTimeList" item="item2" index="index2" open="(" separator="," close=")">
+            #{item2,jdbcType=VARCHAR}
+        </foreach>
+        order by b.HEC01_DATASENDDATE ASC
+    </select>
+    <select id="selectEC01ByDeviceIdAndDt" resultMap="BaseHisResultMap">
+        select
+        a.di_name,a.di_serialnum,b.*
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND to_char(b.HEC01_DATASENDDATE,'yyyy-mm-dd') = #{dateTime,jdbcType=VARCHAR}
+        order by b.HEC01_DATASENDDATE ASC
     </select>
 </mapper>

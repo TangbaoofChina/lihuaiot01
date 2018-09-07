@@ -162,6 +162,7 @@ function dlSelectDeviceByTreeId() {
         locale: 'zh-CN',//中文支持
         //toolbar: '#toolbar',//指定工作栏
         columns: dlTableColumns,
+        height: 500       //设置表格高度-固定表头生效
     });
 }
 

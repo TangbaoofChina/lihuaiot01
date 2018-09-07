@@ -354,6 +354,9 @@ function hisSelectDeviceByTreeIdEC01() {
         sidePagination: "server",
         locale: 'zh-CN',//中文支持
         columns: hisEC01TableColumns,
+        height: 500,             //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
     });
 }
 
@@ -400,6 +403,9 @@ function hisSelectDeviceByTreeIdSewageC01() {
         sidePagination: "server",
         locale: 'zh-CN',//中文支持
         columns: hisSewageC01TableColumns,
+        height: 500,      //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
     });
 }
 

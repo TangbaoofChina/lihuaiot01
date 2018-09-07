@@ -316,7 +316,7 @@ function hisChartSelectDeviceByIdsTable() {
 function hisChartExportStorageAction() {
     $('#hisChartExport_storage').click(function () {
         $('#export_modal').modal("show");
-    })
+    });
 
     $('#hisChartExport_storage_download').click(function () {
         var queryParamObj = document.getElementById("hisChartSelId_Param"); //定位选择参数
@@ -329,7 +329,7 @@ function hisChartExportStorageAction() {
             sQueryParam: queryParameter,
             sStartDate: queryStartDate,
             sEndDate: queryEndDate
-        }
+        };
         var url = "/lihuaiot01/hisChartDevice/exportHisDeviceList?" + $.param(data)
         window.open(url, '_blank');
 

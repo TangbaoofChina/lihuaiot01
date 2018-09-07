@@ -1,5 +1,7 @@
 package com.system.po.parameter;
 
+import com.system.util.DataConvertor;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +19,10 @@ public class ParameterData extends ParameterBase {
     }
 
     public String findMaxValue() {
-        return Collections.max(data);
+        return DataConvertor.findMaxValue(data);
     }
 
     public String findMinValue() {
-        return Collections.min(data);
+        return DataConvertor.findMinValue(data);
     }
 }

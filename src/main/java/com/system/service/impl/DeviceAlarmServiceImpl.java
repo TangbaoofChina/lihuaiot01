@@ -5,10 +5,7 @@ import com.system.mapperiot.AlarmErrorOfflineMapper;
 import com.system.mapperiot.DeviceAlarmMapper;
 import com.system.mapperiot.DeviceErrorMapper;
 import com.system.mapperiot.DeviceOfflineMapper;
-import com.system.po.DataTablePageing;
-import com.system.po.DeviceAlarmInfo;
-import com.system.po.MydataTableColumn;
-import com.system.po.RoleInfo;
+import com.system.po.*;
 import com.system.service.DeviceAlarmService;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
@@ -73,6 +70,8 @@ public class DeviceAlarmServiceImpl implements DeviceAlarmService {
         List<DeviceAlarmInfo> deviceAlarmInfoList = alarmErrorOfflineMapper.selectDeviceAlarmInfoByRoleId(roleIds);
         return deviceAlarmInfoList;
     }
+
+
 
     @Override
     public DataTablePageing selectDeviceHisAlarmInfoAndPaging(Integer pageNumber, Integer pageSize, String alarmType, String sStartDate, String sEndDate) throws Exception {
@@ -139,6 +138,17 @@ public class DeviceAlarmServiceImpl implements DeviceAlarmService {
         DeviceAlarmInfo deviceAlarmInfo = new DeviceAlarmInfo();
         List<MydataTableColumn> mydataTableColumnList = deviceAlarmInfo.getDeviceAlarmHead();
         return mydataTableColumnList;
+    }
+
+    @Override
+    public List<DeviceAlarmRate> selectHisAlarmTopN(String sStartDate, String sEndDate, int topN) throws Exception {
+        return deviceAlarmMapper.selectHisAlarmTopN(sStartDate,sEndDate,topN);
+    }
+
+    @Override
+    public List<DeviceAlarmRate> selectHisAlarmTopNByRoleId(String sStartDate, String sEndDate, int topN, List<RoleInfo> roleInfoList) throws Exception {
+        List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
+        return deviceAlarmMapper.selectHisAlarmTopNByRoleId(sStartDate,sEndDate,topN,roleIds);
     }
 
     private DataTablePageing deviceHisAlarmInfoListPaging(Integer pageNumber, Integer pageSize, List<DeviceAlarmInfo> deviceAlarmInfoList) {

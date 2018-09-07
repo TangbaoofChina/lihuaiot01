@@ -1,12 +1,14 @@
 package com.system.po.parameter;
 
 import com.system.po.Device.EC01DeviceMessage;
+import com.system.po.EChartsOptions.EChartsYAxis;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParameterCharts {
     private ChartsParameters chartsParameters;
+    private List<EChartsYAxis> eChartsYAxisList;
     private ChartsParameters01 chartsParameters01;
 
     public ChartsParameters getChartsParameters() {
@@ -23,6 +25,14 @@ public class ParameterCharts {
 
     public void setChartsParameters01(ChartsParameters01 chartsParameters01) {
         this.chartsParameters01 = chartsParameters01;
+    }
+
+    public List<EChartsYAxis> geteChartsYAxisList() {
+        return eChartsYAxisList;
+    }
+
+    public void seteChartsYAxisList(List<EChartsYAxis> eChartsYAxisList) {
+        this.eChartsYAxisList = eChartsYAxisList;
     }
 
     public ParameterCharts(List<DeviceCharts01> deviceChartsList, String sQueryParam) {
@@ -42,28 +52,24 @@ public class ParameterCharts {
                     ) {
                 if (parameterData1.getName().equals(sQueryParam))
                     dataList = parameterData1.getData();
-            };
+            }
+            ;
             parameterData01.setData(dataList);
             parameterDataList.add(parameterData01);
         }
 
-        this.chartsParameters01 = new ChartsParameters01(deviceParameterName,parameterDataList,deviceParameterTime);
+        this.chartsParameters01 = new ChartsParameters01(deviceParameterName, parameterDataList, deviceParameterTime);
 
     }
 
-    public ParameterCharts(List<DeviceCharts01> deviceChartsList, String sQueryParam, List<EC01DeviceMessage> deviceMessageList) {
+    public ParameterCharts(List<DeviceCharts01> deviceChartsList, String sQueryParam, List<String> deviceParameterTime) {
         //曲线的名称
         List<String> deviceParameterName = new ArrayList<String>();
         //曲线的时间轴
-        List<String> deviceParameterTime = new ArrayList<String>();
+        //List<String> deviceParameterTime = new ArrayList<String>();
         //曲线的series
         List<ParameterData> parameterDataList = new ArrayList<ParameterData>();
 
-        //时间序列生成
-        for (EC01DeviceMessage deviceMessage:deviceMessageList
-             ) {
-            deviceParameterTime.add(deviceMessage.getSendDate());
-        }
         //根据时间序列，生成新的ParameterData的list；parameterDataList即为曲线中对应的series
         for (DeviceCharts01 deviceChats : deviceChartsList
                 ) {
@@ -71,6 +77,9 @@ public class ParameterCharts {
 
             ParameterData parameterData = new ParameterData();
             parameterData.setName(deviceChats.getDeviceInfo().getDName());
+            if (parameterData.getName().indexOf("-饮水") > -1) {
+                parameterData.setyAxisIndex("1");
+            }
             List<String> dataList = new ArrayList<String>();
             List<OneDataDetail> oneDataDetailList = new ArrayList<OneDataDetail>();
             //一个设备有多个参数，每个参数都有一个ParameterData01
@@ -101,12 +110,18 @@ public class ParameterCharts {
                     }
                     break;
                 }
-            };
+            }
+
             parameterData.setData(dataList);  //单个series
+            if (sQueryParam.equals("日饮水量")) {
+                parameterData.setShowAllSymbol(true);
+            } else {
+                parameterData.setShowAllSymbol(false);
+            }
             parameterDataList.add(parameterData);//多个series
         }
 
-        this.chartsParameters = new ChartsParameters(deviceParameterName,parameterDataList,deviceParameterTime);
+        this.chartsParameters = new ChartsParameters(deviceParameterName, parameterDataList, deviceParameterTime);
 
     }
 }

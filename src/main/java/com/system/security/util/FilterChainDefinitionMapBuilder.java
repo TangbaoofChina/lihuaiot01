@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 获取 URL 权限信息工厂类
+ *
  * @author ken
  * @since 2017/2/26.
  */
@@ -16,15 +17,17 @@ public class FilterChainDefinitionMapBuilder {
 
     /**
      * 获取授权信息
+     *
      * @return 返回授权信息列表
      */
-    public LinkedHashMap<String, String> builderFilterChainDefinitionMap(){
+    public LinkedHashMap<String, String> builderFilterChainDefinitionMap() {
         LinkedHashMap<String, String> permissionMap = new LinkedHashMap<>();
 
         // 固定的权限配置
         permissionMap.put("/bootstrap/**", "anon");
         permissionMap.put("/css/**", "anon");
         permissionMap.put("/datatables/**", "anon");
+        permissionMap.put("/easyui/**", "anon");
         permissionMap.put("/echarts/**", "anon");
         permissionMap.put("/fonts/**", "anon");
         permissionMap.put("/images/**", "anon");
@@ -35,7 +38,7 @@ public class FilterChainDefinitionMapBuilder {
         permissionMap.put("/login", "anon, kickOut");
         permissionMap.put("/account/beforeLogin", "anon");
         permissionMap.put("/account/login", "anon");
-        permissionMap.put("/mainpage", "authc,roles["+"admin,user"+"]");
+        permissionMap.put("/mainpage", "authc,roles[" + "admin,user" + "]");
          /*/admin/** = authc, roles[admin]
          /user/** = authc, roles[user]
         // 可变化的权限配置

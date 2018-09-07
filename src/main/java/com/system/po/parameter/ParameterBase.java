@@ -8,8 +8,12 @@ import java.util.List;
 
 public class ParameterBase {
     private String name;
-    private String type="line";
-    private String connectNulls="true";
+    private String type = "line";
+    private String yAxisIndex = "0";
+    private String connectNulls = "true";
+    private String symbol = "circle";//拐点样式
+    private int symbolSize = 8;//拐点大小
+    private Boolean showAllSymbol = true;
     private EcsMarkPoint markPoint;
     private EcsMarkLine markLine;
 
@@ -27,6 +31,14 @@ public class ParameterBase {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getyAxisIndex() {
+        return yAxisIndex;
+    }
+
+    public void setyAxisIndex(String yAxisIndex) {
+        this.yAxisIndex = yAxisIndex;
     }
 
     public String getConnectNulls() {
@@ -53,4 +65,27 @@ public class ParameterBase {
         this.markLine = markLine;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public int getSymbolSize() {
+        return symbolSize;
+    }
+
+    public void setSymbolSize(int symbolSize) {
+        this.symbolSize = symbolSize;
+    }
+
+    public Boolean getShowAllSymbol() {
+        return showAllSymbol;
+    }
+
+    public void setShowAllSymbol(Boolean showAllSymbol) {
+        this.showAllSymbol = showAllSymbol;
+    }
 }

@@ -17,6 +17,8 @@ public interface DeviceInfoService {
     List<DeviceInfoAndNode> selectDeviceInfoByOrgIdAll(String orgId) throws Exception;
     //查询该用户角色下所有设备
     List<DeviceInfoAndNode> selectDeviceInfoByRoleIdAll(List<RoleInfo> roleInfoList) throws Exception;
+    //查询所有设备
+    List<DeviceInfoAndNode> selectAllDeviceAndNodeInfo()throws Exception;
     /**
      * 根据角色ID查找所有相关联的设备信息
      * @return 返回设备信息

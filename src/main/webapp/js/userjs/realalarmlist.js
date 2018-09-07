@@ -73,6 +73,7 @@ function raInitTableContent() {
         locale: 'zh-CN',//中文支持
          toolbar: '#ratoolbar',//指定工作栏
         columns: raTableColumns,
+        height: 500       //设置表格高度-固定表头生效
     });
 }
 

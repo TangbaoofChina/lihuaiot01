@@ -6,6 +6,7 @@ import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 import com.system.service.DeviceInfoService;
 import com.system.service.EC01DeviceMessageService;
+import com.system.util.EC01Util;
 import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -56,7 +57,7 @@ public class HisChartDeviceListController {
             deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("111"));
             /*deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("201"));
             deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("211"));*/
-        }  else {
+        } else {
             deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleInfoList());
         }
         jsonString = JSON.toJSONString(deviceInfoList);
@@ -65,9 +66,22 @@ public class HisChartDeviceListController {
 
     @RequestMapping(value = "/selectEC01ByIdsAndDateChart", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String selectEC01ByIdsAndDateChart(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
+    public String selectEC01ByIdsAndDateChart(String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
         //List<DeviceMessage> deviceMessageList = deviceMessageService.selectHisDeviceMessage();
-        ParameterCharts parameterCharts = ec01DeviceMessageService.selectHisEC01ByDateAndIDsChart(sDeviceIds, sQueryParam, sStartDate, sEndDate);
+        //ParameterCharts parameterCharts = ec01DeviceMessageService.selectHisEC01ByDateAndIDsChart(sDeviceIds, sQueryParam, sStartDate, sEndDate);
+        ParameterCharts parameterCharts = ec01DeviceMessageService.selectHisEC01ByDateAndIDsChartThreshold(sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
+        if (parameterCharts == null)
+            return "[]";
+        String jsonString = JSON.toJSONString(parameterCharts);
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/selectEC01ByIdAndDateTimeChart", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectEC01ByIdAndDateTimeChart(String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sQueryParam, String[] sDateTimeList) throws Exception {
+        //排序
+        sDateTimeList = EC01Util.SortByDate(sDateTimeList);
+        ParameterCharts parameterCharts = ec01DeviceMessageService.selectHisEC01ByDtlAndId(sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sDateTimeList);
         if (parameterCharts == null)
             return "[]";
         String jsonString = JSON.toJSONString(parameterCharts);
@@ -76,14 +90,14 @@ public class HisChartDeviceListController {
 
     @RequestMapping(value = "selectEC01ByIdsAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String selectEC01ByIdsAndDateAndPaging(Integer pageNumber, Integer pageSize, String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
+    public String selectEC01ByIdsAndDateAndPaging(Integer pageNumber, Integer pageSize, String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
         String sReturnJson = "[]";
         if (sDeviceIds == null) {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
             List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-            DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDateAndIDsAndPage(pageNumber, pageSize, deviceInfoList, sDeviceIds, sQueryParam, sStartDate, sEndDate);
+            DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sStartDate, sEndDate);
             sReturnJson = "{";
             sReturnJson += "\"" + "total" + "\"";
             sReturnJson += ":";
@@ -99,26 +113,102 @@ public class HisChartDeviceListController {
 
     @RequestMapping(value = "exportHisDeviceList", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     public void exportHisDeviceList(String[] sDeviceIds,
+                                    String sMaxThreshold,
+                                    String sMinThreshold,
                                     String sQueryParam,
                                     String sStartDate,
                                     String sEndDate,
                                     HttpServletRequest request,
                                     HttpServletResponse response) throws Exception {
-        String fileName = "hisdevicelist.xlsx";
         List<List<OneDataDetail>> ec01DeviceMessageList = null;
         List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
         if (sDeviceIds != null) {
-            ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTable(deviceInfoList, sDeviceIds, sQueryParam, sStartDate, sEndDate);
+            ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
         }
-        List<MydataTableColumn> myDTCList = getEC01DeviceHead(sDeviceIds);
+        List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,null);
         File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+        ExportExcel(response, file);
+    }
+
+    @RequestMapping(value = "exportHisDeviceListDtl", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    public void exportHisDeviceListDtl(String[] sDeviceIds,
+                                       String sMaxThreshold,
+                                       String sMinThreshold,
+                                       String sQueryParam, String[] sDateTimeList,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
+        List<List<OneDataDetail>> ec01DeviceMessageList = null;
+        List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+        if (sDeviceIds != null) {
+            ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01TbByDtlAndIDsAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sDateTimeList);
+        }
+        List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,sDateTimeList);
+        File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+        ExportExcel(response, file);
+    }
+
+    @RequestMapping(value = "/ec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String ec01DeviceHead(String[] sDeviceIds, String sQueryParam) throws Exception {
+        List<MydataTableColumn> myDTCList = new ArrayList<>();
+        if (sDeviceIds.length > 0) {
+            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,null);
+        }
+
+        String jsonString = JSON.toJSONString(myDTCList);
+
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/ec01DeviceDataTimeHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String ec01DeviceDataTimeHead(String[] sDeviceIds, String[] sDateTimeList, String sQueryParam) throws Exception {
+        List<MydataTableColumn> myDTCList = new ArrayList<>();
+        //排序
+        sDateTimeList = EC01Util.SortByDate(sDateTimeList);
+        if (sDeviceIds.length > 0) {
+            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,sDateTimeList);
+        }
+        /*String a = JSONArray.fromObject(myDTCList).toString();
+        JSONArray.parseO*/
+        String jsonString = JSON.toJSONString(myDTCList);
+
+        return jsonString;
+    }
+
+    @RequestMapping(value = "selectEC01ByIdsAndDtlAndPg", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectEC01ByIdsAndDtlAndPg(Integer pageNumber, Integer pageSize, String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sQueryParam, String[] sDateTimeList) throws Exception {
+        String sReturnJson = "[]";
+        if (sDeviceIds == null) {
+            return sReturnJson;
+        }
+        if (sDeviceIds.length > 0) {
+            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+            DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDtlAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sDateTimeList);
+            sReturnJson = "{";
+            sReturnJson += "\"" + "total" + "\"";
+            sReturnJson += ":";
+            sReturnJson += "\"" + dataTablePageing.getTotal() + "\"";
+            sReturnJson += ",";
+            sReturnJson += "\"" + "rows" + "\"";
+            sReturnJson += ":";
+            sReturnJson += dataTablePageing.getsReturnJson();
+            sReturnJson += "}";
+        }
+        return sReturnJson;
+    }
+
+    public void ExportExcel(HttpServletResponse response, File file) throws Exception {
+        String fileName = "hisdevicelist.xlsx";
         if (file != null) {
             // 设置响应头
             response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
             FileInputStream inputStream = new FileInputStream(file);
             OutputStream outputStream = response.getOutputStream();
             byte[] buffer = new byte[8192];
-
             int len;
             while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
                 outputStream.write(buffer, 0, len);
@@ -130,38 +220,4 @@ public class HisChartDeviceListController {
         }
     }
 
-    @RequestMapping(value = "/ec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public String ec01DeviceHead(String[] sDeviceIds) throws Exception {
-
-        List<MydataTableColumn> myDTCList = getEC01DeviceHead(sDeviceIds);
-        /*String a = JSONArray.fromObject(myDTCList).toString();
-        JSONArray.parseO*/
-        String jsonString = JSON.toJSONString(myDTCList);
-
-        return jsonString;
-    }
-
-    private List<MydataTableColumn> getEC01DeviceHead(String[] sDeviceIds) throws Exception {
-        List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
-        if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-
-            for (DeviceInfo deviceInfo : deviceInfoList
-                    ) {
-                MydataTableColumn mdtc = new MydataTableColumn();
-                mdtc.setData(deviceInfo.getDSerialNum());
-                mdtc.setTitle(deviceInfo.getDName());
-                myDTCList.add(mdtc);
-            }
-        }
-
-        MydataTableColumn mdtcTime = new MydataTableColumn();
-        mdtcTime.setData("sSendTime");
-        mdtcTime.setDefaultContent("时间");
-        mdtcTime.setTitle("发送时间");
-
-        myDTCList.add(mdtcTime);
-        return myDTCList;
-    }
 }

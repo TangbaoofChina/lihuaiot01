@@ -7,6 +7,7 @@ import com.system.po.DeviceInfoAndNode;
 import com.system.po.ORGTreeNode;
 import com.system.po.RoleInfo;
 import com.system.service.DeviceInfoService;
+import com.system.util.DeviceUtil;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Override
     public List<DeviceInfo> selectDeviceInfoByORGIdAndRoleId(String orgId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
-        List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGIdAndRoleId(orgId,roleIds);
+        List<DeviceInfo> list = deviceInfoMapper.selectDeviceByORGIdAndRoleId(orgId, roleIds);
         //判断设备的在线状态
         list = judgeDeviceOnlineState(list);
         return list;
@@ -81,6 +82,11 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         return deviceInfoMapper.selectDeviceAndNodeByRoleId(roleIds);
     }
 
+    @Override
+    public List<DeviceInfoAndNode> selectAllDeviceAndNodeInfo() throws Exception {
+        return deviceInfoMapper.selectAllDeviceAndNodeInfo();
+    }
+
     private List<DeviceInfo> judgeDeviceOnlineState(List<DeviceInfo> deviceInfoList) throws Exception {
         for (DeviceInfo deviceInfo : deviceInfoList
                 ) {
@@ -89,10 +95,17 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
             long from = simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
             long to = simpleFormat.parse(toDate).getTime();
             int minutes = (int) ((to - from) / (1000 * 60));
-            if (minutes > 15)
-                deviceInfo.setDState("离线");
-            else
-                deviceInfo.setDState("在线");
+            if (deviceInfo.getDDevType().equals("111")) {
+                if (minutes > DeviceUtil.dOffline111)
+                    deviceInfo.setDState("离线");
+                else
+                    deviceInfo.setDState("在线");
+            } else if (deviceInfo.getDDevType().equals("211")) {
+                if (minutes > DeviceUtil.dOffline211)
+                    deviceInfo.setDState("离线");
+                else
+                    deviceInfo.setDState("在线");
+            }
         }
         return deviceInfoList;
     }

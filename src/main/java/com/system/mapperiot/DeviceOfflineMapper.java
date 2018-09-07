@@ -1,6 +1,7 @@
 package com.system.mapperiot;
 
 import com.system.po.DeviceAlarmInfo;
+import com.system.po.DeviceOfflineRate;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -44,5 +45,20 @@ public interface DeviceOfflineMapper {
      * @return 离线信息
      */
     List<DeviceAlarmInfo> selectHisOfflineInfoByDateAndRoleId(@Param("sStartDate") String sStartDate,@Param("sEndDate")  String sEndDate,@Param("roleIds") List<String> roleIds);
+
+    /**
+     * 查询所有设备离线频率前N的
+     * @param topN 前N个
+     * @return
+     */
+    List<DeviceOfflineRate> selectHisOfflineTopN(@Param("sStartDate") String sStartDate,@Param("sEndDate")  String sEndDate,@Param("topN") int topN);
+
+    /**
+     * 根据用户角色，查询设备离线频率前N的
+     * @param topN 前N个
+     * @param roleIds
+     * @return
+     */
+    List<DeviceOfflineRate> selectHisOfflineTopNByRoleId(@Param("sStartDate") String sStartDate,@Param("sEndDate")  String sEndDate,@Param("topN") int topN,@Param("roleIds") List<String> roleIds);
 
 }

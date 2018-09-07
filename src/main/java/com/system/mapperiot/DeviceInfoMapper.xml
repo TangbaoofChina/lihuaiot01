@@ -21,6 +21,7 @@
         <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
         <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
         <result column="DI_NODEID" jdbcType="VARCHAR" property="dNodeId"/>
+        <result column="DEVTYPE_SERIALNUM" jdbcType="VARCHAR" property="dDevType"/>
         <result column="NODE_NAME" jdbcType="VARCHAR" property="dNodeName"/>
         <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
         <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
@@ -74,6 +75,13 @@
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectAllDeviceAndNodeInfo" parameterType="String" resultMap="BaseResultAndNodeMap">
+        select DISTINCT a.*,b.node_name
+        from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
+        where a.di_nodeid=b.node_id
+        and a.di_serialnum = c.devrole_devnum
         order by a.DI_SERIALNUM asc
     </select>
     <select id="selectDeviceInfoByIDs" resultMap="BaseResultMap">

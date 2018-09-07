@@ -1,5 +1,8 @@
 package com.system.po.parameter;
 
+import com.system.po.EChartsOptions.EChartsYAxis;
+import com.system.util.DataConvertor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +11,7 @@ public class ChartsParameters {
     private List<ParameterData> dParameterdata;
     private List<String> dParameterTime;
     private List<String> dParameterName;
+    private List<EChartsYAxis> yAxis;
     private String min;
     private String max;
 
@@ -35,6 +39,14 @@ public class ChartsParameters {
         this.dParameterName = dParameterName;
     }
 
+    public List<EChartsYAxis> getyAxis() {
+        return yAxis;
+    }
+
+    public void setyAxis(List<EChartsYAxis> yAxis) {
+        this.yAxis = yAxis;
+    }
+
     public String getMin() {
         return min;
     }
@@ -60,8 +72,8 @@ public class ChartsParameters {
             maxValues.add(parameterData.findMaxValue());
             minValues.add(parameterData.findMinValue());
         }
-        this.max = Collections.max(maxValues);
-        this.min = Collections.min(minValues);
+        this.max = DataConvertor.findMaxValue(maxValues);
+        this.min = DataConvertor.findMinValue(minValues);
         this.dParameterName = deviceParameterName;
         this.dParameterTime = deviceParameterTime;
     }

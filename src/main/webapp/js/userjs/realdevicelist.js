@@ -943,6 +943,9 @@ function rdlSelectDeviceByTreeIdEC01() {
         sidePagination: "client",
         locale: 'zh-CN',//中文支持
         columns: rdlTableColumns,
+        height: 500,               //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
     });
 }
 
@@ -986,6 +989,9 @@ function rdlSelectDeviceByTreeIdSewageC01() {
         sidePagination: "client",
         locale: 'zh-CN',//中文支持
         columns: rdlSewageC01TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
     });
 }
 
