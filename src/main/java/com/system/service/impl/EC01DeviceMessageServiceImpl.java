@@ -106,7 +106,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     /**
-     * 查询多个设备历史数据-曲线格式
+     * 查询多个设备历史数据-曲线格式-20180907废弃不用
      *
      * @param sDeviceIds  设备ID 数组
      * @param sQueryParam 设备参数
@@ -155,14 +155,18 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
             sEndDate = sEndDate.substring(0, 10);
             List<EC01DayAvgTemp> ec01DayAvgTempList = ec01DeviceMessageMapper.selectEC01DayAvgTempByDeviceIdAndDate(sDeviceIds[0], sStartDate, sEndDate);
             DeviceInfo deviceInfo = deviceInfoMapper.selectDeviceInfoByID(sDeviceIds[0]);
-            EC01DeviceDayAvgTemp ec01DeviceDayAvgTemp = new EC01DeviceDayAvgTemp(deviceInfo, ec01DayAvgTempList);
-            deviceMessageList = ec01DeviceMessageMapper.selectEC01WaterByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
-            returnParamChats = getTempWaterChartsByDeviceMessageList(deviceMessageList, ec01DeviceDayAvgTemp, sDeviceIds, sQueryParam);
+            if (ec01DayAvgTempList.size() > 0) {
+                EC01DeviceDayAvgTemp ec01DeviceDayAvgTemp = new EC01DeviceDayAvgTemp(deviceInfo, ec01DayAvgTempList);
+                deviceMessageList = ec01DeviceMessageMapper.selectEC01WaterByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
+                returnParamChats = getTempWaterChartsByDeviceMessageList(deviceMessageList, ec01DeviceDayAvgTemp, sDeviceIds, sQueryParam);
+            }
         } else if (sQueryParam.equals("多舍日饮水量")) {
             sStartDate = sStartDate.substring(0, 10);
             sEndDate = sEndDate.substring(0, 10);
             deviceMessageList = ec01DeviceMessageMapper.selectEC01WaterByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
-            returnParamChats = getMuitiDeviceWaterChartsByDml(deviceMessageList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam);
+            if (deviceMessageList.size() > 0) {
+                returnParamChats = getMuitiDeviceWaterChartsByDml(deviceMessageList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam);
+            }
         } else {
             deviceMessageList = ec01DeviceMessageMapper.selectEC01ByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
             returnParamChats = getParameterChartsByDeviceMessageList(deviceMessageList, sDeviceIds, sQueryParam);
@@ -171,7 +175,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     /**
-     * 查询多个设备历史数据-报表格式
+     * 查询多个设备历史数据-报表格式-20180907废弃不用
      *
      * @param deviceInfoList 设备信息List
      * @param sDeviceIds     设备ID数组
@@ -186,16 +190,16 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         List<List<OneDataDetail>> dataDetailList = null;
         ParameterCharts parameterCharts = this.selectHisEC01ByDateAndIDsChart(sDeviceIds, sQueryParam, sStartDate, sEndDate);
         if (parameterCharts != null) {
-            dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts,null);
+            dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts, null);
         }
         //List<List<OneDataDetail>> dataDetailList = getDataDetailList(deviceInfoList,parameterCharts);
-        String sReturnJson = formatDataDetailsToJson(dataDetailList);
+        //String sReturnJson = formatDataDetailsToJson(dataDetailList);
         //return dataDetailList;
         return dataDetailList;
     }
 
     /**
-     * 查询多个设备历史数据-报表格式;分页
+     * 查询多个设备历史数据-报表格式;分页-20180907废弃不用
      *
      * @param pageNumber     分页码
      * @param pageSize       页数据长度
@@ -214,7 +218,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         if (parameterCharts == null) {
             return dataTablePageing;
         }
-        List<List<OneDataDetail>> dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts,null);
+        List<List<OneDataDetail>> dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts, null);
         dataTablePageing = getDataTableAndPageing(pageNumber, pageSize, dataDetailList);
         return dataTablePageing;
     }
@@ -241,13 +245,13 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         if (parameterCharts == null) {
             return dataTablePageing;
         }
-        List<List<OneDataDetail>> dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts,null);
+        List<List<OneDataDetail>> dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts, null);
         dataTablePageing = getDataTableAndPageing(pageNumber, pageSize, dataDetailList);
         return dataTablePageing;
     }
 
     /**
-     * 查询多个设备历史数据-报表格式 带阈值
+     * 查询多个设备历史数据-报表格式；不分页 带阈值
      *
      * @param deviceInfoList
      * @param sDeviceIds
@@ -264,7 +268,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         List<List<OneDataDetail>> dataDetailList = null;
         ParameterCharts parameterCharts = this.selectHisEC01ByDateAndIDsChartThreshold(sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
         if (parameterCharts != null) {
-            dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts,null);
+            dataDetailList = getDataDetailListByParam(sQueryParam, deviceInfoList, parameterCharts, null);
         }
         //List<List<OneDataDetail>> dataDetailList = getDataDetailList(deviceInfoList,parameterCharts);
         //String sReturnJson = formatDataDetailsToJson(dataDetailList);
@@ -272,6 +276,18 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         return dataDetailList;
     }
 
+    /**
+     * 查询单设备，多个日期的数据，生成报表；单舍温度，单舍饮水量 含阈值
+     *
+     * @param deviceInfoList
+     * @param sDeviceIds
+     * @param sMaxThreshold
+     * @param sMinThreshold
+     * @param sQueryParam
+     * @param sDateTimeList
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<List<OneDataDetail>> selectHisEC01TbByDtlAndIDsAndThreshold(List<DeviceInfo> deviceInfoList, String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sQueryParam, String[] sDateTimeList) throws Exception {
         List<List<OneDataDetail>> dataDetailList = null;
@@ -298,11 +314,15 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         for (String dateTime : sDateTimeList
                 ) {
             List<EC01DeviceMessage> deviceMessageList = ec01DeviceMessageMapper.selectEC01ByDeviceIdAndDt(sDeviceIds[0], dateTime);
-            judgeWaterThreshold(deviceMessageList, sMaxThreshold, sMinThreshold);
-            deviceMsgListMap.put(dateTime, deviceMessageList);
+            if (deviceMessageList.size() > 0) {
+                judgeWaterThreshold(deviceMessageList, sMaxThreshold, sMinThreshold);
+                deviceMsgListMap.put(dateTime, deviceMessageList);
+            }
         }
-        ParameterCharts parameterCharts = this.getOneDeviceDataSplitByDateTime(deviceMsgListMap, sQueryParam);
-        return parameterCharts;
+        if (deviceMsgListMap.size() > 0) {
+            ParameterCharts parameterCharts = this.getOneDeviceDataSplitByDateTime(deviceMsgListMap, sQueryParam);
+            return parameterCharts;
+        } else return null;
     }
 
     @Override
@@ -422,6 +442,9 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     //根据曲线的查询结果，转换成key/value形式，为datatable服务
     private List<List<OneDataDetail>> getDataDetailListByTableColumn(List<MydataTableColumn> mydataTableColumnList, ParameterCharts parameterCharts) {
         List<List<OneDataDetail>> dataDetailList = new ArrayList<List<OneDataDetail>>();
+        if (parameterCharts == null) {
+            return dataDetailList;
+        }
         List<String> sTimeList = parameterCharts.getChartsParameters().getdParameterTime();
         //以时间为基准，先填一行，再增加行
         for (int i = 0; i < sTimeList.size(); i++) {

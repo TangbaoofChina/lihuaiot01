@@ -39,10 +39,10 @@
           href="/lihuaiot01/ztree/css/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" type="text/css"
           href="/lihuaiot01/css/daterangepicker.css">
-<%--    <link rel="stylesheet" type="text/css"
-          href="/lihuaiot01/easyui/css/easyui.css">--%>
-<%--    <link rel="stylesheet" type="text/css"
-          href="/lihuaiot01/easyui/css/icon.css">--%>
+    <%--    <link rel="stylesheet" type="text/css"
+              href="/lihuaiot01/easyui/css/easyui.css">--%>
+    <%--    <link rel="stylesheet" type="text/css"
+              href="/lihuaiot01/easyui/css/icon.css">--%>
     <link rel="shortcut icon" href="/lihuaiot01/images/lihuaiotweb01.ico"/>
 
 </head>
@@ -161,15 +161,15 @@
                                        class="menu_item"
                                        name="/lihuaiot01/jsp/userpage/hisalarmlist.jsp">历史报警</a>
                                 </li>
-                                <li class="list-group-item">
+                                <%--<li class="list-group-item">
                                     <a href="javascript:void(0);" id="hischartdevice"
                                        class="menu_item"
                                        name="/lihuaiot01/jsp/userpage/hischartdevice.jsp">历史曲线</a>
-                                </li>
+                                </li>--%>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0);" id="hischartdevice01"
                                        class="menu_item"
-                                       name="/lihuaiot01/jsp/userpage/hischartdevice01.jsp">历史曲线01</a>
+                                       name="/lihuaiot01/jsp/userpage/hischartdevice01.jsp">历史曲线</a>
                                 </li>
                             </ul>
                         </div>
