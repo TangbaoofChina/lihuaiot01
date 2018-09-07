@@ -96,7 +96,7 @@ public class HisChartDeviceListController {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sStartDate, sEndDate);
             sReturnJson = "{";
             sReturnJson += "\"" + "total" + "\"";
@@ -121,13 +121,14 @@ public class HisChartDeviceListController {
                                     HttpServletRequest request,
                                     HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> ec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-        if (sDeviceIds != null) {
+        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
+
+            List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
+            File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+            ExportExcel(response, file);
         }
-        List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,null);
-        File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
-        ExportExcel(response, file);
     }
 
     @RequestMapping(value = "exportHisDeviceListDtl", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
@@ -138,22 +139,24 @@ public class HisChartDeviceListController {
                                        HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> ec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-        if (sDeviceIds != null) {
+        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01TbByDtlAndIDsAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sDateTimeList);
+
+            List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, sDateTimeList);
+            File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+            ExportExcel(response, file);
         }
-        List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,sDateTimeList);
-        File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
-        ExportExcel(response, file);
     }
 
     @RequestMapping(value = "/ec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String ec01DeviceHead(String[] sDeviceIds, String sQueryParam) throws Exception {
         List<MydataTableColumn> myDTCList = new ArrayList<>();
+        List<DeviceInfo> deviceInfoList = new ArrayList<>();
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,null);
+            deviceInfoList = getDeviceInfoList(sDeviceIds);
+            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
         }
 
         String jsonString = JSON.toJSONString(myDTCList);
@@ -168,8 +171,8 @@ public class HisChartDeviceListController {
         //排序
         sDateTimeList = EC01Util.SortByDate(sDateTimeList);
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
-            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam,deviceInfoList,sDateTimeList);
+            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, sDateTimeList);
         }
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/
@@ -186,7 +189,7 @@ public class HisChartDeviceListController {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDtlAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sDateTimeList);
             sReturnJson = "{";
             sReturnJson += "\"" + "total" + "\"";
@@ -218,6 +221,29 @@ public class HisChartDeviceListController {
             inputStream.close();
             outputStream.close();
         }
+    }
+
+    private List<DeviceInfo> getDeviceInfoList(String[] sDeviceIds) throws Exception {
+        //为了防止排序
+        //日温饮水 排序，先取出第一个设备的信息，再取出后续的设备的信息
+        List<DeviceInfo> deviceInfoList = new ArrayList<>();
+        if (sDeviceIds.length < 1) {
+            return deviceInfoList;
+        }
+        String[] sDeviceIdsFirst = new String[1];
+        sDeviceIdsFirst[0] = sDeviceIds[0];
+        List<DeviceInfo> deviceInfoListFirst = deviceInfoService.selectDeviceInfoByIDs(sDeviceIdsFirst);
+        deviceInfoList.addAll(deviceInfoListFirst);
+        if (sDeviceIds.length > 1) {
+            List<String> sDeviceIdsSecond = new ArrayList<>();
+            for (int i = 1; i < sDeviceIds.length; i++) {
+                sDeviceIdsSecond.add(sDeviceIds[i]);
+            }
+            List<DeviceInfo> deviceInfoListSecond = deviceInfoService.selectDeviceInfoByIDs(sDeviceIdsSecond.toArray(new String[sDeviceIdsSecond.size()]));
+
+            deviceInfoList.addAll(deviceInfoListSecond);
+        }
+        return deviceInfoList;
     }
 
 }
