@@ -10,7 +10,7 @@
         <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto;">
             <div id="hisChartOrgTree" style="margin-top: 5px;white-space: nowrap;overflow: auto;"></div>
         </div>
-        <div class="columns-right" style="display: block;white-space: nowrap;">
+        <div class="columns-right" id="hisChartEC01DivP1" style="display: block;white-space: nowrap;">
             <div class="form-inline">
                 <div class="input-group" style="margin-left: 15px;">
                     <label>设备：</label>
@@ -84,8 +84,64 @@
                 </button>
             </div>
         </div>
+        <div class="columns-right" id="hisChartSewageC01Div" style="display: none;white-space: nowrap;">
 
-        <div class="col-md-8 col-sm-7" style="height:100%;">
+        </div>
+        <div class="columns-right" id="hisChartScaleC01Div" style="display: none;white-space: nowrap;">
+            <div class="form-inline">
+                <div class="input-group" style="margin-left: 15px;">
+                    <label>参数：</label>
+                    <select name="hisChartScaleC01SelName_Param" onchange="hisChartScaleC01ParamChange()"
+                            id="hisChartScaleC01SelId_Param"
+                            class="input-sm">
+                        <option value="0" selected="selected">称重分析</option>
+                        <option value="1">有效体重</option>
+                        <option value="2">增重日龄</option>
+                        <option value="3">平均体重</option>
+                    </select>
+                </div>
+                <label>时间：</label>
+                <div class="btn-group">
+                    <input type="text" id="hisChartScaleC01DateInterval" class="form-control" style="width: 320px;">
+                </div>
+                <button class="btn btn-default" id="hisChartScaleC01Query_storage" onclick="hisChartScaleC01Query()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                </button>
+            </div>
+            <div id="hisChartScaleC01ThresholdDiv" class="form-inline"
+                 style="margin-top: 10px; display: block;">
+                <div class="input-group" style="margin-left: 15px;">
+                    <label>最大阈值：</label>
+                    <input name="hisChartScaleC01MaxThreshold" id="hisChartScaleC01MaxThreshold" style="width: 50px;"
+                           onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+                <div class="input-group">
+                    <label>最小阈值：</label>
+                    <input name="hisChartScaleC01MinThreshold" id="hisChartScaleC01MinThreshold" style="width: 50px;"
+                           onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+                <div class="input-group">
+                    <label>起始日龄：</label>
+                    <input name="hisChartScaleC01StartAge" id="hisChartScaleC01StartAge" style="width: 50px;"
+                           onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+            </div>
+            <div id="hisChartScaleC01toolbar" style="margin-left: 15px;">
+                <button class="btn btn-default" id="hisChartScaleC01Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+            <div class="table-responsive" id="hisChartScaleC01TableDiv">
+                <table class="table table-striped" id="hisChartScaleC01DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#hisChartScaleC01toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-showColumns="true">
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-sm-7" id="hisChartEC01DivP2" style="height:100%;display: block;">
             <div id="echartsmain" style="margin-top: 15px;"></div>
             <div id="hisCharttoolbar">
                 <button class="btn btn-default" id="hisChartExport_storage">
@@ -102,7 +158,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- 导出设备信息模态框 -->

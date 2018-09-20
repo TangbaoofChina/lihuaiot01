@@ -3,20 +3,8 @@
          pageEncoding="UTF-8" %>
 
 <div class="panel panel-default">
-    <%--<div class="tab-pane">--%>
-    <%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
-            <li>实时数据信息</li>
-        </ol>--%>
     <div class="panel-body">
-        <%--<div class="columns-left">
-            <div class="zTreeDemoBackground left col-md-2" style="width:230px;height: 410px;overflow: scroll">
-                <div>
-                    <input class="text-input" type="text" style="width:120px;" id="txtSearchTreeNode">
-                    <button class="btn btn-default" onclick="rdlSearchTreeNode()">搜索</button>
-                </div>
-                <ul id="tree" class="ztree"></ul>
-            </div>
-        </div>--%>
+
         <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto;">
             <div class="input-group">
                 <input class="text-input" type="text" style="width:120px;margin-right: 2px;"
@@ -28,10 +16,6 @@
 
         <div class="columns-right" id="rdlEC01DeviceListDiv" style="display: block;white-space: nowrap;">
             <div id="rdlec01toolbar" class="btn-group">
-                <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
-                        onclick="tableRefresh()">
-                    <span class="glyphicon glyphicon-refresh"></span> <span>刷新</span>
-                </button>--%>
                 <button class="btn btn-default" id="rdlEC01Export_storage">
                     <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
                 </button>
@@ -54,10 +38,6 @@
         <div class="columns-right" id="rdlSewageC01DeviceListDiv"
              style="display: none;white-space: nowrap;">
             <div id="rdlSewageC01toolbar" class="btn-group">
-                <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
-                        onclick="tableRefresh()">
-                    <span class="glyphicon glyphicon-refresh"></span> <span>刷新</span>
-                </button>--%>
                 <button class="btn btn-default" id="rdlSewageC01Export_storage">
                     <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
                 </button>
@@ -67,6 +47,28 @@
                 <table class="table table-striped" id="rdlSewageC01DeviceList" align="center"
                        striped="true" data-click-to-select="true"
                        data-toolbar="#rdlSewageC01toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
+        <div class="columns-right" id="rdlScaleC01DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlScaleC01toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlScaleC01Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlScaleC01DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlScaleC01toolbar"<%--设置装按钮的容器为id为toolbar--%>
                        data-pagination="true"<%--设置是否显示页码数--%>
                        data-show-refresh="true" <%--设置刷新按钮--%>
                        data-show-toggle="true" <%--设置数据显示格式--%>
@@ -672,6 +674,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="columns-right" id="rdlScaleC01OneDeviceDiv" style="display: none">
+
         </div>
     </div>
 </div>

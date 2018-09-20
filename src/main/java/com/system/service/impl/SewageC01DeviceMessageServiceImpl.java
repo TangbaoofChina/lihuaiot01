@@ -7,6 +7,8 @@ import com.system.po.*;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.SewageC01DMHis;
 import com.system.po.Device.SewageC01DeviceMessage;
+import com.system.po.parameter.DeviceType;
+import com.system.service.DeviceTypeService;
 import com.system.service.SewageC01DeviceMessageService;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
@@ -23,16 +25,17 @@ import java.util.List;
 public class SewageC01DeviceMessageServiceImpl implements SewageC01DeviceMessageService {
 
     @Autowired
-    private DeviceInfoMapper deviceInfoMapper;
-    @Autowired
     private SewageC01DeviceMessageMapper sewageC01DeviceMessageMapper;
     @Autowired
     private EJConvertor ejConvertor;
+    @Autowired
+    private DeviceTypeService deviceTypeService;
 
     @Override
     public List<SewageC01DeviceMessage> selectSewageC01ByORGId(String ORGId) throws Exception {
         List<SewageC01DeviceMessage> sewageC01DeviceMessageList = sewageC01DeviceMessageMapper.selectSewageC01ByORGId(ORGId);
-        sewageC01DeviceMessageList = judgeDeviceOnlineState(sewageC01DeviceMessageList);
+        DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("211");
+        sewageC01DeviceMessageList = judgeDeviceOnlineState(sewageC01DeviceMessageList,deviceType.getDevTypeOffline());
         return sewageC01DeviceMessageList;
     }
 
@@ -40,14 +43,16 @@ public class SewageC01DeviceMessageServiceImpl implements SewageC01DeviceMessage
     public List<SewageC01DeviceMessage> selectSewageC01ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         List<SewageC01DeviceMessage> sewageC01DeviceMessageList = sewageC01DeviceMessageMapper.selectSewageC01ByORGIdAndRoleId(ORGId,roleIds);
-        sewageC01DeviceMessageList = judgeDeviceOnlineState(sewageC01DeviceMessageList);
+        DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("211");
+        sewageC01DeviceMessageList = judgeDeviceOnlineState(sewageC01DeviceMessageList,deviceType.getDevTypeOffline());
         return sewageC01DeviceMessageList;
     }
 
     @Override
     public SewageC01DeviceMessage selectSewageC01ByDeviceId(String sDeviceId) throws Exception {
         SewageC01DeviceMessage sewageC01DeviceMessage = sewageC01DeviceMessageMapper.selectSewageC01ByDeviceId(sDeviceId);
-        judgeOneDeviceOnlineState(sewageC01DeviceMessage);
+        DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("211");
+        judgeOneDeviceOnlineState(sewageC01DeviceMessage,deviceType.getDevTypeOffline());
         return sewageC01DeviceMessage;
     }
 
@@ -104,23 +109,23 @@ public class SewageC01DeviceMessageServiceImpl implements SewageC01DeviceMessage
     }
 
     //************************************私有函数********************************************//
-    private List<SewageC01DeviceMessage> judgeDeviceOnlineState(List<SewageC01DeviceMessage> sewageC01DeviceMessageList) throws Exception
+    private List<SewageC01DeviceMessage> judgeDeviceOnlineState(List<SewageC01DeviceMessage> sewageC01DeviceMessageList,int offline) throws Exception
     {
         for (BaseDeviceMessage baseDeviceMessage:sewageC01DeviceMessageList
                 ) {
-            judgeOneDeviceOnlineState(baseDeviceMessage);
+            judgeOneDeviceOnlineState(baseDeviceMessage,offline);
         }
         return sewageC01DeviceMessageList;
     }
 
-    private void judgeOneDeviceOnlineState(BaseDeviceMessage baseDeviceMessage) throws Exception
+    private void judgeOneDeviceOnlineState(BaseDeviceMessage baseDeviceMessage,int offline) throws Exception
     {
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDate = simpleFormat.format(new Date());
         long from =  simpleFormat.parse(baseDeviceMessage.getDReceiveTime()).getTime();
         long to = simpleFormat.parse(toDate).getTime();
         int minutes = (int) ((to - from) / (1000 * 60));
-        if (minutes > 15)
+        if (minutes > offline)
             baseDeviceMessage.setDState("离线");
         else
             baseDeviceMessage.setDState("在线");

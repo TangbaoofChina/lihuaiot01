@@ -6,7 +6,9 @@ import com.system.po.DeviceInfo;
 import com.system.po.DeviceInfoAndNode;
 import com.system.po.ORGTreeNode;
 import com.system.po.RoleInfo;
+import com.system.po.parameter.DeviceType;
 import com.system.service.DeviceInfoService;
+import com.system.service.DeviceTypeService;
 import com.system.util.DeviceUtil;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
@@ -15,14 +17,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Autowired
     private DeviceInfoMapper deviceInfoMapper;
+    @Autowired
+    private DeviceTypeService deviceTypeService;
     @Autowired
     private ORGTreeNodeMapper orgTreeNodeMapper;
     @Autowired
@@ -61,6 +63,11 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
+    public void updateDeviceInfo(String deviceId, String deviceName, String deviceEasFId, String deviceEasFName, String deviceEasFDisplayName) throws Exception {
+        deviceInfoMapper.updateDeviceInfo(deviceId, deviceName, deviceEasFId, deviceEasFName, deviceEasFDisplayName);
+    }
+
+    @Override
     public void batchUpdateDeviceOrgId(String[] deviceIds, String sOrgId) throws Exception {
         deviceInfoMapper.batchUpdateDeviceOrgId(deviceIds, sOrgId);
     }
@@ -88,6 +95,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     private List<DeviceInfo> judgeDeviceOnlineState(List<DeviceInfo> deviceInfoList) throws Exception {
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
+        Map<String, Integer> deviceTypeOfflineMap = deviceTypeService.selectDevTypeOfflineMap(deviceTypeList);
         for (DeviceInfo deviceInfo : deviceInfoList
                 ) {
             SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -95,13 +104,14 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
             long from = simpleFormat.parse(deviceInfo.getDReceiveTime()).getTime();
             long to = simpleFormat.parse(toDate).getTime();
             int minutes = (int) ((to - from) / (1000 * 60));
-            if (deviceInfo.getDDevType().equals("111")) {
-                if (minutes > DeviceUtil.dOffline111)
+            if (deviceTypeOfflineMap.containsKey(deviceInfo.getDDevType())) {
+                int offline = deviceTypeOfflineMap.get(deviceInfo.getDDevType());
+                if (minutes > offline)
                     deviceInfo.setDState("离线");
                 else
                     deviceInfo.setDState("在线");
-            } else if (deviceInfo.getDDevType().equals("211")) {
-                if (minutes > DeviceUtil.dOffline211)
+            } else {
+                if (minutes > DeviceUtil.defaultOffline)
                     deviceInfo.setDState("离线");
                 else
                     deviceInfo.setDState("在线");

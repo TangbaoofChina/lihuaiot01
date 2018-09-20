@@ -320,11 +320,17 @@ function removealljsfile() {
 window.operateEvents = {
     /*设备组织配置*/
     'click .deviceOrgChangeORG': function (e, value, row, index) {
+        deviceOrgSelectDevice = row;
+        deviceOrgOneTransfer();
+    },
+
+    'click .deviceOrgModifyInfo': function (e, value, row, index) {
         $('#deviceOrgNum').val(row.dSerialNum);
         $('#deviceOrgNumDec').val(row.dSerialNumDec);
         $('#deviceOrgName').val(row.dName);
+        $('#deviceOrgEasRoom').val(row.dEasFName);
         deviceOrgSelectDevice = row;
-        deviceOrgShowAdd();
+        deviceOrgShowModify();
     },
 
     /*用户组织配置*/

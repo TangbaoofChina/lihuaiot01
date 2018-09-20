@@ -6,8 +6,10 @@ import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 import com.system.service.DeviceInfoService;
 import com.system.service.EC01DeviceMessageService;
+import com.system.service.ScaleC01DeviceMessageService;
 import com.system.util.EC01Util;
 import com.system.util.RoleInfoListUtil;
+import com.system.util.ScaleC01Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -31,6 +33,8 @@ public class HisChartDeviceListController {
 
     @Autowired
     private EC01DeviceMessageService ec01DeviceMessageService;
+    @Autowired
+    private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
     @Autowired
     private DeviceInfoService deviceInfoService;
 
@@ -98,15 +102,7 @@ public class HisChartDeviceListController {
         if (sDeviceIds.length > 0) {
             List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sStartDate, sEndDate);
-            sReturnJson = "{";
-            sReturnJson += "\"" + "total" + "\"";
-            sReturnJson += ":";
-            sReturnJson += "\"" + dataTablePageing.getTotal() + "\"";
-            sReturnJson += ",";
-            sReturnJson += "\"" + "rows" + "\"";
-            sReturnJson += ":";
-            sReturnJson += dataTablePageing.getsReturnJson();
-            sReturnJson += "}";
+            sReturnJson = getReturnJson(dataTablePageing);
         }
         return sReturnJson;
     }
@@ -191,15 +187,7 @@ public class HisChartDeviceListController {
         if (sDeviceIds.length > 0) {
             List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDtlAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sDateTimeList);
-            sReturnJson = "{";
-            sReturnJson += "\"" + "total" + "\"";
-            sReturnJson += ":";
-            sReturnJson += "\"" + dataTablePageing.getTotal() + "\"";
-            sReturnJson += ",";
-            sReturnJson += "\"" + "rows" + "\"";
-            sReturnJson += ":";
-            sReturnJson += dataTablePageing.getsReturnJson();
-            sReturnJson += "}";
+            sReturnJson = getReturnJson(dataTablePageing);
         }
         return sReturnJson;
     }
@@ -223,6 +211,59 @@ public class HisChartDeviceListController {
         }
     }
 
+    /****************************ScaleC01  Start****************************************/
+    @RequestMapping(value = "/scalec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String scalec01DeviceHead(String[] sDeviceIds, String sQueryParam) throws Exception {
+        List<MydataTableColumn> myDTCList = new ArrayList<>();
+        List<DeviceInfo> deviceInfoList = new ArrayList<>();
+        if (sDeviceIds.length > 0) {
+            deviceInfoList = getDeviceInfoList(sDeviceIds);
+            myDTCList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
+        }
+
+        String jsonString = JSON.toJSONString(myDTCList);
+
+        return jsonString;
+    }
+
+    @RequestMapping(value = "selectScaleC01ByIdsAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectScaleC01ByIdsAndDateAndPaging(Integer pageNumber, Integer pageSize, String[] sDeviceIds, String sMaxThreshold, String sMinThreshold, String sStartAge, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
+        String sReturnJson = "[]";
+        if (sDeviceIds == null) {
+            return sReturnJson;
+        }
+        if (sDeviceIds.length > 0) {
+            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            DataTablePageing dataTablePageing = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sStartAge, sDeviceIds, sQueryParam, sStartDate, sEndDate);
+            sReturnJson = getReturnJson(dataTablePageing);
+        }
+        return sReturnJson;
+    }
+
+    @RequestMapping(value = "exportScaleC01HisDeviceList", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    public void exportScaleC01HisDeviceList(String[] sDeviceIds,
+                                            String sMaxThreshold,
+                                            String sMinThreshold,
+                                            String sStartAge,
+                                            String sQueryParam,
+                                            String sStartDate,
+                                            String sEndDate,
+                                            HttpServletRequest request,
+                                            HttpServletResponse response) throws Exception {
+        List<List<OneDataDetail>> ec01DeviceMessageList = null;
+        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        if (sDeviceIds != null && (sDeviceIds.length > 0)) {
+            ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
+
+            List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
+            File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+            ExportExcel(response, file);
+        }
+    }
+
+    /****************************ScaleC01   End****************************************/
     private List<DeviceInfo> getDeviceInfoList(String[] sDeviceIds) throws Exception {
         //为了防止排序
         //日温饮水 排序，先取出第一个设备的信息，再取出后续的设备的信息
@@ -244,6 +285,20 @@ public class HisChartDeviceListController {
             deviceInfoList.addAll(deviceInfoListSecond);
         }
         return deviceInfoList;
+    }
+
+    private String getReturnJson(DataTablePageing dataTablePageing) {
+        String sReturnJson = "[]";
+        sReturnJson = "{";
+        sReturnJson += "\"" + "total" + "\"";
+        sReturnJson += ":";
+        sReturnJson += "\"" + dataTablePageing.getTotal() + "\"";
+        sReturnJson += ",";
+        sReturnJson += "\"" + "rows" + "\"";
+        sReturnJson += ":";
+        sReturnJson += dataTablePageing.getsReturnJson();
+        sReturnJson += "}";
+        return sReturnJson;
     }
 
 }

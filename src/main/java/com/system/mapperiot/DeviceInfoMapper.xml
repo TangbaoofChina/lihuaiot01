@@ -9,8 +9,12 @@
         <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
         <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
         <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
+        <result column="DEVTYPE_SERIALNUM" jdbcType="VARCHAR" property="dDevType"/>
         <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
         <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
+        <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
+        <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
     </resultMap>
     <resultMap id="BaseResultAndNodeMap" type="com.system.po.DeviceInfoAndNode">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -25,6 +29,9 @@
         <result column="NODE_NAME" jdbcType="VARCHAR" property="dNodeName"/>
         <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
         <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
+        <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
+        <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
     </resultMap>
     <resultMap id="BaseResultNodeMap" type="com.system.po.ORGTreeNode">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -38,12 +45,8 @@
         <result column="NODE_NAME" jdbcType="VARCHAR" property="text"/>
         <result column="NODE_PID" jdbcType="VARCHAR" property="pId"/>
     </resultMap>
-    <sql id="Base_Column_List">
-        DI_NAME, DI_SERIALNUM,DI_IP,DI_PORT,DI_PROTOCOL,DI_NODEID,DI_SENDDATE,DI_RECEIVEDATE
-    </sql>
     <select id="selectDeviceByORGId" parameterType="String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from IOT_DEVICEINFO
         WHERE di_nodeId = #{orgId}
         order by DI_SERIALNUM asc
@@ -85,8 +88,7 @@
         order by a.DI_SERIALNUM asc
     </select>
     <select id="selectDeviceInfoByIDs" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from IOT_DEVICEINFO
         where DI_SERIALNUM in
         <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
@@ -94,8 +96,7 @@
         </foreach>
     </select>
     <select id="selectDeviceInfoByID" parameterType="string" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from IOT_DEVICEINFO
         where DI_SERIALNUM = #{deviceId}
     </select>
@@ -135,6 +136,24 @@
             </if>
         </set>
         where DI_SERIALNUM = #{sSerialNum,jdbcType=VARCHAR}
+    </update>
+    <update id="updateDeviceInfo">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="deviceName != null">
+                DI_NAME = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFId != null and deviceEasFId !=''">
+                EAS_FID = #{deviceEasFId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFName != null and deviceEasFName !=''">
+                EAS_FNAME = #{deviceEasFName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFDisplayName != null and deviceEasFDisplayName !=''">
+                EAS_FDISPLAYNAME = #{deviceEasFDisplayName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
     </update>
     <update id="batchUpdateDeviceOrgId">
         update IOT_DEVICEINFO

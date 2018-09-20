@@ -4,6 +4,7 @@ public class DeviceType {
     private String sid;
     private String devType;
     private String devTypeDescribe;
+    private int devTypeOffline;
 
     public String getSid() {
         return sid;
@@ -27,5 +28,13 @@ public class DeviceType {
 
     public void setDevTypeDescribe(String devTypeDescribe) {
         this.devTypeDescribe = devTypeDescribe;
+    }
+
+    public int getDevTypeOffline() {
+        return devTypeOffline;
+    }
+
+    public void setDevTypeOffline(int devTypeOffline) {
+        this.devTypeOffline = devTypeOffline;
     }
 }

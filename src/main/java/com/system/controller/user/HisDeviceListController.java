@@ -3,9 +3,11 @@ package com.system.controller.user;
 import com.alibaba.fastjson.JSON;
 import com.system.po.DataTablePageing;
 import com.system.po.Device.EC01DeviceMessage;
+import com.system.po.Device.ScaleC01DeviceMessage;
 import com.system.po.MydataTableColumn;
 import com.system.po.Device.SewageC01DeviceMessage;
 import com.system.service.EC01DeviceMessageService;
+import com.system.service.ScaleC01DeviceMessageService;
 import com.system.service.SewageC01DeviceMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,9 @@ public class HisDeviceListController {
 
     @Autowired
     private SewageC01DeviceMessageService sewageC01DeviceMessageService;
+
+    @Autowired
+    private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
 
     @RequestMapping(value = "selectEC01ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -148,6 +153,67 @@ public class HisDeviceListController {
         List<MydataTableColumn> sewagec01HeadColumnList =  sewageC01DeviceMessageService.selectSewageC01DeviceHead();
 
         String jsonString = JSON.toJSONString(sewagec01HeadColumnList);
+
+        return jsonString;
+    }
+
+    /*****************************Scale***************************************/
+    @RequestMapping(value = "selectScaleC01ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectScaleC01ByDevNumAndDateAndPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId !=null) {
+            DataTablePageing dataTablePageing = scaleC01DeviceMessageService.selectScaleC01ByDeviceIdAndDateAndPaging(pageNumber,pageSize,sDeviceId,sStartDate,sEndDate);
+            jsonString = "{";
+            jsonString += "\""+"total"+"\"";
+            jsonString += ":";
+            jsonString += "\""+dataTablePageing.getTotal()+"\"";
+            jsonString += ",";
+            jsonString += "\""+"rows"+"\"";
+            jsonString += ":";
+            jsonString += dataTablePageing.getsReturnJson();
+            jsonString += "}";
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportHisScaleC01DeviceList", method = RequestMethod.GET)
+    public void exportHisScaleC01DeviceList(String sDeviceId,
+                                             String sStartDate,
+                                             String sEndDate,
+                                             HttpServletRequest request,
+                                             HttpServletResponse response) throws Exception {
+        String fileName = "hiscalec01devicelist.xlsx";
+        List<ScaleC01DeviceMessage> scaleC01DeviceMessageList = null;
+        if (sDeviceId !=null) {
+            scaleC01DeviceMessageList = scaleC01DeviceMessageService.selectScaleC01ByDevNumAndDate(sDeviceId,sStartDate,sEndDate);
+        }
+        File file = scaleC01DeviceMessageService.exportStorage(scaleC01DeviceMessageList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    @RequestMapping(value="/scalec01DeviceHead",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String scalec01DeviceHead() throws Exception{
+
+        List<MydataTableColumn> scalec01HeadColumnList =  scaleC01DeviceMessageService.selectScaleC01DeviceHead();
+
+        String jsonString = JSON.toJSONString(scalec01HeadColumnList);
 
         return jsonString;
     }

@@ -10,10 +10,8 @@ import com.system.po.EC01.EC01DayAvgTemp;
 import com.system.po.EC01.EC01DeviceDayAvgTemp;
 import com.system.po.EC01.EC01DeviceDayWater;
 import com.system.po.EChartsOptions.EChartsYAxis;
-import com.system.po.parameter.DeviceCharts01;
-import com.system.po.parameter.OneDataDetail;
-import com.system.po.parameter.ParameterCharts;
-import com.system.po.parameter.ParameterData;
+import com.system.po.parameter.*;
+import com.system.service.DeviceTypeService;
 import com.system.service.EC01DeviceMessageService;
 import com.system.util.EC01Util;
 import com.system.util.EJConvertor;
@@ -31,6 +29,8 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     @Autowired
     private DeviceInfoMapper deviceInfoMapper;
     @Autowired
+    private DeviceTypeService deviceTypeService;
+    @Autowired
     private EC01DeviceMessageMapper ec01DeviceMessageMapper;
     @Autowired
     private EJConvertor ejConvertor;
@@ -38,7 +38,8 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     @Override
     public List<EC01DeviceMessage> selectEC01ByORGId(String ORGId) throws Exception {
         List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGId(ORGId);
-        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList);
+        DeviceType deviceType  = deviceTypeService.selectDeviceTypeByTypeNum("111");
+        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList,deviceType.getDevTypeOffline());
         return ec01DeviceMessageList;
     }
 
@@ -46,14 +47,16 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     public List<EC01DeviceMessage> selectEC01ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         List<EC01DeviceMessage> ec01DeviceMessageList = ec01DeviceMessageMapper.selectEC01ByORGIdAndRoleId(ORGId, roleIds);
-        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList);
+        DeviceType deviceType  = deviceTypeService.selectDeviceTypeByTypeNum("111");
+        ec01DeviceMessageList = judgeDeviceOnlineState(ec01DeviceMessageList,deviceType.getDevTypeOffline());
         return ec01DeviceMessageList;
     }
 
     @Override
     public EC01DeviceMessage selectEC01ByDeviceId(String sDeviceId) throws Exception {
         EC01DeviceMessage ec01DeviceMessage = ec01DeviceMessageMapper.selectEC01ByDeviceId(sDeviceId);
-        judgeOneDeviceOnlineState(ec01DeviceMessage);
+        DeviceType deviceType  = deviceTypeService.selectDeviceTypeByTypeNum("111");
+        judgeOneDeviceOnlineState(ec01DeviceMessage,deviceType.getDevTypeOffline());
         return ec01DeviceMessage;
     }
 
@@ -97,7 +100,6 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
                 bigIndex = ec01DeviceMessageListAll.size();
             ec01DeviceMessageList.addAll(ec01DeviceMessageListAll.subList(smallIndex, bigIndex));
         }
-        String str = JSON.toJSON(ec01DeviceMessageList).toString();
         String sReturnJson = JSON.toJSONString(ec01DeviceMessageList);
         dataTablePageing.setTotal(ec01DeviceMessageListAll.size());
         dataTablePageing.setsReturnJson(sReturnJson);
@@ -335,7 +337,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     //************************************私有函数********************************************//
-    private DataTablePageing getDataTableAndPageing(Integer pageNumber, Integer pageSize, List<List<OneDataDetail>> dataDetailList) throws Exception {
+    public static DataTablePageing getDataTableAndPageing(Integer pageNumber, Integer pageSize, List<List<OneDataDetail>> dataDetailList) throws Exception {
         DataTablePageing dataTablePageing = new DataTablePageing();
         Integer bigIndex = 0;
         Integer smallIndex = 0;
@@ -353,21 +355,21 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         return dataTablePageing;
     }
 
-    private List<EC01DeviceMessage> judgeDeviceOnlineState(List<EC01DeviceMessage> ec01DeviceMessageList) throws Exception {
+    private List<EC01DeviceMessage> judgeDeviceOnlineState(List<EC01DeviceMessage> ec01DeviceMessageList,int offline) throws Exception {
         for (EC01DeviceMessage ec01DeviceMessage : ec01DeviceMessageList
                 ) {
-            judgeOneDeviceOnlineState(ec01DeviceMessage);
+            judgeOneDeviceOnlineState(ec01DeviceMessage,offline);
         }
         return ec01DeviceMessageList;
     }
 
-    private void judgeOneDeviceOnlineState(EC01DeviceMessage ec01DeviceMessage) throws Exception {
+    private void judgeOneDeviceOnlineState(EC01DeviceMessage ec01DeviceMessage,int offline) throws Exception {
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDate = simpleFormat.format(new Date());
         long from = simpleFormat.parse(ec01DeviceMessage.getDReceiveTime()).getTime();
         long to = simpleFormat.parse(toDate).getTime();
         int minutes = (int) ((to - from) / (1000 * 60));
-        if (minutes > 30)
+        if (minutes > offline)
             ec01DeviceMessage.setDState("离线");
         else
             ec01DeviceMessage.setDState("在线");
@@ -450,7 +452,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
         for (int i = 0; i < sTimeList.size(); i++) {
             String sTime = sTimeList.get(i);
             List<OneDataDetail> dataDetails = new ArrayList<OneDataDetail>();
-            //循环设备列表
+            //循环表头一次循环为一行数据
             for (MydataTableColumn mydataTableColumn : mydataTableColumnList
                     ) {
                 if (mydataTableColumn.getTitle().equals("发送时间")) {
@@ -466,6 +468,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
                     if (pD.getName().equals(mydataTableColumn.getTitle())) {
                         //读取跟上面的时间相同位置的值
                         oneDataDetail.setValue(pD.getData().get(i));
+                        break;
                     }
                 }
                 dataDetails.add(oneDataDetail);

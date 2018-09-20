@@ -117,7 +117,7 @@ function rolePeopleInitPeopleOld() {
                 data.value.push({
                     "userName": json[i].personName,
                     "userId": json[i].personId,
-                    "orgName": json[i].orgName,
+                    "orgName": json[i].orgName
                 });
             }
             //console.log(data);

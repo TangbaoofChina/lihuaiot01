@@ -1,6 +1,7 @@
 package com.system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.system.po.parameter.DeviceType;
 import com.system.util.RoleInfoListUtil;
 import com.system.po.*;
 import com.system.service.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class BootStrapTreeViewController {
     @Autowired
     private DeviceInfoService deviceInfoService;
     @Autowired
+    private DeviceTypeService deviceTypeService;
+    @Autowired
     private RoleDeviceOrgInfoService roleDeviceOrgInfoService;
 
     @RequestMapping(value = "selectTreeNode", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
@@ -35,19 +39,24 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGInfo();
-        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
-            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId("111");
-            bootStrapTreeNodeList.add(bootStrapTreeNode);
-        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
-            BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId("211");
-            bootStrapTreeNodeList.add(bootStrapTreeNode);
         } else {
-            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnByRoleId(userlogin.getRoleInfoList());
-            bootStrapTreeNodeList.add(bootStrapTreeNode);
+            for (DeviceType deviceType : deviceTypeList
+                    ) {
+                if (RoleInfoListUtil.checkIsControllerAdmin(userlogin.getRoleInfoList(), deviceType.getDevType())) {
+                    BootStrapTreeNode bootStrapTreeNode = bootStrapTreeNodeService.selectORGInfoByOrgId(deviceType.getDevType());
+                    bootStrapTreeNodeList.add(bootStrapTreeNode);
+                } else {
+                    List<RoleInfo> roleInfoList = RoleInfoListUtil.getRoleInfoFromRoleInfoListByDevtype(userlogin.getRoleInfoList(), deviceType.getDevType());
+                    if (roleInfoList.size() > 0) {
+                        BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnByRoleId(roleInfoList);
+                        bootStrapTreeNodeList.add(bootStrapTreeNode);
+                    }
+                }
+            }
         }
-
         String jsonString = JSON.toJSONString(bootStrapTreeNodeList);
         return jsonString;
     }
@@ -60,11 +69,26 @@ public class BootStrapTreeViewController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<BootStrapTreeNode>();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             bootStrapTreeNodeList = bootStrapTreeNodeService.selectORGAndDeviceInfo();
         } else {
-            BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(userlogin.getRoleInfoList());
-            bootStrapTreeNodeList.add(bootStrapTreeNode);
+            for (DeviceType deviceType : deviceTypeList
+                    ) {
+                if (RoleInfoListUtil.checkIsControllerAdmin(userlogin.getRoleInfoList(), deviceType.getDevType())) {
+                    RoleInfo roleInfo = RoleInfoListUtil.getRoleAdminByDevtype(userlogin.getRoleInfoList(), deviceType.getDevType());
+                    List<RoleInfo> roleInfoList = new ArrayList<>();
+                    roleInfoList.add(roleInfo);
+                    BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(roleInfoList);
+                    bootStrapTreeNodeList.add(bootStrapTreeNode);
+                } else {
+                    List<RoleInfo> roleInfoList = RoleInfoListUtil.getRoleInfoFromRoleInfoListByDevtype(userlogin.getRoleInfoList(), deviceType.getDevType());
+                    if (roleInfoList.size() > 0) {
+                        BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(roleInfoList);
+                        bootStrapTreeNodeList.add(bootStrapTreeNode);
+                    }
+                }
+            }
         }
         String jsonString = JSON.toJSONString(bootStrapTreeNodeList);
 

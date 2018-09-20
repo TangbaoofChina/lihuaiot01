@@ -2,6 +2,7 @@ var deviceOrgNowTreeNode;
 var deviceOrgTreeNodes;
 var deviceOrgTableColumns;
 var deviceOrgSelectORG;
+var deviceOrgSelectEasRoom;
 var deviceOrgSelectDevice;
 var deviceOrgTableChecked = new Array();  //全局数组
 
@@ -9,11 +10,14 @@ $(function () {
     deviceOrgInitTreeNode();
     deviceOrgInitTable();
     /*deviceOrgInitORG();*/
+    deviceOrgOneTransferInit();
     deviceOrgBatchTransferInit();
+    deviceOrgModifyInit();
     $('#deviceOrgTable').on('uncheck.bs.table check.bs.table check-all.bs.table uncheck-all.bs.table', function (e, rows) {
         var datas = $.isArray(rows) ? rows : [rows];        // 点击时获取选中的行或取消选中的行
         examine(e.type, datas);                              // 保存到全局 Array() 里
     });
+    deviceOrgEasRoomInit();
 });
 
 function examine(type, datas) {
@@ -143,7 +147,6 @@ function deviceOrgSearchTreeNode() {
             }]);
 }
 
-
 //请求服务数据时所传参数
 function deviceOrgQueryParams(params) {
     var queryParameter;
@@ -154,7 +157,7 @@ function deviceOrgQueryParams(params) {
         pageNumber: params.offset + 1,
         //每页多少条数据
         pageSize: params.limit,
-        sORGId: queryParameter,
+        sORGId: queryParameter
     };
 }
 
@@ -211,7 +214,7 @@ function deviceOrgInitTable() {
             /*alert("1");*/
             var json = eval(result); //数组
             var temp0 = {field: 'checkStatus', checkbox: true};
-            questionColumns.push(temp0)
+            questionColumns.push(temp0);
             for (var i = 0; i < json.length; i++) {
                 var temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
                 questionColumns.push(temp);
@@ -220,8 +223,9 @@ function deviceOrgInitTable() {
                 field: 'operation',
                 title: '操作',
                 formatter: function (value, row, index) {
-                    var s = '<a class = "deviceOrgChangeORG" href="#">转移/重命名</a>';
-                    return s;
+                    var s = '<a class = "deviceOrgChangeORG" href="#">转移</a>';
+                    var d = '<a class = "deviceOrgModifyInfo" href="#">修改</a>';
+                    return s + ' ' + d;
                 },
                 events: 'operateEvents'
             };
@@ -242,23 +246,24 @@ function deviceOrgInitTable() {
     });
 }
 
-function deviceOrgShowAdd() {
-
+function deviceOrgOneTransfer() {
     $('#deviceOrgaddNew-popup').show('slow');
-    deviceOrgAddNewInit();
 }
 
 function deviceOrgBatchTransfer() {
     $('#deviceOrgaddNew-popup02').show('slow');
 }
 
+function deviceOrgShowModify() {
+    $('#deviceOrgModify-popup').show('slow');
+}
+
 /**
- * 新增页面
+ * 转移设备页面
  * */
-function deviceOrgAddNewInit() {
+function deviceOrgOneTransferInit() {
     //保存按钮
     /*    $('#addNew-save').bind('click', function (e) {
-
         });*/
     //取消按钮
     $('#deviceOrgaddNew-cancel').bind('click', function (e) {
@@ -271,12 +276,11 @@ function deviceOrgAddNewInit() {
 }
 
 /**
- * 新增页面
+ * 批量转移设备页面
  * */
 function deviceOrgBatchTransferInit() {
     //保存按钮
     /*    $('#addNew-save').bind('click', function (e) {
-
         });*/
     //取消按钮
     $('#deviceOrgaddNew-cancel02').bind('click', function (e) {
@@ -288,13 +292,27 @@ function deviceOrgBatchTransferInit() {
     });
 }
 
-function deviceOrgInitORG() {
-    $("#deviceOrgOrg").bsSuggest('init', {
-        effectiveFieldsAlias: {name: "部门"},
-        searchFields: ["name"],
-        effectiveFields: ["name"],
+/**
+ * 修改设备页面
+ * */
+function deviceOrgModifyInit() {
+    //取消按钮
+    $('#deviceOrgModify-cancel').bind('click', function (e) {
+        $('#deviceOrgModify-popup').hide('slow');
+    });
+    //x按钮
+    $('#deviceOrgModify-close').bind('click', function (e) {
+        $('#deviceOrgModify-popup').hide('slow');
+    });
+}
+
+function deviceOrgEasRoomInit() {
+    $("#deviceOrgEasRoom").bsSuggest('init', {
+        effectiveFieldsAlias: {name: "舍号", position: "组织"},
+        searchFields: ["name", "position"],
+        effectiveFields: ["name", "position"],
         showHeader: true,//显示 header
-        url: "/lihuaiot01/deviceCombineOrg/selectZTreeNode",
+        url: "/lihuaiot01/deviceCombineOrg/selectEasRoom",
         idField: "id",
         keyField: "name",
         inputWarnColor: 'rgba(255,0,0,.1)', //输入框内容不是下拉列表选择时的警告色
@@ -317,8 +335,9 @@ function deviceOrgInitORG() {
             len = json.length;
             for (i = 0; i < len; i++) {
                 data.value.push({
-                    "name": json[i].name,
-                    "id": json[i].id,
+                    "name": json[i].fName,
+                    "id": json[i].fId,
+                    "position": json[i].fDisplayName
                 });
             }
             //console.log(data);
@@ -328,7 +347,7 @@ function deviceOrgInitORG() {
         //console.log('onDataRequestSuccess: ', result);
     }).on('onSetSelectValue', function (e, keyword, data) {
         //console.log('onSetSelectValue: ', keyword, data);
-        deviceOrgSelectORG = data;
+        deviceOrgSelectEasRoom = data;
     }).on('onUnsetSelectValue', function () {
         //console.log('onUnsetSelectValue');
     });
@@ -336,12 +355,17 @@ function deviceOrgInitORG() {
 
 function deviceOrgUpdateDeviceOrg() {
     var deviceId = deviceOrgSelectDevice.dSerialNum;
-    var deviceName = $('#deviceOrgName').val();
     var orgId = deviceOrgSelectORG.id;
+    if (deviceOrgSelectORG == null) {
+        showMsg("error", "未选择根节点", "请先选择根节点");
+        return;
+    }
+    var deviceIds = new Array();
+    deviceIds.push(deviceId);
     $.ajax({
         type: 'POST',
-        data: {deviceId: deviceId, deviceName: deviceName, orgId: orgId},
-        url: '/lihuaiot01/deviceCombineOrg/deviceCombineOrgUpdate',
+        data: {deviceIds: deviceIds.join(','), orgId: orgId},
+        url: '/lihuaiot01/deviceCombineOrg/deviceCombineOrgBatchUpdate',
         dataType: "text",
         success: function (result) {
             /*alert("1");*/
@@ -383,5 +407,39 @@ function deviceOrgUpdateDeviceOrg02() {
     });
 
     $('#deviceOrgaddNew-popup02').hide('slow');
+}
+
+function deviceOrgUpdateDeviceOrg03() {
+    var deviceId = deviceOrgSelectDevice.dSerialNum;
+    var deviceName = $('#deviceOrgName').val();
+    var deviceEasRoomVal = $('#deviceOrgEasRoom').val();
+    var deviceEasFId = null;
+    var deviceEasFName = null;
+    var deviceEasFDisplayName = null;
+    if (deviceEasRoomVal != "" && deviceOrgSelectEasRoom != null) {
+        deviceEasFId = deviceOrgSelectEasRoom.id;
+        deviceEasFName = deviceOrgSelectEasRoom.name;
+        deviceEasFDisplayName = deviceOrgSelectEasRoom.position;
+    }
+    var data = {
+        deviceId: deviceId,
+        deviceName: deviceName,
+        deviceEasFId: deviceEasFId,
+        deviceEasFName: deviceEasFName,
+        deviceEasFDisplayName: deviceEasFDisplayName
+    };
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/lihuaiot01/deviceCombineOrg/deviceCombineOrgUpdateDeviceInfo',
+        dataType: "text",
+        success: function (result) {
+            deviceOrgSelectDeviceByTreeId();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+    $('#deviceOrgModify-popup').hide('slow');
 }
 

@@ -39,44 +39,6 @@
     </div>
 </div>
 <%--转移设备--%>
-<!--新增页面-->
-<%--<div class="delete-popup" id="addNew-popup">
-    <div class="addNew-wrap">
-        <div class="delete-point">
-            <h3 id="addNew-title">转移设备</h3>
-            <button class="close" id="addNew-close">&times;</button>
-        </div>
-        <div class="addNew-content">
-            <form action="" method="post">
-                <div class="form-num">
-                    <label for="deviceOrgNum">序号</label>
-                    <input type="text" class="input-sm" disabled="true" name="deviceOrgNum" id="deviceOrgNum"/>
-                </div>
-                <div class="form-name">
-                    <label for="deviceOrgName">名称</label>
-                    <input type="text" class="input-sm" name="deviceOrgName" id="deviceOrgName"/>
-                </div>
-                <div class="form-org">
-                    <div class="row">
-                        <label for="deviceOrgOrg" style="margin-left: 17px;margin-top: 26px">组织</label>
-                        <div class="input-group" style="width:240px;margin-left: 50px;margin-top: -30px">
-                            <input type="text" class="form-control" id="deviceOrgOrg"
-                                   style="width:240px;margin-right:0px">
-                            <div class="input-group-btn" style="width:1px;">
-                                <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="delete-btn">
-            <button class="btn btn-danger" id="addNew-save" onclick="deviceOrgUpdateDeviceOrg()">保存</button>
-            <button class="btn btn-default" id="addNew-cancel">取消</button>
-        </div>
-    </div>
-</div>--%>
-
 <div class="delete-popup" id="deviceOrgaddNew-popup">
     <div class="addNew-wrap">
         <div class="delete-point">
@@ -85,18 +47,6 @@
         </div>
         <div class="addNew-content deviceOrgAddNew-Content">
             <%--<form action="" method="post">--%>
-            <div class="form-num" style="display:none">
-                <label for="deviceOrgNum">序号</label>
-                <input type="text" class="input-sm" disabled="true" name="deviceOrgNum" id="deviceOrgNum"/>
-            </div>
-            <div class="form-num">
-                <label for="deviceOrgNumDec">序号</label>
-                <input type="text" class="input-sm" disabled="true" name="deviceOrgNumDec" id="deviceOrgNumDec"/>
-            </div>
-            <div class="form-name">
-                <label for="deviceOrgName">名称</label>
-                <input type="text" class="input-sm" name="deviceOrgName" id="deviceOrgName"/>
-            </div>
             <div class="form-org">
                 <div class="row">
                     <label for="deviceOrgTree01" style="margin-left: 17px;margin-top: 26px">组织</label>
@@ -121,7 +71,6 @@
             <button class="close" id="deviceOrgaddNew-close02">&times;</button>
         </div>
         <div class="addNew-content">
-            <%--<form action="" method="post">--%>
             <div class="form-org">
                 <div class="row">
                     <label for="deviceOrgTree02" style="margin-left: 17px;margin-top: 26px">组织</label>
@@ -130,12 +79,56 @@
                     </div>
                 </div>
             </div>
-            <%--</form>--%>
         </div>
         <div class="delete-btn">
             <button class="btn btn-danger" id="deviceOrgaddNew-save02" onclick="deviceOrgUpdateDeviceOrg02()">保存
             </button>
             <button class="btn btn-default" id="deviceOrgaddNew-cancel02">取消</button>
+        </div>
+    </div>
+</div>
+<%--修改设备信息--%>
+<div class="delete-popup" id="deviceOrgModify-popup">
+    <div class="addNew-wrap">
+        <div class="delete-point">
+            <h3 id="deviceOrgModify-title">修改设备</h3>
+            <button class="close" id="deviceOrgModify-close">&times;</button>
+        </div>
+        <div class="addNew-content deviceOrgModify-Content">
+            <%--<form action="" method="post">--%>
+            <div class="form-num" style="display:none">
+                <label for="deviceOrgNum">序号</label>
+                <input type="text" class="input-sm" disabled="true" name="deviceOrgNum" id="deviceOrgNum"/>
+            </div>
+            <div class="form-num">
+                <label for="deviceOrgNumDec">序号</label>
+                <input type="text" class="input-sm" disabled="true" name="deviceOrgNumDec" id="deviceOrgNumDec"/>
+            </div>
+            <div class="form-name">
+                <label for="deviceOrgName">名称</label>
+                <input type="text" class="input-sm" name="deviceOrgName" id="deviceOrgName"/>
+            </div>
+            <div class="form-name form-inline">
+                <label for="deviceOrgEasRoom">舍号</label>
+                <div class="input-group">
+                    <input type="text" class="input-sm" name="deviceOrgEasRoom" id="deviceOrgEasRoom">
+                    <div class="input-group-btn" style="width:20px;">
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-name form-inline">
+                <label for="deviceOrgDeviceDisabled">停用</label>
+                <div class="col-md-4 input-group">
+                    <input type="checkbox" id="deviceOrgDeviceDisabled"
+                           style="width: 18px;height: 18px;"/>
+                </div>
+            </div>
+            <%--</form>--%>
+        </div>
+        <div class="delete-btn">
+            <button class="btn btn-danger" id="deviceOrgModify-save" onclick="deviceOrgUpdateDeviceOrg03()">保存</button>
+            <button class="btn btn-default" id="deviceOrgModify-cancel">取消</button>
         </div>
     </div>
 </div>

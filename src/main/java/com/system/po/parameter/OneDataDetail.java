@@ -2,7 +2,7 @@ package com.system.po.parameter;
 
 public class OneDataDetail {
     private String name;
-    private String value;
+    private String value="NaN";
 
     public String getName() {
         return name;

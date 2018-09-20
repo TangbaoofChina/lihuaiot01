@@ -6,6 +6,12 @@ var hisChartbeginTimeStore = '';
 var hisChartendTimeStore = '';
 var hisChartTreeNodes;
 var hisChart;
+var hisChartNowTreeNodeRoot;
+var hisChartNowTreeNode;
+var hisChartScaleC01TableColumns;
+var hisChartScaleC01search_start_date;
+var hisChartScaleC01search_end_date;
+
 // 指定图表的配置项和数据
 var hisChartoptionInit = {
     title: {
@@ -90,8 +96,7 @@ var chartYAxis = {
     max: function (value) {
         return Math.floor(value.max + 3);
     }
-}
-
+};
 
 var hisChartMultiselectset = {
     enableFiltering: true,//搜索
@@ -130,6 +135,10 @@ $(function () {
     hisChartDateRangePickerInit();
     hisChartSearchAction();
     hisChartDatePickerInit();
+
+    hisChartDateRangePickerInitScaleC01();
+    $("#hisChartScaleC01TableDiv").width(window.innerWidth * 0.6 + 'px');
+    hisChartScaleC01InitTable();
 });
 
 // 日期选择器初始化
@@ -303,7 +312,48 @@ function hisChartInitTreeNode() {
     });
 }
 
+function hisChartGetRootNode(tree, treeNode) {
+    if (treeNode.parentId === undefined) {
+        hisChartNowTreeNodeRoot = treeNode;
+        return;
+    }
+    var parentNode = tree.treeview('getNode', treeNode.parentId);
+    if (parentNode.parentId !== undefined)
+        hisChartGetRootNode(tree, parentNode);
+    else {
+        hisChartNowTreeNodeRoot = parentNode;
+    }
+}
+
 function hisChartNodeSelected(event, data) {
+    hisChartNowTreeNode = data;
+    hisChartGetRootNode($('#hisChartOrgTree'), hisChartNowTreeNode);
+    var hcEC01DivP1 = document.getElementById("hisChartEC01DivP1");
+    var hcEC01DivP2 = document.getElementById("hisChartEC01DivP2");
+    var hcSewageC01Div = document.getElementById("hisChartSewageC01Div");
+    var hcScaleC01Div = document.getElementById("hisChartScaleC01Div");
+    var rootNodeId = hisChartNowTreeNodeRoot.id;
+    if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
+    {
+        hcEC01DivP1.style.display = "block";
+        hcEC01DivP2.style.display = "block";
+        hcSewageC01Div.style.display = "none";
+        hcScaleC01Div.style.display = "none";
+    }
+    else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
+    {
+        hcEC01DivP1.style.display = "none";
+        hcEC01DivP2.style.display = "none";
+        hcSewageC01Div.style.display = "block";
+        hcScaleC01Div.style.display = "none";
+    }
+    else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+    {
+        hcEC01DivP1.style.display = "none";
+        hcEC01DivP2.style.display = "none";
+        hcSewageC01Div.style.display = "none";
+        hcScaleC01Div.style.display = "block";
+    }
     if (data.nodes != null) {
         var select_node = $('#hisChartOrgTree').treeview('getSelected');
         if (select_node[0].state.expanded) {
@@ -829,6 +879,194 @@ function hisChartRemoveDeviceToList(selectValue) {
     });
 }
 
+/***************************ScaleC01 Start*********************/
+// 日期选择器初始化
+function hisChartDateRangePickerInitScaleC01() {
+    hisChartScaleC01search_start_date = NowWeeHours(); //凌晨
+    hisChartScaleC01search_end_date = GetTodaytime(); //最晚时间
+    $('#hisChartScaleC01DateInterval').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'left',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        locale: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1, 'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+            '最近7日': [moment().subtract(6, 'days'), moment()],
+            '最近30日': [moment().subtract(29, 'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisChartScaleC01search_start_date = this.startDate.format(this.locale.format);
+        hisChartScaleC01search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisChartScaleC01InitTable() {
+    var queryParamObj = document.getElementById("hisChartScaleC01SelId_Param"); //定位选择参数
+    var queryParameter = ""; // 选中文本
+    var data = {
+        sDeviceIds: hisChartNowDeviceIds.join(','),
+        sQueryParam: queryParameter
+    };
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        async: true,   // 轻轻方式-异步
+        data: data,
+        url: '/lihuaiot01/hisChartDevice/scalec01DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisChartScaleC01TableColumns = questionColumns;
+
+            $('#hisChartScaleC01DeviceList').bootstrapTable('destroy');
+            $('#hisChartScaleC01DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function hisChartScaleC01Query() {
+    hisChartScaleC01SelectHisDataTableHead();
+}
+
+function hisChartScaleC01SelectHisDataTableHead() {
+    var queryParamObj = document.getElementById("hisChartScaleC01SelId_Param"); //定位选择参数
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter = queryParamObj.options[queryParamIndex].text; // 选中文本
+    var data = {
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sQueryParam: queryParameter
+    };
+    $.ajax({
+        url: "/lihuaiot01/hisChartDevice/scalec01DeviceHead",
+// 数据发送方式
+        type: "POST",
+// 接受数据格式
+        dataType: "json",
+        async: true,   // 轻轻方式-异步
+// 要传递的数据
+        data: data,
+        success: function (result) {
+            var questionColumns = [];
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisChartScaleC01TableColumns = questionColumns;
+            hisChartScaleC01SelectDeviceByIdsTable();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+//请求服务数据时所传参数
+function hisChartScaleC01QueryParams(params) {
+    var queryStartDate = hisChartScaleC01search_start_date;
+    var queryEndDate = hisChartScaleC01search_end_date;
+    var queryParamObj = document.getElementById("hisChartScaleC01SelId_Param"); //定位选择参数
+    var queryParamMaxThreshold = document.getElementById("hisChartScaleC01MaxThreshold").value; //最大阈值
+    var queryParamMinThreshold = document.getElementById("hisChartScaleC01MinThreshold").value; //最小阈值
+    var queryParamStartAge = document.getElementById("hisChartScaleC01StartAge").value; //起始日龄(增重日龄参数查询)
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter = queryParamObj.options[queryParamIndex].text; // 选中文本
+    return {
+        pageNumber: params.offset + 1,
+        //每页多少条数据
+        pageSize: params.limit,
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sMaxThreshold: queryParamMaxThreshold,
+        sMinThreshold: queryParamMinThreshold,
+        sStartAge: queryParamStartAge,
+        sQueryParam: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate
+    };
+}
+
+function hisChartScaleC01SelectDeviceByIdsTable() {
+    //table不能每次都初始化，所以每次需要先销毁
+    $('#hisChartScaleC01DeviceList').bootstrapTable('destroy');
+
+    $('#hisChartScaleC01DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 10,
+        //可供选择的每页的行数（*）
+        pageList: [10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/hisChartDevice/selectScaleC01ByIdsAndDateAndPaging",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: hisChartScaleC01QueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server",
+        locale: 'zh-CN',//中文支持
+        columns: hisChartScaleC01TableColumns
+    });
+}
+
+/***************************ScaleC01 end*********************/
+
 /***************************级联勾选*********************/
 function hisChartSelectDeviceIdsRemove(queryParameter) {
     var index = hisChartSelectDeviceIds.indexOf(queryParameter);
@@ -885,7 +1123,6 @@ function nodeUnchecked(event, node) {
     $("#hisChartsel_search").multiselect('refresh');
     nodeUncheckedSilent = false;
 }
-
 
 //选中全部父节点
 function checkAllParent(node) {

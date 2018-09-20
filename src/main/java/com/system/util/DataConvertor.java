@@ -1,7 +1,11 @@
 package com.system.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class DataConvertor {
@@ -76,7 +80,7 @@ public class DataConvertor {
     }
 
     public static String findMaxValue(List<String> maxValues) {
-        if(maxValues.size()<1)
+        if (maxValues.size() < 1)
             return "0";
         float max = Float.valueOf(maxValues.get(0));
         for (int i = 0; i < maxValues.size(); i++) {
@@ -89,7 +93,7 @@ public class DataConvertor {
     }
 
     public static String findMinValue(List<String> minValues) {
-        if(minValues.size()<1)
+        if (minValues.size() < 1)
             return "0";
         float min = Float.valueOf(minValues.get(0));
         for (int i = 0; i < minValues.size(); i++) {
@@ -135,4 +139,25 @@ public class DataConvertor {
         return String.valueOf(fmax);
     }
 
+    //合成浮点数小数位数
+    public static float formatFloat(float fvalue, int decimalDigit) {
+        int scale = decimalDigit;//设置位数
+        int roundingMode = 4;//表示四舍五入，可以选择其他舍值方式，例如去尾，等等.
+        BigDecimal bd = new BigDecimal((double) fvalue);
+        bd = bd.setScale(scale, roundingMode);
+        fvalue = bd.floatValue();
+        return fvalue;
+    }
+
+    public static long DateCompare(String s1, String s2) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date d1 = sdf.parse(s1);
+            Date d2 = sdf.parse(s2);
+            return (d1.getTime() - d2.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

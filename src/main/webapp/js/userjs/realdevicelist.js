@@ -2,6 +2,7 @@ var rdlNowTreeNode;
 var rdlNowTreeNodeRoot;
 var rdlTableColumns;
 var rdlSewageC01TableColumns;
+var rdlScaleC01TableColumns;
 var rdlTreeNodes;
 var realid_of_setintervalDeviceList;
 var realid_of_setintervalDeviceOne;
@@ -9,13 +10,13 @@ $(function () {
     rdlInitTreeNode();
     rdlInitTableEC01();
     rdlInitTableSewageC01();
+    rdlInitTableScaleC01();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {
         rdlTableRefresh();
     }, 3000);
     realid_of_setintervalDeviceOne = setInterval(function () {
-        //rdlSelectInfoByDeviceId();
         rdlSelectInfoByDeviceIdAndType();
     }, 3000);
 });
@@ -94,6 +95,8 @@ function rdlNodeSelected(event, data) {
     var uiEC01One = document.getElementById("rdlEC01OneDeviceDiv");
     var uiSewageC01List = document.getElementById("rdlSewageC01DeviceListDiv");
     var uiSewageC01One = document.getElementById("rdlSewageC01OneDeviceDiv");
+    var uiScaleC01List = document.getElementById("rdlScaleC01DeviceListDiv");
+    var uiScaleC01One = document.getElementById("rdlScaleC01OneDeviceDiv");
     var rootNodeId = rdlNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
@@ -102,6 +105,8 @@ function rdlNodeSelected(event, data) {
             uiEC01One.style.display = "block";
             uiSewageC01List.style.display = "none";
             uiSewageC01One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
         }
         else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
         {
@@ -109,6 +114,17 @@ function rdlNodeSelected(event, data) {
             uiEC01One.style.display = "none";
             uiSewageC01List.style.display = "none";
             uiSewageC01One.style.display = "block";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+        }
+        else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "block";
         }
     }
     else {
@@ -118,6 +134,8 @@ function rdlNodeSelected(event, data) {
             uiEC01One.style.display = "none";
             uiSewageC01List.style.display = "none";
             uiSewageC01One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
         }
         else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
         {
@@ -125,6 +143,17 @@ function rdlNodeSelected(event, data) {
             uiEC01One.style.display = "none";
             uiSewageC01List.style.display = "block";
             uiSewageC01One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+        }
+        else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiScaleC01List.style.display = "block";
+            uiScaleC01One.style.display = "none";
         }
     }
     if (data.nodes != null) {
@@ -145,6 +174,10 @@ function rdlNodeSelected(event, data) {
     else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
     {
         rdlSelectDeviceByTreeIdSewageC01();
+    }
+    else if (rootNodeId === "301" || rootNodeId === "311")  //污水控制器
+    {
+        rdlSelectDeviceByTreeIdScaleC01();
     }
     rdlSelectInfoByDeviceIdAndType();
 }
@@ -167,6 +200,7 @@ function rdlSelectInfoByDeviceIdAndType() {
     }
 }
 
+//************************EC01 start******************************/
 function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
     var wetCurtainWPOpenDiv = document.getElementById("wetCurtainWPOpen");
     if (wetCurtainWPOpenDiv === null)
@@ -284,6 +318,96 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
         }
     });
 }
+
+function rdlInitTableEC01() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/ec01DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlTableColumns = questionColumns;
+            $('#rdlEC01DeviceList').bootstrapTable('destroy');
+            $('#rdlEC01DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdEC01() {
+
+    $('#rdlEC01DeviceList').bootstrapTable('destroy');
+
+    $('#rdlEC01DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 4,
+        //可供选择的每页的行数（*）
+        pageList: [10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectEC01ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlTableColumns,
+        height: 500,               //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+
+//************************EC01 end******************************/
+
+//************************SewageC01 start******************************/
 
 function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
     $.ajax({
@@ -777,46 +901,6 @@ function rdlSelectInfoByDeviceIdAndSewageC01(queryParameter) {
     });
 }
 
-function rdlInitTableEC01() {
-    var questionColumns = [];
-    $.ajax({
-        type: 'POST',
-        data: {},
-        url: '/lihuaiot01/realDeviceList/ec01DeviceHead',
-        dataType: "json",
-        success: function (result) {
-            /*alert("1");*/
-            var json = eval(result); //数组
-            for (var i = 0; i < json.length; i++) {
-                var temp = "";
-                if (json[i].data === "dState") {
-                    temp = {
-                        field: json[i].data,
-                        title: json[i].title,
-                        align: json[i].align,
-                        formatter: rdlChangeTableColor
-                    };//手动拼接columns
-                } else {
-                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
-                }
-                questionColumns.push(temp);
-            }
-            rdlTableColumns = questionColumns;
-            $('#rdlEC01DeviceList').bootstrapTable('destroy');
-            $('#rdlEC01DeviceList').bootstrapTable({
-                columns: questionColumns
-            });
-
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            /*alert(XMLHttpRequest.status);
-            alert(XMLHttpRequest.readyState);
-            alert(textStatus);*/
-            handleAjaxError(XMLHttpRequest.status);
-        }
-    });
-}
-
 function rdlInitTableSewageC01() {
     var questionColumns = [];
     $.ajax({
@@ -853,99 +937,6 @@ function rdlInitTableSewageC01() {
             alert(textStatus);*/
             handleAjaxError(XMLHttpRequest.status);
         }
-    });
-}
-
-//请求服务数据时所传参数
-function rdlQueryParams(params) {
-    var queryParameter = rdlNowTreeNode.id;
-    return {
-        sORGId: queryParameter,
-    };
-}
-
-// 表格刷新
-function rdlTableRefresh() {
-    if (typeof(rdlNowTreeNode) == "undefined")
-        return;
-    /*    var rdlDeviceList = document.getElementById("rdlDeviceList");
-        if (rdlDeviceList === null)
-            return;*/
-    var queryParameter = rdlNowTreeNode.id;
-    if (queryParameter.length === 4) {
-        return;
-    }
-    try {
-        var rootNodeId = rdlNowTreeNodeRoot.id;
-        if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
-        {
-            $('#rdlEC01DeviceList').bootstrapTable('refresh', {
-                query: {},
-                silent: true
-            });
-        }
-        else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
-        {
-            $('#rdlSewageC01DeviceList').bootstrapTable('refresh', {
-                query: {},
-                silent: true
-            });
-        }
-    }
-    catch (err) {
-        if (realid_of_setintervalDeviceList !== undefined) {
-            clearInterval(realid_of_setintervalDeviceList);
-        }
-        var type = 'error';
-        var msg = '实时数据列表定时刷新出错';
-        var append = '对不起，实时数据列表定时刷新出错:' + err;
-        showMsg(type, msg, append);
-    }
-}
-
-function rdlSelectDeviceByTreeIdEC01() {
-
-    $('#rdlEC01DeviceList').bootstrapTable('destroy');
-
-    $('#rdlEC01DeviceList').bootstrapTable({
-        //是否显示行间隔色
-        striped: true,
-        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-        cache: false,
-        //是否显示分页（*）
-        pagination: true,
-        //是否启用排序
-        sortable: false,
-        //排序方式
-        sortOrder: "asc",
-        //每页的记录行数（*）
-        pageSize: 4,
-        //可供选择的每页的行数（*）
-        pageList: [10, 25, 50, 100],
-        //是否显示搜索
-        search: false,
-        // 显示下拉框勾选要显示的列
-        showColumns: true,
-        // 设置最少显示列个数
-        minimumCountColumns: 2,
-        //data:json,
-        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
-        url: "/lihuaiot01/realDeviceList/selectEC01ByORGId",
-        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
-        method: 'post',                      //请求方式（*）
-        dataType: "json",
-        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
-        //queryParamsType:'',
-        ////查询参数,每次调用是会带上这个参数，可自定义
-        queryParamsType: 'limit',//查询参数组织方式
-        queryParams: rdlQueryParams,
-        //分页方式：client客户端分页，server服务端分页（*）
-        sidePagination: "client",
-        locale: 'zh-CN',//中文支持
-        columns: rdlTableColumns,
-        height: 500,               //设置表格高度-固定表头生效
-        fixedColumns: true,
-        fixedNumber: 1 //固定列数
     });
 }
 
@@ -995,6 +986,149 @@ function rdlSelectDeviceByTreeIdSewageC01() {
     });
 }
 
+//************************SewageC01 end******************************/
+
+//************************ScaleC01 start******************************/
+function rdlInitTableScaleC01() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/scalec01DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlScaleC01TableColumns = questionColumns;
+            $('#rdlScaleC01DeviceList').bootstrapTable('destroy');
+            $('#rdlScaleC01DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdScaleC01() {
+
+    $('#rdlScaleC01DeviceList').bootstrapTable('destroy');
+
+    $('#rdlScaleC01DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 4,
+        //可供选择的每页的行数（*）
+        pageList: [10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectScaleC01ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlScaleC01TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+//************************ScaleC01 end******************************/
+
+//请求服务数据时所传参数
+function rdlQueryParams(params) {
+    var queryParameter = rdlNowTreeNode.id;
+    return {
+        sORGId: queryParameter,
+    };
+}
+
+// 表格刷新
+function rdlTableRefresh() {
+    if (typeof(rdlNowTreeNode) == "undefined")
+        return;
+    /*    var rdlDeviceList = document.getElementById("rdlDeviceList");
+        if (rdlDeviceList === null)
+            return;*/
+    var queryParameter = rdlNowTreeNode.id;
+    if (queryParameter.length === 4) {
+        return;
+    }
+    try {
+        var rootNodeId = rdlNowTreeNodeRoot.id;
+        if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
+        {
+            $('#rdlEC01DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        }
+        else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
+        {
+            $('#rdlSewageC01DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        }
+        else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+        {
+            $('#rdlScaleC01DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        }
+    }
+    catch (err) {
+        if (realid_of_setintervalDeviceList !== undefined) {
+            clearInterval(realid_of_setintervalDeviceList);
+        }
+        var type = 'error';
+        var msg = '实时数据列表定时刷新出错';
+        var append = '对不起，实时数据列表定时刷新出错:' + err;
+        showMsg(type, msg, append);
+    }
+}
+
 function rdlChangeTableColor(value, row, index) {
     //通过判断单元格的值，来格式化单元格，返回的值即为格式化后包含的元素
     var a = "";
@@ -1020,6 +1154,10 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlScaleC01Export_storage').click(function () {
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlExport_storage_download').click(function () {
         var queryParameter = rdlNowTreeNode.id;
         var data = {
@@ -1034,6 +1172,10 @@ function rdlExportStorageAction() {
         else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC01DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+        {
+            url = "/lihuaiot01/realDeviceList/exportScaleC01DeviceList?" + $.param(data);
         }
         window.open(url, '_blank');
         $('#rdlExport_modal').modal("hide");

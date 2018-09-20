@@ -26,7 +26,33 @@ public interface DeviceInfoService {
      */
     List<DeviceInfo> selectDeviceInfoByRoleId(String roleId) throws Exception;
 
+    /**
+     * 更新设备信息，设备名称，组织ID
+     * @param sSerialNum
+     * @param deviceName
+     * @param sOrgId
+     * @return
+     * @throws Exception
+     */
     int updateDeviceOrgId(String sSerialNum,String deviceName,String sOrgId) throws Exception;
+
+    /**
+     * 更新 设备名称，设备所在鸡舍ID，设备所在鸡舍名称，设备所在鸡舍组织路径
+     * @param deviceId
+     * @param deviceName
+     * @param deviceEasFId
+     * @param deviceEasFName
+     * @param deviceEasFDisplayName
+     * @throws Exception
+     */
+    void updateDeviceInfo(String deviceId, String deviceName, String deviceEasFId,String deviceEasFName,String deviceEasFDisplayName) throws Exception;
+
+    /**
+     * 批量更新设备组织
+     * @param deviceIds
+     * @param sOrgId
+     * @throws Exception
+     */
     void batchUpdateDeviceOrgId(String[] deviceIds,String sOrgId) throws Exception;
     /**
      * 导出记录

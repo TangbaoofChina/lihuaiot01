@@ -69,7 +69,7 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             bootStrapTreeNode.setText(roleDeviceOrgInfo.getDeviceRoleInfo().getDevName());
             bootStrapTreeNode.setpId(roleDeviceOrgInfo.getBootStrapTreeNode().getId());
             //去掉数据库查询过程中重复的设备
-            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList,bootStrapTreeNode)) {
+            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList, bootStrapTreeNode)) {
                 bootStrapTreeNodeList.add(bootStrapTreeNode);
             }
             //去掉重复的节点
@@ -98,15 +98,25 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
         return mBootStrapTreeNode;
     }
 
-    private List<BootStrapTreeNode> selectBootStrapTreeNodeByLPid(List<BootStrapTreeNode> bootStrapTreeNodeList)
-    {
+    private List<BootStrapTreeNode> selectBootStrapTreeNodeByLPid(List<BootStrapTreeNode> bootStrapTreeNodeList) {
         List<BootStrapTreeNode> bootStrapTreeNodeList01 = new ArrayList<BootStrapTreeNode>();
         for (BootStrapTreeNode bootStrapTreeNode : bootStrapTreeNodeList
                 ) {  //找出所有的ID和PID
-            if (bootStrapTreeNode.getlPid() == null || bootStrapTreeNode.getlPid().equals(""))
-                bootStrapTreeNodeList01.add(bootStrapTreeNode);
-            else
-                bootStrapTreeNodeList01.addAll(releaseOneLongNodeId(bootStrapTreeNode.getlPid()));
+            if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList01, bootStrapTreeNode)) {
+                //再次去掉重复的
+                if (bootStrapTreeNode.getlPid() == null || bootStrapTreeNode.getlPid().equals(""))
+                    bootStrapTreeNodeList01.add(bootStrapTreeNode);
+                else {
+                    List<BootStrapTreeNode> bootStrapTreeNodeList02 = releaseOneLongNodeId(bootStrapTreeNode.getlPid());
+                    for (BootStrapTreeNode bSTN01 : bootStrapTreeNodeList02
+                            ) {
+                        //生成的节点list，也需要去掉重复的
+                        if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList01, bSTN01)) {
+                            bootStrapTreeNodeList01.add(bSTN01);
+                        }
+                    }
+                }
+            }
         }
         return bootStrapTreeNodeList01;
     }

@@ -6,13 +6,16 @@ public class DeviceInfo {
     private String dSerialNum;
     private String dSerialNumDec;
     private String dName = "";
-    private String dIp="";
-    private String dPort="";
-    private String dDevType="";
+    private String dIp = "";
+    private String dPort = "";
+    private String dDevType = "";
     private String dProtocol = "";
     private String dSendTime = "";
     private String dReceiveTime = "";
     private String dState = "";
+    private String dEasFId = "";
+    private String dEasFName = "";
+    private String dEasFDisplayName = "";
 
     public String getDSerialNum() {
         return dSerialNum;
@@ -23,7 +26,7 @@ public class DeviceInfo {
     }
 
     public String getDSerialNumDec() {
-        return DataConvertor.ConvertHexToDec(dSerialNumDec,5);
+        return DataConvertor.ConvertHexToDec(dSerialNumDec, 5);
     }
 
     public void setDSerialNumDec(String dSerialNumDec) {
@@ -92,5 +95,29 @@ public class DeviceInfo {
 
     public void setDDevType(String dDevType) {
         this.dDevType = dDevType;
+    }
+
+    public String getDEasFId() {
+        return dEasFId;
+    }
+
+    public void setDEasFId(String dEasFId) {
+        this.dEasFId = dEasFId;
+    }
+
+    public String getDEasFName() {
+        return dEasFName;
+    }
+
+    public void setDEasFName(String dEasFName) {
+        this.dEasFName = dEasFName;
+    }
+
+    public String getDEasFDisplayName() {
+        return dEasFDisplayName;
+    }
+
+    public void setDEasFDisplayName(String dEasFDisplayName) {
+        this.dEasFDisplayName = dEasFDisplayName;
     }
 }

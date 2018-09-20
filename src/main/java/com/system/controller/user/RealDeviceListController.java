@@ -3,8 +3,10 @@ package com.system.controller.user;
 import com.alibaba.fastjson.JSON;
 import com.system.po.*;
 import com.system.po.Device.EC01DeviceMessage;
+import com.system.po.Device.ScaleC01DeviceMessage;
 import com.system.po.Device.SewageC01DeviceMessage;
 import com.system.service.EC01DeviceMessageService;
+import com.system.service.ScaleC01DeviceMessageService;
 import com.system.service.SewageC01DeviceMessageService;
 import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
@@ -32,8 +34,10 @@ public class RealDeviceListController {
     private EC01DeviceMessageService ec01DeviceMessageService;
     @Autowired
     private SewageC01DeviceMessageService sewageC01DeviceMessageService;
+    @Autowired
+    private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
 
-    /*************************Environment*********************************************/
+    /*************************Environment 种禽环控*********************************************/
     @RequestMapping(value = "selectEC01ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectEC01ByORGId(String sORGId) throws Exception {
@@ -102,13 +106,13 @@ public class RealDeviceListController {
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByORGId(sORGId);
-        }  else {
+        } else {
             ec01DeviceMessageList = ec01DeviceMessageService.selectEC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
         }
         return ec01DeviceMessageList;
     }
 
-    /*************************Sewage*********************************************/
+    /*************************Sewage 污水处理*********************************************/
 
     @RequestMapping(value = "selectSewageC01ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -183,4 +187,82 @@ public class RealDeviceListController {
         }
         return sewageC01DeviceMessageList;
     }
+
+    /*************************Scale 自动称重*********************************************/
+
+
+    @RequestMapping(value = "selectScaleC01ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectScaleC01ByORGId(String sORGId) throws Exception {
+        String jsonString = "[]";
+        if (sORGId != null) {
+            List<ScaleC01DeviceMessage> scaleC01DeviceMessageList = selectScaleC01DeviceMessageList(sORGId);
+            if (scaleC01DeviceMessageList.size() > 0)
+                jsonString = JSON.toJSONString(scaleC01DeviceMessageList);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "selectScaleC01ByDeviceId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectScaleC01ByDeviceId(String sDeviceId) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId != null) {
+            ScaleC01DeviceMessage scaleC01DeviceMessage = scaleC01DeviceMessageService.selectScaleC01ByDeviceId(sDeviceId);
+            if (scaleC01DeviceMessage != null)
+                jsonString = JSON.toJSONString(scaleC01DeviceMessage);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportScaleC01DeviceList", method = RequestMethod.GET)
+    public void exportScaleC01DeviceList(String sORGId,
+                                         HttpServletRequest request,
+                                         HttpServletResponse response) throws Exception {
+        String fileName = "realscale01devicelist.xlsx";
+        List<ScaleC01DeviceMessage> scaleC01DeviceMessageList = null;
+        if (sORGId != null) {
+            scaleC01DeviceMessageList = selectScaleC01DeviceMessageList(sORGId);
+        }
+        File file = scaleC01DeviceMessageService.exportStorage(scaleC01DeviceMessageList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    @RequestMapping(value = "/scalec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String scalec01DeviceHead() throws Exception {
+        List<MydataTableColumn> scalec01HeadColumnList = scaleC01DeviceMessageService.selectScaleC01DeviceHead();
+        String jsonString = JSON.toJSONString(scalec01HeadColumnList);
+        return jsonString;
+    }
+
+    private List<ScaleC01DeviceMessage> selectScaleC01DeviceMessageList(String sORGId) throws Exception {
+        List<ScaleC01DeviceMessage> scaleC01DeviceMessageList = new ArrayList<ScaleC01DeviceMessage>();
+        //获取用户角色
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            scaleC01DeviceMessageList = scaleC01DeviceMessageService.selectScaleC01ByORGId(sORGId);
+        } else {
+            scaleC01DeviceMessageList = scaleC01DeviceMessageService.selectScaleC01ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+        }
+        return scaleC01DeviceMessageList;
+    }
+
 }

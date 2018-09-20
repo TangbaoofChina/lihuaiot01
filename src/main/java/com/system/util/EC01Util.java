@@ -55,7 +55,7 @@ public class EC01Util {
         for (int i = 1; i < newDeviceDateList.size(); i++) {
             tmp = newDeviceDateList.get(i);
             int j = i - 1;
-            for (; j >= 0 && (DateCompare(tmp, newDeviceDateList.get(j)) < 0); j--) {
+            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDeviceDateList.get(j)) < 0); j--) {
                 newDeviceDateList.set(j + 1, newDeviceDateList.get(j));
             }
             newDeviceDateList.set(j + 1, tmp);
@@ -74,7 +74,7 @@ public class EC01Util {
         for (int i = 1; i < newDateTimeList.size(); i++) {
             tmp = newDateTimeList.get(i);
             int j = i - 1;
-            for (; j >= 0 && (DateCompare(tmp, newDateTimeList.get(j)) < 0); j--) {
+            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDateTimeList.get(j)) < 0); j--) {
                 newDateTimeList.set(j + 1, newDateTimeList.get(j));
             }
             newDateTimeList.set(j + 1, tmp);
@@ -123,18 +123,6 @@ public class EC01Util {
     public static long TimeCompare(String s1, String s2) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            Date d1 = sdf.parse(s1);
-            Date d2 = sdf.parse(s2);
-            return (d1.getTime() - d2.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    public static long DateCompare(String s1, String s2) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date d1 = sdf.parse(s1);
             Date d2 = sdf.parse(s2);
             return (d1.getTime() - d2.getTime());

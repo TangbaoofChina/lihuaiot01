@@ -11,9 +11,7 @@ import java.util.List;
 
 public class DeviceUtil {
 
-    public static final int dOffline111 = 45;
-    public static final int dOffline211 = 15;
-
+    public static final int defaultOffline = 30; //默认设备离线时间
 
     public static List<DeviceInfoAndNode> judgeDeviceOnlineState(List<DeviceInfoAndNode> deviceInfoAndNodeList, int offlineMinute) throws Exception {
         for (DeviceInfoAndNode deviceInfoAndNode : deviceInfoAndNodeList

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.ScaleC01DeviceMessageMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.ScaleC01DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="SCALEC01_ASSISTSERIALNUM" jdbcType="VARCHAR" property="assistSerialNum"/>
+        <result column="SCALEC01_SYSTEMVOLTAGE" jdbcType="FLOAT" property="systemVoltage"/>
+        <result column="SCALEC01_TEMP" jdbcType="FLOAT" property="temp"/>
+        <result column="SCALEC01_STARTNUM" jdbcType="INTEGER" property="startNum"/>
+        <result column="SCALEC01_NUMDATA" jdbcType="INTEGER" property="numData"/>
+        <result column="SCALEC01_WEIGHT01" jdbcType="INTEGER" property="weight01"/>
+        <result column="SCALEC01_WEIGHT02" jdbcType="INTEGER" property="weight02"/>
+        <result column="SCALEC01_WEIGHT03" jdbcType="INTEGER" property="weight03"/>
+        <result column="SCALEC01_WEIGHT04" jdbcType="INTEGER" property="weight04"/>
+        <result column="SCALEC01_WEIGHT05" jdbcType="INTEGER" property="weight05"/>
+        <result column="SCALEC01_WEIGHT06" jdbcType="INTEGER" property="weight06"/>
+        <result column="SCALEC01_WEIGHT07" jdbcType="INTEGER" property="weight07"/>
+        <result column="SCALEC01_WEIGHT08" jdbcType="INTEGER" property="weight08"/>
+        <result column="SCALEC01_WEIGHT09" jdbcType="INTEGER" property="weight09"/>
+        <result column="SCALEC01_WEIGHT10" jdbcType="INTEGER" property="weight10"/>
+        <result column="SCALEC01_WEIGHT11" jdbcType="INTEGER" property="weight11"/>
+        <result column="SCALEC01_WEIGHT12" jdbcType="INTEGER" property="weight12"/>
+        <result column="SCALEC01_WEIGHT13" jdbcType="INTEGER" property="weight13"/>
+        <result column="SCALEC01_WEIGHT14" jdbcType="INTEGER" property="weight14"/>
+        <result column="SCALEC01_WEIGHT15" jdbcType="INTEGER" property="weight15"/>
+        <result column="SCALEC01_WEIGHT16" jdbcType="INTEGER" property="weight16"/>
+        <result column="SCALEC01_WEIGHT17" jdbcType="INTEGER" property="weight17"/>
+        <result column="SCALEC01_WEIGHT18" jdbcType="INTEGER" property="weight18"/>
+        <result column="SCALEC01_WEIGHT19" jdbcType="INTEGER" property="weight19"/>
+        <result column="SCALEC01_WEIGHT20" jdbcType="INTEGER" property="weight20"/>
+        <result column="SCALEC01_SPARECODE" jdbcType="INTEGER" property="spareCode01"/>
+        <result column="SCALEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.ScaleC01DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="HSCALEC01_ASSISTSERIALNUM" jdbcType="VARCHAR" property="assistSerialNum"/>
+        <result column="HSCALEC01_SYSTEMVOLTAGE" jdbcType="FLOAT" property="systemVoltage"/>
+        <result column="HSCALEC01_TEMP" jdbcType="FLOAT" property="temp"/>
+        <result column="HSCALEC01_STARTNUM" jdbcType="INTEGER" property="startNum"/>
+        <result column="HSCALEC01_NUMDATA" jdbcType="INTEGER" property="numData"/>
+        <result column="HSCALEC01_WEIGHT01" jdbcType="INTEGER" property="weight01"/>
+        <result column="HSCALEC01_WEIGHT02" jdbcType="INTEGER" property="weight02"/>
+        <result column="HSCALEC01_WEIGHT03" jdbcType="INTEGER" property="weight03"/>
+        <result column="HSCALEC01_WEIGHT04" jdbcType="INTEGER" property="weight04"/>
+        <result column="HSCALEC01_WEIGHT05" jdbcType="INTEGER" property="weight05"/>
+        <result column="HSCALEC01_WEIGHT06" jdbcType="INTEGER" property="weight06"/>
+        <result column="HSCALEC01_WEIGHT07" jdbcType="INTEGER" property="weight07"/>
+        <result column="HSCALEC01_WEIGHT08" jdbcType="INTEGER" property="weight08"/>
+        <result column="HSCALEC01_WEIGHT09" jdbcType="INTEGER" property="weight09"/>
+        <result column="HSCALEC01_WEIGHT10" jdbcType="INTEGER" property="weight10"/>
+        <result column="HSCALEC01_WEIGHT11" jdbcType="INTEGER" property="weight11"/>
+        <result column="HSCALEC01_WEIGHT12" jdbcType="INTEGER" property="weight12"/>
+        <result column="HSCALEC01_WEIGHT13" jdbcType="INTEGER" property="weight13"/>
+        <result column="HSCALEC01_WEIGHT14" jdbcType="INTEGER" property="weight14"/>
+        <result column="HSCALEC01_WEIGHT15" jdbcType="INTEGER" property="weight15"/>
+        <result column="HSCALEC01_WEIGHT16" jdbcType="INTEGER" property="weight16"/>
+        <result column="HSCALEC01_WEIGHT17" jdbcType="INTEGER" property="weight17"/>
+        <result column="HSCALEC01_WEIGHT18" jdbcType="INTEGER" property="weight18"/>
+        <result column="HSCALEC01_WEIGHT19" jdbcType="INTEGER" property="weight19"/>
+        <result column="HSCALEC01_WEIGHT20" jdbcType="INTEGER" property="weight20"/>
+        <result column="HSCALEC01_SPARECODE" jdbcType="INTEGER" property="spareCode01"/>
+        <result column="HSCALEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+
+    <select id="selectScaleC01ByORGId" parameterType="string" resultMap="BaseResultMap">
+        select u.di_name,u.di_serialnum,t.*
+        from IOT_SCALECON_01 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_nodeid = #{ORGId}
+        order by u.di_serialnum asc
+    </select>
+
+    <select id="selectScaleC01ByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT u.di_name,u.di_serialnum,t.*
+        from IOT_SCALECON_01 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+
+    <select id="selectScaleC01ByDeviceId" parameterType="string" resultMap="BaseResultMap">
+        select u.di_name,u.di_serialnum,t.*
+        from IOT_SCALECON_01 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+
+    <select id="selectScaleC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        a.di_name,a.di_serialnum,b.*
+        from IOT_DEVICEINFO a,IOT_HISSCALECON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.HSCALEC01_DATARECEIVEDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.HSCALEC01_DATARECEIVEDATE ASC
+    </select>
+
+    <select id="selectScaleC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
+        select
+        a.di_name,a.di_serialnum,b.*
+        from IOT_DEVICEINFO a,IOT_HISSCALECON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND b.HSCALEC01_DATARECEIVEDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.HSCALEC01_DATARECEIVEDATE ASC
+    </select>
+</mapper>
