@@ -1,8 +1,8 @@
 package com.system.po.EChartsOptions.EChartsParts;
 
 public class ECxAxisAxisLabel {
-    private String interval;
-    private String rotate;
+    private String interval; //坐标轴刻度标签的显示间隔
+    private String rotate; //刻度标签旋转的角度
 
     public String getInterval() {
         return interval;

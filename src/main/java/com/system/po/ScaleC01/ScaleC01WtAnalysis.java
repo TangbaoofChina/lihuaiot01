@@ -2,6 +2,7 @@ package com.system.po.ScaleC01;
 
 import com.mysql.jdbc.StringUtils;
 import com.system.po.Device.ScaleC01DeviceMessage;
+import com.system.po.parameter.OneDataDetail;
 import com.system.util.ScaleC01Util;
 
 import java.util.ArrayList;
@@ -90,5 +91,55 @@ public class ScaleC01WtAnalysis {
         this.setCount(iDataList.size());
         this.setAvgWt(ScaleC01Util.getScaleC01AvgWt(iDataList));
         this.setUniformity(ScaleC01Util.getScaleC01Uniformity(this.getAvgWt(), iDataList));
+    }
+
+    public List<OneDataDetail> getWtList() {
+        OneDataDetail oneDataDetail01 = new OneDataDetail();
+        oneDataDetail01.setName("count");
+        oneDataDetail01.setValue(String.valueOf(getCount()));
+
+        OneDataDetail oneDataDetail02 = new OneDataDetail();
+        oneDataDetail02.setName("avgWt");
+        oneDataDetail02.setValue(String.valueOf(getAvgWt()));
+
+        OneDataDetail oneDataDetail03 = new OneDataDetail();
+        oneDataDetail03.setName("uniformity");
+        oneDataDetail03.setValue(String.valueOf(getUniformity()));
+
+        OneDataDetail oneDataDetail04 = new OneDataDetail();
+        oneDataDetail04.setName("sDate");
+        oneDataDetail04.setValue(String.valueOf(getsDate()));
+
+        List<OneDataDetail> oneDataDetailList = new ArrayList<>();
+        oneDataDetailList.add(oneDataDetail01);
+        oneDataDetailList.add(oneDataDetail02);
+        oneDataDetailList.add(oneDataDetail03);
+        oneDataDetailList.add(oneDataDetail04);
+        return oneDataDetailList;
+    }
+
+    public List<OneDataDetail> getGainWtList() {
+        OneDataDetail oneDataDetail01 = new OneDataDetail();
+        oneDataDetail01.setName("avgWt");
+        oneDataDetail01.setValue(String.valueOf(getAvgWt()));
+
+        OneDataDetail oneDataDetail02 = new OneDataDetail();
+        oneDataDetail02.setName("gainWt");
+        oneDataDetail02.setValue(String.valueOf(getGainWt()));
+
+        OneDataDetail oneDataDetail03 = new OneDataDetail();
+        oneDataDetail03.setName("dayAge");
+        oneDataDetail03.setValue(String.valueOf(getDayAge()));
+
+        OneDataDetail oneDataDetail04 = new OneDataDetail();
+        oneDataDetail04.setName("sDate");
+        oneDataDetail04.setValue(String.valueOf(getsDate()));
+
+        List<OneDataDetail> oneDataDetailList = new ArrayList<>();
+        oneDataDetailList.add(oneDataDetail01);
+        oneDataDetailList.add(oneDataDetail02);
+        oneDataDetailList.add(oneDataDetail03);
+        oneDataDetailList.add(oneDataDetail04);
+        return oneDataDetailList;
     }
 }

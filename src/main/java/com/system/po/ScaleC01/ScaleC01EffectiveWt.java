@@ -1,5 +1,8 @@
 package com.system.po.ScaleC01;
 
+import com.system.po.parameter.OneDataDetail;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScaleC01EffectiveWt {
@@ -145,6 +148,65 @@ public class ScaleC01EffectiveWt {
             this.setWeight08(scaleC01WtList.get(7));
             this.setWeight09(scaleC01WtList.get(8));
         }
+    }
+
+    public List<OneDataDetail> getDdl(){
+        List<OneDataDetail> dataDetails = new ArrayList<>();
+        OneDataDetail oneDdWt01 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt01.setName("weight01");
+        //填入某一行第一列值
+        oneDdWt01.setValue(String.valueOf(getWeight01()));
+        OneDataDetail oneDdWt02 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt02.setName("weight02");
+        //填入某一行第一列值
+        oneDdWt02.setValue(String.valueOf(getWeight02()));
+        OneDataDetail oneDdWt03 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt03.setName("weight03");
+        //填入某一行第一列值
+        oneDdWt03.setValue(String.valueOf(getWeight03()));
+        OneDataDetail oneDdWt04 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt04.setName("weight04");
+        //填入某一行第一列值
+        oneDdWt04.setValue(String.valueOf(getWeight04()));
+        OneDataDetail oneDdWt05 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt05.setName("weight05");
+        //填入某一行第一列值
+        oneDdWt05.setValue(String.valueOf(getWeight05()));
+        OneDataDetail oneDdWt06 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt06.setName("weight06");
+        //填入某一行第一列值
+        oneDdWt06.setValue(String.valueOf(getWeight06()));
+        OneDataDetail oneDdWt07 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt07.setName("weight07");
+        //填入某一行第一列值
+        oneDdWt07.setValue(String.valueOf(getWeight07()));
+        OneDataDetail oneDdWt08 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt08.setName("weight08");
+        //填入某一行第一列值
+        oneDdWt08.setValue(String.valueOf(getWeight08()));
+        OneDataDetail oneDdWt09 = new OneDataDetail();
+        //填入某一行第一列重量--填入列头信息
+        oneDdWt09.setName("weight09");
+        //填入某一行第一列值
+        oneDdWt09.setValue(String.valueOf(getWeight09()));
+        dataDetails.add(oneDdWt01);
+        dataDetails.add(oneDdWt02);
+        dataDetails.add(oneDdWt03);
+        dataDetails.add(oneDdWt04);
+        dataDetails.add(oneDdWt05);
+        dataDetails.add(oneDdWt06);
+        dataDetails.add(oneDdWt07);
+        dataDetails.add(oneDdWt08);
+        dataDetails.add(oneDdWt09);
+        return dataDetails;
     }
 
 }

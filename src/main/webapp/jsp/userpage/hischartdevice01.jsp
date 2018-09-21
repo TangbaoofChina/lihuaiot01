@@ -87,7 +87,7 @@
         <div class="columns-right" id="hisChartSewageC01Div" style="display: none;white-space: nowrap;">
 
         </div>
-        <div class="columns-right" id="hisChartScaleC01Div" style="display: none;white-space: nowrap;">
+        <div class="columns-right" id="hisChartScaleC01DivP1" style="display: none;white-space: nowrap;">
             <div class="form-inline">
                 <div class="input-group" style="margin-left: 15px;">
                     <label>参数：</label>
@@ -96,8 +96,8 @@
                             class="input-sm">
                         <option value="0" selected="selected">称重分析</option>
                         <option value="1">有效体重</option>
-                        <option value="2">增重日龄</option>
-                        <option value="3">平均体重</option>
+                        <option value="2">平均体重</option>
+                        <option value="3">增重日龄</option>
                     </select>
                 </div>
                 <label>时间：</label>
@@ -126,6 +126,9 @@
                            onkeyup="value=value.replace(/[^\d]/g,'')"/>
                 </div>
             </div>
+        </div>
+        <div class="col-md-8 col-sm-7" id="hisChartScaleC01DivP2" style="height:100%;display: none;">
+            <div id="echartsScaleC01main" style="margin-top: 15px;"></div>
             <div id="hisChartScaleC01toolbar" style="margin-left: 15px;">
                 <button class="btn btn-default" id="hisChartScaleC01Export_storage">
                     <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
@@ -140,7 +143,6 @@
                 </table>
             </div>
         </div>
-
         <div class="col-md-8 col-sm-7" id="hisChartEC01DivP2" style="height:100%;display: block;">
             <div id="echartsmain" style="margin-top: 15px;"></div>
             <div id="hisCharttoolbar">
@@ -189,6 +191,41 @@
                     <span>取消</span>
                 </button>
                 <button class="btn btn-success" type="button" id="hisChartExport_storage_download">
+                    <span>确认下载</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exportScaleC01_modal" table-index="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myScaleC01ModalLabel">导出信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3" style="text-align: center;">
+                        <img src="/lihuaiot01/images/icons/warning-icon.png" alt=""
+                             style="width: 70px; height: 70px; margin-top: 20px;">
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <h3>是否确认导出信息</h3>
+                        <p>(注意：请确定要导出的信息，导出的内容为当前列表的搜索结果)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">
+                    <span>取消</span>
+                </button>
+                <button class="btn btn-success" type="button" id="hisChartScaleC01Export_storage_download">
                     <span>确认下载</span>
                 </button>
             </div>

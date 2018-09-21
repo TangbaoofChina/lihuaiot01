@@ -5,6 +5,8 @@ import com.system.po.MydataTableColumn;
 import com.system.po.PeopleRoleInfo;
 import com.system.po.RoleInfo;
 import com.system.po.Userlogin;
+import com.system.po.parameter.DeviceType;
+import com.system.service.DeviceTypeService;
 import com.system.service.PeopleRoleInfoService;
 import com.system.service.RoleInfoService;
 import com.system.util.RoleInfoListUtil;
@@ -28,6 +30,8 @@ public class RoleCombinePeopleController {
     private PeopleRoleInfoService peopleRoleInfoService;
     @Autowired
     private RoleInfoService roleInfoService;
+    @Autowired
+    private DeviceTypeService deviceTypeService;
 
     @RequestMapping(value = "selectRolePeopleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -36,12 +40,17 @@ public class RoleCombinePeopleController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<PeopleRoleInfo> peopleRoleInfoList = new ArrayList<PeopleRoleInfo>();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfo();
-        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
-            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByRoleAdmin("111");
-        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
-            peopleRoleInfoList = peopleRoleInfoService.selectPeopleRoleInfoByRoleAdmin("211");
+        } else {
+            for (DeviceType deviceType : deviceTypeList
+                    ) {
+                if (RoleInfoListUtil.checkIsControllerAdmin(userlogin.getRoleInfoList(), deviceType.getDevType())) {
+                    List<PeopleRoleInfo> peopleRoleInfoListOne = peopleRoleInfoService.selectPeopleRoleInfoByRoleAdmin(deviceType.getDevType());
+                    peopleRoleInfoList.addAll(peopleRoleInfoListOne);
+                }
+            }
         }
         String jsonString = JSON.toJSONString(peopleRoleInfoList);
         return jsonString;
@@ -54,12 +63,17 @@ public class RoleCombinePeopleController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<RoleInfo> roleInfoList = new ArrayList<RoleInfo>();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             roleInfoList = roleInfoService.selectRoleInfo();
-        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
-            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("111");
-        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
-            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("211");
+        } else {
+            for (DeviceType deviceType : deviceTypeList
+                    ) {
+                if (RoleInfoListUtil.checkIsControllerAdmin(userlogin.getRoleInfoList(), deviceType.getDevType())) {
+                    List<RoleInfo> roleInfoListOne = roleInfoService.selectRoleInfoByRoldAdmin(deviceType.getDevType());
+                    roleInfoList.addAll(roleInfoListOne);
+                }
+            }
         }
         String jsonString = JSON.toJSONString(roleInfoList);
         return jsonString;

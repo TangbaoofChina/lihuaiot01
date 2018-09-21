@@ -6,6 +6,7 @@ var hisChartbeginTimeStore = '';
 var hisChartendTimeStore = '';
 var hisChartTreeNodes;
 var hisChart;
+var hisChartScaleC01;
 var hisChartNowTreeNodeRoot;
 var hisChartNowTreeNode;
 var hisChartScaleC01TableColumns;
@@ -136,6 +137,7 @@ $(function () {
     hisChartSearchAction();
     hisChartDatePickerInit();
 
+    hisChartScaleC01InitChart(hisChartoptionInit);
     hisChartDateRangePickerInitScaleC01();
     $("#hisChartScaleC01TableDiv").width(window.innerWidth * 0.6 + 'px');
     hisChartScaleC01InitTable();
@@ -331,28 +333,32 @@ function hisChartNodeSelected(event, data) {
     var hcEC01DivP1 = document.getElementById("hisChartEC01DivP1");
     var hcEC01DivP2 = document.getElementById("hisChartEC01DivP2");
     var hcSewageC01Div = document.getElementById("hisChartSewageC01Div");
-    var hcScaleC01Div = document.getElementById("hisChartScaleC01Div");
+    var hcScaleC01DivP1 = document.getElementById("hisChartScaleC01DivP1");
+    var hcScaleC01DivP2 = document.getElementById("hisChartScaleC01DivP2");
     var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
     {
         hcEC01DivP1.style.display = "block";
         hcEC01DivP2.style.display = "block";
         hcSewageC01Div.style.display = "none";
-        hcScaleC01Div.style.display = "none";
+        hcScaleC01DivP1.style.display = "none";
+        hcScaleC01DivP2.style.display = "none";
     }
     else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
     {
         hcEC01DivP1.style.display = "none";
         hcEC01DivP2.style.display = "none";
         hcSewageC01Div.style.display = "block";
-        hcScaleC01Div.style.display = "none";
+        hcScaleC01DivP1.style.display = "none";
+        hcScaleC01DivP2.style.display = "none";
     }
     else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
     {
         hcEC01DivP1.style.display = "none";
         hcEC01DivP2.style.display = "none";
         hcSewageC01Div.style.display = "none";
-        hcScaleC01Div.style.display = "block";
+        hcScaleC01DivP1.style.display = "block";
+        hcScaleC01DivP2.style.display = "block";
     }
     if (data.nodes != null) {
         var select_node = $('#hisChartOrgTree').treeview('getSelected');
@@ -685,6 +691,9 @@ function hisChartExportStorageAction() {
     $('#hisChartExport_storage').click(function () {
         $('#export_modal').modal("show");
     });
+    $('#hisChartScaleC01Export_storage').click(function () {
+        $('#exportScaleC01_modal').modal("show");
+    });
 
     $('#hisChartExport_storage_download').click(function () {
         var queryParamObj = document.getElementById("hisChartSelId_Param"); //定位选择参数
@@ -696,7 +705,12 @@ function hisChartExportStorageAction() {
             HisChartExportData();
         }
         $('#export_modal').modal("hide");
-    })
+    });
+
+    $('#hisChartScaleC01Export_storage_download').click(function () {
+        HisChartScaleC01ExportData();
+        $('#exportScaleC01_modal').modal("hide");
+    });
 }
 
 function HisChartExportData() {
@@ -880,6 +894,34 @@ function hisChartRemoveDeviceToList(selectValue) {
 }
 
 /***************************ScaleC01 Start*********************/
+function hisChartScaleC01RepaintChart(hisChartoption) {
+    hisChartScaleC01.clear();
+    hisChartScaleC01.setOption(hisChartoption);
+}
+
+function hisChartScaleC01InitChart(hisChartoption) {
+    var mainContainer = document.getElementById('echartsScaleC01main');
+    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+    var resizeMainContainer = function () {
+        mainContainer.style.width = window.innerWidth * 0.6 + 'px';
+        mainContainer.style.height = window.innerHeight * 0.42 + 'px';
+        /*mainContainer.height = window.innerWidth * 0.7 + 'px';
+        mainContainer.width = window.innerHeight * 0.42 + 'px';*/
+    };
+    resizeMainContainer();
+    // 初始化图表
+    //hisChart = echarts.init(mainContainer, 'macarons');
+    // 初始化图表-不带主题
+    hisChartScaleC01 = echarts.init(mainContainer);
+    hisChartScaleC01.clear();
+    hisChartScaleC01.setOption(hisChartoption);
+    $(window).on('resize', function () {//
+        //屏幕大小自适应，重置容器高宽
+        resizeMainContainer();
+        hisChartScaleC01.resize();
+    });
+}
+
 // 日期选择器初始化
 function hisChartDateRangePickerInitScaleC01() {
     hisChartScaleC01search_start_date = NowWeeHours(); //凌晨
@@ -966,7 +1008,47 @@ function hisChartScaleC01InitTable() {
 }
 
 function hisChartScaleC01Query() {
+    hisChartScaleC01SelectDeviceByIdsChart();
     hisChartScaleC01SelectHisDataTableHead();
+}
+
+function hisChartScaleC01SelectDeviceByIdsChart() {
+    var queryStartDate = hisChartScaleC01search_start_date;
+    var queryEndDate = hisChartScaleC01search_end_date;
+    var queryParamObj = document.getElementById("hisChartScaleC01SelId_Param"); //定位选择参数
+    var queryParamMaxThreshold = document.getElementById("hisChartScaleC01MaxThreshold").value; //最大阈值
+    var queryParamMinThreshold = document.getElementById("hisChartScaleC01MinThreshold").value; //最小阈值
+    var queryParamStartAge = document.getElementById("hisChartScaleC01StartAge").value; //起始日龄(增重日龄参数查询)
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter = queryParamObj.options[queryParamIndex].text; // 选中文本
+    var data = {
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sMaxThreshold: queryParamMaxThreshold,
+        sMinThreshold: queryParamMinThreshold,
+        sStartAge: queryParamStartAge,
+        sQueryParam: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/lihuaiot01/hisChartDevice/selectScaleC01ByIdsAndDateChart',
+        dataType: 'json',
+        async: true,   // 轻轻方式-异步
+        data: data,
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                hisChartoption = result;
+                // 使用刚指定的配置项和数据显示图表。
+                hisChartScaleC01RepaintChart(hisChartoption);
+            }else{
+                hisChartScaleC01RepaintChart(hisChartoptionInit);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
 }
 
 function hisChartScaleC01SelectHisDataTableHead() {
@@ -1063,6 +1145,28 @@ function hisChartScaleC01SelectDeviceByIdsTable() {
         locale: 'zh-CN',//中文支持
         columns: hisChartScaleC01TableColumns
     });
+}
+
+function HisChartScaleC01ExportData() {
+    var queryStartDate = hisChartScaleC01search_start_date;
+    var queryEndDate = hisChartScaleC01search_end_date;
+    var queryParamObj = document.getElementById("hisChartScaleC01SelId_Param"); //定位选择参数
+    var queryParamMaxThreshold = document.getElementById("hisChartScaleC01MaxThreshold").value; //最大阈值
+    var queryParamMinThreshold = document.getElementById("hisChartScaleC01MinThreshold").value; //最小阈值
+    var queryParamStartAge = document.getElementById("hisChartScaleC01StartAge").value; //起始日龄(增重日龄参数查询)
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter = queryParamObj.options[queryParamIndex].text; // 选中文本
+    var data = {
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sMaxThreshold: queryParamMaxThreshold,
+        sMinThreshold: queryParamMinThreshold,
+        sStartAge: queryParamStartAge,
+        sQueryParam: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate
+    };
+    var url = "/lihuaiot01/hisChartDevice/exportScaleC01HisDeviceList?" + $.param(data);
+    window.open(url, '_blank');
 }
 
 /***************************ScaleC01 end*********************/

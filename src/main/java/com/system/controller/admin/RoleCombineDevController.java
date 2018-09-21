@@ -2,10 +2,9 @@ package com.system.controller.admin;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.*;
-import com.system.service.DeviceInfoService;
-import com.system.service.DeviceRoleInfoService;
-import com.system.service.PeopleRoleInfoService;
-import com.system.service.RoleInfoService;
+import com.system.po.parameter.DeviceType;
+import com.system.service.*;
+import com.system.util.DeviceUtil;
 import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -29,6 +28,8 @@ public class RoleCombineDevController {
     @Autowired
     private DeviceInfoService deviceInfoService;
     @Autowired
+    private DeviceTypeService deviceTypeService;
+    @Autowired
     private DeviceRoleInfoService deviceRoleInfoService;
     @Autowired
     private PeopleRoleInfoService peopleRoleInfoService;
@@ -40,12 +41,17 @@ public class RoleCombineDevController {
         Session session = currentSubject.getSession();
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<RoleInfo> roleInfoList = new ArrayList<RoleInfo>();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             roleInfoList = roleInfoService.selectRoleInfo();
-        } else if (RoleInfoListUtil.checkIsECAdmin(userlogin.getRoleInfoList())) {
-            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("111");
-        } else if (RoleInfoListUtil.checkIsSewageCAdmin(userlogin.getRoleInfoList())) {
-            roleInfoList = roleInfoService.selectRoleInfoByRoldAdmin("211");
+        } else {
+            for (DeviceType deviceType : deviceTypeList
+                    ) {
+                if (RoleInfoListUtil.checkIsControllerAdmin(userlogin.getRoleInfoList(), deviceType.getDevType())) {
+                    List<RoleInfo> roleInfoListOne = roleInfoService.selectRoleInfoByRoldAdmin(deviceType.getDevType());
+                    roleInfoList.addAll(roleInfoListOne);
+                }
+            }
         }
         String jsonString = JSON.toJSONString(roleInfoList);
         return jsonString;
@@ -81,13 +87,13 @@ public class RoleCombineDevController {
 
     @RequestMapping(value = "insertRoleInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String insertRoleInfo(String roleNewName, String roleNewDescribe,String roleBelong) throws Exception {
+    public String insertRoleInfo(String roleNewName, String roleNewDescribe, String roleBelong) throws Exception {
         String jsonString = "新增完成";
         if (roleNewName != null) {
             //先判断名称是否存在
             //如果存在，则返回，不能新增
             //如果不存在，则继续保存
-            if (roleInfoService.selectRoleInfoByRoleNameAndBelong(roleNewName,roleBelong).size() > 0) {
+            if (roleInfoService.selectRoleInfoByRoleNameAndBelong(roleNewName, roleBelong).size() > 0) {
                 jsonString = "角色名称已经存在，请更换";
             } else {
                 Subject currentSubject = SecurityUtils.getSubject();
@@ -109,11 +115,11 @@ public class RoleCombineDevController {
     public String insertUpdateRoleDeviceList(@RequestBody List<DeviceRoleInfo> roleDeviceList) throws Exception {
         String jsonString = "更新角色完成";
         String roleName = roleDeviceList.get(0).getRoleName();
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
+        List<String> deviceTypeNumList = DeviceUtil.getDeviceTypeNum(deviceTypeList);
         if (roleName.equals("admin")) {
             jsonString = "管理员角色名称不可修改";
-        } else if (roleName.equals("211")) {
-            jsonString = "管理员角色名称不可修改";
-        } else if (roleName.equals("111")) {
+        } else if (deviceTypeNumList.contains(roleName)) {
             jsonString = "管理员角色名称不可修改";
         } else if (roleDeviceList != null && roleDeviceList.size() > 0) {
             //更新角色信息表
@@ -144,11 +150,11 @@ public class RoleCombineDevController {
         }
         //如果没有关联，则执行下面的步骤
         //删除角色设备关联表
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
+        List<String> deviceTypeNumList = DeviceUtil.getDeviceTypeNum(deviceTypeList);
         if (roleName.equals("admin")) {
             jsonString = "管理员角色不可删除";
-        } else if (roleName.equals("211")) {
-            jsonString = "管理员角色不可删除";
-        } else if (roleName.equals("111")) {
+        } else if (deviceTypeNumList.contains(roleName)) {
             jsonString = "管理员角色不可删除";
         } else {
             //删除角色设备关联表

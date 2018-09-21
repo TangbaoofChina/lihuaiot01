@@ -137,6 +137,12 @@
                     <shiro:hasAnyRoles name="admin,211">
                         <option value="211">污水控制器</option>
                     </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,311">
+                        <option value="311">自动称重</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin">
+                        <option value="admin">管理员</option>
+                    </shiro:hasAnyRoles>
                 </select>
             </div>
         </div>

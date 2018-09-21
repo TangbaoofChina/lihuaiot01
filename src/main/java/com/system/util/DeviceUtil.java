@@ -2,6 +2,7 @@ package com.system.util;
 
 import com.system.po.DeviceInfo;
 import com.system.po.DeviceInfoAndNode;
+import com.system.po.parameter.DeviceType;
 
 import java.security.PublicKey;
 import java.text.SimpleDateFormat;
@@ -38,5 +39,16 @@ public class DeviceUtil {
             }
         }
         return newDeviceInfoAndNodeList;
+    }
+
+    //根据设备类型表，获取设备类型编码列表
+    public static List<String> getDeviceTypeNum(List<DeviceType> deviceTypeList) {
+        List<String> devTypeNumList = new ArrayList<>();
+        for (int i = 0; i < deviceTypeList.size(); i++) {
+            if (!deviceTypeList.contains(deviceTypeList.get(i).getDevType())) {
+                devTypeNumList.add(deviceTypeList.get(i).getDevType());
+            }
+        }
+        return devTypeNumList;
     }
 }

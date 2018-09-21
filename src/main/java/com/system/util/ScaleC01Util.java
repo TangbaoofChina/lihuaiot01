@@ -122,7 +122,7 @@ public class ScaleC01Util {
         return myDTCList;
     }
 
-    //生成日期
+    //生成日期 由小到大排序
     public static List<String> getParameterDate(List<ScaleC01DeviceMessage> deviceMessageList) {
         List<String> deviceDateList = new ArrayList<String>();
         //日期序列生成

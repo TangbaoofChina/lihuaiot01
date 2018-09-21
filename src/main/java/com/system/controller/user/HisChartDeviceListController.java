@@ -1,13 +1,22 @@
 package com.system.controller.user;
 
 import com.alibaba.fastjson.JSON;
+import com.system.controller.util.ScaleC01Chart;
 import com.system.po.*;
+import com.system.po.EChartsOptions.EChartsParts.ECxAxisAxisLabel;
+import com.system.po.EChartsOptions.EChartsTitle;
+import com.system.po.EChartsOptions.EChartsXAxis;
+import com.system.po.EChartsOptions.EChartsYAxis;
+import com.system.po.EChartsOptions.EcSplitLine;
+import com.system.po.Phone.PhoneEChartsOptions;
+import com.system.po.ScaleC01.ScaleC01WtAnalysis;
 import com.system.po.parameter.OneDataDetail;
 import com.system.po.parameter.ParameterCharts;
 import com.system.service.DeviceInfoService;
 import com.system.service.EC01DeviceMessageService;
 import com.system.service.ScaleC01DeviceMessageService;
 import com.system.util.EC01Util;
+import com.system.util.EChartsUtil;
 import com.system.util.RoleInfoListUtil;
 import com.system.util.ScaleC01Util;
 import org.apache.shiro.SecurityUtils;
@@ -26,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/hisChartDevice")
@@ -37,6 +47,8 @@ public class HisChartDeviceListController {
     private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
     @Autowired
     private DeviceInfoService deviceInfoService;
+    @Autowired
+    private ScaleC01Chart scaleC01Chart;
 
 /*    @RequestMapping(value = "selectDevices", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -193,7 +205,7 @@ public class HisChartDeviceListController {
     }
 
     public void ExportExcel(HttpServletResponse response, File file) throws Exception {
-        String fileName = "hisdevicelist.xlsx";
+        String fileName = "hisChartdevicelist.xlsx";
         if (file != null) {
             // 设置响应头
             response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
@@ -212,6 +224,26 @@ public class HisChartDeviceListController {
     }
 
     /****************************ScaleC01  Start****************************************/
+    @RequestMapping(value = "/selectScaleC01ByIdsAndDateChart", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectScaleC01ByIdsAndDateChart(String[] sDeviceIds,
+                                                  String sMaxThreshold,
+                                                  String sMinThreshold,
+                                                  String sStartAge,
+                                                  String sQueryParam,
+                                                  String sStartDate,
+                                                  String sEndDate) throws Exception {
+        Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsChartThreshold(sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
+        if (scaleC01MapByDate == null || scaleC01MapByDate.size() < 1)
+            return "[]";
+
+        PhoneEChartsOptions phoneEChartsOptions = scaleC01Chart.getECharts(sQueryParam, scaleC01MapByDate);
+        if (phoneEChartsOptions == null)
+            return "[]";
+        String jsonString = JSON.toJSONString(phoneEChartsOptions);
+        return jsonString;
+    }
+
     @RequestMapping(value = "/scalec01DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String scalec01DeviceHead(String[] sDeviceIds, String sQueryParam) throws Exception {
@@ -252,13 +284,12 @@ public class HisChartDeviceListController {
                                             String sEndDate,
                                             HttpServletRequest request,
                                             HttpServletResponse response) throws Exception {
-        List<List<OneDataDetail>> ec01DeviceMessageList = null;
+        List<List<OneDataDetail>> scalec01DeviceMessageList = null;
         List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
         if (sDeviceIds != null && (sDeviceIds.length > 0)) {
-            ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
-
-            List<MydataTableColumn> myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
-            File file = ec01DeviceMessageService.exportStoragedynamic(myDTCList, ec01DeviceMessageList);
+            scalec01DeviceMessageList = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
+            List<MydataTableColumn> myDTCList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
+            File file = scaleC01DeviceMessageService.exportStoragedynamic(myDTCList, scalec01DeviceMessageList);
             ExportExcel(response, file);
         }
     }
