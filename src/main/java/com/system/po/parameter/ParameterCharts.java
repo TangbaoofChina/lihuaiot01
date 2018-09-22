@@ -77,8 +77,10 @@ public class ParameterCharts {
 
             ParameterData parameterData = new ParameterData();
             parameterData.setName(deviceChats.getDeviceInfo().getDName());
-            if (parameterData.getName().indexOf("-饮水") > -1) {
-                parameterData.setyAxisIndex("1");
+            if(sQueryParam.equals("日温饮水")) {
+                if (parameterData.getName().indexOf("-饮水") > -1) {
+                    parameterData.setyAxisIndex("1");
+                }
             }
             List<String> dataList = new ArrayList<String>();
             List<OneDataDetail> oneDataDetailList = new ArrayList<OneDataDetail>();

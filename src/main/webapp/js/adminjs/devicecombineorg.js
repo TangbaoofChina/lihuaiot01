@@ -161,6 +161,7 @@ function deviceOrgQueryParams(params) {
     };
 }
 
+//列表显示查询
 function deviceOrgSelectDeviceByTreeId() {
 
     $('#deviceOrgTable').bootstrapTable('destroy');
@@ -216,7 +217,18 @@ function deviceOrgInitTable() {
             var temp0 = {field: 'checkStatus', checkbox: true};
             questionColumns.push(temp0);
             for (var i = 0; i < json.length; i++) {
-                var temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                var temp = "";
+                if (json[i].data === "dDeactive") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: deviceOrgChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+
                 questionColumns.push(temp);
             }
             var temp1 = {
@@ -246,6 +258,23 @@ function deviceOrgInitTable() {
     });
 }
 
+//是否停用的判断显示
+function deviceOrgChangeTableColor(value, row, index) {
+    //通过判断单元格的值，来格式化单元格，返回的值即为格式化后包含的元素
+    var a = "";
+    var run = "运";
+    var stop = "停";
+    if (value == "0") {
+        var a = '<span style="color:#00ff00">' + run + '</span>';
+    } else if (value == "1") {
+        var a = '<span style="color:#FF0000">' + stop + '</span>';
+    } else {
+        var a = '<span>' + value + '</span>';
+    }
+    return a;
+}
+
+//单击一行的修改，显示出值
 function deviceOrgOneTransfer() {
     $('#deviceOrgaddNew-popup').show('slow');
 }
@@ -413,6 +442,10 @@ function deviceOrgUpdateDeviceOrg03() {
     var deviceId = deviceOrgSelectDevice.dSerialNum;
     var deviceName = $('#deviceOrgName').val();
     var deviceEasRoomVal = $('#deviceOrgEasRoom').val();
+    var deviceDeactive = 0;
+    if (document.getElementById("deviceOrgDeviceDisabled").checked) {
+        deviceDeactive = 1;
+    }
     var deviceEasFId = null;
     var deviceEasFName = null;
     var deviceEasFDisplayName = null;
@@ -424,6 +457,7 @@ function deviceOrgUpdateDeviceOrg03() {
     var data = {
         deviceId: deviceId,
         deviceName: deviceName,
+        deviceDeactive: deviceDeactive,
         deviceEasFId: deviceEasFId,
         deviceEasFName: deviceEasFName,
         deviceEasFDisplayName: deviceEasFDisplayName

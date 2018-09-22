@@ -181,17 +181,17 @@ public class DeviceCharts01 {
     }
 
     /**
-     * 日饮水量曲线
+     * 日温饮水-日饮水量曲线/日饮水量曲线
      *
      * @param ec01DeviceDayWater
      */
-    public DeviceCharts01(EC01DeviceDayWater ec01DeviceDayWater) {
+    public DeviceCharts01(EC01DeviceDayWater ec01DeviceDayWater,String sQueryParam) {
         List<String> deviceParameterName = new ArrayList<String>();
         List<String> deviceParameterTime = new ArrayList<String>();
         List<ParameterData01> parameterDataList = new ArrayList<ParameterData01>();
-        deviceParameterName.add("日温饮水");
+        deviceParameterName.add(sQueryParam);
         ParameterData01 parameterDayWater = new ParameterData01();
-        parameterDayWater.setName("日温饮水");
+        parameterDayWater.setName(sQueryParam);
         List<OneDataDetail> dayWaterList = new ArrayList<OneDataDetail>();
         for (EC01DayWater ec01DayWater : ec01DeviceDayWater.getEc01DayWaterList()
                 ) {

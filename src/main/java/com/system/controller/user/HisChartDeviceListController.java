@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -236,8 +237,11 @@ public class HisChartDeviceListController {
         Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsChartThreshold(sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
         if (scaleC01MapByDate == null || scaleC01MapByDate.size() < 1)
             return "[]";
-
-        PhoneEChartsOptions phoneEChartsOptions = scaleC01Chart.getECharts(sQueryParam, scaleC01MapByDate);
+        List<DeviceInfo> deviceInfoList = this.getDeviceInfoList(sDeviceIds);
+        if (deviceInfoList == null || deviceInfoList.size() < 1)
+            return "[]";
+        Map<String, String> deviceInfoMap = this.getDeviceInfoMap(deviceInfoList);
+        PhoneEChartsOptions phoneEChartsOptions = scaleC01Chart.getECharts(sQueryParam, deviceInfoMap, sStartAge, scaleC01MapByDate);
         if (phoneEChartsOptions == null)
             return "[]";
         String jsonString = JSON.toJSONString(phoneEChartsOptions);
@@ -285,7 +289,7 @@ public class HisChartDeviceListController {
                                             HttpServletRequest request,
                                             HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> scalec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        List<DeviceInfo> deviceInfoList = this.getDeviceInfoList(sDeviceIds);
         if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             scalec01DeviceMessageList = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
             List<MydataTableColumn> myDTCList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
@@ -316,6 +320,15 @@ public class HisChartDeviceListController {
             deviceInfoList.addAll(deviceInfoListSecond);
         }
         return deviceInfoList;
+    }
+
+    //根据设备列表，生成设备的MAP，为曲线的图例服务，显示设备名称(设备序号，设备名称)
+    private Map<String, String> getDeviceInfoMap(List<DeviceInfo> deviceInfoList) {
+        Map<String, String> deviceInfoMap = new HashMap<>();
+        for (int i = 0; i < deviceInfoList.size(); i++) {
+            deviceInfoMap.put(deviceInfoList.get(i).getDSerialNum(), deviceInfoList.get(i).getDName());
+        }
+        return deviceInfoMap;
     }
 
     private String getReturnJson(DataTablePageing dataTablePageing) {

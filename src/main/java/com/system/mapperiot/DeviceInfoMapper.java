@@ -35,7 +35,7 @@ public interface DeviceInfoMapper {
 
     void batchUpdateDeviceOrgId(@Param("deviceIds") String[] deviceIds, @Param("sOrgId") String sOrgId);
 
-    void updateDeviceInfo(@Param("deviceId") String deviceId, @Param("deviceName") String deviceName,
+    void updateDeviceInfo(@Param("deviceId") String deviceId, @Param("deviceName") String deviceName,@Param("deviceDeactive") boolean deviceDeactive,
                           @Param("deviceEasFId") String deviceEasFId, @Param("deviceEasFName") String deviceEasFName,
                           @Param("deviceEasFDisplayName") String deviceEasFDisplayName);
 }

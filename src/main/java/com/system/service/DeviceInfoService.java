@@ -40,12 +40,13 @@ public interface DeviceInfoService {
      * 更新 设备名称，设备所在鸡舍ID，设备所在鸡舍名称，设备所在鸡舍组织路径
      * @param deviceId
      * @param deviceName
+     * @param deviceDeactive 停用
      * @param deviceEasFId
      * @param deviceEasFName
      * @param deviceEasFDisplayName
      * @throws Exception
      */
-    void updateDeviceInfo(String deviceId, String deviceName, String deviceEasFId,String deviceEasFName,String deviceEasFDisplayName) throws Exception;
+    void updateDeviceInfo(String deviceId, String deviceName,boolean deviceDeactive, String deviceEasFId,String deviceEasFName,String deviceEasFDisplayName) throws Exception;
 
     /**
      * 批量更新设备组织

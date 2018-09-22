@@ -23,8 +23,7 @@ public class DeviceCombineOrgServiceImpl implements DeviceCombineOrgService {
         Integer smallIndex = 0;
         smallIndex = pageNumber - 1;
         bigIndex = smallIndex + pageSize;
-        List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
-        deviceInfoList = deviceInfoMapper.selectDeviceByORGId(orgId);
+        List<DeviceInfo> deviceInfoList = deviceInfoMapper.selectDeviceByORGId(orgId);
         //截取部分字符串
         List<DeviceInfo> deviceInfoListSub = new ArrayList<DeviceInfo>();
         if (bigIndex > deviceInfoList.size())

@@ -15,6 +15,7 @@
         <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
         <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
         <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
+        <result column="DI_DEACTIVE" jdbcType="INTEGER" property="dDeactive"/>
     </resultMap>
     <resultMap id="BaseResultAndNodeMap" type="com.system.po.DeviceInfoAndNode">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -32,6 +33,7 @@
         <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
         <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
         <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
+        <result column="DI_DEACTIVE" jdbcType="INTEGER" property="dDeactive"/>
     </resultMap>
     <resultMap id="BaseResultNodeMap" type="com.system.po.ORGTreeNode">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -142,6 +144,9 @@
         <set>
             <if test="deviceName != null">
                 DI_NAME = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceDeactive != null">
+                DI_DEACTIVE = #{deviceDeactive,jdbcType=INTEGER},
             </if>
             <if test="deviceEasFId != null and deviceEasFId !=''">
                 EAS_FID = #{deviceEasFId,jdbcType=VARCHAR},

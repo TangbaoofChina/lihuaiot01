@@ -57,7 +57,7 @@ public interface ScaleC01DeviceMessageService {
     List<ScaleC01DeviceMessage> selectScaleC01ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
-     * 一个设备时间段内的数据;分页
+     * 一个设备时间段内的数据-历史数据界面;分页
      *
      * @param pageNumber
      * @param pageSize

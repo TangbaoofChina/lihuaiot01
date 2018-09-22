@@ -13,7 +13,7 @@ public class ParameterBase {
     private String connectNulls = "true";
     private String symbol = "circle";//拐点样式
     private int symbolSize = 8;//拐点大小
-    private Boolean showAllSymbol = true;
+    private Boolean showAllSymbol = true; //是否显示拐点
     private EcsMarkPoint markPoint;
     private EcsMarkLine markLine;
 

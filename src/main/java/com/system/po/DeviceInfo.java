@@ -16,7 +16,9 @@ public class DeviceInfo {
     private String dEasFId = "";
     private String dEasFName = "";
     private String dEasFDisplayName = "";
+    private boolean dDeactive = false;  //是否停用
 
+    //get后面首字母大写，否则不符合json规则
     public String getDSerialNum() {
         return dSerialNum;
     }
@@ -119,5 +121,13 @@ public class DeviceInfo {
 
     public void setDEasFDisplayName(String dEasFDisplayName) {
         this.dEasFDisplayName = dEasFDisplayName;
+    }
+
+    public boolean isDDeactive() {
+        return dDeactive;
+    }
+
+    public void setDDeactive(boolean dDeactive) {
+        this.dDeactive = dDeactive;
     }
 }

@@ -64,6 +64,7 @@ public class DeviceCombineOrgController {
         return jsonString;
     }
 
+    //单个设备更换组织
     @RequestMapping(value = "/deviceCombineOrgUpdate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String deviceCombineOrgUpdate(String deviceId, String deviceName, String orgId) throws Exception {
@@ -77,14 +78,16 @@ public class DeviceCombineOrgController {
         return jsonString;
     }
 
+    //设备更改参数
     @RequestMapping(value = "/deviceCombineOrgUpdateDeviceInfo", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String deviceCombineOrgUpdateDeviceInfo(String deviceId, String deviceName, String deviceEasFId,String deviceEasFName,String deviceEasFDisplayName) throws Exception {
-        deviceInfoService. updateDeviceInfo(deviceId, deviceName, deviceEasFId,deviceEasFName,deviceEasFDisplayName);
+    public String deviceCombineOrgUpdateDeviceInfo(String deviceId, String deviceName, boolean deviceDeactive, String deviceEasFId, String deviceEasFName, String deviceEasFDisplayName) throws Exception {
+        deviceInfoService.updateDeviceInfo(deviceId, deviceName, deviceDeactive, deviceEasFId, deviceEasFName, deviceEasFDisplayName);
         String jsonString = "修改成功";
         return jsonString;
     }
 
+    //多个设备更换组织
     @RequestMapping(value = "/deviceCombineOrgBatchUpdate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String deviceCombineOrgBatchUpdate(String[] deviceIds, String orgId) throws Exception {
@@ -136,9 +139,15 @@ public class DeviceCombineOrgController {
         mdtc5.setDefaultContent("5");
         mdtc5.setTitle("路径");
 
+        MydataTableColumn mdtc6 = new MydataTableColumn();
+        mdtc6.setData("dDeactive");
+        mdtc6.setDefaultContent("6");
+        mdtc6.setTitle("停用");
+
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
         myDTCList.add(mdtc3);
+        myDTCList.add(mdtc6);
         myDTCList.add(mdtc4);
         myDTCList.add(mdtc5);
 

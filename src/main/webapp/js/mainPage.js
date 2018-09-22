@@ -329,6 +329,7 @@ window.operateEvents = {
         $('#deviceOrgNumDec').val(row.dSerialNumDec);
         $('#deviceOrgName').val(row.dName);
         $('#deviceOrgEasRoom').val(row.dEasFName);
+        $("#deviceOrgDeviceDisabled").prop("checked", row.dDeactive);
         deviceOrgSelectDevice = row;
         deviceOrgShowModify();
     },

@@ -21,7 +21,7 @@ public class ScaleC01Util {
                     ) {
                 MydataTableColumn mdtc = new MydataTableColumn();
                 mdtc.setData(deviceInfo.getDSerialNum());
-                mdtc.setTitle(deviceInfo.getDName());
+                mdtc.setTitle(deviceInfo.getDName() + "-均重");
                 myDTCList.add(mdtc);
             }
         }
@@ -105,6 +105,31 @@ public class ScaleC01Util {
         return myDTCList;
     }
 
+    //多增重日龄
+    public static List<MydataTableColumn> getScaleC01sWtAge(List<DeviceInfo> deviceInfoList) throws Exception {
+        List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
+
+        for (int i = 0; i < deviceInfoList.size(); i++) {
+            MydataTableColumn mdtc = new MydataTableColumn();
+            mdtc.setData(deviceInfoList.get(i).getDSerialNum());
+            mdtc.setTitle(deviceInfoList.get(i).getDName() + "-增重");
+            myDTCList.add(mdtc);
+        }
+
+        MydataTableColumn mdtc01 = new MydataTableColumn();
+        mdtc01.setData("dayAge");
+        mdtc01.setTitle("日龄");
+        myDTCList.add(mdtc01);
+
+        MydataTableColumn mdtcTime = new MydataTableColumn();
+        mdtcTime.setData("sDate");
+        mdtcTime.setDefaultContent("时间");
+        mdtcTime.setTitle("时间");
+        myDTCList.add(mdtcTime);
+
+        return myDTCList;
+    }
+
     public static List<MydataTableColumn> getMyDataTableColumn(String sQueryParam, List<DeviceInfo> deviceInfoList,
                                                                String[] sDateTimeList) throws Exception {
         List<MydataTableColumn> myDTCList = new ArrayList<>();
@@ -116,6 +141,8 @@ public class ScaleC01Util {
             myDTCList = ScaleC01Util.getScaleC01WtAge(deviceInfoList);
         } else if (sQueryParam.equals("平均体重")) {
             myDTCList = ScaleC01Util.getScaleC01DeviceHead(deviceInfoList);
+        } else if (sQueryParam.equals("多增重日龄")) {
+            myDTCList = ScaleC01Util.getScaleC01sWtAge(deviceInfoList);
         } else {
             myDTCList = ScaleC01Util.getScaleC01DeviceHead(deviceInfoList);
         }
@@ -341,10 +368,36 @@ public class ScaleC01Util {
         return newDateList;
     }
 
+    //计算日龄
     public static Integer getDAge(String endDate, String startDate) {
         long dTime = DataConvertor.DateCompare(endDate, startDate);
         long day = dTime / (24 * 60 * 60 * 1000);
         return (int) day;
+    }
+
+    //根据起始日龄，根据日期列表，计算出日龄列表
+    public static List<String> getDayAgeList(String sStartAge, List<String> sDateList) {
+        List<String> dayAgeList = new ArrayList<>();
+        if (sDateList == null || sDateList.size() < 1) {
+            return dayAgeList;
+        }
+        if (StringUtils.isNullOrEmpty(sStartAge)) {
+            sStartAge = "0";
+        }
+        if (sDateList.size() < 2) {
+            dayAgeList.add(sStartAge);
+            return dayAgeList;
+        }
+        dayAgeList.add(sStartAge);
+        String oldDate = sDateList.get(0);
+        int oldAge = Integer.valueOf(sStartAge);
+        for (int i = 1; i < sDateList.size(); i++) {
+            int dAge = ScaleC01Util.getDAge(sDateList.get(i), oldDate);
+            dayAgeList.add(String.valueOf(oldAge + dAge));
+            oldDate = sDateList.get(i);
+            oldAge = oldAge + dAge;
+        }
+        return dayAgeList;
     }
 
 }

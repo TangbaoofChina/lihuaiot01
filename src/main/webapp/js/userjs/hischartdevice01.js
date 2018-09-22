@@ -848,25 +848,35 @@ function hisChartInitMultiselect() {
     });
 }
 
+//ec01参数发生改变
 function hisChartParamChange() {
     var objS = document.getElementById("hisChartSelId_Param");
     var paramValue = objS.options[objS.selectedIndex].value;
-    if (paramValue === "6") {
-        $("#hisChartThresholdDiv").css("display", "block");//
-    } else {
-        $("#hisChartThresholdDiv").css("display", "none");//
-    }
-    if (paramValue === "7") {
-        $("#hisChartTempWaterDiv").css("display", "block");//
-    } else {
-        $("#hisChartTempWaterDiv").css("display", "none");//
-    }
-    if (paramValue === "8" || paramValue === "9") {
-        $("#hisChartDateRangeDiv").css("display", "none");//
-        $("#hisChartDateTimeDiv").css("display", "block");//
-    } else {
-        $("#hisChartDateRangeDiv").css("display", "block");//
-        $("#hisChartDateTimeDiv").css("display", "none");//
+    if (paramValue === "6") { //日饮水量
+        $("#hisChartThresholdDiv").css("display", "block");// 最大，最小阈值
+        $("#hisChartTempWaterDiv").css("display", "none");// 日温参照
+        $("#hisChartDateRangeDiv").css("display", "block");// bootstrap日期范围选择控件
+        $("#hisChartDateTimeDiv").css("display", "none");// 时间list 为单舍饮水量、单舍温度服务
+    } else if (paramValue === "7") { //日温饮水
+        $("#hisChartThresholdDiv").css("display", "block");//最大，最小阈值
+        $("#hisChartTempWaterDiv").css("display", "block");//日温参照
+        $("#hisChartDateRangeDiv").css("display", "block");//bootstrap日期范围选择控件
+        $("#hisChartDateTimeDiv").css("display", "none");//时间list 为单舍饮水量、单舍温度服务
+    } else if (paramValue === "8" || paramValue === "9") {  //单舍饮水量\单舍温度
+        $("#hisChartThresholdDiv").css("display", "block");//最大，最小阈值
+        $("#hisChartTempWaterDiv").css("display", "none");//日温参照
+        $("#hisChartDateRangeDiv").css("display", "none");//bootstrap日期范围选择控件
+        $("#hisChartDateTimeDiv").css("display", "block");//时间list 为单舍饮水量、单舍温度服务
+    } else if (paramValue === "10") {  //多舍日饮水量
+        $("#hisChartThresholdDiv").css("display", "block");//最大，最小阈值
+        $("#hisChartTempWaterDiv").css("display", "none");//日温参照
+        $("#hisChartDateRangeDiv").css("display", "block");//bootstrap日期范围选择控件
+        $("#hisChartDateTimeDiv").css("display", "none");//时间list 为单舍饮水量、单舍温度服务
+    } else {   //其他
+        $("#hisChartThresholdDiv").css("display", "none");//最大，最小阈值
+        $("#hisChartTempWaterDiv").css("display", "none");//日温参照
+        $("#hisChartDateRangeDiv").css("display", "block");//bootstrap日期范围选择控件
+        $("#hisChartDateTimeDiv").css("display", "none");//时间list 为单舍饮水量、单舍温度服务
     }
 
 }
@@ -1007,7 +1017,20 @@ function hisChartScaleC01InitTable() {
     });
 }
 
+//自动称重，查询事件
 function hisChartScaleC01Query() {
+    var objS = document.getElementById("hisChartScaleC01SelId_Param");
+    var paramValue = objS.options[objS.selectedIndex].value;
+    if (paramValue !== "2" && paramValue !== "4") { //平均体重 多增重日龄
+        //只能选择单个设备
+        if (hisChartSelectDeviceIds.length != 1) {
+            var type = 'warning';
+            var msg = '只能选择一个设备';
+            var append = '只针对单个设备进行数据分析';
+            showMsg(type, msg, append);
+            return;
+        }
+    }
     hisChartScaleC01SelectDeviceByIdsChart();
     hisChartScaleC01SelectHisDataTableHead();
 }
@@ -1041,7 +1064,7 @@ function hisChartScaleC01SelectDeviceByIdsChart() {
                 hisChartoption = result;
                 // 使用刚指定的配置项和数据显示图表。
                 hisChartScaleC01RepaintChart(hisChartoption);
-            }else{
+            } else {
                 hisChartScaleC01RepaintChart(hisChartoptionInit);
             }
         },

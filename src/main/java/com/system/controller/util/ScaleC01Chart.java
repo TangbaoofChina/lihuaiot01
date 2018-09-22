@@ -18,10 +18,10 @@ import java.util.Map;
 public class ScaleC01Chart {
 
     //生成曲线
-    public PhoneEChartsOptions getECharts(String sQueryParam, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+    public PhoneEChartsOptions getECharts(String sQueryParam, Map<String, String> deviceInfoMap, String sStartAge, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
         PhoneEChartsOptions phoneEChartsOptions = null;
         if (sQueryParam.equals("平均体重")) {
-            phoneEChartsOptions = this.getWtCharts(scaleC01MapByDate);
+            phoneEChartsOptions = this.getWtCharts(deviceInfoMap, scaleC01MapByDate);
         } else if (sQueryParam.equals("增重日龄")) {
             //增重日龄是针对单个设备的，只需要选取一个即可
             List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = null;
@@ -30,12 +30,14 @@ public class ScaleC01Chart {
                 break;
             }
             phoneEChartsOptions = this.getAgeCharts(scaleC01WtAnalysisList);
+        } else if (sQueryParam.equals("多增重日龄")) {
+            phoneEChartsOptions = this.getAgeCharts(deviceInfoMap, sStartAge, scaleC01MapByDate);
         }
         return phoneEChartsOptions;
     }
 
     //生成平均体重曲线
-    private PhoneEChartsOptions getWtCharts(Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+    private PhoneEChartsOptions getWtCharts(Map<String, String> deviceInfoMap, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
         phoneEChartsOptions.setColor(EChartsUtil.Color());
 
@@ -48,11 +50,13 @@ public class ScaleC01Chart {
         EChartsLegend eChartsLegend = new EChartsLegend();
         List<String> legendDataList = new ArrayList<>();
         for (String key : scaleC01MapByDate.keySet()) {
-            if (!legendDataList.contains(key)) {
-                legendDataList.add(key);
+            String legendName = deviceInfoMap.get(key) + "-均重";
+            if (!legendDataList.contains(legendName)) {
+                legendDataList.add(legendName);
             }
         }
         eChartsLegend.setData(legendDataList);
+        eChartsLegend.setLeft("center");
         phoneEChartsOptions.setLegend(eChartsLegend);
         //X轴坐标
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
@@ -81,11 +85,12 @@ public class ScaleC01Chart {
         eChartsYAxis.setSplitLine(ecySplitLine);
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
-        phoneEChartsOptions.setSeries(this.getWtSeries(scaleC01MapByDate));
+        phoneEChartsOptions.setSeries(this.getWtSeries(deviceInfoMap, scaleC01MapByDate));
         phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
     }
 
+    //生成增重日龄曲线
     private PhoneEChartsOptions getAgeCharts(List<ScaleC01WtAnalysis> scaleC01WtAnalysisList) {
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
         phoneEChartsOptions.setColor(EChartsUtil.Color());
@@ -99,6 +104,7 @@ public class ScaleC01Chart {
         EChartsLegend eChartsLegend = new EChartsLegend();
         List<String> legendDataList = new ArrayList<>();
         legendDataList.add("增重");
+        eChartsLegend.setLeft("center");
         eChartsLegend.setData(legendDataList);
         phoneEChartsOptions.setLegend(eChartsLegend);
         //X轴坐标
@@ -134,6 +140,62 @@ public class ScaleC01Chart {
         List<ParameterData> parameterDataList = new ArrayList<>();
         parameterDataList.add(this.getGainWtAgeSeries(scaleC01WtAnalysisList));
         phoneEChartsOptions.setSeries(parameterDataList);
+        phoneEChartsOptions.showPoint(false, false);
+        return phoneEChartsOptions;
+    }
+
+    //生成多增重日龄曲线
+    private PhoneEChartsOptions getAgeCharts(Map<String, String> deviceInfoMap, String sStartAge, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+        PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
+        phoneEChartsOptions.setColor(EChartsUtil.Color());
+
+        EChartsTitle eChartsTitle = new EChartsTitle();
+        eChartsTitle.setText("多增重日龄");
+        eChartsTitle.setSubtext("");
+        phoneEChartsOptions.setTitle(eChartsTitle);
+
+        //添加图例
+        EChartsLegend eChartsLegend = new EChartsLegend();
+        List<String> legendDataList = new ArrayList<>();
+        for (String key : scaleC01MapByDate.keySet()) {
+            String legendName = deviceInfoMap.get(key) + "-增重";
+            if (!legendDataList.contains(legendName)) {
+                legendDataList.add(legendName);
+            }
+        }
+        eChartsLegend.setData(legendDataList);
+        eChartsLegend.setLeft("center");
+        phoneEChartsOptions.setLegend(eChartsLegend);
+
+        //X轴坐标
+        EChartsXAxis eChartsXAxis = new EChartsXAxis();
+        List<String> sDateList = ScaleC01Util.getScaleC01DateList(scaleC01MapByDate);
+        List<String> sDayAgeList = ScaleC01Util.getDayAgeList(sStartAge, sDateList);
+        eChartsXAxis.setData(sDayAgeList);
+        //分割线
+        EcSplitLine ecxSplitLine = new EcSplitLine();
+        ecxSplitLine.setShow(false);
+        eChartsXAxis.setSplitLine(ecxSplitLine);
+        //坐标轴刻度标签
+        ECxAxisAxisLabel eCxAxisAxisLabel = new ECxAxisAxisLabel();
+        eCxAxisAxisLabel.setInterval("0");
+        eCxAxisAxisLabel.setRotate("0");
+        eChartsXAxis.setAxisLabel(eCxAxisAxisLabel);
+        phoneEChartsOptions.setxAxis(eChartsXAxis);
+
+        EChartsYAxis eChartsYAxis = new EChartsYAxis();
+        eChartsYAxis.setMin("0");
+        eChartsYAxis.setMax("1");
+        if (scaleC01MapByDate.size() > 0) {
+            eChartsYAxis.setMin(this.getMinGainWt(scaleC01MapByDate));
+            eChartsYAxis.setMax(this.getMaxGainWt(scaleC01MapByDate));
+        }
+        eChartsYAxis.setType("value");
+        EcSplitLine ecySplitLine = new EcSplitLine();
+        eChartsYAxis.setSplitLine(ecySplitLine);
+        phoneEChartsOptions.setyAxis(eChartsYAxis);
+
+        phoneEChartsOptions.setSeries(this.getGainWtAgeSeries(deviceInfoMap, scaleC01MapByDate));
         phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
     }
@@ -176,13 +238,16 @@ public class ScaleC01Chart {
     }
 
     //获取平均体重的曲线
-    private List<ParameterData> getWtSeries(Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+    private List<ParameterData> getWtSeries(Map<String, String> deviceInfoMap, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
         List<ParameterData> parameterDataList = new ArrayList<>();
         if (scaleC01MapByDate.size() < 1) {
             return parameterDataList;
         }
-        for (List<ScaleC01WtAnalysis> value : scaleC01MapByDate.values()) {
+        for (Map.Entry<String, List<ScaleC01WtAnalysis>> entry : scaleC01MapByDate.entrySet()) {
             ParameterData parameterData = new ParameterData();
+            String parameterName = deviceInfoMap.get(entry.getKey()) + "-均重";
+            parameterData.setName(parameterName);
+            List<ScaleC01WtAnalysis> value = entry.getValue();
             List<String> dataList = new ArrayList<>();
             for (int i = 0; i < value.size(); i++) {
                 dataList.add(String.valueOf(value.get(i).getAvgWt()));
@@ -233,8 +298,68 @@ public class ScaleC01Chart {
         for (int i = 0; i < scaleC01WtAnalysisList.size(); i++) {
             dataList.add(String.valueOf(scaleC01WtAnalysisList.get(i).getGainWt()));
         }
+        parameterData.setName("增重");
         parameterData.setData(dataList);
         parameterData.setType("line");
         return parameterData;
+    }
+
+    //获取多增重的最小值
+    private String getMinGainWt(Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+        //遍历map中的值
+        float minValue = 0;
+        //取出第一个值，防止默认值0最小
+        for (List<ScaleC01WtAnalysis> value : scaleC01MapByDate.values()) {
+            minValue = value.get(0).getGainWt();
+            break;
+        }
+        for (List<ScaleC01WtAnalysis> value : scaleC01MapByDate.values()) {
+            for (int i = 0; i < value.size(); i++) {
+                if (value.get(i).getGainWt() < minValue) {
+                    minValue = value.get(i).getGainWt();
+                }
+            }
+        }
+        minValue = minValue - 3;
+        if (minValue < 0) {
+            minValue = 0;
+        }
+        return String.valueOf(minValue);
+    }
+
+    //获取多增重的最大值
+    private String getMaxGainWt(Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+        //遍历map中的值
+        float maxValue = 0; //这里不需要取出第一个值
+        for (List<ScaleC01WtAnalysis> value : scaleC01MapByDate.values()) {
+            for (int i = 0; i < value.size(); i++) {
+                if (value.get(i).getGainWt() > maxValue) {
+                    maxValue = value.get(i).getGainWt();
+                }
+            }
+        }
+        return String.valueOf(maxValue + 3);
+    }
+
+    //获取多增重的曲线
+    private List<ParameterData> getGainWtAgeSeries(Map<String, String> deviceInfoMap, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+        List<ParameterData> parameterDataList = new ArrayList<>();
+        if (scaleC01MapByDate.size() < 1) {
+            return parameterDataList;
+        }
+        for (Map.Entry<String, List<ScaleC01WtAnalysis>> entry : scaleC01MapByDate.entrySet()) {
+            ParameterData parameterData = new ParameterData();
+            String parameterName = deviceInfoMap.get(entry.getKey()) + "-增重";
+            parameterData.setName(parameterName);
+            List<ScaleC01WtAnalysis> value = entry.getValue();
+            List<String> dataList = new ArrayList<>();
+            for (int i = 0; i < value.size(); i++) {
+                dataList.add(String.valueOf(value.get(i).getGainWt()));
+            }
+            parameterData.setData(dataList);
+            parameterData.setType("line");
+            parameterDataList.add(parameterData);
+        }
+        return parameterDataList;
     }
 }

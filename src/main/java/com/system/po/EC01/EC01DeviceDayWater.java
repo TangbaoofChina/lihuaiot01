@@ -47,13 +47,11 @@ public class EC01DeviceDayWater extends BaseDeviceMessage {
         List<String> minValues = new ArrayList<>();
         for (EC01DeviceMessage ec01DeviceMessage : ec01DeviceMessageList
                 ) {
-            if (ec01DeviceMessage.getDSerialNum().equals(dSerialNum)) {
                 this.setDName(ec01DeviceMessage.getDName());
                 EC01DayWater ec01DayWater = new EC01DayWater(ec01DeviceMessage);
                 ec01DayWaters.add(ec01DayWater);
                 maxValues.add(String.valueOf(ec01DayWater.getWaterFlowVal()));
                 minValues.add(String.valueOf(ec01DayWater.getWaterFlowVal()));
-            }
         }
         this.setEc01DayWaterList(ec01DayWaters);
         this.setMax(DataConvertor.findMaxValue(maxValues));

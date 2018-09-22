@@ -91,13 +91,14 @@
             <div class="form-inline">
                 <div class="input-group" style="margin-left: 15px;">
                     <label>参数：</label>
-                    <select name="hisChartScaleC01SelName_Param" onchange="hisChartScaleC01ParamChange()"
+                    <select name="hisChartScaleC01SelName_Param"
                             id="hisChartScaleC01SelId_Param"
                             class="input-sm">
                         <option value="0" selected="selected">称重分析</option>
                         <option value="1">有效体重</option>
                         <option value="2">平均体重</option>
                         <option value="3">增重日龄</option>
+                        <option value="4">多增重日龄</option>
                     </select>
                 </div>
                 <label>时间：</label>

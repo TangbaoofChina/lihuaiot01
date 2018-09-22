@@ -63,8 +63,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
-    public void updateDeviceInfo(String deviceId, String deviceName, String deviceEasFId, String deviceEasFName, String deviceEasFDisplayName) throws Exception {
-        deviceInfoMapper.updateDeviceInfo(deviceId, deviceName, deviceEasFId, deviceEasFName, deviceEasFDisplayName);
+    public void updateDeviceInfo(String deviceId, String deviceName,boolean deviceDeactive, String deviceEasFId, String deviceEasFName, String deviceEasFDisplayName) throws Exception {
+        deviceInfoMapper.updateDeviceInfo(deviceId, deviceName,deviceDeactive, deviceEasFId, deviceEasFName, deviceEasFDisplayName);
     }
 
     @Override

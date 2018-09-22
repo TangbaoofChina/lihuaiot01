@@ -21,7 +21,17 @@ function rolePeopleInitTableHead() {
             /*alert("1");*/
             var json = eval(result); //数组
             for (var i = 0; i < json.length; i++) {
-                var temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                var temp = "";
+                if (json[i].data === "userMsgPush") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rolePeopleChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
+                }
                 questionColumns.push(temp);
             }
             var temp1 = {
@@ -43,6 +53,23 @@ function rolePeopleInitTableHead() {
         }
     });
 }
+
+//是否启用消息推送的判断显示
+function rolePeopleChangeTableColor(value, row, index) {
+    //通过判断单元格的值，来格式化单元格，返回的值即为格式化后包含的元素
+    var a = "";
+    var run = "启";
+    var stop = "停";
+    if (value == "1") {
+        var a = '<span style="color:#00ff00">' + run + '</span>';
+    } else if (value == "0") {
+        var a = '<span style="color:#FF0000">' + stop + '</span>';
+    } else {
+        var a = '<span>' + value + '</span>';
+    }
+    return a;
+}
+
 
 function rolePeopleInitTableContent() {
 

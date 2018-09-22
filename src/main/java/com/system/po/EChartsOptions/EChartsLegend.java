@@ -9,6 +9,7 @@ public class EChartsLegend {
     private List<String> data;
     private String bottom = "auto";
     private String left = "auto";
+    private String show = "true";
 
     public List<String> getData() {
         return data;
@@ -34,4 +35,11 @@ public class EChartsLegend {
         this.left = left;
     }
 
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
 }
