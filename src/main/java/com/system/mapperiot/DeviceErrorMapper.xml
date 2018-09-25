@@ -28,7 +28,9 @@
         <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
     </resultMap>
     <select id="selectErrorInfoCount" resultType="Integer">
-        SELECT count(*) from iot_realerror
+        select count(a.drerror_devnum) from iot_realerror a,iot_deviceinfo b
+        where a.drerror_devnum = b.di_serialnum
+        and (b.di_deactive  &lt; 1 or b.di_deactive is null)
     </select>
     <select id="selectErrorInfoCountByRoleId" resultType="Integer">
         select count(DISTINCT a.drerror_devnum)

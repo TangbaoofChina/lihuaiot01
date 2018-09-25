@@ -375,9 +375,9 @@ function rdlSelectDeviceByTreeIdEC01() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 4,
+        pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [10, 25, 50, 100],
+        pageList: [8,10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -956,9 +956,9 @@ function rdlSelectDeviceByTreeIdSewageC01() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 4,
+        pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [10, 25, 50, 100],
+        pageList: [8,10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -1044,9 +1044,9 @@ function rdlSelectDeviceByTreeIdScaleC01() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 4,
+        pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [10, 25, 50, 100],
+        pageList: [8,10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列

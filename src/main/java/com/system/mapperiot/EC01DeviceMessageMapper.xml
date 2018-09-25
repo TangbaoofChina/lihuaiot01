@@ -140,12 +140,14 @@
         from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_nodeid = #{ORGId}
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
         order by u.di_serialnum asc
     </select>
     <select id="selectEC01ByORGIdAndRoleId" resultMap="BaseResultMap">
         select DISTINCT u.di_name,u.di_serialnum,t.*
         from iot_envcon_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
         and u.di_serialnum = a.devrole_devnum
         and u.di_nodeid = #{orgId}
         and a.devrole_roleid in

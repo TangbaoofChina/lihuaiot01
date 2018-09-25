@@ -20,6 +20,7 @@
         b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c
         where a.device_id = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         union all
         select d.drerror_id as dAlarmId,d.drerror_devnum as dSerialNum,d.drerror_code as dAlarmCode,
@@ -27,6 +28,7 @@
         b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_realerror d,iot_deviceinfo b1,iot_orgtreenode c1
         where d.drerror_devnum = b1.di_serialnum
+        and (b1.di_deactive &lt; 1 or b1.di_deactive is null)
         and b1.di_nodeid = c1.node_id
         union all
         select e.droffline_id as dAlarmId,e.droffline_devnum as dSerialNum,'01' dAlarmCode,
@@ -34,6 +36,7 @@
         b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline e,iot_deviceinfo b2,iot_orgtreenode c2
         where e.droffline_devnum = b2.di_serialnum
+        and (b2.di_deactive &lt; 1 or b2.di_deactive is null)
         and b2.di_nodeid = c2.node_id
         order by dAlarmTime
     </select>
@@ -43,6 +46,7 @@
         b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole f
         where a.device_id = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         and f.devrole_devnum = a.device_id
         and f.devrole_roleid IN
@@ -55,6 +59,7 @@
         b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_realerror d,iot_deviceinfo b1,iot_orgtreenode c1,iot_devicerole f1
         where d.drerror_devnum = b1.di_serialnum
+        and (b1.di_deactive &lt; 1 or b1.di_deactive is null)
         and b1.di_nodeid = c1.node_id
         and f1.devrole_devnum = d.drerror_devnum
         and f1.devrole_roleid IN
@@ -67,6 +72,7 @@
         b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline e,iot_deviceinfo b2,iot_orgtreenode c2,iot_devicerole f2
         where e.droffline_devnum = b2.di_serialnum
+        and (b2.di_deactive &lt; 1 or b2.di_deactive is null)
         and b2.di_nodeid = c2.node_id
         and f2.devrole_devnum = e.droffline_devnum
         and f2.devrole_roleid IN
@@ -81,6 +87,7 @@
         b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_hisalarm a,iot_deviceinfo b,iot_orgtreenode c
         where a.device_id = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         AND a.hisalarm_date BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -90,6 +97,7 @@
         b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_hiserror d,iot_deviceinfo b1,iot_orgtreenode c1
         where d.dherror_devnum = b1.di_serialnum
+        and (b1.di_deactive &lt; 1 or b1.di_deactive is null)
         and b1.di_nodeid = c1.node_id
         AND d.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -99,6 +107,7 @@
         b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline e,iot_deviceinfo b2,iot_orgtreenode c2
         where e.dhoffline_devnum = b2.di_serialnum
+        and (b2.di_deactive &lt; 1 or b2.di_deactive is null)
         and b2.di_nodeid = c2.node_id
         AND e.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -110,6 +119,7 @@
         b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_hisalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole f
         where a.device_id = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         and f.devrole_devnum = a.device_id
         AND a.hisalarm_date BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -124,6 +134,7 @@
         b1.di_name as DEVNAME,c1.node_id as DEVORGID,c1.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_hiserror d,iot_deviceinfo b1,iot_orgtreenode c1,iot_devicerole f1
         where d.dherror_devnum = b1.di_serialnum
+        and (b1.di_deactive &lt; 1 or b1.di_deactive is null)
         and b1.di_nodeid = c1.node_id
         and f1.devrole_devnum = d.dherror_devnum
         AND d.dherror_receivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -138,6 +149,7 @@
         b2.di_name as DEVNAME,c2.node_id as DEVORGID,c2.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline e,iot_deviceinfo b2,iot_orgtreenode c2,iot_devicerole f2
         where e.dhoffline_devnum = b2.di_serialnum
+        and (b2.di_deactive &lt; 1 or b2.di_deactive is null)
         and b2.di_nodeid = c2.node_id
         and f2.devrole_devnum = e.dhoffline_devnum
         AND e.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')

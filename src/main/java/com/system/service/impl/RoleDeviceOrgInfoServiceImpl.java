@@ -68,6 +68,7 @@ public class RoleDeviceOrgInfoServiceImpl implements RoleDeviceOrgInfoService {
             bootStrapTreeNode.setId(roleDeviceOrgInfo.getDeviceRoleInfo().getDevNum());
             bootStrapTreeNode.setText(roleDeviceOrgInfo.getDeviceRoleInfo().getDevName());
             bootStrapTreeNode.setpId(roleDeviceOrgInfo.getBootStrapTreeNode().getId());
+            bootStrapTreeNode.setIcon("glyphicon glyphicon-inbox");
             //去掉数据库查询过程中重复的设备
             if (!judgeContainBootStrapTreeNode(bootStrapTreeNodeList, bootStrapTreeNode)) {
                 bootStrapTreeNodeList.add(bootStrapTreeNode);

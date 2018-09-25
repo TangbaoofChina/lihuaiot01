@@ -106,8 +106,8 @@ public class WelComeController {
         List<EChartsPieOneSerie> eChartsPieOneSerieList = new ArrayList<>();
 
         //title
-        title.setText("设备在线状态");
-        title.setSubtext("设备数量：" + String.valueOf(onLineCount + offLineCount));
+        title.setText("设备状态(数量:" + String.valueOf(onLineCount + offLineCount) + ")");
+        //title.setSubtext("数量：" + String.valueOf(onLineCount + offLineCount));
         title.setLeft("center");
 
         //legend

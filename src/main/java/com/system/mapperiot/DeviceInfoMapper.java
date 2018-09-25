@@ -17,6 +17,8 @@ public interface DeviceInfoMapper {
 
     List<DeviceInfo> selectDeviceByORGId(String orgId);
 
+    List<DeviceInfo> selectDeviceByORGIdBackstage(String orgId);
+
     List<DeviceInfo> selectDeviceByORGIdAndRoleId(@Param("orgId") String orgId, @Param("roleIds") List<String> roleIds);
 
     List<DeviceInfoAndNode> selectDeviceAndNodeByORGId(String orgId);

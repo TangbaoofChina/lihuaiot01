@@ -51,12 +51,20 @@
         select *
         from IOT_DEVICEINFO
         WHERE di_nodeId = #{orgId}
+        and (DI_DEACTIVE &lt; 1 or DI_DEACTIVE is null)
+        order by DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceByORGIdBackstage" resultMap="BaseResultMap">
+        select *
+        from IOT_DEVICEINFO
+        WHERE di_nodeId = #{orgId}
         order by DI_SERIALNUM asc
     </select>
     <select id="selectDeviceByORGIdAndRoleId" resultMap="BaseResultMap">
         select DISTINCT a.*
         from IOT_DEVICEINFO a,iot_devicerole c
         where  c.devrole_devnum = a.di_serialnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
         AND a.di_nodeId = #{orgId}
         and c.devrole_roleid in
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
@@ -68,6 +76,7 @@
         select a.*,b.node_name
         from IOT_DEVICEINFO a,iot_orgtreenode b
         where a.di_nodeid=b.node_id
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
         AND a.di_nodeId = #{orgId}
         order by a.DI_SERIALNUM asc
     </select>
@@ -76,6 +85,7 @@
         from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
         where a.di_nodeid=b.node_id
         and a.di_serialnum = c.devrole_devnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
         AND c.devrole_roleid in
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
@@ -86,6 +96,7 @@
         select DISTINCT a.*,b.node_name
         from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
         where a.di_nodeid=b.node_id
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
         and a.di_serialnum = c.devrole_devnum
         order by a.DI_SERIALNUM asc
     </select>
@@ -96,6 +107,7 @@
         <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
+        and (IOT_DEVICEINFO.DI_DEACTIVE &lt; 1 or IOT_DEVICEINFO.DI_DEACTIVE is null)
     </select>
     <select id="selectDeviceInfoByID" parameterType="string" resultMap="BaseResultMap">
         select *
@@ -105,18 +117,22 @@
     <select id="selectDeviceInfo" resultMap="BaseResultNodeMap">
         select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
         from IOT_DEVICEINFO t
+        where (t.DI_DEACTIVE &lt; 1 or t.DI_DEACTIVE is null)
         order by t.di_serialnum
     </select>
     <select id="selectDeviceByOrgId" resultMap="BaseResultNodeMap">
         select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
         from IOT_DEVICEINFO t
         WHERE di_nodeId = #{orgId}
+        and (t.DI_DEACTIVE &lt; 1 or t.DI_DEACTIVE is null)
         order by t.di_serialnum
     </select>
+
     <select id="selectBstDeviceByOrgId" resultMap="BaseResultBstMap">
         select t.di_name as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
         from IOT_DEVICEINFO t
         WHERE di_nodeId = #{orgId}
+        and (DI_DEACTIVE &lt; 1 or DI_DEACTIVE is null)
         order by t.di_serialnum
     </select>
     <select id="selectDeviceInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
@@ -124,6 +140,7 @@
         a.*
         from IOT_DEVICEINFO a,iot_devicerole b
         WHERE a.di_serialnum = b.devrole_devnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
         and b.devrole_roleid = #{roleId}
         order by a.DI_SERIALNUM asc
     </select>

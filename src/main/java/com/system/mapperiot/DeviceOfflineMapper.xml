@@ -37,12 +37,16 @@
         <result column="ALARM_TYPE" jdbcType="VARCHAR" property="alarmType"/>
     </resultMap>
     <select id="selectOfflineInfoCount" resultType="Integer">
-        SELECT count(*) from IOT_REALOFFLINE
+        select count(a.droffline_devnum) from iot_realoffline a,iot_deviceinfo b
+        where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
     </select>
     <select id="selectOfflineInfoCountByRoleId" resultType="Integer">
         select count(DISTINCT a.droffline_devnum)
-        from iot_realoffline a,iot_devicerole b
+        from iot_realoffline a,iot_devicerole b,iot_deviceinfo c
         where a.droffline_devnum = b.devrole_devnum
+        and a.droffline_devnum = c.di_serialnum
+        and (c.di_deactive &lt; 1 or c.di_deactive is null)
         and b.devrole_roleid IN
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
@@ -52,6 +56,7 @@
         select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c
         where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         order by a.droffline_devreceivetime desc
     </select>
@@ -59,6 +64,7 @@
         select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         and d.devrole_devnum = a.droffline_devnum
         and d.devrole_roleid in
@@ -71,6 +77,7 @@
         select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c
         where a.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         AND a.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -80,6 +87,7 @@
         select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         and d.devrole_devnum = a.dhoffline_devnum
         AND a.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
@@ -100,6 +108,7 @@
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         group by a.dhoffline_devnum order by t desc) m,iot_deviceinfo b,iot_orgtreenode c
         where m.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id and Rownum &lt; #{topN,jdbcType=INTEGER}
         order by m.T desc
     </select>
@@ -113,6 +122,7 @@
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         group by a.dhoffline_devnum order by t desc) m,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where m.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
         and b.di_nodeid = c.node_id
         and d.devrole_devnum = m.dhoffline_devnum
         and d.devrole_roleid in

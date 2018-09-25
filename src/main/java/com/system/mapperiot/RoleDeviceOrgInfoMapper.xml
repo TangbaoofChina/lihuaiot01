@@ -20,6 +20,7 @@
         from iot_role a,iot_devicerole b,iot_deviceinfo c,iot_orgtreenode d,iot_deviceorg e
         where b.devrole_roleid = a.role_id
         and c.di_serialnum = b.devrole_devnum
+        and (c.DI_DEACTIVE &lt; 1 or c.DI_DEACTIVE is null)
         and e.devorg_devnum = b.devrole_devnum
         and d.node_id = c.di_nodeid
         and a.role_id IN
@@ -34,6 +35,7 @@
         from iot_role a,iot_devicerole b,iot_deviceinfo c,iot_orgtreenode d,iot_deviceorg e
         where b.devrole_roleid = a.role_id
         and c.di_serialnum = b.devrole_devnum
+        and (c.DI_DEACTIVE &lt; 1 or c.DI_DEACTIVE is null)
         and e.devorg_devnum = b.devrole_devnum
         and d.node_id = c.di_nodeid
         and c.devtype_serialnum = #{devType,jdbcType=VARCHAR}

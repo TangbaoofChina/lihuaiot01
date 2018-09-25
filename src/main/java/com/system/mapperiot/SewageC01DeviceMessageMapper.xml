@@ -152,6 +152,7 @@
         select u.di_name,u.di_serialnum,t.*
         from IOT_SEWAGECON_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
         and u.di_nodeid = #{ORGId}
         order by u.di_serialnum asc
     </select>
@@ -159,6 +160,7 @@
         select DISTINCT u.di_name,u.di_serialnum,t.*
         from IOT_SEWAGECON_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
         and u.di_serialnum = a.devrole_devnum
         and u.di_nodeid = #{orgId}
         and a.devrole_roleid in
