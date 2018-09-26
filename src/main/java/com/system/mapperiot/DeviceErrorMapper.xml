@@ -42,14 +42,14 @@
         </foreach>
     </select>
     <select id="selectErrorInfo" resultMap="BaseResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_realerror a,iot_deviceinfo b,iot_orgtreenode c
         where a.drerror_devnum = b.di_serialnum
         and b.di_nodeid = c.node_id
         order by a.drerror_receivetime desc
     </select>
     <select id="selectErrorInfoByRoleId" resultMap="BaseResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_realerror a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.drerror_devnum = b.di_serialnum
         and b.di_nodeid = c.node_id
@@ -61,7 +61,7 @@
         order by a.drerror_receivetime desc
     </select>
     <select id="selectHisErrorInfoByDate" resultMap="BaseHisResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_hiserror a,iot_deviceinfo b,iot_orgtreenode c
         where a.dherror_devnum = b.di_serialnum
         and b.di_nodeid = c.node_id
@@ -70,7 +70,7 @@
         order by a.dherror_receivetime desc
     </select>
     <select id="selectHisErrorInfoByDateAndRoleId" resultMap="BaseHisResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'错误' ALARM_TYPE
         from iot_hiserror a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.dherror_devnum = b.di_serialnum
         and b.di_nodeid = c.node_id

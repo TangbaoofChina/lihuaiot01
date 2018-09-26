@@ -67,9 +67,14 @@
         <result column="HSCALEC01_SPARECODE" jdbcType="INTEGER" property="spareCode01"/>
         <result column="HSCALEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
-
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
     <select id="selectScaleC01ByORGId" parameterType="string" resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select <include refid="BaseResult_Column_List"/>
         from IOT_SCALECON_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
@@ -78,7 +83,7 @@
     </select>
 
     <select id="selectScaleC01ByORGIdAndRoleId" resultMap="BaseResultMap">
-        select DISTINCT u.di_name,u.di_serialnum,t.*
+        select DISTINCT <include refid="BaseResult_Column_List"/>
         from IOT_SCALECON_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
@@ -92,7 +97,7 @@
     </select>
 
     <select id="selectScaleC01ByDeviceId" parameterType="string" resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select <include refid="BaseResult_Column_List"/>
         from IOT_SCALECON_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_serialnum = #{sDeviceId}
@@ -100,7 +105,7 @@
 
     <select id="selectScaleC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISSCALECON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
@@ -111,7 +116,7 @@
 
     <select id="selectScaleC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISSCALECON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM in

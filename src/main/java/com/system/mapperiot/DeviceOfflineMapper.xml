@@ -53,7 +53,7 @@
         </foreach>
     </select>
     <select id="selectOfflineInfo" resultMap="BaseResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c
         where a.droffline_devnum = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -61,7 +61,7 @@
         order by a.droffline_devreceivetime desc
     </select>
     <select id="selectOfflineInfoByRoleId" resultMap="BaseResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.droffline_devnum = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -74,7 +74,7 @@
         order by a.droffline_devreceivetime desc
     </select>
     <select id="selectHisOfflineInfoByDate" resultMap="BaseHisResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c
         where a.dhoffline_devnum = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -84,7 +84,7 @@
         order by a.dhoffline_devreceivetime desc
     </select>
     <select id="selectHisOfflineInfoByDateAndRoleId" resultMap="BaseHisResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
         from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.dhoffline_devnum = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -99,7 +99,7 @@
         order by a.dhoffline_devreceivetime desc
     </select>
     <select id="selectHisOfflineTopN" resultMap="HisOfflineRate">
-        select m.*,b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
         (select count(a.dhoffline_devnum) t,a.dhoffline_devnum
         from iot_hisoffline a
         where a.dhoffline_describe='离线'
@@ -113,7 +113,7 @@
         order by m.T desc
     </select>
     <select id="selectHisOfflineTopNByRoleId" resultMap="HisOfflineRate">
-        select m.*,b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
         (select count(a.dhoffline_devnum) t,a.dhoffline_devnum
         from iot_hisoffline a
         where a.dhoffline_describe='离线'

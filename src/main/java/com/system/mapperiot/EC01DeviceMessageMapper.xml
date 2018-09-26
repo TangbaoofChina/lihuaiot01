@@ -135,8 +135,15 @@
         <result column="senddate" jdbcType="VARCHAR" property="sendDate"/>
         <result column="avgtemp" jdbcType="FLOAT" property="avgTemp"/>
     </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
     <select id="selectEC01ByORGId" parameterType="string" resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select
+        <include refid="BaseResult_Column_List"/>
         from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_nodeid = #{ORGId}
@@ -144,7 +151,8 @@
         order by u.di_serialnum asc
     </select>
     <select id="selectEC01ByORGIdAndRoleId" resultMap="BaseResultMap">
-        select DISTINCT u.di_name,u.di_serialnum,t.*
+        select DISTINCT
+        <include refid="BaseResult_Column_List"/>
         from iot_envcon_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
@@ -157,14 +165,14 @@
         order by u.di_serialnum asc
     </select>
     <select id="selectEC01ByDeviceId" parameterType="string" resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select <include refid="BaseResult_Column_List"/>
         from iot_envcon_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_serialnum = #{sDeviceId}
     </select>
     <select id="selectEC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
@@ -174,7 +182,7 @@
     </select>
     <select id="selectEC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM in
@@ -186,7 +194,7 @@
         order by b.HEC01_DATASENDDATE ASC
     </select>
     <select id="selectEC01WaterByDeviceIdsAndDate" resultMap="BaseHisResultMap">
-        select u.di_name,u.di_serialnum,c.*
+        select <include refid="BaseHisResult_Column_List"/>
         from (select t.*,
         row_number() over(partition by t.device_serialnum,to_char(t.hec01_datasenddate,'yyyy-mm-dd') order by
         t.hec01_datasenddate desc) rn
@@ -197,9 +205,9 @@
         <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
-        ) c,iot_deviceinfo u
-        where rn = 1 and u.di_serialnum=c.device_serialnum
-        order by c.hec01_datasenddate asc
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum= b.device_serialnum
+        order by b.hec01_datasenddate asc
     </select>
     <select id="selectEC01DayAvgTempByDeviceIdAndDate" resultMap="DayAvgTempResult">
         select to_char(a.hec01_datasenddate,'yyyy-mm-dd') senddate,
@@ -213,7 +221,7 @@
     </select>
     <select id="selectEC01ByDeviceIdsAndDtl" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM in
@@ -228,7 +236,7 @@
     </select>
     <select id="selectEC01ByDeviceIdAndDt" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}

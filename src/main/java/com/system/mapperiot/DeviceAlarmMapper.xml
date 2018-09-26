@@ -53,7 +53,7 @@
         </foreach>
     </select>
     <select id="selectAlarmInfo" resultMap="BaseResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c
         where a.device_id = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -61,7 +61,7 @@
         order by a.alarm_date desc
     </select>
     <select id="selectAlarmInfoByRoleId" resultMap="BaseResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from iot_realalarm a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.device_id = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -74,7 +74,7 @@
         order by a.alarm_code desc
     </select>
     <select id="selectHisAlarmInfoByDate" resultMap="BaseHisResultMap">
-        select a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from IOT_HISALARM a,iot_deviceinfo b,iot_orgtreenode c
         where a.device_id = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -84,7 +84,7 @@
         order by a.hisalarm_date desc
     </select>
     <select id="selectHisAlarmInfoByDateAndRoleId" resultMap="BaseHisResultMap">
-        select DISTINCT a.*, b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from IOT_HISALARM a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
         where a.device_id = b.di_serialnum
         and (b.di_deactive &lt; 1 or b.di_deactive is null)
@@ -99,7 +99,7 @@
         order by a.hisalarm_date desc
     </select>
     <select id="selectHisAlarmTopN" resultMap="HisAlarmRate">
-        select m.*,b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from (select count(a.hisalarm_id) qty ,a.device_id
         from (
         select t.hisalarm_id hisalarm_id,t.device_id device_id, t.hisalarm_describe thisalarm ,
@@ -120,7 +120,7 @@
         order by m.qty desc
     </select>
     <select id="selectHisAlarmTopNByRoleId" resultMap="HisAlarmRate">
-        select m.*,b.di_name as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'报警' ALARM_TYPE
         from (select count(a.hisalarm_id) qty ,a.device_id
         from (
         select t.hisalarm_id hisalarm_id,t.device_id device_id, t.hisalarm_describe thisalarm ,

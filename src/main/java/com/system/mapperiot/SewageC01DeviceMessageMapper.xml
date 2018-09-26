@@ -147,9 +147,14 @@
         <result column="HSWC01_TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
         <result column="HSWC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
     </resultMap>
-
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
     <select id="selectSewageC01ByORGId" parameterType="string"  resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select <include refid="BaseResult_Column_List"/>
         from IOT_SEWAGECON_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
@@ -157,7 +162,7 @@
         order by u.di_serialnum asc
     </select>
     <select id="selectSewageC01ByORGIdAndRoleId" resultMap="BaseResultMap">
-        select DISTINCT u.di_name,u.di_serialnum,t.*
+        select DISTINCT <include refid="BaseResult_Column_List"/>
         from IOT_SEWAGECON_01 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
@@ -170,14 +175,14 @@
         order by u.di_serialnum asc
     </select>
     <select id="selectSewageC01ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
-        select u.di_name,u.di_serialnum,t.*
+        select <include refid="BaseResult_Column_List"/>
         from IOT_SEWAGECON_01 t,iot_deviceinfo u
         where u.di_serialnum=t.device_serialnum
         and u.di_serialnum = #{sDeviceId}
     </select>
     <select id="selectSewageC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISSEWAGECON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
@@ -187,7 +192,7 @@
     </select>
     <select id="selectSewageC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
         select
-        a.di_name,a.di_serialnum,b.*
+        <include refid="BaseHisResult_Column_List"/>
         from IOT_DEVICEINFO a,IOT_HISSEWAGECON_01 b
         WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
         AND a.DI_SERIALNUM in
@@ -199,15 +204,15 @@
         order by b.HSWC01_DATASENDDATE ASC
     </select>
     <select id="selectPhoneHisSewageC01ByDateAndId" resultMap="BasePhoneHisResultMap">
-         select u.di_name,u.di_serialnum,c.*
+         select a.di_name,a.di_serialnum,b.*
           from (select t.*,
                row_number() over(partition by t.device_serialnum,to_char(t.hswc01_datasenddate,'yyyy-mm-dd') order by t.hswc01_datasenddate desc) rn
           from IOT_HISSEWAGECON_01 t
           where t.hswc01_datasenddate between to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
           and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
           and t.device_serialnum = #{deviceId,jdbcType=VARCHAR}
-          ) c,iot_deviceinfo u
-          where rn = 1 and u.di_serialnum=c.device_serialnum
+          ) b,iot_deviceinfo a
+          where rn = 1 and a.di_serialnum=b.device_serialnum
     </select>
 
 </mapper>

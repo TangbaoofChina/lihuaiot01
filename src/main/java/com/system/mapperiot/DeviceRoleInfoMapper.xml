@@ -10,7 +10,7 @@
         <result column="role_describe" jdbcType="VARCHAR" property="roleDescribe"/>
     </resultMap>
     <select id="selectDeviceRoleInfoByRoleIds" resultMap="BaseResultMap">
-        select distinct b.di_serialnum,b.di_name,c.role_id,c.role_name,c.role_describe
+        select distinct b.di_serialnum,decode(b.eas_fname,null,b.di_name,b.eas_fname),c.role_id,c.role_name,c.role_describe
         from iot_devicerole a,iot_deviceinfo b,iot_role c
         where b.di_serialnum = a.devrole_devnum
         and c.role_id = a.devrole_roleid
