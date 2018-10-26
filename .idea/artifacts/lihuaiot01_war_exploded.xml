@@ -50,7 +50,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.8.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.18.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.8.RELEASE" />
