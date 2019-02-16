@@ -31,9 +31,11 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
         for (DeviceType deviceType : deviceTypeList
                 ) {
             BootStrapTreeNode bootStrapTreeNode1 = bootStrapTreeNodeMapper.selectORGInfoByNodeId(deviceType.getDevType());
-            List<BootStrapTreeNode> bootStrapTreeNodeChildList1 = getChildNode(deviceType.getDevType());
-            bootStrapTreeNode1.setNodes(bootStrapTreeNodeChildList1);
-            bootStrapTreeNodeList.add(bootStrapTreeNode1);
+            if(bootStrapTreeNode1 != null) {
+                List<BootStrapTreeNode> bootStrapTreeNodeChildList1 = getChildNode(deviceType.getDevType());
+                bootStrapTreeNode1.setNodes(bootStrapTreeNodeChildList1);
+                bootStrapTreeNodeList.add(bootStrapTreeNode1);
+            }
         }
         return bootStrapTreeNodeList;
     }
@@ -83,6 +85,8 @@ public class BootStrapTreeNodeServiceImpl implements BootStrapTreeNodeService {
             //立华牧业节点-鸡舍环控器
             BootStrapTreeNode bootStrapTreeNode01 = bootStrapTreeNodeMapper.selectORGInfoByNodeId(deviceType.getDevType());
             //获取根节点下挂的设备
+            if(bootStrapTreeNode01 == null) //如果没有设备
+                continue;
             List<BootStrapTreeNode> deviceNodeList01 = getDevicesList(deviceType.getDevType());
             List<BootStrapTreeNode> bootStrapTreeNodeChildList01 = getChildNodeAndDevice(deviceType.getDevType());
             //添加设备
