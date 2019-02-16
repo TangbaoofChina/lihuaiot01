@@ -276,10 +276,10 @@
             <field>alarmErrorCode</field>
             <value>报警</value>
         </property>
-        <!--<property>
+        <property>
             <field>dReceiveTime</field>
             <value>接收</value>
-        </property>-->
+        </property>
         <property>
             <field>dState</field>
             <value>状态</value>
