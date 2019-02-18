@@ -57,6 +57,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlSewageC212DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlSewageC212toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlSewageC212Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlSewageC212DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlSewageC212toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlScaleC01DeviceListDiv"
              style="display: none;white-space: nowrap;">
             <div id="rdlScaleC01toolbar" class="btn-group">
@@ -671,6 +693,732 @@
                     <div class="col-md-3 col-sm-3 SewageC01border">
                         <div id="plcElecNormal" class="rectangle02Open" style="display: block">正常</div>
                         <div id="plcElecLack" class="rectangle02Close" style="display: none">不足</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns-right" id="rdlSewageC212OneDeviceDiv" style="display:none;">
+            <!--主体-->
+            <div class="col-md-9 col-sm-9 row" id="sewageC212Main" style="text-align: center;margin-left: 20px;">
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>时间</span>
+                    </div>
+                    <div class="col-md-5 col-sm-5 SewageC212border">
+                        <span id="sewagec212sendDate">2018-05-19 12:21:12</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>累计流量(m³)</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="flowmeter212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>当日流量(m³)</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="todayFlowmeter212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>环境温度(℃)</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="airTemp212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR水温(℃)</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="waterTemp212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold"></span>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">污水处理前期工艺(分钟)</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>运行时间</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>运行时间</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池搅拌机</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="collectMixerStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="collectMixerRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="collectMixerRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>除磷投加机</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="dephosphorizeStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="dephosphorizeRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="dephosphorizeRunMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池提升泵</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="collectPumpStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="collectPumpRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="collectPumpRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵1</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sludgePump01Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sludgePump01Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sludgePump01RunMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">SBR污水处理控制系统(分钟)</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>系统自动模式</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="systemAutoStop212" class="rectangle02Close" style="display: block">手动</div>
+                        <div id="systemAutoRun212" class="rectangle02Open" style="display: none">自动</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR周期运行</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrCycleStop212" class="rectangle02Close" style="display: block">停止</div>
+                        <div id="sbrCycleRun212" class="rectangle02Open" style="display: none">周期</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>运行时间</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>工艺流程</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <span>运</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>运行时间</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池进水泵</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrIntakePumpStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrIntakePumpRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sbrIntakePumpRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR静置</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrStaticStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrStaticRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sbrStaticRunMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR一次搅拌</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrMixerOnceStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixerOnceRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sbrMixerOnceRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR污泥泵2</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sludgePump02Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sludgePump02Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sludgePump02RunMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR曝气</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="fanStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="fanRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="fanRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>滗水器(排水)</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="decanterCycleStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="decanterCycleRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border" style="position: center">
+                        <div id="decanterStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="decanterRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR二次搅拌</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrMixerSecStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixerSecRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sbrMixerRunMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR静置活化</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrActiveStop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrActiveRun212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="sbrActiveRunMinute212">50</span>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">工艺流程设定时间(分钟)</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>除磷投加机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="dephosphorizeSetMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵1</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sludgePump01SetMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR设定周期</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrCycleSetMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR一次搅拌</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrMixerOnceSetMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR静置</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrStaticSetMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR曝气</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="fanSetMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR污泥泵2</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sludgePump02SetMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR二次搅拌</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrMixerSetMinute212">50</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR活化</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrActiveSetMinute212">50</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">设备运行状态</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机1</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="fan01Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="fan01Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>/</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机2</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="fan02Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="fan02Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>/</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机01</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrMixer01Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixer01Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>/</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机02</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 SewageC212border">
+                        <div id="sbrMixer02Stop212" class="rectangleClose" style="display: block">停</div>
+                        <div id="sbrMixer02Run212" class="rectangleOpen" style="display: none">运</div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>/</span>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">公共参数</span>
+                </div>
+
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池液位高</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="collectHighOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="collectHighOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池液位低</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="collectLowOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="collectLowOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>调节池液位高</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="regulatHighOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="regulatHighOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>调节池液位低</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="regulatLowOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="regulatLowOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池液位高</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrHighOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="sbrHighOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池液位低</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrLowOff212" class="rectangle02Close" style="display: block">未到</div>
+                        <div id="sbrLowOn212" class="rectangle02Open" style="display: none">到了</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">故障状态</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池搅拌机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="collectMixerNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="collectMixerFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池提升泵</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="collectPumpNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="collectPumpFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵1</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sludgePump01Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="sludgePump01Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池进水泵</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrIntakePumpNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="sbrIntakePumpFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机1</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrMixer01Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="sbrMixer01Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机2</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sbrMixer02Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="sbrMixer02Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机1</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="fan01Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="fan01Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机2</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="fan02Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="fan02Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵2</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="sludgePump02Normal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="sludgePump02Fault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>滗水器</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="decanterNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="decanterFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>PLC电量</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="plcElecNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="plcElecLack212" class="rectangle02Close" style="display: none">不足</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>除磷投加机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="dephosphorizeNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="dephosphorizeFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>智能电表</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="elecNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="elecFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>环境温度</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="airTempNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="airTempFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池水温</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <div id="waterTempNormal212" class="rectangle02Open" style="display: block">正常</div>
+                        <div id="waterTempFault212" class="rectangle02Close" style="display: none">故障</div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">电能数据</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>线Uab</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="uab212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>线Ubc</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="ubc212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>线Uca</span>
+                    </div>
+                    <div class="col-sm-2 col-sm-2 SewageC212border">
+                        <span id="uca212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>相Ua</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="ua212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>相Ub</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="ub212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>相Uc</span>
+                    </div>
+                    <div class="col-sm-2 col-sm-2 SewageC212border">
+                        <span id="uc212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>Ia</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="ia212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>Ib</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span id="ib212">150.22</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 SewageC212border">
+                        <span>Ic</span>
+                    </div>
+                    <div class="col-sm-2 col-sm-2 SewageC212border">
+                        <span id="ic212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>合相有功功率</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="pt212">150.22</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>合相无功功率</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="qt212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>合相视在功率</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="st212">150.22</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>合相功率因数</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="pft212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>正向有功总电能</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="impEP212">150.22</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>反向有功总电能</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="expEP212">150.22</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>频率</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="freq212">30</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row" style="text-align: left;">
+                    <span style="font-weight: bold">设备运行累计时长</span>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池搅拌机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="collectMixerTotal212">15012</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>除磷投加机</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="dephosphorizeTotal212">15012</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>集水池提升泵</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="collectPumpTotal212">15012</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵01</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sludgePump01Total212">15012</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR进水泵</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrIntakePumpTotal212">15012</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机01</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrMixer01Total212">15012</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>SBR池搅拌机02</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sbrMixer02Total212">15012</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机01</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="fan01Total212">15012</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>回转式风机02</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="fan02Total212">15012</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>污泥泵02</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="sludgePump02Total212">15012</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 row">
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span>滗水器</span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 SewageC212border">
+                        <span id="decanterTotal212">15012</span>
                     </div>
                 </div>
             </div>
