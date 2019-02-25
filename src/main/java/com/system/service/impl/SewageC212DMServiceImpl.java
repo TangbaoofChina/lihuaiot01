@@ -1,6 +1,8 @@
 package com.system.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.system.mapperiot.SewageC212DMMapper;
+import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.SewageC212DeviceMessage;
 import com.system.po.MydataTableColumn;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +53,34 @@ public class SewageC212DMServiceImpl implements SewageC212DMService {
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("212");
         judgeOneDeviceOnlineState(sewageC212DeviceMessage,deviceType.getDevTypeOffline());
         return sewageC212DeviceMessage;
+    }
+
+    @Override
+    public List<SewageC212DeviceMessage> selectSewageC212ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+        return sewageC212DeviceMessageMapper.selectSewageC212ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
+    }
+
+    @Override
+    public DataTablePageing selectSewageC212ByDeviceIdAndDateAndPaging(Integer pageNumber, Integer pageSize, String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+        List<SewageC212DeviceMessage> sewageC212DeviceMessageList = new ArrayList<SewageC212DeviceMessage>();
+        DataTablePageing dataTablePageing = new DataTablePageing();
+        List<SewageC212DeviceMessage> ewagec212DeviceMessageListAll = sewageC212DeviceMessageMapper.selectSewageC212ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
+        if (ewagec212DeviceMessageListAll.size() > 0)
+        {
+            Integer bigIndex = 0;
+            Integer smallIndex = 0;
+            smallIndex = pageNumber-1;
+            bigIndex = smallIndex + pageSize;
+            if(bigIndex > ewagec212DeviceMessageListAll.size())
+                bigIndex = ewagec212DeviceMessageListAll.size();
+            sewageC212DeviceMessageList.addAll(ewagec212DeviceMessageListAll.subList(smallIndex,bigIndex));
+        }
+        //String str= JSON.toJSON(sewageC01DeviceMessageList).toString();
+        String sReturnJson = JSON.toJSONString(sewageC212DeviceMessageList);
+        dataTablePageing.setTotal(ewagec212DeviceMessageListAll.size());
+        dataTablePageing.setsReturnJson(sReturnJson);
+        //return dataDetailList;
+        return dataTablePageing;
     }
 
     @Override

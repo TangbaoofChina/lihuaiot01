@@ -1,5 +1,6 @@
 package com.system.service;
 
+import com.system.po.DataTablePageing;
 import com.system.po.Device.SewageC212DeviceMessage;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
@@ -32,6 +33,29 @@ public interface SewageC212DMService {
      * @throws Exception
      */
     SewageC212DeviceMessage selectSewageC212ByDeviceId(String sDeviceId) throws Exception;
+
+    /**
+     * 一个设备时间段内的数据;不分页
+     * @param sDeviceId
+     * @param sStartDate
+     * @param sEndDate
+     * @return
+     * @throws Exception
+     */
+    List<SewageC212DeviceMessage> selectSewageC212ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+
+    /**
+     * 一个设备时间段内的数据;分页
+     * @param pageNumber
+     * @param pageSize
+     * @param sDeviceId
+     * @param sStartDate
+     * @param sEndDate
+     * @return
+     * @throws Exception
+     */
+    DataTablePageing selectSewageC212ByDeviceIdAndDateAndPaging(Integer pageNumber, Integer pageSize, String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+
 
     /**
      * 污水控制器表头

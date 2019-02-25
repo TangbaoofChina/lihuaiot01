@@ -206,7 +206,7 @@
             #{item}
         </foreach>
         ) b,iot_deviceinfo a
-        where rn = 1 and a.di_serialnum= b.device_serialnum
+        where rn = 2 and a.di_serialnum= b.device_serialnum
         order by b.hec01_datasenddate asc
     </select>
     <select id="selectEC01DayAvgTempByDeviceIdAndDate" resultMap="DayAvgTempResult">

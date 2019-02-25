@@ -72,8 +72,40 @@
                        data-showColumns="true">
                 </table>
             </div>
-
         </div>
+
+        <div class="columns-right" id="hisSewageC212DeviceListDiv" style="white-space: nowrap;display: none">
+            <div id="hisSewageC212toolbar" class="btn-group">
+                <%--<button class="btn btn-default" style="width: 61px;height: 30px" id="refresh_button"
+                        onclick="tableRefresh()">
+                    <span class="glyphicon glyphicon-refresh"></span> <span>刷新</span>
+                </button>--%>
+                <div class="form-inline">
+                    <label>时间：</label>
+                    <div class="btn-group">
+                        <input type="text" id="hisSewageC212DateInterval" class="form-control" style="width: 320px;">
+                    </div>
+                    <button class="btn btn-default" id="hisSewageC212Query_storage">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                    </button>
+                    <button class="btn btn-default" id="hisSewageC212Export_storage">
+                        <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-8">
+                <table class="table table-striped" id="hisSewageC212DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#hisSewageC212toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-showColumns="true">
+                </table>
+            </div>
+        </div>
+
         <div class="columns-right" id="hisScaleC01DeviceListDiv" style="white-space: nowrap;display: none">
             <div id="hisScaleC01toolbar" class="btn-group">
                 <div class="form-inline">
