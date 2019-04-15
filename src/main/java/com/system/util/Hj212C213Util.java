@@ -1,6 +1,5 @@
 package com.system.util;
 
-import com.sun.xml.internal.ws.api.server.SDDocument;
 import com.system.po.Device.Hj212C213DeviceMessage;
 import com.system.po.Hj212C213.Hj212C213DayData;
 
