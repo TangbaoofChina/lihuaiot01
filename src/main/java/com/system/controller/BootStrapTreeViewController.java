@@ -159,7 +159,16 @@ public class BootStrapTreeViewController {
     public String selectDeviceTypeTreeNode() throws Exception{
         String jsonString = "";
         List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
-
+        List<BootStrapTreeNode> bootStrapTreeNodeList = new ArrayList<>();
+        for (DeviceType dt:deviceTypeList
+             ) {
+            BootStrapTreeNode bootStrapTreeNode = new BootStrapTreeNode();
+            bootStrapTreeNode.setId(dt.getDevType());
+            bootStrapTreeNode.setText(dt.getDevTypeDescribe());
+            bootStrapTreeNode.setpId("-1");
+            bootStrapTreeNodeList.add(bootStrapTreeNode);
+        }
+        jsonString = JSON.toJSONString(bootStrapTreeNodeList);
         return jsonString;
     }
 }

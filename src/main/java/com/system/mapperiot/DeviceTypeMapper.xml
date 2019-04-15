@@ -8,6 +8,13 @@
         <result column="DEVTYPE_DESCRIBE" jdbcType="VARCHAR" property="devTypeDescribe"/>
         <result column="DEVTYPE_OFFLINE" jdbcType="INTEGER" property="devTypeOffline"/>
     </resultMap>
+    <resultMap id="DeviceListResultMap" type="com.system.po.DeviceCfgInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="di_serialnum" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="di_serialnum" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="di_name" jdbcType="VARCHAR" property="dName"/>
+        <result column="devorg_orglongid" jdbcType="VARCHAR" property="dCfgUrlId"/>
+    </resultMap>
     <insert id="insertDeviceType" parameterType="com.system.po.parameter.DeviceType">
         <selectKey keyProperty="sid" resultType="String" order="BEFORE">
             select sys_guid() from dual
@@ -20,5 +27,12 @@
     </select>
     <select id="selectDeviceTypeByTypeNum" parameterType="String" resultMap="BaseResultMap">
         select * from IOT_DEVICETYPE t where t.devtype_serialnum = #{devType,jdbcType=VARCHAR}
+    </select>
+    <select id="selectDeviceListByType" parameterType="String" resultMap="DeviceListResultMap">
+       select di.di_name,di.di_serialnum,do.devorg_orglongid
+       from iot_deviceinfo di,iot_deviceorg do
+        where di.devtype_serialnum=#{devType,jdbcType=VARCHAR}
+        and di.di_serialnum = do.devorg_devnum
+        order by di.di_serialnum asc
     </select>
 </mapper>

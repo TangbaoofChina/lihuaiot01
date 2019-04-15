@@ -43,6 +43,25 @@
         </property>
     </entity>
 
+    <entity class="com.system.po.DeviceCfgInfo" sheetName="设备信息2.0" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dSerialNumDec</field>
+            <value>序号(10)</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>dCfgUrl</field>
+            <value>路径</value>
+        </property>
+    </entity>
+
     <entity class="com.system.po.Device.EC01DeviceMessage" sheetName="环控器01数据" boldHeading="true">
         <property>
             <field>dSerialNum</field>

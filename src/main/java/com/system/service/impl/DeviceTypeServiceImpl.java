@@ -1,11 +1,16 @@
 package com.system.service.impl;
 
 import com.system.mapperiot.DeviceTypeMapper;
+import com.system.mapperiot.ORGTreeNodeMapper;
+import com.system.po.DeviceCfgInfo;
+import com.system.po.ORGTreeNode;
 import com.system.po.parameter.DeviceType;
 import com.system.service.DeviceTypeService;
+import com.system.util.EJConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +19,10 @@ import java.util.Map;
 public class DeviceTypeServiceImpl implements DeviceTypeService {
     @Autowired
     private DeviceTypeMapper deviceTypeMapper;
+    @Autowired
+    private ORGTreeNodeMapper orgTreeNodeMapper;
+    @Autowired
+    private EJConvertor ejConvertor;
 
     @Override
     public void insertDeviceType(DeviceType deviceType) {
@@ -38,5 +47,23 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             deviceTypeOfflineMap.put(deviceType.getDevType(), deviceType.getDevTypeOffline());
         }
         return deviceTypeOfflineMap;
+    }
+
+    @Override
+    public List<DeviceCfgInfo> selectDeviceListByType(String devType){
+        List<DeviceCfgInfo> deviceCfgInfoList = deviceTypeMapper.selectDeviceListByType(devType);
+        List<ORGTreeNode>  orgTreeNodeList = orgTreeNodeMapper.selectORGInfo();
+        for (DeviceCfgInfo dCI:deviceCfgInfoList
+             ) {
+            dCI.findUrl(orgTreeNodeList);
+        }
+        return deviceCfgInfoList;
+    }
+
+    @Override
+    public File exportStorage(List<DeviceCfgInfo> storageList) {
+        if (storageList == null)
+            return null;
+        return ejConvertor.excelWriter(DeviceCfgInfo.class, storageList);
     }
 }

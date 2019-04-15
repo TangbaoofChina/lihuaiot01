@@ -12,7 +12,7 @@ $(function () {
 function dlbtInitTreeNode() {
     // Some logic to retrieve, or generate tree structure
     $.ajax({
-        url: "/lihuaiot01/bootStrapTreeNode/selectTreeNode",
+        url: "/lihuaiot01/bootStrapTreeNode/selectDeviceTypeTreeNode",
 // 数据发送方式
         type: "POST",
 // 接受数据格式
@@ -23,7 +23,7 @@ function dlbtInitTreeNode() {
         success: function (result) {
             if (JSON.stringify(result) !== '[]') {
                 var json = eval(result); //数组
-                dlbtNowTreeNode = json;
+                dlbtTreeNodes = json;
                 $('#dlbtTree').treeview({
                     data: dlbtTreeNodes,
                     showTags: true,
@@ -72,28 +72,19 @@ function dlbtInitTable() {
     $.ajax({
         type: 'POST',
         data: {},
-        url: '/lihuaiot01/deviceList/DeviceHead',
+        url: '/lihuaiot01/devicelistbytype/DeviceHead',
         dataType: "json",
         success: function (result) {
             /*alert("1");*/
             var json = eval(result); //数组
             for (var i = 0; i < json.length; i++) {
                 var temp = "";
-                if (json[i].data === "dState") {
-                    temp = {
-                        field: json[i].data,
-                        title: json[i].title,
-                        align: json[i].align,
-                        formatter: dlbtChangeTableColor
-                    };//手动拼接columns
-                } else {
-                    temp = {field: json[i].data, title: json[i].title, align: json[i].align};//手动拼接columns
-                }
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
                 questionColumns.push(temp);
             }
             dlbtTableColumns = questionColumns;
-            $('#dlbtDeviceList').bootstrapTable('destroy');
-            $('#dlbtDeviceList').bootstrapTable({
+            $('#dlbtTable').bootstrapTable('destroy');
+            $('#dlbtTable').bootstrapTable({
                 columns: questionColumns,
             });
         },
@@ -110,15 +101,15 @@ function dlbtInitTable() {
 function dlbtQueryParams(params) {
     var queryParameter = dlbtNowTreeNode.id;
     return {
-        sId: queryParameter
+        sTypeId: queryParameter
     };
 }
 
 function dlbtSelectDeviceByTreeId() {
 
-    $('#dlbtDeviceList').bootstrapTable('destroy');
+    $('#dlbtTable').bootstrapTable('destroy');
 
-    $('#dlbtDeviceList').bootstrapTable({
+    $('#dlbtTable').bootstrapTable({
         //是否显示行间隔色
         striped: true,
         //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -130,14 +121,18 @@ function dlbtSelectDeviceByTreeId() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 8,
+        pageSize: 9,
         //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],
         //是否显示搜索
-        search: false,
+        search: true,
+        // 显示下拉框勾选要显示的列
+        showColumns : true,
+        //是否显示刷新按钮
+        showRefresh: true,
         //data:json,
         //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
-        url: "/lihuaiot01/deviceList/selectDeviceByORGId",
+        url: "/lihuaiot01/devicelistbytype/selectDeviceByTypeId",
         contentType: "application/x-www-form-urlencoded",//必须要有！！！！
         method: 'post',                      //请求方式（*）
         dataType: "json",
@@ -155,21 +150,6 @@ function dlbtSelectDeviceByTreeId() {
     });
 }
 
-function dlbtChangeTableColor(value, row, index) {
-    //通过判断单元格的值，来格式化单元格，返回的值即为格式化后包含的元素
-    var a = "";
-    if (value == "在线") {
-        var a = '<span style="color:#00ff00">' + value + '</span>';
-    } else if (value == "已分派") {
-        var a = '<span style="color:#0000ff">' + value + '</span>';
-    } else if (value == "离线") {
-        var a = '<span style="color:#FF0000">' + value + '</span>';
-    } else {
-        var a = '<span>' + value + '</span>';
-    }
-    return a;
-}
-
 // 导出库存信息
 function dlbtExportStorageAction() {
     $('#dlbtExport_storage').click(function () {
@@ -179,9 +159,9 @@ function dlbtExportStorageAction() {
     $('#dlbtExport_storage_download').click(function () {
         var queryParameter = dlbtNowTreeNode.id;
         var data = {
-            sId: queryParameter
+            sTypeId: queryParameter
         };
-        var url = "/lihuaiot01/deviceList/exportDeviceList?" + $.param(data);
+        var url = "/lihuaiot01/devicelistbytype/exportDeviceList?" + $.param(data);
         window.open(url, '_blank');
         $('#dlbtExport_modal').modal("hide");
     });
