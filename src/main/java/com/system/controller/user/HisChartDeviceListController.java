@@ -1,6 +1,7 @@
 package com.system.controller.user;
 
 import com.alibaba.fastjson.JSON;
+import com.system.controller.util.DeviceUtilController;
 import com.system.controller.util.ScaleC01Chart;
 import com.system.po.*;
 import com.system.po.EChartsOptions.EChartsParts.ECxAxisAxisLabel;
@@ -50,6 +51,8 @@ public class HisChartDeviceListController {
     private DeviceInfoService deviceInfoService;
     @Autowired
     private ScaleC01Chart scaleC01Chart;
+    @Autowired
+    private DeviceUtilController deviceUtilController;
 
 /*    @RequestMapping(value = "selectDevices", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -70,10 +73,7 @@ public class HisChartDeviceListController {
         Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
         List<DeviceInfoAndNode> deviceInfoList = new ArrayList<DeviceInfoAndNode>();
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
-            //deviceInfoList = deviceInfoService.selectDeviceInfoByOrgIdAll("101");
             deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("111"));
-            /*deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("201"));
-            deviceInfoList.addAll(deviceInfoService.selectDeviceInfoByOrgIdAll("211"));*/
         } else {
             deviceInfoList = deviceInfoService.selectDeviceInfoByRoleIdAll(userlogin.getRoleInfoList());
         }
@@ -113,7 +113,7 @@ public class HisChartDeviceListController {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sStartDate, sEndDate);
             sReturnJson = getReturnJson(dataTablePageing);
         }
@@ -130,7 +130,7 @@ public class HisChartDeviceListController {
                                     HttpServletRequest request,
                                     HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> ec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
         if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sStartDate, sEndDate);
 
@@ -148,7 +148,7 @@ public class HisChartDeviceListController {
                                        HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> ec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+        List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
         if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             ec01DeviceMessageList = ec01DeviceMessageService.selectHisEC01TbByDtlAndIDsAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sQueryParam, sDateTimeList);
 
@@ -164,7 +164,7 @@ public class HisChartDeviceListController {
         List<MydataTableColumn> myDTCList = new ArrayList<>();
         List<DeviceInfo> deviceInfoList = new ArrayList<>();
         if (sDeviceIds.length > 0) {
-            deviceInfoList = getDeviceInfoList(sDeviceIds);
+            deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
         }
 
@@ -180,7 +180,7 @@ public class HisChartDeviceListController {
         //排序
         sDateTimeList = EC01Util.SortByDate(sDateTimeList);
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             myDTCList = EC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, sDateTimeList);
         }
         /*String a = JSONArray.fromObject(myDTCList).toString();
@@ -198,7 +198,7 @@ public class HisChartDeviceListController {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = ec01DeviceMessageService.selectHisEC01ByDtlAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sDeviceIds, sQueryParam, sDateTimeList);
             sReturnJson = getReturnJson(dataTablePageing);
         }
@@ -237,10 +237,10 @@ public class HisChartDeviceListController {
         Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsChartThreshold(sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
         if (scaleC01MapByDate == null || scaleC01MapByDate.size() < 1)
             return "[]";
-        List<DeviceInfo> deviceInfoList = this.getDeviceInfoList(sDeviceIds);
+        List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
         if (deviceInfoList == null || deviceInfoList.size() < 1)
             return "[]";
-        Map<String, String> deviceInfoMap = this.getDeviceInfoMap(deviceInfoList);
+        Map<String, String> deviceInfoMap = deviceUtilController.getDeviceInfoMap(deviceInfoList);
         PhoneEChartsOptions phoneEChartsOptions = scaleC01Chart.getECharts(sQueryParam, deviceInfoMap, sStartAge, scaleC01MapByDate);
         if (phoneEChartsOptions == null)
             return "[]";
@@ -254,7 +254,7 @@ public class HisChartDeviceListController {
         List<MydataTableColumn> myDTCList = new ArrayList<>();
         List<DeviceInfo> deviceInfoList = new ArrayList<>();
         if (sDeviceIds.length > 0) {
-            deviceInfoList = getDeviceInfoList(sDeviceIds);
+            deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             myDTCList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
         }
 
@@ -271,7 +271,7 @@ public class HisChartDeviceListController {
             return sReturnJson;
         }
         if (sDeviceIds.length > 0) {
-            List<DeviceInfo> deviceInfoList = getDeviceInfoList(sDeviceIds);
+            List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
             DataTablePageing dataTablePageing = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsAndPageAndThreshold(pageNumber, pageSize, deviceInfoList, sMaxThreshold, sMinThreshold, sStartAge, sDeviceIds, sQueryParam, sStartDate, sEndDate);
             sReturnJson = getReturnJson(dataTablePageing);
         }
@@ -289,7 +289,7 @@ public class HisChartDeviceListController {
                                             HttpServletRequest request,
                                             HttpServletResponse response) throws Exception {
         List<List<OneDataDetail>> scalec01DeviceMessageList = null;
-        List<DeviceInfo> deviceInfoList = this.getDeviceInfoList(sDeviceIds);
+        List<DeviceInfo> deviceInfoList = deviceUtilController.getDeviceInfoList(sDeviceIds);
         if (sDeviceIds != null && (sDeviceIds.length > 0)) {
             scalec01DeviceMessageList = scaleC01DeviceMessageService.selectHisScaleC01ByDateAndIDsTableAndThreshold(deviceInfoList, sDeviceIds, sMaxThreshold, sMinThreshold, sStartAge, sQueryParam, sStartDate, sEndDate);
             List<MydataTableColumn> myDTCList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
@@ -299,38 +299,6 @@ public class HisChartDeviceListController {
     }
 
     /****************************ScaleC01   End****************************************/
-    private List<DeviceInfo> getDeviceInfoList(String[] sDeviceIds) throws Exception {
-        //为了防止排序
-        //日温饮水 排序，先取出第一个设备的信息，再取出后续的设备的信息
-        List<DeviceInfo> deviceInfoList = new ArrayList<>();
-        if (sDeviceIds.length < 1) {
-            return deviceInfoList;
-        }
-        String[] sDeviceIdsFirst = new String[1];
-        sDeviceIdsFirst[0] = sDeviceIds[0];
-        List<DeviceInfo> deviceInfoListFirst = deviceInfoService.selectDeviceInfoByIDs(sDeviceIdsFirst);
-        deviceInfoList.addAll(deviceInfoListFirst);
-        if (sDeviceIds.length > 1) {
-            List<String> sDeviceIdsSecond = new ArrayList<>();
-            for (int i = 1; i < sDeviceIds.length; i++) {
-                sDeviceIdsSecond.add(sDeviceIds[i]);
-            }
-            List<DeviceInfo> deviceInfoListSecond = deviceInfoService.selectDeviceInfoByIDs(sDeviceIdsSecond.toArray(new String[sDeviceIdsSecond.size()]));
-
-            deviceInfoList.addAll(deviceInfoListSecond);
-        }
-        return deviceInfoList;
-    }
-
-    //根据设备列表，生成设备的MAP，为曲线的图例服务，显示设备名称(设备序号，设备名称)
-    private Map<String, String> getDeviceInfoMap(List<DeviceInfo> deviceInfoList) {
-        Map<String, String> deviceInfoMap = new HashMap<>();
-        for (int i = 0; i < deviceInfoList.size(); i++) {
-            deviceInfoMap.put(deviceInfoList.get(i).getDSerialNum(), deviceInfoList.get(i).getDName());
-        }
-        return deviceInfoMap;
-    }
-
     private String getReturnJson(DataTablePageing dataTablePageing) {
         String sReturnJson = "[]";
         sReturnJson = "{";

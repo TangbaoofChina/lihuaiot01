@@ -304,13 +304,15 @@ function removealljsfile() {
     removejscssfile("/lihuaiot01/js/userjs/operationcenter.js", "js");
     removejscssfile("/lihuaiot01/js/userjs/realdevicelist.js", "js");
     removejscssfile("/lihuaiot01/js/userjs/hisdevicelist.js", "js");
+
     removejscssfile("/lihuaiot01/js/userjs/hischartdevice.js", "js");
+    removejscssfile("/lihuaiot01/js/userjs/hischartdevicehj212C213.js", "js");
 
     removejscssfile("/lihuaiot01/js/adminjs/devicecombineorg.js", "js");
     removejscssfile("/lihuaiot01/js/adminjs/peoplecombineorg.js", "js");
     removejscssfile("/lihuaiot01/js/adminjs/organizemanage.js", "js");
 
-    removejscssfile("/lihuaiot01/js/centerjs/operationcenter.js", "js");
+    //removejscssfile("/lihuaiot01/js/centerjs/operationcenter.js", "js");
 
     removejscssfile("/lihuaiot01/js/systemjs/loginrecord.js", "js");
 

@@ -4,6 +4,7 @@ var rdlTableColumns;
 var rdlSewageC01TableColumns;
 var rdlSewageC212TableColumns;
 var rdlScaleC01TableColumns;
+var rdlHj212C213TableColumns;
 var rdlTreeNodes;
 var realid_of_setintervalDeviceList;
 var realid_of_setintervalDeviceOne;
@@ -13,6 +14,7 @@ $(function () {
     rdlInitTableSewageC01();
     rdlInitTableSewageC212();
     rdlInitTableScaleC01();
+    rdlInitTableHj212C213();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {
@@ -101,6 +103,8 @@ function rdlNodeSelected(event, data) {
     var uiSewageC212One = document.getElementById("rdlSewageC212OneDeviceDiv");
     var uiScaleC01List = document.getElementById("rdlScaleC01DeviceListDiv");
     var uiScaleC01One = document.getElementById("rdlScaleC01OneDeviceDiv");
+    var uiHj212C213List = document.getElementById("rdlHj212C213DeviceListDiv");
+    var uiHj212C213One = document.getElementById("rdlHj212C213OneDeviceDiv");
     var rootNodeId = rdlNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (rootNodeId === "101" || rootNodeId === "111")   //种禽环控器
@@ -147,8 +151,18 @@ function rdlNodeSelected(event, data) {
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "block";
         }
-    }
-    else {
+    } else if(rootNodeId === "213" && queryParameter.length == 14){
+        uiEC01List.style.display = "none";
+        uiEC01One.style.display = "none";
+        uiSewageC01List.style.display = "none";
+        uiSewageC01One.style.display = "none";
+        uiSewageC212List.style.display = "none";
+        uiSewageC212One.style.display = "none";
+        uiScaleC01List.style.display = "none";
+        uiScaleC01One.style.display = "none";
+        uiHj212C213List.style.display = "none";
+        uiHj212C213One.style.display = "block";
+    } else {
         if (rootNodeId === "101" || rootNodeId === "111")   //种禽环控器
         {
             uiEC01List.style.display = "block";
@@ -159,6 +173,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC212One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
         }
         else if (rootNodeId === "201" || rootNodeId === "211")  //立华禽环保1.0
         {
@@ -170,6 +186,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC212One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
         }
         else if (rootNodeId === "202" || rootNodeId === "212")  //立华禽环保2.0
         {
@@ -181,6 +199,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC212One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
         }
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
@@ -192,6 +212,20 @@ function rdlNodeSelected(event, data) {
             uiSewageC212One.style.display = "none";
             uiScaleC01List.style.display = "block";
             uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
+        }
+        else if(rootNodeId === "213"){ //水质在线监测
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "block";
+            uiHj212C213One.style.display = "none";
         }
     }
     if (data.nodes != null) {
@@ -220,6 +254,10 @@ function rdlNodeSelected(event, data) {
     else if (rootNodeId === "301" || rootNodeId === "311")  //污水控制器
     {
         rdlSelectDeviceByTreeIdScaleC01();
+    }
+    else if (rootNodeId === "213")  //水质在线监测
+    {
+        rdlSelectDeviceByTreeIdHj212C213();
     }
     rdlSelectInfoByDeviceIdAndType();
 }
@@ -1861,6 +1899,93 @@ function rdlSelectDeviceByTreeIdScaleC01() {
 }
 //************************ScaleC01 end******************************/
 
+//************************Hj212C213 start******************************/
+function rdlInitTableHj212C213() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/hj212C213DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlHj212C213TableColumns = questionColumns;
+            $('#rdlHj212C213DeviceList').bootstrapTable('destroy');
+            $('#rdlHj212C213DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdHj212C213() {
+
+    $('#rdlHj212C213DeviceList').bootstrapTable('destroy');
+
+    $('#rdlHj212C213DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 8,
+        //可供选择的每页的行数（*）
+        pageList: [8,10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectHj212C213ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlHj212C213TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+//************************Hj212C213 end******************************/
+
 //请求服务数据时所传参数
 function rdlQueryParams(params) {
     var queryParameter = rdlNowTreeNode.id;
@@ -1910,6 +2035,13 @@ function rdlTableRefresh() {
                 silent: true
             });
         }
+        else if (rootNodeId === "213")  //水质在线监测
+        {
+            $('#rdlHj212C213DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        }
     }
     catch (err) {
         if (realid_of_setintervalDeviceList !== undefined) {
@@ -1955,6 +2087,10 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlHj212C213Export_storage').click(function () { //水质在线监测
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlExport_storage_download').click(function () {
         var queryParameter = rdlNowTreeNode.id;
         var data = {
@@ -1977,6 +2113,10 @@ function rdlExportStorageAction() {
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
             url = "/lihuaiot01/realDeviceList/exportScaleC01DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "213")  //水质在线监测
+        {
+            url = "/lihuaiot01/realDeviceList/exportHj212C213DeviceList?" + $.param(data);
         }
         window.open(url, '_blank');
         $('#rdlExport_modal').modal("hide");

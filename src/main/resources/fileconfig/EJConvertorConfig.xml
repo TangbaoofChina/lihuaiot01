@@ -945,4 +945,60 @@
             <value>长度</value>
         </property>
     </entity>
+
+    <entity class="com.system.po.Device.Hj212C213DeviceMessage" sheetName="立华水质" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>sendDate</field>
+            <value>发送时间</value>
+        </property>
+        <property>
+            <field>datatime</field>
+            <value>合成时间</value>
+        </property>
+        <property>
+            <field>flowrate_value</field>
+            <value>瞬时流量(m³/h)</value>
+        </property>
+        <property>
+            <field>ph_value</field>
+            <value>pH</value>
+        </property>
+        <property>
+            <field>cod_value</field>
+            <value>COD</value>
+        </property>
+        <property>
+            <field>cod_sampletime</field>
+            <value>COD采样时间</value>
+        </property>
+        <property>
+            <field>nh3n_value</field>
+            <value>氨氮</value>
+        </property>
+        <property>
+            <field>nh3n_sampletime</field>
+            <value>氨氮采样时间</value>
+        </property>
+        <property>
+            <field>tp_value</field>
+            <value>总磷</value>
+        </property>
+        <property>
+            <field>tp_sampletime</field>
+            <value>总磷采样时间</value>
+        </property>
+        <property>
+            <field>dReceiveTime</field>
+            <value>接收时间</value>
+        </property>
+
+    </entity>
 </configuration>

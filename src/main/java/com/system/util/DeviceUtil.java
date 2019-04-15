@@ -30,6 +30,12 @@ public class DeviceUtil {
         return deviceInfoAndNodeList;
     }
 
+    /**
+     * 根据设备编号区分出新的设备列表
+     * @param deviceInfoAndNodeList
+     * @param devType
+     * @return
+     */
     public static List<DeviceInfoAndNode> splitDeviceByDevType(List<DeviceInfoAndNode> deviceInfoAndNodeList, String devType) {
         List<DeviceInfoAndNode> newDeviceInfoAndNodeList = new ArrayList<>();
         for (DeviceInfoAndNode deviceInfoAndNode : deviceInfoAndNodeList

@@ -160,4 +160,54 @@ public class DataConvertor {
         }
         return 0;
     }
+
+    public static long DateCompare02(String s1, String s2) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+            Date d1 = sdf.parse(s1);
+            Date d2 = sdf.parse(s2);
+            return (d1.getTime() - d2.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * 把20190403140000 转换成19-04-03 14:00
+     *
+     * @param sTime
+     * @return
+     */
+    public static String formatTime(String sTime) {
+        if (sTime == null || sTime.isEmpty())
+            return sTime;
+        if (sTime.length() != 14)
+            return sTime;
+        String sYear = sTime.substring(2, 4);
+        String sMonth = sTime.substring(4, 6);
+        String sDay = sTime.substring(6, 8);
+        String sHour = sTime.substring(8, 10);
+        String sMinute = sTime.substring(10, 12);
+        String sSecond = sTime.substring(12, 14);
+        StringBuffer returnTime = new StringBuffer(sYear);
+        returnTime.append("-");
+        returnTime.append(sMonth);
+        returnTime.append("-");
+        returnTime.append(sDay);
+        returnTime.append(" ");
+        returnTime.append(sHour);
+        returnTime.append(":");
+        returnTime.append(sMinute);
+        return returnTime.toString();
+    }
+
+    /**
+     * 把字符串值乘以系数，得到真实值，同时保留2位小数
+     */
+    public static String stringMultiple(String value, float multiple,int decimalDigit) {
+        float fvalue = Float.valueOf(value);
+        fvalue = fvalue * multiple;
+        return String.valueOf(formatFloat(fvalue,decimalDigit));
+    }
 }

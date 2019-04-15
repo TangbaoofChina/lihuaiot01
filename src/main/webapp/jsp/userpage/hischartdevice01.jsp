@@ -11,13 +11,13 @@
             <div id="hisChartOrgTree" style="margin-top: 5px;white-space: nowrap;overflow: auto;"></div>
         </div>
         <div class="columns-right" id="hisChartEC01DivP1" style="display: block;white-space: nowrap;">
-            <div class="form-inline">
+            <div class="form-inline" id="hisChartEC01Div" style="display: block;">
                 <div class="input-group" style="margin-left: 15px;">
                     <label>设备：</label>
                     <select class="form-control" id="hisChartsel_search" multiple="multiple">
                     </select>
                 </div>
-                <div class="input-group">
+                <div class="input-group" id="hisChartEC01Param">
                     <label>参数：</label>
                     <select name="hisChartSelName_Param" onchange="hisChartParamChange()" id="hisChartSelId_Param"
                             class="input-sm">
@@ -85,7 +85,6 @@
             </div>
         </div>
         <div class="columns-right" id="hisChartSewageC01Div" style="display: none;white-space: nowrap;">
-
         </div>
         <div class="columns-right" id="hisChartScaleC01DivP1" style="display: none;white-space: nowrap;">
             <div class="form-inline">
@@ -128,6 +127,36 @@
                 </div>
             </div>
         </div>
+        <%--水质在线监测第一部分--%>
+        <div class="columns-right" id="hisChartHj212C213DivP1" style="display: none;white-space: nowrap;">
+            <div class="form-inline" style="display: block;">
+                <div class="input-group" id="hisChartHj212C213Param">
+                    <label>参数：</label>
+                    <select name="hisChartHj212C213SelName_Param" onchange="hisChartHj212C213ParamChange()"
+                            id="hisChartHj212C213SelId_Param"
+                            class="input-sm">
+                        <option value="0" selected="selected">流量</option>
+                        <option value="1">pH</option>
+                        <option value="2">COD</option>
+                        <option value="3">氨氮</option>
+                        <option value="4">总磷</option>
+                        <option value="5">流量/COD</option>
+                        <option value="6">流量/氨氮</option>
+                        <option value="7">流量/总磷</option>
+                        <option value="8">COD/氨氮</option>
+                        <option value="9">COD/总磷</option>
+                        <option value="10">氨氮/总磷</option>
+                    </select>
+                </div>
+                <label>时间：</label>
+                <div class="btn-group">
+                    <input type="text" id="hisChartHj212C213DateInterval" class="form-control" style="width: 320px;">
+                </div>
+                <button class="btn btn-default" id="hisChartHj212C213Query_storage" onclick="hisChartHj212C213Query()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                </button>
+            </div>
+        </div>
         <div class="col-md-8 col-sm-7" id="hisChartScaleC01DivP2" style="height:100%;display: none;">
             <div id="echartsScaleC01main" style="margin-top: 15px;"></div>
             <div id="hisChartScaleC01toolbar" style="margin-left: 15px;">
@@ -159,6 +188,9 @@
                        data-showColumns="true">
                 </table>
             </div>
+        </div>
+        <div class="col-md-8 col-sm-7" id="hisChartHj212C213DivP2" style="height:100%;display: none;">
+            <div id="echartsHj212C213main" style="margin-top: 15px;"></div>
         </div>
     </div>
 </div>
@@ -236,6 +268,7 @@
 
 <script>
     //removealljsfile();
+    loadjscssfile("/lihuaiot01/js/userjs/hischartdevicehj212C213.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/hischartdevice01.js", "js");
 </script>
 

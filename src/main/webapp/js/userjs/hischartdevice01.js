@@ -12,6 +12,9 @@ var hisChartNowTreeNode;
 var hisChartScaleC01TableColumns;
 var hisChartScaleC01search_start_date;
 var hisChartScaleC01search_end_date;
+var hisChartHj212C213;
+var hisChartHj212C213search_start_date;
+var hisChartHj212C213search_end_date;
 
 // 指定图表的配置项和数据
 var hisChartoptionInit = {
@@ -141,6 +144,9 @@ $(function () {
     hisChartDateRangePickerInitScaleC01();
     $("#hisChartScaleC01TableDiv").width(window.innerWidth * 0.6 + 'px');
     hisChartScaleC01InitTable();
+
+    hisChartHj212C213InitChart(hisChartoptionInit);
+    hisChartDateRangePickerInitHj212C213();
 });
 
 // 日期选择器初始化
@@ -335,6 +341,8 @@ function hisChartNodeSelected(event, data) {
     var hcSewageC01Div = document.getElementById("hisChartSewageC01Div");
     var hcScaleC01DivP1 = document.getElementById("hisChartScaleC01DivP1");
     var hcScaleC01DivP2 = document.getElementById("hisChartScaleC01DivP2");
+    var hcHj212C213DivP1 = document.getElementById("hisChartHj212C213DivP1");
+    var hcHj212C213DivP2 = document.getElementById("hisChartHj212C213DivP2");
     var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
     {
@@ -343,6 +351,8 @@ function hisChartNodeSelected(event, data) {
         hcSewageC01Div.style.display = "none";
         hcScaleC01DivP1.style.display = "none";
         hcScaleC01DivP2.style.display = "none";
+        hcHj212C213DivP1.style.display = "none";
+        hcHj212C213DivP2.style.display = "none";
     }
     else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
     {
@@ -351,6 +361,8 @@ function hisChartNodeSelected(event, data) {
         hcSewageC01Div.style.display = "block";
         hcScaleC01DivP1.style.display = "none";
         hcScaleC01DivP2.style.display = "none";
+        hcHj212C213DivP1.style.display = "none";
+        hcHj212C213DivP2.style.display = "none";
     }
     else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
     {
@@ -359,6 +371,18 @@ function hisChartNodeSelected(event, data) {
         hcSewageC01Div.style.display = "none";
         hcScaleC01DivP1.style.display = "block";
         hcScaleC01DivP2.style.display = "block";
+        hcHj212C213DivP1.style.display = "none";
+        hcHj212C213DivP2.style.display = "none";
+    }
+    else if (rootNodeId === "213")  //水质在线监测
+    {
+        hcEC01DivP1.style.display = "none";
+        hcEC01DivP2.style.display = "none";
+        hcSewageC01Div.style.display = "none";
+        hcScaleC01DivP1.style.display = "none";
+        hcScaleC01DivP2.style.display = "none";
+        hcHj212C213DivP1.style.display = "block";
+        hcHj212C213DivP2.style.display = "block";
     }
     if (data.nodes != null) {
         var select_node = $('#hisChartOrgTree').treeview('getSelected');
@@ -1225,6 +1249,12 @@ function nodeChecked(event, node) {
             var queryName = node.text;
             hisChartAddDeviceToList(queryParameter, queryName);
         }
+    }else if (queryParameter.length == 14) {
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
     }
     checkAllParent(node);
     checkAllSon(node);
@@ -1241,6 +1271,9 @@ function nodeUnchecked(event, node) {
     nodeUncheckedSilent = true;
     var queryParameter = node.id;
     if (queryParameter.length == 4) {
+        hisChartSelectDeviceIdsRemove(queryParameter);
+        hisChartRemoveDeviceToList(queryParameter);
+    }else if (queryParameter.length == 4) {
         hisChartSelectDeviceIdsRemove(queryParameter);
         hisChartRemoveDeviceToList(queryParameter);
     }
@@ -1292,6 +1325,12 @@ function checkAllSon(node) {
             var queryName = node.text;
             hisChartAddDeviceToList(queryParameter, queryName);
         }
+    }else if (queryParameter.length == 14) {
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
     }
     if (node.nodes != null && node.nodes.length > 0) {
         for (var i in node.nodes) {
@@ -1305,6 +1344,11 @@ function uncheckAllSon(node) {
     $('#hisChartOrgTree').treeview('uncheckNode', node.nodeId, {silent: true});
     var queryParameter = node.id;
     if (queryParameter.length == 4) {
+        if (hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIdsRemove(queryParameter);
+            hisChartRemoveDeviceToList(queryParameter);
+        }
+    }else if (queryParameter.length == 14) {
         if (hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIdsRemove(queryParameter);
             hisChartRemoveDeviceToList(queryParameter);

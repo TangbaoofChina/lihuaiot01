@@ -38,7 +38,7 @@
         where e.droffline_devnum = b2.di_serialnum
         and (b2.di_deactive &lt; 1 or b2.di_deactive is null)
         and b2.di_nodeid = c2.node_id
-        order by dAlarmTime
+        order by dAlarmTime desc
     </select>
     <select id="selectDeviceAlarmInfoByRoleId" resultMap="BaseResultMap">
         select DISTINCT a.alarm_id as dAlarmId,a.device_id as dSerialNum,a.alarm_code as dAlarmCode,
@@ -79,7 +79,7 @@
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
-        order by dAlarmTime
+        order by dAlarmTime DESC
     </select>
     <select id="selectDeviceHisAlarmInfoList" resultMap="BaseResultMap">
         select a.hisalarm_id as dAlarmId,a.device_id as dSerialNum,a.hisalarm_code as dAlarmCode,
@@ -111,7 +111,7 @@
         and b2.di_nodeid = c2.node_id
         AND e.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
-        order by dAlarmTime
+        order by dAlarmTime DESC
     </select>
     <select id="selectDeviceHisAlarmInfoListByRoleId" resultMap="BaseResultMap">
         select a.hisalarm_id as dAlarmId,a.device_id as dSerialNum,a.hisalarm_code as dAlarmCode,
@@ -158,6 +158,6 @@
         <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
-        order by dAlarmTime
+        order by dAlarmTime DESC
     </select>
 </mapper>

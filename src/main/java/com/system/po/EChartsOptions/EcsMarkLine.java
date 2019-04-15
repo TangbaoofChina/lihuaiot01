@@ -4,7 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EcsMarkLine {
+    private boolean silent = true;
     private List<EcsmplData> data;
+
+    public boolean isSilent() {
+        return silent;
+    }
+
+    public void setSilent(boolean silent) {
+        this.silent = silent;
+    }
 
     public List<EcsmplData> getData() {
         return data;

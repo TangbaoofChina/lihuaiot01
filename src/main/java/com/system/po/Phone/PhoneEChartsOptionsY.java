@@ -5,13 +5,13 @@ import com.system.po.parameter.ParameterData;
 
 import java.util.List;
 
-public class PhoneEChartsOptions {
+public class PhoneEChartsOptionsY {
     private EChartsTitle title;
     private EChartsTooltip tooltip;
     private EChartsToolBox toolbox;
     private EChartsLegend legend;
     private EChartsXAxis xAxis;
-    private EChartsYAxis yAxis;
+    private List<EChartsYAxis> yAxis;
     private List<ParameterData> series;
     private String[] color;
 
@@ -55,11 +55,11 @@ public class PhoneEChartsOptions {
         this.xAxis = xAxis;
     }
 
-    public EChartsYAxis getyAxis() {
+    public List<EChartsYAxis> getyAxis() {
         return yAxis;
     }
 
-    public void setyAxis(EChartsYAxis yAxis) {
+    public void setyAxis(List<EChartsYAxis> yAxis) {
         this.yAxis = yAxis;
     }
 
@@ -79,7 +79,7 @@ public class PhoneEChartsOptions {
         this.color = color;
     }
 
-    public PhoneEChartsOptions() {
+    public PhoneEChartsOptionsY() {
         this.setTooltip(new EChartsTooltip());
         this.setToolbox(new EChartsToolBox());
         String[] myColor = new String[2];

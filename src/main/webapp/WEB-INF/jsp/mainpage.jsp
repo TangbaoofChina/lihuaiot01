@@ -98,7 +98,7 @@
 <div class="container-fluid" style="padding-left: 0px;">
     <div class="row">
         <!-- 左侧导航栏 -->
-        <div id="sideBar" class="col-md-2 col-sm-2">
+        <div id="sideBar" class="col-md-2 col-sm-2" style="width: 13%;margin-left: 10px;">
             <!--  此处加载左侧导航栏 -->
             <!-- 左侧导航栏  -->
             <div class="panel-group" id="accordion">
@@ -201,6 +201,10 @@
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="devicecombineorg" class="menu_item"
                                            name="/lihuaiot01/jsp/adminpage/devicecombineorg.jsp">设备管理</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="devicelistbytype" class="menu_item"
+                                           name="/lihuaiot01/jsp/adminpage/devicelistbytype.jsp">设备清单</a>
                                     </li>
                                         <%--<li class="list-group-item">
                                             <a href="javascript:void(0)" id="devicecode" class="menu_item"

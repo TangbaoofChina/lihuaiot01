@@ -153,4 +153,13 @@ public class BootStrapTreeViewController {
         }
         return jsonString;
     }
+
+    @RequestMapping(value = "selectDeviceTypeTreeNode", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectDeviceTypeTreeNode() throws Exception{
+        String jsonString = "";
+        List<DeviceType> deviceTypeList = deviceTypeService.selectDeviceTypeList();
+
+        return jsonString;
+    }
 }
