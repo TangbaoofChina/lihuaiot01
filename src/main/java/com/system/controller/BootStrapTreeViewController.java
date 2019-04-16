@@ -80,7 +80,8 @@ public class BootStrapTreeViewController {
                     List<RoleInfo> roleInfoList = new ArrayList<>();
                     roleInfoList.add(roleInfo);
                     BootStrapTreeNode bootStrapTreeNode = roleDeviceOrgInfoService.selectBstnAndDeviceByRoleId(roleInfoList);
-                    bootStrapTreeNodeList.add(bootStrapTreeNode);
+                    if(bootStrapTreeNode !=null)
+                        bootStrapTreeNodeList.add(bootStrapTreeNode);
                 } else {
                     List<RoleInfo> roleInfoList = RoleInfoListUtil.getRoleInfoFromRoleInfoListByDevtype(userlogin.getRoleInfoList(), deviceType.getDevType());
                     if (roleInfoList.size() > 0) {

@@ -132,10 +132,16 @@
                 <label for="roleAdminType">类型</label>
                 <select name="roleAdminType" id="roleAdminType" class="input-sm">
                     <shiro:hasAnyRoles name="admin,111">
-                        <option value="111" selected="selected">鸡舍环控器</option>
+                        <option value="111" selected="selected">种禽环控器</option>
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,211">
-                        <option value="211">污水控制器</option>
+                        <option value="211">立华禽环保1.0</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,212">
+                        <option value="212">立华禽环保2.0</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,213">
+                        <option value="213">立华水质</option>
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,311">
                         <option value="311">自动称重</option>
