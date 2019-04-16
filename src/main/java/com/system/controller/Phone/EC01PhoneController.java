@@ -106,7 +106,7 @@ public class EC01PhoneController {
             //用鸡舍的admin代替
             roleInfoAdmin.setRoleId("6AE5CA02164B1046E0536800A8C06B5D");
             roleInfoAdmin.setRoleName("111");
-            roleInfoAdmin.setRoleDescribe("鸡舍环控器");
+            roleInfoAdmin.setRoleDescribe("种禽环控器");
             List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
             roleInfoListAdmin.add(roleInfoAdmin);
             //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();

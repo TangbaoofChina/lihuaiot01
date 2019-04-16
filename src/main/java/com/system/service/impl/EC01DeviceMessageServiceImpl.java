@@ -108,7 +108,7 @@ public class EC01DeviceMessageServiceImpl implements EC01DeviceMessageService {
     }
 
     /**
-     * 查询多个设备历史数据-曲线格式-20180907废弃不用
+     * 查询多个设备历史数据-曲线格式-手机端还在用
      *
      * @param sDeviceIds  设备ID 数组
      * @param sQueryParam 设备参数

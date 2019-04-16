@@ -1117,6 +1117,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo02.setTitle("舍中：");
         phoneRealMsgInfo02.setValue(String.valueOf(inTemp2) + "℃");
         phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfo02.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo02);
 
         PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
@@ -1124,6 +1125,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo03.setTitle("舍后：");
         phoneRealMsgInfo03.setValue(String.valueOf(inTemp3) + "℃");
         phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfo03.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
         PhoneRealMsgInfo phoneRealMsgInfo015 = new PhoneRealMsgInfo();
@@ -1131,6 +1133,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo015.setTitle("舍外：");
         phoneRealMsgInfo015.setValue(String.valueOf(outTemp) + "℃");
         phoneRealMsgInfo015.setFlag("0");
+        phoneRealMsgInfo015.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo015);
 
         PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
@@ -1138,6 +1141,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo13.setTitle("饮水：");
         phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal) + "m³");
         phoneRealMsgInfo13.setFlag("0");
+        phoneRealMsgInfo13.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo13);
 
         PhoneRealMsgInfo phoneRealMsgInfo18 = new PhoneRealMsgInfo();
