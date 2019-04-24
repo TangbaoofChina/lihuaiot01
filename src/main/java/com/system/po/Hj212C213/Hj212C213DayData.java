@@ -15,6 +15,7 @@ public class Hj212C213DayData {
     String tn= "NaN";
     String name;
     String serialNum;
+    String ph;
 
     public String getDateTime() {
         return dateTime;
@@ -80,16 +81,25 @@ public class Hj212C213DayData {
         this.serialNum = serialNum;
     }
 
+    public String getPh() {
+        return ph;
+    }
+
+    public void setPh(String ph) {
+        this.ph = ph;
+    }
+
     public Hj212C213DayData(){}
 
     public Hj212C213DayData(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         this.setDateTime(sDate);
         this.setFlowrate(this.getDayFlowrate(hj212C213DeviceMessageList));
+        this.setPh(this.getDayPH(hj212C213DeviceMessageList));
         this.setSerialNum(hj212C213DeviceMessageList.get(0).getDSerialNum());
         this.setName(hj212C213DeviceMessageList.get(0).getDName());
     }
 
-    public String getDayFlowrate(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList){
+    private String getDayFlowrate(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList){
         float fDayFlowrate = 0f;
         for (int i = 0;i<hj212C213DeviceMessageList.size();i++){
             fDayFlowrate = fDayFlowrate +  Float.valueOf( hj212C213DeviceMessageList.get(i).getFlowrate_value());
@@ -98,6 +108,16 @@ public class Hj212C213DayData {
         fDayFlowrate = fDayFlowrate * 24;
         fDayFlowrate = (DataConvertor.formatFloat(fDayFlowrate,2));
         return String.valueOf(fDayFlowrate) ;
+    }
+
+    private String getDayPH(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList){
+        float fDayPH = 0f;
+        for (int i = 0;i<hj212C213DeviceMessageList.size();i++){
+            fDayPH = fDayPH +  Float.valueOf( hj212C213DeviceMessageList.get(i).getPh_value());
+        }
+        fDayPH = fDayPH/hj212C213DeviceMessageList.size();
+        fDayPH = (DataConvertor.formatFloat(fDayPH,2));
+        return String.valueOf(fDayPH) ;
     }
 
     /**
@@ -122,8 +142,8 @@ public class Hj212C213DayData {
      */
     public void findNh3N(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sCodDate = hj212C213DeviceMessageList.get(i).getNh3n_sampletime().substring(0,8);
-            if(sCodDate.equals(sDate)) {
+            String sNh3NDate = hj212C213DeviceMessageList.get(i).getNh3n_sampletime().substring(0,8);
+            if(sNh3NDate.equals(sDate)) {
                 this.setNh3n(hj212C213DeviceMessageList.get(i).getNh3n_value());
                 break;
             }
@@ -137,8 +157,8 @@ public class Hj212C213DayData {
      */
     public void findTP(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sCodDate = hj212C213DeviceMessageList.get(i).getTp_sampletime().substring(0,8);
-            if(sCodDate.equals(sDate)) {
+            String sTpDate = hj212C213DeviceMessageList.get(i).getTp_sampletime().substring(0,8);
+            if(sTpDate.equals(sDate)) {
                 this.setTp(hj212C213DeviceMessageList.get(i).getTp_value());
                 break;
             }
@@ -152,8 +172,8 @@ public class Hj212C213DayData {
      */
     public void findTN(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sCodDate = hj212C213DeviceMessageList.get(i).getTn_sampletime().substring(0,8);
-            if(sCodDate.equals(sDate)) {
+            String sTnDate = hj212C213DeviceMessageList.get(i).getTn_sampletime().substring(0,8);
+            if(sTnDate.equals(sDate)) {
                 this.setTp(hj212C213DeviceMessageList.get(i).getTn_value());
                 break;
             }

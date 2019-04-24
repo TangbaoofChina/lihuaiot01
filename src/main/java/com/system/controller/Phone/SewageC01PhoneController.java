@@ -105,7 +105,7 @@ public class SewageC01PhoneController {
             //用污水处理的admin代替
             roleInfoAdmin.setRoleId("6AE5C6025D7B1035E0536800A8C0C8FD");
             roleInfoAdmin.setRoleName("211");
-            roleInfoAdmin.setRoleDescribe("污水处理");
+            roleInfoAdmin.setRoleDescribe("立华禽环保1.0");
             List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
             roleInfoListAdmin.add(roleInfoAdmin);
             //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();

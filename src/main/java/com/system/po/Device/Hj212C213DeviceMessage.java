@@ -1,6 +1,11 @@
 package com.system.po.Device;
 
+import com.system.po.Hj212C213.Hj212C213Threshold;
 import com.system.po.MydataTableColumn;
+import com.system.po.Phone.PhoneHj212C213.PhoneHj212C213RealData;
+import com.system.po.Phone.PhoneHj212C213.PhoneHj212C213RealMsgInfo;
+import com.system.po.Phone.PhoneHj212C213.PhoneHj212C213RealOneData;
+import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.util.DataConvertor;
 
 import java.util.ArrayList;
@@ -127,7 +132,7 @@ public class Hj212C213DeviceMessage extends BaseDeviceMessage {
     }
 
     public String getFlowrate_value() {
-        return DataConvertor.stringMultiple(flowrate_value,3.6f,1);
+        return DataConvertor.stringMultiple(flowrate_value, 3.6f, 1);
     }
 
     public void setFlowrate_value(String flowrate_value) {
@@ -389,4 +394,166 @@ public class Hj212C213DeviceMessage extends BaseDeviceMessage {
         return myDTCList;
     }
 
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("flowrate");
+        phoneRealMsgInfo01.setTitle("流量：");
+        phoneRealMsgInfo01.setValue(this.getFlowrate_value() + "m³/h");
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("pH");
+        phoneRealMsgInfo02.setTitle("pH：");
+        phoneRealMsgInfo02.setValue(this.getFlowrate_value());
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("COD");
+        phoneRealMsgInfo03.setTitle("COD：");
+        phoneRealMsgInfo03.setValue(this.getCod_value() + "mg/l");
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("Nh3N");
+        phoneRealMsgInfo04.setTitle("氨氮：");
+        phoneRealMsgInfo04.setValue(this.getNh3n_value() + "mg/l");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("Tp");
+        phoneRealMsgInfo05.setTitle("总磷：");
+        phoneRealMsgInfo05.setValue(this.getTp_value() + "mg/l");
+        phoneRealMsgInfo05.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("dState");
+        phoneRealMsgInfo06.setTitle("状态：");
+        phoneRealMsgInfo06.setValue(getDState());
+        phoneRealMsgInfo06.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo07.setId("sendDate");
+        phoneRealMsgInfo07.setTitle("");
+        phoneRealMsgInfo07.setValue(this.getSendDate());
+        phoneRealMsgInfo07.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+
+        return phoneRealMsgInfoList;
+    }
+
+    public List<PhoneHj212C213RealData> getPhoneRealMsgInfoDetail() {
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        Hj212C213Threshold hj212C213Threshold = new Hj212C213Threshold();
+        List<PhoneHj212C213RealData> phoneHj212C213RealDataList = new ArrayList<>();
+
+        PhoneHj212C213RealData phoneHj212C213RealData = new PhoneHj212C213RealData();
+        phoneHj212C213RealData.setColumn(2);
+        phoneHj212C213RealData.setScale("0.5,0.5");
+        phoneHj212C213RealData.setTitle("总体信息");
+        List<PhoneHj212C213RealOneData> phoneHj212C213RealOneDataList = new ArrayList<PhoneHj212C213RealOneData>();
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData01 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData01.setTitle("时间：");
+        phoneHj212C213RealOneData01.setValue1(sendDate);
+        phoneHj212C213RealOneData01.setColor1(defaultColor);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData01);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData02 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData02.setTitle("状态：");
+        if (getDState().equals("离线")) {
+            phoneHj212C213RealOneData02.setValue1(getDState());
+            phoneHj212C213RealOneData02.setColor1(alarmColor);
+        } else {
+            phoneHj212C213RealOneData02.setValue1(getDState());
+            phoneHj212C213RealOneData02.setColor1(defaultColor);
+        }
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData02);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData03 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData03.setTitle("流量：");
+        phoneHj212C213RealOneData03.setValue1(this.getFlowrate_value() + "m³/h");
+        phoneHj212C213RealOneData03.setColor1(defaultColor);
+        phoneHj212C213RealOneData03.setHasHis(true);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData03);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData04 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData04.setTitle("pH：");
+        if ((Float.valueOf(this.getPh_value()) < hj212C213Threshold.getMinPh()) ||
+                (Float.valueOf(this.getPh_value()) > hj212C213Threshold.getMaxPh())) {
+            phoneHj212C213RealOneData04.setValue1(this.getPh_value());
+            phoneHj212C213RealOneData04.setColor1(alarmColor);
+        } else {
+            phoneHj212C213RealOneData04.setValue1(this.getPh_value());
+            phoneHj212C213RealOneData04.setColor1(defaultColor);
+        }
+        phoneHj212C213RealOneData04.setHasHis(true);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData04);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData05 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData05.setTitle("COD：");
+        if ((Float.valueOf(this.getCod_value()) > hj212C213Threshold.getMaxCOD())) {
+            phoneHj212C213RealOneData05.setValue1(this.getCod_value() + "mg/l");
+            phoneHj212C213RealOneData05.setColor1(alarmColor);
+        } else {
+            phoneHj212C213RealOneData05.setValue1(this.getCod_value() + "mg/l");
+            phoneHj212C213RealOneData05.setColor1(defaultColor);
+        }
+        phoneHj212C213RealOneData05.setHasHis(true);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData05);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData0501 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData0501.setTitle("采样：");
+        phoneHj212C213RealOneData0501.setValue1(this.getCod_sampletime());
+        phoneHj212C213RealOneData0501.setColor1(defaultColor);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData0501);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData06 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData06.setTitle("氨氮：");
+        if ((Float.valueOf(this.getNh3n_value()) > hj212C213Threshold.getMaxNh3N())) {
+            phoneHj212C213RealOneData06.setValue1(this.getNh3n_value() + "mg/l");
+            phoneHj212C213RealOneData06.setColor1(alarmColor);
+        } else {
+            phoneHj212C213RealOneData06.setValue1(this.getNh3n_value() + "mg/l");
+            phoneHj212C213RealOneData06.setColor1(defaultColor);
+        }
+        phoneHj212C213RealOneData06.setHasHis(true);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData06);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData0601 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData0601.setTitle("采样：");
+        phoneHj212C213RealOneData0601.setValue1(this.getNh3n_sampletime());
+        phoneHj212C213RealOneData0601.setColor1(defaultColor);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData0601);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData07 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData07.setTitle("总磷：");
+        if ((Float.valueOf(this.getTp_value()) > hj212C213Threshold.getMaxTp())) {
+            phoneHj212C213RealOneData07.setValue1(this.getTp_value() + "mg/l");
+            phoneHj212C213RealOneData07.setColor1(alarmColor);
+        } else {
+            phoneHj212C213RealOneData07.setValue1(this.getTp_value() + "mg/l");
+            phoneHj212C213RealOneData07.setColor1(defaultColor);
+        }
+        phoneHj212C213RealOneData07.setHasHis(true);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData07);
+
+        PhoneHj212C213RealOneData phoneHj212C213RealOneData0701 = new PhoneHj212C213RealOneData();
+        phoneHj212C213RealOneData0701.setTitle("采样：");
+        phoneHj212C213RealOneData0701.setValue1(this.getTp_sampletime());
+        phoneHj212C213RealOneData0701.setColor1(defaultColor);
+        phoneHj212C213RealOneDataList.add(phoneHj212C213RealOneData0701);
+
+        phoneHj212C213RealData.setPhoneHj212C213RealOneDataList(phoneHj212C213RealOneDataList);
+        phoneHj212C213RealDataList.add(phoneHj212C213RealData);
+        return phoneHj212C213RealDataList;
+    }
 }

@@ -8,6 +8,7 @@ import com.system.po.EChartsOptions.EChartsParts.ECAxisLine;
 import com.system.po.EChartsOptions.EChartsParts.ECLineStyle;
 import com.system.po.EChartsOptions.EChartsParts.ECxAxisAxisLabel;
 import com.system.po.Hj212C213.Hj212C213DayData;
+import com.system.po.Hj212C213.Hj212C213Threshold;
 import com.system.po.Phone.PhoneEChartsOptionsY;
 import com.system.po.parameter.ParameterData;
 import com.system.util.DataConvertor;
@@ -24,6 +25,8 @@ import java.util.Map;
  */
 @Controller
 public class Hj212C213ChartTwoParam {
+    private Hj212C213Threshold hj212C213Threshold = new Hj212C213Threshold();
+
     //生成曲线
     public PhoneEChartsOptionsY getECharts(String sQueryParam, Map<String, Hj212C213DayData> hj212C213DayDataMap) {
         PhoneEChartsOptionsY phoneEChartsOptionsY = null;
@@ -614,8 +617,8 @@ public class Hj212C213ChartTwoParam {
             }
         }
         maxValue = maxValue + 3f;
-        if (maxValue < 70f) { //为最大基准线服务
-            maxValue = 71f;
+        if (maxValue < hj212C213Threshold.getMaxCOD()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxCOD() + 1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue, 1));
     }
@@ -690,8 +693,8 @@ public class Hj212C213ChartTwoParam {
             }
         }
         maxValue = maxValue + 3f;
-        if (maxValue < 15f) { //为最大基准线服务
-            maxValue = 16f;
+        if (maxValue < hj212C213Threshold.getMaxNh3N()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxNh3N() + 1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue, 1));
     }
@@ -766,8 +769,8 @@ public class Hj212C213ChartTwoParam {
             }
         }
         maxValue = maxValue + 0.3f;
-        if (maxValue < 0.5f) { //为最大基准线服务
-            maxValue = 0.6f;
+        if (maxValue < hj212C213Threshold.getMaxTp()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxTp() + 0.1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue, 1));
     }
@@ -841,7 +844,7 @@ public class Hj212C213ChartTwoParam {
                 maxValue = Float.valueOf(value.getTn());
             }
         }
-        maxValue = maxValue + 3f;
+        maxValue = maxValue + 0.3f;
         return String.valueOf(DataConvertor.formatFloat(maxValue, 1));
     }
     /********************总磷 结束***********************************/

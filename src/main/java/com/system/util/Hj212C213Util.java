@@ -183,6 +183,4 @@ public class Hj212C213Util {
         }
         return newDateList;
     }
-
-
 }

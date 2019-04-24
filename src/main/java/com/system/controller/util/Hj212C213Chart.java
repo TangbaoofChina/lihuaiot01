@@ -3,11 +3,13 @@ package com.system.controller.util;
 import com.system.po.Device.Hj212C213DeviceMessage;
 import com.system.po.EChartsOptions.*;
 import com.system.po.EChartsOptions.EChartsParts.ECxAxisAxisLabel;
+import com.system.po.Hj212C213.Hj212C213Threshold;
 import com.system.po.Phone.PhoneEChartsOptions;
 import com.system.po.parameter.ParameterData;
 import com.system.util.DataConvertor;
 import com.system.util.EChartsUtil;
 import com.system.util.Hj212C213Util;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ import java.util.Map;
  */
 @Controller
 public class Hj212C213Chart {
+
+    private Hj212C213Threshold hj212C213Threshold = new Hj212C213Threshold();
+
     //生成曲线
     public PhoneEChartsOptions getECharts(String sQueryParam, Map<String, String> deviceInfoMap, Map<String, List<Hj212C213DeviceMessage>> hj212C213MapByDate) {
         PhoneEChartsOptions phoneEChartsOptions = null;
@@ -486,7 +491,7 @@ public class Hj212C213Chart {
             }
         }
         minValue = minValue - 0.3f;
-        if (minValue > 6f) {  //为最小基准线服务
+        if (minValue > hj212C213Threshold.getMinPh()) {  //为最小基准线服务
             minValue = 5.9f;
         }
         if (minValue < 0) {
@@ -507,7 +512,7 @@ public class Hj212C213Chart {
             }
         }
         maxValue = maxValue+0.3f;
-        if (maxValue < 9f) { //为最大基准线服务
+        if (maxValue < hj212C213Threshold.getMaxPh()) { //为最大基准线服务
             maxValue = 9.1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue,1));
@@ -583,8 +588,8 @@ public class Hj212C213Chart {
             }
         }
         maxValue = maxValue+ 3f;
-        if (maxValue < 70f) { //为最大基准线服务
-            maxValue = 71f;
+        if (maxValue < hj212C213Threshold.getMaxCOD()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxCOD() + 1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue,1));
     }
@@ -659,8 +664,8 @@ public class Hj212C213Chart {
             }
         }
         maxValue = maxValue+ 3f;
-        if (maxValue < 15f) { //为最大基准线服务
-            maxValue = 16f;
+        if (maxValue < hj212C213Threshold.getMaxNh3N()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxNh3N() + 1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue,1));
     }
@@ -735,8 +740,8 @@ public class Hj212C213Chart {
             }
         }
         maxValue = maxValue+ 0.3f;
-        if (maxValue < 0.5f) { //为最大基准线服务
-            maxValue = 0.6f;
+        if (maxValue < hj212C213Threshold.getMaxTp()) { //为最大基准线服务
+            maxValue = hj212C213Threshold.getMaxTp() + 0.1f;
         }
         return String.valueOf(DataConvertor.formatFloat(maxValue,1));
     }

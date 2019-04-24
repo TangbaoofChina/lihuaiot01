@@ -41,7 +41,7 @@ public class Hj212C213DMServiceImpl implements Hj212C213DMService {
     }
 
     @Override
-    public List<Hj212C213DeviceMessage> selectHj212C213ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
+    public List<Hj212C213DeviceMessage> selectHj212C213ByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         List<Hj212C213DeviceMessage> hj212C213DeviceMessageList = hj212C213DMMapper.selectHj212C213ByORGIdAndRoleId(ORGId, roleIds);
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("212");
@@ -122,16 +122,15 @@ public class Hj212C213DMServiceImpl implements Hj212C213DMService {
     }
 
     /**
-     * 两两参数对比曲线数据，以 日 为单位，这里不考虑多设备情况
+     * 两两参数对比曲线数据，以 日 为单位，这里不考虑多设备情况-无法为多设备服务
      * @param sDeviceIds
-     * @param sQueryParam
      * @param sStartDate
      * @param sEndDate
      * @return
      * @throws Exception
      */
     @Override
-    public Map<String, Hj212C213DayData> selectHisHj212C213ByDateAndIDsTwoParam(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
+    public Map<String, Hj212C213DayData> selectHisHj212C213ByDateAndIDsTwoParam(String[] sDeviceIds, String sStartDate, String sEndDate) throws Exception {
         List<Hj212C213DeviceMessage> hj212C213DMList = hj212C213DMMapper.selectHj212C213ByDeviceIdsAndDateTime(sDeviceIds, sStartDate, sEndDate);
         Map<String, List<Hj212C213DeviceMessage>> hj212C213Map = Hj212C213Util.splitHj212C213DMByDate(hj212C213DMList);
         Map<String,Hj212C213DayData> hj212C213DayDataMap = new HashMap<>();

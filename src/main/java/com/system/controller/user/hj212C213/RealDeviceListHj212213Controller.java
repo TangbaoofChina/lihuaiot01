@@ -99,7 +99,7 @@ public class RealDeviceListHj212213Controller {
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             hj212C213DeviceMessageList = hj212C213DMService.selectHj212C213ByORGId(sORGId);
         } else {
-            hj212C213DeviceMessageList = hj212C213DMService.selectHj212C213ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+            hj212C213DeviceMessageList = hj212C213DMService.selectHj212C213ByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
         }
         return hj212C213DeviceMessageList;
     }

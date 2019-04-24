@@ -105,7 +105,7 @@ public class HisChartDeviceListHj212213Controller {
     }
 
     private String getTwoParamChart(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception{
-        Map<String, Hj212C213DayData> hj212C213MapByDate = hj212C213DMService.selectHisHj212C213ByDateAndIDsTwoParam(sDeviceIds, sQueryParam, sStartDate, sEndDate);
+        Map<String, Hj212C213DayData> hj212C213MapByDate = hj212C213DMService.selectHisHj212C213ByDateAndIDsTwoParam(sDeviceIds, sStartDate, sEndDate);
         if (hj212C213MapByDate == null || hj212C213MapByDate.size() < 1)
             return "[]";
         PhoneEChartsOptionsY phoneEChartsOptions = hj212C213ChartTwoParam.getECharts(sQueryParam, hj212C213MapByDate);

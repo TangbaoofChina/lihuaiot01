@@ -28,7 +28,7 @@ public interface Hj212C213DMService {
      * @return
      * @throws Exception
      */
-    List<Hj212C213DeviceMessage> selectHj212C213ByByORGIdAndRoleId(String ORGId,List<RoleInfo> roleInfoList) throws Exception;
+    List<Hj212C213DeviceMessage> selectHj212C213ByORGIdAndRoleId(String ORGId,List<RoleInfo> roleInfoList) throws Exception;
 
     /**
      * 获取单设备数据
@@ -79,6 +79,6 @@ public interface Hj212C213DMService {
     /*******************曲线部分 Start*******************************************/
     //根据查询参数生成;
     Map<String,List<Hj212C213DeviceMessage>>  selectHisHj212C213ByDateAndIDs(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception;
-    Map<String,Hj212C213DayData>  selectHisHj212C213ByDateAndIDsTwoParam(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception;
+    Map<String,Hj212C213DayData>  selectHisHj212C213ByDateAndIDsTwoParam(String[] sDeviceIds, String sStartDate, String sEndDate) throws Exception;
     /*******************曲线部分 End*******************************************/
 }
