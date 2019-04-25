@@ -79,35 +79,6 @@ public class SewageC212PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectOrgByUserId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public String selectOrgByUserId(String userId) throws Exception {
-        if (userId == null || userId.equals(""))
-            return "[]";
-        //OAID转换为EASID
-        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
-
-        if (roleInfoList.size() < 1)
-            return "[]";
-        List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
-        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
-            RoleInfo roleInfoAdmin = new RoleInfo();
-            //用污水处理的admin代替
-            roleInfoAdmin.setRoleId("8227A120DFC80DF2E0536800A8C0DADE");
-            roleInfoAdmin.setRoleName("212");
-            roleInfoAdmin.setRoleDescribe("立华禽环保2.0");
-            List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
-            roleInfoListAdmin.add(roleInfoAdmin);
-            //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("212",roleInfoListAdmin);
-        } else {
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("212",roleInfoList);
-        }
-        String jsonString = JSON.toJSONString(orgTreeNodeList);
-        return jsonString;
-    }
-
     @RequestMapping(value = "selectRealDeviceInfoSummary", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRealDeviceInfoSummary(String userId, String orgId) throws Exception {
@@ -160,11 +131,11 @@ public class SewageC212PhoneController {
     private PhoneRealDeviceInfo getOneRealDeviceInfoSummary(SewageC212DeviceMessage sewageC212DeviceMessage) {
         PhoneRealDeviceInfo phoneRealDeviceInfo = new PhoneRealDeviceInfo();
         //形成信号信息
-        //List<PhoneRealMsgInfo> phoneRealMsgInfoList = sewageC212DeviceMessage.getPhoneRealMsgInfoSummary();
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = sewageC212DeviceMessage.getPhoneRealMsgInfoSummary();
         //形成设备信息
         phoneRealDeviceInfo.setDevNum(sewageC212DeviceMessage.getDSerialNum());
         phoneRealDeviceInfo.setTitle(sewageC212DeviceMessage.getDName());
-        //phoneRealDeviceInfo.setData(phoneRealMsgInfoList);
+        phoneRealDeviceInfo.setData(phoneRealMsgInfoList);
         return phoneRealDeviceInfo;
     }
 }

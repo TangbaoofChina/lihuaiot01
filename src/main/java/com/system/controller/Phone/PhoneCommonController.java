@@ -44,7 +44,7 @@ public class PhoneCommonController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "selectOrgByUserIdAndDevType", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectOrgByUserIdAndDevType", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectOrgByUserIdAndDevType(String userId,String devType) throws Exception {
         if (userId == null || userId.equals(""))
@@ -66,7 +66,7 @@ public class PhoneCommonController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectOrg", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectOrg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectOrg(String userId,String devType) throws Exception {
         if (userId == null || userId.equals(""))

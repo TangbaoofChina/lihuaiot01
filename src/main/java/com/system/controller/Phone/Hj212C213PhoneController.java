@@ -88,7 +88,7 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectOrgByUserId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectOrgByUserId", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectOrgByUserId(String userId) throws Exception {
         if (userId == null || userId.equals(""))
@@ -115,7 +115,7 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectRealDeviceInfoSummary", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectRealDeviceInfoSummary", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRealDeviceInfoSummary(String userId, String orgId) throws Exception {
         List<Hj212C213DeviceMessage> sewageC01DeviceMessageList = getRealHj212C213DeviceMessageByUserIdAndOrgId(userId, orgId);
@@ -127,7 +127,7 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectRealDeviceInfoDetail", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectRealDeviceInfoDetail", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRealDeviceInfoDetail(String userId, String devNum) throws Exception {
         Hj212C213DeviceMessage hj212C213DeviceMessage = getRealHj212C213DeviceMessageByUserIdAndDevNum(userId, devNum);
@@ -139,7 +139,7 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectHisChart", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectHisChart", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectHisChart(String userId, String sQueryParam, String devNum, String day) throws Exception {
         if (userId == null || userId.equals(""))
@@ -186,7 +186,7 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    @RequestMapping(value = "selectHisData", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "selectHisData", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectHisData(String userId, String devNum, String day) throws Exception {
         if (userId == null || userId.equals(""))
