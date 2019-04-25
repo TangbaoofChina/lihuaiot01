@@ -2,6 +2,8 @@ package com.system.util;
 
 import com.system.po.DeviceInfo;
 import com.system.po.DeviceInfoAndNode;
+import com.system.po.ORGTreeNode;
+import com.system.po.Phone.PhoneTree;
 import com.system.po.parameter.DeviceType;
 
 import java.security.PublicKey;
@@ -56,5 +58,15 @@ public class DeviceUtil {
             }
         }
         return devTypeNumList;
+    }
+
+    public static  List<PhoneTree> getPhoneTreeList(List<ORGTreeNode> orgTreeNodeList){
+        List<PhoneTree> phoneTreeList = new ArrayList<>();
+        for (ORGTreeNode orgTreeNode: orgTreeNodeList
+             ) {
+            PhoneTree phoneTree = new PhoneTree(orgTreeNode);
+            phoneTreeList.add(phoneTree);
+        }
+        return phoneTreeList;
     }
 }

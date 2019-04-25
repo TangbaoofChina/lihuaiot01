@@ -1,21 +1,13 @@
 package com.system.controller.Phone;
 
 import com.alibaba.fastjson.JSON;
-import com.system.controller.user.hj212C213.HisChartDeviceListHj212213Controller;
 import com.system.controller.util.DeviceUtilController;
 import com.system.controller.util.Hj212C213Chart;
 import com.system.po.*;
 import com.system.po.Device.Hj212C213DeviceMessage;
 import com.system.po.Hj212C213.Hj212C213DayData;
-import com.system.po.Phone.PhoneEChartsOptions;
-import com.system.po.Phone.PhoneHj212C213.PHj212C213HisDataContent;
-import com.system.po.Phone.PhoneHj212C213.PHj212C213HisMsgInfo;
-import com.system.po.Phone.PhoneHj212C213.PhoneHj212C213RealData;
-import com.system.po.Phone.PhoneHj212C213.PhoneHj212C213RealMsgInfo;
-import com.system.po.Phone.PhoneLoginMsg;
-import com.system.po.Phone.PhoneRealDeviceInfo;
-import com.system.po.Phone.PhoneRealMsgInfo;
-import com.system.po.parameter.ParameterCharts;
+import com.system.po.Phone.*;
+import com.system.po.Phone.PhoneHj212C213.*;
 import com.system.security.realms.MdPasswordUtil;
 import com.system.service.*;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
@@ -86,7 +78,7 @@ public class Hj212C213PhoneController {
                 userlogin.setPassword(null);
                 // 设置用户信息到 Session
                 session.setAttribute("userInfo", userlogin);
-                UserOAEas userOAEas =  phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
+                UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
 
                 phoneLoginMsg.setOaId(userOAEas.getOaId());
                 phoneLoginMsg.setMessage("登录成功");
@@ -115,10 +107,9 @@ public class Hj212C213PhoneController {
             roleInfoAdmin.setRoleDescribe("立华水质");
             List<RoleInfo> roleInfoListAdmin = new ArrayList<RoleInfo>();
             roleInfoListAdmin.add(roleInfoAdmin);
-            //orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfo();
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("213",roleInfoListAdmin);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("213", roleInfoListAdmin);
         } else {
-            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("213",roleInfoList);
+            orgTreeNodeList = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("213", roleInfoList);
         }
         String jsonString = JSON.toJSONString(orgTreeNodeList);
         return jsonString;
@@ -179,7 +170,7 @@ public class Hj212C213PhoneController {
         sDeviceIds[0] = devNum;
         String jsonString = "[]";
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
-            jsonString = this.getOneParamChart(sDeviceIds,sQueryParam,sStartDate,sEndDate);
+            jsonString = this.getOneParamChart(sDeviceIds, sQueryParam, sStartDate, sEndDate);
         } else {
             //查询该用户是否有权限查看该设备
             //如果有权限，就继续查询该设备
@@ -187,7 +178,7 @@ public class Hj212C213PhoneController {
             for (DeviceRoleInfo deviceRoleInfo : deviceRoleInfoList
                     ) {
                 if (deviceRoleInfo.getDevNum().equals(devNum)) {
-                    jsonString = this.getOneParamChart(sDeviceIds,sQueryParam,sStartDate,sEndDate);
+                    jsonString = this.getOneParamChart(sDeviceIds, sQueryParam, sStartDate, sEndDate);
                     break;
                 }
             }
@@ -224,7 +215,7 @@ public class Hj212C213PhoneController {
 
         String jsonString = "[]";
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
-            jsonString = this.getOneParamData(devNum,sStartDate,sEndDate);
+            jsonString = this.getOneParamData(devNum, sStartDate, sEndDate);
         } else {
             //查询该用户是否有权限查看该设备
             //如果有权限，就继续查询该设备
@@ -232,7 +223,7 @@ public class Hj212C213PhoneController {
             for (DeviceRoleInfo deviceRoleInfo : deviceRoleInfoList
                     ) {
                 if (deviceRoleInfo.getDevNum().equals(devNum)) {
-                    jsonString = this.getOneParamData(devNum,sStartDate,sEndDate);
+                    jsonString = this.getOneParamData(devNum, sStartDate, sEndDate);
                     break;
                 }
             }
@@ -335,7 +326,7 @@ public class Hj212C213PhoneController {
         return phoneHj212C213RealMsgInfo;
     }
 
-    private String getOneParamChart(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception{
+    private String getOneParamChart(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
         Map<String, List<Hj212C213DeviceMessage>> hj212C213MapByDate = hj212C213DMService.selectHisHj212C213ByDateAndIDs(sDeviceIds, sQueryParam, sStartDate, sEndDate);
         if (hj212C213MapByDate == null || hj212C213MapByDate.size() < 1)
             return "[]";
@@ -350,22 +341,22 @@ public class Hj212C213PhoneController {
         return jsonString;
     }
 
-    private String getOneParamData(String sDeviceId, String sStartDate, String sEndDate) throws Exception{
+    private String getOneParamData(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
         String[] sDeviceIds = new String[1];
         sDeviceIds[0] = sDeviceId;
         Map<String, Hj212C213DayData> hj212C213MapByDate = hj212C213DMService.selectHisHj212C213ByDateAndIDsTwoParam(sDeviceIds, sStartDate, sEndDate);
         List<String> sDateList = Hj212C213Util.getHj212C213DayDate(hj212C213MapByDate);
         List<DeviceInfo> deviceInfoList = deviceInfoService.selectDeviceInfoByIDs(sDeviceIds);
         List<PHj212C213HisDataContent> pHj212C213HisDataContentList = new ArrayList<>();
-        if(deviceInfoList.size() < 1)
+        if (deviceInfoList.size() < 1)
             return "[]";
-        for (String sDate:sDateList
-             ) {
+        for (String sDate : sDateList
+                ) {
             Hj212C213DayData hj212C213DayData = hj212C213MapByDate.get(sDate);
             PHj212C213HisDataContent pHj212C213HisDataContent = new PHj212C213HisDataContent(hj212C213DayData);
             pHj212C213HisDataContentList.add(pHj212C213HisDataContent);
         }
-        PHj212C213HisMsgInfo pHj212C213HisMsgInfo = new PHj212C213HisMsgInfo(deviceInfoList.get(0).getDSerialNum(),deviceInfoList.get(0).getDName());
+        PHj212C213HisMsgInfo pHj212C213HisMsgInfo = new PHj212C213HisMsgInfo(deviceInfoList.get(0).getDSerialNum(), deviceInfoList.get(0).getDName());
         pHj212C213HisMsgInfo.setpHj212C213HisDataContentList(pHj212C213HisDataContentList);
         String jsonString = JSON.toJSONString(pHj212C213HisMsgInfo);
         return jsonString;
