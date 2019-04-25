@@ -45,8 +45,6 @@ public class SewageC01PhoneController {
     @Autowired
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
     @Autowired
-    private DeviceTypeService deviceTypeService;
-    @Autowired
     private UserloginService userloginService;
 
     @RequestMapping(value = "login", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
