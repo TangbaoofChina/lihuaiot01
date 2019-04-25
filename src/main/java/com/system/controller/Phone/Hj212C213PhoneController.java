@@ -19,6 +19,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
+@CrossOrigin(maxAge = 3600)   //解决跨域问题
 @RequestMapping("/phone/hj212C213")
 public class Hj212C213PhoneController {
     @Autowired

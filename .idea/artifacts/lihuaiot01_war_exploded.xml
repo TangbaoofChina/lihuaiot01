@@ -66,6 +66,8 @@
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.41" />
           <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.54" />
+          <element id="library" level="project" name="Maven: com.thetransactioncompany:cors-filter:1.7.1" />
+          <element id="library" level="project" name="Maven: com.thetransactioncompany:java-property-utils:1.9" />
         </element>
       </element>
       <element id="directory" name="META-INF">

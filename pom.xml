@@ -287,11 +287,22 @@
       <artifactId>bcprov-jdk15on</artifactId>
       <version>1.54</version>
     </dependency>
-<!--    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations-java5</artifactId>
-      <version>RELEASE</version>
-    </dependency>-->
+
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>cors-filter</artifactId>
+      <version>1.7.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>java-property-utils</artifactId>
+      <version>1.9</version>
+    </dependency>
+    <!--    <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations-java5</artifactId>
+          <version>RELEASE</version>
+        </dependency>-->
   </dependencies>
   <build>
     <finalName>lihuaiot01</finalName>
