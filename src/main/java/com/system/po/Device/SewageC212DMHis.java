@@ -2,15 +2,15 @@ package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
 import com.system.po.Phone.PhoneRealMsgInfo;
-import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealData;
-import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealOneData;
+import com.system.po.Phone.PhoneSewageC01.PSC01HisDataHead;
+import com.system.po.Phone.PhoneSewageC212.PSC212HisDataHead;
 import com.system.po.Phone.PhoneSewageC212.PhoneSewageC212RealData;
 import com.system.po.Phone.PhoneSewageC212.PhoneSewageC212RealOneData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SewageC212DeviceMessage extends BaseDeviceMessage {
+public class SewageC212DMHis extends BaseDeviceMessage {
     //系统保留
     private int systemSpare;
     /************* 16个 运行状态  ******************/
@@ -1880,678 +1880,91 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
         return myDTCList;
     }
 
-    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
-        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
-        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo01.setId("flowmeter");
-        phoneRealMsgInfo01.setTitle("累计流量：");
-        phoneRealMsgInfo01.setValue(String.valueOf(flowmeter) + "m³");
-        phoneRealMsgInfo01.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+    public List<PSC212HisDataHead> getDevicePhoneHead212() {
+        List<PSC212HisDataHead> psc212HisDataHeadList = new ArrayList<PSC212HisDataHead>();
 
-        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo02.setId("todayFlowmeter");
-        phoneRealMsgInfo02.setTitle("当日流量：");
-        phoneRealMsgInfo02.setValue(String.valueOf(todayFlowmeter) + "m³");
-        phoneRealMsgInfo02.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+        //时间
+        PSC212HisDataHead psc212HisDataHead01 = new PSC212HisDataHead("时间","0.2","sendDate");
+        psc212HisDataHeadList.add(psc212HisDataHead01);
 
-        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo03.setId("systemAuto");
-        phoneRealMsgInfo03.setTitle("自动模式：");
-        if (systemAuto) {
-            phoneRealMsgInfo03.setValue("自动");
-        } else {
-            phoneRealMsgInfo03.setValue("手动");
-        }
-        phoneRealMsgInfo03.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+        //当日流量
+        PSC212HisDataHead psc212HisDataHead02 = new PSC212HisDataHead("当日流量","0.1","todayFlowmeter");
+        psc212HisDataHeadList.add(psc212HisDataHead02);
 
-        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo04.setId("sbrCycle");
-        phoneRealMsgInfo04.setTitle("SBR周期运行：");
-        if (sbrCycle) {
-            phoneRealMsgInfo04.setValue("运行");
-        } else {
-            phoneRealMsgInfo04.setValue("停止");
-        }
-        phoneRealMsgInfo04.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+        //sbr设定总时间
+        PSC212HisDataHead psc212HisDataHead03 = new PSC212HisDataHead("设定周期","0.1","sbrCycleSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead03);
 
-        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo07.setId("waterTemp");
-        phoneRealMsgInfo07.setTitle("SBR池水温：");
-        phoneRealMsgInfo07.setValue(String.valueOf(waterTemp) + "℃");
-        phoneRealMsgInfo07.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+        //SBR一次搅拌（设定分钟）
+        PSC212HisDataHead psc212HisDataHead04 = new PSC212HisDataHead("一次搅拌","0.1","sbrMixerOnceSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead04);
 
-        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo05.setId("dState");
-        phoneRealMsgInfo05.setTitle("状态：");
-        phoneRealMsgInfo05.setValue(getDState());
-        phoneRealMsgInfo05.setFlag("1");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+        //SBR曝气（设定分钟）
+        PSC212HisDataHead psc212HisDataHead05 = new PSC212HisDataHead("曝气","0.1","fanSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead05);
 
-        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo06.setId("sendDate");
-        phoneRealMsgInfo06.setTitle("");
-        phoneRealMsgInfo06.setValue(this.getSendDate());
-        phoneRealMsgInfo06.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+        //SBR混合（设定分钟）
+        PSC212HisDataHead psc212HisDataHead06 = new PSC212HisDataHead("混合","0.1","sbrMixerSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead06);
 
-        return phoneRealMsgInfoList;
+        //SBR静置（设定分钟）
+        PSC212HisDataHead psc212HisDataHead07 = new PSC212HisDataHead("静置","0.1","sbrStaticSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead07);
+
+        //SBR污泥泵2（设定分钟）
+        PSC212HisDataHead psc212HisDataHead08 = new PSC212HisDataHead("污泥泵2","0.1","sludgePump02SetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead08);
+
+        //SBR静置活化（设定分钟）
+        PSC212HisDataHead psc212HisDataHead09 = new PSC212HisDataHead("静置活化","0.1","sbrActiveSetMinute");
+        psc212HisDataHeadList.add(psc212HisDataHead09);
+
+        return psc212HisDataHeadList;
     }
 
-    public List<PhoneSewageC212RealData> getPhoneRealMsgInfoDetail212() {
-        String defaultColor = "#000000"; //Black
-        String normalRunColor = "#00FF00"; //Green
-        String normalStopColor = "#FFA500"; //Orange
-        String alarmColor = "#CDCD00";   //LightYellow
-        List<PhoneSewageC212RealData> phoneSewageC212RealDataList = new ArrayList<PhoneSewageC212RealData>();
+    public List<PSC01HisDataHead> getDevicePhoneHead() {
+        List<PSC01HisDataHead> psc01HisDataHeadList = new ArrayList<PSC01HisDataHead>();
 
-        //第一部分的两列
-        PhoneSewageC212RealData phoneSewageC212RealData01 = new PhoneSewageC212RealData();
-        phoneSewageC212RealData01.setColumn(2);
-        phoneSewageC212RealData01.setScale("0.5,0.5");
-        phoneSewageC212RealData01.setTitle("总体信息");
-        List<PhoneSewageC212RealOneData> phoneSewageC212RealOneDataList01 = new ArrayList<PhoneSewageC212RealOneData>();
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData01 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData01.setTitle("时间：");
-        phoneSewageC212RealOneData01.setValue1(sendDate);
-        phoneSewageC212RealOneData01.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList01.add(phoneSewageC212RealOneData01);
+        //时间
+        PSC01HisDataHead psc01HisDataHead01 = new PSC01HisDataHead("时间","0.2","sendDate");
+        psc01HisDataHeadList.add(psc01HisDataHead01);
 
-        //累计流量（m³）
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData02 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData02.setTitle("累计流量：");
-        phoneSewageC212RealOneData02.setValue1(String.valueOf(flowmeter) + "m³");
-        phoneSewageC212RealOneData02.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList01.add(phoneSewageC212RealOneData02);
+        //当日流量
+        PSC01HisDataHead psc01HisDataHead02 = new PSC01HisDataHead("当日流量","0.1","todayFlowmeter");
+        psc01HisDataHeadList.add(psc01HisDataHead02);
 
-        //当日流量(m³)
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData03 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData03.setTitle("当日流量：");
-        phoneSewageC212RealOneData03.setValue1(String.valueOf(todayFlowmeter) + "m³");
-        phoneSewageC212RealOneData03.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList01.add(phoneSewageC212RealOneData03);
+        //SBR池水温
+        PSC01HisDataHead psc01HisDataHead10 = new PSC01HisDataHead("水温","0.1","waterTemp");
+        psc01HisDataHeadList.add(psc01HisDataHead10);
 
-        //系统自动模式
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData04 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData04.setTitle("系统自动模式：");
-        if (systemAuto) {
-            phoneSewageC212RealOneData04.setValue1("自动");
-            phoneSewageC212RealOneData04.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData04.setValue1("手动");
-            phoneSewageC212RealOneData04.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneDataList01.add(phoneSewageC212RealOneData04);
+        //sbr设定总时间
+        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("设定周期","0.1","sbrCycleSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead03);
 
-        //SBR周期运行
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData05 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData05.setTitle("SBR周期运行：");
-        if (sbrCycle) {
-            phoneSewageC212RealOneData05.setValue1("运行");
-            phoneSewageC212RealOneData05.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData05.setValue1("停止");
-            phoneSewageC212RealOneData05.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneDataList01.add(phoneSewageC212RealOneData05);
-        //第一部分两列收尾
-        phoneSewageC212RealData01.setPhoneSewageC212RealOneDataList(phoneSewageC212RealOneDataList01);
-        phoneSewageC212RealDataList.add(phoneSewageC212RealData01);
+        //SBR一次搅拌（设定分钟）
+        PSC01HisDataHead psc01HisDataHead04 = new PSC01HisDataHead("一次搅拌","0.1","sbrMixerOnceSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead04);
 
-        //第二部分的三列
-        PhoneSewageC212RealData phoneSewageC212RealData02 = new PhoneSewageC212RealData();
-        phoneSewageC212RealData02.setColumn(3);
-        phoneSewageC212RealData02.setScale("0.5,0.3,0.2");
-        phoneSewageC212RealData02.setTitle("SBR污水处理控制系统(分钟)");
-        List<PhoneSewageC212RealOneData> phoneSewageC212RealOneDataList02 = new ArrayList<PhoneSewageC212RealOneData>();
-        //除磷投加机
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData06 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData06.setTitle("除磷投加机：");
-        if (dephosphorizeRun) {
-            phoneSewageC212RealOneData06.setValue1("运行");
-            phoneSewageC212RealOneData06.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData06.setValue1("停止");
-            phoneSewageC212RealOneData06.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData06.setValue2(String.valueOf(dephosphorizeRunMinute) + "");
-        phoneSewageC212RealOneData06.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData06);
+        //SBR曝气（设定分钟）
+        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("曝气","0.1","fanSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead05);
 
-        //污泥泵1
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData07 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData07.setTitle("污泥泵1：");
-        if (sludgePump01Run) {
-            phoneSewageC212RealOneData07.setValue1("运行");
-            phoneSewageC212RealOneData07.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData07.setValue1("停止");
-            phoneSewageC212RealOneData07.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData07.setValue2(String.valueOf(sludgePump01RunMinute) + "");
-        phoneSewageC212RealOneData07.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData07);
+        //SBR混合（设定分钟）
+        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("混合","0.1","sbrMixerSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead06);
 
-        //SBR池进水泵
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData08 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData08.setTitle("SBR池进水泵：");
-        if (sbrIntakePumpRun) {
-            phoneSewageC212RealOneData08.setValue1("运行");
-            phoneSewageC212RealOneData08.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData08.setValue1("停止");
-            phoneSewageC212RealOneData08.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData08.setValue2(String.valueOf(sbrIntakePumpRunMinute) + "");
-        phoneSewageC212RealOneData08.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData08);
+        //SBR静置（设定分钟）
+        PSC01HisDataHead psc01HisDataHead07 = new PSC01HisDataHead("静置","0.1","sbrStaticSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead07);
 
-        //SBR一次搅拌
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData09 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData09.setTitle("SBR一次搅拌：");
-        if (sbrMixerOnceRun) {
-            phoneSewageC212RealOneData09.setValue1("运行");
-            phoneSewageC212RealOneData09.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData09.setValue1("停止");
-            phoneSewageC212RealOneData09.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData09.setValue2(String.valueOf(sbrMixerOnceRunMinute) + "");
-        phoneSewageC212RealOneData09.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData09);
+        //SBR污泥泵2（设定分钟）
+        PSC01HisDataHead psc01HisDataHead08 = new PSC01HisDataHead("污泥泵2","0.1","sludgePump02SetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead08);
 
-        //SBR曝气
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData10 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData10.setTitle("SBR曝气：");
-        if (fan01Run || fan02Run) {
-            phoneSewageC212RealOneData10.setValue1("运行");
-            phoneSewageC212RealOneData10.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData10.setValue1("停止");
-            phoneSewageC212RealOneData10.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData10.setValue2(String.valueOf(fanRunMinute) + "");
-        phoneSewageC212RealOneData10.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData10);
+        //SBR静置活化（设定分钟）
+        PSC01HisDataHead psc01HisDataHead09 = new PSC01HisDataHead("静置活化","0.1","sbrActiveSetMinute");
+        psc01HisDataHeadList.add(psc01HisDataHead09);
 
-        //SBR二次搅拌
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData11 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData11.setTitle("SBR二次搅拌：");
-        if (sbrMixerSecRun) {
-            phoneSewageC212RealOneData11.setValue1("运行");
-            phoneSewageC212RealOneData11.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData11.setValue1("停止");
-            phoneSewageC212RealOneData11.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData11.setValue2(String.valueOf(sbrMixerRunMinute) + "");
-        phoneSewageC212RealOneData11.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData11);
-
-        //SBR静置
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData12 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData12.setTitle("SBR静置：");
-        if (sbrStaticRun) {
-            phoneSewageC212RealOneData12.setValue1("运行");
-            phoneSewageC212RealOneData12.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData12.setValue1("停止");
-            phoneSewageC212RealOneData12.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData12.setValue2(String.valueOf(sbrStaticRunMinute) + "");
-        phoneSewageC212RealOneData12.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData12);
-
-        //SBR污泥泵2
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData13 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData13.setTitle("SBR污泥泵2：");
-        if (sludgePump02Run) {
-            phoneSewageC212RealOneData13.setValue1("运行");
-            phoneSewageC212RealOneData13.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData13.setValue1("停止");
-            phoneSewageC212RealOneData13.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData13.setValue2(String.valueOf(sludgePump02RunMinute) + "");
-        phoneSewageC212RealOneData13.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData13);
-
-        //滗水器(排水)
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData14 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData14.setTitle("滗水器(排水)：");
-        if (decanterCycleRun) {
-            phoneSewageC212RealOneData14.setValue1("运行");
-            phoneSewageC212RealOneData14.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData14.setValue1("停止");
-            phoneSewageC212RealOneData14.setColor1(normalStopColor);
-        }
-        if (decanterRun) {
-            phoneSewageC212RealOneData14.setValue2("运行");
-            phoneSewageC212RealOneData14.setColor2(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData14.setValue2("停止");
-            phoneSewageC212RealOneData14.setColor2(normalStopColor);
-        }
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData14);
-
-        //SBR静置活化
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData15 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData15.setTitle("SBR静置活化：");
-        if (sbrActiveRun) {
-            phoneSewageC212RealOneData15.setValue1("运行");
-            phoneSewageC212RealOneData15.setColor1(normalRunColor);
-        } else {
-            phoneSewageC212RealOneData15.setValue1("停止");
-            phoneSewageC212RealOneData15.setColor1(normalStopColor);
-        }
-        phoneSewageC212RealOneData15.setValue2(String.valueOf(sbrActiveRunMinute) + "");
-        phoneSewageC212RealOneData15.setColor2(defaultColor);
-        phoneSewageC212RealOneDataList02.add(phoneSewageC212RealOneData15);
-        //第二部分三列收尾
-        phoneSewageC212RealData02.setPhoneSewageC212RealOneDataList(phoneSewageC212RealOneDataList02);
-        phoneSewageC212RealDataList.add(phoneSewageC212RealData02);
-
-        //第三部分的两列--设定时间
-        PhoneSewageC212RealData phoneSewageC212RealData03 = new PhoneSewageC212RealData();
-        phoneSewageC212RealData03.setColumn(2);
-        phoneSewageC212RealData03.setScale("0.5,0.5");
-        phoneSewageC212RealData03.setTitle("SBR工艺流程设定时间(分钟)");
-        List<PhoneSewageC212RealOneData> phoneSewageC212RealOneDataList03 = new ArrayList<PhoneSewageC212RealOneData>();
-
-        //除磷投加机
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData16 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData16.setTitle("除磷投加机：");
-        phoneSewageC212RealOneData16.setValue1(String.valueOf(dephosphorizeSetMinute));
-        phoneSewageC212RealOneData16.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData16);
-
-        //污泥泵1
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData17 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData17.setTitle("污泥泵1：");
-        phoneSewageC212RealOneData17.setValue1(String.valueOf(sludgePump01SetMinute));
-        phoneSewageC212RealOneData17.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData17);
-
-        //SBR设定周期
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData18 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData18.setTitle("SBR设定周期：");
-        phoneSewageC212RealOneData18.setValue1(String.valueOf(sbrCycleSetMinute));
-        phoneSewageC212RealOneData18.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData18);
-
-        //SBR一次搅拌
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData19 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData19.setTitle("SBR一次搅拌：");
-        phoneSewageC212RealOneData19.setValue1(String.valueOf(sbrMixerOnceSetMinute));
-        phoneSewageC212RealOneData19.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData19);
-
-        //SBR曝气
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData20 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData20.setTitle("SBR曝气：");
-        phoneSewageC212RealOneData20.setValue1(String.valueOf(fanSetMinute));
-        phoneSewageC212RealOneData20.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData20);
-
-        //SBR二次搅拌
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData21 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData21.setTitle("SBR二次搅拌：");
-        phoneSewageC212RealOneData21.setValue1(String.valueOf(sbrMixerSetMinute));
-        phoneSewageC212RealOneData21.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData21);
-
-        //SBR静置
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData22 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData22.setTitle("SBR静置：");
-        phoneSewageC212RealOneData22.setValue1(String.valueOf(sbrStaticSetMinute));
-        phoneSewageC212RealOneData22.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData22);
-
-        //SBR污泥泵2
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData23 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData23.setTitle("SBR污泥泵2：");
-        phoneSewageC212RealOneData23.setValue1(String.valueOf(sludgePump02SetMinute));
-        phoneSewageC212RealOneData23.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData23);
-
-        //SBR静置活化
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData24 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData24.setTitle("SBR静置活化：");
-        phoneSewageC212RealOneData24.setValue1(String.valueOf(sbrActiveSetMinute));
-        phoneSewageC212RealOneData24.setColor1(defaultColor);
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData24);
-
-        //状态
-        PhoneSewageC212RealOneData phoneSewageC212RealOneData25 = new PhoneSewageC212RealOneData();
-        phoneSewageC212RealOneData25.setTitle("状态：");
-        if (getDState().equals("离线") ) {
-            phoneSewageC212RealOneData25.setValue1(getDState());
-            phoneSewageC212RealOneData25.setColor1(alarmColor);
-        } else {
-            phoneSewageC212RealOneData25.setValue1(getDState());
-            phoneSewageC212RealOneData25.setColor1(defaultColor);
-        }
-        phoneSewageC212RealOneDataList03.add(phoneSewageC212RealOneData25);
-
-        //第三部分两列收尾
-        phoneSewageC212RealData03.setPhoneSewageC212RealOneDataList(phoneSewageC212RealOneDataList03);
-        phoneSewageC212RealDataList.add(phoneSewageC212RealData03);
-
-        return phoneSewageC212RealDataList;
-    }
-
-    public List<PhoneSewageC01RealData> getPhoneRealMsgInfoDetail() {
-        String defaultColor = "#000000"; //Black
-        String normalRunColor = "#00FF00"; //Green
-        String normalStopColor = "#FFA500"; //Orange
-        String alarmColor = "#CDCD00";   //LightYellow
-        List<PhoneSewageC01RealData> phoneSewageC01RealDataList = new ArrayList<PhoneSewageC01RealData>();
-
-        //第一部分的两列
-        PhoneSewageC01RealData phoneSewageC01RealData01 = new PhoneSewageC01RealData();
-        phoneSewageC01RealData01.setColumn(2);
-        phoneSewageC01RealData01.setScale("0.5,0.5");
-        phoneSewageC01RealData01.setTitle("总体信息");
-        List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList01 = new ArrayList<PhoneSewageC01RealOneData>();
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData01 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData01.setTitle("时间：");
-        phoneSewageC01RealOneData01.setValue1(sendDate);
-        phoneSewageC01RealOneData01.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData01);
-
-        //累计流量（m³）
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData02 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData02.setTitle("累计流量：");
-        phoneSewageC01RealOneData02.setValue1(String.valueOf(flowmeter) + "m³");
-        phoneSewageC01RealOneData02.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData02);
-
-        //当日流量(m³)
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData03 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData03.setTitle("当日流量：");
-        phoneSewageC01RealOneData03.setValue1(String.valueOf(todayFlowmeter) + "m³");
-        phoneSewageC01RealOneData03.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData03);
-
-        //SBR池水温(℃)
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData26 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData26.setTitle("SBR池水温：");
-        phoneSewageC01RealOneData26.setValue1(String.valueOf(waterTemp) + "℃");
-        phoneSewageC01RealOneData26.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData26);
-
-        //系统自动模式
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData04 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData04.setTitle("系统自动模式：");
-        if (systemAuto) {
-            phoneSewageC01RealOneData04.setValue1("自动");
-            phoneSewageC01RealOneData04.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData04.setValue1("手动");
-            phoneSewageC01RealOneData04.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData04);
-
-        //SBR周期运行
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData05 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData05.setTitle("SBR周期运行：");
-        if (sbrCycle) {
-            phoneSewageC01RealOneData05.setValue1("运行");
-            phoneSewageC01RealOneData05.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData05.setValue1("停止");
-            phoneSewageC01RealOneData05.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneDataList01.add(phoneSewageC01RealOneData05);
-        //第一部分两列收尾
-        phoneSewageC01RealData01.setPhoneSewageC01RealOneDataList(phoneSewageC01RealOneDataList01);
-        phoneSewageC01RealDataList.add(phoneSewageC01RealData01);
-
-        //第二部分的三列
-        PhoneSewageC01RealData phoneSewageC01RealData02 = new PhoneSewageC01RealData();
-        phoneSewageC01RealData02.setColumn(3);
-        phoneSewageC01RealData02.setScale("0.5,0.3,0.2");
-        phoneSewageC01RealData02.setTitle("SBR污水处理控制系统(分钟)");
-        List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList02 = new ArrayList<PhoneSewageC01RealOneData>();
-        //除磷投加机
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData06 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData06.setTitle("除磷投加机：");
-        if (dephosphorizeRun) {
-            phoneSewageC01RealOneData06.setValue1("运行");
-            phoneSewageC01RealOneData06.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData06.setValue1("停止");
-            phoneSewageC01RealOneData06.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData06.setValue2(String.valueOf(dephosphorizeRunMinute) + "");
-        phoneSewageC01RealOneData06.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData06);
-
-        //污泥泵1
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData07 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData07.setTitle("污泥泵1：");
-        if (sludgePump01Run) {
-            phoneSewageC01RealOneData07.setValue1("运行");
-            phoneSewageC01RealOneData07.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData07.setValue1("停止");
-            phoneSewageC01RealOneData07.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData07.setValue2(String.valueOf(sludgePump01RunMinute) + "");
-        phoneSewageC01RealOneData07.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData07);
-
-        //SBR池进水泵
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData08 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData08.setTitle("SBR池进水泵：");
-        if (sbrIntakePumpRun) {
-            phoneSewageC01RealOneData08.setValue1("运行");
-            phoneSewageC01RealOneData08.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData08.setValue1("停止");
-            phoneSewageC01RealOneData08.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData08.setValue2(String.valueOf(sbrIntakePumpRunMinute) + "");
-        phoneSewageC01RealOneData08.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData08);
-
-        //SBR一次搅拌
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData09 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData09.setTitle("SBR一次搅拌：");
-        if (sbrMixerOnceRun) {
-            phoneSewageC01RealOneData09.setValue1("运行");
-            phoneSewageC01RealOneData09.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData09.setValue1("停止");
-            phoneSewageC01RealOneData09.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData09.setValue2(String.valueOf(sbrMixerOnceRunMinute) + "");
-        phoneSewageC01RealOneData09.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData09);
-
-        //SBR曝气
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData10 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData10.setTitle("SBR曝气：");
-        if (fan01Run || fan02Run) {
-            phoneSewageC01RealOneData10.setValue1("运行");
-            phoneSewageC01RealOneData10.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData10.setValue1("停止");
-            phoneSewageC01RealOneData10.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData10.setValue2(String.valueOf(fanRunMinute) + "");
-        phoneSewageC01RealOneData10.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData10);
-
-        //SBR二次搅拌
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData11 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData11.setTitle("SBR二次搅拌：");
-        if (sbrMixerSecRun) {
-            phoneSewageC01RealOneData11.setValue1("运行");
-            phoneSewageC01RealOneData11.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData11.setValue1("停止");
-            phoneSewageC01RealOneData11.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData11.setValue2(String.valueOf(sbrMixerRunMinute) + "");
-        phoneSewageC01RealOneData11.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData11);
-
-        //SBR静置
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData12 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData12.setTitle("SBR静置：");
-        if (sbrStaticRun) {
-            phoneSewageC01RealOneData12.setValue1("运行");
-            phoneSewageC01RealOneData12.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData12.setValue1("停止");
-            phoneSewageC01RealOneData12.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData12.setValue2(String.valueOf(sbrStaticRunMinute) + "");
-        phoneSewageC01RealOneData12.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData12);
-
-        //SBR污泥泵2
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData13 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData13.setTitle("SBR污泥泵2：");
-        if (sludgePump02Run) {
-            phoneSewageC01RealOneData13.setValue1("运行");
-            phoneSewageC01RealOneData13.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData13.setValue1("停止");
-            phoneSewageC01RealOneData13.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData13.setValue2(String.valueOf(sludgePump02RunMinute) + "");
-        phoneSewageC01RealOneData13.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData13);
-
-        //滗水器(排水)
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData14 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData14.setTitle("滗水器(排水)：");
-        if (decanterCycleRun) {
-            phoneSewageC01RealOneData14.setValue1("运行");
-            phoneSewageC01RealOneData14.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData14.setValue1("停止");
-            phoneSewageC01RealOneData14.setColor1(normalStopColor);
-        }
-        if (decanterRun) {
-            phoneSewageC01RealOneData14.setValue2("运行");
-            phoneSewageC01RealOneData14.setColor2(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData14.setValue2("停止");
-            phoneSewageC01RealOneData14.setColor2(normalStopColor);
-        }
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData14);
-
-        //SBR静置活化
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData15 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData15.setTitle("SBR静置活化：");
-        if (sbrActiveRun) {
-            phoneSewageC01RealOneData15.setValue1("运行");
-            phoneSewageC01RealOneData15.setColor1(normalRunColor);
-        } else {
-            phoneSewageC01RealOneData15.setValue1("停止");
-            phoneSewageC01RealOneData15.setColor1(normalStopColor);
-        }
-        phoneSewageC01RealOneData15.setValue2(String.valueOf(sbrActiveRunMinute) + "");
-        phoneSewageC01RealOneData15.setColor2(defaultColor);
-        phoneSewageC01RealOneDataList02.add(phoneSewageC01RealOneData15);
-        //第二部分三列收尾
-        phoneSewageC01RealData02.setPhoneSewageC01RealOneDataList(phoneSewageC01RealOneDataList02);
-        phoneSewageC01RealDataList.add(phoneSewageC01RealData02);
-
-        //第三部分的两列--设定时间
-        PhoneSewageC01RealData phoneSewageC01RealData03 = new PhoneSewageC01RealData();
-        phoneSewageC01RealData03.setColumn(2);
-        phoneSewageC01RealData03.setScale("0.5,0.5");
-        phoneSewageC01RealData03.setTitle("SBR工艺流程设定时间(分钟)");
-        List<PhoneSewageC01RealOneData> phoneSewageC01RealOneDataList03 = new ArrayList<PhoneSewageC01RealOneData>();
-
-        //除磷投加机
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData16 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData16.setTitle("除磷投加机：");
-        phoneSewageC01RealOneData16.setValue1(String.valueOf(dephosphorizeSetMinute));
-        phoneSewageC01RealOneData16.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData16);
-
-        //污泥泵1
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData17 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData17.setTitle("污泥泵1：");
-        phoneSewageC01RealOneData17.setValue1(String.valueOf(sludgePump01SetMinute));
-        phoneSewageC01RealOneData17.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData17);
-
-        //SBR设定周期
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData18 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData18.setTitle("SBR设定周期：");
-        phoneSewageC01RealOneData18.setValue1(String.valueOf(sbrCycleSetMinute));
-        phoneSewageC01RealOneData18.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData18);
-
-        //SBR一次搅拌
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData19 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData19.setTitle("SBR一次搅拌：");
-        phoneSewageC01RealOneData19.setValue1(String.valueOf(sbrMixerOnceSetMinute));
-        phoneSewageC01RealOneData19.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData19);
-
-        //SBR曝气
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData20 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData20.setTitle("SBR曝气：");
-        phoneSewageC01RealOneData20.setValue1(String.valueOf(fanSetMinute));
-        phoneSewageC01RealOneData20.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData20);
-
-        //SBR二次搅拌
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData21 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData21.setTitle("SBR二次搅拌：");
-        phoneSewageC01RealOneData21.setValue1(String.valueOf(sbrMixerSetMinute));
-        phoneSewageC01RealOneData21.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData21);
-
-        //SBR静置
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData22 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData22.setTitle("SBR静置：");
-        phoneSewageC01RealOneData22.setValue1(String.valueOf(sbrStaticSetMinute));
-        phoneSewageC01RealOneData22.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData22);
-
-        //SBR污泥泵2
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData23 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData23.setTitle("SBR污泥泵2：");
-        phoneSewageC01RealOneData23.setValue1(String.valueOf(sludgePump02SetMinute));
-        phoneSewageC01RealOneData23.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData23);
-
-        //SBR静置活化
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData24 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData24.setTitle("SBR静置活化：");
-        phoneSewageC01RealOneData24.setValue1(String.valueOf(sbrActiveSetMinute));
-        phoneSewageC01RealOneData24.setColor1(defaultColor);
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData24);
-
-        //状态
-        PhoneSewageC01RealOneData phoneSewageC01RealOneData25 = new PhoneSewageC01RealOneData();
-        phoneSewageC01RealOneData25.setTitle("状态：");
-        if (getDState().equals("离线") ) {
-            phoneSewageC01RealOneData25.setValue1(getDState());
-            phoneSewageC01RealOneData25.setColor1(alarmColor);
-        } else {
-            phoneSewageC01RealOneData25.setValue1(getDState());
-            phoneSewageC01RealOneData25.setColor1(defaultColor);
-        }
-        phoneSewageC01RealOneDataList03.add(phoneSewageC01RealOneData25);
-
-        //第三部分两列收尾
-        phoneSewageC01RealData03.setPhoneSewageC01RealOneDataList(phoneSewageC01RealOneDataList03);
-        phoneSewageC01RealDataList.add(phoneSewageC01RealData03);
-
-        return phoneSewageC01RealDataList;
+        return psc01HisDataHeadList;
     }
 }

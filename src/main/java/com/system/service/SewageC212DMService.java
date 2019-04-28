@@ -1,6 +1,7 @@
 package com.system.service;
 
 import com.system.po.DataTablePageing;
+import com.system.po.Device.SewageC212DMHis;
 import com.system.po.Device.SewageC212DeviceMessage;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
@@ -43,6 +44,16 @@ public interface SewageC212DMService {
      * @throws Exception
      */
     List<SewageC212DeviceMessage> selectSewageC212ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+
+    /**
+     * 手机端查询历史数据
+     * @param sDeviceId 设备ID
+     * @param sStartDate 起始时间
+     * @param sEndDate 截止时间
+     * @return
+     * @throws Exception
+     */
+    List<SewageC212DMHis> selectPhoneHisSewageC212ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
      * 一个设备时间段内的数据;分页

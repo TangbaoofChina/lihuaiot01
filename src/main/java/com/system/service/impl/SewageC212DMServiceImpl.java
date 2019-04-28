@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.system.mapperiot.SewageC212DMMapper;
 import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
+import com.system.po.Device.SewageC212DMHis;
 import com.system.po.Device.SewageC212DeviceMessage;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
@@ -81,6 +82,11 @@ public class SewageC212DMServiceImpl implements SewageC212DMService {
         dataTablePageing.setsReturnJson(sReturnJson);
         //return dataDetailList;
         return dataTablePageing;
+    }
+
+    @Override
+    public List<SewageC212DMHis> selectPhoneHisSewageC212ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+        return sewageC212DeviceMessageMapper.selectPhoneHisSewageC212ByDateAndId(sDeviceId,sStartDate,sEndDate);
     }
 
     @Override

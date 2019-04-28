@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/phone/sewagec01")
+@RequestMapping("/phone/sewagec")
 public class SewageC01PhoneController {
 
     @Autowired

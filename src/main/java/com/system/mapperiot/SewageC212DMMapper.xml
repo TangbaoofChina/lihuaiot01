@@ -223,6 +223,21 @@
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
+    <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.SewageC212DMHis">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="SBRCYCLESETMINUTE" jdbcType="INTEGER" property="sbrCycleSetMinute"/>
+        <result column="SBRMIXERONCESETMINUTE" jdbcType="INTEGER" property="sbrMixerOnceSetMinute"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXERSETMINUTE" jdbcType="INTEGER" property="sbrMixerSetMinute"/>
+        <result column="SBRSTATICSETMINUTE" jdbcType="INTEGER" property="sbrStaticSetMinute"/>
+        <result column="SLUDGEPUMP02SETMINUTE" jdbcType="INTEGER" property="sludgePump02SetMinute"/>
+        <result column="SBRACTIVESETMINUTE" jdbcType="INTEGER" property="sbrActiveSetMinute"/>
+        <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+    </resultMap>
     <sql id="BaseResult_Column_List">
         decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
     </sql>
@@ -265,5 +280,16 @@
         AND b.SENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
         order by b.SENDDATE ASC
+    </select>
+    <select id="selectPhoneHisSewageC212ByDateAndId" resultMap="BasePhoneHisResultMap">
+        select a.di_name,a.di_serialnum,b.*
+        from (select t.*,
+        row_number() over(partition by t.device_serialnum,to_char(t.senddate,'yyyy-mm-dd') order by t.senddate desc) rn
+        from IOT_HISSEWAGECON_212 t
+        where t.senddate between to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and t.DEVICE_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum=b.device_serialnum
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.system.po.Phone.PhoneSewageC01;
 
 import com.system.po.Device.SewageC01DMHis;
+import com.system.po.Device.SewageC212DMHis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,19 @@ public class PSC01HisMsgInfo {
         for (SewageC01DMHis sewageC01DMHis : sewageC01DMHisList
                 ) {
             PSC01HisDataContent psc01HisDataContent = new PSC01HisDataContent(sewageC01DMHis);
+            psc01HisDataContentList.add(psc01HisDataContent);
+        }
+        this.psc01HisDataContentList = psc01HisDataContentList;
+    }
+
+    public PSC01HisMsgInfo(List<SewageC212DMHis> sewageC212DMHisList,String devType) {
+        this.dSerialNum = sewageC212DMHisList.get(0).getDSerialNum();
+        this.dName = sewageC212DMHisList.get(0).getDName();
+        this.psc01HisDataHeadList = sewageC212DMHisList.get(0).getDevicePhoneHead();
+        List<PSC01HisDataContent> psc01HisDataContentList = new ArrayList<PSC01HisDataContent>();
+        for (SewageC212DMHis sewageC212DMHis : sewageC212DMHisList
+                ) {
+            PSC01HisDataContent psc01HisDataContent = new PSC01HisDataContent(sewageC212DMHis);
             psc01HisDataContentList.add(psc01HisDataContent);
         }
         this.psc01HisDataContentList = psc01HisDataContentList;
