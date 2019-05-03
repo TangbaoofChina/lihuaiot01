@@ -1946,11 +1946,11 @@ public class SewageC212DMHis extends BaseDeviceMessage {
         psc01HisDataHeadList.add(psc01HisDataHead04);
 
         //SBR曝气（设定分钟）
-        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("曝气","0.1","fanSetMinute");
+        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("曝气","0.05","fanSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead05);
 
         //SBR混合（设定分钟）
-        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("混合","0.1","sbrMixerSetMinute");
+        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("混合","0.05","sbrMixerSetMinute");
         psc01HisDataHeadList.add(psc01HisDataHead06);
 
         //SBR静置（设定分钟）
