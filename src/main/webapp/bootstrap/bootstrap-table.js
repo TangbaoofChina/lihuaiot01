@@ -2487,7 +2487,8 @@
                 padding += this.$tableFooter.outerHeight() + 1;
             }
         }
-
+        if(padding === 0)
+            padding = 40;
         // Assign the correct sortable arrow
         this.getCaret();
         this.$tableContainer.css('padding-bottom', padding + 'px');
