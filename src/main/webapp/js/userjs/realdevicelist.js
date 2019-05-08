@@ -459,7 +459,7 @@ function rdlSelectDeviceByTreeIdEC01() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 8,
+        pageSize: 100,
         //可供选择的每页的行数（*）
         pageList: [8,10, 25, 50, 100],
         //是否显示搜索

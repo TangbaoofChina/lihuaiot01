@@ -141,7 +141,7 @@ function dlSelectDeviceByTreeId() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 8,
+        pageSize: 100,
         //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],
         //是否显示搜索
@@ -191,7 +191,7 @@ function dlExportStorageAction() {
         var queryParameter = dlNowTreeNode.id;
         var data = {
             sORGId: queryParameter
-        }
+        };
         var url = "/lihuaiot01/deviceList/exportDeviceList?" + $.param(data)
         window.open(url, '_blank');
         $('#dlExport_modal').modal("hide");
