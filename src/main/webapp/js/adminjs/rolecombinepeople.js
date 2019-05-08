@@ -1,3 +1,4 @@
+//用户管理 用户关联角色
 var rolePeopleTableColumns;
 var rolePeopleSelectPeople;
 var rolePeopleSelectRole;
@@ -86,8 +87,10 @@ function rolePeopleInitTableContent() {
         sortable: false,
         //排序方式
         sortOrder: "asc",
+        //初始化加载第一页，默认第一页
+        pageNumber: 1,
         //每页的记录行数（*）
-        pageSize: 8,
+        pageSize: 100,
         //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],
         //是否显示搜索
@@ -105,11 +108,13 @@ function rolePeopleInitTableContent() {
         ////查询参数,每次调用是会带上这个参数，可自定义
         /*queryParamsType: 'limit',//查询参数组织方式
         queryParams: roleQueryParams,*/
+        pagination:true,
         //分页方式：client客户端分页，server服务端分页（*）
         sidePagination: "client",
         locale: 'zh-CN',//中文支持
         /* toolbar: '#toolbar',//指定工作栏*/
         columns: rolePeopleTableColumns,
+        height: 500       //设置表格高度-固定表头生效
     });
 }
 

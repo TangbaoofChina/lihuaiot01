@@ -6,9 +6,9 @@
     }
 </style>
 <div class="panel panel-default">
-    <ol class="breadcrumb" style="margin-bottom: 0px;">
+<%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
         <li>用户管理信息</li>
-    </ol>
+    </ol>--%>
     <div class="panel-body">
         <div id="rolePeopletoolbar" class="btn-group">
             <button class="btn btn-default btnwidth" onclick="rolePeopleShowAddNew()">新增</button>

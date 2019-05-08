@@ -1,3 +1,4 @@
+//设备代码
 var dcAlarmTableColumns;
 var dcErrorTableColumns;
 var dcSelectRole;

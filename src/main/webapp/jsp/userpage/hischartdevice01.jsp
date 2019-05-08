@@ -268,7 +268,6 @@
 
 <script>
     //removealljsfile();
-    loadjscssfile("/lihuaiot01/js/userjs/hischartdevicehj212C213.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/hischartdevice01.js", "js");
 </script>
 

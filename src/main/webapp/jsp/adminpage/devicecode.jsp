@@ -8,9 +8,9 @@
     }
 </style>
 <div class="panel panel-default">
-    <ol class="breadcrumb" style="margin-bottom: 0px;">
+<%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
         <li>设备代码信息</li>
-    </ol>
+    </ol>--%>
     <div class="panel-body">
         <div id="dctoolbar" class="form-inline">
             <div class="input-group">

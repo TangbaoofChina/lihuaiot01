@@ -1,3 +1,4 @@
+//人员管理 -屏蔽了
 var peopleOrgParentNode;
 var peopleOrgNowTreeNode;
 var peopleOrgNextNode;

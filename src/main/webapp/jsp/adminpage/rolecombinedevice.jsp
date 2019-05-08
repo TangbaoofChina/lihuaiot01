@@ -8,21 +8,21 @@
     }
 </style>
 <div class="panel panel-default">
-    <ol class="breadcrumb" style="margin-bottom: 0px;">
+<%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
         <li>角色管理信息</li>
-    </ol>
+    </ol>--%>
     <div class="panel-body">
         <div id="roletoolbar" class="btn-group">
             <button class="btn btn-default btnwidth" onclick="roleShowAdd()">新增</button>
         </div>
         <div class="container col-md-11">
-            <table class="table table-striped" id="roleTable" align="center"
-                   striped="true" data-click-to-select="true"
-                   data-toolbar="#roletoolbar"<%--设置装按钮的容器为id为toolbar--%>
-                   data-pagination="true"<%--设置是否显示页码数--%>
-                   data-show-refresh="true" <%--设置刷新按钮--%>
-                   data-showColumns="true">
+            <table id="roleTable">
             </table>
+<%--            <table class="table table-striped" id="roleTable" align="center"
+                   striped="true" data-click-to-select="true"
+                   data-toolbar="#roletoolbar"&lt;%&ndash;设置装按钮的容器为id为toolbar&ndash;%&gt;
+                   data-show-refresh="true" &lt;%&ndash;设置刷新按钮&ndash;%&gt;>
+            </table>--%>
         </div>
     </div>
 </div>

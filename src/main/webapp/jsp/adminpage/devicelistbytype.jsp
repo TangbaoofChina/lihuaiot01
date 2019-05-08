@@ -2,9 +2,9 @@
          pageEncoding="UTF-8" %>
 
 <div class="panel panel-default">
-    <ol class="breadcrumb" style="margin-bottom: 0px;">
+<%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
         <li>设备清单信息</li>
-    </ol>
+    </ol>--%>
     <div class="panel-body">
         <div class="columns-left col-md-2" style="margin-left:-15px;width:230px;height:410px;overflow: auto">
             <div id="dlbtTree" style="margin-top: 5px;"></div>

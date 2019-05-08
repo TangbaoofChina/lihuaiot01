@@ -3,6 +3,7 @@ package com.system.po.ScaleC01;
 import com.mysql.jdbc.StringUtils;
 import com.system.po.Device.ScaleC01DeviceMessage;
 import com.system.po.parameter.OneDataDetail;
+import com.system.util.DataConvertor;
 import com.system.util.ScaleC01Util;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ScaleC01WtAnalysis {
     }
 
     public float getGainWt() {
-        return gainWt;
+        return DataConvertor.formatFloat(gainWt,2);
     }
 
     public void setGainWt(float gainWt) {

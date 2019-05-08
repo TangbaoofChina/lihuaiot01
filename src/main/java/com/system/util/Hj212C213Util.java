@@ -144,8 +144,8 @@ public class Hj212C213Util {
         return newDateList;
     }
 
-    //日期排序 yyyy-MM-dd
-    public static List<String> dateSort01(List<String> sDateList){
+    //日期排序 yyyy-MM-dd 这个工具类的这个方法没用到，所以屏蔽了
+/*    public static List<String> dateSort01(List<String> sDateList){
         List<String> newDateList = new ArrayList<String>();
         for (int i = 0; i < sDateList.size(); i++) {
             if (!newDateList.contains(sDateList.get(i))) {
@@ -162,7 +162,7 @@ public class Hj212C213Util {
             newDateList.set(j + 1, tmp);
         }
         return newDateList;
-    }
+    }*/
 
     //日期排序 yy-MM-dd
     public static List<String> dateSort02(List<String> sDateList){

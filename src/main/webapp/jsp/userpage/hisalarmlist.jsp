@@ -30,6 +30,7 @@
             <table id="haDeviceList">
             </table>
         </div>
+
         <%--</div>--%>
     </div>
 </div>

@@ -2,9 +2,9 @@
          pageEncoding="UTF-8" %>
 
 <div class="panel panel-default">
-    <ol class="breadcrumb" style="margin-bottom: 0px;">
+<%--    <ol class="breadcrumb" style="margin-bottom: 0px;">
         <li>设备管理信息</li>
-    </ol>
+    </ol>--%>
     <div class="panel-body">
         <%--        <div class="columns-left">
                     <div class="zTreeDemoBackground left col-md-2" style="width:230px;height: 410px;overflow: scroll">

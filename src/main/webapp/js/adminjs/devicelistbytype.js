@@ -1,4 +1,4 @@
-
+//设备清单 根据设备类型，列出设备清单
 var dlbtNowTreeNode;
 var dlbtTreeNodes;
 var dlbtTableColumns;
@@ -121,7 +121,7 @@ function dlbtSelectDeviceByTreeId() {
         //排序方式
         sortOrder: "asc",
         //每页的记录行数（*）
-        pageSize: 9,
+        pageSize: 100,
         //可供选择的每页的行数（*）
         pageList: [10, 25, 50, 100],
         //是否显示搜索

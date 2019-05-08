@@ -1,3 +1,4 @@
+//设备管理  把设备关联到对应组织下，关联到eas中
 var deviceOrgNowTreeNode;
 var deviceOrgTreeNodes;
 var deviceOrgTableColumns;

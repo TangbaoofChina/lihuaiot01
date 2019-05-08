@@ -85,7 +85,7 @@ public class ScaleC01Chart {
         eChartsYAxis.setSplitLine(ecySplitLine);
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
-        phoneEChartsOptions.setSeries(this.getWtSeries(deviceInfoMap, scaleC01MapByDate));
+        phoneEChartsOptions.setSeries(this.getWtSeries(deviceInfoMap, sDateList, scaleC01MapByDate));
         phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
     }
@@ -109,11 +109,16 @@ public class ScaleC01Chart {
         phoneEChartsOptions.setLegend(eChartsLegend);
         //X轴坐标
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
-        List<String> sDateList = new ArrayList<>();
-        for (int i = 0; i < scaleC01WtAnalysisList.size(); i++) {
-            sDateList.add(String.valueOf(scaleC01WtAnalysisList.get(i).getDayAge()));
+        List<String> sDateList = ScaleC01Util.getScaleC01DataList(scaleC01WtAnalysisList);
+        List<String> sDateAgeList = new ArrayList<>();
+        for (String sDate:sDateList
+             ) {
+            for (int i = 0; i < scaleC01WtAnalysisList.size(); i++) {
+                if (sDate.equals(scaleC01WtAnalysisList.get(i).getsDate()))
+                    sDateAgeList.add(String.valueOf(scaleC01WtAnalysisList.get(i).getDayAge()));
+            }
         }
-        eChartsXAxis.setData(sDateList);
+        eChartsXAxis.setData(sDateAgeList);
         //分割线
         EcSplitLine ecxSplitLine = new EcSplitLine();
         ecxSplitLine.setShow(false);
@@ -138,7 +143,7 @@ public class ScaleC01Chart {
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
         List<ParameterData> parameterDataList = new ArrayList<>();
-        parameterDataList.add(this.getGainWtAgeSeries(scaleC01WtAnalysisList));
+        parameterDataList.add(this.getGainWtAgeSeries(sDateList,scaleC01WtAnalysisList));
         phoneEChartsOptions.setSeries(parameterDataList);
         phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
@@ -195,7 +200,7 @@ public class ScaleC01Chart {
         eChartsYAxis.setSplitLine(ecySplitLine);
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
-        phoneEChartsOptions.setSeries(this.getGainWtAgeSeries(deviceInfoMap, scaleC01MapByDate));
+        phoneEChartsOptions.setSeries(this.getGainWtAgeSeries(deviceInfoMap,sDateList, scaleC01MapByDate));
         phoneEChartsOptions.showPoint(false, false);
         return phoneEChartsOptions;
     }
@@ -238,7 +243,7 @@ public class ScaleC01Chart {
     }
 
     //获取平均体重的曲线
-    private List<ParameterData> getWtSeries(Map<String, String> deviceInfoMap, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+    private List<ParameterData> getWtSeries(Map<String, String> deviceInfoMap,List<String> sDateList, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
         List<ParameterData> parameterDataList = new ArrayList<>();
         if (scaleC01MapByDate.size() < 1) {
             return parameterDataList;
@@ -249,8 +254,12 @@ public class ScaleC01Chart {
             parameterData.setName(parameterName);
             List<ScaleC01WtAnalysis> value = entry.getValue();
             List<String> dataList = new ArrayList<>();
-            for (int i = 0; i < value.size(); i++) {
-                dataList.add(String.valueOf(value.get(i).getAvgWt()));
+            for (String sDate:sDateList
+                 ) {
+                for (int i = 0; i < value.size(); i++) {
+                    if (sDate.equals(value.get(i).getsDate()))
+                        dataList.add(String.valueOf(value.get(i).getAvgWt()));
+                }
             }
             parameterData.setData(dataList);
             parameterData.setType("line");
@@ -269,9 +278,6 @@ public class ScaleC01Chart {
             }
         }
         minValue = minValue - 3;
-        if (minValue < 0) {
-            minValue = 0;
-        }
         return String.valueOf(minValue);
     }
 
@@ -288,15 +294,19 @@ public class ScaleC01Chart {
     }
 
     //获取增重的曲线（当前只看一个设备，所以只有一条曲线）
-    private ParameterData getGainWtAgeSeries(List<ScaleC01WtAnalysis> scaleC01WtAnalysisList) {
+    private ParameterData getGainWtAgeSeries(List<String> sDateList,List<ScaleC01WtAnalysis> scaleC01WtAnalysisList) {
         if (scaleC01WtAnalysisList.size() < 1) {
             return null;
         }
         //只有一条曲线
         ParameterData parameterData = new ParameterData();
         List<String> dataList = new ArrayList<>();
-        for (int i = 0; i < scaleC01WtAnalysisList.size(); i++) {
-            dataList.add(String.valueOf(scaleC01WtAnalysisList.get(i).getGainWt()));
+        for (String sDate:sDateList
+                ) {
+            for (int i = 0; i < scaleC01WtAnalysisList.size(); i++) {
+                if (sDate.equals(scaleC01WtAnalysisList.get(i).getsDate()))
+                    dataList.add(String.valueOf(scaleC01WtAnalysisList.get(i).getGainWt()));
+            }
         }
         parameterData.setName("增重");
         parameterData.setData(dataList);
@@ -321,9 +331,6 @@ public class ScaleC01Chart {
             }
         }
         minValue = minValue - 3;
-        if (minValue < 0) {
-            minValue = 0;
-        }
         return String.valueOf(minValue);
     }
 
@@ -342,7 +349,7 @@ public class ScaleC01Chart {
     }
 
     //获取多增重的曲线
-    private List<ParameterData> getGainWtAgeSeries(Map<String, String> deviceInfoMap, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
+    private List<ParameterData> getGainWtAgeSeries(Map<String, String> deviceInfoMap,List<String> sDateList, Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate) {
         List<ParameterData> parameterDataList = new ArrayList<>();
         if (scaleC01MapByDate.size() < 1) {
             return parameterDataList;
@@ -353,8 +360,12 @@ public class ScaleC01Chart {
             parameterData.setName(parameterName);
             List<ScaleC01WtAnalysis> value = entry.getValue();
             List<String> dataList = new ArrayList<>();
-            for (int i = 0; i < value.size(); i++) {
-                dataList.add(String.valueOf(value.get(i).getGainWt()));
+            for (String sDate:sDateList
+                 ) {
+                for (int i = 0; i < value.size(); i++) {
+                    if (sDate.equals(value.get(i).getsDate()))
+                        dataList.add(String.valueOf(value.get(i).getGainWt()));
+                }
             }
             parameterData.setData(dataList);
             parameterData.setType("line");

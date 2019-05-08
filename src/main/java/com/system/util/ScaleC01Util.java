@@ -161,21 +161,7 @@ public class ScaleC01Util {
                 deviceDateList.add(deviceMessage.getDReceiveTime().substring(0, 10));
             }
         }
-        List<String> newDeviceDateList = new ArrayList<String>();
-        for (int i = 0; i < deviceDateList.size(); i++) {
-            if (!newDeviceDateList.contains(deviceDateList.get(i))) {
-                newDeviceDateList.add(deviceDateList.get(i));
-            }
-        }
-        String tmp;
-        for (int i = 1; i < newDeviceDateList.size(); i++) {
-            tmp = newDeviceDateList.get(i);
-            int j = i - 1;
-            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDeviceDateList.get(j)) < 0); j--) {
-                newDeviceDateList.set(j + 1, newDeviceDateList.get(j));
-            }
-            newDeviceDateList.set(j + 1, tmp);
-        }
+        List<String> newDeviceDateList = dateSort01(deviceDateList);
         return newDeviceDateList;
     }
 
@@ -322,21 +308,7 @@ public class ScaleC01Util {
                 }
             }
         }
-        List<String> newDateList = new ArrayList<String>();
-        for (int i = 0; i < sDateList.size(); i++) {
-            if (!newDateList.contains(sDateList.get(i))) {
-                newDateList.add(sDateList.get(i));
-            }
-        }
-        String tmp;
-        for (int i = 1; i < newDateList.size(); i++) {
-            tmp = newDateList.get(i);
-            int j = i - 1;
-            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDateList.get(j)) < 0); j--) {
-                newDateList.set(j + 1, newDateList.get(j));
-            }
-            newDateList.set(j + 1, tmp);
-        }
+        List<String> newDateList = dateSort01(sDateList);
         return newDateList;
     }
 
@@ -349,22 +321,8 @@ public class ScaleC01Util {
                 sDateList.add(scaleC01WtAnalysis.getsDate());
             }
         }
-        //日期排序
-        List<String> newDateList = new ArrayList<String>();
-        for (int i = 0; i < sDateList.size(); i++) {
-            if (!newDateList.contains(sDateList.get(i))) {
-                newDateList.add(sDateList.get(i));
-            }
-        }
-        String tmp;
-        for (int i = 1; i < newDateList.size(); i++) {
-            tmp = newDateList.get(i);
-            int j = i - 1;
-            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDateList.get(j)) < 0); j--) {
-                newDateList.set(j + 1, newDateList.get(j));
-            }
-            newDateList.set(j + 1, tmp);
-        }
+        //日期排序 从小到大
+        List<String> newDateList = dateSort01(sDateList);
         return newDateList;
     }
 
@@ -389,6 +347,7 @@ public class ScaleC01Util {
             return dayAgeList;
         }
         dayAgeList.add(sStartAge);
+        sDateList = dateSort01(sDateList);
         String oldDate = sDateList.get(0);
         int oldAge = Integer.valueOf(sStartAge);
         for (int i = 1; i < sDateList.size(); i++) {
@@ -400,4 +359,38 @@ public class ScaleC01Util {
         return dayAgeList;
     }
 
+    public static List<ScaleC01WtAnalysis>  scaleC01WtAnalysisSort(List<ScaleC01WtAnalysis> scaleC01WtAnalysisList){
+        List<ScaleC01WtAnalysis> scaleC01WtAnalysisList01 = new ArrayList<ScaleC01WtAnalysis>();
+        List<String> sDateList = getScaleC01DataList(scaleC01WtAnalysisList);
+        for (String sDate:sDateList  //根据日期，对list进行重新排序
+                ) {
+            for(int i=0;i<scaleC01WtAnalysisList.size();i++){
+                if(sDate.equals(scaleC01WtAnalysisList.get(i).getsDate())){
+                    scaleC01WtAnalysisList01.add(scaleC01WtAnalysisList.get(i));
+                }
+            }
+        }
+        return scaleC01WtAnalysisList01;
+    }
+
+
+    //日期排序 yyyy-MM-dd   日期从小到大排序
+    public static List<String> dateSort01(List<String> sDateList){
+        List<String> newDateList = new ArrayList<String>();
+        for (int i = 0; i < sDateList.size(); i++) {
+            if (!newDateList.contains(sDateList.get(i))) {
+                newDateList.add(sDateList.get(i));
+            }
+        }
+        String tmp;
+        for (int i = 1; i < newDateList.size(); i++) {
+            tmp = newDateList.get(i);
+            int j = i - 1;
+            for (; j >= 0 && (DataConvertor.DateCompare(tmp, newDateList.get(j)) < 0); j--) {
+                newDateList.set(j + 1, newDateList.get(j));
+            }
+            newDateList.set(j + 1, tmp);
+        }
+        return newDateList;
+    }
 }

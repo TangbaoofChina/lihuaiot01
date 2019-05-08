@@ -102,16 +102,22 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
         DataTablePageing dataTablePageing = new DataTablePageing();
         if (sQueryParam.equals("称重分析")) {
             List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
-            dataTablePageing = this.getScaleC01WtAnalysisPaging(scaleC01WtAnalysisList, pageNumber, pageSize);
+            //根据日期，重新进行排序
+            List<ScaleC01WtAnalysis> scaleC01WtAnalysisList01 = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
+            dataTablePageing = this.getScaleC01WtAnalysisPaging(scaleC01WtAnalysisList01, pageNumber, pageSize);
         } else if (sQueryParam.equals("有效体重")) { //从最早的日期开始，顺序排列
             List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
-            dataTablePageing = this.getScaleC01EffectivePaging(scaleC01WtAnalysisList, pageNumber, pageSize);
+            //根据日期，重新进行排序
+            List<ScaleC01WtAnalysis> scaleC01WtAnalysisList01 = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
+            dataTablePageing = this.getScaleC01EffectivePaging(scaleC01WtAnalysisList01, pageNumber, pageSize);
         } else if (sQueryParam.equals("平均体重")) {
             List<MydataTableColumn> mydataTableColumnList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
             dataTablePageing = this.getScaleC01AvgWt(mydataTableColumnList, scaleC01MapByDate, pageNumber, pageSize);
         } else if (sQueryParam.equals("增重日龄")) {
             List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
-            dataTablePageing = this.getScaleC01WtAge(scaleC01WtAnalysisList, sStartAge, pageNumber, pageSize);
+            //根据日期，重新进行排序
+            List<ScaleC01WtAnalysis> scaleC01WtAnalysisList01 = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
+            dataTablePageing = this.getScaleC01WtAge(scaleC01WtAnalysisList01, sStartAge, pageNumber, pageSize);
         } else if (sQueryParam.equals("多增重日龄")) {
             List<MydataTableColumn> mydataTableColumnList = ScaleC01Util.getMyDataTableColumn(sQueryParam, deviceInfoList, null);
             dataTablePageing = this.getScaleC01sWtAge(mydataTableColumnList, scaleC01MapByDate, sStartAge, pageNumber, pageSize);
@@ -129,10 +135,12 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
         if (scaleC01MapByDate != null && scaleC01MapByDate.size() > 0) {
             if (sQueryParam.equals("称重分析")) {
                 List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
+                scaleC01WtAnalysisList = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
                 dataDetailList = this.getWtOrAgeDetailList(sQueryParam, scaleC01WtAnalysisList);
             } else if (sQueryParam.equals("有效体重")) { //从最早的日期开始，顺序排列
                 List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
                 //这里根据有效体重 生成dataDetailList 需要写方法
+                scaleC01WtAnalysisList = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
                 List<ScaleC01EffectiveWt> scaleC01EffectiveWtList = this.getScaleC01EffWt(scaleC01WtAnalysisList);
                 dataDetailList = this.getEffectiveWtDetailList(scaleC01EffectiveWtList);
             } else if (sQueryParam.equals("平均体重")) {
@@ -140,6 +148,7 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
             } else if (sQueryParam.equals("增重日龄")) {
                 List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(sDeviceIds[0]);
                 //这里还要进行增重日龄的计算
+                scaleC01WtAnalysisList = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
                 this.getScaleC01WtAge(scaleC01WtAnalysisList, sStartAge);
                 dataDetailList = this.getWtOrAgeDetailList(sQueryParam, scaleC01WtAnalysisList);
             } else if (sQueryParam.equals("多增重日龄")) {
@@ -160,6 +169,7 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
             //这里还要进行增重日龄的计算
             if (scaleC01MapByDate != null && scaleC01MapByDate.size() > 0) {
                 for (List<ScaleC01WtAnalysis> scaleC01WtAnalysisList : scaleC01MapByDate.values()) {
+                    scaleC01WtAnalysisList = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
                     this.getScaleC01WtAge(scaleC01WtAnalysisList, sStartAge);
                 }
             }
@@ -212,8 +222,8 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
 
     //多个设备-按日期划分数据-并计算设备的单日的数据(设备，日期数据)-未计算增重，日龄
     private Map<String, List<ScaleC01WtAnalysis>> getScaleC01MapByDate(String sMaxThreshold, String sMinThreshold, String[] sDeviceIds, String sStartDate, String sEndDate) {
-        sStartDate = sStartDate.substring(0, 10);
-        sEndDate = sEndDate.substring(0, 10);
+        //sStartDate = sStartDate.substring(0, 10);
+        //sEndDate = sEndDate.substring(0, 10);
         List<ScaleC01DeviceMessage> deviceMessageList = scaleC01DeviceMessageMapper.selectScaleC01ByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
         //获取每个设备的数据(设备，设备数据)
         if (deviceMessageList == null || deviceMessageList.size() < 1) {
@@ -221,7 +231,7 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
         }
         Map<String, List<ScaleC01DeviceMessage>> scaleC01MapByIds = this.splitMsgByIds(deviceMessageList, sDeviceIds);
         //重新整合每个设备的数据(去除阈值，去除0)
-        //多个设备-按日期划分数据-并计算设备的单日的数据(设备，日期称重分析数据list) 日期已排序 有小到大
+        //多个设备-按日期划分数据-并计算设备的单日的数据(设备，日期称重分析数据list) 注意： map排序是无效的，不能用map排序
         Map<String, List<ScaleC01WtAnalysis>> scaleC01MapByDate = this.splitMsgByDate(scaleC01MapByIds, sMaxThreshold, sMinThreshold);
         return scaleC01MapByDate;
     }
@@ -381,7 +391,7 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
             //循环设备列表
             for (MydataTableColumn mydataTableColumn : tableColumnList
                     ) {
-                if (mydataTableColumn.getData().equals("sDate")) {
+                if (mydataTableColumn.getData().equals("sDate")) {  //"这里是需要去除掉sDate列"
                     continue;
                 }
                 OneDataDetail oneDataDetail = new OneDataDetail();
@@ -390,8 +400,8 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
                 //需要遍历设备的日期数据列表，防止设备有部分日期没有数据
                 List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(mydataTableColumn.getData());
                 for (int j = 0; j < scaleC01WtAnalysisList.size(); j++) {
-                    if (scaleC01WtAnalysisList.get(i).getsDate().equals(sDate)) {
-                        oneDataDetail.setValue(String.valueOf(scaleC01WtAnalysisList.get(i).getAvgWt()));
+                    if (scaleC01WtAnalysisList.get(j).getsDate().equals(sDate)) {
+                        oneDataDetail.setValue(String.valueOf(scaleC01WtAnalysisList.get(j).getAvgWt()));
                         break;
                     }
                 }
@@ -504,6 +514,7 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
         for (List<ScaleC01WtAnalysis> scaleC01WtAnalysisList : scaleC01MapByDate.values()
                 ) {
             //针对每日数据，计算出增重数据和日龄
+            scaleC01WtAnalysisList = ScaleC01Util.scaleC01WtAnalysisSort(scaleC01WtAnalysisList);
             this.getScaleC01WtAge(scaleC01WtAnalysisList, sStartAge);
         }
         List<List<OneDataDetail>> dataDetailList = this.tableScaleC01sWtAge(tableColumnList, sStartAge, scaleC01MapByDate);
@@ -539,8 +550,8 @@ public class ScaleC01DeviceMessageServiceImpl implements ScaleC01DeviceMessageSe
                 //需要遍历设备的日期数据列表，防止设备有部分日期没有数据
                 List<ScaleC01WtAnalysis> scaleC01WtAnalysisList = scaleC01MapByDate.get(mydataTableColumn.getData());
                 for (int j = 0; j < scaleC01WtAnalysisList.size(); j++) {
-                    if (scaleC01WtAnalysisList.get(i).getsDate().equals(sDate)) {
-                        oneDataDetail.setValue(String.valueOf(scaleC01WtAnalysisList.get(i).getGainWt()));
+                    if (scaleC01WtAnalysisList.get(j).getsDate().equals(sDate)) {
+                        oneDataDetail.setValue(String.valueOf(scaleC01WtAnalysisList.get(j).getGainWt()));
                         break;
                     }
                 }
