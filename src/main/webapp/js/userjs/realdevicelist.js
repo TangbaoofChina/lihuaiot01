@@ -383,7 +383,7 @@ function rdlSelectInfoByDeviceIdAndEC01(queryParameter) {
                 co2Val.innerHTML = result.co2Val + " ppm";
                 sc01date.innerHTML = result.sendDate;
                 lightIntensity.innerHTML = result.lightIntensity + " Lux";
-                waterFlowVal.innerHTML = result.waterFlowVal + " m³/h";
+                waterFlowVal.innerHTML = result.waterFlowVal + " l";
             } else {
                 var type = 'error';
                 var msg = '未查询到设备数据';
