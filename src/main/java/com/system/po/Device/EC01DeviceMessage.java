@@ -1136,6 +1136,14 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo015.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo015);
 
+        PhoneRealMsgInfo phoneRealMsgInfo022 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo022.setId("boilerTemp");
+        phoneRealMsgInfo022.setTitle("水温：");
+        phoneRealMsgInfo022.setValue(String.valueOf(boilerTemp) + "℃");
+        phoneRealMsgInfo022.setFlag("0");
+        phoneRealMsgInfo022.setHasHis(true);
+        phoneRealMsgInfoList.add(phoneRealMsgInfo022);
+
         PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
         phoneRealMsgInfo13.setId("negativePressure");
         phoneRealMsgInfo13.setTitle("饮水量：");

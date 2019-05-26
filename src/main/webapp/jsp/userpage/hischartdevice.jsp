@@ -23,6 +23,7 @@
                     <option value="4">舍外</option>
                     <option value="5">饮水量</option>
                     <option value="6">日饮水量</option>
+                    <option value="7">水温</option>
                 </select>
             </div>
             <label>时间：</label>

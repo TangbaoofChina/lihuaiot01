@@ -32,6 +32,7 @@
                         <option value="8">单舍饮水量</option>
                         <option value="9">单舍温度</option>
                         <option value="10">多舍日饮水量</option>
+                        <option value="11">水温</option>
                     </select>
                 </div>
                 <div id="hisChartThresholdDiv" class="form-inline"
