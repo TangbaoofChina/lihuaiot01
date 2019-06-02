@@ -1147,7 +1147,7 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo13 = new PhoneRealMsgInfo();
         phoneRealMsgInfo13.setId("negativePressure");
         phoneRealMsgInfo13.setTitle("饮水量：");
-        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal) + "m³");
+        phoneRealMsgInfo13.setValue(String.valueOf(waterFlowVal) + "L");
         phoneRealMsgInfo13.setFlag("0");
         phoneRealMsgInfo13.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo13);
