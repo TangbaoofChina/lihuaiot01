@@ -406,7 +406,7 @@ public class Hj212C213DeviceMessage extends BaseDeviceMessage {
         PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
         phoneRealMsgInfo02.setId("pH");
         phoneRealMsgInfo02.setTitle("pH：");
-        phoneRealMsgInfo02.setValue(this.getFlowrate_value());
+        phoneRealMsgInfo02.setValue(this.getPh_value());
         phoneRealMsgInfo02.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo02);
 
