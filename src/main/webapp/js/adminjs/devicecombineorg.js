@@ -479,3 +479,10 @@ function deviceOrgUpdateDeviceOrg03() {
     $('#deviceOrgModify-popup').hide('slow');
 }
 
+function deviceOrgBtnClearEasRoom() {
+    $('#deviceOrgdelcfmModel').modal();
+}
+
+function deviceOrgClearEasRoom() {
+    $("#deviceOrgEasRoom").val("");
+}
