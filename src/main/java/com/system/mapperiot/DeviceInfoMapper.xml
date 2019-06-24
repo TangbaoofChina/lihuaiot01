@@ -198,6 +198,11 @@
             <if test="deviceEasFDisplayName != null and deviceEasFDisplayName !=''">
                 EAS_FDISPLAYNAME = #{deviceEasFDisplayName,jdbcType=VARCHAR},
             </if>
+            <if test="deviceEasFDisplayName != null and deviceEasFDisplayName ==''">
+                EAS_FID = '',
+                EAS_FNAME = '',
+                EAS_FDISPLAYNAME = '',
+            </if>
         </set>
         where DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
     </update>
