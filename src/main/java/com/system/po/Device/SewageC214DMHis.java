@@ -2514,17 +2514,29 @@ public class SewageC214DMHis extends BaseDeviceMessage {
         PSC01HisDataHead psc01HisDataHead01 = new PSC01HisDataHead("时间","0.2","sendDate");
         psc01HisDataHeadList.add(psc01HisDataHead01);
 
-        //当日流量
-        PSC01HisDataHead psc01HisDataHead02 = new PSC01HisDataHead("当日流量","0.1","todayFlowmeter");
+        //累计流量
+        PSC01HisDataHead psc01HisDataHead02 = new PSC01HisDataHead("累计流量","0.1","flowmeter");
         psc01HisDataHeadList.add(psc01HisDataHead02);
+
+        //当日流量
+        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("当日流量","0.1","todayFlowmeter");
+        psc01HisDataHeadList.add(psc01HisDataHead03);
+
+        //累计电量
+        PSC01HisDataHead psc01HisDataHead04 = new PSC01HisDataHead("累计电量","0.1","impEP");
+        psc01HisDataHeadList.add(psc01HisDataHead04);
 
         //当日电量
-        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("当日电量","0.1","todayEP");
-        psc01HisDataHeadList.add(psc01HisDataHead02);
+        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("当日电量","0.1","todayEP");
+        psc01HisDataHeadList.add(psc01HisDataHead05);
 
         //SBR池水温
-        PSC01HisDataHead psc01HisDataHead10 = new PSC01HisDataHead("水温","0.1","waterTemp");
-        psc01HisDataHeadList.add(psc01HisDataHead10);
+        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("水温","0.1","waterTemp");
+        psc01HisDataHeadList.add(psc01HisDataHead06);
+
+        //环境温度
+        PSC01HisDataHead psc01HisDataHead07 = new PSC01HisDataHead("环境","0.1","airTemp");
+        psc01HisDataHeadList.add(psc01HisDataHead07);
 
         return psc01HisDataHeadList;
     }

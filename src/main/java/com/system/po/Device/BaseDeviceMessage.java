@@ -21,7 +21,7 @@ public class BaseDeviceMessage{
         if (dSerialNumDec.length() > 4)
             return dSerialNumDec;
         else
-            return DataConvertor.ConvertHexToDec(dSerialNumDec, 5);
+            return DataConvertor.convertHexToDec(dSerialNumDec, 5);
     }
 
     public void setdSerialNumDec(String dSerialNumDec) {

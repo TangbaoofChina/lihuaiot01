@@ -30,10 +30,10 @@ public class DataConvertor {
      * @param iNeedLen 10进制字符串长度
      * @return
      */
-    public static String ConvertHexToDec(String sHex, int iNeedLen) {
+    public static String convertHexToDec(String sHex, int iNeedLen) {
         int iDecValue = Integer.valueOf(sHex, 16);
         String sDecValue = String.valueOf(iDecValue);
-        String sReturnValue = FormatZero(sDecValue, iNeedLen);
+        String sReturnValue = formatZero(sDecValue, iNeedLen);
         return sReturnValue;
     }
 
@@ -44,10 +44,10 @@ public class DataConvertor {
      * @param iNeedLen 16进制字符串长度
      * @return
      */
-    public static String ConvertDecToHex(String sDec, int iNeedLen) {
+    public static String convertDecToHex(String sDec, int iNeedLen) {
         int iDec = Integer.valueOf(sDec);
         String sHex = Integer.toHexString(iDec);
-        String sReturnValue = FormatZero(sHex, iNeedLen);
+        String sReturnValue = formatZero(sHex, iNeedLen);
         return sReturnValue;
     }
 
@@ -58,17 +58,17 @@ public class DataConvertor {
      * @param iNeedLen 十六进制字符串长度
      * @return
      */
-    public static String[] ConvertDecsToHexs(String[] sDecs, int iNeedLen) {
+    public static String[] convertDecsToHexs(String[] sDecs, int iNeedLen) {
         String sHexs[] = new String[sDecs.length];
         for (int i = 0; i < sDecs.length; i++) {
             int iDec = Integer.valueOf(sDecs[i]);
             String sHex = Integer.toHexString(iDec);
-            sHexs[i] = FormatZero(sHex, iNeedLen);
+            sHexs[i] = formatZero(sHex, iNeedLen);
         }
         return sHexs;
     }
 
-    public static String FormatZero(String sVaule, int iNeedLen) {
+    public static String formatZero(String sVaule, int iNeedLen) {
         int iNowLen = sVaule.length();
         String sReturnValue = sVaule;
         if (iNowLen > iNeedLen)
@@ -78,6 +78,11 @@ public class DataConvertor {
                 sReturnValue = "0" + sReturnValue;
         }
         return sReturnValue;
+    }
+
+    public static String formatZero(int iVaule, int iNeedLen) {
+        String sVaule = String.valueOf(iVaule);
+        return  formatZero(sVaule,iNeedLen);
     }
 
     public static String findMaxValue(List<String> maxValues) {
