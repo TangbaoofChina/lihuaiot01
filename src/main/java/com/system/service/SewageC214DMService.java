@@ -2,22 +2,22 @@ package com.system.service;
 
 import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
-import com.system.po.Device.SewageC212DMHis;
-import com.system.po.Device.SewageC212DeviceMessage;
+import com.system.po.Device.SewageC214DMHis;
+import com.system.po.Device.SewageC214DM;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
 
 import java.io.File;
 import java.util.List;
 
-public interface SewageC212DMService {
+public interface SewageC214DMService {
     /**
      * 获取设备数据-管理员权限
      * @param ORGId 组织ID
      * @return
      * @throws Exception
      */
-    List<SewageC212DeviceMessage> selectSewageC212ByORGId(String ORGId) throws Exception;
+    List<SewageC214DM> selectSewageC214ByORGId(String ORGId) throws Exception;
 
     /**
      * 获取设备数据-用户权限
@@ -26,7 +26,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    List<SewageC212DeviceMessage> selectSewageC212ByByORGIdAndRoleId(String ORGId,List<RoleInfo> roleInfoList) throws Exception;
+    List<SewageC214DM> selectSewageC214ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception;
 
     /**
      * 获取单设备数据
@@ -34,7 +34,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    SewageC212DeviceMessage selectSewageC212ByDeviceId(String sDeviceId) throws Exception;
+    SewageC214DM selectSewageC214ByDeviceId(String sDeviceId) throws Exception;
 
     /**
      * 一个设备时间段内的数据;不分页
@@ -44,7 +44,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    List<SewageC212DeviceMessage> selectSewageC212ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+    List<SewageC214DM> selectSewageC214ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
      * 手机端查询历史数据
@@ -54,7 +54,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    List<BaseDeviceMessage> selectPhoneHisSewageC212ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+    List<BaseDeviceMessage> selectPhoneHisSewageC214ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
      * 一个设备时间段内的数据;分页
@@ -66,7 +66,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    DataTablePageing selectSewageC212ByDeviceIdAndDateAndPaging(Integer pageNumber, Integer pageSize, String sDeviceId, String sStartDate, String sEndDate) throws Exception;
+    DataTablePageing selectSewageC214ByDeviceIdAndDateAndPaging(Integer pageNumber, Integer pageSize, String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
 
     /**
@@ -74,7 +74,7 @@ public interface SewageC212DMService {
      * @return
      * @throws Exception
      */
-    List<MydataTableColumn> selectSewageC212DeviceHead() throws Exception;
+    List<MydataTableColumn> selectSewageC214DeviceHead() throws Exception;
 
     /**
      * 导出记录
@@ -82,5 +82,5 @@ public interface SewageC212DMService {
      * @param storageList 保存有信息记录的List
      * @return excel 文件
      */
-    File exportStorage(List<SewageC212DeviceMessage> storageList);
+    File exportStorage(List<SewageC214DM> storageList);
 }

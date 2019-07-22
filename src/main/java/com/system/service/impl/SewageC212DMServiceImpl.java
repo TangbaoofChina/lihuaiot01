@@ -85,7 +85,7 @@ public class SewageC212DMServiceImpl implements SewageC212DMService {
     }
 
     @Override
-    public List<SewageC212DMHis> selectPhoneHisSewageC212ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
+    public List<BaseDeviceMessage> selectPhoneHisSewageC212ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
         return sewageC212DeviceMessageMapper.selectPhoneHisSewageC212ByDateAndId(sDeviceId,sStartDate,sEndDate);
     }
 

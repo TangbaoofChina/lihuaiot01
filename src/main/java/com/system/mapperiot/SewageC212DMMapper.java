@@ -1,5 +1,6 @@
 package com.system.mapperiot;
 
+import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.SewageC212DMHis;
 import com.system.po.Device.SewageC212DeviceMessage;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +17,7 @@ public interface SewageC212DMMapper {
     List<SewageC212DeviceMessage> selectSewageC212ByDeviceIdAndDate(@Param("deviceId") String sDeviceId,
                                                                   @Param("startDate") String sStartTime,
                                                                   @Param("endDate") String sEndDate);
-    List<SewageC212DMHis> selectPhoneHisSewageC212ByDateAndId(@Param("deviceId") String sDeviceId,
-                                                              @Param("startDate") String sStartDate,
-                                                              @Param("endDate") String sEndDate);
+    List<BaseDeviceMessage> selectPhoneHisSewageC212ByDateAndId(@Param("deviceId") String sDeviceId,
+                                                                @Param("startDate") String sStartDate,
+                                                                @Param("endDate") String sEndDate);
 }

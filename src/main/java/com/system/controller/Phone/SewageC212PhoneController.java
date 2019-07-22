@@ -34,6 +34,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/*
+20190714
+存在多个设备类型，都挂在立华禽环保下面，这里就废弃了
+ */
+
 @Controller
 @CrossOrigin(maxAge = 3600)   //解决跨域问题
 @RequestMapping("/phone/sewagec212")
@@ -88,7 +93,7 @@ public class SewageC212PhoneController {
         jsonString = JSON.toJSONString(phoneLoginMsg);
         return jsonString;
     }
-
+/*
     @RequestMapping(value = "selectRealDeviceInfoSummary", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRealDeviceInfoSummary(String userId, String orgId) throws Exception {
@@ -138,8 +143,10 @@ public class SewageC212PhoneController {
         calendar.add(Calendar.DAY_OF_MONTH, mDay);
         date = calendar.getTime();
         String sStartDate = simpleFormat.format(date);
-        /*String sEndDate = "2017/12/30 23:59:59";
-        String sStartDate = "2017/12/01 00:00:00";*/
+        */
+/*String sEndDate = "2017/12/30 23:59:59";
+        String sStartDate = "2017/12/01 00:00:00";*//*
+
         //获取时间-end
         List<SewageC212DMHis> sewageC212DMHisList = new ArrayList<SewageC212DMHis>();
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
@@ -164,14 +171,16 @@ public class SewageC212PhoneController {
         return jsonString;
     }
 
-    /**
+    */
+/**
      * 通过用户ID和组织ID查询设备实时数据-概要信息
      *
      * @param userId
      * @param orgId
      * @return
      * @throws Exception
-     */
+     *//*
+
     private List<SewageC212DeviceMessage> getRealSewageC212DeviceMessageByUserIdAndOrgId(String userId, String orgId) throws Exception {
         List<SewageC212DeviceMessage> sewageC212DeviceMessageList = new ArrayList<SewageC212DeviceMessage>();
         if (userId == null || userId.equals(""))
@@ -212,13 +221,15 @@ public class SewageC212PhoneController {
         return phoneRealDeviceInfo;
     }
 
-    /**
+    */
+/**
      * 通过用户ID和设备ID查询设备实时数据-详细信息
      *
      * @param userId
      * @param devNum
      * @return
-     */
+     *//*
+
     private SewageC212DeviceMessage getRealSewageC212DeviceMessageByUserIdAndDevNum(String userId, String devNum) throws Exception {
         SewageC212DeviceMessage sewageC212DeviceMessage = null;
         if (userId == null || userId.equals(""))
@@ -258,4 +269,6 @@ public class SewageC212PhoneController {
         phoneSewageC212RealMsgInfo.setPhoneSewageC212RealDataList(phoneSewageC212RealDataList);
         return phoneSewageC212RealMsgInfo;
     }
+    */
 }
+

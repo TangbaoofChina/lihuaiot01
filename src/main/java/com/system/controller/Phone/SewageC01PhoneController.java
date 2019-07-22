@@ -30,6 +30,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/*
+20190714
+存在多个设备类型，都挂在立华禽环保下面，这里就废弃了
+ */
 @Controller
 @RequestMapping("/phone/sewagec")
 public class SewageC01PhoneController {

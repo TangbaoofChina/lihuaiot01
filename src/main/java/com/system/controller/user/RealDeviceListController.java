@@ -2,14 +2,8 @@ package com.system.controller.user;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.*;
-import com.system.po.Device.EC01DeviceMessage;
-import com.system.po.Device.ScaleC01DeviceMessage;
-import com.system.po.Device.SewageC01DeviceMessage;
-import com.system.po.Device.SewageC212DeviceMessage;
-import com.system.service.EC01DeviceMessageService;
-import com.system.service.ScaleC01DeviceMessageService;
-import com.system.service.SewageC01DeviceMessageService;
-import com.system.service.SewageC212DMService;
+import com.system.po.Device.*;
+import com.system.service.*;
 import com.system.util.RoleInfoListUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -38,6 +32,8 @@ public class RealDeviceListController {
     private SewageC01DeviceMessageService sewageC01DeviceMessageService;
     @Autowired
     private SewageC212DMService sewageC212DeviceMessageService;
+    @Autowired
+    private SewageC214DMService sewageC214DMService;
     @Autowired
     private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
 
@@ -269,6 +265,82 @@ public class RealDeviceListController {
             sewageC212DeviceMessageList = sewageC212DeviceMessageService.selectSewageC212ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
         }
         return sewageC212DeviceMessageList;
+    }
+
+    /*************************Sewage 立华禽环保3.0 214*********************************************/
+
+    @RequestMapping(value = "selectSewageC214ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectSewageC214ByORGId(String sORGId) throws Exception {
+        String jsonString = "[]";
+        if (sORGId != null) {
+            List<SewageC214DM> sewageC214DMList = selectSewageC214DMList(sORGId);
+            if (sewageC214DMList.size() > 0)
+                jsonString = JSON.toJSONString(sewageC214DMList);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/sewagec214DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String sewagec214DeviceHead() throws Exception {
+        List<MydataTableColumn> sewagec214HeadColumnList = sewageC214DMService.selectSewageC214DeviceHead();
+        String jsonString = JSON.toJSONString(sewagec214HeadColumnList);
+        return jsonString;
+    }
+
+    @RequestMapping(value = "selectSewageC214ByDeviceId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectSewageC214ByDeviceId(String sDeviceId) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId != null) {
+            SewageC214DM sewageC212DM = sewageC214DMService.selectSewageC214ByDeviceId(sDeviceId);
+            if (sewageC212DM != null)
+                jsonString = JSON.toJSONString(sewageC212DM);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportSewageC214DeviceList", method = RequestMethod.GET)
+    public void exportSewageC214DeviceList(String sORGId,
+                                           HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception {
+        String fileName = "realsewagec214devicelist.xlsx";
+        List<SewageC214DM> sewageC214DMList = null;
+        if (sORGId != null) {
+            sewageC214DMList = selectSewageC214DMList(sORGId);
+        }
+        File file = sewageC214DMService.exportStorage(sewageC214DMList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    private List<SewageC214DM> selectSewageC214DMList(String sORGId) throws Exception {
+        List<SewageC214DM> sewageC214DMList = new ArrayList<SewageC214DM>();
+        //获取用户角色
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            sewageC214DMList = sewageC214DMService.selectSewageC214ByORGId(sORGId);
+        } else {
+            sewageC214DMList = sewageC214DMService.selectSewageC214ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+        }
+        return sewageC214DMList;
     }
     /*************************Scale 自动称重*********************************************/
 

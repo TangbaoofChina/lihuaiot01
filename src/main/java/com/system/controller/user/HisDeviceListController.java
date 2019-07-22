@@ -2,15 +2,9 @@ package com.system.controller.user;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.DataTablePageing;
-import com.system.po.Device.EC01DeviceMessage;
-import com.system.po.Device.ScaleC01DeviceMessage;
-import com.system.po.Device.SewageC212DeviceMessage;
+import com.system.po.Device.*;
 import com.system.po.MydataTableColumn;
-import com.system.po.Device.SewageC01DeviceMessage;
-import com.system.service.EC01DeviceMessageService;
-import com.system.service.ScaleC01DeviceMessageService;
-import com.system.service.SewageC01DeviceMessageService;
-import com.system.service.SewageC212DMService;
+import com.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +30,9 @@ public class HisDeviceListController {
 
     @Autowired
     private SewageC212DMService sewageC212DeviceMessageService;
+
+    @Autowired
+    private SewageC214DMService sewageC214DMService;
 
     @Autowired
     private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
@@ -162,6 +159,67 @@ public class HisDeviceListController {
         return jsonString;
     }
 
+    /*********************Sewage214*******************************/
+    @RequestMapping(value = "selectSewageC214ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectSewageC214ByDevNumAndDateAndPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId !=null) {
+            DataTablePageing dataTablePageing = sewageC214DMService.selectSewageC214ByDeviceIdAndDateAndPaging(pageNumber,pageSize,sDeviceId,sStartDate,sEndDate);
+            jsonString = "{";
+            jsonString += "\""+"total"+"\"";
+            jsonString += ":";
+            jsonString += "\""+dataTablePageing.getTotal()+"\"";
+            jsonString += ",";
+            jsonString += "\""+"rows"+"\"";
+            jsonString += ":";
+            jsonString += dataTablePageing.getsReturnJson();
+            jsonString += "}";
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportHisSewageC214DeviceList", method = RequestMethod.GET)
+    public void exportHisSewageC214DeviceList(String sDeviceId,
+                                             String sStartDate,
+                                             String sEndDate,
+                                             HttpServletRequest request,
+                                             HttpServletResponse response) throws Exception {
+        String fileName = "hissewagec214devicelist.xlsx";
+        List<SewageC214DM> sewageC214DMList = null;
+        if (sDeviceId !=null) {
+            sewageC214DMList = sewageC214DMService.selectSewageC214ByDevNumAndDate(sDeviceId,sStartDate,sEndDate);
+        }
+        File file = sewageC214DMService.exportStorage(sewageC214DMList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    @RequestMapping(value="/sewagec214DeviceHead",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String sewagec214DeviceHead() throws Exception{
+
+        List<MydataTableColumn> sewagec214HeadColumnList =  sewageC214DMService.selectSewageC214DeviceHead();
+
+        String jsonString = JSON.toJSONString(sewagec214HeadColumnList);
+
+        return jsonString;
+    }
+
     /*********************Sewage212*******************************/
     @RequestMapping(value = "selectSewageC212ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -184,10 +242,10 @@ public class HisDeviceListController {
 
     @RequestMapping(value = "exportHisSewageC212DeviceList", method = RequestMethod.GET)
     public void exportHisSewageC212DeviceList(String sDeviceId,
-                                             String sStartDate,
-                                             String sEndDate,
-                                             HttpServletRequest request,
-                                             HttpServletResponse response) throws Exception {
+                                              String sStartDate,
+                                              String sEndDate,
+                                              HttpServletRequest request,
+                                              HttpServletResponse response) throws Exception {
         String fileName = "hissewagec212devicelist.xlsx";
         List<SewageC212DeviceMessage> sewageC212DeviceMessageList = null;
         if (sDeviceId !=null) {

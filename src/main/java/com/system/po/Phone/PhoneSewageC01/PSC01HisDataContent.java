@@ -2,6 +2,7 @@ package com.system.po.Phone.PhoneSewageC01;
 
 import com.system.po.Device.SewageC01DMHis;
 import com.system.po.Device.SewageC212DMHis;
+import com.system.po.Device.SewageC214DMHis;
 
 public class PSC01HisDataContent {
     /***********  数据-设定时间  *********************/
@@ -107,6 +108,8 @@ public class PSC01HisDataContent {
         this.sendDate = sendDate;
     }
 
+    public PSC01HisDataContent(){}
+
     public PSC01HisDataContent(SewageC01DMHis sewageC01DMHis) {
         //当日流量(m³)
         this.todayFlowmeter = sewageC01DMHis.getTodayFlowmeter();
@@ -131,29 +134,4 @@ public class PSC01HisDataContent {
         this.sendDate = sewageC01DMHis.getSendDate();
     }
 
-    public PSC01HisDataContent(SewageC212DMHis sewageC1212DMHis) {
-        //当日流量(m³)
-        this.todayFlowmeter = sewageC1212DMHis.getTodayFlowmeter();
-        //SBR池水温
-        this.waterTemp = sewageC1212DMHis.getWaterTemp();
-        /***********  数据-设定时间  *********************/
-        //sbr设定总时间
-        this.sbrCycleSetMinute = sewageC1212DMHis.getSbrCycleSetMinute();
-        //SBR一次搅拌（设定分钟）
-        this.sbrMixerOnceSetMinute = sewageC1212DMHis.getSbrMixerOnceSetMinute();
-        //SBR曝气（设定分钟）
-        this.fanSetMinute = sewageC1212DMHis.getFanSetMinute();
-        //SBR混合（设定分钟）
-        this.sbrMixerSetMinute = sewageC1212DMHis.getSbrMixerSetMinute();
-        //SBR静置（设定分钟）
-        this.sbrStaticSetMinute = sewageC1212DMHis.getSbrStaticSetMinute();
-        //SBR污泥泵2（设定分钟）
-        this.sludgePump02SetMinute = sewageC1212DMHis.getSludgePump02SetMinute();
-        //SBR活化（设定分钟）
-        this.sbrActiveSetMinute = sewageC1212DMHis.getSbrActiveSetMinute();
-        /***********  数据-运行时间  *********************/
-
-        //设备发送数据时间
-        this.sendDate = sewageC1212DMHis.getSendDate();
-    }
 }

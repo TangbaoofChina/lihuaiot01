@@ -200,6 +200,8 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
     private float impEP;
     //反向有功总电能
     private float expEP;
+    //当日电量 需要运算
+    private float todayEP;
     //备用133、134
     private int spare133134;
     //备用135、136
@@ -958,6 +960,14 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
         this.expEP = expEP;
     }
 
+    public float getTodayEP() {
+        return todayEP;
+    }
+
+    public void setTodayEP(float todayEP) {
+        this.todayEP = todayEP;
+    }
+
     public int getSpare133134() {
         return spare133134;
     }
@@ -1586,7 +1596,12 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
         mdtc84.setDefaultContent("84");
         mdtc84.setTitle("反向有功总电能");
         mdtc84.setVisible(false);
-
+        //当日电量
+        MydataTableColumn mdtc98 = new MydataTableColumn();
+        mdtc98.setData("todayEP");
+        mdtc98.setDefaultContent("98");
+        mdtc98.setTitle("当日电量");
+        mdtc98.setVisible(true);
         /*********** 11个 设备运行累计时长(小时) *********************/
         //集水池搅拌机累计时长
         MydataTableColumn mdtc85 = new MydataTableColumn();
@@ -1681,6 +1696,10 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc65);
         //当日流量(m³)
         myDTCList.add(mdtc66);
+        //正向有功总电能
+        myDTCList.add(mdtc83);
+        //当日电量
+        myDTCList.add(mdtc98);
         //环境温度
         myDTCList.add(mdtc67);
         //SBR池水温
@@ -1848,8 +1867,7 @@ public class SewageC212DeviceMessage extends BaseDeviceMessage {
         myDTCList.add(mdtc81);
         //频率
         myDTCList.add(mdtc82);
-        //正向有功总电能
-        myDTCList.add(mdtc83);
+
         //反向有功总电能
         myDTCList.add(mdtc84);
 

@@ -111,6 +111,7 @@
         <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
         <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
         <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
     </resultMap>
     <resultMap id="BaseHisResultMap" type="com.system.po.Device.SewageC212DeviceMessage">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -222,6 +223,7 @@
         <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
     </resultMap>
     <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.SewageC212DMHis">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
@@ -236,6 +238,8 @@
         <result column="SLUDGEPUMP02SETMINUTE" jdbcType="INTEGER" property="sludgePump02SetMinute"/>
         <result column="SBRACTIVESETMINUTE" jdbcType="INTEGER" property="sbrActiveSetMinute"/>
         <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="IMPEP" jdbcType="FLOAT" property="impEP"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
     </resultMap>
     <sql id="BaseResult_Column_List">

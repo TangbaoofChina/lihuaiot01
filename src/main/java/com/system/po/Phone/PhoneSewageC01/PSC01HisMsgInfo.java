@@ -1,7 +1,11 @@
 package com.system.po.Phone.PhoneSewageC01;
 
+import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.SewageC01DMHis;
 import com.system.po.Device.SewageC212DMHis;
+import com.system.po.Device.SewageC214DMHis;
+import com.system.po.Phone.PhoneSewageC212.PSC212HisDataContent;
+import com.system.po.Phone.PhoneSewageC214.PSC214HisDataContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,16 +61,29 @@ public class PSC01HisMsgInfo {
         this.psc01HisDataContentList = psc01HisDataContentList;
     }
 
-    public PSC01HisMsgInfo(List<SewageC212DMHis> sewageC212DMHisList,String devType) {
-        this.dSerialNum = sewageC212DMHisList.get(0).getDSerialNum();
-        this.dName = sewageC212DMHisList.get(0).getDName();
-        this.psc01HisDataHeadList = sewageC212DMHisList.get(0).getDevicePhoneHead();
-        List<PSC01HisDataContent> psc01HisDataContentList = new ArrayList<PSC01HisDataContent>();
-        for (SewageC212DMHis sewageC212DMHis : sewageC212DMHisList
-                ) {
-            PSC01HisDataContent psc01HisDataContent = new PSC01HisDataContent(sewageC212DMHis);
-            psc01HisDataContentList.add(psc01HisDataContent);
+    public PSC01HisMsgInfo(List<BaseDeviceMessage> sewageCDMHisList, String devType) {
+        if (devType.equals("212")) {
+            this.dSerialNum = ((SewageC212DMHis)sewageCDMHisList.get(0)).getDSerialNum();
+            this.dName = ((SewageC212DMHis)sewageCDMHisList.get(0)).getDName();
+            this.psc01HisDataHeadList = ((SewageC212DMHis)sewageCDMHisList.get(0)).getDevicePhoneHead();
+            List<PSC01HisDataContent> psc01HisDataContentList = new ArrayList<PSC01HisDataContent>();
+            for (Object sewageC212DMHis : sewageCDMHisList
+                    ) {
+                PSC01HisDataContent psc01HisDataContent = new PSC212HisDataContent((SewageC212DMHis) sewageC212DMHis);
+                psc01HisDataContentList.add(psc01HisDataContent);
+            }
+            this.psc01HisDataContentList = psc01HisDataContentList;
+        } else if (devType.equals("214")) {
+            this.dSerialNum = ((SewageC214DMHis)sewageCDMHisList.get(0)).getDSerialNum();
+            this.dName = ((SewageC214DMHis)sewageCDMHisList.get(0)).getDName();
+            this.psc01HisDataHeadList = ((SewageC214DMHis)sewageCDMHisList.get(0)).getDevicePhoneHead();
+            List<PSC01HisDataContent> psc01HisDataContentList = new ArrayList<PSC01HisDataContent>();
+            for (Object sewageC214DMHis : sewageCDMHisList
+                    ) {
+                PSC01HisDataContent psc01HisDataContent = new PSC214HisDataContent((SewageC214DMHis)sewageC214DMHis);
+                psc01HisDataContentList.add(psc01HisDataContent);
+            }
+            this.psc01HisDataContentList = psc01HisDataContentList;
         }
-        this.psc01HisDataContentList = psc01HisDataContentList;
     }
 }

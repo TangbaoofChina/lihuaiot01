@@ -2,7 +2,7 @@ package com.system.po.Device;
 
 import com.system.util.DataConvertor;
 
-public class BaseDeviceMessage {
+public class BaseDeviceMessage{
     private String dSerialNum;
     private String dSerialNumDec;
     private String dName;
