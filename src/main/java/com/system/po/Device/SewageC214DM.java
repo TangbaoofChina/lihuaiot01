@@ -1610,73 +1610,73 @@ public class SewageC214DM extends BaseDeviceMessage {
         MydataTableColumn mdtc19 = new MydataTableColumn();
         mdtc19.setData("dephosphorizePumpFault");
         mdtc19.setDefaultContent("19");
-        mdtc19.setTitle("污泥泵故障");
+        mdtc19.setTitle("除磷池提升泵故障");
         mdtc19.setVisible(false);
         //SBR池搅拌机01 正常/故障
         MydataTableColumn mdtc20 = new MydataTableColumn();
         mdtc20.setData("sbrMixer01Fault");
         mdtc20.setDefaultContent("20");
-        mdtc20.setTitle("污泥泵故障");
+        mdtc20.setTitle("SBR池搅拌机01故障");
         mdtc20.setVisible(false);
         //SBR池搅拌机02 正常/故障
         MydataTableColumn mdtc21 = new MydataTableColumn();
         mdtc21.setData("sbrMixer02Fault");
         mdtc21.setDefaultContent("21");
-        mdtc21.setTitle("污泥泵故障");
+        mdtc21.setTitle("SBR池搅拌机02故障");
         mdtc21.setVisible(false);
         //风机01 正常/故障
         MydataTableColumn mdtc22 = new MydataTableColumn();
         mdtc22.setData("fan01Fault");
         mdtc22.setDefaultContent("22");
-        mdtc22.setTitle("污泥泵故障");
+        mdtc22.setTitle("风机01故障");
         mdtc22.setVisible(false);
         //风机02 正常/故障
         MydataTableColumn mdtc23 = new MydataTableColumn();
         mdtc23.setData("fan02Fault");
         mdtc23.setDefaultContent("23");
-        mdtc23.setTitle("污泥泵故障");
+        mdtc23.setTitle("风机02故障");
         mdtc23.setVisible(false);
         //收集池提升泵 正常/故障
         MydataTableColumn mdtc24 = new MydataTableColumn();
         mdtc24.setData("collectPumpFault");
         mdtc24.setDefaultContent("24");
-        mdtc24.setTitle("污泥泵故障");
+        mdtc24.setTitle("收集池提升泵故障");
         mdtc24.setVisible(false);
         //滗水器 正常/故障
         MydataTableColumn mdtc25 = new MydataTableColumn();
         mdtc25.setData("decanterFault");
         mdtc25.setDefaultContent("25");
-        mdtc25.setTitle("污泥泵故障");
+        mdtc25.setTitle("滗水器故障");
         mdtc25.setVisible(false);
         //PLC电量不足
         MydataTableColumn mdtc26 = new MydataTableColumn();
         mdtc26.setData("plcElecLack");
         mdtc26.setDefaultContent("26");
-        mdtc26.setTitle("污泥泵故障");
+        mdtc26.setTitle("PLC电量不足");
         mdtc26.setVisible(false);
         //加药罐搅拌机 正常/故障
         MydataTableColumn mdtc27 = new MydataTableColumn();
         mdtc27.setData("dosingMixerFault");
         mdtc27.setDefaultContent("27");
-        mdtc27.setTitle("污泥泵故障");
+        mdtc27.setTitle("加药罐搅拌机故障");
         mdtc27.setVisible(false);
         //智能电表设备通讯故障
         MydataTableColumn mdtc28 = new MydataTableColumn();
         mdtc28.setData("elecFault");
         mdtc28.setDefaultContent("28");
-        mdtc28.setTitle("污泥泵故障");
+        mdtc28.setTitle("智能电表故障");
         mdtc28.setVisible(false);
         //空气温度变送器通讯故障
         MydataTableColumn mdtc29 = new MydataTableColumn();
         mdtc29.setData("airTempFault");
         mdtc29.setDefaultContent("29");
-        mdtc29.setTitle("污泥泵故障");
+        mdtc29.setTitle("环境温度故障");
         mdtc29.setVisible(false);
         //SBR水温变送器通讯故障
         MydataTableColumn mdtc30 = new MydataTableColumn();
         mdtc30.setData("waterTempFault");
         mdtc30.setDefaultContent("30");
-        mdtc30.setTitle("污泥泵故障");
+        mdtc30.setTitle("SBR水温故障");
         mdtc30.setVisible(false);
         /*********** 9个 公共参数 2byte *********************/
         //收集池液位高未到/到了

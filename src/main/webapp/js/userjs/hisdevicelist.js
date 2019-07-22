@@ -657,8 +657,8 @@ function hisDateRangePickerInitSewageC214() {
             '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
         },
     }, function (start, end, label) {
-        hisSewageC212search_start_date = this.startDate.format(this.locale.format);
-        hisSewageC212search_end_date = this.endDate.format(this.locale.format);
+        hisSewageC214search_start_date = this.startDate.format(this.locale.format);
+        hisSewageC214search_end_date = this.endDate.format(this.locale.format);
         if (!this.startDate) {
             this.element.val('');
         } else {

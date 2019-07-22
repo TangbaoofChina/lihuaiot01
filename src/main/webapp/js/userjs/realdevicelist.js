@@ -2933,6 +2933,10 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlSewageC214Export_storage').click(function () { //立华禽环保3.0
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlScaleC01Export_storage').click(function () { //自动称重
         $('#rdlExport_modal').modal("show");
     });
@@ -2956,9 +2960,13 @@ function rdlExportStorageAction() {
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC01DeviceList?" + $.param(data);
         }
-        else if (rootNodeId === "201" || rootNodeId === "212")  //立华禽环保2.0
+        else if (rootNodeId === "202" || rootNodeId === "212")  //立华禽环保2.0
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC212DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "204" || rootNodeId === "214")  //立华禽环保3.0
+        {
+            url = "/lihuaiot01/realDeviceList/exportSewageC214DeviceList?" + $.param(data);
         }
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
