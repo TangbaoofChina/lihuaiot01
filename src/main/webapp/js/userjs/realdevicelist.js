@@ -1163,7 +1163,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                 //当日电量
                 var todayEp212 = document.getElementById("todayEp212");
                 //当日电量
-                todayEp212.innerHTML = result.todayEp + "";
+                todayEp212.innerHTML = result.todayEP + "";
                 //环境温度
                 var airTemp212 = document.getElementById("airTemp212");
                 //环境温度

@@ -57,31 +57,31 @@
         <result column="SPARE1406" jdbcType="BOOLEAN" property="spare1406"/>
         <result column="SPARE1407" jdbcType="BOOLEAN" property="spare1407"/>
 
-        <result column="MODBUSCODE" jdbcType="BOOLEAN" property="modbusCode"/>
-        <result column="FANSETMINUTE" jdbcType="BOOLEAN" property="fanSetMinute"/>
-        <result column="SBRMIXER01SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer01SetMinute"/>
-        <result column="SBRMIXER02SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer02SetMinute"/>
-        <result column="COLLECTPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectPumpSetMinute"/>
-        <result column="SLUDGEPUMPSETMINUTE" jdbcType="BOOLEAN" property="sludgePumpSetMinute"/>
-        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpSetMinute"/>
-        <result column="DECANTERSETMINUTE" jdbcType="BOOLEAN" property="decanterSetMinute"/>
-        <result column="COLLECTMIXERSETMINUTE" jdbcType="BOOLEAN" property="collectMixerSetMinute"/>
-        <result column="DOSINGPUMPSETMINUTE" jdbcType="BOOLEAN" property="dosingPumpSetMinute"/>
-        <result column="DOSINGMIXERSETMINUTE" jdbcType="BOOLEAN" property="dosingMixerSetMinute"/>
-        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectWellPumpSetMinute"/>
+        <result column="MODBUSCODE" jdbcType="INTEGER" property="modbusCode"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
 
-        <result column="DOSINGPUMPRUNMINUTE" jdbcType="BOOLEAN" property="dosingPumpRunMinute"/>
-        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="BOOLEAN" property="sludgePumpRunMinute"/>
-        <result column="SBRMIXER01RUNMINUTE" jdbcType="BOOLEAN" property="sbrMixer01RunMinute"/>
-        <result column="FAN01RUNMINUTE" jdbcType="BOOLEAN" property="fan01RunMinute"/>
-        <result column="SBRMIXER02RUNMINUTE" jdbcType="BOOLEAN" property="sbrMixer02RunMinute"/>
-        <result column="DOSINGMIXERRUNMINUTE" jdbcType="BOOLEAN" property="dosingMixerRunMinute"/>
-        <result column="COLLECTPUMPRUNMINUTE" jdbcType="BOOLEAN" property="collectPumpRunMinute"/>
-        <result column="FAN02RUNMINUTE" jdbcType="BOOLEAN" property="fan02RunMinute"/>
-        <result column="COLLECTMIXERRUNMINUTE" jdbcType="BOOLEAN" property="collectMixerRunMinute"/>
-        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="BOOLEAN" property="collectWellPumpRunMinute"/>
-        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpRunMinute"/>
-        <result column="DECANTERRUNMINUTE" jdbcType="BOOLEAN" property="decanterRunMinute"/>
+        <result column="DOSINGPUMPRUNMINUTE" jdbcType="INTEGER" property="dosingPumpRunMinute"/>
+        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="INTEGER" property="sludgePumpRunMinute"/>
+        <result column="SBRMIXER01RUNMINUTE" jdbcType="INTEGER" property="sbrMixer01RunMinute"/>
+        <result column="FAN01RUNMINUTE" jdbcType="INTEGER" property="fan01RunMinute"/>
+        <result column="SBRMIXER02RUNMINUTE" jdbcType="INTEGER" property="sbrMixer02RunMinute"/>
+        <result column="DOSINGMIXERRUNMINUTE" jdbcType="INTEGER" property="dosingMixerRunMinute"/>
+        <result column="COLLECTPUMPRUNMINUTE" jdbcType="INTEGER" property="collectPumpRunMinute"/>
+        <result column="FAN02RUNMINUTE" jdbcType="INTEGER" property="fan02RunMinute"/>
+        <result column="COLLECTMIXERRUNMINUTE" jdbcType="INTEGER" property="collectMixerRunMinute"/>
+        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="INTEGER" property="collectWellPumpRunMinute"/>
+        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="INTEGER" property="dephosphorizePumpRunMinute"/>
+        <result column="DECANTERRUNMINUTE" jdbcType="INTEGER" property="decanterRunMinute"/>
 
         <result column="FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
         <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
@@ -105,57 +105,57 @@
         <result column="EXPEP" jdbcType="FLOAT" property="expEP"/>
         <result column="SPARE135136" jdbcType="BIGINT" property="spare135136"/>
 
-        <result column="COLLECTMIXERTOTAL" jdbcType="BOOLEAN" property="collectMixerTotal"/>
-        <result column="DOSINGPUMPTOTAL" jdbcType="BOOLEAN" property="dosingPumpTotal"/>
-        <result column="COLLECTWELLPUMPTOTAL" jdbcType="BOOLEAN" property="collectWellPumpTotal"/>
-        <result column="SLUDGEPUMPTOTAL" jdbcType="BOOLEAN" property="sludgePumpTotal"/>
-        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="BOOLEAN" property="dephosphorizePumpTotal"/>
-        <result column="SBRMIXER01TOTAL" jdbcType="BOOLEAN" property="sbrMixer01Total"/>
-        <result column="SBRMIXER02TOTAL" jdbcType="BOOLEAN" property="sbrMixer02Total"/>
-        <result column="FAN01TOTAL" jdbcType="BOOLEAN" property="fan01Total"/>
-        <result column="FAN02TOTAL" jdbcType="BOOLEAN" property="fan02Total"/>
-        <result column="COLLECTPUMPTOTAL" jdbcType="BOOLEAN" property="collectPumpTotal"/>
-        <result column="DOSINGMIXERTOTAL" jdbcType="BOOLEAN" property="dosingMixerTotal"/>
-        <result column="DECANTERTOTAL" jdbcType="BOOLEAN" property="decanterTotal"/>
+        <result column="COLLECTMIXERTOTAL" jdbcType="INTEGER" property="collectMixerTotal"/>
+        <result column="DOSINGPUMPTOTAL" jdbcType="INTEGER" property="dosingPumpTotal"/>
+        <result column="COLLECTWELLPUMPTOTAL" jdbcType="INTEGER" property="collectWellPumpTotal"/>
+        <result column="SLUDGEPUMPTOTAL" jdbcType="INTEGER" property="sludgePumpTotal"/>
+        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="INTEGER" property="dephosphorizePumpTotal"/>
+        <result column="SBRMIXER01TOTAL" jdbcType="INTEGER" property="sbrMixer01Total"/>
+        <result column="SBRMIXER02TOTAL" jdbcType="INTEGER" property="sbrMixer02Total"/>
+        <result column="FAN01TOTAL" jdbcType="INTEGER" property="fan01Total"/>
+        <result column="FAN02TOTAL" jdbcType="INTEGER" property="fan02Total"/>
+        <result column="COLLECTPUMPTOTAL" jdbcType="INTEGER" property="collectPumpTotal"/>
+        <result column="DOSINGMIXERTOTAL" jdbcType="INTEGER" property="dosingMixerTotal"/>
+        <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
 
-        <result column="COLLECTPUMPSHOUR" jdbcType="BOOLEAN" property="collectPumpSHour"/>
-        <result column="COLLECTPUMPSMINUTE" jdbcType="BOOLEAN" property="collectPumpSMinute"/>
-        <result column="FAN01SHOUR" jdbcType="BOOLEAN" property="fan01SHour"/>
-        <result column="FAN01SMINUTE" jdbcType="BOOLEAN" property="fan01SMinute"/>
-        <result column="FAN02SHOUR" jdbcType="BOOLEAN" property="fan02SHour"/>
-        <result column="FAN02SMINUTE" jdbcType="BOOLEAN" property="fan02SMinute"/>
-        <result column="COLLECTMIXERSHOUR" jdbcType="BOOLEAN" property="collectMixerSHour"/>
-        <result column="COLLECTMIXERSMINUTE" jdbcType="BOOLEAN" property="collectMixerSMinute"/>
-        <result column="COLLECTWELLPUMPSHOUR" jdbcType="BOOLEAN" property="collectWellPumpSHour"/>
-        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="BOOLEAN" property="collectWellPumpSMinute"/>
-        <result column="SBRMIXER01SHOUR" jdbcType="BOOLEAN" property="sbrMixer01SHour"/>
-        <result column="SBRMIXER01SMINUTE" jdbcType="BOOLEAN" property="sbrMixer01SMinute"/>
-        <result column="SBRMIXER02SHOUR" jdbcType="BOOLEAN" property="sbrMixer02SHour"/>
-        <result column="SBRMIXER02SMINUTE" jdbcType="BOOLEAN" property="sbrMixer02SMinute"/>
-        <result column="SLUDGEPUMPSHOUR" jdbcType="BOOLEAN" property="sludgePumpSHour"/>
-        <result column="SLUDGEPUMPSMINUTE" jdbcType="BOOLEAN" property="sludgePumpSMinute"/>
-        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="BOOLEAN" property="dephosphorizePumpSHour"/>
-        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpSMinute"/>
-        <result column="DECANTERSHOUR" jdbcType="BOOLEAN" property="decanterSHour"/>
-        <result column="DECANTERSMINUTE" jdbcType="BOOLEAN" property="decanterSMinute"/>
-        <result column="DOSINGPUMPSHOUR" jdbcType="BOOLEAN" property="dosingPumpSHour"/>
-        <result column="DOSINGPUMPSMINUTE" jdbcType="BOOLEAN" property="dosingPumpSMinute"/>
-        <result column="DOSINGMIXERSHOUR" jdbcType="BOOLEAN" property="dosingMixerSHour"/>
-        <result column="DOSINGMIXERSMINUTE" jdbcType="BOOLEAN" property="dosingMixerSMinute"/>
-        <result column="SPARE191" jdbcType="BOOLEAN" property="spare191"/>
-        <result column="SPARE192" jdbcType="BOOLEAN" property="spare192"/>
-        <result column="SPARE193" jdbcType="BOOLEAN" property="spare193"/>
-        <result column="SPARE194" jdbcType="BOOLEAN" property="spare194"/>
-        <result column="SPARE195" jdbcType="BOOLEAN" property="spare195"/>
-        <result column="SPARE196" jdbcType="BOOLEAN" property="spare196"/>
-        <result column="SPARE197" jdbcType="BOOLEAN" property="spare197"/>
-        <result column="SPARE198" jdbcType="BOOLEAN" property="spare198"/>
-        <result column="SPARE199" jdbcType="BOOLEAN" property="spare199"/>
-        <result column="SPARE200" jdbcType="BOOLEAN" property="spare200"/>
-        <result column="SPARE201" jdbcType="BOOLEAN" property="spare201"/>
-        <result column="SPARE202" jdbcType="BOOLEAN" property="spare202"/>
-        <result column="ACKSECONDS" jdbcType="BOOLEAN" property="ackSeconds"/>
-        <result column="PLCADDRESS" jdbcType="BOOLEAN" property="plcAddress"/>
+        <result column="COLLECTPUMPSHOUR" jdbcType="INTEGER" property="collectPumpSHour"/>
+        <result column="COLLECTPUMPSMINUTE" jdbcType="INTEGER" property="collectPumpSMinute"/>
+        <result column="FAN01SHOUR" jdbcType="INTEGER" property="fan01SHour"/>
+        <result column="FAN01SMINUTE" jdbcType="INTEGER" property="fan01SMinute"/>
+        <result column="FAN02SHOUR" jdbcType="INTEGER" property="fan02SHour"/>
+        <result column="FAN02SMINUTE" jdbcType="INTEGER" property="fan02SMinute"/>
+        <result column="COLLECTMIXERSHOUR" jdbcType="INTEGER" property="collectMixerSHour"/>
+        <result column="COLLECTMIXERSMINUTE" jdbcType="INTEGER" property="collectMixerSMinute"/>
+        <result column="COLLECTWELLPUMPSHOUR" jdbcType="INTEGER" property="collectWellPumpSHour"/>
+        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="INTEGER" property="collectWellPumpSMinute"/>
+        <result column="SBRMIXER01SHOUR" jdbcType="INTEGER" property="sbrMixer01SHour"/>
+        <result column="SBRMIXER01SMINUTE" jdbcType="INTEGER" property="sbrMixer01SMinute"/>
+        <result column="SBRMIXER02SHOUR" jdbcType="INTEGER" property="sbrMixer02SHour"/>
+        <result column="SBRMIXER02SMINUTE" jdbcType="INTEGER" property="sbrMixer02SMinute"/>
+        <result column="SLUDGEPUMPSHOUR" jdbcType="INTEGER" property="sludgePumpSHour"/>
+        <result column="SLUDGEPUMPSMINUTE" jdbcType="INTEGER" property="sludgePumpSMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="INTEGER" property="dephosphorizePumpSHour"/>
+        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSMinute"/>
+        <result column="DECANTERSHOUR" jdbcType="INTEGER" property="decanterSHour"/>
+        <result column="DECANTERSMINUTE" jdbcType="INTEGER" property="decanterSMinute"/>
+        <result column="DOSINGPUMPSHOUR" jdbcType="INTEGER" property="dosingPumpSHour"/>
+        <result column="DOSINGPUMPSMINUTE" jdbcType="INTEGER" property="dosingPumpSMinute"/>
+        <result column="DOSINGMIXERSHOUR" jdbcType="INTEGER" property="dosingMixerSHour"/>
+        <result column="DOSINGMIXERSMINUTE" jdbcType="INTEGER" property="dosingMixerSMinute"/>
+        <result column="SPARE191" jdbcType="INTEGER" property="spare191"/>
+        <result column="SPARE192" jdbcType="INTEGER" property="spare192"/>
+        <result column="SPARE193" jdbcType="INTEGER" property="spare193"/>
+        <result column="SPARE194" jdbcType="INTEGER" property="spare194"/>
+        <result column="SPARE195" jdbcType="INTEGER" property="spare195"/>
+        <result column="SPARE196" jdbcType="INTEGER" property="spare196"/>
+        <result column="SPARE197" jdbcType="INTEGER" property="spare197"/>
+        <result column="SPARE198" jdbcType="INTEGER" property="spare198"/>
+        <result column="SPARE199" jdbcType="INTEGER" property="spare199"/>
+        <result column="SPARE200" jdbcType="INTEGER" property="spare200"/>
+        <result column="SPARE201" jdbcType="INTEGER" property="spare201"/>
+        <result column="SPARE202" jdbcType="INTEGER" property="spare202"/>
+        <result column="ACKSECONDS" jdbcType="INTEGER" property="ackSeconds"/>
+        <result column="PLCADDRESS" jdbcType="INTEGER" property="plcAddress"/>
         <result column="FAULTINDICATION" jdbcType="VARCHAR" property="faultIndication"/>
         <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
         <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
@@ -217,31 +217,31 @@
         <result column="SPARE1406" jdbcType="BOOLEAN" property="spare1406"/>
         <result column="SPARE1407" jdbcType="BOOLEAN" property="spare1407"/>
 
-        <result column="MODBUSCODE" jdbcType="BOOLEAN" property="modbusCode"/>
-        <result column="FANSETMINUTE" jdbcType="BOOLEAN" property="fanSetMinute"/>
-        <result column="SBRMIXER01SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer01SetMinute"/>
-        <result column="SBRMIXER02SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer02SetMinute"/>
-        <result column="COLLECTPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectPumpSetMinute"/>
-        <result column="SLUDGEPUMPSETMINUTE" jdbcType="BOOLEAN" property="sludgePumpSetMinute"/>
-        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpSetMinute"/>
-        <result column="DECANTERSETMINUTE" jdbcType="BOOLEAN" property="decanterSetMinute"/>
-        <result column="COLLECTMIXERSETMINUTE" jdbcType="BOOLEAN" property="collectMixerSetMinute"/>
-        <result column="DOSINGPUMPSETMINUTE" jdbcType="BOOLEAN" property="dosingPumpSetMinute"/>
-        <result column="DOSINGMIXERSETMINUTE" jdbcType="BOOLEAN" property="dosingMixerSetMinute"/>
-        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectWellPumpSetMinute"/>
+        <result column="MODBUSCODE" jdbcType="INTEGER" property="modbusCode"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
 
-        <result column="DOSINGPUMPRUNMINUTE" jdbcType="BOOLEAN" property="dosingPumpRunMinute"/>
-        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="BOOLEAN" property="sludgePumpRunMinute"/>
-        <result column="SBRMIXER01RUNMINUTE" jdbcType="BOOLEAN" property="sbrMixer01RunMinute"/>
-        <result column="FAN01RUNMINUTE" jdbcType="BOOLEAN" property="fan01RunMinute"/>
-        <result column="SBRMIXER02RUNMINUTE" jdbcType="BOOLEAN" property="sbrMixer02RunMinute"/>
-        <result column="DOSINGMIXERRUNMINUTE" jdbcType="BOOLEAN" property="dosingMixerRunMinute"/>
-        <result column="COLLECTPUMPRUNMINUTE" jdbcType="BOOLEAN" property="collectPumpRunMinute"/>
-        <result column="FAN02RUNMINUTE" jdbcType="BOOLEAN" property="fan02RunMinute"/>
-        <result column="COLLECTMIXERRUNMINUTE" jdbcType="BOOLEAN" property="collectMixerRunMinute"/>
-        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="BOOLEAN" property="collectWellPumpRunMinute"/>
-        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpRunMinute"/>
-        <result column="DECANTERRUNMINUTE" jdbcType="BOOLEAN" property="decanterRunMinute"/>
+        <result column="DOSINGPUMPRUNMINUTE" jdbcType="INTEGER" property="dosingPumpRunMinute"/>
+        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="INTEGER" property="sludgePumpRunMinute"/>
+        <result column="SBRMIXER01RUNMINUTE" jdbcType="INTEGER" property="sbrMixer01RunMinute"/>
+        <result column="FAN01RUNMINUTE" jdbcType="INTEGER" property="fan01RunMinute"/>
+        <result column="SBRMIXER02RUNMINUTE" jdbcType="INTEGER" property="sbrMixer02RunMinute"/>
+        <result column="DOSINGMIXERRUNMINUTE" jdbcType="INTEGER" property="dosingMixerRunMinute"/>
+        <result column="COLLECTPUMPRUNMINUTE" jdbcType="INTEGER" property="collectPumpRunMinute"/>
+        <result column="FAN02RUNMINUTE" jdbcType="INTEGER" property="fan02RunMinute"/>
+        <result column="COLLECTMIXERRUNMINUTE" jdbcType="INTEGER" property="collectMixerRunMinute"/>
+        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="INTEGER" property="collectWellPumpRunMinute"/>
+        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="INTEGER" property="dephosphorizePumpRunMinute"/>
+        <result column="DECANTERRUNMINUTE" jdbcType="INTEGER" property="decanterRunMinute"/>
 
         <result column="FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
         <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
@@ -265,57 +265,57 @@
         <result column="EXPEP" jdbcType="FLOAT" property="expEP"/>
         <result column="SPARE135136" jdbcType="BIGINT" property="spare135136"/>
 
-        <result column="COLLECTMIXERTOTAL" jdbcType="BOOLEAN" property="collectMixerTotal"/>
-        <result column="DOSINGPUMPTOTAL" jdbcType="BOOLEAN" property="dosingPumpTotal"/>
-        <result column="COLLECTWELLPUMPTOTAL" jdbcType="BOOLEAN" property="collectWellPumpTotal"/>
-        <result column="SLUDGEPUMPTOTAL" jdbcType="BOOLEAN" property="sludgePumpTotal"/>
-        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="BOOLEAN" property="dephosphorizePumpTotal"/>
-        <result column="SBRMIXER01TOTAL" jdbcType="BOOLEAN" property="sbrMixer01Total"/>
-        <result column="SBRMIXER02TOTAL" jdbcType="BOOLEAN" property="sbrMixer02Total"/>
-        <result column="FAN01TOTAL" jdbcType="BOOLEAN" property="fan01Total"/>
-        <result column="FAN02TOTAL" jdbcType="BOOLEAN" property="fan02Total"/>
-        <result column="COLLECTPUMPTOTAL" jdbcType="BOOLEAN" property="collectPumpTotal"/>
-        <result column="DOSINGMIXERTOTAL" jdbcType="BOOLEAN" property="dosingMixerTotal"/>
-        <result column="DECANTERTOTAL" jdbcType="BOOLEAN" property="decanterTotal"/>
+        <result column="COLLECTMIXERTOTAL" jdbcType="INTEGER" property="collectMixerTotal"/>
+        <result column="DOSINGPUMPTOTAL" jdbcType="INTEGER" property="dosingPumpTotal"/>
+        <result column="COLLECTWELLPUMPTOTAL" jdbcType="INTEGER" property="collectWellPumpTotal"/>
+        <result column="SLUDGEPUMPTOTAL" jdbcType="INTEGER" property="sludgePumpTotal"/>
+        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="INTEGER" property="dephosphorizePumpTotal"/>
+        <result column="SBRMIXER01TOTAL" jdbcType="INTEGER" property="sbrMixer01Total"/>
+        <result column="SBRMIXER02TOTAL" jdbcType="INTEGER" property="sbrMixer02Total"/>
+        <result column="FAN01TOTAL" jdbcType="INTEGER" property="fan01Total"/>
+        <result column="FAN02TOTAL" jdbcType="INTEGER" property="fan02Total"/>
+        <result column="COLLECTPUMPTOTAL" jdbcType="INTEGER" property="collectPumpTotal"/>
+        <result column="DOSINGMIXERTOTAL" jdbcType="INTEGER" property="dosingMixerTotal"/>
+        <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
 
-        <result column="COLLECTPUMPSHOUR" jdbcType="BOOLEAN" property="collectPumpSHour"/>
-        <result column="COLLECTPUMPSMINUTE" jdbcType="BOOLEAN" property="collectPumpSMinute"/>
-        <result column="FAN01SHOUR" jdbcType="BOOLEAN" property="fan01SHour"/>
-        <result column="FAN01SMINUTE" jdbcType="BOOLEAN" property="fan01SMinute"/>
-        <result column="FAN02SHOUR" jdbcType="BOOLEAN" property="fan02SHour"/>
-        <result column="FAN02SMINUTE" jdbcType="BOOLEAN" property="fan02SMinute"/>
-        <result column="COLLECTMIXERSHOUR" jdbcType="BOOLEAN" property="collectMixerSHour"/>
-        <result column="COLLECTMIXERSMINUTE" jdbcType="BOOLEAN" property="collectMixerSMinute"/>
-        <result column="COLLECTWELLPUMPSHOUR" jdbcType="BOOLEAN" property="collectWellPumpSHour"/>
-        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="BOOLEAN" property="collectWellPumpSMinute"/>
-        <result column="SBRMIXER01SHOUR" jdbcType="BOOLEAN" property="sbrMixer01SHour"/>
-        <result column="SBRMIXER01SMINUTE" jdbcType="BOOLEAN" property="sbrMixer01SMinute"/>
-        <result column="SBRMIXER02SHOUR" jdbcType="BOOLEAN" property="sbrMixer02SHour"/>
-        <result column="SBRMIXER02SMINUTE" jdbcType="BOOLEAN" property="sbrMixer02SMinute"/>
-        <result column="SLUDGEPUMPSHOUR" jdbcType="BOOLEAN" property="sludgePumpSHour"/>
-        <result column="SLUDGEPUMPSMINUTE" jdbcType="BOOLEAN" property="sludgePumpSMinute"/>
-        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="BOOLEAN" property="dephosphorizePumpSHour"/>
-        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpSMinute"/>
-        <result column="DECANTERSHOUR" jdbcType="BOOLEAN" property="decanterSHour"/>
-        <result column="DECANTERSMINUTE" jdbcType="BOOLEAN" property="decanterSMinute"/>
-        <result column="DOSINGPUMPSHOUR" jdbcType="BOOLEAN" property="dosingPumpSHour"/>
-        <result column="DOSINGPUMPSMINUTE" jdbcType="BOOLEAN" property="dosingPumpSMinute"/>
-        <result column="DOSINGMIXERSHOUR" jdbcType="BOOLEAN" property="dosingMixerSHour"/>
-        <result column="DOSINGMIXERSMINUTE" jdbcType="BOOLEAN" property="dosingMixerSMinute"/>
-        <result column="SPARE191" jdbcType="BOOLEAN" property="spare191"/>
-        <result column="SPARE192" jdbcType="BOOLEAN" property="spare192"/>
-        <result column="SPARE193" jdbcType="BOOLEAN" property="spare193"/>
-        <result column="SPARE194" jdbcType="BOOLEAN" property="spare194"/>
-        <result column="SPARE195" jdbcType="BOOLEAN" property="spare195"/>
-        <result column="SPARE196" jdbcType="BOOLEAN" property="spare196"/>
-        <result column="SPARE197" jdbcType="BOOLEAN" property="spare197"/>
-        <result column="SPARE198" jdbcType="BOOLEAN" property="spare198"/>
-        <result column="SPARE199" jdbcType="BOOLEAN" property="spare199"/>
-        <result column="SPARE200" jdbcType="BOOLEAN" property="spare200"/>
-        <result column="SPARE201" jdbcType="BOOLEAN" property="spare201"/>
-        <result column="SPARE202" jdbcType="BOOLEAN" property="spare202"/>
-        <result column="ACKSECONDS" jdbcType="BOOLEAN" property="ackSeconds"/>
-        <result column="PLCADDRESS" jdbcType="BOOLEAN" property="plcAddress"/>
+        <result column="COLLECTPUMPSHOUR" jdbcType="INTEGER" property="collectPumpSHour"/>
+        <result column="COLLECTPUMPSMINUTE" jdbcType="INTEGER" property="collectPumpSMinute"/>
+        <result column="FAN01SHOUR" jdbcType="INTEGER" property="fan01SHour"/>
+        <result column="FAN01SMINUTE" jdbcType="INTEGER" property="fan01SMinute"/>
+        <result column="FAN02SHOUR" jdbcType="INTEGER" property="fan02SHour"/>
+        <result column="FAN02SMINUTE" jdbcType="INTEGER" property="fan02SMinute"/>
+        <result column="COLLECTMIXERSHOUR" jdbcType="INTEGER" property="collectMixerSHour"/>
+        <result column="COLLECTMIXERSMINUTE" jdbcType="INTEGER" property="collectMixerSMinute"/>
+        <result column="COLLECTWELLPUMPSHOUR" jdbcType="INTEGER" property="collectWellPumpSHour"/>
+        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="INTEGER" property="collectWellPumpSMinute"/>
+        <result column="SBRMIXER01SHOUR" jdbcType="INTEGER" property="sbrMixer01SHour"/>
+        <result column="SBRMIXER01SMINUTE" jdbcType="INTEGER" property="sbrMixer01SMinute"/>
+        <result column="SBRMIXER02SHOUR" jdbcType="INTEGER" property="sbrMixer02SHour"/>
+        <result column="SBRMIXER02SMINUTE" jdbcType="INTEGER" property="sbrMixer02SMinute"/>
+        <result column="SLUDGEPUMPSHOUR" jdbcType="INTEGER" property="sludgePumpSHour"/>
+        <result column="SLUDGEPUMPSMINUTE" jdbcType="INTEGER" property="sludgePumpSMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="INTEGER" property="dephosphorizePumpSHour"/>
+        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSMinute"/>
+        <result column="DECANTERSHOUR" jdbcType="INTEGER" property="decanterSHour"/>
+        <result column="DECANTERSMINUTE" jdbcType="INTEGER" property="decanterSMinute"/>
+        <result column="DOSINGPUMPSHOUR" jdbcType="INTEGER" property="dosingPumpSHour"/>
+        <result column="DOSINGPUMPSMINUTE" jdbcType="INTEGER" property="dosingPumpSMinute"/>
+        <result column="DOSINGMIXERSHOUR" jdbcType="INTEGER" property="dosingMixerSHour"/>
+        <result column="DOSINGMIXERSMINUTE" jdbcType="INTEGER" property="dosingMixerSMinute"/>
+        <result column="SPARE191" jdbcType="INTEGER" property="spare191"/>
+        <result column="SPARE192" jdbcType="INTEGER" property="spare192"/>
+        <result column="SPARE193" jdbcType="INTEGER" property="spare193"/>
+        <result column="SPARE194" jdbcType="INTEGER" property="spare194"/>
+        <result column="SPARE195" jdbcType="INTEGER" property="spare195"/>
+        <result column="SPARE196" jdbcType="INTEGER" property="spare196"/>
+        <result column="SPARE197" jdbcType="INTEGER" property="spare197"/>
+        <result column="SPARE198" jdbcType="INTEGER" property="spare198"/>
+        <result column="SPARE199" jdbcType="INTEGER" property="spare199"/>
+        <result column="SPARE200" jdbcType="INTEGER" property="spare200"/>
+        <result column="SPARE201" jdbcType="INTEGER" property="spare201"/>
+        <result column="SPARE202" jdbcType="INTEGER" property="spare202"/>
+        <result column="ACKSECONDS" jdbcType="INTEGER" property="ackSeconds"/>
+        <result column="PLCADDRESS" jdbcType="INTEGER" property="plcAddress"/>
         <result column="FAULTINDICATION" jdbcType="VARCHAR" property="faultIndication"/>
         <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
@@ -326,17 +326,17 @@
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
         <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
-        <result column="FANSETMINUTE" jdbcType="BOOLEAN" property="fanSetMinute"/>
-        <result column="SBRMIXER01SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer01SetMinute"/>
-        <result column="SBRMIXER02SETMINUTE" jdbcType="BOOLEAN" property="sbrMixer02SetMinute"/>
-        <result column="COLLECTPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectPumpSetMinute"/>
-        <result column="SLUDGEPUMPSETMINUTE" jdbcType="BOOLEAN" property="sludgePumpSetMinute"/>
-        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="BOOLEAN" property="dephosphorizePumpSetMinute"/>
-        <result column="DECANTERSETMINUTE" jdbcType="BOOLEAN" property="decanterSetMinute"/>
-        <result column="COLLECTMIXERSETMINUTE" jdbcType="BOOLEAN" property="collectMixerSetMinute"/>
-        <result column="DOSINGPUMPSETMINUTE" jdbcType="BOOLEAN" property="dosingPumpSetMinute"/>
-        <result column="DOSINGMIXERSETMINUTE" jdbcType="BOOLEAN" property="dosingMixerSetMinute"/>
-        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="BOOLEAN" property="collectWellPumpSetMinute"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
         <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
         <result column="IMPEP" jdbcType="FLOAT" property="impEP"/>
         <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
