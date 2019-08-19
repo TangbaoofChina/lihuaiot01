@@ -113,6 +113,7 @@ public class PhoneCommonController {
         return jsonString;
     }
 
+    //该接口貌似不通用，只能查询单个设备类型的组织结构，暂不使用
     @RequestMapping(value = "selectOrg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectOrg(String userId,String devType) throws Exception {

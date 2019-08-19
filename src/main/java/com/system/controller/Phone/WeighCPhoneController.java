@@ -9,6 +9,7 @@ import com.system.po.Phone.PWeighC312.PWeighC312Detail;
 import com.system.po.Phone.PWeighC312.PWeighC312His;
 import com.system.po.Phone.PWeighC312.PWeighC312Summary;
 import com.system.service.*;
+import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
 import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,35 @@ public class WeighCPhoneController {
     private WeighC312DMService weighC312DMService;
     @Autowired
     private DeviceRoleInfoService deviceRoleInfoService;
+    @Autowired
+    private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
+
+    @RequestMapping(value = "selectOrg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectOrg(String userId) throws Exception {
+        if (userId == null || userId.equals(""))
+            return "[]";
+        //OAID转换为EASID
+        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
+        if (roleInfoList.size() < 1)
+            return "[]";
+        List<ORGTreeNode> orgTreeNodeList = new ArrayList<ORGTreeNode>();
+        List<ORGTreeNode> orgTreeNodeList312 = new ArrayList<ORGTreeNode>();
+        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
+            List<RoleInfo> roleInfoListAdmin312 = roleInfoService.selectRoleInfoByRoleName("312");
+            orgTreeNodeList312 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("312", roleInfoListAdmin312);
+            orgTreeNodeList.addAll(orgTreeNodeList312);
+        } else {
+            orgTreeNodeList312 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("312", roleInfoList);
+            orgTreeNodeList.addAll(orgTreeNodeList312);
+        }
+        String jsonString = "[]";
+        if (orgTreeNodeList.size() > 0) {
+            jsonString = JSON.toJSONString(orgTreeNodeList);
+        }
+        return jsonString;
+    }
 
     @RequestMapping(value = "selectSummary", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
