@@ -1371,4 +1371,64 @@
         </property>
 
     </entity>
+
+    <entity class="com.system.po.Device.WeighC312DM" sheetName="散料称重" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>sendDate</field>
+            <value>发送时间</value>
+        </property>
+        <property>
+            <field>netW</field>
+            <value>净重</value>
+        </property>
+        <property>
+            <field>grossW</field>
+            <value>毛重</value>
+        </property>
+        <property>
+            <field>increase</field>
+            <value>投料</value>
+        </property>
+        <property>
+            <field>decrease</field>
+            <value>放料</value>
+        </property>
+        <property>
+            <field>inNetW</field>
+            <value>投料净重</value>
+        </property>
+        <property>
+            <field>inStartDate</field>
+            <value>投料开始</value>
+        </property>
+        <property>
+            <field>inEndDate</field>
+            <value>投料结束</value>
+        </property>
+        <property>
+            <field>deNetW</field>
+            <value>放料净重</value>
+        </property>
+        <property>
+            <field>deStartDate</field>
+            <value>放料开始</value>
+        </property>
+        <property>
+            <field>deEndDate</field>
+            <value>放料结束</value>
+        </property>
+        <property>
+            <field>dReceiveTime</field>
+            <value>接收时间</value>
+        </property>
+    </entity>
+
 </configuration>

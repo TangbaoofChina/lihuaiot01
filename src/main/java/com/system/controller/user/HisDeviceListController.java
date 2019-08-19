@@ -37,6 +37,9 @@ public class HisDeviceListController {
     @Autowired
     private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
 
+    @Autowired
+    private WeighC312DMService weighC312DMService;
+
     @RequestMapping(value = "selectEC01ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectEC01ByDevNumAndDateAndPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
@@ -337,6 +340,68 @@ public class HisDeviceListController {
         List<MydataTableColumn> scalec01HeadColumnList =  scaleC01DeviceMessageService.selectScaleC01DeviceHead();
 
         String jsonString = JSON.toJSONString(scalec01HeadColumnList);
+
+        return jsonString;
+    }
+
+
+    /*********************WeighC312*******************************/
+    @RequestMapping(value = "selectWeighC312ByDevNumAndDateAndPaging", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectWeighC312ByDevNumAndDateAndPaging(Integer pageNumber,Integer pageSize,String sDeviceId,String sStartDate,String sEndDate) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId !=null) {
+            DataTablePageing dataTablePageing = weighC312DMService.selectWeighC312ByDeviceIdAndDateAndPaging(pageNumber,pageSize,sDeviceId,sStartDate,sEndDate);
+            jsonString = "{";
+            jsonString += "\""+"total"+"\"";
+            jsonString += ":";
+            jsonString += "\""+dataTablePageing.getTotal()+"\"";
+            jsonString += ",";
+            jsonString += "\""+"rows"+"\"";
+            jsonString += ":";
+            jsonString += dataTablePageing.getsReturnJson();
+            jsonString += "}";
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportHisWeighC312DeviceList", method = RequestMethod.GET)
+    public void exportHisWeighC312DeviceList(String sDeviceId,
+                                              String sStartDate,
+                                              String sEndDate,
+                                              HttpServletRequest request,
+                                              HttpServletResponse response) throws Exception {
+        String fileName = "hisweighc312devicelist.xlsx";
+        List<WeighC312DM> weighC312DMList = null;
+        if (sDeviceId !=null) {
+            weighC312DMList = weighC312DMService.selectWeighC312ByDevNumAndDate(sDeviceId,sStartDate,sEndDate);
+        }
+        File file = weighC312DMService.exportStorage(weighC312DMList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    @RequestMapping(value="/weighc312DeviceHead",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String weighc312DeviceHead() throws Exception{
+
+        List<MydataTableColumn> weighc312HeadColumnList =  weighC312DMService.selectWeighC312DeviceHead();
+
+        String jsonString = JSON.toJSONString(weighc312HeadColumnList);
 
         return jsonString;
     }

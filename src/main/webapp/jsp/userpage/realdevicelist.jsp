@@ -145,6 +145,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlWeighC312DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlWeighC312toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlWeighC312Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlWeighC312DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlWeighC312toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlEC01OneDeviceDiv" style="display:none">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="main">
@@ -2297,6 +2319,10 @@
             </div>
         </div>
         <div class="columns-right" id="rdlScaleC01OneDeviceDiv" style="display: none">
+
+        </div>
+
+        <div class="columns-right" id="rdlWeighC312OneDeviceDiv" style="display: none">
 
         </div>
         <div class="columns-right" id="rdlHj212C213OneDeviceDiv" style="display: none">

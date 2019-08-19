@@ -6,6 +6,7 @@ var rdlSewageC212TableColumns;
 var rdlSewageC214TableColumns;
 var rdlScaleC01TableColumns;
 var rdlHj212C213TableColumns;
+var rdlWeighC312TableColumns;
 var rdlTreeNodes;
 var realid_of_setintervalDeviceList;
 var realid_of_setintervalDeviceOne;
@@ -17,6 +18,7 @@ $(function () {
     rdlInitTableSewageC214();
     rdlInitTableScaleC01();
     rdlInitTableHj212C213();
+    rdlInitTableWeighC312();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {
@@ -109,6 +111,8 @@ function rdlNodeSelected(event, data) {
     var uiScaleC01One = document.getElementById("rdlScaleC01OneDeviceDiv");
     var uiHj212C213List = document.getElementById("rdlHj212C213DeviceListDiv");
     var uiHj212C213One = document.getElementById("rdlHj212C213OneDeviceDiv");
+    var uiWeighC312List = document.getElementById("rdlWeighC312DeviceListDiv");
+    var uiWeighC312One = document.getElementById("rdlWeighC312OneDeviceDiv");
     var rootNodeId = rdlNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (rootNodeId === "101" || rootNodeId === "111")   //种禽环控器
@@ -123,6 +127,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC214One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "201" || rootNodeId === "211")  //立华禽环保1.0
         {
@@ -136,6 +142,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC214One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "202" || rootNodeId === "212")  //立华禽环保2.0
         {
@@ -149,6 +157,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC214One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "204" || rootNodeId === "214")  //立华禽环保2.0
         {
@@ -162,6 +172,8 @@ function rdlNodeSelected(event, data) {
             uiSewageC214One.style.display = "block";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
@@ -175,6 +187,23 @@ function rdlNodeSelected(event, data) {
             uiSewageC214One.style.display = "none";
             uiScaleC01List.style.display = "none";
             uiScaleC01One.style.display = "block";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+        }
+        else if (rootNodeId === "302" || rootNodeId === "312")  //种禽料塔称重1.0
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "block";
         }
     } else if(rootNodeId === "213" && queryParameter.length == 14){
         uiEC01List.style.display = "none";
@@ -189,6 +218,8 @@ function rdlNodeSelected(event, data) {
         uiScaleC01One.style.display = "none";
         uiHj212C213List.style.display = "none";
         uiHj212C213One.style.display = "block";
+        uiWeighC312List.style.display = "none";
+        uiWeighC312One.style.display = "none";
     } else {
         if (rootNodeId === "101" || rootNodeId === "111")   //种禽环控器
         {
@@ -204,6 +235,8 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "none";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "201" || rootNodeId === "211")  //立华禽环保1.0
         {
@@ -219,6 +252,8 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "none";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "202" || rootNodeId === "212")  //立华禽环保2.0
         {
@@ -234,6 +269,8 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "none";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "204" || rootNodeId === "214")  //立华禽环保3.0
         {
@@ -249,6 +286,8 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "none";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
@@ -264,6 +303,25 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "none";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+        }
+        else if (rootNodeId === "302" || rootNodeId === "312")  //种鸡散装料塔称重
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "block";
+            uiWeighC312One.style.display = "none";
         }
         else if(rootNodeId === "213"){ //水质在线监测
             uiEC01List.style.display = "none";
@@ -278,6 +336,8 @@ function rdlNodeSelected(event, data) {
             uiScaleC01One.style.display = "none";
             uiHj212C213List.style.display = "block";
             uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
         }
     }
     if (data.nodes != null) {
@@ -310,6 +370,10 @@ function rdlNodeSelected(event, data) {
     else if (rootNodeId === "301" || rootNodeId === "311")  //污水控制器
     {
         rdlSelectDeviceByTreeIdScaleC01();
+    }
+    else if (rootNodeId === "302" || rootNodeId === "312")  //种禽散装料塔称重1.0
+    {
+        rdlSelectDeviceByTreeIdWeighC312();
     }
     else if (rootNodeId === "213")  //水质在线监测
     {
@@ -2828,6 +2892,98 @@ function rdlSelectDeviceByTreeIdHj212C213() {
 }
 //************************Hj212C213 end******************************/
 
+//************************WeighC312 start******************************/
+function rdlSelectInfoByDeviceIdAndWeighC312(queryParameter) {
+
+}
+
+function rdlInitTableWeighC312() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/weighC312DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlWeighC312TableColumns = questionColumns;
+            $('#rdlWeighC312DeviceList').bootstrapTable('destroy');
+            $('#rdlWeighC312DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdWeighC312() {
+
+    $('#rdlWeighC312DeviceList').bootstrapTable('destroy');
+
+    $('#rdlWeighC312DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 50,
+        //可供选择的每页的行数（*）
+        pageList: [8,10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectWeighC312ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlWeighC312TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+
+//************************WeighC312 end******************************/
+
 //请求服务数据时所传参数
 function rdlQueryParams(params) {
     var queryParameter = rdlNowTreeNode.id;
@@ -2880,6 +3036,13 @@ function rdlTableRefresh() {
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
             $('#rdlScaleC01DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        }
+        else if (rootNodeId === "302" || rootNodeId === "312")  //自动称重
+        {
+            $('#rdlWeighC312DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
@@ -2945,6 +3108,10 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlWeighC312Export_storage').click(function () { //种鸡散装料塔称重1.0
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlExport_storage_download').click(function () {
         var queryParameter = rdlNowTreeNode.id;
         var data = {
@@ -2971,6 +3138,10 @@ function rdlExportStorageAction() {
         else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
         {
             url = "/lihuaiot01/realDeviceList/exportScaleC01DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "302" || rootNodeId === "312")  //种鸡散装料塔称重
+        {
+            url = "/lihuaiot01/realDeviceList/exportWeighC312DeviceList?" + $.param(data);
         }
         else if (rootNodeId === "213")  //水质在线监测
         {

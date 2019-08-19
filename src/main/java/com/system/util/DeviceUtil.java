@@ -15,6 +15,11 @@ import java.util.List;
 public class DeviceUtil {
 
     public static final int defaultOffline = 30; //默认设备离线时间
+    public static final String defaultColor = "#000000"; //Black
+    public static final String normalRunColor = "#00FF00"; //Green
+    public static final String normalStopColor = "#FFA500"; //Orange
+    public static final String alarmColor = "#CDCD00";   //LightYellow
+
 
     public static List<DeviceInfoAndNode> judgeDeviceOnlineState(List<DeviceInfoAndNode> deviceInfoAndNodeList, int offlineMinute) throws Exception {
         for (DeviceInfoAndNode deviceInfoAndNode : deviceInfoAndNodeList

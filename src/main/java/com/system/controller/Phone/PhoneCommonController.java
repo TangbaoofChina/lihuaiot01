@@ -1,19 +1,22 @@
 package com.system.controller.Phone;
 
 import com.alibaba.fastjson.JSON;
-import com.system.po.BootStrapTreeNode;
-import com.system.po.ORGTreeNode;
+import com.system.po.*;
+import com.system.po.Phone.PhoneLoginMsg;
 import com.system.po.Phone.PhoneTree;
-import com.system.po.RoleInfo;
-import com.system.po.UserOAEas;
+import com.system.security.realms.MdPasswordUtil;
 import com.system.service.BootStrapTreeNodeService;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
 import com.system.service.RoleDeviceOrgInfoService;
 import com.system.service.RoleInfoService;
+import com.system.service.UserloginService;
 import com.system.util.DeviceUtil;
 import com.system.util.PhoneTreeNodeMerger;
 import com.system.util.RoleInfoListUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +34,8 @@ public class PhoneCommonController {
     @Autowired
     private RoleInfoService roleInfoService;
     @Autowired
+    private UserloginService userloginService;
+    @Autowired
     private PhoneUserOaEasService phoneUserOaEasService;
     @Autowired
     private BootStrapTreeNodeService bootStrapTreeNodeService;
@@ -38,6 +43,46 @@ public class PhoneCommonController {
     private RoleDeviceOrgInfoService roleDeviceOrgInfoService;
     @Autowired
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
+
+    @RequestMapping(value = "login", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String login(String userName, String userPwd) throws Exception {
+        String jsonString = "[]";
+        Userlogin userlogin = userloginService.findByNameLiHua(userName);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userlogin.getUserid());
+        PhoneLoginMsg phoneLoginMsg = new PhoneLoginMsg();
+        if (roleInfoList.size() > 0) //如果物联网系统中已经配置
+        {
+            userlogin.setRoleInfoList(roleInfoList);
+        } else {
+            userlogin = null;
+            phoneLoginMsg.setOaId("");
+            phoneLoginMsg.setMessage("无登录权限");
+        }
+        if (userlogin != null) {
+            //获取正式的密码(立华牧业用户表)
+            String realPassword = MdPasswordUtil.encodePassword(userlogin.getUserid(), userPwd);
+            if (!realPassword.equals(userlogin.getPassword())) {
+                //密码错误
+                userlogin = null;
+                phoneLoginMsg.setOaId("");
+                phoneLoginMsg.setMessage("密码错误");
+            } else {
+                Subject currentSubject = SecurityUtils.getSubject();
+                Session session = currentSubject.getSession();
+                // 清除 session 中的 userInfo 密码敏感信息
+                userlogin.setPassword(null);
+                // 设置用户信息到 Session
+                session.setAttribute("userInfo", userlogin);
+                UserOAEas userOAEas =  phoneUserOaEasService.selectUserOaEasByEasId(userlogin.getUserid());
+
+                phoneLoginMsg.setOaId(userOAEas.getOaId());
+                phoneLoginMsg.setMessage("登录成功");
+            }
+        }
+        jsonString = JSON.toJSONString(phoneLoginMsg);
+        return jsonString;
+    }
 
     /**
      * 获取树形结构-bootstrap格式

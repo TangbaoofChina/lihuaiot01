@@ -6,6 +6,7 @@ var hisSewageC212TableColumns;
 var hisSewageC214TableColumns;
 var hisScaleC01TableColumns;
 var hisHj212C213TableColumns;
+var hisWeighC312TableColumns;
 var hisTreeNodes;
 var hisEC01search_start_date = null;
 var hisEC01search_end_date = null;
@@ -19,6 +20,8 @@ var hisScaleC01search_start_date = null;
 var hisScaleC01search_end_date = null;
 var hisHj212C213search_start_date = null;
 var hisHj212C213search_end_date = null;
+var hisWeighC312search_start_date = null;
+var hisWeighC312search_end_date = null;
 
 $(function () {
     hisInitTreeNode();
@@ -28,6 +31,7 @@ $(function () {
     hisInitTableSewageC214();
     hisInitTableScaleC01();
     hisInitTableHj212C213();
+    hisInitTableWeighC312();
     hisExportStorageAction();
     //hisDatePickerInit();
     hisDateRangePickerInitEC01();
@@ -36,6 +40,7 @@ $(function () {
     hisDateRangePickerInitSewageC214();
     hisDateRangePickerInitScaleC01();
     hisDateRangePickerInitHj212C213();
+    hisDateRangePickerInitWeighC312();
     hisSearchAction();
 
 });
@@ -112,6 +117,7 @@ function hisNodeSelected(event, data) {
     var uiSewageC214List = document.getElementById("hisSewageC214DeviceListDiv");
     var uiScaleC01List = document.getElementById("hisScaleC01DeviceListDiv");
     var uiHj212C213List = document.getElementById("hisHj212C213DeviceListDiv");
+    var uiWeighC312List = document.getElementById("hisWeighC312DeviceListDiv");
     $('#hisOrgTree').treeview('clearSearch');
     if (data.nodes != null) {
         var select_node = $('#hisOrgTree').treeview('getSelected');
@@ -133,6 +139,7 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "none";
         uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "none";
     }
     else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
     {
@@ -142,6 +149,7 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "none";
         uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "none";
     }
     else if (rootNodeId === "202" || rootNodeId === "212")  //污水控制器
     {
@@ -151,6 +159,7 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "none";
         uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "none";
     }
     else if (rootNodeId === "204" || rootNodeId === "214")  //污水控制器
     {
@@ -160,6 +169,7 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "block";
         uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "none";
     }
     else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
     {
@@ -169,6 +179,17 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "none";
         uiScaleC01List.style.display = "block";
         uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "none";
+    }
+    else if (rootNodeId === "302" || rootNodeId === "312")  //种禽散装料塔称重1.0
+    {
+        uiEC01List.style.display = "none";
+        uiSewageC01List.style.display = "none";
+        uiSewageC212List.style.display = "none";
+        uiSewageC214List.style.display = "none";
+        uiScaleC01List.style.display = "none";
+        uiHj212C213List.style.display = "none";
+        uiWeighC312List.style.display = "block";
     }
     else if (rootNodeId === "213" )  //水质在线监测
     {
@@ -178,6 +199,7 @@ function hisNodeSelected(event, data) {
         uiSewageC214List.style.display = "none";
         uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "block";
+        uiWeighC312List.style.display = "none";
     }
 }
 
@@ -1059,6 +1081,151 @@ function hisSelectDeviceByTreeIdHj212C213() {
 }
 //*****************Hj212C213 end*********************/
 
+//*****************WeighC312 start*********************/
+// 日期选择器初始化
+function hisDateRangePickerInitWeighC312() {
+    hisWeighC312search_start_date = NowWeeHours(); //凌晨
+    hisWeighC312search_end_date = GetTodaytime(); //最晚时间
+    $('#hisWeighC312DateInterval').daterangepicker({
+        "timePicker": true,
+        "timePicker24Hour": true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'right',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        "locale": {
+            format: 'YYYY/MM/DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1,'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1,'days').startOf('day'), moment().subtract(1,'days').endOf('day')],
+            '最近7日': [moment().subtract(6,'days'), moment()],
+            '最近30日': [moment().subtract(29,'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisWeighC312search_start_date = this.startDate.format(this.locale.format);
+        hisWeighC312search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisInitTableWeighC312() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/hisDeviceList/weighc312DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align,visible:json[i].visible};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisWeighC312TableColumns = questionColumns;
+            $('#hisWeighC312DeviceList').bootstrapTable('destroy');
+            $('#hisWeighC312DeviceList').bootstrapTable({
+                columns: questionColumns,
+                // 显示下拉框勾选要显示的列
+                showColumns : true,
+                // 设置最少显示列个数
+                minimumCountColumns: 2,
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+//请求服务数据时所传参数
+function hisQueryParamsWeighC312(params) {
+    var queryParameter = hisNowTreeNode.id;
+    var queryStartDate = hisWeighC312search_start_date;
+    var queryEndDate = hisWeighC312search_end_date;
+    return {
+        pageNumber: params.offset + 1,
+        //每页多少条数据
+        pageSize: params.limit,
+        sDeviceId: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate,
+    };
+}
+
+function hisSelectDeviceByTreeIdWeighC312() {
+
+    $('#hisWeighC312DeviceList').bootstrapTable('destroy');
+
+    $('#hisWeighC312DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 100,
+        /*        //可供选择的每页的行数（*）
+                pageList: [10, 25, 50, 100],*/
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns : true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //分页只显示分页不显示总页数等数据，结合本页的style
+        /*paginationDetailHAlign:"right",*/
+        /*onlyInfoPagination:true,*/
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/hisDeviceList/selectWeighC312ByDevNumAndDateAndPaging",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: hisQueryParamsWeighC312,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server",
+        locale: 'zh-CN',//中文支持
+        columns: hisWeighC312TableColumns,
+        height: 500,      //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+//*****************WeighC312 end*********************/
 
 // 导出信息
 function hisExportStorageAction() {
@@ -1078,6 +1245,9 @@ function hisExportStorageAction() {
         $('#hisExport_modal').modal("show");
     });
     $('#hisHj212C213Export_storage').click(function () {
+        $('#hisExport_modal').modal("show");
+    });
+    $('#hisWeighC312Export_storage').click(function () {
         $('#hisExport_modal').modal("show");
     });
 
@@ -1139,6 +1309,17 @@ function hisExportStorageAction() {
                 sEndDate: queryEndDate
             };
             url = "/lihuaiot01/hisDeviceList/exportHisScaleC01DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "302" || rootNodeId === "312")  //种禽散装料塔称重1.0
+        {
+            queryStartDate = hisWeighC312search_start_date;
+            queryEndDate = hisWeighC312search_end_date;
+            data = {
+                sDeviceId: queryParameter,
+                sStartDate: queryStartDate,
+                sEndDate: queryEndDate
+            };
+            url = "/lihuaiot01/hisDeviceList/exportHisWeighC312DeviceList?" + $.param(data);
         }
         else if (rootNodeId === "213")  //自动称重
         {
@@ -1231,6 +1412,18 @@ function hisSearchAction() {
         var queryParameter = hisNowTreeNode.id;
         if (queryParameter.length >= 14 && queryParameter.length <= 30) {  //水质在线监测设备
             hisSelectDeviceByTreeIdHj212C213();
+        } else {
+            var type = 'error';
+            var msg = '未选择设备';
+            var append = '对不起，您未选择具体设备，请重新选择';
+            showMsg(type, msg, append);
+        }
+    });
+
+    $('#hisWeighC312Query_storage').click(function () {
+        var queryParameter = hisNowTreeNode.id;
+        if (queryParameter.length == 4) {
+            hisSelectDeviceByTreeIdWeighC312();
         } else {
             var type = 'error';
             var msg = '未选择设备';

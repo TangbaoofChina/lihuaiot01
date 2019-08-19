@@ -36,6 +36,8 @@ public class RealDeviceListController {
     private SewageC214DMService sewageC214DMService;
     @Autowired
     private ScaleC01DeviceMessageService scaleC01DeviceMessageService;
+    @Autowired
+    private WeighC312DMService weighC312DMService;
 
     /*************************Environment 种禽环控*********************************************/
     @RequestMapping(value = "selectEC01ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
@@ -342,6 +344,8 @@ public class RealDeviceListController {
         }
         return sewageC214DMList;
     }
+
+
     /*************************Scale 自动称重*********************************************/
 
 
@@ -419,4 +423,79 @@ public class RealDeviceListController {
         return scaleC01DeviceMessageList;
     }
 
+    /*************************Weigh 种鸡散装料塔称重1.0 312*********************************************/
+
+    @RequestMapping(value = "selectWeighC312ByORGId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectWeighC312ByORGId(String sORGId) throws Exception {
+        String jsonString = "[]";
+        if (sORGId != null) {
+            List<WeighC312DM> weighC312DMList = selectWeighC312DMList(sORGId);
+            if (weighC312DMList.size() > 0)
+                jsonString = JSON.toJSONString(weighC312DMList);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/weighC312DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String weighC312DeviceHead() throws Exception {
+        List<MydataTableColumn> weighC312HeadColumnList = weighC312DMService.selectWeighC312DeviceHead();
+        String jsonString = JSON.toJSONString(weighC312HeadColumnList);
+        return jsonString;
+    }
+
+    @RequestMapping(value = "selectWeighC312ByDeviceId", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectWeighC312ByDeviceId(String sDeviceId) throws Exception {
+        String jsonString = "[]";
+        if (sDeviceId != null) {
+            WeighC312DM weighC312DM = weighC312DMService.selectWeighC312ByDeviceId(sDeviceId);
+            if (weighC312DM != null)
+                jsonString = JSON.toJSONString(weighC312DM);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "exportWeighC312DeviceList", method = RequestMethod.GET)
+    public void exportWeighC312DeviceList(String sORGId,
+                                           HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception {
+        String fileName = "realweighc312devicelist.xlsx";
+        List<WeighC312DM> weighC312DMList = null;
+        if (sORGId != null) {
+            weighC312DMList = selectWeighC312DMList(sORGId);
+        }
+        File file = weighC312DMService.exportStorage(weighC312DMList);
+        if (file != null) {
+            // 设置响应头
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[8192];
+
+            int len;
+            while ((len = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                outputStream.write(buffer, 0, len);
+                outputStream.flush();
+            }
+
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+    private List<WeighC312DM> selectWeighC312DMList(String sORGId) throws Exception {
+        List<WeighC312DM> weighC312DMList = new ArrayList<WeighC312DM>();
+        //获取用户角色
+        Subject currentSubject = SecurityUtils.getSubject();
+        Session session = currentSubject.getSession();
+        Userlogin userlogin = (Userlogin) session.getAttribute("userInfo");
+        if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
+            weighC312DMList = weighC312DMService.selectWeighC312ByORGId(sORGId);
+        } else {
+            weighC312DMList = weighC312DMService.selectWeighC312ByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+        }
+        return weighC312DMList;
+    }
 }

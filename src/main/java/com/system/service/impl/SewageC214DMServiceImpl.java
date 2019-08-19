@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class SewageC214DMServiceImpl implements SewageC214DMService {
     @Autowired
-    private SewageC214DMMapper SewageC214DMMapper;
+    private SewageC214DMMapper sewageC214DMMapper;
     @Autowired
     private EJConvertor ejConvertor;
     @Autowired
@@ -33,7 +33,7 @@ public class SewageC214DMServiceImpl implements SewageC214DMService {
 
     @Override
     public List<SewageC214DM> selectSewageC214ByORGId(String ORGId) throws Exception {
-        List<SewageC214DM> SewageC214DMList = SewageC214DMMapper.selectSewageC214ByORGId(ORGId);
+        List<SewageC214DM> SewageC214DMList = sewageC214DMMapper.selectSewageC214ByORGId(ORGId);
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("214");
         SewageC214DMList = judgeDeviceOnlineState(SewageC214DMList,deviceType.getDevTypeOffline());
         return SewageC214DMList;
@@ -42,30 +42,30 @@ public class SewageC214DMServiceImpl implements SewageC214DMService {
     @Override
     public List<SewageC214DM> selectSewageC214ByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
-        List<SewageC214DM> SewageC214DMList = SewageC214DMMapper.selectSewageC214ByORGIdAndRoleId(ORGId,roleIds);
+        List<SewageC214DM> sewageC214DMList = sewageC214DMMapper.selectSewageC214ByORGIdAndRoleId(ORGId,roleIds);
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("214");
-        SewageC214DMList = judgeDeviceOnlineState(SewageC214DMList,deviceType.getDevTypeOffline());
-        return SewageC214DMList;
+        sewageC214DMList = judgeDeviceOnlineState(sewageC214DMList,deviceType.getDevTypeOffline());
+        return sewageC214DMList;
     }
 
     @Override
     public SewageC214DM selectSewageC214ByDeviceId(String sDeviceId) throws Exception {
-        SewageC214DM SewageC214DM = SewageC214DMMapper.selectSewageC214ByDeviceId(sDeviceId);
+        SewageC214DM sewageC214DM = sewageC214DMMapper.selectSewageC214ByDeviceId(sDeviceId);
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("214");
-        judgeOneDeviceOnlineState(SewageC214DM,deviceType.getDevTypeOffline());
-        return SewageC214DM;
+        judgeOneDeviceOnlineState(sewageC214DM,deviceType.getDevTypeOffline());
+        return sewageC214DM;
     }
 
     @Override
     public List<SewageC214DM> selectSewageC214ByDevNumAndDate(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
-        return SewageC214DMMapper.selectSewageC214ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
+        return sewageC214DMMapper.selectSewageC214ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
     }
 
     @Override
     public DataTablePageing selectSewageC214ByDeviceIdAndDateAndPaging(Integer pageNumber, Integer pageSize, String sDeviceId, String sStartDate, String sEndDate) throws Exception {
-        List<SewageC214DM> SewageC214DMList = new ArrayList<SewageC214DM>();
+        List<SewageC214DM> sewageC214DMList = new ArrayList<SewageC214DM>();
         DataTablePageing dataTablePageing = new DataTablePageing();
-        List<SewageC214DM> ewagec214DeviceMessageListAll = SewageC214DMMapper.selectSewageC214ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
+        List<SewageC214DM> ewagec214DeviceMessageListAll = sewageC214DMMapper.selectSewageC214ByDeviceIdAndDate(sDeviceId,sStartDate,sEndDate);
         if (ewagec214DeviceMessageListAll.size() > 0)
         {
             Integer bigIndex = 0;
@@ -74,10 +74,10 @@ public class SewageC214DMServiceImpl implements SewageC214DMService {
             bigIndex = smallIndex + pageSize;
             if(bigIndex > ewagec214DeviceMessageListAll.size())
                 bigIndex = ewagec214DeviceMessageListAll.size();
-            SewageC214DMList.addAll(ewagec214DeviceMessageListAll.subList(smallIndex,bigIndex));
+            sewageC214DMList.addAll(ewagec214DeviceMessageListAll.subList(smallIndex,bigIndex));
         }
         //String str= JSON.toJSON(sewageC01DeviceMessageList).toString();
-        String sReturnJson = JSON.toJSONString(SewageC214DMList);
+        String sReturnJson = JSON.toJSONString(sewageC214DMList);
         dataTablePageing.setTotal(ewagec214DeviceMessageListAll.size());
         dataTablePageing.setsReturnJson(sReturnJson);
         //return dataDetailList;
@@ -86,13 +86,13 @@ public class SewageC214DMServiceImpl implements SewageC214DMService {
 
     @Override
     public List<BaseDeviceMessage> selectPhoneHisSewageC214ByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
-        return SewageC214DMMapper.selectPhoneHisSewageC214ByDateAndId(sDeviceId,sStartDate,sEndDate);
+        return sewageC214DMMapper.selectPhoneHisSewageC214ByDateAndId(sDeviceId,sStartDate,sEndDate);
     }
 
     @Override
     public List<MydataTableColumn> selectSewageC214DeviceHead() throws Exception {
-        SewageC214DM SewageC214DM = new SewageC214DM();
-        List<MydataTableColumn> mydataTableColumnList = SewageC214DM.getDeviceHead();
+        SewageC214DM sewageC214DM = new SewageC214DM();
+        List<MydataTableColumn> mydataTableColumnList = sewageC214DM.getDeviceHead();
         return mydataTableColumnList;
     }
 
