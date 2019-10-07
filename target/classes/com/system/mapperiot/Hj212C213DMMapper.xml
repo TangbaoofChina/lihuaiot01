@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.Hj212C213DMMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.Hj212C213DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+        <result column="QN" jdbcType="VARCHAR" property="qn"/>
+        <result column="DATATIME" jdbcType="VARCHAR" property="datatime"/>
+        <result column="FLOWRATE_VALUE" jdbcType="VARCHAR" property="flowrate_value"/>
+        <result column="FLOWRATE_FLAG" jdbcType="VARCHAR" property="flowrate_flag"/>
+        <result column="FLOWRATE_SAMPLETIME" jdbcType="VARCHAR" property="flowrate_sampletime"/>
+        <result column="PH_VALUE" jdbcType="VARCHAR" property="ph_value"/>
+        <result column="PH_FLAG" jdbcType="VARCHAR" property="ph_flag"/>
+        <result column="PH_SAMPLETIME" jdbcType="VARCHAR" property="ph_sampletime"/>
+        <result column="COD_VALUE" jdbcType="VARCHAR" property="cod_value"/>
+        <result column="COD_FLAG" jdbcType="VARCHAR" property="cod_flag"/>
+        <result column="COD_SAMPLETIME" jdbcType="VARCHAR" property="cod_sampletime"/>
+        <result column="NH3N_VALUE" jdbcType="VARCHAR" property="nh3n_value"/>
+        <result column="NH3N_FLAG" jdbcType="VARCHAR" property="nh3n_flag"/>
+        <result column="NH3N_SAMPLETIME" jdbcType="VARCHAR" property="nh3n_sampletime"/>
+        <result column="TP_VALUE" jdbcType="VARCHAR" property="tp_value"/>
+        <result column="TP_FLAG" jdbcType="VARCHAR" property="tp_flag"/>
+        <result column="TP_SAMPLETIME" jdbcType="VARCHAR" property="tp_sampletime"/>
+        <result column="TN_VALUE" jdbcType="VARCHAR" property="tn_value"/>
+        <result column="TN_FLAG" jdbcType="VARCHAR" property="tn_flag"/>
+        <result column="TN_SAMPLETIME" jdbcType="VARCHAR" property="tn_sampletime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.Hj212C213DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+        <result column="QN" jdbcType="VARCHAR" property="qn"/>
+        <result column="CN" jdbcType="VARCHAR" property="cn"/>
+        <result column="DATATIME" jdbcType="VARCHAR" property="datatime"/>
+        <result column="FLOWRATE_VALUE" jdbcType="VARCHAR" property="flowrate_value"/>
+        <result column="FLOWRATE_FLAG" jdbcType="VARCHAR" property="flowrate_flag"/>
+        <result column="FLOWRATE_SAMPLETIME" jdbcType="VARCHAR" property="flowrate_sampletime"/>
+        <result column="PH_VALUE" jdbcType="VARCHAR" property="ph_value"/>
+        <result column="PH_FLAG" jdbcType="VARCHAR" property="ph_flag"/>
+        <result column="PH_SAMPLETIME" jdbcType="VARCHAR" property="ph_sampletime"/>
+        <result column="COD_VALUE" jdbcType="VARCHAR" property="cod_value"/>
+        <result column="COD_FLAG" jdbcType="VARCHAR" property="cod_flag"/>
+        <result column="COD_SAMPLETIME" jdbcType="VARCHAR" property="cod_sampletime"/>
+        <result column="NH3N_VALUE" jdbcType="VARCHAR" property="nh3n_value"/>
+        <result column="NH3N_FLAG" jdbcType="VARCHAR" property="nh3n_flag"/>
+        <result column="NH3N_SAMPLETIME" jdbcType="VARCHAR" property="nh3n_sampletime"/>
+        <result column="TP_VALUE" jdbcType="VARCHAR" property="tp_value"/>
+        <result column="TP_FLAG" jdbcType="VARCHAR" property="tp_flag"/>
+        <result column="TP_SAMPLETIME" jdbcType="VARCHAR" property="tp_sampletime"/>
+        <result column="TN_VALUE" jdbcType="VARCHAR" property="tn_value"/>
+        <result column="TN_FLAG" jdbcType="VARCHAR" property="tn_flag"/>
+        <result column="TN_SAMPLETIME" jdbcType="VARCHAR" property="tn_sampletime"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
+    <select id="selectHj212C213ByORGId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_HJ212_213 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_nodeid = #{ORGId}
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectHj212C213ByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT <include refid="BaseResult_Column_List"/>
+        from IOT_HJ212_213 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectHj212C213ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_HJ212_213 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+    <select id="selectHj212C213ByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        and b.CN = '2011'
+        AND b.SENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.SENDDATE desc
+    </select>
+    <select id="selectHj212C213ByDeviceIdsAndDateTime" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and b.CN = '2011'
+        AND (to_date(b.datatime,'yyyymmddhh24miss') &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(b.datatime,'yyyymmddhh24miss') &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'))
+        order by to_date(b.datatime,'yyyymmddhh24miss') asc
+    </select>
+    <select id="selectHj212C213ByDeviceIdsAndCODSampleTime" resultMap="BaseHisResultMap">
+        select
+        distinct b.cod_sampletime,b.cod_value,b.cod_flag,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and b.CN = '2011'
+        AND (to_date(b.Cod_Sampletime,'yyyymmddhh24miss') &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(b.Cod_Sampletime,'yyyymmddhh24miss') &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'))
+        order by to_date(b.Cod_Sampletime,'yyyymmddhh24miss') asc
+    </select>
+    <select id="selectHj212C213ByDeviceIdsAndNH3NSampleTime" resultMap="BaseHisResultMap">
+        select
+        distinct b.nh3n_sampletime,b.nh3n_value,b.nh3n_flag,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and b.CN = '2011'
+        AND (to_date(b.nh3n_sampletime,'yyyymmddhh24miss') &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(b.nh3n_sampletime,'yyyymmddhh24miss') &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'))
+        order by to_date(b.nh3n_sampletime,'yyyymmddhh24miss') asc
+    </select>
+    <select id="selectHj212C213ByDeviceIdsAndTPSampleTime" resultMap="BaseHisResultMap">
+        select
+        distinct b.tp_sampletime,b.tp_value,b.tp_flag,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and b.CN = '2011'
+        AND (to_date(b.tp_sampletime,'yyyymmddhh24miss') &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(b.tp_sampletime,'yyyymmddhh24miss') &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'))
+        order by to_date(b.tp_sampletime,'yyyymmddhh24miss') asc
+    </select>
+    <select id="selectHj212C213ByDeviceIdsAndTNSampleTime" resultMap="BaseHisResultMap">
+        select
+        distinct b.tn_sampletime,b.tn_value,b.tn_flag,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum
+        from IOT_DEVICEINFO a,IOT_HISHJ212_213 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and b.CN = '2011'
+        AND (to_date(b.tn_sampletime,'yyyymmddhh24miss') &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(b.tn_sampletime,'yyyymmddhh24miss') &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'))
+        order by to_date(b.tn_sampletime,'yyyymmddhh24miss') asc
+    </select>
+</mapper>

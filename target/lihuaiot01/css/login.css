@@ -1,0 +1,14 @@
+body {
+	background: url(../../lihuaiot01/images/c.png);
+	/*background: lightskyblue;*/
+	background-size: 100%;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+
+	margin-top:150px;
+}
+
+#checkCodeImg:hover{
+	cursor: pointer;
+}

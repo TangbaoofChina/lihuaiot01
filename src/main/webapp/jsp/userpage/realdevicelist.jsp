@@ -1421,7 +1421,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">设备运行累计时长</span>
+                    <span style="font-weight: bold">设备运行累计时长(时)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC212border">
@@ -1765,7 +1765,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">工艺流程设定时间</span>
+                    <span style="font-weight: bold">工艺流程设定时间(分钟)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC214border">
@@ -2230,7 +2230,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">设备运行累计时长</span>
+                    <span style="font-weight: bold">设备运行累计时长(时)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC212border">

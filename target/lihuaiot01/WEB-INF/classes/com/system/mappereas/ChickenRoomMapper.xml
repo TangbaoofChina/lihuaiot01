@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mappereas.ChickenRoomMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Eas.ChickenRoom">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="fid" jdbcType="VARCHAR" property="fId"/>
+        <result column="fname_l2" jdbcType="VARCHAR" property="fName"/>
+        <result column="fdisplayname_l2" jdbcType="VARCHAR" property="fDisplayName"/>
+    </resultMap>
+    <select id="selectAllChickenRoom" resultMap="BaseResultMap">
+        select s.fid,s.fname_l2,org.fdisplayname_l2 from T_KD_BrdrShed s
+        left join t_org_storage org
+        on s.forgunitwensid= ORG.FID
+        ORDER by fname_l2 asc
+    </select>
+
+</mapper>

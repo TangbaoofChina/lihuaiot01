@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.PeopleRoleInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.PeopleRoleInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="userrole_userid" jdbcType="VARCHAR" property="userId"/>
+        <result column="userrole_username" jdbcType="VARCHAR" property="userName"/>
+        <result column="USERROLE_MSGSEND" jdbcType="BOOLEAN" property="userMsgPush"/>
+        <result column="userrole_roleid" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    </resultMap>
+    <select id="selectPeopleRoleInfo" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.USERROLE_MSGSEND,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByRoleAdmin" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.USERROLE_MSGSEND,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and b.ROLE_BELONG = #{roleAdmin}
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByPeopleId" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.USERROLE_MSGSEND,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_userid = #{userId}
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.USERROLE_MSGSEND,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_roleid = #{roleId}
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByUserIdAndRoleId" resultMap="BaseResultMap">
+        select a.userrole_userid,a.userrole_username,a.USERROLE_MSGSEND,a.userrole_roleid,b.role_name
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_userid = #{userId,jdbcType=VARCHAR}
+        and a.userrole_roleid = #{roleId,jdbcType=VARCHAR}
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoDistinct" resultMap="BaseResultMap">
+        select distinct a.userrole_userid,a.userrole_username
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        order by a.userrole_username ASC
+    </select>
+    <select id="selectPeopleRoleInfoByPeopleIdDistinct" parameterType="String" resultMap="BaseResultMap">
+        select distinct a.userrole_userid,a.userrole_username
+        from iot_userrole a,iot_role b
+        where a.userrole_roleid=b.role_id
+        and a.userrole_userid = #{userId}
+        order by a.userrole_username ASC
+    </select>
+    <insert id="insertPeopleRoleInfo" parameterType="java.util.List">
+        INSERT INTO iot_userrole(USERROLE_USERID,USERROLE_USERNAME,USERROLE_ROLEID,USERROLE_MSGSEND)
+        (
+        <foreach collection="peopleRoleInfoList" item="item" index="index" open="(" close=")" separator="union all">
+            SELECT #{item.userId,jdbcType=VARCHAR} as USERROLE_USERID, #{item.userName,jdbcType=VARCHAR} as
+            USERROLE_USERNAME, #{item.roleId,jdbcType=VARCHAR} as USERROLE_ROLEID, #{item.userMsgPush,jdbcType=BOOLEAN}
+            as USERROLE_MSGSEND FROM DUAL
+        </foreach>
+        )
+    </insert>
+    <insert id="insertOnePeopleRoleInfo" parameterType="com.system.po.PeopleRoleInfo">
+        INSERT INTO iot_userrole(USERROLE_USERID,USERROLE_USERNAME,USERROLE_ROLEID,USERROLE_MSGSEND)
+        VALUES (#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
+        #{roleId,jdbcType=VARCHAR},#{userMsgPush,jdbcType=BOOLEAN})
+    </insert>
+    <update id="updatePeopleRoleInfo" parameterType="com.system.po.PeopleRoleInfo">
+        update iot_userrole
+        SET  USERROLE_USERNAME = #{userName,jdbcType=VARCHAR},
+              USERROLE_MSGSEND = #{userMsgPush,jdbcType=BOOLEAN}
+        where USERROLE_USERID = #{userId,jdbcType=VARCHAR}
+        and USERROLE_ROLEID = #{roleId,jdbcType=VARCHAR}
+    </update>
+    <delete id="deletePeopleRoleInfoByPeopleId" parameterType="String">
+        DELETE from iot_userrole
+        WHERE USERROLE_USERID = #{userId}
+    </delete>
+    <delete id="deletePeopleRoleInfoByPeopleIdAndRoleId" parameterType="String">
+        DELETE from iot_userrole
+        WHERE USERROLE_USERID = #{userId}
+        AND USERROLE_ROLEID = #{roleId}
+    </delete>
+</mapper>

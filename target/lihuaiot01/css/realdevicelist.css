@@ -1,0 +1,141 @@
+#main{
+    position: relative;
+    min-height: 400px;
+    background: url("/lihuaiot01/images/onedevice/bg.png") no-repeat;
+    right:-25px;
+}
+.wetCurtainMotorState{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    text-align: center;
+}
+.wetCurtainWPState{
+    position: absolute;
+    bottom: -75px;
+    left: 135px;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    text-align: center;
+}
+.boilerState{
+    position: absolute;
+    bottom: -75px;
+    left: 248px;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    text-align: center;
+}
+.fanState{
+    position: absolute;
+    top: 76px;
+    right: 81px;
+    width: 80px;
+    min-height: 80px;
+    margin-top: -40px;
+    text-align: center;
+}
+.circleClose{
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+    background: red;
+    margin-left: 18px;
+    color: #fff;
+}
+.circleOpen{
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+    margin-left: 18px;
+    background: green;
+    color: #fff;
+}
+
+.leftWrap{
+    position: absolute;
+    top: 75px;
+    left: 120px;
+    width: 16%;
+    border: 2px dashed #999;
+}
+.mainWrap{
+    position: absolute;
+    top: 50px;
+    left: 294px;
+    width: 16%;
+    border: 2px dashed #999;
+}
+.rightWrap{
+    position: absolute;
+    top: 75px;
+    right: 225px;
+    width: 16%;
+    border: 2px dashed #999;
+    padding-bottom: 10px;
+}
+.temp{
+    padding-top: 12px;
+}
+.temp span{
+    position: absolute;
+    margin-top: -10px;
+}
+.temp img{
+    position: absolute;
+    right: 20px;
+    margin-top: -12px;
+}
+.temp>div{
+    margin-bottom: 30px;
+}
+.temp p{
+    font-size: 16px;
+    font-weight: 600;
+}
+.blind{
+    position: absolute;
+    width: 10px;
+    height: 100px;
+    background: #999;
+    top: 50%;
+    left: 83px;
+    margin-top: -50px;
+}
+
+.rectangleClose{
+    width: 20px;
+    height: 20px;
+    background: pink;
+}
+.rectangleOpen{
+    width: 20px;
+    height: 20px;
+    background: lightgreen;
+}
+.rectangle02Close{
+    width: 40px;
+    height: 20px;
+    background: pink;
+}
+.rectangle02Open{
+    width: 40px;
+    height: 20px;
+    background: lightgreen;
+}
+.SewageC01border{
+    border:1px dashed #999
+}
+.SewageC212border{
+    border:1px dashed #999
+}
+.SewageC214border{
+    border:1px dashed #999
+}

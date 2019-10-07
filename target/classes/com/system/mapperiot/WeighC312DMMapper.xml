@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.WeighC312DMMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.WeighC312DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="NETW" jdbcType="FLOAT" property="netW"/>
+        <result column="GROSSW" jdbcType="FLOAT" property="grossW"/>
+        <result column="INCREASE" jdbcType="INTEGER" property="increase"/>
+        <result column="DECREASE" jdbcType="INTEGER" property="decrease"/>
+        <result column="INNETW" jdbcType="FLOAT" property="inNetW"/>
+        <result column="INSTARTDATE" jdbcType="TIMESTAMP" property="inStartDate"/>
+        <result column="INENDDATE" jdbcType="TIMESTAMP" property="inEndDate"/>
+        <result column="DENETW" jdbcType="FLOAT" property="deNetW"/>
+        <result column="DESTARTDATE" jdbcType="TIMESTAMP" property="deStartDate"/>
+        <result column="DEENDDATE" jdbcType="TIMESTAMP" property="deEndDate"/>
+
+        <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.WeighC312DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="NETW" jdbcType="FLOAT" property="netW"/>
+        <result column="GROSSW" jdbcType="FLOAT" property="grossW"/>
+        <result column="INCREASE" jdbcType="INTEGER" property="increase"/>
+        <result column="DECREASE" jdbcType="INTEGER" property="decrease"/>
+        <result column="INNETW" jdbcType="FLOAT" property="inNetW"/>
+        <result column="INSTARTDATE" jdbcType="TIMESTAMP" property="inStartDate"/>
+        <result column="INENDDATE" jdbcType="TIMESTAMP" property="inEndDate"/>
+        <result column="DENETW" jdbcType="FLOAT" property="deNetW"/>
+        <result column="DESTARTDATE" jdbcType="TIMESTAMP" property="deStartDate"/>
+        <result column="DEENDDATE" jdbcType="TIMESTAMP" property="deEndDate"/>
+
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.WeighC312DMHis">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="NETW" jdbcType="FLOAT" property="netW"/>
+        <result column="GROSSW" jdbcType="FLOAT" property="grossW"/>
+        <result column="INCREASE" jdbcType="INTEGER" property="increase"/>
+        <result column="DECREASE" jdbcType="INTEGER" property="decrease"/>
+        <result column="INNETW" jdbcType="FLOAT" property="inNetW"/>
+        <result column="INSTARTDATE" jdbcType="TIMESTAMP" property="inStartDate"/>
+        <result column="INENDDATE" jdbcType="TIMESTAMP" property="inEndDate"/>
+        <result column="DENETW" jdbcType="FLOAT" property="deNetW"/>
+        <result column="DESTARTDATE" jdbcType="TIMESTAMP" property="deStartDate"/>
+        <result column="DEENDDATE" jdbcType="TIMESTAMP" property="deEndDate"/>
+
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
+    <select id="selectWeighC312ByORGId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_WEIGH_312 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_nodeid = #{ORGId}
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectWeighC312ByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT <include refid="BaseResult_Column_List"/>
+        from IOT_WEIGH_312 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectWeighC312ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_WEIGH_312 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+    <select id="selectWeighC312ByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISWEIGH_312 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.SENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.SENDDATE ASC
+    </select>
+    <select id="selectPhoneHisInWeighC312ByDateAndId" resultMap="BasePhoneHisResultMap">
+        select a.di_name,a.di_serialnum,b.*
+        from (select t.*,
+        row_number() over(partition by t.instartdate order by t.inenddate desc) rn
+        from iot_hisweigh_312 t
+        where t.senddate &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and  t.senddate  &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum=b.device_serialnum
+        order by instartdate desc
+    </select>
+    <select id="selectPhoneHisDeWeighC312ByDateAndId" resultMap="BasePhoneHisResultMap">
+        select a.di_name,a.di_serialnum,b.*
+        from (select t.*,
+        row_number() over(partition by t.destartdate order by t.deenddate desc) rn
+        from iot_hisweigh_312 t
+        where t.senddate &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and  t.senddate  &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum=b.device_serialnum
+        order by instartdate desc
+    </select>
+</mapper>

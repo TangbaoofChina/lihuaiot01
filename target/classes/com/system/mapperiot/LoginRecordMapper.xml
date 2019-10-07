@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.LoginRecordMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.LoginRecordInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="LOGIN_USERID" jdbcType="VARCHAR" property="userid"/>
+        <result column="LOGIN_USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="LOGIN_TYPE" jdbcType="VARCHAR" property="loginType"/>
+        <result column="LOGIN_DATE" jdbcType="VARCHAR" property="loginDate"/>
+        <result column="LOGIN_IP" jdbcType="VARCHAR" property="loginIp"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        LOGINID,LOGIN_USERID,LOGIN_USERNAME,LOGIN_TYPE,LOGIN_DATE,LOGIN_IP
+    </sql>
+    <insert id="insertLoginRecord">
+        <selectKey keyProperty="sid" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        INSERT INTO iot_loginrecord(<include refid="Base_Column_List"/>)
+        VALUES (#{sid,jdbcType=VARCHAR},#{userlogin.userid,jdbcType=VARCHAR},
+        #{userlogin.username,jdbcType=VARCHAR},#{loginType,jdbcType=VARCHAR},
+        #{loginDate,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR})
+    </insert>
+    <select id="selectLoginByUserIdsAndDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from iot_loginrecord
+        WHERE LOGIN_USERID in
+        <foreach collection="userIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND LOGIN_DATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by LOGIN_DATE ASC
+    </select>
+</mapper>

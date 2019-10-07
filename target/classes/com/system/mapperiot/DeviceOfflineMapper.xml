@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.DeviceOfflineMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceAlarmInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DROFFLINE_ID" jdbcType="VARCHAR" property="dAlarmId"/>
+        <result column="DROFFLINE_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DROFFLINE_DEVNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+        <result column="DROFFLINE_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
+        <result column="DROFFLINE_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
+        <result column="DROFFLINE_DEVRECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.DeviceAlarmInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DHOFFLINE_ID" jdbcType="VARCHAR" property="dAlarmId"/>
+        <result column="DHOFFLINE_DEVNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DHOFFLINE_DEVNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="dOrgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="dOrgName"/>
+        <result column="DHOFFLINE_CODE" jdbcType="VARCHAR" property="dAlarmCode"/>
+        <result column="DHOFFLINE_DESCRIBE" jdbcType="VARCHAR" property="dAlarmInfo"/>
+        <result column="DHOFFLINE_DEVRECEIVETIME" jdbcType="VARCHAR" property="dAlarmTime"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="dAlarmType"/>
+    </resultMap>
+    <resultMap id="HisOfflineRate" type="com.system.po.DeviceOfflineRate">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <result column="T" jdbcType="VARCHAR" property="offlineTimes"/>
+        <result column="DHOFFLINE_DEVNUM" jdbcType="VARCHAR" property="serialNum"/>
+        <result column="DEVNAME" jdbcType="VARCHAR" property="name"/>
+        <result column="DEVORGID" jdbcType="VARCHAR" property="orgId"/>
+        <result column="DEVORGNAME" jdbcType="VARCHAR" property="orgName"/>
+        <result column="ALARM_TYPE" jdbcType="VARCHAR" property="alarmType"/>
+    </resultMap>
+    <select id="selectOfflineInfoCount" resultType="Integer">
+        select count(a.droffline_devnum) from iot_realoffline a,iot_deviceinfo b
+        where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+    </select>
+    <select id="selectOfflineInfoCountByRoleId" resultType="Integer">
+        select count(DISTINCT a.droffline_devnum)
+        from iot_realoffline a,iot_devicerole b,iot_deviceinfo c
+        where a.droffline_devnum = b.devrole_devnum
+        and a.droffline_devnum = c.di_serialnum
+        and (c.di_deactive &lt; 1 or c.di_deactive is null)
+        and b.devrole_roleid IN
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectOfflineInfo" resultMap="BaseResultMap">
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c
+        where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id
+        order by a.droffline_devreceivetime desc
+    </select>
+    <select id="selectOfflineInfoByRoleId" resultMap="BaseResultMap">
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_realoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
+        where a.droffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id
+        and d.devrole_devnum = a.droffline_devnum
+        and d.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.droffline_devreceivetime desc
+    </select>
+    <select id="selectHisOfflineInfoByDate" resultMap="BaseHisResultMap">
+        select a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c
+        where a.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id
+        AND a.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by a.dhoffline_devreceivetime desc
+    </select>
+    <select id="selectHisOfflineInfoByDateAndRoleId" resultMap="BaseHisResultMap">
+        select DISTINCT a.*, decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE
+        from iot_hisoffline a,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
+        where a.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id
+        and d.devrole_devnum = a.dhoffline_devnum
+        AND a.dhoffline_devreceivetime BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and d.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.dhoffline_devreceivetime desc
+    </select>
+    <select id="selectHisOfflineTopN" resultMap="HisOfflineRate">
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
+        (select count(a.dhoffline_devnum) t,a.dhoffline_devnum
+        from iot_hisoffline a
+        where a.dhoffline_describe='离线'
+        AND a.dhoffline_devreceivetime
+        BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        group by a.dhoffline_devnum order by t desc) m,iot_deviceinfo b,iot_orgtreenode c
+        where m.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id and Rownum &lt; #{topN,jdbcType=INTEGER}
+        order by m.T desc
+    </select>
+    <select id="selectHisOfflineTopNByRoleId" resultMap="HisOfflineRate">
+        select m.*,decode(b.eas_fname,null,b.di_name,b.eas_fname) as DEVNAME,c.node_id as DEVORGID,c.node_name as DEVORGNAME,'离线' ALARM_TYPE from
+        (select count(a.dhoffline_devnum) t,a.dhoffline_devnum
+        from iot_hisoffline a
+        where a.dhoffline_describe='离线'
+        AND a.dhoffline_devreceivetime
+        BETWEEN to_date(#{sStartDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{sEndDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        group by a.dhoffline_devnum order by t desc) m,iot_deviceinfo b,iot_orgtreenode c,iot_devicerole d
+        where m.dhoffline_devnum = b.di_serialnum
+        and (b.di_deactive &lt; 1 or b.di_deactive is null)
+        and b.di_nodeid = c.node_id
+        and d.devrole_devnum = m.dhoffline_devnum
+        and d.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+        and Rownum &lt; #{topN,jdbcType=INTEGER}
+        order by m.T desc
+    </select>
+</mapper>

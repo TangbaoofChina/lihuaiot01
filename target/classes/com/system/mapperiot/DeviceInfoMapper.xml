@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.DeviceInfoMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.DeviceInfo">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
+        <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
+        <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
+        <result column="DEVTYPE_SERIALNUM" jdbcType="VARCHAR" property="dDevType"/>
+        <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
+        <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
+        <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
+        <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
+        <result column="DI_DEACTIVE" jdbcType="INTEGER" property="dDeactive"/>
+    </resultMap>
+    <resultMap id="BaseResultAndNodeMap" type="com.system.po.DeviceInfoAndNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="DI_IP" jdbcType="VARCHAR" property="dIp"/>
+        <result column="DI_PORT" jdbcType="VARCHAR" property="dPort"/>
+        <result column="DI_PROTOCOL" jdbcType="VARCHAR" property="dProtocol"/>
+        <result column="DI_NODEID" jdbcType="VARCHAR" property="dNodeId"/>
+        <result column="DEVTYPE_SERIALNUM" jdbcType="VARCHAR" property="dDevType"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="dNodeName"/>
+        <result column="DI_SENDDATE" jdbcType="VARCHAR" property="dSendTime"/>
+        <result column="DI_RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+        <result column="EAS_FID" jdbcType="VARCHAR" property="dEasFId"/>
+        <result column="EAS_FNAME" jdbcType="VARCHAR" property="dEasFName"/>
+        <result column="EAS_FDISPLAYNAME" jdbcType="VARCHAR" property="dEasFDisplayName"/>
+        <result column="DI_DEACTIVE" jdbcType="INTEGER" property="dDeactive"/>
+    </resultMap>
+    <resultMap id="BaseResultNodeMap" type="com.system.po.ORGTreeNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="NODE_ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="NODE_PID" jdbcType="VARCHAR" property="pId"/>
+    </resultMap>
+    <resultMap id="BaseResultBstMap" type="com.system.po.BootStrapTreeNode">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="NODE_ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NODE_NAME" jdbcType="VARCHAR" property="text"/>
+        <result column="NODE_PID" jdbcType="VARCHAR" property="pId"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        DI_SERIALNUM,decode(eas_fname,null,di_name,eas_fname) as di_name,DI_IP,DI_PORT,DI_PROTOCOL,
+        DEVTYPE_SERIALNUM,DI_SENDDATE,DI_RECEIVEDATE,
+        EAS_FID,EAS_FNAME,EAS_FDISPLAYNAME,DI_DEACTIVE
+    </sql>
+    <sql id="BaseResultA_Column_List">
+        a.DI_SERIALNUM,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.DI_IP,a.DI_PORT,a.DI_PROTOCOL,
+        a.DEVTYPE_SERIALNUM,a.DI_SENDDATE,a.DI_RECEIVEDATE,
+        a.EAS_FID,a.EAS_FNAME,a.EAS_FDISPLAYNAME,a.DI_DEACTIVE
+    </sql>
+    <sql id="BaseResultAndNode_Column_List">
+        a.DI_SERIALNUM,decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.DI_IP,a.DI_PORT,a.DI_PROTOCOL,
+        a.DEVTYPE_SERIALNUM,a.DI_SENDDATE,a.DI_RECEIVEDATE,
+        a.EAS_FID,a.EAS_FNAME,a.EAS_FDISPLAYNAME,a.DI_DEACTIVE,b.node_name
+    </sql>
+    <sql id="BaseResultNode_Column_List">
+        decode(t.eas_fname,null,t.di_name,t.eas_fname) as NODE_NAME,t.di_serialnum as NODE_ID,t.di_nodeid as NODE_PID
+    </sql>
+    <select id="selectDeviceByORGId" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseResult_Column_List"/>
+        from IOT_DEVICEINFO
+        WHERE di_nodeId = #{orgId}
+        and (DI_DEACTIVE &lt; 1 or DI_DEACTIVE is null)
+        order by DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceByORGIdBackstage" resultMap="BaseResultMap">
+        select *
+        from IOT_DEVICEINFO
+        WHERE di_nodeId = #{orgId}
+        order by DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT
+        <include refid="BaseResultA_Column_List"/>
+        from IOT_DEVICEINFO a,iot_devicerole c
+        where c.devrole_devnum = a.di_serialnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
+        AND a.di_nodeId = #{orgId}
+        and c.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceAndNodeByORGId" parameterType="String" resultMap="BaseResultAndNodeMap">
+        select
+        <include refid="BaseResultAndNode_Column_List"/>
+        from IOT_DEVICEINFO a,iot_orgtreenode b
+        where a.di_nodeid=b.node_id
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
+        AND a.di_nodeId = #{orgId}
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceAndNodeByRoleId" parameterType="String" resultMap="BaseResultAndNodeMap">
+        select DISTINCT
+        <include refid="BaseResultAndNode_Column_List"/>
+        from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
+        where a.di_nodeid=b.node_id
+        and a.di_serialnum = c.devrole_devnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
+        AND c.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectAllDeviceAndNodeInfo" parameterType="String" resultMap="BaseResultAndNodeMap">
+        select DISTINCT
+        <include refid="BaseResultAndNode_Column_List"/>
+        from IOT_DEVICEINFO a,iot_orgtreenode b,iot_devicerole c
+        where a.di_nodeid=b.node_id
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
+        and a.di_serialnum = c.devrole_devnum
+        order by a.DI_SERIALNUM asc
+    </select>
+    <select id="selectDeviceInfoByIDs" resultMap="BaseResultMap">
+        select
+        <include refid="BaseResult_Column_List"/>
+        from IOT_DEVICEINFO
+        where DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and (IOT_DEVICEINFO.DI_DEACTIVE &lt; 1 or IOT_DEVICEINFO.DI_DEACTIVE is null)
+    </select>
+    <select id="selectDeviceInfoByID" parameterType="string" resultMap="BaseResultMap">
+        select *
+        from IOT_DEVICEINFO
+        where DI_SERIALNUM = #{deviceId}
+    </select>
+    <select id="selectDeviceInfo" resultMap="BaseResultNodeMap">
+        select <include refid="BaseResultNode_Column_List"/>
+        from IOT_DEVICEINFO t
+        where (t.DI_DEACTIVE &lt; 1 or t.DI_DEACTIVE is null)
+        order by t.di_serialnum
+    </select>
+    <select id="selectDeviceByOrgId" resultMap="BaseResultNodeMap">
+        select <include refid="BaseResultNode_Column_List"/>
+        from IOT_DEVICEINFO t
+        WHERE di_nodeId = #{orgId}
+        and (t.DI_DEACTIVE &lt; 1 or t.DI_DEACTIVE is null)
+        order by t.di_serialnum
+    </select>
+
+    <select id="selectBstDeviceByOrgId" resultMap="BaseResultBstMap">
+        select <include refid="BaseResultNode_Column_List"/>
+        from IOT_DEVICEINFO t
+        WHERE di_nodeId = #{orgId}
+        and (DI_DEACTIVE &lt; 1 or DI_DEACTIVE is null)
+        order by t.di_serialnum
+    </select>
+    <select id="selectDeviceInfoByRoleId" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseResultA_Column_List"/>
+        from IOT_DEVICEINFO a,iot_devicerole b
+        WHERE a.di_serialnum = b.devrole_devnum
+        and (a.DI_DEACTIVE &lt; 1 or a.DI_DEACTIVE is null)
+        and b.devrole_roleid = #{roleId}
+        order by a.DI_SERIALNUM asc
+    </select>
+    <update id="updateDeviceOrgId">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="sOrgId != null">
+                DI_NODEID = #{sOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="sDeviceName != null">
+                DI_NAME = #{sDeviceName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DI_SERIALNUM = #{sSerialNum,jdbcType=VARCHAR}
+    </update>
+    <update id="updateDeviceInfo">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="deviceName != null">
+                DI_NAME = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceDeactive != null">
+                DI_DEACTIVE = #{deviceDeactive,jdbcType=INTEGER},
+            </if>
+            <if test="deviceEasFId != null and deviceEasFId !=''">
+                EAS_FID = #{deviceEasFId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFName != null and deviceEasFName !=''">
+                EAS_FNAME = #{deviceEasFName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFDisplayName != null and deviceEasFDisplayName !=''">
+                EAS_FDISPLAYNAME = #{deviceEasFDisplayName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceEasFDisplayName != null and deviceEasFDisplayName ==''">
+                EAS_FID = '',
+                EAS_FNAME = '',
+                EAS_FDISPLAYNAME = '',
+            </if>
+        </set>
+        where DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+    </update>
+    <update id="batchUpdateDeviceOrgId">
+        update IOT_DEVICEINFO
+        <set>
+            <if test="sOrgId != null">
+                DI_NODEID = #{sOrgId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

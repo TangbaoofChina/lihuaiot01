@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.EC01DeviceMessageMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.EC01DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="EC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
+        <result column="EC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>
+        <result column="EC01_INTEMP3" jdbcType="FLOAT" property="inTemp3"/>
+        <result column="EC01_INTEMP4" jdbcType="FLOAT" property="inTemp4"/>
+        <result column="EC01_INTEMP5" jdbcType="FLOAT" property="inTemp5"/>
+        <result column="EC01_INTEMP6" jdbcType="FLOAT" property="inTemp6"/>
+        <result column="EC01_OUTTEMP" jdbcType="FLOAT" property="outTemp"/>
+        <result column="EC01_BOILERTEMP" jdbcType="FLOAT" property="boilerTemp"/>
+        <result column="EC01_HUMIDITYVAL" jdbcType="FLOAT" property="humidityVal"/>
+        <result column="EC01_CO2VAL" jdbcType="FLOAT" property="co2Val"/>
+        <result column="EC01_WATERFLOWVAL" jdbcType="FLOAT" property="waterFlowVal"/>
+        <result column="EC01_INAVETEMP" jdbcType="FLOAT" property="inAveTemp"/>
+        <result column="EC01_TEMPCURVERUNDAYS" jdbcType="INTEGER" property="tempCurveRunDays"/>
+        <result column="EC01_TEMPCURVERUNSTAGE" jdbcType="INTEGER" property="tempCurveRunStage"/>
+        <result column="EC01_STANDARDTEMP" jdbcType="FLOAT" property="standardTemp"/>
+        <result column="EC01_AIRLV" jdbcType="INTEGER" property="airLevel"/>
+        <result column="EC01_WINDOWPCT" jdbcType="INTEGER" property="windowPct"/>
+        <result column="EC01_GUIDEPLATE01PCT" jdbcType="INTEGER" property="guidePlate01Pct"/>
+        <result column="EC01_GUIDEPLATE02PCT" jdbcType="INTEGER" property="guidePlate02Pct"/>
+        <result column="EC01_CHICKENAGE" jdbcType="INTEGER" property="chickenAge"/>
+        <result column="EC01_NH3VAL" jdbcType="FLOAT" property="nh3Val"/>
+        <result column="EC01_H2SVAL" jdbcType="FLOAT" property="h2sVal"/>
+        <result column="EC01_NEGATIVEPRESSURE" jdbcType="FLOAT" property="negativePressure"/>
+        <result column="EC01_LIGHTINTENSITY" jdbcType="FLOAT" property="lightIntensity"/>
+        <result column="EC01_VENTILATIONVOLUME" jdbcType="FLOAT" property="ventilationVolume"/>
+        <result column="EC01_SIGNALINTENSITY" jdbcType="FLOAT" property="signalIntensity"/>
+        <result column="EC01_RELAY09" jdbcType="INTEGER" property="relay09"/>
+        <result column="EC01_RELAY10" jdbcType="INTEGER" property="relay10"/>
+        <result column="EC01_RELAY11" jdbcType="INTEGER" property="relay11"/>
+        <result column="EC01_RELAY12" jdbcType="INTEGER" property="relay12"/>
+        <result column="EC01_RELAY13" jdbcType="INTEGER" property="relay13"/>
+        <result column="EC01_RELAY14" jdbcType="INTEGER" property="relay14"/>
+        <result column="EC01_FAN01ON" jdbcType="BOOLEAN" property="fan01On"/>
+        <result column="EC01_FAN02ON" jdbcType="BOOLEAN" property="fan02On"/>
+        <result column="EC01_FAN03ON" jdbcType="BOOLEAN" property="fan03On"/>
+        <result column="EC01_FAN04ON" jdbcType="BOOLEAN" property="fan04On"/>
+        <result column="EC01_FAN05ON" jdbcType="BOOLEAN" property="fan05On"/>
+        <result column="EC01_FAN06ON" jdbcType="BOOLEAN" property="fan06On"/>
+        <result column="EC01_FAN07ON" jdbcType="BOOLEAN" property="fan07On"/>
+        <result column="EC01_FAN08ON" jdbcType="BOOLEAN" property="fan08On"/>
+        <result column="EC01_RELAY09ON" jdbcType="BOOLEAN" property="relay09On"/>
+        <result column="EC01_RELAY10ON" jdbcType="BOOLEAN" property="relay10On"/>
+        <result column="EC01_RELAY11ON" jdbcType="BOOLEAN" property="relay11On"/>
+        <result column="EC01_RELAY12ON" jdbcType="BOOLEAN" property="relay12On"/>
+        <result column="EC01_RELAY13ON" jdbcType="BOOLEAN" property="relay13On"/>
+        <result column="EC01_RELAY14ON" jdbcType="BOOLEAN" property="relay14On"/>
+        <result column="EC01_WETCURTAINON" jdbcType="BOOLEAN" property="wetCurtainOn"/>
+        <result column="EC01_ALARMON" jdbcType="BOOLEAN" property="alarmOn"/>
+        <result column="EC01_FANCLOCKENABLE" jdbcType="BOOLEAN" property="fanClockEnable"/>
+        <result column="EC01_FANCHANGEENABLE" jdbcType="BOOLEAN" property="fanChangeEnable"/>
+        <result column="EC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
+        <result column="EC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
+        <result column="EC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="EC01_SPARE05ON" jdbcType="BOOLEAN" property="spare05On"/>
+        <result column="EC01_SPARE06ON" jdbcType="BOOLEAN" property="spare06On"/>
+        <result column="EC01_SPARE07ON" jdbcType="BOOLEAN" property="spare07On"/>
+        <result column="EC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
+        <result column="EC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="EC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.EC01DeviceMessage">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="HEC01_INTEMP1" jdbcType="FLOAT" property="inTemp1"/>
+        <result column="HEC01_INTEMP2" jdbcType="FLOAT" property="inTemp2"/>
+        <result column="HEC01_INTEMP3" jdbcType="FLOAT" property="inTemp3"/>
+        <result column="HEC01_INTEMP4" jdbcType="FLOAT" property="inTemp4"/>
+        <result column="HEC01_INTEMP5" jdbcType="FLOAT" property="inTemp5"/>
+        <result column="HEC01_INTEMP6" jdbcType="FLOAT" property="inTemp6"/>
+        <result column="HEC01_OUTTEMP" jdbcType="FLOAT" property="outTemp"/>
+        <result column="HEC01_BOILERTEMP" jdbcType="FLOAT" property="boilerTemp"/>
+        <result column="HEC01_HUMIDITYVAL" jdbcType="FLOAT" property="humidityVal"/>
+        <result column="HEC01_CO2VAL" jdbcType="FLOAT" property="co2Val"/>
+        <result column="HEC01_WATERFLOWVAL" jdbcType="FLOAT" property="waterFlowVal"/>
+        <result column="HEC01_INAVETEMP" jdbcType="FLOAT" property="inAveTemp"/>
+        <result column="HEC01_TEMPCURVERUNDAYS" jdbcType="INTEGER" property="tempCurveRunDays"/>
+        <result column="HEC01_TEMPCURVERUNSTAGE" jdbcType="INTEGER" property="tempCurveRunStage"/>
+        <result column="HEC01_STANDARDTEMP" jdbcType="FLOAT" property="standardTemp"/>
+        <result column="HEC01_AIRLV" jdbcType="INTEGER" property="airLevel"/>
+        <result column="HEC01_WINDOWPCT" jdbcType="INTEGER" property="windowPct"/>
+        <result column="HEC01_GUIDEPLATE01PCT" jdbcType="INTEGER" property="guidePlate01Pct"/>
+        <result column="HEC01_GUIDEPLATE02PCT" jdbcType="INTEGER" property="guidePlate02Pct"/>
+        <result column="HEC01_CHICKENAGE" jdbcType="INTEGER" property="chickenAge"/>
+        <result column="HEC01_NH3VAL" jdbcType="FLOAT" property="nh3Val"/>
+        <result column="HEC01_H2SVAL" jdbcType="FLOAT" property="h2sVal"/>
+        <result column="HEC01_NEGATIVEPRESSURE" jdbcType="FLOAT" property="negativePressure"/>
+        <result column="HEC01_LIGHTINTENSITY" jdbcType="FLOAT" property="lightIntensity"/>
+        <result column="HEC01_VENTILATIONVOLUME" jdbcType="FLOAT" property="ventilationVolume"/>
+        <result column="HEC01_SIGNALINTENSITY" jdbcType="FLOAT" property="signalIntensity"/>
+        <result column="HEC01_RELAY09" jdbcType="INTEGER" property="relay09"/>
+        <result column="HEC01_RELAY10" jdbcType="INTEGER" property="relay10"/>
+        <result column="HEC01_RELAY11" jdbcType="INTEGER" property="relay11"/>
+        <result column="HEC01_RELAY12" jdbcType="INTEGER" property="relay12"/>
+        <result column="HEC01_RELAY13" jdbcType="INTEGER" property="relay13"/>
+        <result column="HEC01_RELAY14" jdbcType="INTEGER" property="relay14"/>
+        <result column="HEC01_FAN01ON" jdbcType="BOOLEAN" property="fan01On"/>
+        <result column="HEC01_FAN02ON" jdbcType="BOOLEAN" property="fan02On"/>
+        <result column="HEC01_FAN03ON" jdbcType="BOOLEAN" property="fan03On"/>
+        <result column="HEC01_FAN04ON" jdbcType="BOOLEAN" property="fan04On"/>
+        <result column="HEC01_FAN05ON" jdbcType="BOOLEAN" property="fan05On"/>
+        <result column="HEC01_FAN06ON" jdbcType="BOOLEAN" property="fan06On"/>
+        <result column="HEC01_FAN07ON" jdbcType="BOOLEAN" property="fan07On"/>
+        <result column="HEC01_FAN08ON" jdbcType="BOOLEAN" property="fan08On"/>
+        <result column="HEC01_RELAY09ON" jdbcType="BOOLEAN" property="relay09On"/>
+        <result column="HEC01_RELAY10ON" jdbcType="BOOLEAN" property="relay10On"/>
+        <result column="HEC01_RELAY11ON" jdbcType="BOOLEAN" property="relay11On"/>
+        <result column="HEC01_RELAY12ON" jdbcType="BOOLEAN" property="relay12On"/>
+        <result column="HEC01_RELAY13ON" jdbcType="BOOLEAN" property="relay13On"/>
+        <result column="HEC01_RELAY14ON" jdbcType="BOOLEAN" property="relay14On"/>
+        <result column="HEC01_WETCURTAINON" jdbcType="BOOLEAN" property="wetCurtainOn"/>
+        <result column="HEC01_ALARMON" jdbcType="BOOLEAN" property="alarmOn"/>
+        <result column="HEC01_FANCLOCKENABLE" jdbcType="BOOLEAN" property="fanClockEnable"/>
+        <result column="HEC01_FANCHANGEENABLE" jdbcType="BOOLEAN" property="fanChangeEnable"/>
+        <result column="HEC01_WETCURTAINWPENABLE" jdbcType="BOOLEAN" property="wetCurtainWPEnable"/>
+        <result column="HEC01_TEMPCURVEENABLE" jdbcType="BOOLEAN" property="tempCurveEnable"/>
+        <result column="HEC01_MINAIRCURVEENABLE" jdbcType="BOOLEAN" property="minAirCurveEnable"/>
+        <result column="HEC01_SPARE05ON" jdbcType="BOOLEAN" property="spare05On"/>
+        <result column="HEC01_SPARE06ON" jdbcType="BOOLEAN" property="spare06On"/>
+        <result column="HEC01_SPARE07ON" jdbcType="BOOLEAN" property="spare07On"/>
+        <result column="HEC01_ALARMERRORCODE" jdbcType="VARCHAR" property="alarmErrorCode"/>
+        <result column="HEC01_DATASENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="HEC01_DATARECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="DayAvgTempResult" type="com.system.po.EC01.EC01DayAvgTemp">
+        <result column="senddate" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="avgtemp" jdbcType="FLOAT" property="avgTemp"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
+    <select id="selectEC01ByORGId" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="BaseResult_Column_List"/>
+        from iot_envcon_01 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_nodeid = #{ORGId}
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectEC01ByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT
+        <include refid="BaseResult_Column_List"/>
+        from iot_envcon_01 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectEC01ByDeviceId" parameterType="string" resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from iot_envcon_01 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+    <select id="selectEC01ByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.HEC01_DATASENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.HEC01_DATASENDDATE DESC
+    </select>
+    <select id="selectEC01ByDeviceIdsAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND b.HEC01_DATASENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.HEC01_DATASENDDATE ASC
+    </select>
+    <select id="selectEC01WaterByDeviceIdsAndDate" resultMap="BaseHisResultMap">
+        select <include refid="BaseHisResult_Column_List"/>
+        from (select t.*,
+        row_number() over(partition by t.device_serialnum,to_char(t.hec01_datasenddate,'yyyy-mm-dd') order by
+        t.hec01_datasenddate desc) rn
+        from iot_hisenvcon_01 t
+        where t.hec01_datasenddate BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and t.device_serialnum in
+        <foreach collection="deviceIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ) b,iot_deviceinfo a
+        where rn = 2 and a.di_serialnum= b.device_serialnum
+        order by b.hec01_datasenddate asc
+    </select>
+    <select id="selectEC01DayAvgTempByDeviceIdAndDate" resultMap="DayAvgTempResult">
+        select to_char(a.hec01_datasenddate,'yyyy-mm-dd') senddate,
+        avg(a.hec01_inavetemp) avgtemp
+        from iot_hisenvcon_01 a
+        where a.hec01_datasenddate BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and a.device_serialnum= #{deviceId,jdbcType=VARCHAR}
+        group by to_char(a.hec01_datasenddate,'yyyy-mm-dd')
+        order by senddate asc
+    </select>
+    <select id="selectEC01ByDeviceIdsAndDtl" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM in
+        <foreach collection="deviceIds" item="item1" index="index1" open="(" separator="," close=")">
+            #{item1,jdbcType=VARCHAR}
+        </foreach>
+        AND to_char(b.HEC01_DATASENDDATE,'yyyy-mm-dd') in
+        <foreach collection="dateTimeList" item="item2" index="index2" open="(" separator="," close=")">
+            #{item2,jdbcType=VARCHAR}
+        </foreach>
+        order by b.HEC01_DATASENDDATE ASC
+    </select>
+    <select id="selectEC01ByDeviceIdAndDt" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISENVCON_01 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND to_char(b.HEC01_DATASENDDATE,'yyyy-mm-dd') = #{dateTime,jdbcType=VARCHAR}
+        order by b.HEC01_DATASENDDATE ASC
+    </select>
+</mapper>

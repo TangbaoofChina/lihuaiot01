@@ -107,13 +107,13 @@ public class WeighC312DMServiceImpl implements WeighC312DMService {
     }
 
     //************************************私有函数********************************************//
-    private List<WeighC312DM> judgeDeviceOnlineState(List<WeighC312DM> SewageC214DMList,int offline) throws Exception
+    private List<WeighC312DM> judgeDeviceOnlineState(List<WeighC312DM> dmList,int offline) throws Exception
     {
-        for (BaseDeviceMessage baseDeviceMessage:SewageC214DMList
+        for (BaseDeviceMessage baseDeviceMessage:dmList
                 ) {
             judgeOneDeviceOnlineState(baseDeviceMessage,offline);
         }
-        return SewageC214DMList;
+        return dmList;
     }
 
     private void judgeOneDeviceOnlineState(BaseDeviceMessage baseDeviceMessage,int offline) throws Exception

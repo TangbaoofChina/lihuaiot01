@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.ErrorDescribeMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.ErrorDescribe">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="alarmstate_id" jdbcType="VARCHAR" property="sid"/>
+        <result column="devtype_serialnum" jdbcType="VARCHAR" property="devType"/>
+        <result column="devtype_describe" jdbcType="VARCHAR" property="devTypeDescribe"/>
+        <result column="errorstate_code" jdbcType="VARCHAR" property="errorCode"/>
+        <result column="errorstate_describe" jdbcType="VARCHAR" property="errorDescribe"/>
+    </resultMap>
+    <select id="selectErrorDescribeByCodeAndType" resultMap="BaseResultMap">
+        select b.errorstate_id,a.devtype_serialnum,a.devtype_describe,
+        b.errorstate_code,b.errorstate_describe
+        from iot_devicetype a,iot_errorstate b
+        where a.devtype_serialnum = b.devtype_serialnum
+        AND b.devtype_serialnum = #{devType}
+        and b.errorstate_code = #{errorCode}
+    </select>
+    <select id="selectErrorDescribeByType" resultMap="BaseResultMap">
+        select b.errorstate_id,a.devtype_serialnum,a.devtype_describe,
+        b.errorstate_code,b.errorstate_describe
+        from iot_devicetype a,iot_errorstate b
+        where a.devtype_serialnum = b.devtype_serialnum
+        AND b.devtype_serialnum = #{devType}
+        ORDER by b.errorstate_code ASC
+    </select>
+    <insert id="insertErrorDescribe" parameterType="com.system.po.ErrorDescribe">
+        <selectKey keyProperty="sid" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        INSERT INTO iot_errorstate(ErrorSTATE_ID,DEVTYPE_SERIALNUM,ErrorSTATE_CODE,ErrorSTATE_DESCRIBE)
+        values (#{sid,jdbcType=VARCHAR},#{devType,jdbcType=VARCHAR},#{errorCode,jdbcType=VARCHAR}
+        ,#{errorDescribe,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateErrorDescribeByTypeAndCode" parameterType="com.system.po.ErrorDescribe">
+        UPDATE iot_errorstate
+        SET ErrorSTATE_DESCRIBE = #{errorDescribe,jdbcType=VARCHAR}
+        WHERE DEVTYPE_SERIALNUM = #{devType,jdbcType=VARCHAR}
+        and ErrorSTATE_CODE = #{errorCode,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteErrorDescribeByTypeAndCode" parameterType="com.system.po.ErrorDescribe">
+        DELETE FROM iot_errorstate
+        WHERE DEVTYPE_SERIALNUM = #{devType,jdbcType=VARCHAR}
+        and ErrorSTATE_CODE = #{errorCode,jdbcType=VARCHAR}
+    </delete>
+</mapper>

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.FeedC411DMMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.FeedC411DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="SILONUM" jdbcType="VARCHAR" property="siloNum"/>
+        <result column="CABLES" jdbcType="INTEGER" property="cables"/>
+        <result column="USESTATE" jdbcType="INTEGER" property="useState"/>
+        <result column="ALARMSTATE" jdbcType="INTEGER" property="alarmState"/>
+        <result column="STOCK" jdbcType="FLOAT" property="stock"/>
+        <result column="WATER" jdbcType="FLOAT" property="water"/>
+        <result column="CABLE01NUMS" jdbcType="INTEGER" property="cable01Nums"/>
+        <result column="CABLE01USED" jdbcType="VARCHAR" property="cable01Used"/>
+        <result column="CABLE01FAULT" jdbcType="VARCHAR" property="cable01Fault"/>
+        <result column="CABLE02NUMS" jdbcType="INTEGER" property="cable02Nums"/>
+        <result column="CABLE02USED" jdbcType="VARCHAR" property="cable02Used"/>
+        <result column="CABLE02FAULT" jdbcType="VARCHAR" property="cable02Fault"/>
+        <result column="CABLE03NUMS" jdbcType="INTEGER" property="cable03Nums"/>
+        <result column="CABLE03USED" jdbcType="VARCHAR" property="cable03Used"/>
+        <result column="CABLE03FAULT" jdbcType="VARCHAR" property="cable03Fault"/>
+        <result column="CABLE04NUMS" jdbcType="INTEGER" property="cable04Nums"/>
+        <result column="CABLE04USED" jdbcType="VARCHAR" property="cable04Used"/>
+        <result column="CABLE04FAULT" jdbcType="VARCHAR" property="cable04Fault"/>
+        <result column="CABLE05NUMS" jdbcType="INTEGER" property="cable05Nums"/>
+        <result column="CABLE05USED" jdbcType="VARCHAR" property="cable05Used"/>
+        <result column="CABLE05FAULT" jdbcType="VARCHAR" property="cable05Fault"/>
+        <result column="CABLE06NUMS" jdbcType="INTEGER" property="cable06Nums"/>
+        <result column="CABLE06USED" jdbcType="VARCHAR" property="cable06Used"/>
+        <result column="CABLE06FAULT" jdbcType="VARCHAR" property="cable06Fault"/>
+        <result column="TEMP01" jdbcType="FLOAT" property="temp01"/>
+        <result column="TEMP02" jdbcType="FLOAT" property="temp02"/>
+        <result column="TEMP03" jdbcType="FLOAT" property="temp03"/>
+        <result column="TEMP04" jdbcType="FLOAT" property="temp04"/>
+        <result column="TEMP05" jdbcType="FLOAT" property="temp05"/>
+        <result column="TEMP06" jdbcType="FLOAT" property="temp06"/>
+        <result column="TEMP07" jdbcType="FLOAT" property="temp07"/>
+        <result column="TEMP08" jdbcType="FLOAT" property="temp08"/>
+        <result column="TEMP09" jdbcType="FLOAT" property="temp09"/>
+        <result column="TEMP10" jdbcType="FLOAT" property="temp10"/>
+        <result column="TEMP11" jdbcType="FLOAT" property="temp11"/>
+        <result column="TEMP12" jdbcType="FLOAT" property="temp12"/>
+        <result column="TEMP13" jdbcType="FLOAT" property="temp13"/>
+        <result column="TEMP14" jdbcType="FLOAT" property="temp14"/>
+        <result column="TEMP15" jdbcType="FLOAT" property="temp15"/>
+        <result column="TEMP16" jdbcType="FLOAT" property="temp16"/>
+        <result column="TEMP17" jdbcType="FLOAT" property="temp17"/>
+        <result column="TEMP18" jdbcType="FLOAT" property="temp18"/>
+        <result column="TEMP19" jdbcType="FLOAT" property="temp19"/>
+        <result column="TEMP20" jdbcType="FLOAT" property="temp20"/>
+        <result column="TEMP21" jdbcType="FLOAT" property="temp21"/>
+        <result column="TEMP22" jdbcType="FLOAT" property="temp22"/>
+        <result column="TEMP23" jdbcType="FLOAT" property="temp23"/>
+        <result column="TEMP24" jdbcType="FLOAT" property="temp24"/>
+        <result column="TEMP25" jdbcType="FLOAT" property="temp25"/>
+        <result column="TEMP26" jdbcType="FLOAT" property="temp26"/>
+        <result column="TEMP27" jdbcType="FLOAT" property="temp27"/>
+        <result column="TEMP28" jdbcType="FLOAT" property="temp28"/>
+        <result column="TEMP29" jdbcType="FLOAT" property="temp29"/>
+        <result column="TEMP30" jdbcType="FLOAT" property="temp30"/>
+        <result column="TEMP31" jdbcType="FLOAT" property="temp31"/>
+        <result column="TEMP32" jdbcType="FLOAT" property="temp32"/>
+        <result column="TEMP33" jdbcType="FLOAT" property="temp33"/>
+        <result column="TEMP34" jdbcType="FLOAT" property="temp34"/>
+        <result column="TEMP35" jdbcType="FLOAT" property="temp35"/>
+        <result column="TEMP36" jdbcType="FLOAT" property="temp36"/>
+        <result column="TEMP37" jdbcType="FLOAT" property="temp37"/>
+        <result column="TEMP38" jdbcType="FLOAT" property="temp38"/>
+        <result column="TEMP39" jdbcType="FLOAT" property="temp39"/>
+        <result column="TEMP40" jdbcType="FLOAT" property="temp40"/>
+        <result column="TEMP41" jdbcType="FLOAT" property="temp41"/>
+        <result column="TEMP42" jdbcType="FLOAT" property="temp42"/>
+        <result column="TEMP43" jdbcType="FLOAT" property="temp43"/>
+        <result column="TEMP44" jdbcType="FLOAT" property="temp44"/>
+        <result column="TEMP45" jdbcType="FLOAT" property="temp45"/>
+        <result column="TEMP46" jdbcType="FLOAT" property="temp46"/>
+        <result column="TEMP47" jdbcType="FLOAT" property="temp47"/>
+        <result column="TEMP48" jdbcType="FLOAT" property="temp48"/>
+        <result column="TEMP49" jdbcType="FLOAT" property="temp49"/>
+        <result column="TEMP50" jdbcType="FLOAT" property="temp50"/>
+        <result column="TEMP51" jdbcType="FLOAT" property="temp51"/>
+        <result column="TEMP52" jdbcType="FLOAT" property="temp52"/>
+        <result column="TEMP53" jdbcType="FLOAT" property="temp53"/>
+        <result column="TEMP54" jdbcType="FLOAT" property="temp54"/>
+        <result column="TEMP55" jdbcType="FLOAT" property="temp55"/>
+        <result column="TEMP56" jdbcType="FLOAT" property="temp56"/>
+        <result column="TEMP57" jdbcType="FLOAT" property="temp57"/>
+        <result column="TEMP58" jdbcType="FLOAT" property="temp58"/>
+        <result column="TEMP59" jdbcType="FLOAT" property="temp59"/>
+        <result column="TEMP60" jdbcType="FLOAT" property="temp60"/>
+        <result column="HIGHTHRESHOLD" jdbcType="FLOAT" property="highThreshold"/>
+        <result column="HUMIDITY01" jdbcType="FLOAT" property="humidity01"/>
+        <result column="HUMIDITY02" jdbcType="FLOAT" property="humidity02"/>
+        <result column="HUMIDITY03" jdbcType="FLOAT" property="humidity03"/>
+        <result column="HUMIDITY04" jdbcType="FLOAT" property="humidity04"/>
+        <result column="HUMIDITY05" jdbcType="FLOAT" property="humidity05"/>
+        <result column="HUMIDITY06" jdbcType="FLOAT" property="humidity06"/>
+        <result column="ENVHUMIDITY" jdbcType="FLOAT" property="envHumidity"/>
+        <result column="ENVTEMP" jdbcType="FLOAT" property="envTemp"/>
+
+        <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.FeedC411DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="SILONUM" jdbcType="VARCHAR" property="siloNum"/>
+        <result column="CABLES" jdbcType="INTEGER" property="cables"/>
+        <result column="USESTATE" jdbcType="INTEGER" property="useState"/>
+        <result column="ALARMSTATE" jdbcType="INTEGER" property="alarmState"/>
+        <result column="STOCK" jdbcType="FLOAT" property="stock"/>
+        <result column="WATER" jdbcType="FLOAT" property="water"/>
+        <result column="CABLE01NUMS" jdbcType="INTEGER" property="cable01Nums"/>
+        <result column="CABLE01USED" jdbcType="VARCHAR" property="cable01Used"/>
+        <result column="CABLE01FAULT" jdbcType="VARCHAR" property="cable01Fault"/>
+        <result column="CABLE02NUMS" jdbcType="INTEGER" property="cable02Nums"/>
+        <result column="CABLE02USED" jdbcType="VARCHAR" property="cable02Used"/>
+        <result column="CABLE02FAULT" jdbcType="VARCHAR" property="cable02Fault"/>
+        <result column="CABLE03NUMS" jdbcType="INTEGER" property="cable03Nums"/>
+        <result column="CABLE03USED" jdbcType="VARCHAR" property="cable03Used"/>
+        <result column="CABLE03FAULT" jdbcType="VARCHAR" property="cable03Fault"/>
+        <result column="CABLE04NUMS" jdbcType="INTEGER" property="cable04Nums"/>
+        <result column="CABLE04USED" jdbcType="VARCHAR" property="cable04Used"/>
+        <result column="CABLE04FAULT" jdbcType="VARCHAR" property="cable04Fault"/>
+        <result column="CABLE05NUMS" jdbcType="INTEGER" property="cable05Nums"/>
+        <result column="CABLE05USED" jdbcType="VARCHAR" property="cable05Used"/>
+        <result column="CABLE05FAULT" jdbcType="VARCHAR" property="cable05Fault"/>
+        <result column="CABLE06NUMS" jdbcType="INTEGER" property="cable06Nums"/>
+        <result column="CABLE06USED" jdbcType="VARCHAR" property="cable06Used"/>
+        <result column="CABLE06FAULT" jdbcType="VARCHAR" property="cable06Fault"/>
+        <result column="TEMP01" jdbcType="FLOAT" property="temp01"/>
+        <result column="TEMP02" jdbcType="FLOAT" property="temp02"/>
+        <result column="TEMP03" jdbcType="FLOAT" property="temp03"/>
+        <result column="TEMP04" jdbcType="FLOAT" property="temp04"/>
+        <result column="TEMP05" jdbcType="FLOAT" property="temp05"/>
+        <result column="TEMP06" jdbcType="FLOAT" property="temp06"/>
+        <result column="TEMP07" jdbcType="FLOAT" property="temp07"/>
+        <result column="TEMP08" jdbcType="FLOAT" property="temp08"/>
+        <result column="TEMP09" jdbcType="FLOAT" property="temp09"/>
+        <result column="TEMP10" jdbcType="FLOAT" property="temp10"/>
+        <result column="TEMP11" jdbcType="FLOAT" property="temp11"/>
+        <result column="TEMP12" jdbcType="FLOAT" property="temp12"/>
+        <result column="TEMP13" jdbcType="FLOAT" property="temp13"/>
+        <result column="TEMP14" jdbcType="FLOAT" property="temp14"/>
+        <result column="TEMP15" jdbcType="FLOAT" property="temp15"/>
+        <result column="TEMP16" jdbcType="FLOAT" property="temp16"/>
+        <result column="TEMP17" jdbcType="FLOAT" property="temp17"/>
+        <result column="TEMP18" jdbcType="FLOAT" property="temp18"/>
+        <result column="TEMP19" jdbcType="FLOAT" property="temp19"/>
+        <result column="TEMP20" jdbcType="FLOAT" property="temp20"/>
+        <result column="TEMP21" jdbcType="FLOAT" property="temp21"/>
+        <result column="TEMP22" jdbcType="FLOAT" property="temp22"/>
+        <result column="TEMP23" jdbcType="FLOAT" property="temp23"/>
+        <result column="TEMP24" jdbcType="FLOAT" property="temp24"/>
+        <result column="TEMP25" jdbcType="FLOAT" property="temp25"/>
+        <result column="TEMP26" jdbcType="FLOAT" property="temp26"/>
+        <result column="TEMP27" jdbcType="FLOAT" property="temp27"/>
+        <result column="TEMP28" jdbcType="FLOAT" property="temp28"/>
+        <result column="TEMP29" jdbcType="FLOAT" property="temp29"/>
+        <result column="TEMP30" jdbcType="FLOAT" property="temp30"/>
+        <result column="TEMP31" jdbcType="FLOAT" property="temp31"/>
+        <result column="TEMP32" jdbcType="FLOAT" property="temp32"/>
+        <result column="TEMP33" jdbcType="FLOAT" property="temp33"/>
+        <result column="TEMP34" jdbcType="FLOAT" property="temp34"/>
+        <result column="TEMP35" jdbcType="FLOAT" property="temp35"/>
+        <result column="TEMP36" jdbcType="FLOAT" property="temp36"/>
+        <result column="TEMP37" jdbcType="FLOAT" property="temp37"/>
+        <result column="TEMP38" jdbcType="FLOAT" property="temp38"/>
+        <result column="TEMP39" jdbcType="FLOAT" property="temp39"/>
+        <result column="TEMP40" jdbcType="FLOAT" property="temp40"/>
+        <result column="TEMP41" jdbcType="FLOAT" property="temp41"/>
+        <result column="TEMP42" jdbcType="FLOAT" property="temp42"/>
+        <result column="TEMP43" jdbcType="FLOAT" property="temp43"/>
+        <result column="TEMP44" jdbcType="FLOAT" property="temp44"/>
+        <result column="TEMP45" jdbcType="FLOAT" property="temp45"/>
+        <result column="TEMP46" jdbcType="FLOAT" property="temp46"/>
+        <result column="TEMP47" jdbcType="FLOAT" property="temp47"/>
+        <result column="TEMP48" jdbcType="FLOAT" property="temp48"/>
+        <result column="TEMP49" jdbcType="FLOAT" property="temp49"/>
+        <result column="TEMP50" jdbcType="FLOAT" property="temp50"/>
+        <result column="TEMP51" jdbcType="FLOAT" property="temp51"/>
+        <result column="TEMP52" jdbcType="FLOAT" property="temp52"/>
+        <result column="TEMP53" jdbcType="FLOAT" property="temp53"/>
+        <result column="TEMP54" jdbcType="FLOAT" property="temp54"/>
+        <result column="TEMP55" jdbcType="FLOAT" property="temp55"/>
+        <result column="TEMP56" jdbcType="FLOAT" property="temp56"/>
+        <result column="TEMP57" jdbcType="FLOAT" property="temp57"/>
+        <result column="TEMP58" jdbcType="FLOAT" property="temp58"/>
+        <result column="TEMP59" jdbcType="FLOAT" property="temp59"/>
+        <result column="TEMP60" jdbcType="FLOAT" property="temp60"/>
+        <result column="HIGHTHRESHOLD" jdbcType="FLOAT" property="highThreshold"/>
+        <result column="HUMIDITY01" jdbcType="FLOAT" property="humidity01"/>
+        <result column="HUMIDITY02" jdbcType="FLOAT" property="humidity02"/>
+        <result column="HUMIDITY03" jdbcType="FLOAT" property="humidity03"/>
+        <result column="HUMIDITY04" jdbcType="FLOAT" property="humidity04"/>
+        <result column="HUMIDITY05" jdbcType="FLOAT" property="humidity05"/>
+        <result column="HUMIDITY06" jdbcType="FLOAT" property="humidity06"/>
+        <result column="ENVHUMIDITY" jdbcType="FLOAT" property="envHumidity"/>
+        <result column="ENVTEMP" jdbcType="FLOAT" property="envTemp"/>
+
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.FeedC411DMHis">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="SILONUM" jdbcType="VARCHAR" property="siloNum"/>
+        <result column="CABLES" jdbcType="INTEGER" property="cables"/>
+        <result column="USESTATE" jdbcType="INTEGER" property="useState"/>
+        <result column="ALARMSTATE" jdbcType="INTEGER" property="alarmState"/>
+        <result column="STOCK" jdbcType="FLOAT" property="stock"/>
+        <result column="WATER" jdbcType="FLOAT" property="water"/>
+        <result column="CABLE01NUMS" jdbcType="INTEGER" property="cable01Nums"/>
+        <result column="CABLE01USED" jdbcType="VARCHAR" property="cable01Used"/>
+        <result column="CABLE01FAULT" jdbcType="VARCHAR" property="cable01Fault"/>
+        <result column="CABLE02NUMS" jdbcType="INTEGER" property="cable02Nums"/>
+        <result column="CABLE02USED" jdbcType="VARCHAR" property="cable02Used"/>
+        <result column="CABLE02FAULT" jdbcType="VARCHAR" property="cable02Fault"/>
+        <result column="CABLE03NUMS" jdbcType="INTEGER" property="cable03Nums"/>
+        <result column="CABLE03USED" jdbcType="VARCHAR" property="cable03Used"/>
+        <result column="CABLE03FAULT" jdbcType="VARCHAR" property="cable03Fault"/>
+        <result column="CABLE04NUMS" jdbcType="INTEGER" property="cable04Nums"/>
+        <result column="CABLE04USED" jdbcType="VARCHAR" property="cable04Used"/>
+        <result column="CABLE04FAULT" jdbcType="VARCHAR" property="cable04Fault"/>
+        <result column="CABLE05NUMS" jdbcType="INTEGER" property="cable05Nums"/>
+        <result column="CABLE05USED" jdbcType="VARCHAR" property="cable05Used"/>
+        <result column="CABLE05FAULT" jdbcType="VARCHAR" property="cable05Fault"/>
+        <result column="CABLE06NUMS" jdbcType="INTEGER" property="cable06Nums"/>
+        <result column="CABLE06USED" jdbcType="VARCHAR" property="cable06Used"/>
+        <result column="CABLE06FAULT" jdbcType="VARCHAR" property="cable06Fault"/>
+        <result column="TEMP01" jdbcType="FLOAT" property="temp01"/>
+        <result column="TEMP02" jdbcType="FLOAT" property="temp02"/>
+        <result column="TEMP03" jdbcType="FLOAT" property="temp03"/>
+        <result column="TEMP04" jdbcType="FLOAT" property="temp04"/>
+        <result column="TEMP05" jdbcType="FLOAT" property="temp05"/>
+        <result column="TEMP06" jdbcType="FLOAT" property="temp06"/>
+        <result column="TEMP07" jdbcType="FLOAT" property="temp07"/>
+        <result column="TEMP08" jdbcType="FLOAT" property="temp08"/>
+        <result column="TEMP09" jdbcType="FLOAT" property="temp09"/>
+        <result column="TEMP10" jdbcType="FLOAT" property="temp10"/>
+        <result column="TEMP11" jdbcType="FLOAT" property="temp11"/>
+        <result column="TEMP12" jdbcType="FLOAT" property="temp12"/>
+        <result column="TEMP13" jdbcType="FLOAT" property="temp13"/>
+        <result column="TEMP14" jdbcType="FLOAT" property="temp14"/>
+        <result column="TEMP15" jdbcType="FLOAT" property="temp15"/>
+        <result column="TEMP16" jdbcType="FLOAT" property="temp16"/>
+        <result column="TEMP17" jdbcType="FLOAT" property="temp17"/>
+        <result column="TEMP18" jdbcType="FLOAT" property="temp18"/>
+        <result column="TEMP19" jdbcType="FLOAT" property="temp19"/>
+        <result column="TEMP20" jdbcType="FLOAT" property="temp20"/>
+        <result column="TEMP21" jdbcType="FLOAT" property="temp21"/>
+        <result column="TEMP22" jdbcType="FLOAT" property="temp22"/>
+        <result column="TEMP23" jdbcType="FLOAT" property="temp23"/>
+        <result column="TEMP24" jdbcType="FLOAT" property="temp24"/>
+        <result column="TEMP25" jdbcType="FLOAT" property="temp25"/>
+        <result column="TEMP26" jdbcType="FLOAT" property="temp26"/>
+        <result column="TEMP27" jdbcType="FLOAT" property="temp27"/>
+        <result column="TEMP28" jdbcType="FLOAT" property="temp28"/>
+        <result column="TEMP29" jdbcType="FLOAT" property="temp29"/>
+        <result column="TEMP30" jdbcType="FLOAT" property="temp30"/>
+        <result column="TEMP31" jdbcType="FLOAT" property="temp31"/>
+        <result column="TEMP32" jdbcType="FLOAT" property="temp32"/>
+        <result column="TEMP33" jdbcType="FLOAT" property="temp33"/>
+        <result column="TEMP34" jdbcType="FLOAT" property="temp34"/>
+        <result column="TEMP35" jdbcType="FLOAT" property="temp35"/>
+        <result column="TEMP36" jdbcType="FLOAT" property="temp36"/>
+        <result column="TEMP37" jdbcType="FLOAT" property="temp37"/>
+        <result column="TEMP38" jdbcType="FLOAT" property="temp38"/>
+        <result column="TEMP39" jdbcType="FLOAT" property="temp39"/>
+        <result column="TEMP40" jdbcType="FLOAT" property="temp40"/>
+        <result column="TEMP41" jdbcType="FLOAT" property="temp41"/>
+        <result column="TEMP42" jdbcType="FLOAT" property="temp42"/>
+        <result column="TEMP43" jdbcType="FLOAT" property="temp43"/>
+        <result column="TEMP44" jdbcType="FLOAT" property="temp44"/>
+        <result column="TEMP45" jdbcType="FLOAT" property="temp45"/>
+        <result column="TEMP46" jdbcType="FLOAT" property="temp46"/>
+        <result column="TEMP47" jdbcType="FLOAT" property="temp47"/>
+        <result column="TEMP48" jdbcType="FLOAT" property="temp48"/>
+        <result column="TEMP49" jdbcType="FLOAT" property="temp49"/>
+        <result column="TEMP50" jdbcType="FLOAT" property="temp50"/>
+        <result column="TEMP51" jdbcType="FLOAT" property="temp51"/>
+        <result column="TEMP52" jdbcType="FLOAT" property="temp52"/>
+        <result column="TEMP53" jdbcType="FLOAT" property="temp53"/>
+        <result column="TEMP54" jdbcType="FLOAT" property="temp54"/>
+        <result column="TEMP55" jdbcType="FLOAT" property="temp55"/>
+        <result column="TEMP56" jdbcType="FLOAT" property="temp56"/>
+        <result column="TEMP57" jdbcType="FLOAT" property="temp57"/>
+        <result column="TEMP58" jdbcType="FLOAT" property="temp58"/>
+        <result column="TEMP59" jdbcType="FLOAT" property="temp59"/>
+        <result column="TEMP60" jdbcType="FLOAT" property="temp60"/>
+        <result column="HIGHTHRESHOLD" jdbcType="FLOAT" property="highThreshold"/>
+        <result column="HUMIDITY01" jdbcType="FLOAT" property="humidity01"/>
+        <result column="HUMIDITY02" jdbcType="FLOAT" property="humidity02"/>
+        <result column="HUMIDITY03" jdbcType="FLOAT" property="humidity03"/>
+        <result column="HUMIDITY04" jdbcType="FLOAT" property="humidity04"/>
+        <result column="HUMIDITY05" jdbcType="FLOAT" property="humidity05"/>
+        <result column="HUMIDITY06" jdbcType="FLOAT" property="humidity06"/>
+        <result column="ENVHUMIDITY" jdbcType="FLOAT" property="envHumidity"/>
+        <result column="ENVTEMP" jdbcType="FLOAT" property="envTemp"/>
+
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
+    <select id="selectByORGId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_FEEDC_411 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_nodeid = #{ORGId}
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT <include refid="BaseResult_Column_List"/>
+        from IOT_FEEDC_411 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectByDeviceId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_FEEDC_411 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+    <select id="selectByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISFEEDC_411 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.SENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.SENDDATE ASC
+    </select>
+    <select id="selectPhoneHisByDateAndId" resultMap="BasePhoneHisResultMap">
+        select a.di_name,a.di_serialnum,b.*
+        from (select t.*,
+        row_number() over(partition by t.instartdate order by t.inenddate desc) rn
+        from IOT_HISFEEDC_411 t
+        where t.senddate &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        and  t.senddate  &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum=b.device_serialnum
+        order by instartdate desc
+    </select>
+</mapper>

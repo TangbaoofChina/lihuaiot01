@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.SewageC214DMMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Device.SewageC214DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="COLLECTMIXERRUN" jdbcType="BOOLEAN" property="collectMixerRun"/>
+        <result column="DOSINGPUMPRUN" jdbcType="BOOLEAN" property="dosingPumpRun"/>
+        <result column="COLLECTWELLPUMPRUN" jdbcType="BOOLEAN" property="collectWellPumpRun"/>
+        <result column="SLUDGEPUMPRUN" jdbcType="BOOLEAN" property="sludgePumpRun"/>
+        <result column="DEPHOSPHORIZEPUMPRUN" jdbcType="BOOLEAN" property="dephosphorizePumpRun"/>
+        <result column="SBRMIXER01RUN" jdbcType="BOOLEAN" property="sbrMixer01Run"/>
+        <result column="FAN01RUN" jdbcType="BOOLEAN" property="fan01Run"/>
+        <result column="FAN02RUN" jdbcType="BOOLEAN" property="fan02Run"/>
+        <result column="COLLECTPUMPRUN" jdbcType="BOOLEAN" property="collectPumpRun"/>
+        <result column="DECANTERRUN" jdbcType="BOOLEAN" property="decanterRun"/>
+        <result column="SBRMIXER02RUN" jdbcType="BOOLEAN" property="sbrMixer02Run"/>
+        <result column="DOSINGMIXERRUN" jdbcType="BOOLEAN" property="dosingMixerRun"/>
+        <result column="SPARE1004" jdbcType="BOOLEAN" property="spare1004"/>
+        <result column="SPARE1005" jdbcType="BOOLEAN" property="spare1005"/>
+        <result column="SPARE1006" jdbcType="BOOLEAN" property="spare1006"/>
+        <result column="SPARE1007" jdbcType="BOOLEAN" property="spare1007"/>
+
+        <result column="COLLECTMIXERFAULT" jdbcType="BOOLEAN" property="collectMixerFault"/>
+        <result column="DOSINGPUMPFAULT" jdbcType="BOOLEAN" property="dosingPumpFault"/>
+        <result column="COLLECTWELLPUMPFAULT" jdbcType="BOOLEAN" property="collectWellPumpFault"/>
+        <result column="SLUDGEPUMPFAULT" jdbcType="BOOLEAN" property="sludgePumpFault"/>
+        <result column="DEPHOSPHORIZEPUMPFAULT" jdbcType="BOOLEAN" property="dephosphorizePumpFault"/>
+        <result column="SBRMIXER01FAULT" jdbcType="BOOLEAN" property="sbrMixer01Fault"/>
+        <result column="SBRMIXER02FAULT" jdbcType="BOOLEAN" property="sbrMixer02Fault"/>
+        <result column="FAN01FAULT" jdbcType="BOOLEAN" property="fan01Fault"/>
+        <result column="FAN02FAULT" jdbcType="BOOLEAN" property="fan02Fault"/>
+        <result column="COLLECTPUMPFAULT" jdbcType="BOOLEAN" property="collectPumpFault"/>
+        <result column="DECANTERFAULT" jdbcType="BOOLEAN" property="decanterFault"/>
+        <result column="PLCELECLACK" jdbcType="BOOLEAN" property="plcElecLack"/>
+        <result column="DOSINGMIXERFAULT" jdbcType="BOOLEAN" property="dosingMixerFault"/>
+        <result column="ELECFAULT" jdbcType="BOOLEAN" property="elecFault"/>
+        <result column="AIRTEMPFAULT" jdbcType="BOOLEAN" property="airTempFault"/>
+        <result column="WATERTEMPFAULT" jdbcType="BOOLEAN" property="waterTempFault"/>
+
+        <result column="SPARE1300" jdbcType="BOOLEAN" property="spare1300"/>
+        <result column="SPARE1301" jdbcType="BOOLEAN" property="spare1301"/>
+        <result column="COLLECTHIGHON" jdbcType="BOOLEAN" property="collectHighOn"/>
+        <result column="COLLECTLOWON" jdbcType="BOOLEAN" property="collectLowOn"/>
+        <result column="DEPHOSPHORIZEHIGHON" jdbcType="BOOLEAN" property="dephosphorizeHighOn"/>
+        <result column="DEPHOSPHORIZELOWON" jdbcType="BOOLEAN" property="dephosphorizeLowOn"/>
+        <result column="SBRHIGHON" jdbcType="BOOLEAN" property="sbrHighOn"/>
+        <result column="SBRLOWON" jdbcType="BOOLEAN" property="sbrLowOn"/>
+        <result column="DECANTEROFF" jdbcType="BOOLEAN" property="decanterOff"/>
+        <result column="SPARE1401" jdbcType="BOOLEAN" property="spare1401"/>
+        <result column="SPARE1402" jdbcType="BOOLEAN" property="spare1402"/>
+        <result column="DECANTERONOK" jdbcType="BOOLEAN" property="decanterOnOK"/>
+        <result column="DECANTEROFFOK" jdbcType="BOOLEAN" property="decanterOffOK"/>
+        <result column="SPARE1405" jdbcType="BOOLEAN" property="spare1405"/>
+        <result column="SPARE1406" jdbcType="BOOLEAN" property="spare1406"/>
+        <result column="SPARE1407" jdbcType="BOOLEAN" property="spare1407"/>
+
+        <result column="MODBUSCODE" jdbcType="INTEGER" property="modbusCode"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
+
+        <result column="DOSINGPUMPRUNMINUTE" jdbcType="INTEGER" property="dosingPumpRunMinute"/>
+        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="INTEGER" property="sludgePumpRunMinute"/>
+        <result column="SBRMIXER01RUNMINUTE" jdbcType="INTEGER" property="sbrMixer01RunMinute"/>
+        <result column="FAN01RUNMINUTE" jdbcType="INTEGER" property="fan01RunMinute"/>
+        <result column="SBRMIXER02RUNMINUTE" jdbcType="INTEGER" property="sbrMixer02RunMinute"/>
+        <result column="DOSINGMIXERRUNMINUTE" jdbcType="INTEGER" property="dosingMixerRunMinute"/>
+        <result column="COLLECTPUMPRUNMINUTE" jdbcType="INTEGER" property="collectPumpRunMinute"/>
+        <result column="FAN02RUNMINUTE" jdbcType="INTEGER" property="fan02RunMinute"/>
+        <result column="COLLECTMIXERRUNMINUTE" jdbcType="INTEGER" property="collectMixerRunMinute"/>
+        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="INTEGER" property="collectWellPumpRunMinute"/>
+        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="INTEGER" property="dephosphorizePumpRunMinute"/>
+        <result column="DECANTERRUNMINUTE" jdbcType="INTEGER" property="decanterRunMinute"/>
+
+        <result column="FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
+        <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="AIRTEMP" jdbcType="FLOAT" property="airTemp"/>
+        <result column="WATERTEMP" jdbcType="FLOAT" property="waterTemp"/>
+        <result column="UAB" jdbcType="FLOAT" property="uab"/>
+        <result column="UBC" jdbcType="FLOAT" property="ubc"/>
+        <result column="UCA" jdbcType="FLOAT" property="uca"/>
+        <result column="UA" jdbcType="FLOAT" property="ua"/>
+        <result column="UB" jdbcType="FLOAT" property="ub"/>
+        <result column="UC" jdbcType="FLOAT" property="uc"/>
+        <result column="IA" jdbcType="FLOAT" property="ia"/>
+        <result column="IB" jdbcType="FLOAT" property="ib"/>
+        <result column="IC" jdbcType="FLOAT" property="ic"/>
+        <result column="PT" jdbcType="FLOAT" property="pt"/>
+        <result column="QT" jdbcType="FLOAT" property="qt"/>
+        <result column="ST" jdbcType="FLOAT" property="st"/>
+        <result column="PFT" jdbcType="FLOAT" property="pft"/>
+        <result column="FREQ" jdbcType="FLOAT" property="freq"/>
+        <result column="IMPEP" jdbcType="FLOAT" property="impEP"/>
+        <result column="EXPEP" jdbcType="FLOAT" property="expEP"/>
+        <result column="SPARE135136" jdbcType="BIGINT" property="spare135136"/>
+
+        <result column="COLLECTMIXERTOTAL" jdbcType="INTEGER" property="collectMixerTotal"/>
+        <result column="DOSINGPUMPTOTAL" jdbcType="INTEGER" property="dosingPumpTotal"/>
+        <result column="COLLECTWELLPUMPTOTAL" jdbcType="INTEGER" property="collectWellPumpTotal"/>
+        <result column="SLUDGEPUMPTOTAL" jdbcType="INTEGER" property="sludgePumpTotal"/>
+        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="INTEGER" property="dephosphorizePumpTotal"/>
+        <result column="SBRMIXER01TOTAL" jdbcType="INTEGER" property="sbrMixer01Total"/>
+        <result column="SBRMIXER02TOTAL" jdbcType="INTEGER" property="sbrMixer02Total"/>
+        <result column="FAN01TOTAL" jdbcType="INTEGER" property="fan01Total"/>
+        <result column="FAN02TOTAL" jdbcType="INTEGER" property="fan02Total"/>
+        <result column="COLLECTPUMPTOTAL" jdbcType="INTEGER" property="collectPumpTotal"/>
+        <result column="DOSINGMIXERTOTAL" jdbcType="INTEGER" property="dosingMixerTotal"/>
+        <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
+
+        <result column="COLLECTPUMPSHOUR" jdbcType="INTEGER" property="collectPumpSHour"/>
+        <result column="COLLECTPUMPSMINUTE" jdbcType="INTEGER" property="collectPumpSMinute"/>
+        <result column="FAN01SHOUR" jdbcType="INTEGER" property="fan01SHour"/>
+        <result column="FAN01SMINUTE" jdbcType="INTEGER" property="fan01SMinute"/>
+        <result column="FAN02SHOUR" jdbcType="INTEGER" property="fan02SHour"/>
+        <result column="FAN02SMINUTE" jdbcType="INTEGER" property="fan02SMinute"/>
+        <result column="COLLECTMIXERSHOUR" jdbcType="INTEGER" property="collectMixerSHour"/>
+        <result column="COLLECTMIXERSMINUTE" jdbcType="INTEGER" property="collectMixerSMinute"/>
+        <result column="COLLECTWELLPUMPSHOUR" jdbcType="INTEGER" property="collectWellPumpSHour"/>
+        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="INTEGER" property="collectWellPumpSMinute"/>
+        <result column="SBRMIXER01SHOUR" jdbcType="INTEGER" property="sbrMixer01SHour"/>
+        <result column="SBRMIXER01SMINUTE" jdbcType="INTEGER" property="sbrMixer01SMinute"/>
+        <result column="SBRMIXER02SHOUR" jdbcType="INTEGER" property="sbrMixer02SHour"/>
+        <result column="SBRMIXER02SMINUTE" jdbcType="INTEGER" property="sbrMixer02SMinute"/>
+        <result column="SLUDGEPUMPSHOUR" jdbcType="INTEGER" property="sludgePumpSHour"/>
+        <result column="SLUDGEPUMPSMINUTE" jdbcType="INTEGER" property="sludgePumpSMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="INTEGER" property="dephosphorizePumpSHour"/>
+        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSMinute"/>
+        <result column="DECANTERSHOUR" jdbcType="INTEGER" property="decanterSHour"/>
+        <result column="DECANTERSMINUTE" jdbcType="INTEGER" property="decanterSMinute"/>
+        <result column="DOSINGPUMPSHOUR" jdbcType="INTEGER" property="dosingPumpSHour"/>
+        <result column="DOSINGPUMPSMINUTE" jdbcType="INTEGER" property="dosingPumpSMinute"/>
+        <result column="DOSINGMIXERSHOUR" jdbcType="INTEGER" property="dosingMixerSHour"/>
+        <result column="DOSINGMIXERSMINUTE" jdbcType="INTEGER" property="dosingMixerSMinute"/>
+        <result column="SPARE191" jdbcType="INTEGER" property="spare191"/>
+        <result column="SPARE192" jdbcType="INTEGER" property="spare192"/>
+        <result column="SPARE193" jdbcType="INTEGER" property="spare193"/>
+        <result column="SPARE194" jdbcType="INTEGER" property="spare194"/>
+        <result column="SPARE195" jdbcType="INTEGER" property="spare195"/>
+        <result column="SPARE196" jdbcType="INTEGER" property="spare196"/>
+        <result column="SPARE197" jdbcType="INTEGER" property="spare197"/>
+        <result column="SPARE198" jdbcType="INTEGER" property="spare198"/>
+        <result column="SPARE199" jdbcType="INTEGER" property="spare199"/>
+        <result column="SPARE200" jdbcType="INTEGER" property="spare200"/>
+        <result column="SPARE201" jdbcType="INTEGER" property="spare201"/>
+        <result column="SPARE202" jdbcType="INTEGER" property="spare202"/>
+        <result column="ACKSECONDS" jdbcType="INTEGER" property="ackSeconds"/>
+        <result column="PLCADDRESS" jdbcType="INTEGER" property="plcAddress"/>
+        <result column="FAULTINDICATION" jdbcType="VARCHAR" property="faultIndication"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
+        <result column="SENDDATE" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="TIMESTAMP" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BaseHisResultMap" type="com.system.po.Device.SewageC214DM">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="COLLECTMIXERRUN" jdbcType="BOOLEAN" property="collectMixerRun"/>
+        <result column="DOSINGPUMPRUN" jdbcType="BOOLEAN" property="dosingPumpRun"/>
+        <result column="COLLECTWELLPUMPRUN" jdbcType="BOOLEAN" property="collectWellPumpRun"/>
+        <result column="SLUDGEPUMPRUN" jdbcType="BOOLEAN" property="sludgePumpRun"/>
+        <result column="DEPHOSPHORIZEPUMPRUN" jdbcType="BOOLEAN" property="dephosphorizePumpRun"/>
+        <result column="SBRMIXER01RUN" jdbcType="BOOLEAN" property="sbrMixer01Run"/>
+        <result column="FAN01RUN" jdbcType="BOOLEAN" property="fan01Run"/>
+        <result column="FAN02RUN" jdbcType="BOOLEAN" property="fan02Run"/>
+        <result column="COLLECTPUMPRUN" jdbcType="BOOLEAN" property="collectPumpRun"/>
+        <result column="DECANTERRUN" jdbcType="BOOLEAN" property="decanterRun"/>
+        <result column="SBRMIXER02RUN" jdbcType="BOOLEAN" property="sbrMixer02Run"/>
+        <result column="DOSINGMIXERRUN" jdbcType="BOOLEAN" property="dosingMixerRun"/>
+        <result column="SPARE1004" jdbcType="BOOLEAN" property="spare1004"/>
+        <result column="SPARE1005" jdbcType="BOOLEAN" property="spare1005"/>
+        <result column="SPARE1006" jdbcType="BOOLEAN" property="spare1006"/>
+        <result column="SPARE1007" jdbcType="BOOLEAN" property="spare1007"/>
+
+        <result column="COLLECTMIXERFAULT" jdbcType="BOOLEAN" property="collectMixerFault"/>
+        <result column="DOSINGPUMPFAULT" jdbcType="BOOLEAN" property="dosingPumpFault"/>
+        <result column="COLLECTWELLPUMPFAULT" jdbcType="BOOLEAN" property="collectWellPumpFault"/>
+        <result column="SLUDGEPUMPFAULT" jdbcType="BOOLEAN" property="sludgePumpFault"/>
+        <result column="DEPHOSPHORIZEPUMPFAULT" jdbcType="BOOLEAN" property="dephosphorizePumpFault"/>
+        <result column="SBRMIXER01FAULT" jdbcType="BOOLEAN" property="sbrMixer01Fault"/>
+        <result column="SBRMIXER02FAULT" jdbcType="BOOLEAN" property="sbrMixer02Fault"/>
+        <result column="FAN01FAULT" jdbcType="BOOLEAN" property="fan01Fault"/>
+        <result column="FAN02FAULT" jdbcType="BOOLEAN" property="fan02Fault"/>
+        <result column="COLLECTPUMPFAULT" jdbcType="BOOLEAN" property="collectPumpFault"/>
+        <result column="DECANTERFAULT" jdbcType="BOOLEAN" property="decanterFault"/>
+        <result column="PLCELECLACK" jdbcType="BOOLEAN" property="plcElecLack"/>
+        <result column="DOSINGMIXERFAULT" jdbcType="BOOLEAN" property="dosingMixerFault"/>
+        <result column="ELECFAULT" jdbcType="BOOLEAN" property="elecFault"/>
+        <result column="AIRTEMPFAULT" jdbcType="BOOLEAN" property="airTempFault"/>
+        <result column="WATERTEMPFAULT" jdbcType="BOOLEAN" property="waterTempFault"/>
+
+        <result column="SPARE1300" jdbcType="BOOLEAN" property="spare1300"/>
+        <result column="SPARE1301" jdbcType="BOOLEAN" property="spare1301"/>
+        <result column="COLLECTHIGHON" jdbcType="BOOLEAN" property="collectHighOn"/>
+        <result column="COLLECTLOWON" jdbcType="BOOLEAN" property="collectLowOn"/>
+        <result column="DEPHOSPHORIZEHIGHON" jdbcType="BOOLEAN" property="dephosphorizeHighOn"/>
+        <result column="DEPHOSPHORIZELOWON" jdbcType="BOOLEAN" property="dephosphorizeLowOn"/>
+        <result column="SBRHIGHON" jdbcType="BOOLEAN" property="sbrHighOn"/>
+        <result column="SBRLOWON" jdbcType="BOOLEAN" property="sbrLowOn"/>
+        <result column="DECANTEROFF" jdbcType="BOOLEAN" property="decanterOff"/>
+        <result column="SPARE1401" jdbcType="BOOLEAN" property="spare1401"/>
+        <result column="SPARE1402" jdbcType="BOOLEAN" property="spare1402"/>
+        <result column="DECANTERONOK" jdbcType="BOOLEAN" property="decanterOnOK"/>
+        <result column="DECANTEROFFOK" jdbcType="BOOLEAN" property="decanterOffOK"/>
+        <result column="SPARE1405" jdbcType="BOOLEAN" property="spare1405"/>
+        <result column="SPARE1406" jdbcType="BOOLEAN" property="spare1406"/>
+        <result column="SPARE1407" jdbcType="BOOLEAN" property="spare1407"/>
+
+        <result column="MODBUSCODE" jdbcType="INTEGER" property="modbusCode"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
+
+        <result column="DOSINGPUMPRUNMINUTE" jdbcType="INTEGER" property="dosingPumpRunMinute"/>
+        <result column="SLUDGEPUMPRUNMINUTE" jdbcType="INTEGER" property="sludgePumpRunMinute"/>
+        <result column="SBRMIXER01RUNMINUTE" jdbcType="INTEGER" property="sbrMixer01RunMinute"/>
+        <result column="FAN01RUNMINUTE" jdbcType="INTEGER" property="fan01RunMinute"/>
+        <result column="SBRMIXER02RUNMINUTE" jdbcType="INTEGER" property="sbrMixer02RunMinute"/>
+        <result column="DOSINGMIXERRUNMINUTE" jdbcType="INTEGER" property="dosingMixerRunMinute"/>
+        <result column="COLLECTPUMPRUNMINUTE" jdbcType="INTEGER" property="collectPumpRunMinute"/>
+        <result column="FAN02RUNMINUTE" jdbcType="INTEGER" property="fan02RunMinute"/>
+        <result column="COLLECTMIXERRUNMINUTE" jdbcType="INTEGER" property="collectMixerRunMinute"/>
+        <result column="COLLECTWELLPUMPRUNMINUTE" jdbcType="INTEGER" property="collectWellPumpRunMinute"/>
+        <result column="DEPHOSPHORIZEPUMPRUNMINUTE" jdbcType="INTEGER" property="dephosphorizePumpRunMinute"/>
+        <result column="DECANTERRUNMINUTE" jdbcType="INTEGER" property="decanterRunMinute"/>
+
+        <result column="FLOWMETER" jdbcType="BIGINT" property="flowmeter"/>
+        <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="AIRTEMP" jdbcType="FLOAT" property="airTemp"/>
+        <result column="WATERTEMP" jdbcType="FLOAT" property="waterTemp"/>
+        <result column="UAB" jdbcType="FLOAT" property="uab"/>
+        <result column="UBC" jdbcType="FLOAT" property="ubc"/>
+        <result column="UCA" jdbcType="FLOAT" property="uca"/>
+        <result column="UA" jdbcType="FLOAT" property="ua"/>
+        <result column="UB" jdbcType="FLOAT" property="ub"/>
+        <result column="UC" jdbcType="FLOAT" property="uc"/>
+        <result column="IA" jdbcType="FLOAT" property="ia"/>
+        <result column="IB" jdbcType="FLOAT" property="ib"/>
+        <result column="IC" jdbcType="FLOAT" property="ic"/>
+        <result column="PT" jdbcType="FLOAT" property="pt"/>
+        <result column="QT" jdbcType="FLOAT" property="qt"/>
+        <result column="ST" jdbcType="FLOAT" property="st"/>
+        <result column="PFT" jdbcType="FLOAT" property="pft"/>
+        <result column="FREQ" jdbcType="FLOAT" property="freq"/>
+        <result column="IMPEP" jdbcType="FLOAT" property="impEP"/>
+        <result column="EXPEP" jdbcType="FLOAT" property="expEP"/>
+        <result column="SPARE135136" jdbcType="BIGINT" property="spare135136"/>
+
+        <result column="COLLECTMIXERTOTAL" jdbcType="INTEGER" property="collectMixerTotal"/>
+        <result column="DOSINGPUMPTOTAL" jdbcType="INTEGER" property="dosingPumpTotal"/>
+        <result column="COLLECTWELLPUMPTOTAL" jdbcType="INTEGER" property="collectWellPumpTotal"/>
+        <result column="SLUDGEPUMPTOTAL" jdbcType="INTEGER" property="sludgePumpTotal"/>
+        <result column="DEPHOSPHORIZEPUMPTOTAL" jdbcType="INTEGER" property="dephosphorizePumpTotal"/>
+        <result column="SBRMIXER01TOTAL" jdbcType="INTEGER" property="sbrMixer01Total"/>
+        <result column="SBRMIXER02TOTAL" jdbcType="INTEGER" property="sbrMixer02Total"/>
+        <result column="FAN01TOTAL" jdbcType="INTEGER" property="fan01Total"/>
+        <result column="FAN02TOTAL" jdbcType="INTEGER" property="fan02Total"/>
+        <result column="COLLECTPUMPTOTAL" jdbcType="INTEGER" property="collectPumpTotal"/>
+        <result column="DOSINGMIXERTOTAL" jdbcType="INTEGER" property="dosingMixerTotal"/>
+        <result column="DECANTERTOTAL" jdbcType="INTEGER" property="decanterTotal"/>
+
+        <result column="COLLECTPUMPSHOUR" jdbcType="INTEGER" property="collectPumpSHour"/>
+        <result column="COLLECTPUMPSMINUTE" jdbcType="INTEGER" property="collectPumpSMinute"/>
+        <result column="FAN01SHOUR" jdbcType="INTEGER" property="fan01SHour"/>
+        <result column="FAN01SMINUTE" jdbcType="INTEGER" property="fan01SMinute"/>
+        <result column="FAN02SHOUR" jdbcType="INTEGER" property="fan02SHour"/>
+        <result column="FAN02SMINUTE" jdbcType="INTEGER" property="fan02SMinute"/>
+        <result column="COLLECTMIXERSHOUR" jdbcType="INTEGER" property="collectMixerSHour"/>
+        <result column="COLLECTMIXERSMINUTE" jdbcType="INTEGER" property="collectMixerSMinute"/>
+        <result column="COLLECTWELLPUMPSHOUR" jdbcType="INTEGER" property="collectWellPumpSHour"/>
+        <result column="COLLECTWELLPUMPSMINUTE" jdbcType="INTEGER" property="collectWellPumpSMinute"/>
+        <result column="SBRMIXER01SHOUR" jdbcType="INTEGER" property="sbrMixer01SHour"/>
+        <result column="SBRMIXER01SMINUTE" jdbcType="INTEGER" property="sbrMixer01SMinute"/>
+        <result column="SBRMIXER02SHOUR" jdbcType="INTEGER" property="sbrMixer02SHour"/>
+        <result column="SBRMIXER02SMINUTE" jdbcType="INTEGER" property="sbrMixer02SMinute"/>
+        <result column="SLUDGEPUMPSHOUR" jdbcType="INTEGER" property="sludgePumpSHour"/>
+        <result column="SLUDGEPUMPSMINUTE" jdbcType="INTEGER" property="sludgePumpSMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSHOUR" jdbcType="INTEGER" property="dephosphorizePumpSHour"/>
+        <result column="DEPHOSPHORIZEPUMPSMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSMinute"/>
+        <result column="DECANTERSHOUR" jdbcType="INTEGER" property="decanterSHour"/>
+        <result column="DECANTERSMINUTE" jdbcType="INTEGER" property="decanterSMinute"/>
+        <result column="DOSINGPUMPSHOUR" jdbcType="INTEGER" property="dosingPumpSHour"/>
+        <result column="DOSINGPUMPSMINUTE" jdbcType="INTEGER" property="dosingPumpSMinute"/>
+        <result column="DOSINGMIXERSHOUR" jdbcType="INTEGER" property="dosingMixerSHour"/>
+        <result column="DOSINGMIXERSMINUTE" jdbcType="INTEGER" property="dosingMixerSMinute"/>
+        <result column="SPARE191" jdbcType="INTEGER" property="spare191"/>
+        <result column="SPARE192" jdbcType="INTEGER" property="spare192"/>
+        <result column="SPARE193" jdbcType="INTEGER" property="spare193"/>
+        <result column="SPARE194" jdbcType="INTEGER" property="spare194"/>
+        <result column="SPARE195" jdbcType="INTEGER" property="spare195"/>
+        <result column="SPARE196" jdbcType="INTEGER" property="spare196"/>
+        <result column="SPARE197" jdbcType="INTEGER" property="spare197"/>
+        <result column="SPARE198" jdbcType="INTEGER" property="spare198"/>
+        <result column="SPARE199" jdbcType="INTEGER" property="spare199"/>
+        <result column="SPARE200" jdbcType="INTEGER" property="spare200"/>
+        <result column="SPARE201" jdbcType="INTEGER" property="spare201"/>
+        <result column="SPARE202" jdbcType="INTEGER" property="spare202"/>
+        <result column="ACKSECONDS" jdbcType="INTEGER" property="ackSeconds"/>
+        <result column="PLCADDRESS" jdbcType="INTEGER" property="plcAddress"/>
+        <result column="FAULTINDICATION" jdbcType="VARCHAR" property="faultIndication"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
+    <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.SewageC214DMHis">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+        <result column="FANSETMINUTE" jdbcType="INTEGER" property="fanSetMinute"/>
+        <result column="SBRMIXER01SETMINUTE" jdbcType="INTEGER" property="sbrMixer01SetMinute"/>
+        <result column="SBRMIXER02SETMINUTE" jdbcType="INTEGER" property="sbrMixer02SetMinute"/>
+        <result column="COLLECTPUMPSETMINUTE" jdbcType="INTEGER" property="collectPumpSetMinute"/>
+        <result column="SLUDGEPUMPSETMINUTE" jdbcType="INTEGER" property="sludgePumpSetMinute"/>
+        <result column="DEPHOSPHORIZEPUMPSETMINUTE" jdbcType="INTEGER" property="dephosphorizePumpSetMinute"/>
+        <result column="DECANTERSETMINUTE" jdbcType="INTEGER" property="decanterSetMinute"/>
+        <result column="COLLECTMIXERSETMINUTE" jdbcType="INTEGER" property="collectMixerSetMinute"/>
+        <result column="DOSINGPUMPSETMINUTE" jdbcType="INTEGER" property="dosingPumpSetMinute"/>
+        <result column="DOSINGMIXERSETMINUTE" jdbcType="INTEGER" property="dosingMixerSetMinute"/>
+        <result column="COLLECTWELLPUMPSETMINUTE" jdbcType="INTEGER" property="collectWellPumpSetMinute"/>
+        <result column="TODAYFLOWMETER" jdbcType="BIGINT" property="todayFlowmeter"/>
+        <result column="IMPEP" jdbcType="FLOAT" property="impEP"/>
+        <result column="TODAYEP" jdbcType="FLOAT" property="todayEP"/>
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+    </resultMap>
+    <sql id="BaseResult_Column_List">
+        decode(u.eas_fname,null,u.di_name,u.eas_fname) as di_name,u.di_serialnum,t.*
+    </sql>
+    <sql id="BaseHisResult_Column_List">
+        decode(a.eas_fname,null,a.di_name,a.eas_fname) as di_name,a.di_serialnum,b.*
+    </sql>
+    <select id="selectSewageC214ByORGId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_SEWAGECON_214 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_nodeid = #{ORGId}
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectSewageC214ByORGIdAndRoleId" resultMap="BaseResultMap">
+        select DISTINCT <include refid="BaseResult_Column_List"/>
+        from IOT_SEWAGECON_214 t,iot_deviceinfo u,iot_devicerole a
+        where u.di_serialnum=t.device_serialnum
+        and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
+        and u.di_serialnum = a.devrole_devnum
+        and u.di_nodeid = #{orgId}
+        and a.devrole_roleid in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by u.di_serialnum asc
+    </select>
+    <select id="selectSewageC214ByDeviceId" parameterType="string"  resultMap="BaseResultMap">
+        select <include refid="BaseResult_Column_List"/>
+        from IOT_SEWAGECON_214 t,iot_deviceinfo u
+        where u.di_serialnum=t.device_serialnum
+        and u.di_serialnum = #{sDeviceId}
+    </select>
+    <select id="selectSewageC214ByDeviceIdAndDate" resultMap="BaseHisResultMap">
+        select
+        <include refid="BaseHisResult_Column_List"/>
+        from IOT_DEVICEINFO a,IOT_HISSEWAGECON_214 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.SENDDATE BETWEEN to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.SENDDATE ASC
+    </select>
+    <select id="selectPhoneHisSewageC214ByDateAndId" resultMap="BasePhoneHisResultMap">
+        select a.di_name,a.di_serialnum,b.*
+        from (select t.*,
+        row_number() over(partition by t.device_serialnum,to_char(t.senddate,'yyyy-mm-dd') order by t.senddate desc) rn
+        from IOT_HISSEWAGECON_214 t
+        where t.senddate between to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        and to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd')+1
+        and t.DEVICE_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        ) b,iot_deviceinfo a
+        where rn = 1 and a.di_serialnum=b.device_serialnum
+    </select>
+</mapper>
