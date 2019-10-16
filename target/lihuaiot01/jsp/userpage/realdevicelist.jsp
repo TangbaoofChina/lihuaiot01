@@ -167,6 +167,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlFeedC411DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlFeedC411toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlFeedC411Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlFeedC411DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlFeedC411toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlEC01OneDeviceDiv" style="display:none">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="main">
@@ -1421,7 +1443,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">设备运行累计时长</span>
+                    <span style="font-weight: bold">设备运行累计时长(时)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC212border">
@@ -1765,7 +1787,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">工艺流程设定时间</span>
+                    <span style="font-weight: bold">工艺流程设定时间(分钟)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC214border">
@@ -2230,7 +2252,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-                    <span style="font-weight: bold">设备运行累计时长</span>
+                    <span style="font-weight: bold">设备运行累计时长(时)</span>
                 </div>
                 <div class="col-md-9 col-sm-9 row">
                     <div class="col-md-3 col-sm-3 SewageC212border">
@@ -2319,12 +2341,333 @@
             </div>
         </div>
         <div class="columns-right" id="rdlScaleC01OneDeviceDiv" style="display: none">
-
         </div>
 
         <div class="columns-right" id="rdlWeighC312OneDeviceDiv" style="display: none">
 
         </div>
+
+        <div class="columns-right" id="rdlFeedC411OneDeviceDiv" style="display: none">
+            <!--主体-->
+            <div class="col-md-9 col-sm-9 row" id="feedC411Main" style="text-align: center;margin-left: 20px;">
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#708090">
+                        <span>仓号</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border">
+                        <span id="feedC411SiloNum">1号仓</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border">
+                        <span id="feedC411UseState01">使用</span>
+                        <span id="feedC411UseState02">缓用</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border">
+                        <span>设备时间</span>
+                    </div>
+                    <div class="col-md-4 col-sm-4 FeedC411border">
+                        <span id="feedC411sendDate">2018-05-19 12:21:12</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#708090">
+                        <span>--</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>1层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>2层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>3层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>4层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>5层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>6层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>7层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>8层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>9层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>10层</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>湿度</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#708090">
+                        <span>1</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-01-10">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-humidity01">34.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#708090">
+                        <span>2</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-02-10">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFFE0">
+                        <span>环湿</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#708090">
+                        <span>3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-03-10">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-envHumidity">34.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FF0000">
+                        <span>最高</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High-10">23.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFF00">
+                        <span>最低</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low-10">23.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#00FF00">
+                        <span>平均</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-01">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-02">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-03">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-04">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-05">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-06">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-07">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-08">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-09">23.3</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg-10">23.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border" style="background-color:#FFFF00">
+                        <span >全仓</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#FF0000">
+                        <span>最高温</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-High">23.3</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#FFFF00">
+                        <span>最低温</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Low">23.3</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#00FF00">
+                        <span>平均温</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Avg">23.3</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row">
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span>--</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#00FFFF">
+                        <span >库存(吨)</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Stock">23.3</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 FeedC411border" style="background-color:#00FFFF">
+                        <span>水份(%)</span>
+                    </div>
+                    <div class="col-md-1 col-sm-1 FeedC411border">
+                        <span id="feedC411-Water">23.3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="columns-right" id="rdlHj212C213OneDeviceDiv" style="display: none">
 
         </div>

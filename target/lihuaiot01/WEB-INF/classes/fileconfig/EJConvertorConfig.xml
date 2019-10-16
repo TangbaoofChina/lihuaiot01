@@ -77,7 +77,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>chickenAge</field>
@@ -363,7 +363,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>todayFlowmeter</field>
@@ -610,7 +610,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>todayFlowmeter</field>
@@ -857,7 +857,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>todayFlowmeter</field>
@@ -1327,7 +1327,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>发送时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>datatime</field>
@@ -1383,7 +1383,7 @@
         </property>
         <property>
             <field>sendDate</field>
-            <value>发送时间</value>
+            <value>设备时间</value>
         </property>
         <property>
             <field>netW</field>
@@ -1424,6 +1424,169 @@
         <property>
             <field>deEndDate</field>
             <value>放料结束</value>
+        </property>
+        <property>
+            <field>dReceiveTime</field>
+            <value>接收时间</value>
+        </property>
+    </entity>
+
+    <entity class="com.system.po.Device.FeedC411.FeedC411DMFY" sheetName="散料称重" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>sendDate</field>
+            <value>设备时间</value>
+        </property>
+        <property>
+            <field>humidity01</field>
+            <value>仓内湿度</value>
+        </property>
+        <property>
+            <field>envHumidity</field>
+            <value>环境湿度</value>
+        </property>
+        <property>
+            <field>useState</field>
+            <value>使用状态</value>
+        </property>
+        <property>
+            <field>alarmState</field>
+            <value>报警状态</value>
+        </property>
+        <property>
+            <field>stock</field>
+            <value>库存</value>
+        </property>
+        <property>
+            <field>water</field>
+            <value>水份</value>
+        </property>
+        <property>
+            <field>temp01</field>
+            <value>1-01</value>
+        </property>
+        <property>
+            <field>temp02</field>
+            <value>1-02</value>
+        </property>
+        <property>
+            <field>temp03</field>
+            <value>1-03</value>
+        </property>
+        <property>
+            <field>temp04</field>
+            <value>1-04</value>
+        </property>
+        <property>
+            <field>temp05</field>
+            <value>1-05</value>
+        </property>
+        <property>
+            <field>temp06</field>
+            <value>1-06</value>
+        </property>
+        <property>
+            <field>temp07</field>
+            <value>1-07</value>
+        </property>
+        <property>
+            <field>temp08</field>
+            <value>1-08</value>
+        </property>
+        <property>
+            <field>temp09</field>
+            <value>1-09</value>
+        </property>
+        <property>
+            <field>temp10</field>
+            <value>1-10</value>
+        </property>
+        <property>
+            <field>temp11</field>
+            <value>2-01</value>
+        </property>
+        <property>
+            <field>temp12</field>
+            <value>2-02</value>
+        </property>
+        <property>
+            <field>temp13</field>
+            <value>2-03</value>
+        </property>
+        <property>
+            <field>temp14</field>
+            <value>2-04</value>
+        </property>
+        <property>
+            <field>temp15</field>
+            <value>2-05</value>
+        </property>
+        <property>
+            <field>temp16</field>
+            <value>2-06</value>
+        </property>
+        <property>
+            <field>temp17</field>
+            <value>2-07</value>
+        </property>
+        <property>
+            <field>temp18</field>
+            <value>2-08</value>
+        </property>
+        <property>
+            <field>temp19</field>
+            <value>2-09</value>
+        </property>
+        <property>
+            <field>temp20</field>
+            <value>2-10</value>
+        </property>
+        <property>
+            <field>temp21</field>
+            <value>3-01</value>
+        </property>
+        <property>
+            <field>temp22</field>
+            <value>3-02</value>
+        </property>
+        <property>
+            <field>temp23</field>
+            <value>3-03</value>
+        </property>
+        <property>
+            <field>temp24</field>
+            <value>3-04</value>
+        </property>
+        <property>
+            <field>temp25</field>
+            <value>3-05</value>
+        </property>
+        <property>
+            <field>temp26</field>
+            <value>3-06</value>
+        </property>
+        <property>
+            <field>temp27</field>
+            <value>3-07</value>
+        </property>
+        <property>
+            <field>temp28</field>
+            <value>3-08</value>
+        </property>
+        <property>
+            <field>temp29</field>
+            <value>3-09</value>
+        </property>
+        <property>
+            <field>temp30</field>
+            <value>3-10</value>
         </property>
         <property>
             <field>dReceiveTime</field>

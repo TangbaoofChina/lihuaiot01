@@ -233,4 +233,18 @@ public class DataConvertor {
         int i = Integer.parseInt(str.substring(1), 16);
         return new Color(i);
     }
+
+    /**
+     * 16进制转2进制，2byte转16位2进制，取出2进制的某一位，高位在左
+     * @param sHex 16进制数值
+     * @param ibit 读取的位，高位在左
+     * @return
+     */
+    public static boolean Hex2Bool(String sHex,int ibit){
+        int i = Integer.parseInt(sHex, 16);
+        int ii = 0x0001 & (i>>ibit);
+        if(ii == 1)
+            return true;
+        return false;
+    }
 }

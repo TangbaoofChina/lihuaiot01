@@ -104,12 +104,12 @@ public class DeviceListController {
         MydataTableColumn mdtc6 = new MydataTableColumn();
         mdtc6.setData("dSendTime");
         mdtc6.setDefaultContent("6");
-        mdtc6.setTitle("发送时间");
+        mdtc6.setTitle("设备时间");
 
         MydataTableColumn mdtc7 = new MydataTableColumn();
         mdtc7.setData("dReceiveTime");
         mdtc7.setDefaultContent("7");
-        mdtc7.setTitle("接收时间");
+        mdtc7.setTitle("服务器时间");
 
         MydataTableColumn mdtc8 = new MydataTableColumn();
         mdtc8.setData("dState");
@@ -118,12 +118,12 @@ public class DeviceListController {
 
         myDTCList.add(mdtc1);
         myDTCList.add(mdtc2);
+        myDTCList.add(mdtc8);
         myDTCList.add(mdtc3);
         myDTCList.add(mdtc4);
         myDTCList.add(mdtc5);
         myDTCList.add(mdtc6);
         myDTCList.add(mdtc7);
-        myDTCList.add(mdtc8);
 
         /*String a = JSONArray.fromObject(myDTCList).toString();
         JSONArray.parseO*/

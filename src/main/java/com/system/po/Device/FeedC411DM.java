@@ -954,4 +954,46 @@ public class FeedC411DM extends BaseDeviceMessage {
         this.sendDate = sendDate;
     }
 
+    public FeedC411DM(){}
+
+    public List<MydataTableColumn> getDeviceHead() {
+        List<MydataTableColumn> myDTCList = new ArrayList<MydataTableColumn>();
+
+        MydataTableColumn mdtc1 = new MydataTableColumn();
+        mdtc1.setData("dSerialNumDec");
+        mdtc1.setDefaultContent("1");
+        mdtc1.setTitle("序号");
+        mdtc1.setVisible(false);
+
+        MydataTableColumn mdtc2 = new MydataTableColumn();
+        mdtc2.setData("dName");
+        mdtc2.setDefaultContent("2");
+        mdtc2.setTitle("名称");
+
+        //设备发送数据时间
+        MydataTableColumn mdtc109 = new MydataTableColumn();
+        mdtc109.setData("sendDate");
+        mdtc109.setDefaultContent("109");
+        mdtc109.setTitle("时间");
+        mdtc109.setVisible(true);
+
+        //设备在线状态
+        MydataTableColumn mdtc110 = new MydataTableColumn();
+        mdtc110.setData("dState");
+        mdtc110.setDefaultContent("110");
+        mdtc110.setTitle("状态");
+        mdtc110.setVisible(true);
+
+        //序号
+        myDTCList.add(mdtc1);
+        //名称
+        myDTCList.add(mdtc2);
+        //设备在线状态
+        myDTCList.add(mdtc110);
+        //设备发送数据时间
+        myDTCList.add(mdtc109);
+
+        return myDTCList;
+    }
+
 }

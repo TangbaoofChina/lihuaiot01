@@ -5,6 +5,7 @@ import com.system.mapperiot.FeedC411DMMapper;
 import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
+import com.system.po.Device.FeedC411.FeedC411DMFY;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
 import com.system.po.parameter.DeviceType;
@@ -90,6 +91,8 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
 
     @Override
     public List<MydataTableColumn> selectDeviceHead() throws Exception {
+        //这里实现子类没想到什么好方法，暂时先这么处理吧，回头再想
+        //需要根据不同饲料部的测温点数，生成不同的子类对象，因此需要知道不同的饲料部，怎么区分不同饲料部呢？
         FeedC411DM dm = new FeedC411DM();
         List<MydataTableColumn> mydataTableColumnList = dm.getDeviceHead();
         return mydataTableColumnList;
@@ -99,7 +102,13 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
     public File exportStorage(List<FeedC411DM> storageList) {
         if (storageList == null)
             return null;
-        return ejConvertor.excelWriter(FeedC411DM.class, storageList);
+        FeedC411DM feedC411DM = storageList.get(0);
+        //阜阳-筒仓测温
+        if(feedC411DM.getDSerialNum().contains("4800")) {
+            return ejConvertor.excelWriter(FeedC411DMFY.class, storageList);
+        }else{
+            return ejConvertor.excelWriter(FeedC411DM.class, storageList);
+        }
     }
 
     //************************************私有函数********************************************//
