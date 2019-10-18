@@ -3,7 +3,7 @@ package com.system.util.msg;
 public class Response {
     private String msg;
     private int code = 0;
-    private Object data;
+    private Object obj;
 
     public String getMsg() {
         return msg;
@@ -21,11 +21,11 @@ public class Response {
         this.code = code;
     }
 
-    public Object getData() {
-        return data;
+    public Object getObj() {
+        return obj;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setObj(Object obj) {
+        this.obj = obj;
     }
 }

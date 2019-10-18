@@ -15,6 +15,9 @@ var hisChartScaleC01search_end_date;
 var hisChartHj212C213;
 var hisChartHj212C213search_start_date;
 var hisChartHj212C213search_end_date;
+var hisChartFeedC411;
+var hisChartFeedC411search_start_date;
+var hisChartFeedC411search_end_date;
 
 // 指定图表的配置项和数据
 var hisChartoptionInit = {
@@ -147,6 +150,9 @@ $(function () {
 
     hisChartHj212C213InitChart(hisChartoptionInit);
     hisChartDateRangePickerInitHj212C213();
+
+    hisChartFeedC411InitChart(hisChartoptionInit);
+    hisChartDateRangePickerInitFeedC411();
 });
 
 // 日期选择器初始化
@@ -343,8 +349,10 @@ function hisChartNodeSelected(event, data) {
     var hcScaleC01DivP2 = document.getElementById("hisChartScaleC01DivP2");
     var hcHj212C213DivP1 = document.getElementById("hisChartHj212C213DivP1");
     var hcHj212C213DivP2 = document.getElementById("hisChartHj212C213DivP2");
+    var hcFeedC411DivP1 = document.getElementById("hisChartFeedC411DivP1");
+    var hcFeedC411DivP2 = document.getElementById("hisChartFeedC411DivP2");
     var rootNodeId = hisChartNowTreeNodeRoot.id;
-    if (rootNodeId === "101" || rootNodeId === "111")   //鸡舍环控器
+    if (rootNodeId === "111")   //种禽环控器
     {
         hcEC01DivP1.style.display = "block";
         hcEC01DivP2.style.display = "block";
@@ -353,8 +361,10 @@ function hisChartNodeSelected(event, data) {
         hcScaleC01DivP2.style.display = "none";
         hcHj212C213DivP1.style.display = "none";
         hcHj212C213DivP2.style.display = "none";
+        hcFeedC411DivP1.style.display = "none";
+        hcFeedC411DivP2.style.display = "none";
     }
-    else if (rootNodeId === "201" || rootNodeId === "211")  //污水控制器
+    else if (rootNodeId === "211")  //立华禽环保1.0
     {
         hcEC01DivP1.style.display = "none";
         hcEC01DivP2.style.display = "none";
@@ -363,8 +373,10 @@ function hisChartNodeSelected(event, data) {
         hcScaleC01DivP2.style.display = "none";
         hcHj212C213DivP1.style.display = "none";
         hcHj212C213DivP2.style.display = "none";
+        hcFeedC411DivP1.style.display = "none";
+        hcFeedC411DivP2.style.display = "none";
     }
-    else if (rootNodeId === "301" || rootNodeId === "311")  //自动称重
+    else if (rootNodeId === "311")  //自动称重
     {
         hcEC01DivP1.style.display = "none";
         hcEC01DivP2.style.display = "none";
@@ -373,6 +385,8 @@ function hisChartNodeSelected(event, data) {
         hcScaleC01DivP2.style.display = "block";
         hcHj212C213DivP1.style.display = "none";
         hcHj212C213DivP2.style.display = "none";
+        hcFeedC411DivP1.style.display = "none";
+        hcFeedC411DivP2.style.display = "none";
     }
     else if (rootNodeId === "213")  //水质在线监测
     {
@@ -383,6 +397,24 @@ function hisChartNodeSelected(event, data) {
         hcScaleC01DivP2.style.display = "none";
         hcHj212C213DivP1.style.display = "block";
         hcHj212C213DivP2.style.display = "block";
+        hcFeedC411DivP1.style.display = "none";
+        hcFeedC411DivP2.style.display = "none";
+    }
+    else if (rootNodeId === "411")  //饲料部-筒仓测温
+    {
+        hcEC01DivP1.style.display = "none";
+        hcEC01DivP2.style.display = "none";
+        hcSewageC01Div.style.display = "none";
+        hcScaleC01DivP1.style.display = "none";
+        hcScaleC01DivP2.style.display = "none";
+        hcHj212C213DivP1.style.display = "none";
+        hcHj212C213DivP2.style.display = "none";
+        hcFeedC411DivP1.style.display = "block";
+        hcFeedC411DivP2.style.display = "block";
+    }
+    var nodeId = hisChartNowTreeNode.id;
+    if(rootNodeId === "411" && nodeId.length === 7){
+        hisChartSelectFeedC411Params(nodeId);
     }
     if (data.nodes != null) {
         var select_node = $('#hisChartOrgTree').treeview('getSelected');
@@ -735,6 +767,7 @@ function hisChartExportStorageAction() {
         HisChartScaleC01ExportData();
         $('#exportScaleC01_modal').modal("hide");
     });
+
 }
 
 function HisChartExportData() {
@@ -1342,7 +1375,6 @@ function hisChartHj212C213SelectDeviceByIdsChart() {
     });
 }
 
-
 //水质在线监测，查询事件
 function hisChartHj212C213Query() {
     var objS = document.getElementById("hisChartHj212C213SelId_Param");
@@ -1358,6 +1390,164 @@ function hisChartHj212C213Query() {
     hisChartHj212C213SelectDeviceByIdsChart();
 }
 /***************************Hj212C213 end*********************/
+
+/***************************FeedC411 start*********************/
+function hisChartFeedC411InitChart(hisChartoption) {
+    var mainContainer = document.getElementById('echartsFeedC411main');
+    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+    var resizeMainContainer = function () {
+        mainContainer.style.width = window.innerWidth * 0.6 + 'px';
+        mainContainer.style.height = window.innerHeight * 0.6 + 'px';
+        /*mainContainer.height = window.innerWidth * 0.7 + 'px';
+        mainContainer.width = window.innerHeight * 0.42 + 'px';*/
+    };
+    resizeMainContainer();
+    // 初始化图表
+    //hisChart = echarts.init(mainContainer, 'macarons');
+    // 初始化图表-不带主题
+    hisChartFeedC411 = echarts.init(mainContainer);
+    hisChartFeedC411.clear();
+    hisChartFeedC411.setOption(hisChartoption);
+    $(window).on('resize', function () {//
+        //屏幕大小自适应，重置容器高宽
+        resizeMainContainer();
+        hisChartFeedC411.resize();
+    });
+}
+
+// 日期选择器初始化
+function hisChartDateRangePickerInitFeedC411() {
+    hisChartFeedC411search_start_date = NowWeeHours(); //凌晨
+    hisChartFeedC411search_end_date = GetTodaytime(); //最晚时间
+    $('#hisChartFeedC411DateInterval').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'left',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        locale: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1, 'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+            '最近7日': [moment().subtract(6, 'days'), moment()],
+            '最近30日': [moment().subtract(29, 'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisChartFeedC411search_start_date = this.startDate.format(this.locale.format);
+        hisChartFeedC411search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisChartFeedC411RepaintChart(hisChartoption) {
+    hisChartFeedC411.clear();
+    hisChartFeedC411.setOption(hisChartoption);
+}
+
+function hisChartFeedC411SelectDeviceByIdsChart() {
+    var queryStartDate = hisChartFeedC411search_start_date;
+    var queryEndDate = hisChartFeedC411search_end_date;
+    var queryParamObj = document.getElementById("hisChartFeedC411SelId_Param"); //定位选择参数
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter01 = queryParamObj.options[queryParamIndex].value; // 选中文本
+    var queryParameter02 = queryParamObj.options[queryParamIndex].text; // 选中文本
+    var data = {
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sQueryParam01: queryParameter01,
+        sQueryParam02: queryParameter02,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/lihuaiot01/hisChartDevice/selectFeedC411ByIdsAndDateChart',
+        dataType: 'json',
+        async: true,   // 轻轻方式-异步
+        data: data,
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                hisChartoption = result;
+                // 使用刚指定的配置项和数据显示图表。
+                hisChartFeedC411RepaintChart(hisChartoption);
+            } else {
+                hisChartFeedC411RepaintChart(hisChartoptionInit);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+
+//查询事件
+function hisChartFeedC411Query() {
+    var objS = document.getElementById("hisChartFeedC411SelId_Param");
+    var paramValue = objS.options[objS.selectedIndex].value;
+    //只能选择单个设备
+    if (hisChartSelectDeviceIds.length != 1) {
+        var type = 'warning';
+        var msg = '只能选择一个设备';
+        var append = '只针对单个设备进行数据分析';
+        showMsg(type, msg, append);
+        return;
+    }
+    hisChartFeedC411SelectDeviceByIdsChart();
+}
+
+function hisChartSelectFeedC411Params(devId) {
+    var data = {
+        devId: devId
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/lihuaiot01/hisChartDevice/selectFeedC411ParamsById',
+        dataType: 'json',
+        async: true,   // 轻轻方式-异步
+        data: data,
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                //console.log(result);
+                for(var i=0;i<result.length;i++) {
+                    if(i===0){
+                        nameOpt ="<option value='"+result[i].communicatName+"' selected='selected'>"+result[i].realName+"</option>";
+                    }else{
+                        nameOpt+="<option value='"+result[i].communicatName+"' >"+result[i].realName+"</option>";
+                    }
+                }
+                $('#hisChartFeedC411SelId_Param').html(nameOpt);
+                // 使用刚指定的配置项和数据显示图表。
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+/***************************FeedC411s end*********************/
 
 /***************************级联勾选*********************/
 function hisChartSelectDeviceIdsRemove(queryParameter) {
@@ -1384,6 +1574,7 @@ function nodeChecked(event, node) {
     }
     nodeCheckedSilent = true;
     var queryParameter = node.id;
+    var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (!hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIds.push(queryParameter);
@@ -1391,6 +1582,12 @@ function nodeChecked(event, node) {
             hisChartAddDeviceToList(queryParameter, queryName);
         }
     }else if (queryParameter.length == 14) {
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
+    }else if (rootNodeId === "411" && queryParameter.length == 7) {
         if (!hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIds.push(queryParameter);
             var queryName = node.text;
@@ -1411,10 +1608,15 @@ function nodeUnchecked(event, node) {
         return;
     nodeUncheckedSilent = true;
     var queryParameter = node.id;
+    var rootNodeId = hisChartNowTreeNodeRoot.id;
+    if (rootNodeId === "111")   //种禽环控器
     if (queryParameter.length == 4) {
         hisChartSelectDeviceIdsRemove(queryParameter);
         hisChartRemoveDeviceToList(queryParameter);
     }else if (queryParameter.length == 4) {
+        hisChartSelectDeviceIdsRemove(queryParameter);
+        hisChartRemoveDeviceToList(queryParameter);
+    }else if (rootNodeId === "411" && queryParameter.length == 7) {
         hisChartSelectDeviceIdsRemove(queryParameter);
         hisChartRemoveDeviceToList(queryParameter);
     }
@@ -1460,6 +1662,7 @@ function uncheckAllParent(node) {
 function checkAllSon(node) {
     $('#hisChartOrgTree').treeview('checkNode', node.nodeId, {silent: true});
     var queryParameter = node.id;
+    var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (!hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIds.push(queryParameter);
@@ -1467,6 +1670,12 @@ function checkAllSon(node) {
             hisChartAddDeviceToList(queryParameter, queryName);
         }
     }else if (queryParameter.length == 14) {
+        if (!hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIds.push(queryParameter);
+            var queryName = node.text;
+            hisChartAddDeviceToList(queryParameter, queryName);
+        }
+    }else if (rootNodeId === "411" && queryParameter.length == 7) {
         if (!hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIds.push(queryParameter);
             var queryName = node.text;
@@ -1484,12 +1693,18 @@ function checkAllSon(node) {
 function uncheckAllSon(node) {
     $('#hisChartOrgTree').treeview('uncheckNode', node.nodeId, {silent: true});
     var queryParameter = node.id;
+    var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIdsRemove(queryParameter);
             hisChartRemoveDeviceToList(queryParameter);
         }
     }else if (queryParameter.length == 14) {
+        if (hisChartSelectDeviceIdsContains(queryParameter)) {
+            hisChartSelectDeviceIdsRemove(queryParameter);
+            hisChartRemoveDeviceToList(queryParameter);
+        }
+    }else if (rootNodeId === "411" && queryParameter.length == 7) {
         if (hisChartSelectDeviceIdsContains(queryParameter)) {
             hisChartSelectDeviceIdsRemove(queryParameter);
             hisChartRemoveDeviceToList(queryParameter);

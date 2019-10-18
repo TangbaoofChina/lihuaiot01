@@ -5,6 +5,7 @@ import com.system.po.FeedC411.SiloCable;
 import com.system.po.FeedC411.SiloFloor;
 import com.system.po.FeedC411.SiloTemp;
 import com.system.po.MydataTableColumn;
+import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.util.DataConvertor;
 
 import java.util.ArrayList;
@@ -417,6 +418,71 @@ public class FeedC411DMFY {
         myDTCList.add(mdtc32);
 
         return myDTCList;
+    }
+
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("useState");
+        phoneRealMsgInfo01.setTitle("状态：");
+        if(this.getFeedC411DM().getUseState() == 1){
+            phoneRealMsgInfo01.setValue("缓用");
+        }else{
+            phoneRealMsgInfo01.setValue("使用");
+        }
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("avg");
+        phoneRealMsgInfo02.setTitle("平均温：");
+        phoneRealMsgInfo02.setValue(String.valueOf(this.getAvg())+ "℃");
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("high");
+        phoneRealMsgInfo03.setTitle("最高温：");
+        phoneRealMsgInfo03.setValue(String.valueOf(this.getHigh())+ "℃");
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("low");
+        phoneRealMsgInfo04.setTitle("最低温：");
+        phoneRealMsgInfo04.setValue(String.valueOf(this.getLow())+ "℃");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo07.setId("stock");
+        phoneRealMsgInfo07.setTitle("库存：");
+        phoneRealMsgInfo07.setValue(String.valueOf(this.getFeedC411DM().getStock()) + "吨");
+        phoneRealMsgInfo07.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+
+        PhoneRealMsgInfo phoneRealMsgInfo08 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo08.setId("water");
+        phoneRealMsgInfo08.setTitle("水份：");
+        phoneRealMsgInfo08.setValue(String.valueOf(this.getFeedC411DM().getWater()) + "%");
+        phoneRealMsgInfo08.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo08);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("dState");
+        phoneRealMsgInfo05.setTitle("状态：");
+        phoneRealMsgInfo05.setValue(this.getFeedC411DM().getSendDate());
+        phoneRealMsgInfo05.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("sendDate");
+        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setValue(this.getFeedC411DM().getSendDate());
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        return phoneRealMsgInfoList;
     }
 
     private void formatTemp(){

@@ -158,6 +158,24 @@
                 </button>
             </div>
         </div>
+        <div class="columns-right" id="hisChartFeedC411DivP1" style="display: none;white-space: nowrap;">
+            <div class="form-inline" style="display: block;">
+                <div class="input-group" id="hisChartFeedC411Param">
+                    <label>参数：</label>
+                    <select name="hisChartFeedC411SelName_Param"
+                            id="hisChartFeedC411SelId_Param"
+                            class="input-sm">
+                    </select>
+                </div>
+                <label>时间：</label>
+                <div class="btn-group">
+                    <input type="text" id="hisChartFeedC411DateInterval" class="form-control" style="width: 320px;">
+                </div>
+                <button class="btn btn-default" id="hisChartFeedC411Query_storage" onclick="hisChartFeedC411Query()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                </button>
+            </div>
+        </div>
         <div class="col-md-8 col-sm-7" id="hisChartScaleC01DivP2" style="height:100%;display: none;">
             <div id="echartsScaleC01main" style="margin-top: 15px;"></div>
             <div id="hisChartScaleC01toolbar" style="margin-left: 15px;">
@@ -192,6 +210,9 @@
         </div>
         <div class="col-md-8 col-sm-7" id="hisChartHj212C213DivP2" style="height:100%;display: none;">
             <div id="echartsHj212C213main" style="margin-top: 15px;"></div>
+        </div>
+        <div class="col-md-8 col-sm-7" id="hisChartFeedC411DivP2" style="height:100%;display: none;">
+            <div id="echartsFeedC411main" style="margin-top: 15px;"></div>
         </div>
     </div>
 </div>

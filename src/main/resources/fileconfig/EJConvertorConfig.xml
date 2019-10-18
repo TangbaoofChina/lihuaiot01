@@ -609,6 +609,10 @@
             <value>名称</value>
         </property>
         <property>
+            <field>dState</field>
+            <value>状态</value>
+        </property>
+        <property>
             <field>sendDate</field>
             <value>设备时间</value>
         </property>
@@ -621,6 +625,22 @@
             <value>累积流量</value>
         </property>
         <property>
+            <field>impEP</field>
+            <value>总电量</value>
+        </property>
+        <property>
+            <field>todayEP</field>
+            <value>当日电量</value>
+        </property>
+        <property>
+            <field>airTemp</field>
+            <value>环境温度</value>
+        </property>
+        <property>
+            <field>waterTemp</field>
+            <value>SBR水温</value>
+        </property>
+        <property>
             <field>systemAuto</field>
             <value>自动模式</value>
         </property>
@@ -628,6 +648,71 @@
             <field>sbrCycle</field>
             <value>SBR周期运行</value>
         </property>
+        <property>
+            <field>collectMixerRun</field>
+            <value>集水池搅拌机运行</value>
+        </property>
+        <property>
+            <field>dephosphorizeRun</field>
+            <value>除磷投加机运行</value>
+        </property>
+        <property>
+            <field>collectPumpRun</field>
+            <value>集水池提升泵运行</value>
+        </property>
+        <property>
+            <field>sludgePump01Run</field>
+            <value>污泥泵1运行</value>
+        </property>
+        <property>
+            <field>sbrIntakePumpRun</field>
+            <value>SBR池进水泵运行</value>
+        </property>
+        <property>
+            <field>sbrMixer01Run</field>
+            <value>SBR池搅拌机01运行</value>
+        </property>
+        <property>
+            <field>fan01Run</field>
+            <value>回转式风机1运行</value>
+        </property>
+        <property>
+            <field>fan02Run</field>
+            <value>回转式风机2运行</value>
+        </property>
+        <property>
+            <field>sludgePump02Run</field>
+            <value>污泥泵02运行</value>
+        </property>
+        <property>
+            <field>decanterRun</field>
+            <value>滗水器运行</value>
+        </property>
+        <property>
+            <field>sbrMixer02Run</field>
+            <value>SBR池搅拌机02运行</value>
+        </property>
+        <property>
+            <field>sbrMixerOnceRun</field>
+            <value>SBR池一次搅拌运行</value>
+        </property>
+        <property>
+            <field>sbrMixerSecRun</field>
+            <value>SBR池二次搅拌运行</value>
+        </property>
+        <property>
+            <field>sbrStaticRun</field>
+            <value>SBR池静置</value>
+        </property>
+        <property>
+            <field>decanterCycleRun</field>
+            <value>滗水器周期</value>
+        </property>
+        <property>
+            <field>sbrActiveRun</field>
+            <value>静置活化</value>
+        </property>
+
         <property>
             <field>dephosphorizeSetMinute</field>
             <value>除磷投加机设定时间</value>
@@ -708,66 +793,7 @@
             <field>sbrActiveRunMinute</field>
             <value>SBR活化运行时间</value>
         </property>
-        <property>
-            <field>collectMixerRun</field>
-            <value>集水池搅拌机运行</value>
-        </property>
-        <property>
-            <field>dephosphorizeRun</field>
-            <value>除磷投加机运行</value>
-        </property>
-        <property>
-            <field>collectPumpRun</field>
-            <value>集水池提升泵运行</value>
-        </property>
-        <property>
-            <field>sludgePump01Run</field>
-            <value>污泥泵1运行</value>
-        </property>
-        <property>
-            <field>sbrIntakePumpRun</field>
-            <value>SBR池进水泵运行</value>
-        </property>
-        <property>
-            <field>sbrMixerOnceRun</field>
-            <value>SBR池一次搅拌</value>
-        </property>
-        <property>
-            <field>fan01Run</field>
-            <value>回转式风机1运行</value>
-        </property>
-        <property>
-            <field>fan02Run</field>
-            <value>回转式风机2运行</value>
-        </property>
-        <property>
-            <field>sbrMixerSecRun</field>
-            <value>SBR池二次搅拌</value>
-        </property>
-        <property>
-            <field>sbrStaticRun</field>
-            <value>SBR池静置</value>
-        </property>
-        <property>
-            <field>sludgePump02Run</field>
-            <value>污泥泵2运行</value>
-        </property>
-        <property>
-            <field>decanterCycleRun</field>
-            <value>滗水器周期</value>
-        </property>
-        <property>
-            <field>decanterRun</field>
-            <value>滗水器运行</value>
-        </property>
-        <property>
-            <field>sbrActiveRun</field>
-            <value>静置活化</value>
-        </property>
-        <property>
-            <field>sbrMixerRun</field>
-            <value>SBR池搅拌机运行</value>
-        </property>
+
         <property>
             <field>collectHighOn</field>
             <value>集水池液位高到了</value>
@@ -793,8 +819,25 @@
             <value>SBR池液位低到了</value>
         </property>
         <property>
+            <field>decanterOff</field>
+            <value>滗水器关</value>
+        </property>
+        <property>
+            <field>decanterOnOK</field>
+            <value>滗水器开到位</value>
+        </property>
+        <property>
+            <field>decanterOffOK</field>
+            <value>滗水器关到位</value>
+        </property>
+
+        <property>
             <field>collectMixerFault</field>
             <value>集水池搅拌机故障</value>
+        </property>
+        <property>
+            <field>dephosphorizeFault</field>
+            <value>除磷投加机故障</value>
         </property>
         <property>
             <field>collectPumpFault</field>
@@ -837,8 +880,118 @@
             <value>PLC电量不足</value>
         </property>
         <property>
-            <field>dState</field>
-            <value>状态</value>
+            <field>elecFault</field>
+            <value>智能电表通讯故障</value>
+        </property>
+        <property>
+            <field>airTempFault</field>
+            <value>空气温度变送器通讯故障</value>
+        </property>
+        <property>
+            <field>waterTempFault</field>
+            <value>SBR水温变送器通讯故障</value>
+        </property>
+
+        <property>
+            <field>uab</field>
+            <value>线电压Uab</value>
+        </property>
+        <property>
+            <field>ubc</field>
+            <value>线电压Ubc</value>
+        </property>
+        <property>
+            <field>uca</field>
+            <value>线电压Uca</value>
+        </property>
+        <property>
+            <field>ua</field>
+            <value>相电压Ua</value>
+        </property>
+        <property>
+            <field>ub</field>
+            <value>相电压Ub</value>
+        </property>
+        <property>
+            <field>uc</field>
+            <value>相电压Uc</value>
+        </property>
+        <property>
+            <field>ia</field>
+            <value>电流Ia</value>
+        </property>
+        <property>
+            <field>ib</field>
+            <value>电流Ib</value>
+        </property>
+        <property>
+            <field>ic</field>
+            <value>电流Ic</value>
+        </property>
+        <property>
+            <field>qt</field>
+            <value>合相有功功率</value>
+        </property>
+        <property>
+            <field>st</field>
+            <value>合相视在功率</value>
+        </property>
+        <property>
+            <field>pft</field>
+            <value>合相功率因数</value>
+        </property>
+        <property>
+            <field>freq</field>
+            <value>频率</value>
+        </property>
+        <property>
+            <field>expEP</field>
+            <value>反向有功总电能</value>
+        </property>
+
+        <property>
+            <field>collectMixerTotal</field>
+            <value>集水池搅拌机累计时长</value>
+        </property>
+        <property>
+            <field>dephosphorizeTotal</field>
+            <value>除磷投加机累计时长</value>
+        </property>
+        <property>
+            <field>collectPumpTotal</field>
+            <value>集水池提升泵累计时长</value>
+        </property>
+        <property>
+            <field>sludgePump01Total</field>
+            <value>污泥泵01累计时长</value>
+        </property>
+        <property>
+            <field>sbrIntakePumpTotal</field>
+            <value>SBR进水泵累计时长</value>
+        </property>
+        <property>
+            <field>sbrMixer01Total</field>
+            <value>SBR池搅拌机01累计时长</value>
+        </property>
+        <property>
+            <field>sbrMixer02Total</field>
+            <value>SBR池搅拌机02累计时长</value>
+        </property>
+        <property>
+            <field>fan01Total</field>
+            <value>回转式风机01累计时长</value>
+        </property>
+        <property>
+            <field>fan02Total</field>
+            <value>回转式风机02累计时长</value>
+        </property>
+        <property>
+            <field>sludgePump02Total</field>
+            <value>污泥泵02累计时长</value>
+        </property>
+        <property>
+            <field>decanterTotal</field>
+            <value>滗水器累计时长</value>
         </property>
     </entity>
 
@@ -854,6 +1007,10 @@
         <property>
             <field>dName</field>
             <value>名称</value>
+        </property>
+        <property>
+            <field>dState</field>
+            <value>状态</value>
         </property>
         <property>
             <field>sendDate</field>
@@ -883,10 +1040,7 @@
             <field>waterTemp</field>
             <value>SBR池水温</value>
         </property>
-        <property>
-            <field>dState</field>
-            <value>状态</value>
-        </property>
+
         <property>
             <field>collectMixerRun</field>
             <value>收集池搅拌机运行</value>
@@ -1190,6 +1344,55 @@
         <property>
             <field>expEP</field>
             <value>反向有功总电能</value>
+        </property>
+
+        <property>
+            <field>collectMixerTotal</field>
+            <value>收集池搅拌机累计时长</value>
+        </property>
+        <property>
+            <field>dosingPumpTotal</field>
+            <value>加药泵累计时长</value>
+        </property>
+        <property>
+            <field>collectWellPumpTotal</field>
+            <value>集水井提升泵累计时长</value>
+        </property>
+        <property>
+            <field>sludgePumpTotal</field>
+            <value>污泥泵累计时长</value>
+        </property>
+        <property>
+            <field>dephosphorizePumpTotal</field>
+            <value>除磷池提升泵累计时长</value>
+        </property>
+        <property>
+            <field>sbrMixer01Total</field>
+            <value>SBR池搅拌机01累计时长</value>
+        </property>
+        <property>
+            <field>sbrMixer02Total</field>
+            <value>SBR池搅拌机02累计时长</value>
+        </property>
+        <property>
+            <field>fan01Total</field>
+            <value>风机01累计时长</value>
+        </property>
+        <property>
+            <field>fan02Total</field>
+            <value>风机02累计时长</value>
+        </property>
+        <property>
+            <field>collectPumpTotal</field>
+            <value>收集池提升泵累计时长</value>
+        </property>
+        <property>
+            <field>dosingMixerTotal</field>
+            <value>加药罐搅拌机累计时长</value>
+        </property>
+        <property>
+            <field>decanterTotal</field>
+            <value>滗水器累计时长</value>
         </property>
     </entity>
 

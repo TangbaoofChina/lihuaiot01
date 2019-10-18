@@ -4,8 +4,11 @@ import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
 import com.system.po.Device.WeighC312DM;
+import com.system.po.FeedC411.SiloHisTemp;
+import com.system.po.FeedC411.SiloTempNameRelation;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.File;
 import java.util.List;
@@ -26,7 +29,7 @@ public interface FeedC411DMService {
      * @return
      * @throws Exception
      */
-    List<FeedC411DM> selectByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception;
+    List<FeedC411DM> selectByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception;
 
     /**
      * 获取单设备数据
@@ -83,4 +86,24 @@ public interface FeedC411DMService {
      * @return excel 文件
      */
     File exportStorage(List<FeedC411DM> storageList);
+
+    /**
+     * 为历史曲线服务，需要知道查询哪些温度点的曲线，合成温度点LIST
+     * @param devId
+     * @return
+     */
+    List<SiloTempNameRelation> selectParamsById(String devId);
+
+    /**
+     * 某一个设备的温度点的历史数据
+     * @param sDeviceId
+     * @param sTempName
+     * @param sStartTime
+     * @param sEndDate
+     * @return
+     */
+    List<SiloHisTemp> selectTempByDeviceIdAndDate(String sDeviceId,
+                                                  String sTempName,
+                                                  String sStartTime,
+                                                  String sEndDate);
 }

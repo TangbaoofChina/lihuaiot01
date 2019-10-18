@@ -207,6 +207,17 @@
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
+    <resultMap id="ChartHisResultMap" type="com.system.po.FeedC411.SiloHisTemp">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
+        <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>
+        <result column="DI_NAME" jdbcType="VARCHAR" property="dName"/>
+
+        <result column="TEMP" jdbcType="FLOAT" property="temp"/>
+
+        <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
+        <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
+    </resultMap>
     <resultMap id="BasePhoneHisResultMap" type="com.system.po.Device.FeedC411DMHis">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
@@ -362,5 +373,15 @@
         ) b,iot_deviceinfo a
         where rn = 1 and a.di_serialnum=b.device_serialnum
         order by instartdate desc
+    </select>
+    <select id="selectTempByDeviceIdAndDate" resultMap="ChartHisResultMap">
+        select
+        a.di_name,a.di_serialnum,b.${tempName} as temp,b.SENDDATE,b.RECEIVEDATE
+        from IOT_DEVICEINFO a,IOT_HISFEEDC_411 b
+        WHERE a.DI_SERIALNUM = b.DEVICE_SERIALNUM
+        AND a.DI_SERIALNUM = #{deviceId,jdbcType=VARCHAR}
+        AND b.SENDDATE &gt;= to_date(#{startDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        AND b.SENDDATE &lt;= to_date(#{endDate,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        order by b.SENDDATE asc
     </select>
 </mapper>

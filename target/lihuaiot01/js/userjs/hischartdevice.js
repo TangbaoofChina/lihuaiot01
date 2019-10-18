@@ -1,3 +1,4 @@
+//本页面停用
 var hisChartNowDeviceIds = [];
 var hisChartTableColumns;
 var hisChartbeginTimeStore = '';

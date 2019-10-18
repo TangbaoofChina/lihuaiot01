@@ -6,11 +6,15 @@ import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
+import com.system.po.FeedC411.SiloHisTemp;
+import com.system.po.FeedC411.SiloTempNameRelation;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
 import com.system.po.parameter.DeviceType;
 import com.system.service.DeviceTypeService;
 import com.system.service.FeedC411DMService;
+import com.system.util.DataConvertor;
+import com.system.util.DeviceUtil;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +44,7 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
     }
 
     @Override
-    public List<FeedC411DM> selectByByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
+    public List<FeedC411DM> selectByORGIdAndRoleId(String ORGId, List<RoleInfo> roleInfoList) throws Exception {
         List<String> roleIds = RoleInfoListUtil.getRoleIdsFromRoleInfoList(roleInfoList);
         List<FeedC411DM> dmList = feedC411DMMapper.selectByORGIdAndRoleId(ORGId,roleIds);
         DeviceType deviceType = deviceTypeService.selectDeviceTypeByTypeNum("411");
@@ -111,6 +115,54 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
         }
     }
 
+    @Override
+    public List<SiloTempNameRelation> selectParamsById(String devId) {
+        FeedC411DM dm = feedC411DMMapper.selectByDeviceId(devId);
+        List<SiloTempNameRelation> sTNRL01 = new ArrayList<>();
+        List<SiloTempNameRelation> sTNRL02 = new ArrayList<>();
+        List<SiloTempNameRelation> sTNRL03 = new ArrayList<>();
+        List<SiloTempNameRelation> sTNRL04 = new ArrayList<>();
+        List<SiloTempNameRelation> sTNRL05 = new ArrayList<>();
+        List<SiloTempNameRelation> sTNRL06 = new ArrayList<>();
+        int indexAll = 0;
+        if (dm.getCable01Nums() > 0)
+            sTNRL01 = formatTempRelation(1, dm.getCable01Nums(), dm.getCable01Used(),0);
+        indexAll = dm.getCable01Nums();
+        if (dm.getCable02Nums() > 0)
+            sTNRL02 = formatTempRelation(2, dm.getCable02Nums(), dm.getCable02Used(),indexAll);
+        indexAll = indexAll + dm.getCable02Nums();
+        if (dm.getCable03Nums() > 0)
+            sTNRL03 = formatTempRelation(3, dm.getCable03Nums(), dm.getCable03Used(),indexAll);
+        indexAll = indexAll + dm.getCable03Nums();
+        if (dm.getCable04Nums() > 0)
+            sTNRL04 = formatTempRelation(4, dm.getCable04Nums(), dm.getCable04Used(),indexAll);
+        indexAll = indexAll + dm.getCable04Nums();
+        if (dm.getCable05Nums() > 0)
+            sTNRL05 = formatTempRelation(5, dm.getCable05Nums(), dm.getCable05Used(),indexAll);
+        indexAll = indexAll + dm.getCable05Nums();
+        if (dm.getCable06Nums() > 0)
+            sTNRL06 = formatTempRelation(6, dm.getCable06Nums(), dm.getCable06Used(),indexAll);
+        List<SiloTempNameRelation> sTNRL = new ArrayList<>();
+        if (sTNRL01.size() > 0)
+            sTNRL.addAll(sTNRL01);
+        if (sTNRL02.size() > 0)
+            sTNRL.addAll(sTNRL02);
+        if (sTNRL03.size() > 0)
+            sTNRL.addAll(sTNRL03);
+        if (sTNRL04.size() > 0)
+            sTNRL.addAll(sTNRL04);
+        if (sTNRL05.size() > 0)
+            sTNRL.addAll(sTNRL05);
+        if (sTNRL06.size() > 0)
+            sTNRL.addAll(sTNRL06);
+        return sTNRL;
+    }
+
+    @Override
+    public List<SiloHisTemp> selectTempByDeviceIdAndDate(String sDeviceId, String sTempName, String sStartTime, String sEndDate) {
+        return feedC411DMMapper.selectTempByDeviceIdAndDate(sDeviceId,sTempName,sStartTime,sEndDate);
+    }
+
     //************************************私有函数********************************************//
     private List<FeedC411DM> judgeDeviceOnlineState(List<FeedC411DM> dmList,int offline) throws Exception
     {
@@ -132,5 +184,28 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
             baseDeviceMessage.setDState("离线");
         else
             baseDeviceMessage.setDState("在线");
+    }
+
+    /**
+     * 生成实际温度名称和协议温度名称关系表
+     * @param cableNum
+     * @param nums
+     * @param used
+     * @param index
+     * @return
+     */
+    private List<SiloTempNameRelation> formatTempRelation(int cableNum,int nums,String used,int index){
+        List<SiloTempNameRelation> sTNRs = new ArrayList<>();
+        for(int i=0;i<nums;i++){
+            if(!DataConvertor.Hex2Bool(used,i)){
+                String sRealTemp = String.valueOf(cableNum) + "-" + String.valueOf(i+1);
+                String sComTemp = "temp" + DataConvertor.formatZero(index+i+1,2);
+                SiloTempNameRelation sTNR = new SiloTempNameRelation();
+                sTNR.setRealName(sRealTemp);
+                sTNR.setCommunicatName(sComTemp);
+                sTNRs.add(sTNR);
+            }
+        }
+        return sTNRs;
     }
 }

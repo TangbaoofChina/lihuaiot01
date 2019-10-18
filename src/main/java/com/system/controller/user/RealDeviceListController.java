@@ -253,8 +253,6 @@ public class RealDeviceListController {
         }
     }
 
-
-
     private List<SewageC212DeviceMessage> selectSewageC212DeviceMessageList(String sORGId) throws Exception {
         List<SewageC212DeviceMessage> sewageC212DeviceMessageList = new ArrayList<SewageC212DeviceMessage>();
         //获取用户角色

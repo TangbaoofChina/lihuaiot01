@@ -1,6 +1,7 @@
 package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
+import com.system.po.Phone.PhoneRealMsgInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -996,4 +997,47 @@ public class FeedC411DM extends BaseDeviceMessage {
         return myDTCList;
     }
 
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("useState");
+        phoneRealMsgInfo01.setTitle("状态：");
+        if(this.getUseState() == 1){
+            phoneRealMsgInfo01.setValue("缓用");
+        }else{
+            phoneRealMsgInfo01.setValue("使用");
+        }
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo07.setId("stock");
+        phoneRealMsgInfo07.setTitle("库存：");
+        phoneRealMsgInfo07.setValue(String.valueOf(this.getStock()) + "吨");
+        phoneRealMsgInfo07.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+
+        PhoneRealMsgInfo phoneRealMsgInfo08 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo08.setId("water");
+        phoneRealMsgInfo08.setTitle("水份：");
+        phoneRealMsgInfo08.setValue(String.valueOf(this.getWater()) + "%");
+        phoneRealMsgInfo08.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo08);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("dState");
+        phoneRealMsgInfo05.setTitle("状态：");
+        phoneRealMsgInfo05.setValue(this.getSendDate());
+        phoneRealMsgInfo05.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("sendDate");
+        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setValue(this.getSendDate());
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        return phoneRealMsgInfoList;
+    }
 }

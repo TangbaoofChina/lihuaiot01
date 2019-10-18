@@ -1,4 +1,4 @@
-package com.system.controller.user;
+package com.system.controller.user.FeedC411;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
@@ -115,7 +115,7 @@ public class FeedC411RDLController {
         if (RoleInfoListUtil.checkIsAdmin(userlogin.getRoleInfoList())) {
             dmList = feedC411DMService.selectByORGId(sORGId);
         } else {
-            dmList = feedC411DMService.selectByByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
+            dmList = feedC411DMService.selectByORGIdAndRoleId(sORGId, userlogin.getRoleInfoList());
         }
         return dmList;
     }
