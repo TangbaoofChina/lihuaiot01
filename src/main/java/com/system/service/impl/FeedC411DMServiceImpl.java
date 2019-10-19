@@ -6,15 +6,14 @@ import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
-import com.system.po.FeedC411.SiloHisTemp;
-import com.system.po.FeedC411.SiloTempNameRelation;
+import com.system.po.FeedC411.FC411HisTemp;
+import com.system.po.FeedC411.FC411TempNameRelation;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
 import com.system.po.parameter.DeviceType;
 import com.system.service.DeviceTypeService;
 import com.system.service.FeedC411DMService;
 import com.system.util.DataConvertor;
-import com.system.util.DeviceUtil;
 import com.system.util.EJConvertor;
 import com.system.util.RoleInfoListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,12 +93,19 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
     }
 
     @Override
-    public List<MydataTableColumn> selectDeviceHead() throws Exception {
+    public List<MydataTableColumn> selectDeviceHead(String devId) throws Exception {
         //这里实现子类没想到什么好方法，暂时先这么处理吧，回头再想
         //需要根据不同饲料部的测温点数，生成不同的子类对象，因此需要知道不同的饲料部，怎么区分不同饲料部呢？
-        FeedC411DM dm = new FeedC411DM();
-        List<MydataTableColumn> mydataTableColumnList = dm.getDeviceHead();
-        return mydataTableColumnList;
+        List<MydataTableColumn> headColumnList = (new FeedC411DM()).getDeviceHead();
+        List<FeedC411DM> dmList = this.selectByORGId(devId);
+        if(dmList.size()>0){
+            if(dmList.get(0).getDSerialNum().contains("4800")){
+                headColumnList = (new FeedC411DMFY()).getDeviceHead();
+            }
+        }else if(devId.contains("4800")){
+            headColumnList = (new FeedC411DMFY()).getDeviceHead();
+        }
+        return headColumnList;
     }
 
     @Override
@@ -116,14 +122,14 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
     }
 
     @Override
-    public List<SiloTempNameRelation> selectParamsById(String devId) {
+    public List<FC411TempNameRelation> selectParamsById(String devId) {
         FeedC411DM dm = feedC411DMMapper.selectByDeviceId(devId);
-        List<SiloTempNameRelation> sTNRL01 = new ArrayList<>();
-        List<SiloTempNameRelation> sTNRL02 = new ArrayList<>();
-        List<SiloTempNameRelation> sTNRL03 = new ArrayList<>();
-        List<SiloTempNameRelation> sTNRL04 = new ArrayList<>();
-        List<SiloTempNameRelation> sTNRL05 = new ArrayList<>();
-        List<SiloTempNameRelation> sTNRL06 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL01 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL02 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL03 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL04 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL05 = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL06 = new ArrayList<>();
         int indexAll = 0;
         if (dm.getCable01Nums() > 0)
             sTNRL01 = formatTempRelation(1, dm.getCable01Nums(), dm.getCable01Used(),0);
@@ -142,7 +148,7 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
         indexAll = indexAll + dm.getCable05Nums();
         if (dm.getCable06Nums() > 0)
             sTNRL06 = formatTempRelation(6, dm.getCable06Nums(), dm.getCable06Used(),indexAll);
-        List<SiloTempNameRelation> sTNRL = new ArrayList<>();
+        List<FC411TempNameRelation> sTNRL = new ArrayList<>();
         if (sTNRL01.size() > 0)
             sTNRL.addAll(sTNRL01);
         if (sTNRL02.size() > 0)
@@ -159,7 +165,7 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
     }
 
     @Override
-    public List<SiloHisTemp> selectTempByDeviceIdAndDate(String sDeviceId, String sTempName, String sStartTime, String sEndDate) {
+    public List<FC411HisTemp> selectTempByDeviceIdAndDate(String sDeviceId, String sTempName, String sStartTime, String sEndDate) {
         return feedC411DMMapper.selectTempByDeviceIdAndDate(sDeviceId,sTempName,sStartTime,sEndDate);
     }
 
@@ -194,13 +200,13 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
      * @param index
      * @return
      */
-    private List<SiloTempNameRelation> formatTempRelation(int cableNum,int nums,String used,int index){
-        List<SiloTempNameRelation> sTNRs = new ArrayList<>();
+    private List<FC411TempNameRelation> formatTempRelation(int cableNum, int nums, String used, int index){
+        List<FC411TempNameRelation> sTNRs = new ArrayList<>();
         for(int i=0;i<nums;i++){
             if(!DataConvertor.Hex2Bool(used,i)){
                 String sRealTemp = String.valueOf(cableNum) + "-" + String.valueOf(i+1);
                 String sComTemp = "temp" + DataConvertor.formatZero(index+i+1,2);
-                SiloTempNameRelation sTNR = new SiloTempNameRelation();
+                FC411TempNameRelation sTNR = new FC411TempNameRelation();
                 sTNR.setRealName(sRealTemp);
                 sTNR.setCommunicatName(sComTemp);
                 sTNRs.add(sTNR);

@@ -2,12 +2,13 @@ package com.system.po.FeedC411;
 
 import com.system.util.DataConvertor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *测温电缆
  */
-public class SiloCable {
+public class FC411Cable {
     /**
      * 温度点数量
      */
@@ -19,7 +20,7 @@ public class SiloCable {
     /**
      * 测温点
      */
-    List<SiloTemp> temps;
+    List<FC411Temp> temps;
     /**
      * 电缆线最高温
      */
@@ -73,35 +74,50 @@ public class SiloCable {
         this.avg = avg;
     }
 
-    public List<SiloTemp> getTemps() {
+    public List<FC411Temp> getTemps() {
         return temps;
     }
 
-    public void setTemps(List<SiloTemp> temps) {
+    public void setTemps(List<FC411Temp> temps) {
         this.temps = temps;
     }
 
-    public SiloCable(){}
+    public FC411Cable(){}
 
-    public SiloCable(int num,int quantity,List<SiloTemp> siloTempList){
+    public FC411Cable(int num, int quantity, List<FC411Temp> FC411TempList){
         this.setNum(num);
         this.setQuantity(quantity);
-        this.setTemps(siloTempList);
+        this.setTemps(FC411TempList);
         //计算最高温
-        this.setHigh(countHigh(siloTempList));
+        this.setHigh(countHigh(FC411TempList));
         //计算最低温
-        this.setLow(countLow(siloTempList));
+        this.setLow(countLow(FC411TempList));
         //计算平均温
-        this.setAvg(countAvg(siloTempList));
+        this.setAvg(countAvg(FC411TempList));
+    }
+
+    public PFC411Cable formatPhoneSiloCable(){
+        PFC411Cable phoneSiloCable = new PFC411Cable();
+        phoneSiloCable.setNum(String.valueOf(this.getNum()));
+        phoneSiloCable.setBgColor("708090");
+
+        List<PFC411Temp> phoneSiloTemps = new ArrayList<>();
+        for(int i =0;i<this.getTemps().size();i++){
+            FC411Temp FC411Temp = this.getTemps().get(i);
+            PFC411Temp phoneSiloTemp = new PFC411Temp(String.valueOf(FC411Temp.getTemp()), FC411Temp.getColor());
+            phoneSiloTemps.add(phoneSiloTemp);
+        }
+        phoneSiloCable.setTemps(phoneSiloTemps);
+        return phoneSiloCable;
     }
 
     /**
      * 计算最高温度
      * @return
      */
-    private float countHigh(List<SiloTemp> siloTempList){
+    private float countHigh(List<FC411Temp> FC411TempList){
         float high = -100;
-        for (SiloTemp st:siloTempList
+        for (FC411Temp st: FC411TempList
              ) {
             if((st.getTemp() > high) && st.isEnable())
                 high = st.getTemp();
@@ -111,12 +127,12 @@ public class SiloCable {
 
     /**
      * 计算最低温度
-     * @param siloTempList
+     * @param FC411TempList
      * @return
      */
-    private float countLow(List<SiloTemp> siloTempList){
+    private float countLow(List<FC411Temp> FC411TempList){
         float low = 100;
-        for (SiloTemp st:siloTempList
+        for (FC411Temp st: FC411TempList
         ) {
             if((low > st.getTemp()) && st.isEnable())
                 low = st.getTemp();
@@ -126,14 +142,14 @@ public class SiloCable {
 
     /**
      * 计算平均温度
-     * @param siloTempList
+     * @param FC411TempList
      * @return
      */
-    private float countAvg(List<SiloTemp> siloTempList) {
+    private float countAvg(List<FC411Temp> FC411TempList) {
         float avg = 0;
         float accum = 0;
         int iCount = 0;
-        for (SiloTemp st : siloTempList
+        for (FC411Temp st : FC411TempList
         ) {
             if (st.isEnable()) {
                 accum = accum + st.getTemp();

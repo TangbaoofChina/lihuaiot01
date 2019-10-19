@@ -448,7 +448,8 @@ function rdlNodeSelected(event, data) {
     }
     else if (rootNodeId === "411")  //饲料部筒仓测温
     {
-        rdlSelectDeviceByTreeIdFeedC411();
+        rdlInitTableFeedC41102(queryParameter);
+        setTimeout("rdlSelectDeviceByTreeIdFeedC411()",300);
     }
     rdlSelectInfoByDeviceIdAndType();
 }
@@ -3160,15 +3161,15 @@ function rdlSelectDeviceByTreeIdWeighC312() {
                     //仓号
                     var feedC411SiloNum = document.getElementById("feedC411SiloNum");
                     //仓号
-                    feedC411SiloNum.innerHTML = result.feedC411DM.siloNum;
+                    feedC411SiloNum.innerHTML = result.siloNum;
                     //时间
                     var feedC411sendDate = document.getElementById("feedC411sendDate");
                     //时间
-                    feedC411sendDate.innerHTML = result.feedC411DM.sendDate;
+                    feedC411sendDate.innerHTML = result.sendDate;
                     //使用状态
                     var feedC411UseState01 = document.getElementById("feedC411UseState01");
                     var feedC411UseState02 = document.getElementById("feedC411UseState02");
-                    if (result.feedC411DM.useState === 0) {
+                    if (result.useState === 0) {
                         feedC411UseState01.style.color = '#FF0000';
                         feedC411UseState02.style.color = '#D3D3D3';
                     } else {
@@ -3496,10 +3497,10 @@ function rdlSelectDeviceByTreeIdWeighC312() {
             low.style.color = "#" + result.lowColor;
             avg.innerHTML = result.avg;
             avg.style.color = "#" + result.avgColor;
-            stock.innerHTML = result.feedC411DM.stock;
-            water.innerHTML = result.feedC411DM.water;
-            humidity01.innerHTML = result.feedC411DM.humidity01;
-            envHumidity.innerHTML = result.feedC411DM.envHumidity;
+            stock.innerHTML = result.stock;
+            water.innerHTML = result.water;
+            humidity01.innerHTML = result.humidity01;
+            envHumidity.innerHTML = result.envHumidity;
         }
 
     /*****************解析全仓 结束************************/
@@ -3507,7 +3508,7 @@ function rdlSelectDeviceByTreeIdWeighC312() {
         var questionColumns = [];
         $.ajax({
             type: 'POST',
-            data: {},
+            data: {devId:""},
             url: '/lihuaiot01/realDeviceList/feedC411DeviceHead',
             dataType: "json",
             success: function (result) {
@@ -3546,6 +3547,46 @@ function rdlSelectDeviceByTreeIdWeighC312() {
             }
         });
     }
+
+function rdlInitTableFeedC41102(devId) {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {devId:devId},
+        url: '/lihuaiot01/realDeviceList/feedC411DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        visible: json[i].visible
+                    };//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlFeedC411TableColumns = questionColumns;
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
 
     function rdlSelectDeviceByTreeIdFeedC411() {
 

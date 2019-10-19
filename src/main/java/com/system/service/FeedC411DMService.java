@@ -3,12 +3,10 @@ package com.system.service;
 import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
-import com.system.po.Device.WeighC312DM;
-import com.system.po.FeedC411.SiloHisTemp;
-import com.system.po.FeedC411.SiloTempNameRelation;
+import com.system.po.FeedC411.FC411HisTemp;
+import com.system.po.FeedC411.FC411TempNameRelation;
 import com.system.po.MydataTableColumn;
 import com.system.po.RoleInfo;
-import org.apache.ibatis.annotations.Param;
 
 import java.io.File;
 import java.util.List;
@@ -73,11 +71,11 @@ public interface FeedC411DMService {
 
 
     /**
-     * 列表表头
+     * 列表表头 存在多个表头
      * @return
      * @throws Exception
      */
-    List<MydataTableColumn> selectDeviceHead() throws Exception;
+    List<MydataTableColumn> selectDeviceHead(String devId) throws Exception;
 
     /**
      * 导出记录
@@ -92,7 +90,7 @@ public interface FeedC411DMService {
      * @param devId
      * @return
      */
-    List<SiloTempNameRelation> selectParamsById(String devId);
+    List<FC411TempNameRelation> selectParamsById(String devId);
 
     /**
      * 某一个设备的温度点的历史数据
@@ -102,8 +100,8 @@ public interface FeedC411DMService {
      * @param sEndDate
      * @return
      */
-    List<SiloHisTemp> selectTempByDeviceIdAndDate(String sDeviceId,
-                                                  String sTempName,
-                                                  String sStartTime,
-                                                  String sEndDate);
+    List<FC411HisTemp> selectTempByDeviceIdAndDate(String sDeviceId,
+                                                   String sTempName,
+                                                   String sStartTime,
+                                                   String sEndDate);
 }

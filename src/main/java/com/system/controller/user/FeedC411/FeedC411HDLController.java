@@ -77,12 +77,8 @@ public class FeedC411HDLController {
 
     @RequestMapping(value="/feedC411DeviceHead",method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String feedC411DeviceHead() throws Exception{
-
-        //List<MydataTableColumn> feedC411HeadColumnList =  feedC411DMService.selectDeviceHead();
-        //返回阜阳的筒仓测温表头，后面要考虑怎么区分
-        FeedC411DMFY feedC411DMFY = new FeedC411DMFY();
-        List<MydataTableColumn> headColumnList = feedC411DMFY.getDeviceHead();
+    public String feedC411DeviceHead(String devId) throws Exception{
+        List<MydataTableColumn> headColumnList =  feedC411DMService.selectDeviceHead(devId);
         String jsonString = JSON.toJSONString(headColumnList);
 
         return jsonString;

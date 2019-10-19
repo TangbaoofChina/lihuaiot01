@@ -207,7 +207,7 @@
         <result column="SENDDATE" jdbcType="VARCHAR" property="sendDate"/>
         <result column="RECEIVEDATE" jdbcType="VARCHAR" property="dReceiveTime"/>
     </resultMap>
-    <resultMap id="ChartHisResultMap" type="com.system.po.FeedC411.SiloHisTemp">
+    <resultMap id="ChartHisResultMap" type="com.system.po.FeedC411.FC411HisTemp">
         <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
         <id column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNum"/>
         <result column="DI_SERIALNUM" jdbcType="VARCHAR" property="dSerialNumDec"/>

@@ -1,6 +1,7 @@
 package com.system.controller.user.FeedC411;
 
 import com.alibaba.fastjson.JSON;
+import com.system.po.Device.FeedC411.FeedC411DMBase;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
 import com.system.po.Device.FeedC411DM;
 import com.system.po.MydataTableColumn;
@@ -49,11 +50,10 @@ public class FeedC411RDLController {
 
     @RequestMapping(value = "/feedC411DeviceHead", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public String feedC411DeviceHead() throws Exception {
-        //List<MydataTableColumn> headColumnList = feedC411DMService.selectDeviceHead();
+    public String feedC411DeviceHead(String devId) throws Exception {
+        List<MydataTableColumn> headColumnList = feedC411DMService.selectDeviceHead(devId);
         //返回阜阳的筒仓测温表头，后面要考虑怎么区分
-        FeedC411DMFY feedC411DMFY = new FeedC411DMFY();
-        List<MydataTableColumn> headColumnList = feedC411DMFY.getDeviceHead();
+
         String jsonString = JSON.toJSONString(headColumnList);
         return jsonString;
     }
@@ -64,14 +64,7 @@ public class FeedC411RDLController {
         String jsonString = "[]";
         if (sDeviceId != null) {
             FeedC411DM dm = feedC411DMService.selectByDeviceId(sDeviceId);
-            //阜阳-筒仓测温
-            if (sDeviceId.contains("4800")) {
-                if (dm != null) {
-                    FeedC411DMFY dmfy = new FeedC411DMFY(dm);
-                    jsonString = JSON.toJSONString(dmfy);
-                    return jsonString;
-                }
-            }
+            dm.formatTemp();
             if (dm != null)
                 jsonString = JSON.toJSONString(dm);
         }

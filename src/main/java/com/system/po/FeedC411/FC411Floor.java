@@ -1,13 +1,15 @@
 package com.system.po.FeedC411;
 
+import com.system.po.Device.FeedC411DM;
 import com.system.util.DataConvertor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 筒仓的层
  */
-public class SiloFloor {
+public class FC411Floor {
     /**
      * 层最高温
      */
@@ -95,10 +97,30 @@ public class SiloFloor {
         this.avgColor = avgColor;
     }
 
-    public SiloFloor(){}
+    public FC411Floor(){}
 
-    public SiloFloor(int num,List<SiloTemp> temps,float high){
+    /*public FC411Floor(int num, List<FC411Temp> temps, float high){
         this.setNum(num);
+        this.setHigh(countHigh(temps));
+        this.setLow(countLow(temps));
+        this.setAvg(countAvg(temps));
+        if(this.getHigh() > high)
+            this.setHighColor("FF0000");
+        else
+            this.setHighColor("000000");
+        if(this.getLow() > high)
+            this.setLowColor("FF0000");
+        else
+            this.setLowColor("000000");
+        if(this.getAvg() > high)
+            this.setAvgColor("FF0000");
+        else
+            this.setAvgColor("000000");
+    }*/
+
+    public FC411Floor(int num, List<FC411Cable> fc411CableList,float high){
+        this.setNum(num);
+        List<FC411Temp> temps = formatTemps(num,fc411CableList);
         this.setHigh(countHigh(temps));
         this.setLow(countLow(temps));
         this.setAvg(countAvg(temps));
@@ -117,12 +139,35 @@ public class SiloFloor {
     }
 
     /**
+     * 合成某一层的温度list
+     * @param num
+     * @param fc411CableList
+     * @return
+     */
+    private List<FC411Temp> formatTemps(int num, List<FC411Cable> fc411CableList) {
+        List<FC411Temp> fc411Temps = new ArrayList<>();
+        for (int i = 0; i < fc411CableList.size(); i++) {
+            List<FC411Temp> fc411Temps01 = fc411CableList.get(i).getTemps();
+            for (int j = 0; j < fc411Temps01.size(); j++) {
+                if (fc411Temps01.get(j).getNum() == num) {
+                    if (fc411Temps01.get(j).isEnable()) {
+                        FC411Temp fc411Temp = fc411Temps01.get(j);
+                        fc411Temps.add(fc411Temp);
+                    }
+                    break;
+                }
+            }
+        }
+        return fc411Temps;
+    }
+
+    /**
      * 计算最高温度
      * @return
      */
-    private float countHigh(List<SiloTemp> siloTempList){
+    private float countHigh(List<FC411Temp> FC411TempList){
         float high = -100;
-        for (SiloTemp st:siloTempList
+        for (FC411Temp st: FC411TempList
         ) {
             if((st.getTemp() > high) && st.isEnable())
                 high = st.getTemp();
@@ -132,12 +177,12 @@ public class SiloFloor {
 
     /**
      * 计算最低温度
-     * @param siloTempList
+     * @param FC411TempList
      * @return
      */
-    private float countLow(List<SiloTemp> siloTempList){
+    private float countLow(List<FC411Temp> FC411TempList){
         float low = 100;
-        for (SiloTemp st:siloTempList
+        for (FC411Temp st: FC411TempList
         ) {
             if((low > st.getTemp()) && st.isEnable())
                 low = st.getTemp();
@@ -147,14 +192,14 @@ public class SiloFloor {
 
     /**
      * 计算平均温度
-     * @param siloTempList
+     * @param FC411TempList
      * @return
      */
-    private float countAvg(List<SiloTemp> siloTempList) {
+    private float countAvg(List<FC411Temp> FC411TempList) {
         float avg = 0;
         float accum = 0;
         int iCount = 0;
-        for (SiloTemp st : siloTempList
+        for (FC411Temp st : FC411TempList
         ) {
             if (st.isEnable()) {
                 accum = accum + st.getTemp();

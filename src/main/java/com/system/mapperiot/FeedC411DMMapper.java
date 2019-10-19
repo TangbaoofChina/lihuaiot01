@@ -2,8 +2,7 @@ package com.system.mapperiot;
 
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.FeedC411DM;
-import com.system.po.Device.WeighC312DM;
-import com.system.po.FeedC411.SiloHisTemp;
+import com.system.po.FeedC411.FC411HisTemp;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,8 +22,8 @@ public interface FeedC411DMMapper {
                                                                  @Param("startDate") String sStartDate,
                                                                  @Param("endDate") String sEndDate);
 
-    List<SiloHisTemp> selectTempByDeviceIdAndDate(@Param("deviceId") String sDeviceId,
-                                                  @Param("tempName") String sTempName,
-                                                  @Param("startDate") String sStartTime,
-                                                  @Param("endDate") String sEndDate);
+    List<FC411HisTemp> selectTempByDeviceIdAndDate(@Param("deviceId") String sDeviceId,
+                                                   @Param("tempName") String sTempName,
+                                                   @Param("startDate") String sStartTime,
+                                                   @Param("endDate") String sEndDate);
 }

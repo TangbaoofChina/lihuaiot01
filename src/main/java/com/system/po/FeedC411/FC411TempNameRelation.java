@@ -1,6 +1,6 @@
 package com.system.po.FeedC411;
 
-public class SiloTempNameRelation {
+public class FC411TempNameRelation {
     //实际名称 1-temp01~temp10;2-temp01~temp10....
     String realName;
     //通讯名称 temp01-60

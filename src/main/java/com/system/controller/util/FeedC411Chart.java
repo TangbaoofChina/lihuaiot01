@@ -2,7 +2,7 @@ package com.system.controller.util;
 
 import com.system.po.EChartsOptions.*;
 import com.system.po.EChartsOptions.EChartsParts.ECxAxisAxisLabel;
-import com.system.po.FeedC411.SiloHisTemp;
+import com.system.po.FeedC411.FC411HisTemp;
 import com.system.po.Phone.PhoneEChartsOptions;
 import com.system.po.parameter.ParameterData;
 import com.system.util.EChartsUtil;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 饲料部-筒仓测温
@@ -20,16 +19,16 @@ import java.util.Map;
 public class FeedC411Chart {
 
     //生成曲线
-    public PhoneEChartsOptions getECharts(String sQueryParam, List<SiloHisTemp> siloHisTempList){
-        if(siloHisTempList.size() <1)
+    public PhoneEChartsOptions getECharts(String sQueryParam, List<FC411HisTemp> FC411HisTempList){
+        if(FC411HisTempList.size() <1)
             return null;
-        SiloHisTemp siloHisTemp01 = siloHisTempList.get(0);
-        String devName = siloHisTemp01.getDName();
-        PhoneEChartsOptions phoneEChartsOptions = getTempCharts(devName,sQueryParam,siloHisTempList);
+        FC411HisTemp FC411HisTemp01 = FC411HisTempList.get(0);
+        String devName = FC411HisTemp01.getDName();
+        PhoneEChartsOptions phoneEChartsOptions = getTempCharts(devName,sQueryParam, FC411HisTempList);
         return phoneEChartsOptions;
     }
 
-    private PhoneEChartsOptions getTempCharts(String devName,String devParm,List<SiloHisTemp> siloHisTempList){
+    private PhoneEChartsOptions getTempCharts(String devName,String devParm,List<FC411HisTemp> FC411HisTempList){
         PhoneEChartsOptions phoneEChartsOptions = new PhoneEChartsOptions();
         phoneEChartsOptions.setColor(EChartsUtil.Color());
 
@@ -49,7 +48,7 @@ public class FeedC411Chart {
         phoneEChartsOptions.setLegend(eChartsLegend);
         //X轴坐标
         EChartsXAxis eChartsXAxis = new EChartsXAxis();
-        List<String> sDateList = FeedC411Util.getDate01List(siloHisTempList);
+        List<String> sDateList = FeedC411Util.getDate01List(FC411HisTempList);
         eChartsXAxis.setData(sDateList);
         //分割线
         EcSplitLine ecxSplitLine = new EcSplitLine();
@@ -65,32 +64,32 @@ public class FeedC411Chart {
         EChartsYAxis eChartsYAxis = new EChartsYAxis();
         eChartsYAxis.setMin("0");
         eChartsYAxis.setMax("1");
-        if (siloHisTempList.size() > 0) {
-            eChartsYAxis.setMin(this.getMinTemp(siloHisTempList));
-            eChartsYAxis.setMax(this.getMaxTemp(siloHisTempList));
+        if (FC411HisTempList.size() > 0) {
+            eChartsYAxis.setMin(this.getMinTemp(FC411HisTempList));
+            eChartsYAxis.setMax(this.getMaxTemp(FC411HisTempList));
         }
         eChartsYAxis.setType("value");
         EcSplitLine ecySplitLine = new EcSplitLine();
         eChartsYAxis.setSplitLine(ecySplitLine);
         phoneEChartsOptions.setyAxis(eChartsYAxis);
 
-        phoneEChartsOptions.setSeries(this.getTempSeries(devParm,siloHisTempList));
+        phoneEChartsOptions.setSeries(this.getTempSeries(devParm, FC411HisTempList));
         phoneEChartsOptions.showPoint(true, true);
         return phoneEChartsOptions;
     }
 
     //获取流量的最小值
-    private String getMinTemp(List<SiloHisTemp> siloHisTempList) {
+    private String getMinTemp(List<FC411HisTemp> FC411HisTempList) {
         //遍历map中的值
         float minValue = 0;
         //取出第一个值，防止默认值0最小
-        for (SiloHisTemp value : siloHisTempList) {
+        for (FC411HisTemp value : FC411HisTempList) {
             minValue = Float.valueOf(value.getTemp());
             break;
         }
-        for (int i = 0; i < siloHisTempList.size(); i++) {
-            if (Float.valueOf(siloHisTempList.get(i).getTemp()) < minValue) {
-                minValue = Float.valueOf(siloHisTempList.get(i).getTemp());
+        for (int i = 0; i < FC411HisTempList.size(); i++) {
+            if (Float.valueOf(FC411HisTempList.get(i).getTemp()) < minValue) {
+                minValue = Float.valueOf(FC411HisTempList.get(i).getTemp());
             }
         }
         minValue = minValue - 3;
@@ -101,21 +100,21 @@ public class FeedC411Chart {
     }
 
     //获取流量的最大值
-    private String getMaxTemp(List<SiloHisTemp> siloHisTempList) {
+    private String getMaxTemp(List<FC411HisTemp> FC411HisTempList) {
         //遍历map中的值
         float maxValue = 0; //这里不需要取出第一个值
-        for (int i = 0; i < siloHisTempList.size(); i++) {
-            if (Float.valueOf(siloHisTempList.get(i).getTemp()) > maxValue) {
-                maxValue = Float.valueOf(siloHisTempList.get(i).getTemp());
+        for (int i = 0; i < FC411HisTempList.size(); i++) {
+            if (Float.valueOf(FC411HisTempList.get(i).getTemp()) > maxValue) {
+                maxValue = Float.valueOf(FC411HisTempList.get(i).getTemp());
             }
         }
         maxValue = maxValue + 3f;
         return String.valueOf(maxValue);
     }
 
-    private List<ParameterData> getTempSeries(String devParm,List<SiloHisTemp> siloHisTempList) {
+    private List<ParameterData> getTempSeries(String devParm,List<FC411HisTemp> FC411HisTempList) {
         List<ParameterData> parameterDataList = new ArrayList<>();
-        if (siloHisTempList.size() < 1) {
+        if (FC411HisTempList.size() < 1) {
             return parameterDataList;
         }
 
@@ -123,8 +122,8 @@ public class FeedC411Chart {
         String parameterName = devParm + "-温度(℃)";
         parameterData.setName(parameterName);
         List<String> dataList = new ArrayList<>();
-        for (int i = 0; i < siloHisTempList.size(); i++) {
-            dataList.add(String.valueOf(siloHisTempList.get(i).getTemp()));
+        for (int i = 0; i < FC411HisTempList.size(); i++) {
+            dataList.add(String.valueOf(FC411HisTempList.get(i).getTemp()));
         }
         parameterData.setData(dataList);
         parameterData.setType("line");

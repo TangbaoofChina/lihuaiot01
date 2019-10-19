@@ -3,7 +3,7 @@ package com.system.po.FeedC411;
 import com.system.po.Device.BaseDeviceMessage;
 
 //为单温度曲线服务
-public class SiloHisTemp extends BaseDeviceMessage {
+public class FC411HisTemp extends BaseDeviceMessage {
     //温度值
     private String temp;
     //设备发送数据时间
