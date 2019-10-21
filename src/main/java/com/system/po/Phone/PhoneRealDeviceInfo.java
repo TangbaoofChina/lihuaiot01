@@ -5,6 +5,7 @@ import java.util.List;
 public class PhoneRealDeviceInfo {
     private String devNum;
     private String title;
+    private String state;
     private List<PhoneRealMsgInfo> data;
 
     public String getDevNum() {
@@ -29,5 +30,13 @@ public class PhoneRealDeviceInfo {
 
     public void setData(List<PhoneRealMsgInfo> data) {
         this.data = data;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

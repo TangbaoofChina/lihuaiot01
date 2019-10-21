@@ -153,16 +153,9 @@ public class FeedC411DM extends FeedC411DMBase {
         phoneRealMsgInfo08.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo08);
 
-        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo05.setId("dState");
-        phoneRealMsgInfo05.setTitle("状态：");
-        phoneRealMsgInfo05.setValue(this.getSendDate());
-        phoneRealMsgInfo05.setFlag("1");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
-
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("sendDate");
-        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setTitle("时间：");
         phoneRealMsgInfo06.setValue(this.getSendDate());
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
@@ -178,7 +171,7 @@ public class FeedC411DM extends FeedC411DMBase {
         else
             siloTempInfo.setUseState("缓用");
         //层数
-        siloTempInfo.setFloorNum(String.valueOf(this.getFloors().size()));
+        siloTempInfo.setFloorNum(this.getFloors().size());
         //库存
         siloTempInfo.setStock(String.valueOf(this.getStock()));
         //水份

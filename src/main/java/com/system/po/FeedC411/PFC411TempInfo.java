@@ -11,7 +11,7 @@ public class PFC411TempInfo {
     //筒仓状态
     String useState;
     //筒仓层数
-    String floorNum;
+    int floorNum;
     //最高温
     PFC411Temp high;
     //最低温
@@ -45,11 +45,11 @@ public class PFC411TempInfo {
         this.useState = useState;
     }
 
-    public String getFloorNum() {
+    public int getFloorNum() {
         return floorNum;
     }
 
-    public void setFloorNum(String floorNum) {
+    public void setFloorNum(int floorNum) {
         this.floorNum = floorNum;
     }
 

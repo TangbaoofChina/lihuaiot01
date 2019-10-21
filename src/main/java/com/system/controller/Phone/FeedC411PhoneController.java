@@ -148,6 +148,11 @@ public class FeedC411PhoneController {
         //形成设备信息
         phoneRealDeviceInfo.setDevNum(feedC411DM.getDSerialNum());
         phoneRealDeviceInfo.setTitle(feedC411DM.getDName());
+        if(feedC411DM.getDState().equals("在线")){
+            phoneRealDeviceInfo.setState("1");
+        }else{
+            phoneRealDeviceInfo.setState("0");
+        }
         phoneRealDeviceInfo.setData(phoneRealMsgInfoList);
         return phoneRealDeviceInfo;
     }
