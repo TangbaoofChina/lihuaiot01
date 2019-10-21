@@ -6,14 +6,19 @@ import com.system.po.Device.FeedC411DM;
 import com.system.po.DeviceRoleInfo;
 import com.system.po.FeedC411.PFC411;
 import com.system.po.FeedC411.PFC411TempInfo;
+import com.system.po.ORGTreeNode;
 import com.system.po.Phone.PhoneRealDeviceInfo;
 import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.po.Phone.PhoneTree;
 import com.system.po.RoleInfo;
 import com.system.po.UserOAEas;
 import com.system.service.DeviceRoleInfoService;
 import com.system.service.FeedC411DMService;
+import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
 import com.system.service.RoleInfoService;
+import com.system.util.DeviceUtil;
+import com.system.util.PhoneTreeNodeMerger;
 import com.system.util.RoleInfoListUtil;
 import com.system.util.msg.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +44,36 @@ public class FeedC411PhoneController {
     private DeviceRoleInfoService deviceRoleInfoService;
     @Autowired
     private FeedC411DMService feedC411DMService;
+    @Autowired
+    private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
+
+    @RequestMapping(value = "selectOrg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectOrg(String userId) throws Exception {
+        if (userId == null || userId.equals(""))
+            return JSON.toJSONString(ResponseUtil.setResponsFaild());;
+        //OAID转换为EASID
+        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
+        if (roleInfoList.size() < 1)
+            return JSON.toJSONString(ResponseUtil.setResponsFaild());;
+        List<ORGTreeNode> orgTreeNodeList411 = new ArrayList<ORGTreeNode>();
+        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
+            List<RoleInfo> roleInfoListAdmin = roleInfoService.selectRoleInfoByRoleName("411");
+            orgTreeNodeList411 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("411", roleInfoListAdmin);
+        } else {
+            orgTreeNodeList411 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("411", roleInfoList);
+        }
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild());
+        List<PhoneTree> phoneTrees = new ArrayList<>();
+        if (orgTreeNodeList411.size() > 0) {
+            List<PhoneTree> phoneTreeList411 = DeviceUtil.getPhoneTreeList(orgTreeNodeList411);
+            PhoneTree phoneTree411 = PhoneTreeNodeMerger.merge(phoneTreeList411);
+            phoneTrees.add(phoneTree411);
+        }
+        jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneTrees));
+        return jsonString;
+    }
 
     @RequestMapping(value = "selectRealDeviceInfoSummary", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
