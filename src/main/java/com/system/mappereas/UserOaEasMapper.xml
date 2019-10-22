@@ -8,12 +8,29 @@
         <result column="personId" jdbcType="VARCHAR" property="personId"/>
         <result column="pname" jdbcType="VARCHAR" property="pName"/>
     </resultMap>
+    <resultMap id="BaseResultMap2019" type="com.system.po.UserOAEas2019">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="oaid" jdbcType="VARCHAR" property="oaId"/>
+        <id column="oaid2019" jdbcType="VARCHAR" property="oaId2019"/>
+        <result column="easid" jdbcType="VARCHAR" property="easId"/>
+        <result column="personId" jdbcType="VARCHAR" property="personId"/>
+        <result column="pname" jdbcType="VARCHAR" property="pName"/>
+    </resultMap>
     <select id="selectUserOaEasByOaId" parameterType="String" resultMap="BaseResultMap">
         select s.username as pname, s.id as oaid,p.fid as easid,b.fid as personId
         from oadb.system_users s
         left join lihua.t_pm_user p on s.easuser_id = p.fpersonid
         left join lihua.t_bd_person b on s.easuser_id =b.fid
         where  s.id = #{oaId}
+    </select>
+    <select id="selectUserOaEasByOaId2019" parameterType="String" resultMap="BaseResultMap2019">
+        select s.username as pname, s.id as oaid,p.fid as easid,b.fid as personId,eh.id as oaid2019
+        from oadb.system_users s
+        left join lihua.t_pm_user p on s.easuser_id = p.fpersonid
+        left join lihua.t_bd_person b on s.easuser_id = b.fid
+        left join ecology.hrmresource eh on eh.outkey = b.fid
+        where eh.id = #{oaId2019}
+        and  p.fisdelete=0  and p.fislocked=0  and  p.fforbidden=0
     </select>
     <select id="selectUserOaEasByEasId" parameterType="String" resultMap="BaseResultMap">
         select s.username as pname, s.id as oaid,p.fid as easid,b.fid as personId

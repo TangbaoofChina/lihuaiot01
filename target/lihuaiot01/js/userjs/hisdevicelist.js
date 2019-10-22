@@ -224,6 +224,7 @@ function hisNodeSelected(event, data) {
         uiHj212C213List.style.display = "none";
         uiWeighC312List.style.display = "none";
         uiFeedC411List.style.display = "block";
+        hisInitTableFeedC41102(data.id);
     }
 }
 
@@ -1303,7 +1304,7 @@ function hisInitTableFeedC411() {
     var questionColumns = [];
     $.ajax({
         type: 'POST',
-        data: {},
+        data: {devId:"411"},
         url: '/lihuaiot01/hisDeviceList/feedC411DeviceHead',
         dataType: "json",
         success: function (result) {
@@ -1332,6 +1333,41 @@ function hisInitTableFeedC411() {
         }
     });
 }
+
+function hisInitTableFeedC41102(devId) {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {devId:devId},
+        url: '/lihuaiot01/hisDeviceList/feedC411DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align,visible:json[i].visible};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisFeedC411TableColumns = questionColumns;
+            $('#hisFeedC411DeviceList').bootstrapTable('destroy');
+            $('#hisFeedC411DeviceList').bootstrapTable({
+                columns: questionColumns,
+                // 显示下拉框勾选要显示的列
+                showColumns : true,
+                // 设置最少显示列个数
+                minimumCountColumns: 2,
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
 //请求服务数据时所传参数
 function hisQueryParamsFeedC411(params) {
     var queryParameter = hisNowTreeNode.id;

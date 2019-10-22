@@ -1,17 +1,14 @@
 package com.system.controller.Phone;
 
 import com.alibaba.fastjson.JSON;
+import com.system.po.*;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
 import com.system.po.Device.FeedC411DM;
-import com.system.po.DeviceRoleInfo;
 import com.system.po.FeedC411.PFC411;
 import com.system.po.FeedC411.PFC411TempInfo;
-import com.system.po.ORGTreeNode;
 import com.system.po.Phone.PhoneRealDeviceInfo;
 import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.po.Phone.PhoneTree;
-import com.system.po.RoleInfo;
-import com.system.po.UserOAEas;
 import com.system.service.DeviceRoleInfoService;
 import com.system.service.FeedC411DMService;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
@@ -53,8 +50,9 @@ public class FeedC411PhoneController {
         if (userId == null || userId.equals(""))
             return JSON.toJSONString(ResponseUtil.setResponsFaild());;
         //OAID转换为EASID
-        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
+        //需要根据新OA：ID 查询到旧OA：ID
+        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
         if (roleInfoList.size() < 1)
             return JSON.toJSONString(ResponseUtil.setResponsFaild());;
         List<ORGTreeNode> orgTreeNodeList411 = new ArrayList<ORGTreeNode>();
@@ -119,8 +117,8 @@ public class FeedC411PhoneController {
         if (orgId == null || orgId.equals(""))
             return feedC411DMList;
         //OAID转换为EASID
-        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
+        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
         if (roleInfoList.size() < 1)
             return feedC411DMList;
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
@@ -171,8 +169,8 @@ public class FeedC411PhoneController {
         if (devNum == null || devNum.equals(""))
             return null;
         //OAID转换为EASID
-        UserOAEas userOAEas = phoneUserOaEasService.selectUserOaEasByOaId(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas.getEasId());
+        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
+        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
         if (roleInfoList.size() < 1)
             return null;
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
