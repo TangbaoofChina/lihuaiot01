@@ -19,6 +19,7 @@ com\system\security\util\MD5Util.class
 com\system\controller\user\hj212C213\RealDeviceListHj212213Controller.class
 com\system\po\Phone\PWeighC312\PWeighC312PartDetail.class
 com\system\po\EC01\EC01DayWater.class
+com\system\po\UserOAEas2019.class
 com\system\service\Eas\impl\ChickenRoomInfoServiceImpl.class
 com\system\po\parameter\DeviceType.class
 com\system\service\impl\FeedC411DMServiceImpl.class

@@ -31,7 +31,7 @@ import java.util.List;
 @Controller
 @CrossOrigin(maxAge = 3600)   //解决跨域问题
 @RequestMapping("/phone/feedC411")
-public class FeedC411PhoneController {
+public class FeedC411PhoneController extends BaseController {
 
     @Autowired
     private RoleInfoService roleInfoService;
@@ -50,11 +50,9 @@ public class FeedC411PhoneController {
         if (userId == null || userId.equals(""))
             return JSON.toJSONString(ResponseUtil.setResponsFaild());;
         //OAID转换为EASID
-        //需要根据新OA：ID 查询到旧OA：ID
-        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
         if (roleInfoList.size() < 1)
-            return JSON.toJSONString(ResponseUtil.setResponsFaild());;
+            return JSON.toJSONString(ResponseUtil.setResponsFaild("用户不存在或无权限！"));;
         List<ORGTreeNode> orgTreeNodeList411 = new ArrayList<ORGTreeNode>();
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
             List<RoleInfo> roleInfoListAdmin = roleInfoService.selectRoleInfoByRoleName("411");
@@ -62,14 +60,15 @@ public class FeedC411PhoneController {
         } else {
             orgTreeNodeList411 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("411", roleInfoList);
         }
-        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild());
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
         List<PhoneTree> phoneTrees = new ArrayList<>();
         if (orgTreeNodeList411.size() > 0) {
             List<PhoneTree> phoneTreeList411 = DeviceUtil.getPhoneTreeList(orgTreeNodeList411);
             PhoneTree phoneTree411 = PhoneTreeNodeMerger.merge(phoneTreeList411);
             phoneTrees.add(phoneTree411);
         }
-        jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneTrees));
+        if(phoneTrees.size() > 0)
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneTrees));
         return jsonString;
     }
 
@@ -81,7 +80,7 @@ public class FeedC411PhoneController {
              ) {
             feedC411DM.formatTemp();
         }
-        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild());
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
         if (feedC411DMList.size() > 0) {
             List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = getPhoneRealDeviceInfoSummary(feedC411DMList);
             jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneRealDeviceInfoList));
@@ -93,7 +92,7 @@ public class FeedC411PhoneController {
     @ResponseBody
     public String selectRealDeviceInfoDetail(String userId, String devNum) throws Exception {
         FeedC411DM feedC411DM = getRealDMByUserIdAndDevNum(userId, devNum);
-        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild());
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
         if (feedC411DM != null) {
             feedC411DM.formatTemp();
             PFC411 PFC411 = getOneRealDeviceInfoDetail(feedC411DM);
@@ -117,8 +116,7 @@ public class FeedC411PhoneController {
         if (orgId == null || orgId.equals(""))
             return feedC411DMList;
         //OAID转换为EASID
-        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
         if (roleInfoList.size() < 1)
             return feedC411DMList;
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
@@ -169,8 +167,7 @@ public class FeedC411PhoneController {
         if (devNum == null || devNum.equals(""))
             return null;
         //OAID转换为EASID
-        UserOAEas2019 userOAEas2019 = phoneUserOaEasService.selectUserOaEasByOaId2019(userId);
-        List<RoleInfo> roleInfoList = roleInfoService.selectRoleInfoByUserId(userOAEas2019.getEasId());
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
         if (roleInfoList.size() < 1)
             return null;
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
