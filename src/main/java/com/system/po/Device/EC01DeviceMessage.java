@@ -1258,6 +1258,39 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo22.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo22);
 
+        PhoneRealMsgInfo phoneRealMsgInfo23 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo23.setId("fan06On");
+        phoneRealMsgInfo23.setTitle("风机6：");
+        if (fan06On) {
+            phoneRealMsgInfo23.setValue("开");
+        } else {
+            phoneRealMsgInfo23.setValue("关");
+        }
+        phoneRealMsgInfo23.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo23);
+
+        PhoneRealMsgInfo phoneRealMsgInfo24 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo24.setId("fan07On");
+        phoneRealMsgInfo24.setTitle("风机7：");
+        if (fan07On) {
+            phoneRealMsgInfo24.setValue("开");
+        } else {
+            phoneRealMsgInfo24.setValue("关");
+        }
+        phoneRealMsgInfo24.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo24);
+
+        PhoneRealMsgInfo phoneRealMsgInfo25 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo25.setId("fan08On");
+        phoneRealMsgInfo25.setTitle("风机8：");
+        if (fan08On) {
+            phoneRealMsgInfo25.setValue("开");
+        } else {
+            phoneRealMsgInfo25.setValue("关");
+        }
+        phoneRealMsgInfo25.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo25);
+
         PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
         phoneRealMsgInfo14.setId("dState");
         phoneRealMsgInfo14.setTitle("状态：");

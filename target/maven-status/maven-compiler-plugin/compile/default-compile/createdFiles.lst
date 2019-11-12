@@ -172,7 +172,6 @@ com\system\po\FeedC411\FC411HisTemp.class
 com\system\mappereas\PeopleInfoMapperLiHua.class
 com\system\controller\Phone\EC01PhoneController.class
 com\system\po\EChartsOptions\EChartsXAxis.class
-com\system\controller\Phone\BaseController.class
 com\system\po\Device\FeedC411DM.class
 com\system\po\EChartsOptions\EChartsToolBox.class
 com\system\service\impl\PeopleRoleInfoServiceImpl.class
@@ -269,7 +268,6 @@ com\system\controller\admin\DeviceCombineOrgController.class
 com\system\controller\Phone\SewageCPhoneController.class
 com\system\po\EChartsOptions\EChartsParts\ECAxisLabel.class
 com\system\po\ScaleC01\ScaleC01WtAnalysis.class
-com\system\controller\Phone\FeedC411PhoneController.class
 com\system\mapperiot\RoleDeviceOrgInfoMapper.class
 com\system\po\Phone\Base\PhoneSummary.class
 com\system\po\Phone\Base\PhoneDetail.class
