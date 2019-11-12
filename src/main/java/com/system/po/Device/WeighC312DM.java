@@ -5,6 +5,7 @@ import com.system.po.Phone.PWeighC312.PWeighC312OneData;
 import com.system.po.Phone.PWeighC312.PWeighC312PartDetail;
 import com.system.po.Phone.Base.PhoneOneData;
 import com.system.po.Phone.Base.PhonePartDetail;
+import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.util.DeviceUtil;
 
 import java.util.ArrayList;
@@ -241,6 +242,49 @@ public class WeighC312DM extends BaseDeviceMessage {
         myDTCList.add(mdtc4);
 
         return myDTCList;
+    }
+
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("netW");
+        phoneRealMsgInfo01.setTitle("净重");
+        phoneRealMsgInfo01.setValue(String.valueOf(netW) + "kg");
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("");
+        phoneRealMsgInfo02.setTitle("");
+        phoneRealMsgInfo02.setValue("");
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("inNetW");
+        phoneRealMsgInfo03.setTitle("投料净重：");
+        phoneRealMsgInfo03.setValue(String.valueOf(inNetW) + "kg");
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("deNetW");
+        phoneRealMsgInfo04.setTitle("放料净重：");
+        phoneRealMsgInfo04.setValue(String.valueOf(deNetW) + "kg");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("sendDate");
+        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setValue(this.getSendDate());
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        return phoneRealMsgInfoList;
     }
 
     public List<PhoneOneData> getPhoneSummary() {

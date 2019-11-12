@@ -127,10 +127,12 @@ public class Hj212C213DayData {
      */
     public void findCOD(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sCodDate = hj212C213DeviceMessageList.get(i).getCod_sampletime().substring(0,8);
-            if(sCodDate.equals(sDate)) {
-                this.setCod(hj212C213DeviceMessageList.get(i).getCod_value());
-                break;
+            if(hj212C213DeviceMessageList.get(i).getCod_flag().equals("N")) {
+                String sCodDate = hj212C213DeviceMessageList.get(i).getCod_sampletime().substring(0, 8);
+                if (sCodDate.equals(sDate)) {
+                    this.setCod(hj212C213DeviceMessageList.get(i).getCod_value());
+                    break;
+                }
             }
         }
     }
@@ -142,10 +144,12 @@ public class Hj212C213DayData {
      */
     public void findNh3N(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sNh3NDate = hj212C213DeviceMessageList.get(i).getNh3n_sampletime().substring(0,8);
-            if(sNh3NDate.equals(sDate)) {
-                this.setNh3n(hj212C213DeviceMessageList.get(i).getNh3n_value());
-                break;
+            if(hj212C213DeviceMessageList.get(i).getNh3n_flag().equals("N")) {
+                String sNh3NDate = hj212C213DeviceMessageList.get(i).getNh3n_sampletime().substring(0, 8);
+                if (sNh3NDate.equals(sDate)) {
+                    this.setNh3n(hj212C213DeviceMessageList.get(i).getNh3n_value());
+                    break;
+                }
             }
         }
     }
@@ -157,10 +161,12 @@ public class Hj212C213DayData {
      */
     public void findTP(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sTpDate = hj212C213DeviceMessageList.get(i).getTp_sampletime().substring(0,8);
-            if(sTpDate.equals(sDate)) {
-                this.setTp(hj212C213DeviceMessageList.get(i).getTp_value());
-                break;
+            if(hj212C213DeviceMessageList.get(i).getTp_flag().equals("N")) {
+                String sTpDate = hj212C213DeviceMessageList.get(i).getTp_sampletime().substring(0, 8);
+                if (sTpDate.equals(sDate)) {
+                    this.setTp(hj212C213DeviceMessageList.get(i).getTp_value());
+                    break;
+                }
             }
         }
     }
@@ -172,10 +178,12 @@ public class Hj212C213DayData {
      */
     public void findTN(List<Hj212C213DeviceMessage> hj212C213DeviceMessageList,String sDate){
         for(int i = 0;i<hj212C213DeviceMessageList.size();i++){
-            String sTnDate = hj212C213DeviceMessageList.get(i).getTn_sampletime().substring(0,8);
-            if(sTnDate.equals(sDate)) {
-                this.setTp(hj212C213DeviceMessageList.get(i).getTn_value());
-                break;
+            if(hj212C213DeviceMessageList.get(i).getTn_flag().equals("N")) {
+                String sTnDate = hj212C213DeviceMessageList.get(i).getTn_sampletime().substring(0, 8);
+                if (sTnDate.equals(sDate)) {
+                    this.setTp(hj212C213DeviceMessageList.get(i).getTn_value());
+                    break;
+                }
             }
         }
     }

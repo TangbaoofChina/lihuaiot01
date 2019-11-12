@@ -24,12 +24,19 @@
         where  s.id = #{oaId}
     </select>
     <select id="selectUserOaEasByOaId2019" parameterType="String" resultMap="BaseResultMap2019">
-        select s.username as pname, s.id as oaid,p.fid as easid,b.fid as personId,eh.id as oaid2019
-        from oadb.system_users s
-        left join lihua.t_pm_user p on s.easuser_id = p.fpersonid
-        left join lihua.t_bd_person b on s.easuser_id = b.fid
+        select distinct eh.id as oaid2019,eh.loginid as pname,p.fid as easid,b.fid as personId
+        from lihua.t_pm_user p
+        left join lihua.t_bd_person b on p.fpersonid =b.fid
         left join ecology.hrmresource eh on eh.outkey = b.fid
         where eh.id = #{oaId2019}
+        and  p.fisdelete=0  and p.fislocked=0  and  p.fforbidden=0
+    </select>
+    <select id="selectUserOaEasByEasId2019" parameterType="String" resultMap="BaseResultMap2019">
+        select distinct eh.id as oaid2019,eh.loginid as pname,p.fid as easid,b.fid as personId
+        from lihua.t_pm_user p
+        left join lihua.t_bd_person b on p.fpersonid =b.fid
+        left join ecology.hrmresource eh on eh.outkey = b.fid
+        where p.fid = #{easId}
         and  p.fisdelete=0  and p.fislocked=0  and  p.fforbidden=0
     </select>
     <select id="selectUserOaEasByEasId" parameterType="String" resultMap="BaseResultMap">

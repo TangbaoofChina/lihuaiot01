@@ -43,7 +43,7 @@ import java.util.List;
 @Controller
 @CrossOrigin(maxAge = 3600)   //解决跨域问题
 @RequestMapping("/phone/sewagec01")
-public class SewageCPhoneController {
+public class  SewageCPhoneController {
 
     @Autowired
     private PhoneUserOaEasService phoneUserOaEasService;

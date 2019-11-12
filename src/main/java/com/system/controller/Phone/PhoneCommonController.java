@@ -4,16 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.system.po.*;
 import com.system.po.Phone.PhoneLoginMsg;
 import com.system.po.Phone.PhoneTree;
+import com.system.po.parameter.DeviceType;
 import com.system.security.realms.MdPasswordUtil;
-import com.system.service.BootStrapTreeNodeService;
+import com.system.service.*;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
-import com.system.service.RoleDeviceOrgInfoService;
-import com.system.service.RoleInfoService;
-import com.system.service.UserloginService;
 import com.system.util.DeviceUtil;
 import com.system.util.PhoneTreeNodeMerger;
 import com.system.util.RoleInfoListUtil;
+import com.system.util.msg.ResponseUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -43,6 +42,8 @@ public class PhoneCommonController {
     private RoleDeviceOrgInfoService roleDeviceOrgInfoService;
     @Autowired
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
+    @Autowired
+    private DeviceTypeService deviceTypeService;
 
     @RequestMapping(value = "login", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -136,6 +137,19 @@ public class PhoneCommonController {
             List<PhoneTree> phoneTreeList = DeviceUtil.getPhoneTreeList(orgTreeNodeList);
             PhoneTree phoneTree = PhoneTreeNodeMerger.merge(phoneTreeList);
             jsonString = JSON.toJSONString(phoneTree);
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "insertDeviceTypeInfo", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String insertDeviceTypeInfo(String sDevType, String sDevTypeDescribe) throws Exception {
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponseOk("新增完成"));
+        if (sDevType != null) {
+            DeviceType deviceType = new DeviceType();
+            deviceType.setDevType(sDevType);
+            deviceType.setDevTypeDescribe(sDevTypeDescribe);
+            deviceTypeService.insertDeviceType(deviceType);
         }
         return jsonString;
     }

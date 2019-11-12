@@ -19,6 +19,13 @@ public interface PhoneUserOaEasService {
     UserOAEas2019 selectUserOaEasByOaId2019(String oaId2019);
 
     /**
+     * 根据新的OA的ID获取ESA的ID
+     * @param easId 新OA ID
+     * @return
+     */
+    UserOAEas2019 selectUserOaEasByEasId2019(String easId);
+
+    /**
      * 根据eas的ID获取OA的ID
      * @param easId
      * @return

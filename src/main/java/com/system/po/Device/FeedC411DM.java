@@ -155,7 +155,7 @@ public class FeedC411DM extends FeedC411DMBase {
 
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("sendDate");
-        phoneRealMsgInfo06.setTitle("时间：");
+        phoneRealMsgInfo06.setTitle("");
         phoneRealMsgInfo06.setValue(this.getSendDate());
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
