@@ -467,7 +467,7 @@ public class FeedC411DM extends FeedC411DMBase {
         for (FC411Cable sc: FC411CableList
         ) {
             if(sc.getAvg() > 0) {
-                accum = sc.getAvg();
+                accum = accum + sc.getAvg();
                 icount = icount + 1;
             }
         }

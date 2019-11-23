@@ -117,5 +117,4 @@ public class PFC411TempInfo {
         this.cables = cables;
     }
 
-
 }

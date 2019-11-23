@@ -200,6 +200,7 @@ public class FeedC411PhoneController extends BaseController {
         //形成设备信息
         pfc411.setDevName(feedC411DM.getDName());
         pfc411.setDevNum(feedC411DM.getDSerialNum());
+        pfc411.setSendDate(feedC411DM.getSendDate());
         pfc411.setSiloTempInfo(siloTempInfo);
         return pfc411;
     }

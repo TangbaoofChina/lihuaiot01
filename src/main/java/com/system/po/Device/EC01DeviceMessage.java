@@ -1075,6 +1075,21 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
 
     public List<PhoneRealMsgInfo> getPhoneRealMsgInfoDetail() {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+
+        PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo14.setId("dState");
+        phoneRealMsgInfo14.setTitle("状态：");
+        phoneRealMsgInfo14.setValue(getDState());
+        phoneRealMsgInfo14.setFlag("1");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo14);
+
+        PhoneRealMsgInfo phoneRealMsgInfo15 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo15.setId("sendDate");
+        phoneRealMsgInfo15.setTitle("时间：");
+        phoneRealMsgInfo15.setValue(getSendDate());
+        phoneRealMsgInfo15.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo15);
+
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("chickenAge");
         phoneRealMsgInfo06.setTitle("日龄：");
@@ -1291,19 +1306,6 @@ public class EC01DeviceMessage extends BaseDeviceMessage {
         phoneRealMsgInfo25.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo25);
 
-        PhoneRealMsgInfo phoneRealMsgInfo14 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo14.setId("dState");
-        phoneRealMsgInfo14.setTitle("状态：");
-        phoneRealMsgInfo14.setValue(getDState());
-        phoneRealMsgInfo14.setFlag("1");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo14);
-
-        PhoneRealMsgInfo phoneRealMsgInfo15 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo15.setId("sendDate");
-        phoneRealMsgInfo15.setTitle("时间：");
-        phoneRealMsgInfo15.setValue(getSendDate());
-        phoneRealMsgInfo15.setFlag("0");
-        phoneRealMsgInfoList.add(phoneRealMsgInfo15);
 
         return phoneRealMsgInfoList;
     }

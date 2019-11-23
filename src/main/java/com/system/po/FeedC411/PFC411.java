@@ -6,6 +6,8 @@ package com.system.po.FeedC411;
 public class PFC411 {
     private String devNum;
     private String devName;
+    //发送时间
+    private String sendDate;
     PFC411TempInfo siloTempInfo;
 
     public String getDevNum() {
@@ -30,5 +32,13 @@ public class PFC411 {
 
     public void setSiloTempInfo(PFC411TempInfo siloTempInfo) {
         this.siloTempInfo = siloTempInfo;
+    }
+
+    public String getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(String sendDate) {
+        this.sendDate = sendDate;
     }
 }
