@@ -2,11 +2,13 @@ package com.system.controller.Phone.oa;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.*;
+import com.system.po.Phone.MobMsgObj;
 import com.system.po.Phone.PhoneLoginMsg;
 import com.system.po.Phone.PhoneTree;
 import com.system.po.parameter.DeviceType;
 import com.system.security.realms.MdPasswordUtil;
 import com.system.service.DeviceTypeService;
+import com.system.service.Phone.MobMsgService;
 import com.system.service.Phone.PhoneBootStrapTreeNodeService;
 import com.system.service.Phone.PhoneUserOaEasService;
 import com.system.service.RoleInfoService;
@@ -49,6 +51,8 @@ public class PublicPhoneController extends BaseController{
     private PhoneBootStrapTreeNodeService phoneBootStrapTreeNodeService;
     @Autowired
     private DeviceTypeService deviceTypeService;
+    @Autowired
+    private MobMsgService mobMsgService;
 
     @RequestMapping(value = "login", method = {RequestMethod.POST}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -132,5 +136,16 @@ public class PublicPhoneController extends BaseController{
         return jsonString;
     }
 
+    @RequestMapping(value = "selectAlarmMsg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectOrg(String msgId) throws Exception {
+        if (msgId == null || msgId.equals(""))
+            return JSON.toJSONString(ResponseUtil.setResponsFaild());
+        MobMsgObj mobMsgObj =mobMsgService.selectAlarmMsg(msgId);
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
+        if(mobMsgObj != null)
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(mobMsgObj));
+        return jsonString;
+    }
 
 }

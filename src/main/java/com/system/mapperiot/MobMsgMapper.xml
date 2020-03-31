@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapperiot.MobMsgMapper">
+    <resultMap id="BaseResultMap" type="com.system.po.Phone.MobMsgObj">
+        <!--  <result column="数据库字段名" property="实体类属性" jdbcType="数据库字段类型" />-->
+        <id column="SID" jdbcType="VARCHAR" property="sid"/>
+        <result column="TITLE" jdbcType="VARCHAR" property="title"/>
+        <result column="BRIEFCONTENT" jdbcType="VARCHAR" property="briefContent"/>
+        <result column="DETAILCONTENT" jdbcType="CLOB" property="detailContent"/>
+        <result column="CREATETIME" jdbcType="VARCHAR" property="createTime"/>
+    </resultMap>
+    <select id="selectAlarmMsg"  resultMap="BaseResultMap">
+        select
+        *
+        from IOT_MOBMSG
+        where
+        sid = #{sid,jdbcType=VARCHAR}
+    </select>
+</mapper>
