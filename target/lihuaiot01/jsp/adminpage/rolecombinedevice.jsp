@@ -149,6 +149,9 @@
                     <shiro:hasAnyRoles name="admin,311">
                         <option value="311">自动称重</option>
                     </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,411">
+                        <option value="311">筒仓测温</option>
+                    </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin">
                         <option value="admin">管理员</option>
                     </shiro:hasAnyRoles>

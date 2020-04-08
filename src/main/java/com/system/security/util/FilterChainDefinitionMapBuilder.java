@@ -36,6 +36,7 @@ public class FilterChainDefinitionMapBuilder {
         permissionMap.put("/ztree/**", "anon");
         permissionMap.put("/phone/**", "anon");
         permissionMap.put("/login", "anon, kickOut");
+        permissionMap.put("/loginOa", "anon");
         permissionMap.put("/account/beforeLogin", "anon");
         permissionMap.put("/account/login", "anon");
         permissionMap.put("/mainpage", "authc,roles[" + "admin,user" + "]");

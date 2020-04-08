@@ -2,8 +2,10 @@ package com.system.security.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.system.po.RoleInfo;
 import com.system.po.Userlogin;
 import com.system.security.realms.MdPasswordUtil;
+import com.system.service.RoleInfoService;
 import com.system.service.UserloginService;
 import com.system.util.RSAUtil;
 import com.system.util.Response;
@@ -26,6 +28,7 @@ import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.List;
 import java.util.Map;
 
 /**

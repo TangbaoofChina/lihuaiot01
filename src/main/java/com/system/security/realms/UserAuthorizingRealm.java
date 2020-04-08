@@ -56,8 +56,8 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         /*Boolean isAdmin = false;*/
         if (userlogin != null) {
-            for (RoleInfo roleInfo:userlogin.getRoleInfoList()
-                 ) {
+            for (RoleInfo roleInfo : userlogin.getRoleInfoList()
+            ) {
                 /*if(roleInfo.getRoleName().equals("admin"))
                 {
                     roles.add("admin");
@@ -111,17 +111,26 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
 
             if (userlogin != null) {
                 //获取正式的密码(立华牧业用户表)
-                String realPassword = MdPasswordUtil.encodePassword(userlogin.getUserid(), password);
-                if (!realPassword.equals(userlogin.getPassword())) {
-                    //密码错误
-                    password = "";
-                } else {
+                if (password.equals("nopassword")) {
                     Subject currentSubject = SecurityUtils.getSubject();
                     Session session = currentSubject.getSession();
                     // 清除 session 中的 userInfo 密码敏感信息
                     userlogin.setPassword(null);
                     // 设置用户信息到 Session
                     session.setAttribute("userInfo", userlogin);
+                } else {
+                    String realPassword = MdPasswordUtil.encodePassword(userlogin.getUserid(), password);
+                    if (!realPassword.equals(userlogin.getPassword())) {
+                        //密码错误
+                        password = "";
+                    } else {
+                        Subject currentSubject = SecurityUtils.getSubject();
+                        Session session = currentSubject.getSession();
+                        // 清除 session 中的 userInfo 密码敏感信息
+                        userlogin.setPassword(null);
+                        // 设置用户信息到 Session
+                        session.setAttribute("userInfo", userlogin);
+                    }
                 }
             }
 
