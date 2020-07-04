@@ -1,4 +1,4 @@
-//本页面停用
+//本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用本页面停用
 var hisChartNowDeviceIds = [];
 var hisChartTableColumns;
 var hisChartbeginTimeStore = '';

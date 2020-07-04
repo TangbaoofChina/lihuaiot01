@@ -18,6 +18,9 @@ var hisChartHj212C213search_end_date;
 var hisChartFeedC411;
 var hisChartFeedC411search_start_date;
 var hisChartFeedC411search_end_date;
+var hisChartLhsp05p1;
+var hisChartLhsp05p1search_start_date;
+var hisChartLhsp05p1search_end_date;
 
 // 指定图表的配置项和数据
 var hisChartoptionInit = {
@@ -153,6 +156,9 @@ $(function () {
 
     hisChartFeedC411InitChart(hisChartoptionInit);
     hisChartDateRangePickerInitFeedC411();
+
+    hisChartLhsp05p1InitChart(hisChartoptionInit);
+    hisChartDateRangePickerInitLhsp05p1();
 });
 
 // 日期选择器初始化
@@ -351,6 +357,8 @@ function hisChartNodeSelected(event, data) {
     var hcHj212C213DivP2 = document.getElementById("hisChartHj212C213DivP2");
     var hcFeedC411DivP1 = document.getElementById("hisChartFeedC411DivP1");
     var hcFeedC411DivP2 = document.getElementById("hisChartFeedC411DivP2");
+    var hcLhsp05p1DivP1 = document.getElementById("hisChartLhsp05p1DivP1");
+    var hcLhsp05p1DivP2 = document.getElementById("hisChartLhsp05p1DivP2");
     var rootNodeId = hisChartNowTreeNodeRoot.id;
     if (rootNodeId === "111")   //种禽环控器
     {
@@ -363,6 +371,8 @@ function hisChartNodeSelected(event, data) {
         hcHj212C213DivP2.style.display = "none";
         hcFeedC411DivP1.style.display = "none";
         hcFeedC411DivP2.style.display = "none";
+        hcLhsp05p1DivP1.style.display = "none";
+        hcLhsp05p1DivP2.style.display = "none";
     }
     else if (rootNodeId === "211")  //立华禽环保1.0
     {
@@ -375,6 +385,8 @@ function hisChartNodeSelected(event, data) {
         hcHj212C213DivP2.style.display = "none";
         hcFeedC411DivP1.style.display = "none";
         hcFeedC411DivP2.style.display = "none";
+        hcLhsp05p1DivP1.style.display = "none";
+        hcLhsp05p1DivP2.style.display = "none";
     }
     else if (rootNodeId === "311")  //自动称重
     {
@@ -387,6 +399,8 @@ function hisChartNodeSelected(event, data) {
         hcHj212C213DivP2.style.display = "none";
         hcFeedC411DivP1.style.display = "none";
         hcFeedC411DivP2.style.display = "none";
+        hcLhsp05p1DivP1.style.display = "none";
+        hcLhsp05p1DivP2.style.display = "none";
     }
     else if (rootNodeId === "213")  //水质在线监测
     {
@@ -399,6 +413,8 @@ function hisChartNodeSelected(event, data) {
         hcHj212C213DivP2.style.display = "block";
         hcFeedC411DivP1.style.display = "none";
         hcFeedC411DivP2.style.display = "none";
+        hcLhsp05p1DivP1.style.display = "none";
+        hcLhsp05p1DivP2.style.display = "none";
     }
     else if (rootNodeId === "411")  //饲料部-筒仓测温
     {
@@ -411,6 +427,22 @@ function hisChartNodeSelected(event, data) {
         hcHj212C213DivP2.style.display = "none";
         hcFeedC411DivP1.style.display = "block";
         hcFeedC411DivP2.style.display = "block";
+        hcLhsp05p1DivP1.style.display = "none";
+        hcLhsp05p1DivP2.style.display = "none";
+    }
+    else if (rootNodeId === "LHSP05p1")  //立华食品-冷库测温
+    {
+        hcEC01DivP1.style.display = "none";
+        hcEC01DivP2.style.display = "none";
+        hcSewageC01Div.style.display = "none";
+        hcScaleC01DivP1.style.display = "none";
+        hcScaleC01DivP2.style.display = "none";
+        hcHj212C213DivP1.style.display = "none";
+        hcHj212C213DivP2.style.display = "none";
+        hcFeedC411DivP1.style.display = "none";
+        hcFeedC411DivP2.style.display = "none";
+        hcLhsp05p1DivP1.style.display = "block";
+        hcLhsp05p1DivP2.style.display = "block";
     }
     var nodeId = hisChartNowTreeNode.id;
     if(rootNodeId === "411" && nodeId.length === 7){
@@ -1549,6 +1581,132 @@ function hisChartSelectFeedC411Params(devId) {
 }
 /***************************FeedC411s end*********************/
 
+/***************************Lhsp05p1 start*********************/
+function hisChartLhsp05p1InitChart(hisChartoption) {
+    var mainContainer = document.getElementById('echartsLhsp05p1main');
+    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+    var resizeMainContainer = function () {
+        mainContainer.style.width = window.innerWidth * 0.6 + 'px';
+        mainContainer.style.height = window.innerHeight * 0.6 + 'px';
+        /*mainContainer.height = window.innerWidth * 0.7 + 'px';
+        mainContainer.width = window.innerHeight * 0.42 + 'px';*/
+    };
+    resizeMainContainer();
+    // 初始化图表
+    //hisChart = echarts.init(mainContainer, 'macarons');
+    // 初始化图表-不带主题
+    hisChartLhsp05p1 = echarts.init(mainContainer);
+    hisChartLhsp05p1.clear();
+    hisChartLhsp05p1.setOption(hisChartoption);
+    $(window).on('resize', function () {//
+        //屏幕大小自适应，重置容器高宽
+        resizeMainContainer();
+        hisChartLhsp05p1.resize();
+    });
+}
+
+// 日期选择器初始化
+function hisChartDateRangePickerInitLhsp05p1() {
+    hisChartLhsp05p1search_start_date = NowWeeHours(); //凌晨
+    hisChartLhsp05p1search_end_date = GetTodaytime(); //最晚时间
+    $('#hisChartLhsp05p1DateInterval').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'left',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        locale: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1, 'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+            '最近7日': [moment().subtract(6, 'days'), moment()],
+            '最近30日': [moment().subtract(29, 'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisChartLhsp05p1search_start_date = this.startDate.format(this.locale.format);
+        hisChartLhsp05p1search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisChartLhsp05p1RepaintChart(hisChartoption) {
+    hisChartLhsp05p1.clear();
+    hisChartLhsp05p1.setOption(hisChartoption);
+}
+
+function hisChartLhsp05p1SelectDeviceByIdsChart() {
+    var queryStartDate = hisChartLhsp05p1search_start_date;
+    var queryEndDate = hisChartLhsp05p1search_end_date;
+    var queryParamObj = document.getElementById("hisChartLhsp05p1SelId_Param"); //定位选择参数
+    var queryParamIndex = queryParamObj.selectedIndex; // 选中索引
+    var queryParameter = queryParamObj.options[queryParamIndex].text; // 选中文本
+    var data = {
+        sDeviceIds: hisChartSelectDeviceIds.join(','),
+        sQueryParam: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/lihuaiot01/hisChartDevice/selectLhsp05p1ByIdsAndDateChart',
+        dataType: 'json',
+        async: true,   // 轻轻方式-异步
+        data: data,
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                hisChartoption = result;
+                // 使用刚指定的配置项和数据显示图表。
+                hisChartLhsp05p1RepaintChart(hisChartoption);
+            } else {
+                hisChartLhsp05p1RepaintChart(hisChartoptionInit);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+//水质在线监测，查询事件
+function hisChartLhsp05p1Query() {
+    var objS = document.getElementById("hisChartLhsp05p1SelId_Param");
+    var paramValue = objS.options[objS.selectedIndex].value;
+    //只能选择单个设备
+    if (hisChartSelectDeviceIds.length != 1) {
+        var type = 'warning';
+        var msg = '只能选择一个设备';
+        var append = '只针对单个设备进行数据分析';
+        showMsg(type, msg, append);
+        return;
+    }
+    hisChartLhsp05p1SelectDeviceByIdsChart();
+}
+/***************************Lhsp05p1 end*********************/
+
+
 /***************************级联勾选*********************/
 function hisChartSelectDeviceIdsRemove(queryParameter) {
     var index = hisChartSelectDeviceIds.indexOf(queryParameter);
@@ -1609,7 +1767,7 @@ function nodeUnchecked(event, node) {
     nodeUncheckedSilent = true;
     var queryParameter = node.id;
     var rootNodeId = hisChartNowTreeNodeRoot.id;
-    if (rootNodeId === "111")   //种禽环控器
+    // if (rootNodeId === "111")   //种禽环控器
     if (queryParameter.length == 4) {
         hisChartSelectDeviceIdsRemove(queryParameter);
         hisChartRemoveDeviceToList(queryParameter);

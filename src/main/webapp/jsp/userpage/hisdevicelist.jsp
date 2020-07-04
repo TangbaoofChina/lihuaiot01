@@ -245,6 +245,61 @@
                 </table>
             </div>
         </div>
+        <div class="columns-right" id="hisLhsp05p1DeviceListDiv" style="white-space: nowrap;display: none">
+            <div id="hisLhsp05p1toolbar" class="btn-group">
+                <div class="form-inline">
+                    <label>时间：</label>
+                    <div class="btn-group">
+                        <input type="text" id="hisLhsp05p1DateInterval" class="form-control" style="width: 320px;">
+                    </div>
+                    <button class="btn btn-default" id="hisLhsp05p1Query_storage">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                    </button>
+                    <button class="btn btn-default" id="hisLhsp05p1Export_storage">
+                        <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-8">
+                <table class="table table-striped" id="hisLhsp05p1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#hisLhsp05p1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-showColumns="true">
+                </table>
+            </div>
+        </div>
+
+        <div class="columns-right" id="hisLhsf0ap1DeviceListDiv" style="white-space: nowrap;display: none">
+            <div id="hisLhsf0ap1toolbar" class="btn-group">
+                <div class="form-inline">
+                    <label>时间：</label>
+                    <div class="btn-group">
+                        <input type="text" id="hisLhsf0ap1DateInterval" class="form-control" style="width: 320px;">
+                    </div>
+                    <button class="btn btn-default" id="hisLhsf0ap1Query_storage">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                    </button>
+                    <button class="btn btn-default" id="hisLhsf0ap1Export_storage">
+                        <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-8">
+                <table class="table table-striped" id="hisLhsf0ap1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#hisLhsf0ap1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-showColumns="true">
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

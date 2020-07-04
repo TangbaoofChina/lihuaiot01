@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.system.mapperiot.FeedC411DMMapper;
 import com.system.po.DataTablePageing;
 import com.system.po.Device.BaseDeviceMessage;
+import com.system.po.Device.FeedC411.FeedC411DMAQ;
 import com.system.po.Device.FeedC411DM;
 import com.system.po.Device.FeedC411.FeedC411DMFY;
 import com.system.po.FeedC411.FC411HisTemp;
@@ -97,13 +98,28 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
         //这里实现子类没想到什么好方法，暂时先这么处理吧，回头再想
         //需要根据不同饲料部的测温点数，生成不同的子类对象，因此需要知道不同的饲料部，怎么区分不同饲料部呢？
         List<MydataTableColumn> headColumnList = (new FeedC411DM()).getDeviceHead();
+        if (devId == null || devId.equals("") || devId.equals("411")) {
+            headColumnList = (new FeedC411DMAQ()).getDeviceHead(0, 0, 0, 0, 0, 0);
+            return headColumnList;
+        }
         List<FeedC411DM> dmList = this.selectByORGId(devId);
-        if(dmList.size()>0){
-            if(dmList.get(0).getDSerialNum().contains("4800")){
-                headColumnList = (new FeedC411DMFY()).getDeviceHead();
+        FeedC411DM dm = null;
+        if (dmList.size() > 0) {
+            dm = dmList.get(0);
+        } else {
+            int p = devId.indexOf(".");
+            if (p > 0) {
+                dm = this.selectByDeviceId(devId);
             }
-        }else if(devId.contains("4800")){
-            headColumnList = (new FeedC411DMFY()).getDeviceHead();
+        }
+        if(dm != null){
+            int cable01 = dm.getCable01Nums();
+            int cable02 = dm.getCable02Nums();
+            int cable03 = dm.getCable03Nums();
+            int cable04 = dm.getCable04Nums();
+            int cable05 = dm.getCable05Nums();
+            int cable06 = dm.getCable06Nums();
+            headColumnList = (new FeedC411DMAQ()).getDeviceHead(cable01, cable02, cable03, cable04, cable05, cable06);
         }
         return headColumnList;
     }
@@ -116,7 +132,10 @@ public class FeedC411DMServiceImpl implements FeedC411DMService{
         //阜阳-筒仓测温
         if(feedC411DM.getDSerialNum().contains("4800")) {
             return ejConvertor.excelWriter(FeedC411DMFY.class, storageList);
-        }else{
+        }else if(feedC411DM.getDSerialNum().contains("4801")){
+            return ejConvertor.excelWriter(FeedC411DMAQ.class, storageList);
+        }
+        else{
             return ejConvertor.excelWriter(FeedC411DM.class, storageList);
         }
     }

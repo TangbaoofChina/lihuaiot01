@@ -8,6 +8,8 @@ var rdlScaleC01TableColumns;
 var rdlHj212C213TableColumns;
 var rdlWeighC312TableColumns;
 var rdlFeedC411TableColumns;
+var rdlLhsp05p1TableColumns;
+var rdlLhsf0ap1TableColumns;
 var rdlTreeNodes;
 var realid_of_setintervalDeviceList;
 var realid_of_setintervalDeviceOne;
@@ -21,6 +23,8 @@ $(function () {
     rdlInitTableHj212C213();
     rdlInitTableWeighC312();
     rdlInitTableFeedC411();
+    rdlInitTableLhsp05p1();
+    rdlInitTableLhsf0ap1();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {
@@ -117,6 +121,10 @@ function rdlNodeSelected(event, data) {
     var uiWeighC312One = document.getElementById("rdlWeighC312OneDeviceDiv");
     var uiFeedC411List = document.getElementById("rdlFeedC411DeviceListDiv");
     var uiFeedC411One = document.getElementById("rdlFeedC411OneDeviceDiv");
+    var uiLhsp05p1List = document.getElementById("rdlLhsp05p1DeviceListDiv");
+    var uiLhsp05p1One = document.getElementById("rdlLhsp05p1OneDeviceDiv");
+    var uiLhsf0ap1List = document.getElementById("rdlLhsf0ap1DeviceListDiv");
+    var uiLhsf0ap1One = document.getElementById("rdlLhsf0ap1OneDeviceDiv");
     var rootNodeId = rdlNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         if (rootNodeId === "111")   //种禽环控器
@@ -135,8 +143,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "211")  //立华禽环保1.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "211")  //立华禽环保1.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -152,8 +163,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "212")  //立华禽环保2.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "212")  //立华禽环保2.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -169,8 +183,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "214")  //立华禽环保2.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "214")  //立华禽环保2.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -186,8 +203,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "311")  //自动称重
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "311")  //自动称重
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -203,8 +223,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "312")  //种禽料塔称重1.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "312")  //种禽料塔称重1.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -220,8 +243,52 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "block";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "LHSP05p1")  //立华食品-冷库测温
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+            uiFeedC411List.style.display = "none";
+            uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "block";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "LHSF0Ap1")  //生防-物资熏蒸
+        {
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+            uiFeedC411List.style.display = "none";
+            uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "block";
         }
-    } else if(rootNodeId === "213" && queryParameter.length == 14){
+    } else if (rootNodeId === "213" && queryParameter.length == 14) {
         uiEC01List.style.display = "none";
         uiEC01One.style.display = "none";
         uiSewageC01List.style.display = "none";
@@ -238,7 +305,11 @@ function rdlNodeSelected(event, data) {
         uiWeighC312One.style.display = "none";
         uiFeedC411List.style.display = "none";
         uiFeedC411One.style.display = "none";
-    } else if(rootNodeId === "411" && queryParameter.length == 7){
+        uiLhsp05p1List.style.display = "none";
+        uiLhsp05p1One.style.display = "none";
+        uiLhsf0ap1List.style.display = "none";
+        uiLhsf0ap1One.style.display = "none";
+    } else if (rootNodeId === "411" && queryParameter.length == 7) {
         uiEC01List.style.display = "none";
         uiEC01One.style.display = "none";
         uiSewageC01List.style.display = "none";
@@ -255,6 +326,10 @@ function rdlNodeSelected(event, data) {
         uiWeighC312One.style.display = "none";
         uiFeedC411List.style.display = "none";
         uiFeedC411One.style.display = "block";
+        uiLhsp05p1List.style.display = "none";
+        uiLhsp05p1One.style.display = "none";
+        uiLhsf0ap1List.style.display = "none";
+        uiLhsf0ap1One.style.display = "none";
     } else {
         if (rootNodeId === "111")   //种禽环控器
         {
@@ -274,8 +349,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "211")  //立华禽环保1.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "211")  //立华禽环保1.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -293,8 +371,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "212")  //立华禽环保2.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "212")  //立华禽环保2.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -312,8 +393,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "214")  //立华禽环保3.0
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "214")  //立华禽环保3.0
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -331,8 +415,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "311")  //商品鸡自动称重
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "311")  //商品鸡自动称重
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -350,8 +437,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if (rootNodeId === "312")  //种鸡散装料塔称重
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "312")  //种鸡散装料塔称重
         {
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
@@ -369,8 +459,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if(rootNodeId === "213"){ //水质在线监测
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "213") { //水质在线监测
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
             uiSewageC01List.style.display = "none";
@@ -387,8 +480,11 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "none";
             uiFeedC411One.style.display = "none";
-        }
-        else if(rootNodeId === "411"){ //饲料部筒仓测温
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "411") { //饲料部筒仓测温
             uiEC01List.style.display = "none";
             uiEC01One.style.display = "none";
             uiSewageC01List.style.display = "none";
@@ -405,6 +501,52 @@ function rdlNodeSelected(event, data) {
             uiWeighC312One.style.display = "none";
             uiFeedC411List.style.display = "block";
             uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "LHSP05p1") { //食品-冷库测温
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+            uiFeedC411List.style.display = "none";
+            uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "block";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "none";
+            uiLhsf0ap1One.style.display = "none";
+        } else if (rootNodeId === "LHSF0Ap1") { //生防-物资熏蒸
+            uiEC01List.style.display = "none";
+            uiEC01One.style.display = "none";
+            uiSewageC01List.style.display = "none";
+            uiSewageC01One.style.display = "none";
+            uiSewageC212List.style.display = "none";
+            uiSewageC212One.style.display = "none";
+            uiSewageC214List.style.display = "none";
+            uiSewageC214One.style.display = "none";
+            uiScaleC01List.style.display = "none";
+            uiScaleC01One.style.display = "none";
+            uiHj212C213List.style.display = "none";
+            uiHj212C213One.style.display = "none";
+            uiWeighC312List.style.display = "none";
+            uiWeighC312One.style.display = "none";
+            uiFeedC411List.style.display = "none";
+            uiFeedC411One.style.display = "none";
+            uiLhsp05p1List.style.display = "none";
+            uiLhsp05p1One.style.display = "none";
+            uiLhsf0ap1List.style.display = "block";
+            uiLhsf0ap1One.style.display = "none";
         }
     }
     if (data.nodes != null) {
@@ -412,8 +554,7 @@ function rdlNodeSelected(event, data) {
         if (select_node[0].state.expanded) {
             $('#rdlOrgTree').treeview('collapseNode', select_node);
             select_node[0].state.selected = false;
-        }
-        else {
+        } else {
             $('#rdlOrgTree').treeview('expandNode', select_node);
             select_node[0].state.selected = false;
         }
@@ -421,46 +562,45 @@ function rdlNodeSelected(event, data) {
     if (rootNodeId === "111")   //种禽环控器
     {
         rdlSelectDeviceByTreeIdEC01();
-    }
-    else if (rootNodeId === "211")  //立华禽环保1.0
+    } else if (rootNodeId === "211")  //立华禽环保1.0
     {
         rdlSelectDeviceByTreeIdSewageC01();
-    }
-    else if (rootNodeId === "212")  //立华禽环保2.0
+    } else if (rootNodeId === "212")  //立华禽环保2.0
     {
         rdlSelectDeviceByTreeIdSewageC212();
-    }
-    else if (rootNodeId === "214")  //立华禽环保3.0
+    } else if (rootNodeId === "214")  //立华禽环保3.0
     {
         rdlSelectDeviceByTreeIdSewageC214();
-    }
-    else if (rootNodeId === "311")  //污水控制器
+    } else if (rootNodeId === "311")  //污水控制器
     {
         rdlSelectDeviceByTreeIdScaleC01();
-    }
-    else if (rootNodeId === "312")  //种禽散装料塔称重1.0
+    } else if (rootNodeId === "312")  //种禽散装料塔称重1.0
     {
         rdlSelectDeviceByTreeIdWeighC312();
-    }
-    else if (rootNodeId === "213")  //水质在线监测
+    } else if (rootNodeId === "213")  //水质在线监测
     {
         rdlSelectDeviceByTreeIdHj212C213();
-    }
-    else if (rootNodeId === "411")  //饲料部筒仓测温
+    } else if (rootNodeId === "411")  //饲料部筒仓测温
     {
         rdlInitTableFeedC41102(queryParameter);
-        setTimeout("rdlSelectDeviceByTreeIdFeedC411()",300);
+        setTimeout("rdlSelectDeviceByTreeIdFeedC411()", 300);
+    } else if (rootNodeId === "LHSP05p1")  //立华食品-冷库测温
+    {
+        rdlSelectDeviceByTreeIdLhsp05p1();
+    } else if (rootNodeId === "LHSF0Ap1")  //生防-物资熏蒸
+    {
+        rdlSelectDeviceByTreeIdLhsf0ap1();
     }
     rdlSelectInfoByDeviceIdAndType();
 }
 
 //图表刷新
 function rdlSelectInfoByDeviceIdAndType() {
-    if (typeof(rdlNowTreeNode) == "undefined")
+    if (typeof (rdlNowTreeNode) == "undefined")
         return;
     var queryParameter = rdlNowTreeNode.id;
     var rootNodeId = rdlNowTreeNodeRoot.id;
-    if(rootNodeId === "411" && queryParameter.length === 7){
+    if (rootNodeId === "411" && queryParameter.length === 7) {
         rdlSelectInfoByDeviceIdAndFeedC411(queryParameter)
     }
     if (queryParameter.length !== 4) {
@@ -469,16 +609,13 @@ function rdlSelectInfoByDeviceIdAndType() {
     if (rootNodeId === "111")   //种禽环控器
     {
         rdlSelectInfoByDeviceIdAndEC01(queryParameter)
-    }
-    else if (rootNodeId === "211")  //立华禽环保1.0
+    } else if (rootNodeId === "211")  //立华禽环保1.0
     {
         rdlSelectInfoByDeviceIdAndSewageC01(queryParameter)
-    }
-    else if (rootNodeId === "212")  //立华禽环保2.0
+    } else if (rootNodeId === "212")  //立华禽环保2.0
     {
         rdlSelectInfoByDeviceIdAndSewageC212(queryParameter)
-    }
-    else if (rootNodeId === "214")  //立华禽环保4.0
+    } else if (rootNodeId === "214")  //立华禽环保4.0
     {
         rdlSelectInfoByDeviceIdAndSewageC214(queryParameter)
     }
@@ -486,7 +623,7 @@ function rdlSelectInfoByDeviceIdAndType() {
 
 // 表格刷新
 function rdlTableRefresh() {
-    if (typeof(rdlNowTreeNode) == "undefined")
+    if (typeof (rdlNowTreeNode) == "undefined")
         return;
     /*    var rdlDeviceList = document.getElementById("rdlDeviceList");
         if (rdlDeviceList === null)
@@ -506,58 +643,62 @@ function rdlTableRefresh() {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "211")  //立华禽环保1.0
+        } else if (rootNodeId === "211")  //立华禽环保1.0
         {
             $('#rdlSewageC01DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "212")  //立华禽环保2.0
+        } else if (rootNodeId === "212")  //立华禽环保2.0
         {
             $('#rdlSewageC212DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "214")  //立华禽环保3.0
+        } else if (rootNodeId === "214")  //立华禽环保3.0
         {
             $('#rdlSewageC214DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "311")  //自动称重
+        } else if (rootNodeId === "311")  //自动称重
         {
             $('#rdlScaleC01DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if ( rootNodeId === "312")  //自动称重
+        } else if (rootNodeId === "312")  //自动称重
         {
             $('#rdlWeighC312DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "213")  //水质在线监测
+        } else if (rootNodeId === "213")  //水质在线监测
         {
             $('#rdlHj212C213DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
-        }
-        else if (rootNodeId === "411")  //饲料部-筒仓测温
+        } else if (rootNodeId === "411")  //饲料部-筒仓测温
         {
             $('#rdlFeedC411DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
+        } else if (rootNodeId === "LHSP05p1")  //立华食品-冷库测温
+        {
+            $('#rdlLhsp05p1DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        } else if (rootNodeId === "LHSF0Ap1")  //生防-物资熏蒸
+        {
+            $('#rdlLhsf0ap1DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
         }
-    }
-    catch (err) {
+    } catch (err) {
         if (realid_of_setintervalDeviceList !== undefined) {
             clearInterval(realid_of_setintervalDeviceList);
         }
@@ -745,7 +886,7 @@ function rdlSelectDeviceByTreeIdEC01() {
         //每页的记录行数（*）
         pageSize: 100,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -1325,7 +1466,7 @@ function rdlSelectDeviceByTreeIdSewageC01() {
         //每页的记录行数（*）
         pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -1352,6 +1493,7 @@ function rdlSelectDeviceByTreeIdSewageC01() {
         fixedNumber: 1 //固定列数
     });
 }
+
 //************************SewageC01 end******************************/
 
 //************************SewageC212 start******************************/
@@ -1397,7 +1539,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                 //SBR水温
                 waterTemp212.innerHTML = result.waterTemp + "℃";
                 /*************污水处理前期工艺***************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerRun212 = document.getElementById("collectMixerRun212");
                 var collectMixerStop212 = document.getElementById("collectMixerStop212");
                 //除磷投加机
@@ -1459,7 +1601,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                 //污泥泵1
                 sludgePump01RunMinute212.innerText = result.sludgePump01RunMinute;
                 /*************SBR污水处理控制系统***************/
-                //系统自动模式
+                    //系统自动模式
                 var systemAutoRun212 = document.getElementById("systemAutoRun212");
                 var systemAutoStop212 = document.getElementById("systemAutoStop212");
                 if (result.systemAuto === false) {
@@ -1636,7 +1778,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                 var sbrActiveSetMinute212 = document.getElementById("sbrActiveSetMinute212");
                 sbrActiveSetMinute212.innerText = result.sbrActiveSetMinute;
                 /***************设备运行状态*************************/
-                //回转式风机1
+                    //回转式风机1
                 var fan01Run212 = document.getElementById("fan01Run212");
                 var fan01Stop212 = document.getElementById("fan01Stop212");
                 //回转式风机2
@@ -1681,7 +1823,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                     sbrMixer02Stop212.style.display = "none";
                 }
                 /***************公共参数*************************/
-                //集水池液位高
+                    //集水池液位高
                 var collectHighOn212 = document.getElementById("collectHighOn212");
                 var collectHighOff212 = document.getElementById("collectHighOff212");
                 if (result.collectHighOn === false) {
@@ -1742,7 +1884,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                     sbrLowOff212.style.display = "none";
                 }
                 /***************故障状态*************************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerNormal212 = document.getElementById("collectMixerNormal212");
                 var collectMixerFault212 = document.getElementById("collectMixerFault212");
                 if (result.collectMixerFault === true) {
@@ -1893,7 +2035,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                     waterTempFault212.style.display = "none";
                 }
                 /***************电能数据*************************/
-                //线电压Uab
+                    //线电压Uab
                 var uab212 = document.getElementById("uab212");
                 //线电压Ubc
                 var ubc212 = document.getElementById("ubc212");
@@ -1958,7 +2100,7 @@ function rdlSelectInfoByDeviceIdAndSewageC212(queryParameter) {
                 //频率
                 freq212.innerText = result.freq;
                 /***************设备运行累计时长*************************/
-                //集水池搅拌机
+                    //集水池搅拌机
                 var collectMixerTotal212 = document.getElementById("collectMixerTotal212");
                 //除磷投加机
                 var dephosphorizeTotal212 = document.getElementById("dephosphorizeTotal212");
@@ -2075,7 +2217,7 @@ function rdlSelectDeviceByTreeIdSewageC212() {
         //每页的记录行数（*）
         pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -2102,6 +2244,7 @@ function rdlSelectDeviceByTreeIdSewageC212() {
         fixedNumber: 1 //固定列数
     });
 }
+
 //************************SewageC212 end******************************/
 
 //************************SewageC214 start******************************/
@@ -2118,7 +2261,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
             if (JSON.stringify(result) !== '[]') {
                 //console.log(result);
                 /*************抬头***************/
-                //水流量
+                    //水流量
                 var flowmeter214 = document.getElementById("flowmeter214");
                 //时间
                 var sewagec214sendDate = document.getElementById("sewagec214sendDate");
@@ -2147,7 +2290,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //SBR水温
                 waterTemp214.innerHTML = result.waterTemp + "℃";
                 /*************污水处理前期工艺 运行状态***************/
-                //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpRun214 = document.getElementById("collectWellPumpRun214");
                 var collectWellPumpStop214 = document.getElementById("collectWellPumpStop214");
                 if (result.collectWellPumpRun === false)  //集水井提升泵
@@ -2181,7 +2324,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                     collectPumpStop214.style.display = "none";
                 }
                 /*************污水处理前期工艺 运行时间***************/
-                //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpRunMinute214 = document.getElementById("collectWellPumpRunMinute214");
                 //集水井提升泵
                 collectWellPumpRunMinute214.innerText = result.collectWellPumpRunMinute;
@@ -2194,7 +2337,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //收集池提升泵
                 collectPumpRunMinute214.innerText = result.collectPumpRunMinute;
                 /*************SBR污水处理控制系统 运行状态***************/
-                //SBR搅拌机01
+                    //SBR搅拌机01
                 var sbrMixer01Run214 = document.getElementById("sbrMixer01Run214");
                 var sbrMixer01Stop214 = document.getElementById("sbrMixer01Stop214");
                 if (result.sbrMixer01Run === false)  //SBR搅拌机01
@@ -2230,11 +2373,11 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //滗水器
                 var decanterRun214 = document.getElementById("decanterRun214");
                 var decanterStop214 = document.getElementById("decanterStop214");
-                if (result.decanterRun === true || result.decanterOff == true )  //滗水器
+                if (result.decanterRun === true || result.decanterOff == true)  //滗水器
                 {
                     decanterRun214.style.display = "block";
                     decanterStop214.style.display = "none";
-                }else{
+                } else {
                     decanterRun214.style.display = "none";
                     decanterStop214.style.display = "block";
                 }
@@ -2261,7 +2404,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                     sbrMixer02Stop214.style.display = "none";
                 }
                 /*************SBR污水处理控制系统 运行时间***************/
-                //SBR搅拌机01
+                    //SBR搅拌机01
                 var fanMixer01RunMinute214 = document.getElementById("fanMixer01RunMinute214");
                 //SBR搅拌机01
                 fanMixer01RunMinute214.innerText = result.sbrMixer01RunMinute;
@@ -2286,7 +2429,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //SBR搅拌机02
                 fanMixer02RunMinute214.innerText = result.sbrMixer02RunMinute;
                 /*************除磷控制系统 运行状态***************/
-                //1#加药泵
+                    //1#加药泵
                 var dosingPumpRun214 = document.getElementById("dosingPumpRun214");
                 var dosingPumpStop214 = document.getElementById("dosingPumpStop214");
                 if (result.dosingPumpRun === false)  //SBR搅拌机01
@@ -2320,7 +2463,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                     dosingMixerStop214.style.display = "none";
                 }
                 /*************除磷控制系统 运行时间***************/
-                //加药泵
+                    //加药泵
                 var dosingPumpRunMinute214 = document.getElementById("dosingPumpRunMinute214");
                 //加药泵
                 dosingPumpRunMinute214.innerText = result.dosingPumpRunMinute;
@@ -2333,47 +2476,47 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //加药罐搅拌机
                 dosingMixerRunMinute214.innerText = result.dosingMixerRunMinute;
                 /***************工艺流程设定时间 开始时间*************************/
-                //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpSTime214 = document.getElementById("collectWellPumpSTime214");
-                collectWellPumpSTime214.innerText = formatTime214(result.collectWellPumpSHour)+":"+formatTime214(result.collectWellPumpSMinute);
+                collectWellPumpSTime214.innerText = formatTime214(result.collectWellPumpSHour) + ":" + formatTime214(result.collectWellPumpSMinute);
                 //风机02
                 var fan02STime214 = document.getElementById("fan02STime214");
-                fan02STime214.innerText =formatTime214(result.fan02SHour)+":"+formatTime214(result.fan02SMinute);
+                fan02STime214.innerText = formatTime214(result.fan02SHour) + ":" + formatTime214(result.fan02SMinute);
                 //收集池提升泵
                 var collectPumpSTime214 = document.getElementById("collectPumpSTime214");
-                collectPumpSTime214.innerText = formatTime214(result.collectPumpSHour)+":"+formatTime214(result.collectPumpSMinute);
+                collectPumpSTime214.innerText = formatTime214(result.collectPumpSHour) + ":" + formatTime214(result.collectPumpSMinute);
                 //静止沉淀
                 var staticSTime214 = document.getElementById("staticSTime214");
                 staticSTime214.innerText = "05:40";
                 //收集池搅拌机
                 var collectMixerSTime214 = document.getElementById("collectMixerSTime214");
-                collectMixerSTime214.innerText = formatTime214(result.collectMixerSHour)+":"+formatTime214(result.collectMixerSMinute);
+                collectMixerSTime214.innerText = formatTime214(result.collectMixerSHour) + ":" + formatTime214(result.collectMixerSMinute);
                 //滗水器
                 var decanterSTime214 = document.getElementById("decanterSTime214");
-                decanterSTime214.innerText = formatTime214(result.decanterSHour)+":"+formatTime214(result.decanterSMinute);
+                decanterSTime214.innerText = formatTime214(result.decanterSHour) + ":" + formatTime214(result.decanterSMinute);
                 //SBR搅拌机01
                 var fanMixer01STime214 = document.getElementById("fanMixer01STime214");
-                fanMixer01STime214.innerText = formatTime214(result.sbrMixer01SHour)+":"+formatTime214(result.sbrMixer01SMinute);
+                fanMixer01STime214.innerText = formatTime214(result.sbrMixer01SHour) + ":" + formatTime214(result.sbrMixer01SMinute);
                 //加药泵
                 var dosingPumpSTime214 = document.getElementById("dosingPumpSTime214");
-                dosingPumpSTime214.innerText = formatTime214(result.dosingPumpSHour)+":"+formatTime214(result.dosingPumpSMinute);
+                dosingPumpSTime214.innerText = formatTime214(result.dosingPumpSHour) + ":" + formatTime214(result.dosingPumpSMinute);
                 //污泥泵
                 var sludgePumpSTime214 = document.getElementById("sludgePumpSTime214");
-                sludgePumpSTime214.innerText = formatTime214(result.sludgePumpSHour)+":"+formatTime214(result.sludgePumpSMinute);
+                sludgePumpSTime214.innerText = formatTime214(result.sludgePumpSHour) + ":" + formatTime214(result.sludgePumpSMinute);
                 //加药罐搅拌机
                 var dosingMixerSTime214 = document.getElementById("dosingMixerSTime214");
-                dosingMixerSTime214.innerText = formatTime214(result.dosingMixerSHour)+":"+formatTime214(result.dosingMixerSMinute);
+                dosingMixerSTime214.innerText = formatTime214(result.dosingMixerSHour) + ":" + formatTime214(result.dosingMixerSMinute);
                 //风机01
                 var fanSTime214 = document.getElementById("fanSTime214");
-                fanSTime214.innerText = formatTime214(result.fan01SHour)+":"+formatTime214(result.fan01SMinute);
+                fanSTime214.innerText = formatTime214(result.fan01SHour) + ":" + formatTime214(result.fan01SMinute);
                 //除磷池提升泵
                 var dephosphorizePumpSTime214 = document.getElementById("dephosphorizePumpSTime214");
-                dephosphorizePumpSTime214.innerText = formatTime214(result.dephosphorizePumpSHour)+":"+formatTime214(result.dephosphorizePumpSMinute);
+                dephosphorizePumpSTime214.innerText = formatTime214(result.dephosphorizePumpSHour) + ":" + formatTime214(result.dephosphorizePumpSMinute);
                 //SBR搅拌机02
                 var fanMixer02STime214 = document.getElementById("fanMixer02STime214");
-                fanMixer02STime214.innerText = formatTime214(result.sbrMixer02SHour)+":"+formatTime214(result.sbrMixer02SMinute);
+                fanMixer02STime214.innerText = formatTime214(result.sbrMixer02SHour) + ":" + formatTime214(result.sbrMixer02SMinute);
                 /***************工艺流程设定时间 时间段*************************/
-                 //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpSetMinute214 = document.getElementById("collectWellPumpSetMinute214");
                 collectWellPumpSetMinute214.innerText = result.collectWellPumpSetMinute;
                 //风机02
@@ -2413,7 +2556,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 var fanMixer02SetMinute214 = document.getElementById("fanMixer02SetMinute214");
                 fanMixer02SetMinute214.innerText = result.sbrMixer02SetMinute;
                 /***************公共参数*************************/
-                //收集池高液位
+                    //收集池高液位
                 var collectHighOn214 = document.getElementById("collectHighOn214");
                 var collectHighOff214 = document.getElementById("collectHighOff214");
                 if (result.collectHighOn === false) {
@@ -2494,7 +2637,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                     decanterOffOff214.style.display = "none";
                 }
                 /***************故障状态*************************/
-                //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpNormal214 = document.getElementById("collectWellPumpNormal214");
                 var collectWellPumpFault214 = document.getElementById("collectWellPumpFault214");
                 if (result.collectWellPumpFault === true) {
@@ -2655,7 +2798,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                     waterTempFault214.style.display = "none";
                 }
                 /***************电能数据*************************/
-                //线电压Uab
+                    //线电压Uab
                 var uab214 = document.getElementById("uab214");
                 //线电压Ubc
                 var ubc214 = document.getElementById("ubc214");
@@ -2720,7 +2863,7 @@ function rdlSelectInfoByDeviceIdAndSewageC214(queryParameter) {
                 //频率
                 freq214.innerText = result.freq;
                 /***************设备运行累计时长*************************/
-                //集水井提升泵
+                    //集水井提升泵
                 var collectWellPumpTotal214 = document.getElementById("collectWellPumpTotal214");
                 //集水井提升泵
                 collectWellPumpTotal214.innerText = result.collectWellPumpTotal;
@@ -2841,7 +2984,7 @@ function rdlSelectDeviceByTreeIdSewageC214() {
         //每页的记录行数（*）
         pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -2870,8 +3013,8 @@ function rdlSelectDeviceByTreeIdSewageC214() {
 }
 
 function formatTime214(value) {
-    if(value.toString().length ===1)
-        return "0"+value.toString();
+    if (value.toString().length === 1)
+        return "0" + value.toString();
     return value.toString();
 }
 
@@ -2936,7 +3079,7 @@ function rdlSelectDeviceByTreeIdScaleC01() {
         //每页的记录行数（*）
         pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -2963,6 +3106,7 @@ function rdlSelectDeviceByTreeIdScaleC01() {
         fixedNumber: 1 //固定列数
     });
 }
+
 //************************ScaleC01 end******************************/
 
 //************************Hj212C213 start******************************/
@@ -3023,7 +3167,7 @@ function rdlSelectDeviceByTreeIdHj212C213() {
         //每页的记录行数（*）
         pageSize: 8,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -3050,6 +3194,7 @@ function rdlSelectDeviceByTreeIdHj212C213() {
         fixedNumber: 1 //固定列数
     });
 }
+
 //************************Hj212C213 end******************************/
 
 //************************WeighC312 start******************************/
@@ -3114,7 +3259,7 @@ function rdlSelectDeviceByTreeIdWeighC312() {
         //每页的记录行数（*）
         pageSize: 50,
         //可供选择的每页的行数（*）
-        pageList: [8,10, 25, 50, 100],
+        pageList: [8, 10, 25, 50, 100],
         //是否显示搜索
         search: false,
         // 显示下拉框勾选要显示的列
@@ -3144,415 +3289,775 @@ function rdlSelectDeviceByTreeIdWeighC312() {
 
 //************************WeighC312 end******************************/
 
+//************************Lhsp05p1 start******************************/
+function rdlSelectInfoByDeviceIdAndLhsp05p1(queryParameter) {
+
+}
+
+function rdlInitTableLhsp05p1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/lhsp05p1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlLhsp05p1TableColumns = questionColumns;
+            $('#rdlLhsp05p1DeviceList').bootstrapTable('destroy');
+            $('#rdlLhsp05p1DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdLhsp05p1() {
+
+    $('#rdlLhsp05p1DeviceList').bootstrapTable('destroy');
+
+    $('#rdlLhsp05p1DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 50,
+        //可供选择的每页的行数（*）
+        pageList: [8, 10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectLhsp05p1ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlLhsp05p1TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+
+//************************Lhsp05p1 end******************************/
+
+//************************Lhsf0ap1 start******************************/
+function rdlSelectInfoByDeviceIdAndLhsf0ap1(queryParameter) {
+
+}
+
+function rdlInitTableLhsf0ap1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/lhsf0ap1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlLhsf0ap1TableColumns = questionColumns;
+            $('#rdlLhsf0ap1DeviceList').bootstrapTable('destroy');
+            $('#rdlLhsf0ap1DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlSelectDeviceByTreeIdLhsf0ap1() {
+
+    $('#rdlLhsf0ap1DeviceList').bootstrapTable('destroy');
+
+    $('#rdlLhsf0ap1DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 50,
+        //可供选择的每页的行数（*）
+        pageList: [8, 10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectLhsf0ap1ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlLhsf0ap1TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+
+//************************Lhsf0ap1 end******************************/
+
 //************************FeedC411 start******************************/
 
-    function rdlSelectInfoByDeviceIdAndFeedC411(queryParameter) {
-        $.ajax({
-            url: "/lihuaiot01/realDeviceList/selectFeedC411ByDeviceId",
+function rdlSelectInfoByDeviceIdAndFeedC411(queryParameter) {
+    $.ajax({
+        url: "/lihuaiot01/realDeviceList/selectFeedC411ByDeviceId",
 // 数据发送方式
-            type: "POST",
+        type: "POST",
 // 接受数据格式
-            dataType: "json",
+        dataType: "json",
 // 要传递的数据
-            data: {sDeviceId: queryParameter},
-            success: function (result) {
-                if (JSON.stringify(result) !== '[]') {
-                    //console.log(result);
-                    //仓号
-                    var feedC411SiloNum = document.getElementById("feedC411SiloNum");
-                    //仓号
-                    feedC411SiloNum.innerHTML = result.siloNum;
-                    //时间
-                    var feedC411sendDate = document.getElementById("feedC411sendDate");
-                    //时间
-                    feedC411sendDate.innerHTML = result.sendDate;
-                    //使用状态
-                    var feedC411UseState01 = document.getElementById("feedC411UseState01");
-                    var feedC411UseState02 = document.getElementById("feedC411UseState02");
-                    if (result.useState === 0) {
-                        feedC411UseState01.style.color = '#FF0000';
-                        feedC411UseState02.style.color = '#D3D3D3';
-                    } else {
-                        feedC411UseState01.style.color = '#D3D3D3';
-                        feedC411UseState02.style.color = '#FF0000';
-                    }
-                    for (var i = 0; i < result.cableList.length; i++) {
-                        var cable = result.cableList[i];
-                        releaseFeedC411Cable(cable);
-                    }
-                    for (var i = 0; i < result.floors.length; i++) {
-                        var floor = result.floors[i];
-                        releaseFeedC411Floor(floor);
-                    }
-                    releaseFeedC411Resume(result);
+        data: {sDeviceId: queryParameter},
+        success: function (result) {
+            if (JSON.stringify(result) !== '[]') {
+                // console.log(result);
+                //仓号
+                var feedC411SiloNum = document.getElementById("feedC411SiloNum");
+                //仓号
+                feedC411SiloNum.innerHTML = result.siloNum;
+                //时间
+                var feedC411sendDate = document.getElementById("feedC411sendDate");
+                //时间
+                feedC411sendDate.innerHTML = result.sendDate;
+                //使用状态
+                var feedC411UseState01 = document.getElementById("feedC411UseState01");
+                var feedC411UseState02 = document.getElementById("feedC411UseState02");
+                if (result.useState === 0) {
+                    feedC411UseState01.style.color = '#FF0000';
+                    feedC411UseState02.style.color = '#D3D3D3';
                 } else {
-                    var type = 'error';
-                    var msg = '未查询到设备数据';
-                    var append = '对不起，未查询到该设备的实时数据';
-                    showMsg(type, msg, append);
+                    feedC411UseState01.style.color = '#D3D3D3';
+                    feedC411UseState02.style.color = '#FF0000';
                 }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                if (realid_of_setintervalDeviceOne !== undefined) {
-                    clearInterval(realid_of_setintervalDeviceOne);
+
+                var cable01ps = result.cable01Nums;
+                var cable02ps = result.cable02Nums;
+                var cable03ps = result.cable03Nums;
+                var cable04ps = result.cable04Nums;
+                var cable05ps = result.cable05Nums;
+                var cable06ps = result.cable06Nums;
+                feedC411CableDisplay(1,cable01ps);
+                feedC411CableDisplay(2,cable02ps);
+                feedC411CableDisplay(3,cable03ps);
+                feedC411CableDisplay(4,cable04ps);
+                feedC411CableDisplay(5,cable05ps);
+                feedC411CableDisplay(6,cable06ps);
+                // 控制最高、最低、平均温度 -层- 的显示
+                var maxFloor = getMaxFloor(cable01ps,cable02ps,cable03ps,cable04ps,cable05ps,cable06ps);
+                for(var i = 1;i< 17;i++){
+                    feedC411FloorDisplay(i,maxFloor);
                 }
-                handleAjaxError(XMLHttpRequest.status);
+                //具体温度显示
+                for (var i = 0; i < result.cableList.length; i++) {
+                    var cable = result.cableList[i];
+                    releaseFeedC411Cable(cable);
+                }
+                for (var i = 0; i < result.floors.length; i++) {
+                    var floor = result.floors[i];
+                    releaseFeedC411Floor(floor);
+                }
+                releaseFeedC411Resume(result);
+            } else {
+                var type = 'error';
+                var msg = '未查询到设备数据';
+                var append = '对不起，未查询到该设备的实时数据';
+                showMsg(type, msg, append);
             }
-        });
-    }
-
-    /*****************解析电缆 开始*********************/
-
-        function releaseFeedC411Cable(cable) {
-            if (cable.num === 1) {
-                releaseFeedC411Cable01(cable)
-            } else if (cable.num === 2) {
-                releaseFeedC411Cable02(cable)
-            } else if (cable.num === 3) {
-                releaseFeedC411Cable03(cable)
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if (realid_of_setintervalDeviceOne !== undefined) {
+                clearInterval(realid_of_setintervalDeviceOne);
             }
+            handleAjaxError(XMLHttpRequest.status);
         }
+    });
+}
+
+/*****************解析电缆 开始*********************/
+
+//判断最长的层，为最高、最低、平均值的显示服务
+function getMaxFloor(cable01ps,cable02ps,cable03ps,cable04ps,cable05ps,cable06ps) {
+    var maxFloor = cable01ps;
+    if(maxFloor < cable02ps){
+        maxFloor = cable02ps;
+    }
+    if(maxFloor < cable03ps){
+        maxFloor = cable02ps;
+    }
+    if(maxFloor < cable04ps){
+        maxFloor = cable02ps;
+    }
+    if(maxFloor < cable05ps){
+        maxFloor = cable02ps;
+    }
+    if(maxFloor < cable06ps){
+        maxFloor = cable02ps;
+    }
+    return maxFloor;
+}
+
+//判断行的显示
+function feedC411CableDisplay(index,cableps) {
+    if(cableps < 1){
+        var element = "feedC411-div-0" + index;
+        var feedC411div = document.getElementById(element);
+        feedC411div.style.display = 'none';
+    }else{
+        var element = "feedC411-div-0" + index;
+        var feedC411div = document.getElementById(element);
+        feedC411div.style.display = 'flex';
+    }
+}
+
+function feedC411FloorDisplay(index,maxFloor) {
+    var highElement = "feedC411-High-01";
+    var lowElement = "feedC411-Low-01";
+    var avgElement = "feedC411-Avg-01";
+    if(index > 9){
+        highElement = "feedC411-High-" + index;
+        lowElement = "feedC411-Low-" + index;
+        avgElement = "feedC411-Avg-" + index;
+    }else{
+        highElement = "feedC411-High-0" + index;
+        lowElement = "feedC411-Low-0" + index;
+        avgElement = "feedC411-Avg-0" + index;
+    }
+    var high = document.getElementById(highElement);
+    var low = document.getElementById(lowElement);
+    var avg = document.getElementById(avgElement);
+    if(index <= maxFloor){
+        high.style.display = 'block';
+        low.style.display = 'block';
+        avg.style.display = 'block';
+    }else {
+        high.style.display = 'none';
+        low.style.display = 'none';
+        avg.style.display = 'none';
+    }
+}
+
+function releaseFeedC411Cable(cable) {
+    if (cable.num === 1) {
+        releaseFeedC411Cable01(cable)
+    } else if (cable.num === 2) {
+        releaseFeedC411Cable02(cable)
+    } else if (cable.num === 3) {
+        releaseFeedC411Cable03(cable)
+    } else if (cable.num === 4) {
+        releaseFeedC411Cable04(cable)
+    }else if (cable.num === 5) {
+        releaseFeedC411Cable05(cable)
+    }else if (cable.num === 6) {
+        releaseFeedC411Cable06(cable)
+    }
+}
 
 //第一根
-        function releaseFeedC411Cable01(cable) {
-            var feedC4110101 = document.getElementById("feedC411-01-01");
-            var temp = getFeedC411Temp(cable.temps, 1);
-            formatFeedC411Temp(feedC4110101, temp);
-
-            var feedC4110102 = document.getElementById("feedC411-01-02");
-            var temp = getFeedC411Temp(cable.temps, 2);
-            formatFeedC411Temp(feedC4110102, temp);
-
-            var feedC4110103 = document.getElementById("feedC411-01-03");
-            var temp = getFeedC411Temp(cable.temps, 3);
-            formatFeedC411Temp(feedC4110103, temp);
-
-            var feedC4110104 = document.getElementById("feedC411-01-04");
-            var temp = getFeedC411Temp(cable.temps, 4);
-            formatFeedC411Temp(feedC4110104, temp);
-
-            var feedC4110105 = document.getElementById("feedC411-01-05");
-            var temp = getFeedC411Temp(cable.temps, 5);
-            formatFeedC411Temp(feedC4110105, temp);
-
-            var feedC4110106 = document.getElementById("feedC411-01-06");
-            var temp = getFeedC411Temp(cable.temps, 6);
-            formatFeedC411Temp(feedC4110106, temp);
-
-            var feedC4110107 = document.getElementById("feedC411-01-07");
-            var temp = getFeedC411Temp(cable.temps, 7);
-            formatFeedC411Temp(feedC4110107, temp);
-
-            var feedC4110108 = document.getElementById("feedC411-01-08");
-            var temp = getFeedC411Temp(cable.temps, 8);
-            formatFeedC411Temp(feedC4110108, temp);
-
-            var feedC4110109 = document.getElementById("feedC411-01-09");
-            var temp = getFeedC411Temp(cable.temps, 9);
-            formatFeedC411Temp(feedC4110109, temp);
-
-            var feedC4110110 = document.getElementById("feedC411-01-10");
-            var temp = getFeedC411Temp(cable.temps, 10);
-            formatFeedC411Temp(feedC4110110, temp);
+function releaseFeedC411Cable01(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-01-01";
+        if(i>9){
+            element = "feedC411-01" + "-" + i;
+        }else {
+            element = "feedC411-01" + "-0" + i;
         }
+        var feedC41101 = document.getElementById(element);
+        feedC41101.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41101, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-01-01";
+        if(i>9){
+            element = "feedC411-01" + "-" + i;
+        }else {
+            element = "feedC411-01" + "-0" + i;
+        }
+        var feedC41101 = document.getElementById(element);
+        feedC41101.style.display = 'none';
+    }
+}
 
 //第二根
-        function releaseFeedC411Cable02(cable) {
-            var feedC4110201 = document.getElementById("feedC411-02-01");
-            var temp = getFeedC411Temp(cable.temps, 1);
-            formatFeedC411Temp(feedC4110201, temp);
-
-            var feedC4110202 = document.getElementById("feedC411-02-02");
-            var temp = getFeedC411Temp(cable.temps, 2);
-            formatFeedC411Temp(feedC4110202, temp);
-
-            var feedC4110203 = document.getElementById("feedC411-02-03");
-            var temp = getFeedC411Temp(cable.temps, 3);
-            formatFeedC411Temp(feedC4110203, temp);
-
-            var feedC4110204 = document.getElementById("feedC411-02-04");
-            var temp = getFeedC411Temp(cable.temps, 4);
-            formatFeedC411Temp(feedC4110204, temp);
-
-            var feedC4110205 = document.getElementById("feedC411-02-05");
-            var temp = getFeedC411Temp(cable.temps, 5);
-            formatFeedC411Temp(feedC4110205, temp);
-
-            var feedC4110206 = document.getElementById("feedC411-02-06");
-            var temp = getFeedC411Temp(cable.temps, 6);
-            formatFeedC411Temp(feedC4110206, temp);
-
-            var feedC4110207 = document.getElementById("feedC411-02-07");
-            var temp = getFeedC411Temp(cable.temps, 7);
-            formatFeedC411Temp(feedC4110207, temp);
-
-            var feedC4110208 = document.getElementById("feedC411-02-08");
-            var temp = getFeedC411Temp(cable.temps, 8);
-            formatFeedC411Temp(feedC4110208, temp);
-
-            var feedC4110209 = document.getElementById("feedC411-02-09");
-            var temp = getFeedC411Temp(cable.temps, 9);
-            formatFeedC411Temp(feedC4110209, temp);
-
-            var feedC4110210 = document.getElementById("feedC411-02-10");
-            var temp = getFeedC411Temp(cable.temps, 10);
-            formatFeedC411Temp(feedC4110210, temp);
+function releaseFeedC411Cable02(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-02-01";
+        if(i>9){
+            element = "feedC411-02" + "-" + i;
+        }else {
+            element = "feedC411-02" + "-0" + i;
         }
+        var feedC41102 = document.getElementById(element);
+        feedC41102.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41102, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-02-01";
+        if(i>9){
+            element = "feedC411-02" + "-" + i;
+        }else {
+            element = "feedC411-02" + "-0" + i;
+        }
+        var feedC41102 = document.getElementById(element);
+        feedC41102.style.display = 'none';
+    }
+}
 
 //第三根
-        function releaseFeedC411Cable03(cable) {
-            var feedC4110301 = document.getElementById("feedC411-03-01");
-            var temp = getFeedC411Temp(cable.temps, 1);
-            formatFeedC411Temp(feedC4110301, temp);
-
-            var feedC4110302 = document.getElementById("feedC411-03-02");
-            var temp = getFeedC411Temp(cable.temps, 2);
-            formatFeedC411Temp(feedC4110302, temp);
-
-            var feedC4110303 = document.getElementById("feedC411-03-03");
-            var temp = getFeedC411Temp(cable.temps, 3);
-            formatFeedC411Temp(feedC4110303, temp);
-
-            var feedC4110304 = document.getElementById("feedC411-03-04");
-            var temp = getFeedC411Temp(cable.temps, 4);
-            formatFeedC411Temp(feedC4110304, temp);
-
-            var feedC4110305 = document.getElementById("feedC411-03-05");
-            var temp = getFeedC411Temp(cable.temps, 5);
-            formatFeedC411Temp(feedC4110305, temp);
-
-            var feedC4110306 = document.getElementById("feedC411-03-06");
-            var temp = getFeedC411Temp(cable.temps, 6);
-            formatFeedC411Temp(feedC4110306, temp);
-
-            var feedC4110307 = document.getElementById("feedC411-03-07");
-            var temp = getFeedC411Temp(cable.temps, 7);
-            formatFeedC411Temp(feedC4110307, temp);
-
-            var feedC4110308 = document.getElementById("feedC411-03-08");
-            var temp = getFeedC411Temp(cable.temps, 8);
-            formatFeedC411Temp(feedC4110308, temp);
-
-            var feedC4110309 = document.getElementById("feedC411-03-09");
-            var temp = getFeedC411Temp(cable.temps, 9);
-            formatFeedC411Temp(feedC4110309, temp);
-
-            var feedC4110310 = document.getElementById("feedC411-03-10");
-            var temp = getFeedC411Temp(cable.temps, 10);
-            formatFeedC411Temp(feedC4110310, temp);
+function releaseFeedC411Cable03(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-03-01";
+        if(i>9){
+            element = "feedC411-03" + "-" + i;
+        }else {
+            element = "feedC411-03" + "-0" + i;
         }
+        var feedC41103 = document.getElementById(element);
+        feedC41103.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41103, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-03-01";
+        if(i>9){
+            element = "feedC411-03" + "-" + i;
+        }else {
+            element = "feedC411-03" + "-0" + i;
+        }
+        var feedC41103 = document.getElementById(element);
+        feedC41103.style.display = 'none';
+    }
+}
 
-        function getFeedC411Temp(temps, num) {
-            var temp;
-            for (var i = 0; i < temps.length; i++) {
-                temp = temps[i];
-                if (temp.num === num) {
-                    return temp;
-                }
-            }
+//第四根
+function releaseFeedC411Cable04(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-04-01";
+        if(i>9){
+            element = "feedC411-04" + "-" + i;
+        }else {
+            element = "feedC411-04" + "-0" + i;
+        }
+        var feedC41104 = document.getElementById(element);
+        feedC41104.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41104, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-04-01";
+        if(i>9){
+            element = "feedC411-04" + "-" + i;
+        }else {
+            element = "feedC411-04" + "-0" + i;
+        }
+        var feedC41104 = document.getElementById(element);
+        feedC41104.style.display = 'none';
+    }
+}
+
+//第五根
+function releaseFeedC411Cable05(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-05-01";
+        if(i>9){
+            element = "feedC411-05" + "-" + i;
+        }else {
+            element = "feedC411-05" + "-0" + i;
+        }
+        var feedC41105 = document.getElementById(element);
+        feedC41105.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41105, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-05-01";
+        if(i>9){
+            element = "feedC411-05" + "-" + i;
+        }else {
+            element = "feedC411-05" + "-0" + i;
+        }
+        var feedC41105 = document.getElementById(element);
+        feedC41105.style.display = 'none';
+    }
+}
+
+//第六根
+function releaseFeedC411Cable06(cable) {
+    for(var i=1;i<=cable.quantity;i++) {
+        var element = "feedC411-06-01";
+        if(i>9){
+            element = "feedC411-06" + "-" + i;
+        }else {
+            element = "feedC411-06" + "-0" + i;
+        }
+        var feedC41106 = document.getElementById(element);
+        feedC41106.style.display = 'block';
+        var temp = getFeedC411Temp(cable.temps, i);
+        formatFeedC411Temp(feedC41106, temp);
+    }
+    for(var i= cable.quantity+1;i<=16;i++){
+        var element = "feedC411-06-01";
+        if(i>9){
+            element = "feedC411-06" + "-" + i;
+        }else {
+            element = "feedC411-06" + "-0" + i;
+        }
+        var feedC41106 = document.getElementById(element);
+        feedC41106.style.display = 'none';
+    }
+}
+
+function getFeedC411Temp(temps, num) {
+    var temp;
+    for (var i = 0; i < temps.length; i++) {
+        temp = temps[i];
+        if (temp.num === num) {
             return temp;
         }
-
-        function formatFeedC411Temp(obj, temp) {
-            obj.innerHTML = temp.temp;
-            obj.style.color = "#" + temp.color;
-            if (temp.enable === false) {
-                obj.style.color = '#D3D3D3';
-            }
-        }
-
-    /*****************解析电缆 结束*********************/
-
-    /**************解析每一层 开始*************************/
-
-        function releaseFeedC411Floor(floor) {
-            if (floor.num === 1) {
-                releaseFeedC411Floor01(floor)
-            }
-            if (floor.num === 2) {
-                releaseFeedC411Floor02(floor)
-            }
-            if (floor.num === 3) {
-                releaseFeedC411Floor03(floor)
-            }
-            if (floor.num === 4) {
-                releaseFeedC411Floor04(floor)
-            }
-            if (floor.num === 5) {
-                releaseFeedC411Floor05(floor)
-            }
-            if (floor.num === 6) {
-                releaseFeedC411Floor06(floor)
-            }
-            if (floor.num === 7) {
-                releaseFeedC411Floor07(floor)
-            }
-            if (floor.num === 8) {
-                releaseFeedC411Floor08(floor)
-            }
-            if (floor.num === 9) {
-                releaseFeedC411Floor09(floor)
-            }
-            if (floor.num === 10) {
-                releaseFeedC411Floor10(floor)
-            }
-        }
-
-        function releaseFeedC411Floor01(floor) {
-            var high = document.getElementById("feedC411-High-01");
-            var low = document.getElementById("feedC411-Low-01");
-            var avg = document.getElementById("feedC411-Avg-01");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor02(floor) {
-            var high = document.getElementById("feedC411-High-02");
-            var low = document.getElementById("feedC411-Low-02");
-            var avg = document.getElementById("feedC411-Avg-02");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor03(floor) {
-            var high = document.getElementById("feedC411-High-03");
-            var low = document.getElementById("feedC411-Low-03");
-            var avg = document.getElementById("feedC411-Avg-03");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor04(floor) {
-            var high = document.getElementById("feedC411-High-04");
-            var low = document.getElementById("feedC411-Low-04");
-            var avg = document.getElementById("feedC411-Avg-04");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor05(floor) {
-            var high = document.getElementById("feedC411-High-05");
-            var low = document.getElementById("feedC411-Low-05");
-            var avg = document.getElementById("feedC411-Avg-05");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor06(floor) {
-            var high = document.getElementById("feedC411-High-06");
-            var low = document.getElementById("feedC411-Low-06");
-            var avg = document.getElementById("feedC411-Avg-06");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor07(floor) {
-            var high = document.getElementById("feedC411-High-07");
-            var low = document.getElementById("feedC411-Low-07");
-            var avg = document.getElementById("feedC411-Avg-07");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor08(floor) {
-            var high = document.getElementById("feedC411-High-08");
-            var low = document.getElementById("feedC411-Low-08");
-            var avg = document.getElementById("feedC411-Avg-08");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor09(floor) {
-            var high = document.getElementById("feedC411-High-09");
-            var low = document.getElementById("feedC411-Low-09");
-            var avg = document.getElementById("feedC411-Avg-09");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function releaseFeedC411Floor10(floor) {
-            var high = document.getElementById("feedC411-High-10");
-            var low = document.getElementById("feedC411-Low-10");
-            var avg = document.getElementById("feedC411-Avg-10");
-            formatFeedC411FTemp(high, low, avg, floor)
-        }
-
-        function formatFeedC411FTemp(high, low, avg, fTemp) {
-            high.innerHTML = fTemp.high;
-            high.style.color = "#" + fTemp.highColor;
-
-            low.innerHTML = fTemp.low;
-            low.style.color = "#" + fTemp.lowColor;
-
-            avg.innerHTML = fTemp.avg;
-            avg.style.color = "#" + fTemp.avgColor;
-        }
-
-    /**************解析每一层 结束*************************/
-
-    /*****************解析全仓 开始************************/
-
-        function releaseFeedC411Resume(result) {
-            var high = document.getElementById("feedC411-High");
-            var low = document.getElementById("feedC411-Low");
-            var avg = document.getElementById("feedC411-Avg");
-            var stock = document.getElementById("feedC411-Stock");
-            var water = document.getElementById("feedC411-Water");
-            var humidity01 = document.getElementById("feedC411-humidity01");
-            var envHumidity = document.getElementById("feedC411-envHumidity");
-            high.innerHTML = result.high;
-            high.style.color = "#" + result.highColor;
-            low.innerHTML = result.low;
-            low.style.color = "#" + result.lowColor;
-            avg.innerHTML = result.avg;
-            avg.style.color = "#" + result.avgColor;
-            stock.innerHTML = result.stock;
-            water.innerHTML = result.water;
-            humidity01.innerHTML = result.humidity01;
-            envHumidity.innerHTML = result.envHumidity;
-        }
-
-    /*****************解析全仓 结束************************/
-    function rdlInitTableFeedC411() {
-        var questionColumns = [];
-        $.ajax({
-            type: 'POST',
-            data: {devId:""},
-            url: '/lihuaiot01/realDeviceList/feedC411DeviceHead',
-            dataType: "json",
-            success: function (result) {
-                /*alert("1");*/
-                var json = eval(result); //数组
-                for (var i = 0; i < json.length; i++) {
-                    var temp = "";
-                    if (json[i].data === "dState") {
-                        temp = {
-                            field: json[i].data,
-                            title: json[i].title,
-                            align: json[i].align,
-                            formatter: rdlChangeTableColor
-                        };//手动拼接columns
-                    } else {
-                        temp = {
-                            field: json[i].data,
-                            title: json[i].title,
-                            align: json[i].align,
-                            visible: json[i].visible
-                        };//手动拼接columns
-                    }
-                    questionColumns.push(temp);
-                }
-                rdlFeedC411TableColumns = questionColumns;
-                $('#rdlFeedC411DeviceList').bootstrapTable('destroy');
-                $('#rdlFeedC411DeviceList').bootstrapTable({
-                    columns: questionColumns
-                });
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                /*alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);*/
-                handleAjaxError(XMLHttpRequest.status);
-            }
-        });
     }
+    return temp;
+}
+
+function formatFeedC411Temp(obj, temp) {
+
+    obj.innerHTML = temp.temp;
+    obj.style.color = "#" + temp.color;
+    if (temp.enable === false) {
+        obj.style.color = '#D3D3D3';
+    }
+}
+
+/*****************解析电缆 结束*********************/
+
+/**************解析每一层 开始*************************/
+
+function releaseFeedC411Floor(floor) {
+    if (floor.num === 1) {
+        releaseFeedC411Floor01(floor)
+    }
+    if (floor.num === 2) {
+        releaseFeedC411Floor02(floor)
+    }
+    if (floor.num === 3) {
+        releaseFeedC411Floor03(floor)
+    }
+    if (floor.num === 4) {
+        releaseFeedC411Floor04(floor)
+    }
+    if (floor.num === 5) {
+        releaseFeedC411Floor05(floor)
+    }
+    if (floor.num === 6) {
+        releaseFeedC411Floor06(floor)
+    }
+    if (floor.num === 7) {
+        releaseFeedC411Floor07(floor)
+    }
+    if (floor.num === 8) {
+        releaseFeedC411Floor08(floor)
+    }
+    if (floor.num === 9) {
+        releaseFeedC411Floor09(floor)
+    }
+    if (floor.num === 10) {
+        releaseFeedC411Floor10(floor)
+    }
+    if (floor.num === 11) {
+        releaseFeedC411Floor11(floor)
+    }
+    if (floor.num === 12) {
+        releaseFeedC411Floor12(floor)
+    }
+    if (floor.num === 13) {
+        releaseFeedC411Floor13(floor)
+    }
+    if (floor.num === 14) {
+        releaseFeedC411Floor14(floor)
+    }
+    if (floor.num === 15) {
+        releaseFeedC411Floor15(floor)
+    }
+    if (floor.num === 16) {
+        releaseFeedC411Floor16(floor)
+    }
+}
+
+function releaseFeedC411Floor01(floor) {
+    var high = document.getElementById("feedC411-High-01");
+    var low = document.getElementById("feedC411-Low-01");
+    var avg = document.getElementById("feedC411-Avg-01");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor02(floor) {
+    var high = document.getElementById("feedC411-High-02");
+    var low = document.getElementById("feedC411-Low-02");
+    var avg = document.getElementById("feedC411-Avg-02");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor03(floor) {
+    var high = document.getElementById("feedC411-High-03");
+    var low = document.getElementById("feedC411-Low-03");
+    var avg = document.getElementById("feedC411-Avg-03");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor04(floor) {
+    var high = document.getElementById("feedC411-High-04");
+    var low = document.getElementById("feedC411-Low-04");
+    var avg = document.getElementById("feedC411-Avg-04");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor05(floor) {
+    var high = document.getElementById("feedC411-High-05");
+    var low = document.getElementById("feedC411-Low-05");
+    var avg = document.getElementById("feedC411-Avg-05");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor06(floor) {
+    var high = document.getElementById("feedC411-High-06");
+    var low = document.getElementById("feedC411-Low-06");
+    var avg = document.getElementById("feedC411-Avg-06");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor07(floor) {
+    var high = document.getElementById("feedC411-High-07");
+    var low = document.getElementById("feedC411-Low-07");
+    var avg = document.getElementById("feedC411-Avg-07");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor08(floor) {
+    var high = document.getElementById("feedC411-High-08");
+    var low = document.getElementById("feedC411-Low-08");
+    var avg = document.getElementById("feedC411-Avg-08");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor09(floor) {
+    var high = document.getElementById("feedC411-High-09");
+    var low = document.getElementById("feedC411-Low-09");
+    var avg = document.getElementById("feedC411-Avg-09");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor10(floor) {
+    var high = document.getElementById("feedC411-High-10");
+    var low = document.getElementById("feedC411-Low-10");
+    var avg = document.getElementById("feedC411-Avg-10");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor11(floor) {
+    var high = document.getElementById("feedC411-High-11");
+    var low = document.getElementById("feedC411-Low-11");
+    var avg = document.getElementById("feedC411-Avg-11");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor12(floor) {
+    var high = document.getElementById("feedC411-High-12");
+    var low = document.getElementById("feedC411-Low-12");
+    var avg = document.getElementById("feedC411-Avg-12");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor13(floor) {
+    var high = document.getElementById("feedC411-High-13");
+    var low = document.getElementById("feedC411-Low-13");
+    var avg = document.getElementById("feedC411-Avg-13");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor14(floor) {
+    var high = document.getElementById("feedC411-High-14");
+    var low = document.getElementById("feedC411-Low-14");
+    var avg = document.getElementById("feedC411-Avg-14");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor15(floor) {
+    var high = document.getElementById("feedC411-High-15");
+    var low = document.getElementById("feedC411-Low-15");
+    var avg = document.getElementById("feedC411-Avg-15");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function releaseFeedC411Floor16(floor) {
+    var high = document.getElementById("feedC411-High-16");
+    var low = document.getElementById("feedC411-Low-16");
+    var avg = document.getElementById("feedC411-Avg-16");
+    formatFeedC411FTemp(high, low, avg, floor)
+}
+
+function formatFeedC411FTemp(high, low, avg, fTemp) {
+    high.innerHTML = fTemp.high;
+    high.style.color = "#" + fTemp.highColor;
+
+    low.innerHTML = fTemp.low;
+    low.style.color = "#" + fTemp.lowColor;
+
+    avg.innerHTML = fTemp.avg;
+    avg.style.color = "#" + fTemp.avgColor;
+}
+
+/**************解析每一层 结束*************************/
+
+/*****************解析全仓 开始************************/
+
+function releaseFeedC411Resume(result) {
+    var high = document.getElementById("feedC411-High");
+    var low = document.getElementById("feedC411-Low");
+    var avg = document.getElementById("feedC411-Avg");
+    var stock = document.getElementById("feedC411-Stock");
+    var water = document.getElementById("feedC411-Water");
+    var humidity01 = document.getElementById("feedC411-humidity01");
+    var envHumidity = document.getElementById("feedC411-envHumidity");
+    var highThreshold = document.getElementById("feedC411-highThreshold");
+    high.innerHTML = result.high;
+    high.style.color = "#" + result.highColor;
+    low.innerHTML = result.low;
+    low.style.color = "#" + result.lowColor;
+    avg.innerHTML = result.avg;
+    avg.style.color = "#" + result.avgColor;
+    stock.innerHTML = result.stock;
+    water.innerHTML = result.water;
+    humidity01.innerHTML = result.humidity01;
+    envHumidity.innerHTML = result.envHumidity;
+    highThreshold.innerHTML = result.highThreshold;
+}
+
+/*****************解析全仓 结束************************/
+function rdlInitTableFeedC411() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {devId: ""},
+        url: '/lihuaiot01/realDeviceList/feedC411DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        visible: json[i].visible
+                    };//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlFeedC411TableColumns = questionColumns;
+            $('#rdlFeedC411DeviceList').bootstrapTable('destroy');
+            $('#rdlFeedC411DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
 
 function rdlInitTableFeedC41102(devId) {
     var questionColumns = [];
     $.ajax({
         type: 'POST',
-        data: {devId:devId},
+        data: {devId: devId},
         url: '/lihuaiot01/realDeviceList/feedC411DeviceHead',
         dataType: "json",
         success: function (result) {
@@ -3588,51 +4093,51 @@ function rdlInitTableFeedC41102(devId) {
     });
 }
 
-    function rdlSelectDeviceByTreeIdFeedC411() {
+function rdlSelectDeviceByTreeIdFeedC411() {
 
-        $('#rdlFeedC411DeviceList').bootstrapTable('destroy');
+    $('#rdlFeedC411DeviceList').bootstrapTable('destroy');
 
-        $('#rdlFeedC411DeviceList').bootstrapTable({
-            //是否显示行间隔色
-            striped: true,
-            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-            cache: false,
-            //是否显示分页（*）
-            pagination: true,
-            //是否启用排序
-            sortable: false,
-            //排序方式
-            sortOrder: "asc",
-            //每页的记录行数（*）
-            pageSize: 50,
-            //可供选择的每页的行数（*）
-            pageList: [8, 10, 25, 50, 100],
-            //是否显示搜索
-            search: false,
-            // 显示下拉框勾选要显示的列
-            showColumns: true,
-            // 设置最少显示列个数
-            minimumCountColumns: 2,
-            //data:json,
-            //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
-            url: "/lihuaiot01/realDeviceList/selectFeedC411ByORGId",
-            contentType: "application/x-www-form-urlencoded",//必须要有！！！！
-            method: 'post',                      //请求方式（*）
-            dataType: "json",
-            //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
-            //queryParamsType:'',
-            ////查询参数,每次调用是会带上这个参数，可自定义
-            queryParamsType: 'limit',//查询参数组织方式
-            queryParams: rdlQueryParams,
-            //分页方式：client客户端分页，server服务端分页（*）
-            sidePagination: "client",
-            locale: 'zh-CN',//中文支持
-            columns: rdlFeedC411TableColumns,
-            height: 500,       //设置表格高度-固定表头生效
-            fixedColumns: true,
-            fixedNumber: 1 //固定列数
-        });
-    }
+    $('#rdlFeedC411DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 50,
+        //可供选择的每页的行数（*）
+        pageList: [8, 10, 25, 50, 100],
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns: true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/realDeviceList/selectFeedC411ByORGId",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: rdlQueryParams,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "client",
+        locale: 'zh-CN',//中文支持
+        columns: rdlFeedC411TableColumns,
+        height: 500,       //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
 
 //************************FeedC411 end******************************/
 
@@ -3693,6 +4198,14 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlLhsp05p1Export_storage').click(function () { //立华食品-冷库测温
+        $('#rdlExport_modal').modal("show");
+    });
+
+    $('#rdlLhsf0ap1Export_storage').click(function () { //生防-物资熏蒸
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlExport_storage_download').click(function () {
         var queryParameter = rdlNowTreeNode.id;
         var data = {
@@ -3700,37 +4213,36 @@ function rdlExportStorageAction() {
         };
         var rootNodeId = rdlNowTreeNodeRoot.id;
         var url = "";
-        if ( rootNodeId === "111")   //种禽环控器
+        if (rootNodeId === "111")   //种禽环控器
         {
             url = "/lihuaiot01/realDeviceList/exportEC01DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "211")  //立华禽环保1.0
+        } else if (rootNodeId === "211")  //立华禽环保1.0
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC01DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "212")  //立华禽环保2.0
+        } else if (rootNodeId === "212")  //立华禽环保2.0
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC212DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "214")  //立华禽环保3.0
+        } else if (rootNodeId === "214")  //立华禽环保3.0
         {
             url = "/lihuaiot01/realDeviceList/exportSewageC214DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "311")  //自动称重
+        } else if (rootNodeId === "311")  //自动称重
         {
             url = "/lihuaiot01/realDeviceList/exportScaleC01DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "312")  //种鸡散装料塔称重
+        } else if (rootNodeId === "312")  //种鸡散装料塔称重
         {
             url = "/lihuaiot01/realDeviceList/exportWeighC312DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "411")  //饲料部筒仓测温
+        } else if (rootNodeId === "411")  //饲料部筒仓测温
         {
             url = "/lihuaiot01/realDeviceList/exportFeedC411DeviceList?" + $.param(data);
-        }
-        else if (rootNodeId === "213")  //水质在线监测
+        } else if (rootNodeId === "213")  //水质在线监测
         {
             url = "/lihuaiot01/realDeviceList/exportHj212C213DeviceList?" + $.param(data);
+        } else if (rootNodeId === "LHSP05p1")  //立华食品-冷库测温
+        {
+            url = "/lihuaiot01/realDeviceList/exportLhsp05p1DeviceList?" + $.param(data);
+        } else if (rootNodeId === "LHSF0Ap1")  //生防-物资熏蒸
+        {
+            url = "/lihuaiot01/realDeviceList/exportLhsf0ap1DeviceList?" + $.param(data);
         }
         window.open(url, '_blank');
         $('#rdlExport_modal').modal("hide");
