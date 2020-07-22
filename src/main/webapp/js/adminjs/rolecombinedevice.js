@@ -188,15 +188,23 @@ function roleSelectDeviceByOrgId() {
                 for (var i = 0; i < result.length; i++) {
                     //先创建好select里面的option元素
                     //var length = $("#").find("option[value=0001]").size();
-                    var selEndlength = $("option[value=" + result[i].dSerialNum + "]", "#roleDeviceSelEnd").length;
+                    var dSerialNum = result[i].dSerialNum;
+                    var dName = result[i].dName;
+                    if(dSerialNum.indexOf('.')>0){
+                        dSerialNum = dSerialNum.replace('.','p');
+                    }
+                    if(dName.indexOf('.')>0){
+                        dName = dName.replace('.','p');
+                    }
+                    var selEndlength = $("option[value=" + dSerialNum + "]", "#roleDeviceSelEnd").length;
                     if (selEndlength > 0)
                         continue;
                     var option = document.createElement("option");
                     //转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-                    $(option).val(result[i].dSerialNum);
+                    $(option).val(dSerialNum);
                     //给option的text赋值,这就是你点开下拉框能够看到的东西
-                    $(option).attr("title", result[i].dName);
-                    $(option).text(result[i].dName);
+                    $(option).attr("title", dName);
+                    $(option).text(dName);
                     //获取select 下拉框对象,并将option添加进select
                     $('#roleDeviceSelBefore').append(option);
                 }
@@ -345,7 +353,11 @@ function roleUpdateRoleDevice() {
         return;
     $.each(operationEnd, function (id, obj) {
         var object = new Object();
-        object.devNum = obj.value;
+        var dDevNum = obj.value;
+        if(dDevNum.indexOf('p'>0)){
+            dDevNum = dDevNum.replace('p','.');
+        }
+        object.devNum = dDevNum;
         object.devName = obj.text;
         object.roleId = mRoleId;
         object.roleName = mRoleName;

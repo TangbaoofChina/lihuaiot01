@@ -2,10 +2,9 @@ package com.system.controller.Phone.oa;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.Device.Lhsf0ap1DM;
+import com.system.po.Lhsf0ap1.Lhsf0ap1DMPhone;
 import com.system.po.ORGTreeNode;
-import com.system.po.Phone.PhoneRealDeviceInfo;
-import com.system.po.Phone.PhoneRealMsgInfo;
-import com.system.po.Phone.PhoneTree;
+import com.system.po.Phone.*;
 import com.system.po.RoleInfo;
 import com.system.service.DeviceRoleInfoService;
 import com.system.service.Lhsf0ap1DMService;
@@ -74,14 +73,30 @@ public class Lhsf0ap1PhoneController extends BaseController {
         return jsonString;
     }
 
+    //获取没有经过对象转换的对象
+    @RequestMapping(value = "selectSummary01", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String selectRealDeviceInfoSummary01(String userId, String orgId) throws Exception {
+        List<Lhsf0ap1DM> dmList = getRealDMByUserIdAndOrgId(userId, orgId);
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
+        if (dmList.size() > 0) {
+            List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = getPhoneRealDeviceInfoSummary01(dmList);
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneRealDeviceInfoList));
+        }
+        return jsonString;
+    }
+
+    //获取没有经过对象转换的对象
     @RequestMapping(value = "selectSummary", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String selectRealDeviceInfoSummary(String userId, String orgId) throws Exception {
         List<Lhsf0ap1DM> dmList = getRealDMByUserIdAndOrgId(userId, orgId);
+        //手机端显示效果需要对对象进行修改
+        List<Lhsf0ap1DMPhone> dmPhoneList = formatPhoneObj(dmList);
         String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
         if (dmList.size() > 0) {
-            List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = getPhoneRealDeviceInfoSummary(dmList);
-            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneRealDeviceInfoList));
+            List<PhoneRealDeviceInfoObj> phoneRealDeviceInfoObjList = getPhoneRealDeviceInfoSummary(dmPhoneList);
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneRealDeviceInfoObjList));
         }
         return jsonString;
     }
@@ -112,17 +127,54 @@ public class Lhsf0ap1PhoneController extends BaseController {
         return dmList;
     }
 
-    private List<PhoneRealDeviceInfo> getPhoneRealDeviceInfoSummary(List<Lhsf0ap1DM> dmList) {
+    //手机端的显示格式和实例对象有点差别，需要做一下转换
+    private List<Lhsf0ap1DMPhone> formatPhoneObj(List<Lhsf0ap1DM> dmList){
+        List<Lhsf0ap1DMPhone> dmPhoneList = new ArrayList<>();
+        for (Lhsf0ap1DM dm:dmList
+             ) {
+            Lhsf0ap1DMPhone dmPhone = new Lhsf0ap1DMPhone(dm);
+            dmPhoneList.add(dmPhone);
+        }
+        return dmPhoneList;
+    }
+
+    private List<PhoneRealDeviceInfoObj> getPhoneRealDeviceInfoSummary(List<Lhsf0ap1DMPhone> dmPhoneList) {
+        List<PhoneRealDeviceInfoObj> phoneRealDeviceInfoObjList = new ArrayList<>();
+        for (Lhsf0ap1DMPhone dmPhone : dmPhoneList
+        ) {
+            PhoneRealDeviceInfoObj phoneRealDeviceInfoObj = getOneRealDeviceInfoSummary(dmPhone);
+            phoneRealDeviceInfoObjList.add(phoneRealDeviceInfoObj);
+        }
+        return phoneRealDeviceInfoObjList;
+    }
+
+    private PhoneRealDeviceInfoObj getOneRealDeviceInfoSummary(Lhsf0ap1DMPhone dmPhone) {
+        PhoneRealDeviceInfoObj phoneRealDeviceInfo = new PhoneRealDeviceInfoObj();
+        //形成信号信息
+        List<PhoneRealMsgInfoObj> phoneRealMsgInfoObjList = dmPhone.getPhoneRealMsgInfoObjSummary();
+        //形成设备信息
+        phoneRealDeviceInfo.setDevNum(dmPhone.getDSerialNum());
+        phoneRealDeviceInfo.setTitle(dmPhone.getDName());
+        if(dmPhone.getDState().equals("在线")){
+            phoneRealDeviceInfo.setState("1");
+        }else{
+            phoneRealDeviceInfo.setState("0");
+        }
+        phoneRealDeviceInfo.setData(phoneRealMsgInfoObjList);
+        return phoneRealDeviceInfo;
+    }
+
+    private List<PhoneRealDeviceInfo> getPhoneRealDeviceInfoSummary01(List<Lhsf0ap1DM> dmList) {
         List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = new ArrayList<PhoneRealDeviceInfo>();
         for (Lhsf0ap1DM dm : dmList
         ) {
-            PhoneRealDeviceInfo phoneRealDeviceInfo = getOneRealDeviceInfoSummary(dm);
+            PhoneRealDeviceInfo phoneRealDeviceInfo = getOneRealDeviceInfoSummary01(dm);
             phoneRealDeviceInfoList.add(phoneRealDeviceInfo);
         }
         return phoneRealDeviceInfoList;
     }
 
-    private PhoneRealDeviceInfo getOneRealDeviceInfoSummary(Lhsf0ap1DM dm) {
+    private PhoneRealDeviceInfo getOneRealDeviceInfoSummary01(Lhsf0ap1DM dm) {
         PhoneRealDeviceInfo phoneRealDeviceInfo = new PhoneRealDeviceInfo();
         //形成信号信息
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = dm.getPhoneRealMsgInfoSummary();
@@ -137,5 +189,7 @@ public class Lhsf0ap1PhoneController extends BaseController {
         phoneRealDeviceInfo.setData(phoneRealMsgInfoList);
         return phoneRealDeviceInfo;
     }
+
+
 
 }
