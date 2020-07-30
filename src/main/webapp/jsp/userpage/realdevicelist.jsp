@@ -211,6 +211,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlLhfh05p1DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlLhfh05p1toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlLhfh05p1Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlLhfh05p1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlLhfh05p1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlLhsf0ap1DeviceListDiv"
              style="display: none;white-space: nowrap;">
             <div id="rdlLhsf0ap1toolbar" class="btn-group">
@@ -223,6 +245,28 @@
                 <table class="table table-striped" id="rdlLhsf0ap1DeviceList" align="center"
                        striped="true" data-click-to-select="true"
                        data-toolbar="#rdlLhsf0ap1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
+        <div class="columns-right" id="rdlLhrz01p1DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlLhrz01p1toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlLhrz01p1Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlLhrz01p1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlLhrz01p1toolbar"<%--设置装按钮的容器为id为toolbar--%>
                        data-pagination="true"<%--设置是否显示页码数--%>
                        data-show-refresh="true" <%--设置刷新按钮--%>
                        data-show-toggle="true" <%--设置数据显示格式--%>
@@ -3030,7 +3074,16 @@
         <div class="columns-right" id="rdlLhsp05p1OneDeviceDiv" style="display: none">
 
         </div>
+
+        <div class="columns-right" id="rdlLhfh05p1OneDeviceDiv" style="display: none">
+
+        </div>
+
         <div class="columns-right" id="rdlLhsf0ap1OneDeviceDiv" style="display: none">
+
+        </div>
+
+        <div class="columns-right" id="rdlLhrz01p1OneDeviceDiv" style="display: none">
 
         </div>
     </div>

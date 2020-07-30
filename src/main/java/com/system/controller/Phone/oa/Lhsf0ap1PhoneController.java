@@ -2,7 +2,7 @@ package com.system.controller.Phone.oa;
 
 import com.alibaba.fastjson.JSON;
 import com.system.po.Device.Lhsf0ap1DM;
-import com.system.po.Lhsf0ap1.Lhsf0ap1DMPhone;
+import com.system.po.Phone.Lhsf0ap1.Lhsf0ap1DMPhone;
 import com.system.po.ORGTreeNode;
 import com.system.po.Phone.*;
 import com.system.po.RoleInfo;

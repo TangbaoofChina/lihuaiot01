@@ -31,7 +31,7 @@
             <entry key="com.zeroturnaround.jrebel.remoting.ModuleRemoteServerSelection" value="off" />
             <entry key="com.zeroturnaround.jrebel.remoting.ModuleSpecificSingleRemoteServer" />
             <entry key="jrebelEnabled" value="true" />
-            <entry key="lastExternalPluginCheckTime" value="1593226058615" />
+            <entry key="lastExternalPluginCheckTime" value="1595834946399" />
             <entry key="savedRebelXmlBuildTool" />
             <entry key="savedRebelXmlContent" />
           </map>
@@ -113,5 +113,6 @@
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.54" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:cors-filter:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:java-property-utils:1.9" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.10" level="project" />
   </component>
 </module>

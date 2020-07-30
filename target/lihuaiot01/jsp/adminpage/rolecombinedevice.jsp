@@ -153,7 +153,7 @@
                         <option value="411">筒仓测温</option>
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,LHRZ01p1">
-                        <option value="LHRZ01p1">猪用环控器</option>
+                        <option value="LHRZ01p1">猪用环控器1.0</option>
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,LHSP05p1">
                         <option value="LHSP05p1">冷库测温</option>
@@ -163,6 +163,9 @@
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,LHSF0Ap1">
                         <option value="LHSF0Ap1">生防(物资熏蒸)</option>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,LHTY02p1">
+                        <option value="LHTY02p1">断电报警器1.0</option>
                     </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin">
                         <option value="admin">管理员</option>

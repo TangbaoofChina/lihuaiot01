@@ -199,6 +199,29 @@
                </button>
            </div>
        </div>
+        <%--立华孵化-GPS测温第一部分--%>
+        <div class="columns-right" id="hisChartLhfh05p1DivP1" style="display: none;white-space: nowrap;">
+            <div class="form-inline" style="display: block;">
+                <div class="input-group" id="hisChartLhfh05p1Param">
+                    <label>参数：</label>
+                    <select name="hisChartLhfh05p1SelName_Param" onchange="hisChartLhfh05p1ParamChange()"
+                            id="hisChartLhfh05p1SelId_Param"
+                            class="input-sm">
+                        <option value="0" selected="selected">温度01</option>
+                        <option value="1">温度02</option>
+                        <option value="2">温度03</option>
+                        <option value="3">温度04</option>
+                    </select>
+                </div>
+                <label>时间：</label>
+                <div class="btn-group">
+                    <input type="text" id="hisChartLhfh05p1DateInterval" class="form-control" style="width: 320px;">
+                </div>
+                <button class="btn btn-default" id="hisChartLhfh05p1Query_storage" onclick="hisChartLhfh05p1Query()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                </button>
+            </div>
+        </div>
        <div class="col-md-8 col-sm-7" id="hisChartScaleC01DivP2" style="height:100%;display: none;">
            <div id="echartsScaleC01main" style="margin-top: 15px;"></div>
            <div id="hisChartScaleC01toolbar" style="margin-left: 15px;">
@@ -240,6 +263,10 @@
         <%--立华食品-冷库测温第二部分--%>
         <div class="col-md-8 col-sm-7" id="hisChartLhsp05p1DivP2" style="height:100%;display: none;">
             <div id="echartsLhsp05p1main" style="margin-top: 15px;"></div>
+        </div>
+        <%--立华孵化-GPS测温第二部分--%>
+        <div class="col-md-8 col-sm-7" id="hisChartLhfh05p1DivP2" style="height:100%;display: none;">
+            <div id="echartsLhfh05p1main" style="margin-top: 15px;"></div>
         </div>
     </div>
 </div>

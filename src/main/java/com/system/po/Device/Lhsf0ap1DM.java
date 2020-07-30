@@ -1,6 +1,7 @@
 package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
+import com.system.po.Phone.Base.PhonePartDetail;
 import com.system.po.Phone.PhoneRealMsgInfo;
 import com.system.util.Lhsf0ap1Util;
 

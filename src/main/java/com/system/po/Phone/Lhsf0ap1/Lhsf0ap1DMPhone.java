@@ -1,4 +1,4 @@
-package com.system.po.Lhsf0ap1;
+package com.system.po.Phone.Lhsf0ap1;
 
 import com.system.po.Device.BaseDeviceMessage;
 import com.system.po.Device.Lhsf0ap1DM;
