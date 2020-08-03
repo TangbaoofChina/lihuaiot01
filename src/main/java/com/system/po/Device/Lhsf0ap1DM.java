@@ -170,14 +170,14 @@ public class Lhsf0ap1DM extends BaseDeviceMessage {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
         PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
         phoneRealMsgInfo01.setId("temp");
-        phoneRealMsgInfo01.setTitle("温度：");
+        phoneRealMsgInfo01.setTitle("温度");
         phoneRealMsgInfo01.setValue(String.valueOf(this.getTemp())+ "℃");
         phoneRealMsgInfo01.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo01);
 
         PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
         phoneRealMsgInfo02.setId("humidity");
-        phoneRealMsgInfo02.setTitle("湿度：");
+        phoneRealMsgInfo02.setTitle("湿度");
         phoneRealMsgInfo02.setValue(String.valueOf(this.getHumidity())+ "%");
         phoneRealMsgInfo02.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo02);
@@ -205,7 +205,7 @@ public class Lhsf0ap1DM extends BaseDeviceMessage {
 
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("sendDate");
-        phoneRealMsgInfo06.setTitle("");
+        phoneRealMsgInfo06.setTitle("上报时间：");
         phoneRealMsgInfo06.setValue(this.getSendDate());
         phoneRealMsgInfo06.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);

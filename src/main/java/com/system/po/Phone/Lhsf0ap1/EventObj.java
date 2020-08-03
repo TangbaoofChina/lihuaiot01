@@ -63,7 +63,7 @@ public class EventObj {
 
         PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
         phoneRealMsgInfo07.setId("eventTime");
-        phoneRealMsgInfo07.setTitle("时间：");
+        phoneRealMsgInfo07.setTitle("事件时间：");
         phoneRealMsgInfo07.setValue(this.getEventTime());
         phoneRealMsgInfo07.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo07);

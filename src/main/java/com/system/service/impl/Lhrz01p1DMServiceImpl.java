@@ -116,7 +116,8 @@ public class Lhrz01p1DMServiceImpl implements Lhrz01p1DMService {
     public Map<String, List<Lhrz01p1DMHis>> selectHisByDateAndIDs(String[] sDeviceIds, String sQueryParam, String sStartDate, String sEndDate) throws Exception {
         Map<String, List<Lhrz01p1DMHis>> dmMapByIds = null;
         List<Lhrz01p1DMHis> dmList = null;
-        if (sQueryParam.equals("温度01") || sQueryParam.equals("温度02") || sQueryParam.equals("温度03")) {
+        if (sQueryParam.equals("温度01") || sQueryParam.equals("温度02") || sQueryParam.equals("温度03")
+                || sQueryParam.equals("当前温度") || sQueryParam.equals("目标温度") || sQueryParam.equals("舍外温度")) {
             dmList = dmMapper.selectByDeviceIdsAndDate(sDeviceIds, sStartDate, sEndDate);
         }
         //获取每个设备的数据(设备，设备数据)

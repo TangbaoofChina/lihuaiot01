@@ -101,7 +101,7 @@ public class Lhsf0ap1DMPhone extends BaseDeviceMessage {
 
         PhoneRealMsgInfoObj PhoneRealMsgInfoObj06 = new PhoneRealMsgInfoObj();
         PhoneRealMsgInfoObj06.setId("sendDate");
-        PhoneRealMsgInfoObj06.setTitle("消息时间");
+        PhoneRealMsgInfoObj06.setTitle("上报时间：");
         PhoneRealMsgInfoObj06.setValue(this.getSendDate());
         PhoneRealMsgInfoObj06.setFlag("0");
         PhoneRealMsgInfoObjList.add(PhoneRealMsgInfoObj06);

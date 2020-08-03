@@ -497,14 +497,14 @@ public class Lhrz01p1DM extends BaseDeviceMessage {
         List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
         PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
         phoneRealMsgInfo01.setId("age");
-        phoneRealMsgInfo01.setTitle("日龄：");
+        phoneRealMsgInfo01.setTitle("日龄");
         phoneRealMsgInfo01.setValue(String.valueOf(this.getAge())+ "天");
         phoneRealMsgInfo01.setFlag("1");
         phoneRealMsgInfoList.add(phoneRealMsgInfo01);
 
         PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
         phoneRealMsgInfo02.setId("workMode");
-        phoneRealMsgInfo02.setTitle("工作模式：");
+        phoneRealMsgInfo02.setTitle("工作模式");
         if(this.getWorkMode() == 0) {
             phoneRealMsgInfo02.setValue("空舍");
         }else if(this.getWorkMode() == 1){
@@ -517,35 +517,35 @@ public class Lhrz01p1DM extends BaseDeviceMessage {
 
         PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
         phoneRealMsgInfo03.setId("inventory");
-        phoneRealMsgInfo03.setTitle("存栏量：");
+        phoneRealMsgInfo03.setTitle("存栏量");
         phoneRealMsgInfo03.setValue(String.valueOf(this.getInventory())+ "头");
         phoneRealMsgInfo03.setFlag("3");
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
         phoneRealMsgInfo04.setId("nowTemp");
-        phoneRealMsgInfo04.setTitle("当前温度：");
+        phoneRealMsgInfo04.setTitle("当前温度");
         phoneRealMsgInfo04.setValue(String.valueOf(this.getNowTemp())+ "℃");
         phoneRealMsgInfo04.setFlag("5");
         phoneRealMsgInfoList.add(phoneRealMsgInfo04);
 
         PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
         phoneRealMsgInfo05.setId("targetTemp");
-        phoneRealMsgInfo05.setTitle("目标温度：");
+        phoneRealMsgInfo05.setTitle("目标温度");
         phoneRealMsgInfo05.setValue(String.valueOf(this.getTargetTemp())+ "℃");
         phoneRealMsgInfo05.setFlag("6");
         phoneRealMsgInfoList.add(phoneRealMsgInfo05);
 
         PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
         phoneRealMsgInfo06.setId("outTemp");
-        phoneRealMsgInfo06.setTitle("舍外温度：");
+        phoneRealMsgInfo06.setTitle("舍外温度");
         phoneRealMsgInfo06.setValue(String.valueOf(this.getOutTemp())+ "℃");
         phoneRealMsgInfo06.setFlag("7");
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
         PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
         phoneRealMsgInfo07.setId("airLevel");
-        phoneRealMsgInfo07.setTitle("通风级别：");
+        phoneRealMsgInfo07.setTitle("通风级别");
         phoneRealMsgInfo07.setValue(String.valueOf(this.getAirLevel())+ "");
         phoneRealMsgInfo07.setFlag("4");
         phoneRealMsgInfoList.add(phoneRealMsgInfo07);
