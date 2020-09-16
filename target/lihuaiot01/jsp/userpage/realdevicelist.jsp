@@ -101,6 +101,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlSwgC215DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlSwgC215toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlSwgC215Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlSwgC215DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlSwgC215toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlScaleC01DeviceListDiv"
              style="display: none;white-space: nowrap;">
             <div id="rdlScaleC01toolbar" class="btn-group">
@@ -277,6 +299,28 @@
 
         </div>
 
+        <div class="columns-right" id="rdlLhty02p1DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlLhty02p1toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlLhty02p1Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlLhty02p1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlLhty02p1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlEC01OneDeviceDiv" style="display:none">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="main">
@@ -398,6 +442,7 @@
                 </div>
             </div>
         </div>
+
         <div class="columns-right" id="rdlSewageC01OneDeviceDiv" style="display:none;">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="sewageC01Main" style="text-align: center;margin-left: 20px;">
@@ -873,6 +918,7 @@
                 </div>
             </div>
         </div>
+
         <div class="columns-right" id="rdlSewageC212OneDeviceDiv" style="display:none;">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="sewageC212Main" style="text-align: center;margin-left: 20px;">
@@ -1613,6 +1659,7 @@
                 </div>
             </div>
         </div>
+
         <div class="columns-right" id="rdlSewageC214OneDeviceDiv" style="display:none;">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="sewageC214Main" style="text-align: center;margin-left: 20px;">
@@ -2428,6 +2475,11 @@
                 </div>
             </div>
         </div>
+
+<%--        <div class="columns-right" id="rdlSwgC215OneDeviceDiv" style="display:none;">--%>
+<%--        </div>--%>
+        <%@include file="rdlSwg215.jsp"%>
+
         <div class="columns-right" id="rdlScaleC01OneDeviceDiv" style="display: none">
         </div>
 
@@ -3086,6 +3138,10 @@
         <div class="columns-right" id="rdlLhrz01p1OneDeviceDiv" style="display: none">
 
         </div>
+
+        <div class="columns-right" id="rdlLhty02p1OneDeviceDiv" style="display: none">
+
+        </div>
     </div>
 </div>
 
@@ -3128,6 +3184,14 @@
 
 <script>
     //removealljsfile();
+    loadjscssfile("/lihuaiot01/js/userjs/rdlSwg/rdlSwg01.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlSwg/rdlSwg212.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlSwg/rdlSwg214.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlSwg/rdlSwg215.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlFeed/rdlFeedC411.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlLh/rdlLhty02p1.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdltableinit.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/realdevicelist.js", "js");
+
 </script>
 <link rel="stylesheet" href="/lihuaiot01/css/realdevicelist.css" type="text/css">

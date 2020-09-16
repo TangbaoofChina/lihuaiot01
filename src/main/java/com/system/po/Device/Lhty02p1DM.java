@@ -1,6 +1,7 @@
 package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
+import com.system.po.Phone.PhoneRealMsgInfo;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class Lhty02p1DM extends BaseDeviceMessage {
         MydataTableColumn mdtc11 = new MydataTableColumn();
         mdtc11.setData("humiA");
         mdtc11.setDefaultContent("11");
-        mdtc11.setTitle("温度02");
+        mdtc11.setTitle("湿度A");
         mdtc11.setVisible(true);
         myDTCList.add(mdtc11);
 
@@ -105,16 +106,16 @@ public class Lhty02p1DM extends BaseDeviceMessage {
         MydataTableColumn mdtc12 = new MydataTableColumn();
         mdtc12.setData("tempB");
         mdtc12.setDefaultContent("12");
-        mdtc12.setTitle("温度03");
-        mdtc12.setVisible(false);
+        mdtc12.setTitle("温度B");
+        mdtc12.setVisible(true);
         myDTCList.add(mdtc12);
 
         //湿度B
         MydataTableColumn mdtc13 = new MydataTableColumn();
         mdtc13.setData("humiB");
         mdtc13.setDefaultContent("13");
-        mdtc13.setTitle("温度04");
-        mdtc13.setVisible(false);
+        mdtc13.setTitle("湿度B");
+        mdtc13.setVisible(true);
         myDTCList.add(mdtc13);
 
         //电压A
@@ -206,5 +207,59 @@ public class Lhty02p1DM extends BaseDeviceMessage {
         myDTCList.add(mdtc24);
 
         return myDTCList;
+    }
+
+    public List<PhoneRealMsgInfo> getPhoneRealMsgInfoSummary() {
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = new ArrayList<PhoneRealMsgInfo>();
+        PhoneRealMsgInfo phoneRealMsgInfo01 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo01.setId("tempA");
+        phoneRealMsgInfo01.setTitle("温度A");
+        phoneRealMsgInfo01.setValue(String.valueOf(this.getTempA())+ "℃");
+        phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo01);
+
+        PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo02.setId("humiA");
+        phoneRealMsgInfo02.setTitle("湿度A");
+        phoneRealMsgInfo02.setValue(String.valueOf(this.getHumiA())+ "%");
+        phoneRealMsgInfo02.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo02);
+
+        PhoneRealMsgInfo phoneRealMsgInfo03 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo03.setId("tempB");
+        phoneRealMsgInfo03.setTitle("温度B");
+        phoneRealMsgInfo03.setValue(String.valueOf(this.getTempB())+ "℃");
+        phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo03);
+
+        PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo04.setId("humiB");
+        phoneRealMsgInfo04.setTitle("湿度B");
+        phoneRealMsgInfo04.setValue(String.valueOf(this.getHumiB())+ "%");
+        phoneRealMsgInfo04.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo04);
+
+        PhoneRealMsgInfo phoneRealMsgInfo05 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo05.setId("volA");
+        phoneRealMsgInfo05.setTitle("电压A");
+        phoneRealMsgInfo05.setValue(String.valueOf(this.getVolA())+ "%");
+        phoneRealMsgInfo05.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo05);
+
+        PhoneRealMsgInfo phoneRealMsgInfo06 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo06.setId("volB");
+        phoneRealMsgInfo06.setTitle("电压B");
+        phoneRealMsgInfo06.setValue(String.valueOf(this.getVolB())+ "%");
+        phoneRealMsgInfo06.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo06);
+
+        PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
+        phoneRealMsgInfo07.setId("volC");
+        phoneRealMsgInfo07.setTitle("电压C");
+        phoneRealMsgInfo07.setValue(String.valueOf(this.getVolC())+ "%");
+        phoneRealMsgInfo07.setFlag("0");
+        phoneRealMsgInfoList.add(phoneRealMsgInfo07);
+
+        return phoneRealMsgInfoList;
     }
 }

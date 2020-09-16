@@ -143,6 +143,9 @@
                     <shiro:hasAnyRoles name="admin,214">
                         <option value="214">立华禽环保3.0</option>
                     </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="admin,215">
+                        <option value="215">立华禽环保4.0</option>
+                    </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="admin,213">
                         <option value="213">立华水质</option>
                     </shiro:hasAnyRoles>

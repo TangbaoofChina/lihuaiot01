@@ -56,8 +56,8 @@
         and u.di_nodeid = #{ORGId}
         order by u.di_serialnum asc
     </select>
-    <select id="selecByORGIdAndRoleId" resultMap="BaseResultMap">
-        select DISTINCT <include refid="BaseResult_Column_List"/>
+    <select id="selectByORGIdAndRoleId" resultMap="BaseResultMap">
+        select distinct <include refid="BaseResult_Column_List"/>
         from IOT_LHSF0AP1 t,iot_deviceinfo u,iot_devicerole a
         where u.di_serialnum=t.device_serialnum
         and (u.DI_DEACTIVE &lt; 1 or u.DI_DEACTIVE is null)
