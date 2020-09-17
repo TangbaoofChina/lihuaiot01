@@ -1143,7 +1143,7 @@ function rdlSelectInfoByDeviceIdAndSewageC215(queryParameter) {
                 //sbr一次搅拌
                 var firstSbrMixerRunMin215 = document.getElementById("firstSbrMixerRunMin215");
                 //sbr一次搅拌
-                firstSbrMixerRunMin215.innerText = result.firstSbrMixerRunMin;
+                firstSbrMixerRunMin215.innerText = result.sbrMixerOnceRunMin;
                 //风机01
                 var fan01SRunMin215 = document.getElementById("fan01SRunMin215");
                 //风机01

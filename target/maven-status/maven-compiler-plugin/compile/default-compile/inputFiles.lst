@@ -10,12 +10,14 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\DeviceTypeServiceImpl.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\FeedC411\FeedC411RDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\BaseController.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\SwgC215DMService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\DeviceOfflineService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\FeedC411\PFC411.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\UserloginService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\admin\RoleCombineDevController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\DeviceOfflineRate.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\FeedC411\HisChartDLFeedC411Controller.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\Lhty02\Lhty02p1RDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\Lhsf0ap1DM.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\DeviceInfo.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\Base\PhoneSummary.java
@@ -41,6 +43,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\parameter\ParameterBase.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\parameter\ParameterData01.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PWeighC312\PWeighC312HisDeData.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\Lhty02p1Mapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\DeviceListController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\EChartsOptions\EChartsPie\EChartsPieOptions.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\Eas\ChickenRoomInfoService.java
@@ -83,16 +86,20 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\FeedC411\PFC411TempInfo.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\DeviceLongNodeInfoMapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\security\controller\AccountHandler.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\Lhty02p1DMService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneSewageC212\PSC212HisDataHead.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\FeedC411PhoneController.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\Lhty02\Lhty02p1HDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\security\util\MD5Util.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\util\EC01Util.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\SewageC214DMHis.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\DeviceOfflineMapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\ScaleC01DeviceMessageService.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\Lhty02p1DMServiceImpl.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\FeedC411\FeedC411HDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\Lhsp05\Lhsp05p1HDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\Base\PhoneHisDataHead.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\SwgC215DMServiceImpl.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\FeedC411\FeedC411DMAQ.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\DeviceErrorMapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\ErrorDescribeMapper.java
@@ -142,6 +149,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\SewageC213PhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\EChartsOptions\EcsmplData.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\ErrorDescribeService.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\SwgC215Mapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\FeedC411\FC411Temp.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\security\filter\ExtendFormAuthenticationFilter.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\DeviceRoleInfoMapper.java
@@ -163,6 +171,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\EChartsOptions\EChartsTBF\EctbfDataZoom.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\BootStrapTreeNodeService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\Phone\PhoneBootStrapTreeNodeService.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\SwgC215DMHis.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\Lhrz01p1\PLhrz01p1Detail.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\SewageC01PhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\AlarmErrorOfflineMapper.java
@@ -195,10 +204,12 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\util\FeedC411Chart.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneSewageC01\PSC01HisMsgInfo.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\BootStrapTreeNodeServiceImpl.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\SwgC215DM.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\parameter\DeviceType.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\admin\PeopleCombineOrgController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PWeighC312\PWeighC312HisDataContent.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\util\ScaleC01Util.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\util\Lhty02p1Util.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\Lhfh05p1Mapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\system\LoginRecordController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\Phone\MobMsgServiceImpl.java
@@ -230,6 +241,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\util\PhoneTreeNodeManager.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\DeviceRoleInfoService.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\Lhfh05p1DM.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\Lhty02p1PhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\WeighC3xxPhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\ScaleC01\ScaleC01EffectiveWt.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\PeopleInfoEas.java
@@ -253,6 +265,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\util\ScaleC01Chart.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\Lhrz01p1PhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\DeviceCombineOrgServiceImpl.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\SwgC\SwgC215HDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\impl\SewageC214DMServiceImpl.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\util\Lhfh05p1Util.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\EChartsOptions\EChartsPie\EChartsPieItemStyle.java
@@ -275,6 +288,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\Base\PhoneHis.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\SewageC214DM.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneHj212C213\PhoneHj212C213RealMsgInfo.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\user\SwgC\SwgC215RDLController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\controller\Phone\oa\EC111PhoneController.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneHj212C213\PhoneHj212C213RealOneData.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PWeighC312\PWeighC312Summary.java
@@ -328,6 +342,7 @@ E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\security\realms\UserAuthorizingRealm.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\mapperiot\DeviceInfoMapper.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\service\SewageC214DMService.java
+E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Device\Lhty02p1DMHis.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\EChartsOptions\EChartsTBF\EctbfBase.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneSewageC01\PSC01HisDataContent.java
 E:\01 2020年工作\01物联网开发\01程序编写web\lihuaiot10\src\main\java\com\system\po\Phone\PhoneSewageC212\PSC212HisDataContent.java
