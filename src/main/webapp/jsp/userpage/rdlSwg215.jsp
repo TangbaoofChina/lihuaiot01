@@ -70,7 +70,7 @@
                 <span id="airTemp01215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>SBR水温01(℃)</span>
+                <span>水温01(℃)</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="waterTemp01215">50</span>
@@ -84,7 +84,7 @@
                 <span id="airTemp02215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>SBR水温02(℃)</span>
+                <span>水温02(℃)</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="waterTemp02215">50</span>
@@ -104,7 +104,7 @@
                 <span>运</span>
             </div>
             <div class="col-md-2 col-sm-2 SwgC215border">
-                <span>运行时间</span>
+                <span>运行时间(分)</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>设备</span>
@@ -684,7 +684,7 @@
                 <span>运</span>
             </div>
             <div class="col-md-2 col-sm-2 SwgC215border">
-                <span>运行时间</span>
+                <span>运行时间(分)</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>工艺流程</span>
@@ -1384,7 +1384,7 @@
             </div>
         </div>
         <div class="col-md-9 col-sm-9 row" style="text-align: left;">
-            <span style="font-weight: bold">设备运行时间(时+分)</span>
+            <span style="font-weight: bold">设备启动时间(时+分)</span>
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
@@ -1449,8 +1449,6 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldOpstMixer01RunTime215">50</span>
             </div>
-        </div>
-        <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>混沉池污泥泵</span>
             </div>

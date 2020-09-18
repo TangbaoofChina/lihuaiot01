@@ -1201,26 +1201,26 @@ function rdlSelectInfoByDeviceIdAndSewageC215(queryParameter) {
                     firstSbrMixerStop215.style.display = "none";
                 }
                 //风机01
-                var fan01Run215 = document.getElementById("fan01Run215");
-                var fan01Stop215 = document.getElementById("fan01Stop215");
+                var fan01SRun215 = document.getElementById("fan01SRun215");
+                var fan01SStop215 = document.getElementById("fan01SStop215");
                 if (result.fan01State === false)  //集水井提升泵
                 {
-                    fan01Run215.style.display = "none";
-                    fan01Stop215.style.display = "block";
+                    fan01SRun215.style.display = "none";
+                    fan01SStop215.style.display = "block";
                 } else {
-                    fan01Run215.style.display = "block";
-                    fan01Stop215.style.display = "none";
+                    fan01SRun215.style.display = "block";
+                    fan01SStop215.style.display = "none";
                 }
                 //风机02
-                var fan02Run215 = document.getElementById("fan02Run215");
-                var fan02Stop215 = document.getElementById("fan02Stop215");
+                var fan02SRun215 = document.getElementById("fan02SRun215");
+                var fan02SStop215 = document.getElementById("fan02SStop215");
                 if (result.fan02State === false)  //集水井提升泵
                 {
-                    fan02Run215.style.display = "none";
-                    fan02Stop215.style.display = "block";
+                    fan02SRun215.style.display = "none";
+                    fan02SStop215.style.display = "block";
                 } else {
-                    fan02Run215.style.display = "block";
-                    fan02Stop215.style.display = "none";
+                    fan02SRun215.style.display = "block";
+                    fan02SStop215.style.display = "none";
                 }
                 //sbr二次搅拌
                 var secSbrMixerRun215 = document.getElementById("secSbrMixerRun215");
