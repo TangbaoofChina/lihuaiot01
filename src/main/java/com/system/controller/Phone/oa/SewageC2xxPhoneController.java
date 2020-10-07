@@ -57,6 +57,8 @@ public class SewageC2xxPhoneController extends BaseController{
     private SewageC212DMService sewageC212DMService;
     @Autowired
     private SewageC214DMService sewageC214DMService;
+    @Autowired
+    private SwgC215DMService swgC215DMService;
 
     @RequestMapping(value = "selectOrg", method = {RequestMethod.GET}, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -70,17 +72,21 @@ public class SewageC2xxPhoneController extends BaseController{
         List<ORGTreeNode> orgTreeNodeList211 = new ArrayList<ORGTreeNode>();
         List<ORGTreeNode> orgTreeNodeList212 = new ArrayList<ORGTreeNode>();
         List<ORGTreeNode> orgTreeNodeList214 = new ArrayList<ORGTreeNode>();
+        List<ORGTreeNode> orgTreeNodeList215 = new ArrayList<ORGTreeNode>();
         if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
             List<RoleInfo> roleInfoListAdmin211 = roleInfoService.selectRoleInfoByRoleName("211");
             List<RoleInfo> roleInfoListAdmin212 = roleInfoService.selectRoleInfoByRoleName("212");
             List<RoleInfo> roleInfoListAdmin214 = roleInfoService.selectRoleInfoByRoleName("214");
+            List<RoleInfo> roleInfoListAdmin215 = roleInfoService.selectRoleInfoByRoleName("215");
             orgTreeNodeList211 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("211", roleInfoListAdmin211);
             orgTreeNodeList212 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("212", roleInfoListAdmin212);
             orgTreeNodeList214 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("214", roleInfoListAdmin214);
+            orgTreeNodeList215 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("215", roleInfoListAdmin215);
         } else {
             orgTreeNodeList211 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("211", roleInfoList);
             orgTreeNodeList212 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("212", roleInfoList);
             orgTreeNodeList214 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("214", roleInfoList);
+            orgTreeNodeList215 = phoneBootStrapTreeNodeService.selectOrgTreeNodeInfoByRoleId("215", roleInfoList);
         }
         String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未获取到有效数据"));
         List<PhoneTree> phoneTrees = new ArrayList<>();
@@ -96,6 +102,11 @@ public class SewageC2xxPhoneController extends BaseController{
         }
         if (orgTreeNodeList214.size() > 0) {
             List<PhoneTree> phoneTreeList = DeviceUtil.getPhoneTreeList(orgTreeNodeList214);
+            PhoneTree phoneTree = PhoneTreeNodeMerger.merge(phoneTreeList);
+            phoneTrees.add(phoneTree);
+        }
+        if (orgTreeNodeList215.size() > 0) {
+            List<PhoneTree> phoneTreeList = DeviceUtil.getPhoneTreeList(orgTreeNodeList215);
             PhoneTree phoneTree = PhoneTreeNodeMerger.merge(phoneTreeList);
             phoneTrees.add(phoneTree);
         }
@@ -125,7 +136,9 @@ public class SewageC2xxPhoneController extends BaseController{
             jsonString = this.selectRealDeviceInfoSummary212(userId, orgId);
         } else if(root.equals("214")){
             jsonString = this.selectRealDeviceInfoSummary214(userId, orgId);
-        }else{
+        } else if(root.equals("215")){
+            jsonString = this.selectRealDeviceInfoSummary215(userId, orgId);
+        } else{
             jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到设备类型！"));
         }
         return jsonString;
@@ -139,8 +152,10 @@ public class SewageC2xxPhoneController extends BaseController{
             jsonString = this.selectRealDeviceInfoDetail211(userId, devNum);
         } else if (0x2001 < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x2800) {
             jsonString = this.selectRealDeviceInfoDetail212(userId, devNum);
-        } else if (0x27FF < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x3000) {
+        } else if (devNum.equals("2801")) {
             jsonString = this.selectRealDeviceInfoDetail214(userId, devNum);
+        } else if (0x2802 < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x3000) {
+            jsonString = this.selectRealDeviceInfoDetail215(userId, devNum);
         } else {
             jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到设备详细信息！"));
         }
@@ -159,8 +174,10 @@ public class SewageC2xxPhoneController extends BaseController{
             jsonString = this.selectHisDeviceInfo211(userId, devNum, day);
         } else if (0x2001 < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x2800) {
             jsonString = this.selectHisDeviceInfo212(userId, devNum, day);
-        } else if (0x27FF < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x3000) {
+        } else if(devNum.equals("2801")){
             jsonString = this.selectHisDeviceInfo214(userId, devNum, day);
+        } else if (0x2802 < Integer.parseInt(devNum, 16) && Integer.parseInt(devNum, 16) < 0x3000) {
+            jsonString = this.selectHisDeviceInfo215(userId, devNum, day);
         } else {
             jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到设备详细信息！"));
         }
@@ -676,4 +693,175 @@ public class SewageC2xxPhoneController extends BaseController{
         return phoneSewageC01RealMsgInfo;
     }
     /**************************************214 end*************************/
+
+    /**************************************215 start*************************/
+    private String selectRealDeviceInfoSummary215(String userId, String orgId) throws Exception {
+        List<SwgC215DM> sewageC215DMList = getRealSewageC215DMByUserIdAndOrgId(userId, orgId);
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到有效数据！"));
+        if (sewageC215DMList.size() > 0) {
+            List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = getPhoneRealDeviceInfoSummary215(sewageC215DMList);
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneRealDeviceInfoList));
+        }
+        return jsonString;
+    }
+
+    /**
+     * 215设备-徐州邳城种鸡场
+     *
+     * @param userId
+     * @param devNum
+     * @return
+     * @throws Exception
+     */
+    private String selectRealDeviceInfoDetail215(String userId, String devNum) throws Exception {
+        SwgC215DM sewageC215DM = getRealSewageC215DMByUserIdAndDevNum(userId, devNum);
+        String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到有效数据！"));
+        if (sewageC215DM != null) {
+            PhoneSewageC01RealMsgInfo phoneSewageC215RealMsgInfo = getOneRealDeviceInfoDetail215(sewageC215DM);
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneSewageC215RealMsgInfo));
+        }
+        return jsonString;
+    }
+
+    private String selectHisDeviceInfo215(String userId, String devNum, String day) throws Exception {
+        //OAID转换为EASID
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
+        if (roleInfoList.size() < 1)
+            return "[]";
+        //获取时间-start
+        //正式时间
+        int mDay = Integer.parseInt(day);
+        mDay = -1 * mDay;
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String sEndDate = simpleFormat.format(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, mDay);
+        date = calendar.getTime();
+        String sStartDate = simpleFormat.format(date);
+        /*String sEndDate = "2017/12/30 23:59:59";
+        String sStartDate = "2017/12/01 00:00:00";*/
+        //获取时间-end
+        List<BaseDeviceMessage> sewageC215DMHisList = new ArrayList<BaseDeviceMessage>();
+        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
+            sewageC215DMHisList = swgC215DMService.selectPhoneHisByDateAndId(devNum, sStartDate, sEndDate);
+        } else {
+            //查询该用户是否有权限查看该设备
+            //如果有权限，就继续查询该设备
+            List<DeviceRoleInfo> deviceRoleInfoList = deviceRoleInfoService.selectDeviceRoleInfoByRoleIds(roleInfoList);
+            for (DeviceRoleInfo deviceRoleInfo : deviceRoleInfoList
+            ) {
+                if (deviceRoleInfo.getDevNum().equals(devNum)) {
+                    sewageC215DMHisList = swgC215DMService.selectPhoneHisByDateAndId(devNum, sStartDate, sEndDate);
+                    break;
+                }
+            }
+        }
+        String jsonString =  JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到有效数据！"));
+        if (sewageC215DMHisList.size() > 0) {
+            PSC01HisMsgInfo psc01HisMsgInfo = new PSC01HisMsgInfo(sewageC215DMHisList,"215");
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(psc01HisMsgInfo));
+        }
+        return jsonString;
+    }
+
+    /**
+     * 通过用户ID和组织ID查询设备实时数据-概要信息
+     *
+     * @param userId
+     * @param orgId
+     * @return
+     * @throws Exception
+     */
+    private List<SwgC215DM> getRealSewageC215DMByUserIdAndOrgId(String userId, String orgId) throws Exception {
+        List<SwgC215DM> sewageC215DMList = new ArrayList<SwgC215DM>();
+        if (userId == null || userId.equals(""))
+            return sewageC215DMList;
+        if (orgId == null || orgId.equals(""))
+            return sewageC215DMList;
+        //OAID转换为EASID
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
+        if (roleInfoList.size() < 1)
+            return sewageC215DMList;
+        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
+            sewageC215DMList = swgC215DMService.selectByORGId(orgId);
+        } else {
+            sewageC215DMList = swgC215DMService.selectByORGIdAndRoleId(orgId, roleInfoList);
+        }
+        return sewageC215DMList;
+    }
+
+    private List<PhoneRealDeviceInfo> getPhoneRealDeviceInfoSummary215(List<SwgC215DM> sewageC215DMList) {
+        List<PhoneRealDeviceInfo> phoneRealDeviceInfoList = new ArrayList<PhoneRealDeviceInfo>();
+        for (SwgC215DM sewageC215DM : sewageC215DMList
+        ) {
+            PhoneRealDeviceInfo phoneRealDeviceInfo = getOneRealDeviceInfoSummary215(sewageC215DM);
+            phoneRealDeviceInfoList.add(phoneRealDeviceInfo);
+        }
+        return phoneRealDeviceInfoList;
+    }
+
+    private PhoneRealDeviceInfo getOneRealDeviceInfoSummary215(SwgC215DM sewageC215DM) {
+        PhoneRealDeviceInfo phoneRealDeviceInfo = new PhoneRealDeviceInfo();
+        //形成信号信息
+        List<PhoneRealMsgInfo> phoneRealMsgInfoList = sewageC215DM.getPhoneRealMsgInfoSummary();
+        //形成设备信息
+        phoneRealDeviceInfo.setDevNum(sewageC215DM.getDSerialNum());
+        phoneRealDeviceInfo.setTitle(sewageC215DM.getDName());
+        if(sewageC215DM.getDState().equals("在线")){
+            phoneRealDeviceInfo.setState("1");
+        }else{
+            phoneRealDeviceInfo.setState("0");
+        }
+        phoneRealDeviceInfo.setData(phoneRealMsgInfoList);
+        return phoneRealDeviceInfo;
+    }
+
+    /**
+     * 通过用户ID和设备ID查询设备实时数据-详细信息
+     *
+     * @param userId
+     * @param devNum
+     * @return
+     */
+    private SwgC215DM getRealSewageC215DMByUserIdAndDevNum(String userId, String devNum) throws Exception {
+        SwgC215DM sewageC215DM = null;
+        if (userId == null || userId.equals(""))
+            return null;
+        if (devNum == null || devNum.equals(""))
+            return null;
+        //OAID转换为EASID
+        List<RoleInfo> roleInfoList = this.selectRoleInfos(userId);
+        if (roleInfoList.size() < 1)
+            return null;
+        if (RoleInfoListUtil.checkIsAdmin(roleInfoList)) {
+            sewageC215DM = swgC215DMService.selectByDeviceId(devNum);
+        } else {
+            //查询该用户是否有权限查看该设备
+            //如果有权限，就继续查询该设备
+            List<DeviceRoleInfo> deviceRoleInfoList = deviceRoleInfoService.selectDeviceRoleInfoByRoleIds(roleInfoList);
+            for (DeviceRoleInfo deviceRoleInfo : deviceRoleInfoList
+            ) {
+                if (deviceRoleInfo.getDevNum().equals(devNum)) {
+                    sewageC215DM = swgC215DMService.selectByDeviceId(devNum);
+                    break;
+                }
+            }
+        }
+        return sewageC215DM;
+    }
+
+    private PhoneSewageC01RealMsgInfo getOneRealDeviceInfoDetail215(SwgC215DM sewageC215DM) {
+        PhoneSewageC01RealMsgInfo phoneSewageC01RealMsgInfo = new PhoneSewageC01RealMsgInfo();
+
+        //形成信号信息
+        List<PhoneSewageC01RealData> phoneSewageC01RealDataList = sewageC215DM.getPhoneRealMsgInfoDetail();
+        //形成设备信息
+        phoneSewageC01RealMsgInfo.setDevName(sewageC215DM.getDName());
+        phoneSewageC01RealMsgInfo.setDevNum(sewageC215DM.getDSerialNum());
+        phoneSewageC01RealMsgInfo.setPhoneSewageC01RealDataList(phoneSewageC01RealDataList);
+        return phoneSewageC01RealMsgInfo;
+    }
+    /**************************************215 end*************************/
 }

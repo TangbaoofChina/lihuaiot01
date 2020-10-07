@@ -14,6 +14,8 @@ var rdlLhfh05p1TableColumns;
 var rdlLhsf0ap1TableColumns;
 var rdlLhrz01p1TableColumns;
 var rdlLhty02p1TableColumns;
+var rdlLhrj0bp1TableColumns;
+var rdlLhslzlp1TableColumns;
 var rdlTreeNodes;
 var realid_of_setintervalDeviceList;
 var realid_of_setintervalDeviceOne;
@@ -32,6 +34,8 @@ $(function () {
     rdlInitTableLhfh05p1();
     rdlInitTableLhrz01p1();
     rdlInitTableLhty02p1();
+    rdlInitTableLhrj0bp1();
+    rdlInitTableLhslzlp1();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {
@@ -140,6 +144,10 @@ function rdlNodeSelected(event, data) {
     var uiLhrz01p1One = document.getElementById("rdlLhrz01p1OneDeviceDiv");
     var uiLhty02p1List = document.getElementById("rdlLhty02p1DeviceListDiv");
     var uiLhty02p1One = document.getElementById("rdlLhty02p1OneDeviceDiv");
+    var uiLhrj0bp1List = document.getElementById("rdlLhrj0bp1DeviceListDiv");
+    var uiLhrj0bp1One = document.getElementById("rdlLhrj0bp1OneDeviceDiv");
+    var uiLhslzlp1List = document.getElementById("rdlLhslzlp1DeviceListDiv");
+    var uiLhslzlp1One = document.getElementById("rdlLhslzlp1OneDeviceDiv");
     var rootNodeId = rdlNowTreeNodeRoot.id;
     if (queryParameter.length == 4) {
         uiEC01List.style.display = "none";
@@ -168,6 +176,10 @@ function rdlNodeSelected(event, data) {
         uiLhrz01p1One.style.display = "none";
         uiLhty02p1List.style.display = "none";
         uiLhty02p1One.style.display = "none";
+        uiLhrj0bp1List.style.display = "none";
+        uiLhrj0bp1One.style.display = "none";
+        uiLhslzlp1List.style.display = "none";
+        uiLhslzlp1One.style.display = "none";
         if (rootNodeId === "111")   //种禽环控器
         {
             uiEC01One.style.display = "block";
@@ -204,6 +216,12 @@ function rdlNodeSelected(event, data) {
         }else if (rootNodeId === "LHTY02p1")  //立华断电报警器
         {
             uiLhty02p1One.style.display = "block";
+        }else if (rootNodeId === "LHRJ0Bp1")  //立华肉鸡 饮水量监测
+        {
+            uiLhrj0bp1One.style.display = "block";
+        }else if (rootNodeId === "LHSLZLp1")  //立华饲料部 制粒机
+        {
+            uiLhslzlp1One.style.display = "block";
         }
     } else if (rootNodeId === "213" && queryParameter.length == 14) {
         uiEC01List.style.display = "none";
@@ -234,6 +252,10 @@ function rdlNodeSelected(event, data) {
         uiLhrz01p1One.style.display = "none";
         uiLhty02p1List.style.display = "none";
         uiLhty02p1One.style.display = "none";
+        uiLhrj0bp1List.style.display = "none";
+        uiLhrj0bp1One.style.display = "none";
+        uiLhslzlp1List.style.display = "none";
+        uiLhslzlp1One.style.display = "none";
     } else if (rootNodeId === "411" && queryParameter.length == 7) {
         uiEC01List.style.display = "none";
         uiEC01One.style.display = "none";
@@ -263,6 +285,10 @@ function rdlNodeSelected(event, data) {
         uiLhrz01p1One.style.display = "none";
         uiLhty02p1List.style.display = "none";
         uiLhty02p1One.style.display = "none";
+        uiLhrj0bp1List.style.display = "none";
+        uiLhrj0bp1One.style.display = "none";
+        uiLhslzlp1List.style.display = "none";
+        uiLhslzlp1One.style.display = "none";
     } else {
         uiEC01List.style.display = "none";
         uiEC01One.style.display = "none";
@@ -292,6 +318,10 @@ function rdlNodeSelected(event, data) {
         uiLhrz01p1One.style.display = "none";
         uiLhty02p1List.style.display = "none";
         uiLhty02p1One.style.display = "none";
+        uiLhrj0bp1List.style.display = "none";
+        uiLhrj0bp1One.style.display = "none";
+        uiLhslzlp1List.style.display = "none";
+        uiLhslzlp1One.style.display = "none";
         if (rootNodeId === "111")   //种禽环控器
         {
             uiEC01List.style.display = "block";
@@ -327,6 +357,10 @@ function rdlNodeSelected(event, data) {
             uiLhrz01p1List.style.display = "block";
         }else if (rootNodeId === "LHTY02p1") { //  立华 断电报警器
             uiLhty02p1List.style.display = "block";
+        }else if (rootNodeId === "LHRJ0Bp1") { //  立华 肉鸡饮水量
+            uiLhrj0bp1List.style.display = "block";
+        }else if (rootNodeId === "LHSLZLp1") { //  立华 饲料 制粒机
+            uiLhslzlp1List.style.display = "block";
         }
     }
     if (data.nodes != null) {
@@ -382,6 +416,12 @@ function rdlNodeSelected(event, data) {
     } else if (rootNodeId === "LHTY02p1")  //立华断电报警器
     {
         rdlSelectDeviceByTreeIdLhty02p1();
+    } else if (rootNodeId === "LHRJ0Bp1")  //立华 商品鸡 饮水量
+    {
+        rdlSelectDeviceByTreeIdLhrj0bp1();
+    } else if (rootNodeId === "LHSLZLp1")  //立华 饲料部 制粒机
+    {
+        rdlSelectDeviceByTreeIdLhslzlp1();
     }
     rdlSelectInfoByDeviceIdAndType();
 }
@@ -513,6 +553,18 @@ function rdlTableRefresh() {
         } else if (rootNodeId === "LHTY02p1")  //立华断电报警器
         {
             $('#rdlLhty02p1DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        } else if (rootNodeId === "LHRJ0Bp1")  //立华 商品鸡 饮水量
+        {
+            $('#rdlLhrj0bp1DeviceList').bootstrapTable('refresh', {
+                query: {},
+                silent: true
+            });
+        } else if (rootNodeId === "LHSLZLp1")  //立华 饲料部 制粒机
+        {
+            $('#rdlLhslzlp1DeviceList').bootstrapTable('refresh', {
                 query: {},
                 silent: true
             });
@@ -1454,6 +1506,14 @@ function rdlExportStorageAction() {
         $('#rdlExport_modal').modal("show");
     });
 
+    $('#rdlLhrj0bp1Export_storage').click(function () { //立华 商品鸡 饮水量
+        $('#rdlExport_modal').modal("show");
+    });
+
+    $('#rdlLhslzlp1Export_storage').click(function () { //立华 饲料部 制粒机
+        $('#rdlExport_modal').modal("show");
+    });
+
     $('#rdlExport_storage_download').click(function () {
         var queryParameter = rdlNowTreeNode.id;
         var data = {
@@ -1501,9 +1561,15 @@ function rdlExportStorageAction() {
         } else if (rootNodeId === "LHRZ01p1")  //立华猪用环控器
         {
             url = "/lihuaiot01/realDeviceList/exportLhrz01p1DeviceList?" + $.param(data);
-        } else if (rootNodeId === "LHTY02p1")  //立华猪用环控器
+        } else if (rootNodeId === "LHTY02p1")  //立华 断电报警器
         {
             url = "/lihuaiot01/realDeviceList/exportLhty02p1DeviceList?" + $.param(data);
+        } else if (rootNodeId === "LHRJ0Bp1")  //立华 商品鸡 饮水量
+        {
+            url = "/lihuaiot01/realDeviceList/exportLhrj0bp1DeviceList?" + $.param(data);
+        } else if (rootNodeId === "LHSLZLp1")  //立华 饲料部 制粒机
+        {
+            url = "/lihuaiot01/realDeviceList/exportLhslzlp1DeviceList?" + $.param(data);
         }
         window.open(url, '_blank');
         $('#rdlExport_modal').modal("hide");

@@ -2397,4 +2397,81 @@
             <value>接收时间</value>
         </property>
     </entity>
+
+    <entity class="com.system.po.Device.Lhrj0bp1DM" sheetName="商品鸡饮水" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>sendDate</field>
+            <value>设备时间</value>
+        </property>
+        <property>
+            <field>water</field>
+            <value>饮水量</value>
+        </property>
+        <property>
+            <field>ele</field>
+            <value>市电</value>
+        </property>
+
+        <property>
+            <field>dReceiveTime</field>
+            <value>接收时间</value>
+        </property>
+    </entity>
+
+    <entity class="com.system.po.Device.Lhslzlp1DM" sheetName="饲料制粒机" boldHeading="true">
+        <property>
+            <field>dSerialNum</field>
+            <value>序号</value>
+        </property>
+        <property>
+            <field>dName</field>
+            <value>名称</value>
+        </property>
+        <property>
+            <field>sendDate</field>
+            <value>设备时间</value>
+        </property>
+        <property>
+            <field>frequency</field>
+            <value>喂料器频率</value>
+        </property>
+        <property>
+            <field>opening</field>
+            <value>蒸汽阀开度</value>
+        </property>
+        <property>
+            <field>temp</field>
+            <value>调制器温度</value>
+        </property>
+        <property>
+            <field>eleCurrent</field>
+            <value>主机总电流</value>
+        </property>
+        <property>
+            <field>pressure</field>
+            <value>蒸汽压力</value>
+        </property>
+        <property>
+            <field>etc01</field>
+            <value>ETC01</value>
+        </property>
+        <property>
+            <field>etc02</field>
+            <value>ETC02</value>
+        </property>
+
+        <property>
+            <field>dReceiveTime</field>
+            <value>接收时间</value>
+        </property>
+    </entity>
+
 </configuration>

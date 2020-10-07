@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @ClassName Lhsf0ap1PhoneController
- * @Description 立华-生防  物资熏蒸
+ * @ClassName Lhty02p1PhoneController
+ * @Description 立华-断电报警器
  * @Author tangbao
  * @Date 2020-07-02 16:53
  * @Version 1.0

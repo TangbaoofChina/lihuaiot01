@@ -14,6 +14,8 @@ var hisLhsf0ap1TableColumns;
 var hisLhfh05p1TableColumns;
 var hisLhrz01p1TableColumns;
 var hisLhty02p1TableColumns;
+var hisLhrj0bp1TableColumns;
+var hisLhslzlp1TableColumns;
 var hisTreeNodes;
 var hisEC01search_start_date = null;
 var hisEC01search_end_date = null;
@@ -43,6 +45,10 @@ var hisLhrz01p1search_start_date = null;
 var hisLhrz01p1search_end_date = null;
 var hisLhty02p1search_start_date = null;
 var hisLhty02p1search_end_date = null;
+var hisLhrj0bp1search_start_date = null;
+var hisLhrj0bp1search_end_date = null;
+var hisLhslzlp1search_start_date = null;
+var hisLhslzlp1search_end_date = null;
 
 $(function () {
     hisInitTreeNode();
@@ -60,6 +66,8 @@ $(function () {
     hisInitTableLhsf0ap1();
     hisInitTableLhrz01p1();
     hisInitTableLhty02p1();
+    hisInitTableLhrj0bp1();
+    hisInitTableLhslzlp1();
     hisExportStorageAction();
     //hisDatePickerInit();
     hisDateRangePickerInitEC01();
@@ -75,6 +83,8 @@ $(function () {
     hisDateRangePickerInitLhsf0ap1();
     hisDateRangePickerInitLhrz01p1();
     hisDateRangePickerInitLhty02p1();
+    hisDateRangePickerInitLhrj0bp1();
+    hisDateRangePickerInitLhslzlp1();
     hisSearchAction();
 
 });
@@ -159,6 +169,8 @@ function hisNodeSelected(event, data) {
     var uiLhsf0ap1List = document.getElementById("hisLhsf0ap1DeviceListDiv");
     var uiLhrz01p1List = document.getElementById("hisLhrz01p1DeviceListDiv");
     var uiLhty02p1List = document.getElementById("hisLhty02p1DeviceListDiv");
+    var uiLhrj0bp1List = document.getElementById("hisLhrj0bp1DeviceListDiv");
+    var uiLhslzlp1List = document.getElementById("hisLhslzlp1DeviceListDiv");
     $('#hisOrgTree').treeview('clearSearch');
     if (data.nodes != null) {
         var select_node = $('#hisOrgTree').treeview('getSelected');
@@ -172,243 +184,86 @@ function hisNodeSelected(event, data) {
         }
     }
     var rootNodeId = hisNowTreeNodeRoot.id;
+    uiEC01List.style.display = "none";
+    uiSewageC01List.style.display = "none";
+    uiSewageC212List.style.display = "none";
+    uiSewageC214List.style.display = "none";
+    uiSewageC215List.style.display = "none";
+    uiScaleC01List.style.display = "none";
+    uiHj212C213List.style.display = "none";
+    uiWeighC312List.style.display = "none";
+    uiFeedC411List.style.display = "none";
+    uiLhsp05p1List.style.display = "none";
+    uiLhsf0ap1List.style.display = "none";
+    uiLhfh05p1List.style.display = "none";
+    uiLhrz01p1List.style.display = "none";
+    uiLhty02p1List.style.display = "none";
+    uiLhrj0bp1List.style.display = "none";
+    uiLhslzlp1List.style.display = "none";
     if (rootNodeId === "111")   //种禽环控器
     {
         uiEC01List.style.display = "block";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "211")  //立华禽环保1.0
     {
-        uiEC01List.style.display = "none";
         uiSewageC01List.style.display = "block";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "212")  //立华禽环保2.0
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
         uiSewageC212List.style.display = "block";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "214")  //立华禽环保3.0
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
         uiSewageC214List.style.display = "block";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "215")  //立华禽环保4.0
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
         uiSewageC215List.style.display = "block";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "311")  //自动称重
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
         uiScaleC01List.style.display = "block";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "312")  //种禽散装料塔称重1.0
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
         uiWeighC312List.style.display = "block";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "213" )  //水质在线监测
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
         uiHj212C213List.style.display = "block";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "411" )  //饲料部筒仓测温1.0
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
         uiFeedC411List.style.display = "block";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
         hisInitTableFeedC41102(data.id);
     }
     else if (rootNodeId === "LHSP05p1" )  //立华食品-冷库测温
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
         uiLhsp05p1List.style.display = "block";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "LHSF0Ap1" )  //立华生防-物资熏蒸
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
         uiLhsf0ap1List.style.display = "block";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "LHFH05p1" )  //立华孵化-GPS测温
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
         uiLhfh05p1List.style.display = "block";
-        uiLhrz01p1List.style.display = "none";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "LHRZ01p1" )  //立华猪用环控器
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
         uiLhrz01p1List.style.display = "block";
-        uiLhty02p1List.style.display = "none";
     }
     else if (rootNodeId === "LHTY02p1" )  //立华 猪用环控器
     {
-        uiEC01List.style.display = "none";
-        uiSewageC01List.style.display = "none";
-        uiSewageC212List.style.display = "none";
-        uiSewageC214List.style.display = "none";
-        uiSewageC215List.style.display = "none";
-        uiScaleC01List.style.display = "none";
-        uiHj212C213List.style.display = "none";
-        uiWeighC312List.style.display = "none";
-        uiFeedC411List.style.display = "none";
-        uiLhsp05p1List.style.display = "none";
-        uiLhsf0ap1List.style.display = "none";
-        uiLhfh05p1List.style.display = "none";
-        uiLhrz01p1List.style.display = "none";
         uiLhty02p1List.style.display = "block";
+    }
+    else if (rootNodeId === "LHRJ0Bp1" )  //立华 商品鸡饮水量
+    {
+        uiLhrj0bp1List.style.display = "block";
+    }
+    else if (rootNodeId === "LHSLZLp1" )  //立华 饲料部 制粒机
+    {
+        uiLhslzlp1List.style.display = "block";
     }
 }
 
@@ -2496,6 +2351,298 @@ function hisSelectDeviceByTreeIdLhty02p1() {
 }
 //*****************Lhty02p1 end*********************/
 
+//*****************Lhrj0bp1 start*********************/
+// 日期选择器初始化
+function hisDateRangePickerInitLhrj0bp1() {
+    hisLhrj0bp1search_start_date = NowWeeHours(); //凌晨
+    hisLhrj0bp1search_end_date = GetTodaytime(); //最晚时间
+    $('#hisLhrj0bp1DateInterval').daterangepicker({
+        "timePicker": true,
+        "timePicker24Hour": true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'right',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        "locale": {
+            format: 'YYYY/MM/DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1,'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1,'days').startOf('day'), moment().subtract(1,'days').endOf('day')],
+            '最近7日': [moment().subtract(6,'days'), moment()],
+            '最近30日': [moment().subtract(29,'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisLhrj0bp1search_start_date = this.startDate.format(this.locale.format);
+        hisLhrj0bp1search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisInitTableLhrj0bp1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/hisDeviceList/lhrj0bp1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align,visible:json[i].visible};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisLhrj0bp1TableColumns = questionColumns;
+            $('#hisLhrj0bp1DeviceList').bootstrapTable('destroy');
+            $('#hisLhrj0bp1DeviceList').bootstrapTable({
+                columns: questionColumns,
+                // 显示下拉框勾选要显示的列
+                showColumns : true,
+                // 设置最少显示列个数
+                minimumCountColumns: 2
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+//请求服务数据时所传参数
+function hisQueryParamsLhrj0bp1(params) {
+    var queryParameter = hisNowTreeNode.id;
+    var queryStartDate = hisLhrj0bp1search_start_date;
+    var queryEndDate = hisLhrj0bp1search_end_date;
+    return {
+        pageNumber: params.offset + 1,
+        //每页多少条数据
+        pageSize: params.limit,
+        sDeviceId: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate,
+    };
+}
+
+function hisSelectDeviceByTreeIdLhrj0bp1() {
+
+    $('#hisLhrj0bp1DeviceList').bootstrapTable('destroy');
+
+    $('#hisLhrj0bp1DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 100,
+        /*        //可供选择的每页的行数（*）
+                pageList: [10, 25, 50, 100],*/
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns : true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //分页只显示分页不显示总页数等数据，结合本页的style
+        /*paginationDetailHAlign:"right",*/
+        /*onlyInfoPagination:true,*/
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/hisDeviceList/selectLhrj0bp1ByDevNumAndDateAndPaging",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: hisQueryParamsLhrj0bp1,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server",
+        locale: 'zh-CN',//中文支持
+        columns: hisLhrj0bp1TableColumns,
+        height: 500,      //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+//*****************Lhrj0bp1 end*********************/
+
+//*****************Lhslzlp1 start*********************/
+// 日期选择器初始化
+function hisDateRangePickerInitLhslzlp1() {
+    hisLhslzlp1search_start_date = NowWeeHours(); //凌晨
+    hisLhslzlp1search_end_date = GetTodaytime(); //最晚时间
+    $('#hisLhslzlp1DateInterval').daterangepicker({
+        "timePicker": true,
+        "timePicker24Hour": true,
+        timePickerSeconds: true, //时间显示到秒
+        /*"linkedCalendars": false,
+        "autoUpdateInput": false,*/
+        applyClass: 'btn-sm btn-success',
+        cancelClass: 'btn-sm btn-default',
+        opens: 'right',    // 日期选择框的弹出位置
+        separator: ' 至 ',
+        "locale": {
+            format: 'YYYY/MM/DD HH:mm:ss',
+            separator: ' ~ ',
+            applyLabel: "应用",
+            cancelLabel: "取消",
+            resetLabel: "重置",
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        },
+        ranges: {
+            '最近1小时': [moment().subtract(1,'hours'), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract(1,'days').startOf('day'), moment().subtract(1,'days').endOf('day')],
+            '最近7日': [moment().subtract(6,'days'), moment()],
+            '最近30日': [moment().subtract(29,'days'), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+    }, function (start, end, label) {
+        hisLhslzlp1search_start_date = this.startDate.format(this.locale.format);
+        hisLhslzlp1search_end_date = this.endDate.format(this.locale.format);
+        if (!this.startDate) {
+            this.element.val('');
+        } else {
+            this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        }
+    });
+}
+
+function hisInitTableLhslzlp1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/hisDeviceList/lhslzlp1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                temp = {field: json[i].data, title: json[i].title, align: json[i].align,visible:json[i].visible};//手动拼接columns
+                questionColumns.push(temp);
+            }
+            hisLhslzlp1TableColumns = questionColumns;
+            $('#hisLhslzlp1DeviceList').bootstrapTable('destroy');
+            $('#hisLhslzlp1DeviceList').bootstrapTable({
+                columns: questionColumns,
+                // 显示下拉框勾选要显示的列
+                showColumns : true,
+                // 设置最少显示列个数
+                minimumCountColumns: 2
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+//请求服务数据时所传参数
+function hisQueryParamsLhslzlp1(params) {
+    var queryParameter = hisNowTreeNode.id;
+    var queryStartDate = hisLhslzlp1search_start_date;
+    var queryEndDate = hisLhslzlp1search_end_date;
+    return {
+        pageNumber: params.offset + 1,
+        //每页多少条数据
+        pageSize: params.limit,
+        sDeviceId: queryParameter,
+        sStartDate: queryStartDate,
+        sEndDate: queryEndDate,
+    };
+}
+
+function hisSelectDeviceByTreeIdLhslzlp1() {
+
+    $('#hisLhslzlp1DeviceList').bootstrapTable('destroy');
+
+    $('#hisLhslzlp1DeviceList').bootstrapTable({
+        //是否显示行间隔色
+        striped: true,
+        //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,
+        //是否显示分页（*）
+        pagination: true,
+        //是否启用排序
+        sortable: false,
+        //排序方式
+        sortOrder: "asc",
+        //每页的记录行数（*）
+        pageSize: 100,
+        /*        //可供选择的每页的行数（*）
+                pageList: [10, 25, 50, 100],*/
+        //是否显示搜索
+        search: false,
+        // 显示下拉框勾选要显示的列
+        showColumns : true,
+        // 设置最少显示列个数
+        minimumCountColumns: 2,
+        //分页只显示分页不显示总页数等数据，结合本页的style
+        /*paginationDetailHAlign:"right",*/
+        /*onlyInfoPagination:true,*/
+        //data:json,
+        //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+        url: "/lihuaiot01/hisDeviceList/selectLhslzlp1ByDevNumAndDateAndPaging",
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        method: 'post',                      //请求方式（*）
+        dataType: "json",
+        //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+        //queryParamsType:'',
+        ////查询参数,每次调用是会带上这个参数，可自定义
+        queryParamsType: 'limit',//查询参数组织方式
+        queryParams: hisQueryParamsLhslzlp1,
+        //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server",
+        locale: 'zh-CN',//中文支持
+        columns: hisLhslzlp1TableColumns,
+        height: 500,      //设置表格高度-固定表头生效
+        fixedColumns: true,
+        fixedNumber: 1 //固定列数
+    });
+}
+//*****************Lhslzlp1 end*********************/
+
 // 导出信息
 function hisExportStorageAction() {
     $('#hisEC01Export_storage').click(function () {
@@ -2538,6 +2685,12 @@ function hisExportStorageAction() {
         $('#hisExport_modal').modal("show");
     });
     $('#hisLhty02p1Export_storage').click(function () {
+        $('#hisExport_modal').modal("show");
+    });
+    $('#hisLhrj0bp1Export_storage').click(function () {
+        $('#hisExport_modal').modal("show");
+    });
+    $('#hisLhslzlp1Export_storage').click(function () {
         $('#hisExport_modal').modal("show");
     });
 
@@ -2698,6 +2851,28 @@ function hisExportStorageAction() {
                 sEndDate: queryEndDate
             };
             url = "/lihuaiot01/hisDeviceList/exportHisLhty02p1DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "LHRJ0Bp1")  //立华 商品鸡 饮水量
+        {
+            queryStartDate = hisLhrj0bp1search_start_date;
+            queryEndDate = hisLhrj0bp1search_end_date;
+            data = {
+                sDeviceId: queryParameter,
+                sStartDate: queryStartDate,
+                sEndDate: queryEndDate
+            };
+            url = "/lihuaiot01/hisDeviceList/exportHisLhrj0bp1DeviceList?" + $.param(data);
+        }
+        else if (rootNodeId === "LHSLZLp1")  //立华 断电报警器
+        {
+            queryStartDate = hisLhslzlp1search_start_date;
+            queryEndDate = hisLhslzlp1search_end_date;
+            data = {
+                sDeviceId: queryParameter,
+                sStartDate: queryStartDate,
+                sEndDate: queryEndDate
+            };
+            url = "/lihuaiot01/hisDeviceList/exportHisLhslzlp1DeviceList?" + $.param(data);
         }
         if (queryParameter.length == 4) {
             window.open(url, '_blank');
@@ -2877,6 +3052,30 @@ function hisSearchAction() {
         var queryParameter = hisNowTreeNode.id;
         if (queryParameter.length == 4) {
             hisSelectDeviceByTreeIdLhty02p1();
+        } else {
+            var type = 'error';
+            var msg = '未选择设备';
+            var append = '对不起，您未选择具体设备，请重新选择';
+            showMsg(type, msg, append);
+        }
+    });
+
+    $('#hisLhrj0bp1Query_storage').click(function () {
+        var queryParameter = hisNowTreeNode.id;
+        if (queryParameter.length == 4) {
+            hisSelectDeviceByTreeIdLhrj0bp1();
+        } else {
+            var type = 'error';
+            var msg = '未选择设备';
+            var append = '对不起，您未选择具体设备，请重新选择';
+            showMsg(type, msg, append);
+        }
+    });
+
+    $('#hisLhslzlp1Query_storage').click(function () {
+        var queryParameter = hisNowTreeNode.id;
+        if (queryParameter.length == 4) {
+            hisSelectDeviceByTreeIdLhslzlp1();
         } else {
             var type = 'error';
             var msg = '未选择设备';

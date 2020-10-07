@@ -194,7 +194,7 @@
                 <span id="solLiqRunMin215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池1搅拌机</span>
+                <span>混合池01搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldMixer01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -206,7 +206,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混反池1搅拌机</span>
+                <span>混反池01搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldOpstMixer01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -228,7 +228,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1搅拌机</span>
+                <span>混凝剂01搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldCglMixer01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -238,7 +238,7 @@
                 <span id="bldCglMixer01RunMin215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1加药泵</span>
+                <span>混凝剂01加药泵</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldCglDosing01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -250,7 +250,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1搅拌机</span>
+                <span>助凝剂01搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="astCglMixer01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -260,7 +260,7 @@
                 <span id="astCglMixer01RunMin215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1加药泵</span>
+                <span>助凝剂01加药泵</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="astCglDosing01Stop215" class="rectangleClose" style="display: block">停</div>
@@ -480,7 +480,7 @@
                 <span id="secSinkPumpRunMin215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂2搅拌机</span>
+                <span>混凝剂02搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldCglMixer02Stop215" class="rectangleClose" style="display: block">停</div>
@@ -558,7 +558,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池2搅拌机</span>
+                <span>混合池02搅拌机</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="bldMixer02Stop215" class="rectangleClose" style="display: block">停</div>
@@ -708,7 +708,7 @@
                 <span id="inPumpRunMin215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>sbr一次搅拌</span>
+                <span>SBR一次搅拌</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="firstSbrMixerStop215" class="rectangleClose" style="display: block">停</div>
@@ -742,7 +742,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>sbr二次搅拌</span>
+                <span>SBR二次搅拌</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <div id="secSbrMixerStop215" class="rectangleClose" style="display: block">停</div>
@@ -831,7 +831,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>sbr一次搅拌</span>
+                <span>SBR一次搅拌</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <span id="sbrMixerOnceSTime215">10:00</span>
@@ -851,7 +851,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>sbr二次搅拌</span>
+                <span>SBR二次搅拌</span>
             </div>
             <div class="col-md-1 col-sm-1 SwgC215border">
                 <span id="sbrMixerSecSTime215">10:00</span>
@@ -928,14 +928,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>机械格栅</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="ydsgsNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="ydsgsFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>集水井提升泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="collectWellPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="collectWellPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -944,14 +944,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>集水池搅拌机01</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="collectMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="collectMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>集水池搅拌机02</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="collectMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="collectMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -960,14 +960,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>除磷投加机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="dephosphorizeNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="dephosphorizeFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>集水池提升泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="collectPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="collectPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -976,62 +976,62 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>固液分离机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="solLiqNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="solLiqFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池1搅拌机</span>
+                <span>混合池01搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混反池1搅拌机</span>
+                <span>混反池01搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldOpstMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldOpstMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>混沉池污泥泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldSinkPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldSinkPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1搅拌机</span>
+                <span>混凝剂01搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldCglMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldCglMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1加药泵</span>
+                <span>混凝剂01加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldCglDosing01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldCglDosing01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1搅拌机</span>
+                <span>助凝剂01搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="astCglMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="astCglMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1加药泵</span>
+                <span>助凝剂01加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="astCglDosing01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="astCglDosing01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1040,14 +1040,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>污泥池搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="sludgeMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="sludgeMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>泥水分离机进泥泵 </span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="slySeprtInPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="slySeprtInPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1056,14 +1056,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>絮凝剂加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="flocltDosingNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="flocltDosingFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>絮凝剂搅拌机 </span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="flocltMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="flocltMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1072,14 +1072,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>泥水分离机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="slySeprtNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="slySeprtFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>调节初沉池污泥泵 </span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="pmySinkPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="pmySinkPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1088,14 +1088,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>SBR池进水泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="sbrIntakePumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="sbrIntakePumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>风机01 </span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="fan01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="fan01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1104,14 +1104,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>风机02</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="fan02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="fan02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>SBR池污泥泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="sbrSludegPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="sbrSludegPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1120,14 +1120,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>电动排水阀</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="eleDrainNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="eleDrainFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>SBR池搅拌机01</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="sbrMixer01Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="sbrMixer01Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1136,14 +1136,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>SBR池搅拌机02</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="sbrMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="sbrMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>厌氧池进水泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="uasbInPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="uasbInPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1152,14 +1152,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>内回流泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="inBfPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="inBfPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>外回流泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="outBfPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="outBfPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1168,14 +1168,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>厌氧池搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="uasbMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="uasbMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>缺氧池搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="anoxiaMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="anoxiaMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1184,14 +1184,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>二沉池污泥泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="secSinkPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="secSinkPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂2搅拌机</span>
+                <span>混凝剂02搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldCglMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldCglMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1200,14 +1200,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>助凝剂02搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="astCglMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="astCglMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>除磷剂搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="ppRmvMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="ppRmvMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1216,14 +1216,14 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>混凝剂02加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldCglDosing02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldCglDosing02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>助凝剂02加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="astCglDosing02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="astCglDosing02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1232,30 +1232,30 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>除磷剂加药泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="ppRmvDosingNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="ppRmvDosingFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>混反池02搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldOpstMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldOpstMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池2搅拌机</span>
+                <span>混合池02搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="bldMixer02Normal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="bldMixer02Fault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>除磷池搅拌机</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="ppRmvTankMixerNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="ppRmvTankMixerFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1264,7 +1264,7 @@
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>终沉池污泥泵</span>
             </div>
-            <div class="col-md-1 col-sm-1 SwgC215border">
+            <div class="col-md-3 col-sm-3 SwgC215border">
                 <div id="finalSinkPumpNormal215" class="rectangle02Open" style="display: block">正常</div>
                 <div id="finalSinkPumpFault215" class="rectangle02Close" style="display: block">故障</div>
             </div>
@@ -1436,7 +1436,7 @@
                 <span id="solLiqRunTime215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池1搅拌机</span>
+                <span>混合池01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldMixer01RunTime215">50</span>
@@ -1444,7 +1444,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混反池1搅拌机</span>
+                <span>混反池01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldOpstMixer01RunTime215">50</span>
@@ -1458,13 +1458,13 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1搅拌机</span>
+                <span>混凝剂01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldCglMixer01RunTime215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1加药泵</span>
+                <span>混凝剂01加药泵</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldCglDosing01RunTime215">50</span>
@@ -1472,13 +1472,13 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1搅拌机</span>
+                <span>助凝剂01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="astCglMixer01RunTime215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1加药泵</span>
+                <span>助凝剂01加药泵</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="astCglDosing01RunTime215">50</span>
@@ -1629,7 +1629,7 @@
                 <span id="secSinkPumpRunTime215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂2搅拌机</span>
+                <span>混凝剂02搅拌机</span>
             </div>
 
             <div class="col-md-3 col-sm-3 SwgC215border">
@@ -1683,7 +1683,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池2搅拌机</span>
+                <span>混合池02搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldMixer02RunTime215">50</span>
@@ -1756,7 +1756,7 @@
                 <span id="solLiqRunTotal215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池1搅拌机</span>
+                <span>混合池01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldMixer01RunTotal215">50</span>
@@ -1764,13 +1764,11 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混反池1搅拌机</span>
+                <span>混反池01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldOpstMixer01RunTotal215">50</span>
             </div>
-        </div>
-        <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span>混沉池污泥泵</span>
             </div>
@@ -1780,13 +1778,13 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1搅拌机</span>
+                <span>混凝剂01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldCglMixer01RunTotal215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂1加药泵</span>
+                <span>混凝剂01加药泵</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldCglDosing01RunTotal215">50</span>
@@ -1794,13 +1792,13 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1搅拌机</span>
+                <span>助凝剂01搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="astCglMixer01RunTotal215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>助凝剂1加药泵</span>
+                <span>助凝剂01加药泵</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="astCglDosing01RunTotal215">50</span>
@@ -1951,7 +1949,7 @@
                 <span id="secSinkPumpRunTotal215">50</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混凝剂2搅拌机</span>
+                <span>混凝剂02搅拌机</span>
             </div>
 
             <div class="col-md-3 col-sm-3 SwgC215border">
@@ -2005,7 +2003,7 @@
         </div>
         <div class="col-md-9 col-sm-9 row">
             <div class="col-md-3 col-sm-3 SwgC215border">
-                <span>混合池2搅拌机</span>
+                <span>混合池02搅拌机</span>
             </div>
             <div class="col-md-3 col-sm-3 SwgC215border">
                 <span id="bldMixer02RunTotal215">50</span>

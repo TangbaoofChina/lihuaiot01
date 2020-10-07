@@ -321,6 +321,50 @@
 
         </div>
 
+        <div class="columns-right" id="rdlLhrj0bp1DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlLhrj0bp1toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlLhrj0bp1Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlLhrj0bp1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlLhrj0bp1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
+        <div class="columns-right" id="rdlLhslzlp1DeviceListDiv"
+             style="display: none;white-space: nowrap;">
+            <div id="rdlLhslzlp1toolbar" class="btn-group">
+                <button class="btn btn-default" id="rdlLhslzlp1Export_storage">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+                </button>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+                <table class="table table-striped" id="rdlLhslzlp1DeviceList" align="center"
+                       striped="true" data-click-to-select="true"
+                       data-toolbar="#rdlLhslzlp1toolbar"<%--设置装按钮的容器为id为toolbar--%>
+                       data-pagination="true"<%--设置是否显示页码数--%>
+                       data-show-refresh="true" <%--设置刷新按钮--%>
+                       data-show-toggle="true" <%--设置数据显示格式--%>
+                       data-toggle="table"
+                       data-showColumns="true">
+                </table>
+            </div>
+
+        </div>
+
         <div class="columns-right" id="rdlEC01OneDeviceDiv" style="display:none">
             <!--主体-->
             <div class="col-md-9 col-sm-9 row" id="main">
@@ -3142,6 +3186,14 @@
         <div class="columns-right" id="rdlLhty02p1OneDeviceDiv" style="display: none">
 
         </div>
+
+        <div class="columns-right" id="rdlLhrj0bp1OneDeviceDiv" style="display: none">
+
+        </div>
+
+        <div class="columns-right" id="rdlLhslzlp1OneDeviceDiv" style="display: none">
+
+        </div>
     </div>
 </div>
 
@@ -3190,6 +3242,8 @@
     loadjscssfile("/lihuaiot01/js/userjs/rdlSwg/rdlSwg215.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/rdlFeed/rdlFeedC411.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/rdlLh/rdlLhty02p1.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlrj/rdlLhrj0bp1.js", "js");
+    loadjscssfile("/lihuaiot01/js/userjs/rdlsl/rdlLhslzlp1.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/rdltableinit.js", "js");
     loadjscssfile("/lihuaiot01/js/userjs/realdevicelist.js", "js");
 

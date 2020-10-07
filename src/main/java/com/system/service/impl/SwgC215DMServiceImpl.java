@@ -69,7 +69,7 @@ public class SwgC215DMServiceImpl implements SwgC215DMService {
     }
 
     @Override
-    public List<BaseDeviceMessage> selectPhoneHisByDateAndId(String sDeviceId, String type, String sStartDate, String sEndDate) throws Exception {
+    public List<BaseDeviceMessage> selectPhoneHisByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception {
         return dmMapper.selectPhoneHisByDateAndId(sDeviceId, sStartDate, sEndDate);
     }
 

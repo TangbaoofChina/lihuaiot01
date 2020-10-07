@@ -233,3 +233,81 @@ function rdlInitTableFeedC41102(devId) {
         }
     });
 }
+
+function rdlInitTableLhrj0bp1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/lhrj0bp1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlLhrj0bp1TableColumns = questionColumns;
+            $('#rdlLhrj0bp1DeviceList').bootstrapTable('destroy');
+            $('#rdlLhrj0bp1DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}
+
+function rdlInitTableLhslzlp1() {
+    var questionColumns = [];
+    $.ajax({
+        type: 'POST',
+        data: {},
+        url: '/lihuaiot01/realDeviceList/lhslzlp1DeviceHead',
+        dataType: "json",
+        success: function (result) {
+            /*alert("1");*/
+            var json = eval(result); //数组
+            for (var i = 0; i < json.length; i++) {
+                var temp = "";
+                if (json[i].data === "dState") {
+                    temp = {
+                        field: json[i].data,
+                        title: json[i].title,
+                        align: json[i].align,
+                        formatter: rdlChangeTableColor
+                    };//手动拼接columns
+                } else {
+                    temp = {field: json[i].data, title: json[i].title, align: json[i].align, visible: json[i].visible};//手动拼接columns
+                }
+                questionColumns.push(temp);
+            }
+            rdlLhslzlp1TableColumns = questionColumns;
+            $('#rdlLhslzlp1DeviceList').bootstrapTable('destroy');
+            $('#rdlLhslzlp1DeviceList').bootstrapTable({
+                columns: questionColumns
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            /*alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);*/
+            handleAjaxError(XMLHttpRequest.status);
+        }
+    });
+}

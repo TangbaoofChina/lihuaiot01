@@ -58,7 +58,7 @@ public interface SwgC215DMService {
      * @return
      * @throws Exception
      */
-    List<BaseDeviceMessage> selectPhoneHisByDateAndId(String sDeviceId, String type, String sStartDate, String sEndDate) throws Exception;
+    List<BaseDeviceMessage> selectPhoneHisByDateAndId(String sDeviceId, String sStartDate, String sEndDate) throws Exception;
 
     /**
      * 一个设备时间段内的数据;分页

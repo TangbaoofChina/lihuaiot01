@@ -2,6 +2,10 @@ package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
 import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealData;
+import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealOneData;
+import com.system.po.Phone.Pswg215.PSwg215OneParam;
+import com.system.po.Phone.Pswg215.PSwg215OnePart;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -3718,5 +3722,576 @@ public class SwgC215DM extends BaseDeviceMessage {
         phoneRealMsgInfoList.add(phoneRealMsgInfo06);
 
         return phoneRealMsgInfoList;
+    }
+
+    public List<PSwg215OnePart> getPhoneRealMsgInfoDetail() {
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        List<PSwg215OnePart> pSwg215OneParts = new ArrayList<PSwg215OnePart>();
+        int sbrA2o = this.getSpare475476();
+        if(sbrA2o == 0){
+        //默认 SBR工艺
+            pSwg215OneParts = this.formatSBR();
+        }else{
+            pSwg215OneParts = this.formatA2O();
+        }
+        return pSwg215OneParts;
+
+    }
+
+    private List<PSwg215OnePart> formatSBR() {
+        List<PSwg215OnePart> pSwg215OneParts = new ArrayList<PSwg215OnePart>();
+
+        //第一部分 基本信息
+        PSwg215OnePart pSwg215OnePart01 = new PSwg215OnePart();
+        pSwg215OnePart01.setRow(9);
+        pSwg215OnePart01.setTitle("基本信息");
+        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01(0);
+        pSwg215OnePart01.setPSwg215OneParams(pSwg215OneParams01);
+        pSwg215OneParts.add(pSwg215OnePart01);
+
+        //第二部分 预处理系统
+        PSwg215OnePart pSwg215OnePart02 = new PSwg215OnePart();
+        pSwg215OnePart02.setRow(15);
+        pSwg215OnePart02.setTitle("预处理系统");
+        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02(0);
+        pSwg215OnePart02.setPSwg215OneParams(pSwg215OneParams02);
+        pSwg215OneParts.add(pSwg215OnePart02);
+
+        //第三部分 泥水分离系统
+        PSwg215OnePart pSwg215OnePart03 = new PSwg215OnePart();
+        pSwg215OnePart03.setRow(5);
+        pSwg215OnePart03.setTitle("泥水分离系统");
+        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03(0);
+        pSwg215OnePart03.setPSwg215OneParams(pSwg215OneParams03);
+        pSwg215OneParts.add(pSwg215OnePart03);
+
+        return pSwg215OneParts;
+    }
+
+    private List<PSwg215OnePart> formatA2O() {
+        List<PSwg215OnePart> pSwg215OneParts = new ArrayList<PSwg215OnePart>();
+
+        //第一部分 基本信息
+        PSwg215OnePart pSwg215OnePart01 = new PSwg215OnePart();
+        pSwg215OnePart01.setRow(9);
+        pSwg215OnePart01.setTitle("基本信息");
+        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01(1);
+        pSwg215OnePart01.setPSwg215OneParams(pSwg215OneParams01);
+        pSwg215OneParts.add(pSwg215OnePart01);
+
+        //第二部分 预处理系统
+        PSwg215OnePart pSwg215OnePart02 = new PSwg215OnePart();
+        pSwg215OnePart02.setRow(14);
+        pSwg215OnePart02.setTitle("预处理系统");
+        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02(1);
+        pSwg215OnePart02.setPSwg215OneParams(pSwg215OneParams02);
+        pSwg215OneParts.add(pSwg215OnePart02);
+
+        //第三部分 泥水分离系统
+        PSwg215OnePart pSwg215OnePart03 = new PSwg215OnePart();
+        pSwg215OnePart03.setRow(5);
+        pSwg215OnePart03.setTitle("泥水分离系统");
+        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03(1);
+        pSwg215OnePart03.setPSwg215OneParams(pSwg215OneParams03);
+        pSwg215OneParts.add(pSwg215OnePart03);
+
+        //第四部分 A2O工艺
+        PSwg215OnePart pSwg215OnePart04 = new PSwg215OnePart();
+        pSwg215OnePart04.setRow(5);
+        pSwg215OnePart04.setTitle("A2O工艺");
+        List<PSwg215OneParam> pSwg215OneParams04 = formatA2OPart04();
+        pSwg215OnePart04.setPSwg215OneParams(pSwg215OneParams04);
+        pSwg215OneParts.add(pSwg215OnePart04);
+
+        //第五部分 末端混凝系统
+        PSwg215OnePart pSwg215OnePart05 = new PSwg215OnePart();
+        pSwg215OnePart05.setRow(5);
+        pSwg215OnePart05.setTitle("泥水分离系统");
+        List<PSwg215OneParam> pSwg215OneParams05 = formatA2OPart05();
+        pSwg215OnePart05.setPSwg215OneParams(pSwg215OneParams05);
+        pSwg215OneParts.add(pSwg215OnePart05);
+
+        return pSwg215OneParts;
+    }
+
+    private List<PSwg215OneParam> formatPart01(int sbrA2o){
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        List<PSwg215OneParam> pSwg215OneParams = new ArrayList<>();
+
+        //时间
+        PSwg215OneParam pSwg215OneParam01 = new PSwg215OneParam("时间：","left",0.5f,1,"center");
+        pSwg215OneParam01.setValue01(this.getSendDate());
+        pSwg215OneParam01.setColor01(defaultColor);
+        pSwg215OneParam01.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam01);
+
+        //累计流量（m³）
+        PSwg215OneParam pSwg215OneParam02 = new PSwg215OneParam("累计流量：","left",0.5f,1,"center");
+        pSwg215OneParam02.setValue01(String.valueOf(flowmeter) + "m³");
+        pSwg215OneParam02.setColor01(defaultColor);
+        pSwg215OneParam02.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam02);
+
+        //当日流量(m³)
+        PSwg215OneParam pSwg215OneParam03 = new PSwg215OneParam("当日流量：","left",0.5f,1,"center");
+        pSwg215OneParam03.setValue01(String.valueOf(todayFlowmeter) + "m³");
+        pSwg215OneParam03.setColor01(defaultColor);
+        pSwg215OneParam03.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam03);
+
+        //累计电量
+        PSwg215OneParam pSwg215OneParam04 = new PSwg215OneParam("累计电量：","left",0.5f,1,"center");
+        pSwg215OneParam04.setValue01(String.valueOf(impEP) + " ");
+        pSwg215OneParam04.setColor01(defaultColor);
+        pSwg215OneParam04.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam04);
+
+        //当日电量
+        PSwg215OneParam pSwg215OneParam05 = new PSwg215OneParam("当日电量：","left",0.5f,1,"center");
+        pSwg215OneParam05.setValue01(String.valueOf(todayEP) + " ");
+        pSwg215OneParam05.setColor01(defaultColor);
+        pSwg215OneParam05.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam05);
+
+        //水温
+        PSwg215OneParam pSwg215OneParam06 = new PSwg215OneParam("水温：","left",0.5f,1,"center");
+        pSwg215OneParam06.setValue01(String.valueOf(waterTemp01) + " ");
+        pSwg215OneParam06.setColor01(defaultColor);
+        pSwg215OneParam06.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam06);
+        //环境温度
+        PSwg215OneParam pSwg215OneParam07 = new PSwg215OneParam("环境温度：","left",0.5f,1,"center");
+        pSwg215OneParam07.setValue01(String.valueOf(airTemp01) + " ");
+        pSwg215OneParam07.setColor01(defaultColor);
+        pSwg215OneParam07.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam07);
+        //设备在线状态
+        PSwg215OneParam pSwg215OneParam08 = new PSwg215OneParam("状态：","left",0.5f,1,"center");
+        if (getDState().equals("离线") ) {
+            pSwg215OneParam08.setValue01(getDState());
+            pSwg215OneParam08.setColor01(alarmColor);
+        } else {
+            pSwg215OneParam08.setValue01(getDState());
+            pSwg215OneParam08.setColor01(defaultColor);
+        }
+        pSwg215OneParam08.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam08);
+        //主要工艺
+        PSwg215OneParam pSwg215OneParam09 = new PSwg215OneParam("工艺：","left",0.5f,1,"center");
+        if (sbrA2o == 0) {
+            pSwg215OneParam09.setValue01("SBR");
+        } else {
+            pSwg215OneParam09.setValue01("A2O");
+        }
+        pSwg215OneParam09.setColor01(defaultColor);
+        pSwg215OneParam09.setValue01Scale(0.5f);
+        pSwg215OneParams.add(pSwg215OneParam09);
+
+        return pSwg215OneParams;
+    }
+
+    private List<PSwg215OneParam> formatPart02(int sbrA2o){
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        List<PSwg215OneParam> pSwg215OneParams = new ArrayList<>();
+
+        //机械格栅
+        PSwg215OneParam pSwg215OneParam01 = new PSwg215OneParam("机械格栅：","left",0.4f,2,"center");
+        if (ydsgsRun) {
+            pSwg215OneParam01.setValue01("运行");
+            pSwg215OneParam01.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam01.setValue01("停止");
+            pSwg215OneParam01.setColor01(normalStopColor);
+        }
+        pSwg215OneParam01.setValue01Scale(0.3f);
+        pSwg215OneParam01.setValue02(String.valueOf(ydsgsRunMin));
+        pSwg215OneParam01.setColor02(defaultColor);
+        pSwg215OneParam01.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam01);
+        //集水井提升泵
+        PSwg215OneParam pSwg215OneParam02 = new PSwg215OneParam("集水井提升泵：","left",0.4f,2,"center");
+        if (collectWellPumpRun) {
+            pSwg215OneParam02.setValue01("运行");
+            pSwg215OneParam02.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam02.setValue01("停止");
+            pSwg215OneParam02.setColor01(normalStopColor);
+        }
+        pSwg215OneParam02.setValue01Scale(0.3f);
+        pSwg215OneParam02.setValue02(String.valueOf(collectWellPumpRunMin));
+        pSwg215OneParam02.setColor02(defaultColor);
+        pSwg215OneParam02.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam02);
+        //集水池搅拌机01
+        PSwg215OneParam pSwg215OneParam03 = new PSwg215OneParam("集水池搅拌机01：","left",0.4f,2,"center");
+        if (collectMixer01Run) {
+            pSwg215OneParam03.setValue01("运行");
+            pSwg215OneParam03.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam03.setValue01("停止");
+            pSwg215OneParam03.setColor01(normalStopColor);
+        }
+        pSwg215OneParam03.setValue01Scale(0.3f);
+        pSwg215OneParam03.setValue02(String.valueOf(collectMixer01RunMin));
+        pSwg215OneParam03.setColor02(defaultColor);
+        pSwg215OneParam03.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam03);
+        //集水池搅拌机02
+        PSwg215OneParam pSwg215OneParam04 = new PSwg215OneParam("集水池搅拌机02：","left",0.4f,2,"center");
+        if (collectMixer02Run) {
+            pSwg215OneParam04.setValue01("运行");
+            pSwg215OneParam04.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam04.setValue01("停止");
+            pSwg215OneParam04.setColor01(normalStopColor);
+        }
+        pSwg215OneParam04.setValue01Scale(0.3f);
+        pSwg215OneParam04.setValue02(String.valueOf(collectMixer02RunMin));
+        pSwg215OneParam04.setColor02(defaultColor);
+        pSwg215OneParam04.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam04);
+        //除磷投加机
+        PSwg215OneParam pSwg215OneParam05 = new PSwg215OneParam("除磷投加机：","left",0.4f,2,"center");
+        if (dephosphorizeRun) {
+            pSwg215OneParam05.setValue01("运行");
+            pSwg215OneParam05.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam05.setValue01("停止");
+            pSwg215OneParam05.setColor01(normalStopColor);
+        }
+        pSwg215OneParam05.setValue01Scale(0.3f);
+        pSwg215OneParam05.setValue02(String.valueOf(dephosphorizeRunMin));
+        pSwg215OneParam05.setColor02(defaultColor);
+        pSwg215OneParam05.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam05);
+        //集水池提升泵
+        PSwg215OneParam pSwg215OneParam06 = new PSwg215OneParam("集水池提升泵：","left",0.4f,2,"center");
+        if (collectPumpRun) {
+            pSwg215OneParam06.setValue01("运行");
+            pSwg215OneParam06.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam06.setValue01("停止");
+            pSwg215OneParam06.setColor01(normalStopColor);
+        }
+        pSwg215OneParam06.setValue01Scale(0.3f);
+        pSwg215OneParam06.setValue02(String.valueOf(collectPumpRunMin));
+        pSwg215OneParam06.setColor02(defaultColor);
+        pSwg215OneParam06.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam06);
+        //固液分离机
+        PSwg215OneParam pSwg215OneParam07 = new PSwg215OneParam("固液分离机：","left",0.4f,2,"center");
+        if (solLiqRun) {
+            pSwg215OneParam07.setValue01("运行");
+            pSwg215OneParam07.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam07.setValue01("停止");
+            pSwg215OneParam07.setColor01(normalStopColor);
+        }
+        pSwg215OneParam07.setValue01Scale(0.3f);
+        pSwg215OneParam07.setValue02(String.valueOf(solLiqRunMin));
+        pSwg215OneParam07.setColor02(defaultColor);
+        pSwg215OneParam07.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam07);
+        //混合池01搅拌机
+        PSwg215OneParam pSwg215OneParam08 = new PSwg215OneParam("混合池01搅拌机：","left",0.4f,2,"center");
+        if (bldMixer01Run) {
+            pSwg215OneParam08.setValue01("运行");
+            pSwg215OneParam08.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam08.setValue01("停止");
+            pSwg215OneParam08.setColor01(normalStopColor);
+        }
+        pSwg215OneParam08.setValue01Scale(0.3f);
+        pSwg215OneParam08.setValue02(String.valueOf(bldMixer01RunMin));
+        pSwg215OneParam08.setColor02(defaultColor);
+        pSwg215OneParam08.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam08);
+        //混反池搅拌机
+        PSwg215OneParam pSwg215OneParam09 = new PSwg215OneParam("混反池搅拌机：","left",0.4f,2,"center");
+        if (bldOpstMixer01Run) {
+            pSwg215OneParam09.setValue01("运行");
+            pSwg215OneParam09.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam09.setValue01("停止");
+            pSwg215OneParam09.setColor01(normalStopColor);
+        }
+        pSwg215OneParam09.setValue01Scale(0.3f);
+        pSwg215OneParam09.setValue02(String.valueOf(bldOpstMixer01RunMin));
+        pSwg215OneParam09.setColor02(defaultColor);
+        pSwg215OneParam09.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam09);
+        //混沉池污泥泵
+        PSwg215OneParam pSwg215OneParam10 = new PSwg215OneParam("混沉池污泥泵：","left",0.4f,2,"center");
+        if (bldSinkPumpRun) {
+            pSwg215OneParam10.setValue01("运行");
+            pSwg215OneParam10.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam10.setValue01("停止");
+            pSwg215OneParam10.setColor01(normalStopColor);
+        }
+        pSwg215OneParam10.setValue01Scale(0.3f);
+        pSwg215OneParam10.setValue02(String.valueOf(bldSinkPumpRunMin));
+        pSwg215OneParam10.setColor02(defaultColor);
+        pSwg215OneParam10.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam10);
+        //混凝剂01搅拌机
+        PSwg215OneParam pSwg215OneParam11 = new PSwg215OneParam("混凝剂01搅拌机：","left",0.4f,2,"center");
+        if (bldCglMixer01Run) {
+            pSwg215OneParam11.setValue01("运行");
+            pSwg215OneParam11.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam11.setValue01("停止");
+            pSwg215OneParam11.setColor01(normalStopColor);
+        }
+        pSwg215OneParam11.setValue01Scale(0.3f);
+        pSwg215OneParam11.setValue02(String.valueOf(bldCglMixer01RunMin));
+        pSwg215OneParam11.setColor02(defaultColor);
+        pSwg215OneParam11.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam11);
+        //混凝剂01加药泵
+        PSwg215OneParam pSwg215OneParam12 = new PSwg215OneParam("混凝剂01加药泵：","left",0.4f,2,"center");
+        if (bldCglDosing01Run) {
+            pSwg215OneParam12.setValue01("运行");
+            pSwg215OneParam12.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam12.setValue01("停止");
+            pSwg215OneParam12.setColor01(normalStopColor);
+        }
+        pSwg215OneParam12.setValue01Scale(0.3f);
+        pSwg215OneParam12.setValue02(String.valueOf(bldCglDosing01RunMin));
+        pSwg215OneParam12.setColor02(defaultColor);
+        pSwg215OneParam12.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam12);
+        //助凝剂01搅拌机
+        PSwg215OneParam pSwg215OneParam13 = new PSwg215OneParam("助凝剂01搅拌机：","left",0.4f,2,"center");
+        if (astCglMixer01Run) {
+            pSwg215OneParam13.setValue01("运行");
+            pSwg215OneParam13.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam13.setValue01("停止");
+            pSwg215OneParam13.setColor01(normalStopColor);
+        }
+        pSwg215OneParam13.setValue01Scale(0.3f);
+        pSwg215OneParam13.setValue02(String.valueOf(astCglMixer01RunMin));
+        pSwg215OneParam13.setColor02(defaultColor);
+        pSwg215OneParam13.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam13);
+        //助凝剂01加药泵
+        PSwg215OneParam pSwg215OneParam14 = new PSwg215OneParam("助凝剂01加药泵：","left",0.4f,2,"center");
+        if (astCglDosing01Run) {
+            pSwg215OneParam14.setValue01("运行");
+            pSwg215OneParam14.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam14.setValue01("停止");
+            pSwg215OneParam14.setColor01(normalStopColor);
+        }
+        pSwg215OneParam14.setValue01Scale(0.3f);
+        pSwg215OneParam14.setValue02(String.valueOf(astCglDosing01RunMin));
+        pSwg215OneParam14.setColor02(defaultColor);
+        pSwg215OneParam14.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam14);
+        //调节初沉池污泥泵-sbr
+        if(sbrA2o == 0) {
+            PSwg215OneParam pSwg215OneParam15 = new PSwg215OneParam("调节初沉池污泥泵：", "left", 0.4f, 2, "center");
+            if (pmySinkPumpRun) {
+                pSwg215OneParam15.setValue01("运行");
+                pSwg215OneParam15.setColor01(normalRunColor);
+            } else {
+                pSwg215OneParam15.setValue01("停止");
+                pSwg215OneParam15.setColor01(normalStopColor);
+            }
+            pSwg215OneParam15.setValue01Scale(0.3f);
+            pSwg215OneParam15.setValue02(String.valueOf(pmySinkPumpRunMin));
+            pSwg215OneParam15.setColor02(defaultColor);
+            pSwg215OneParam15.setValue02Scale(0.3f);
+            pSwg215OneParams.add(pSwg215OneParam15);
+        }
+
+        return pSwg215OneParams;
+    }
+
+    private List<PSwg215OneParam> formatPart03(int sbrA2o){
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        List<PSwg215OneParam> pSwg215OneParams = new ArrayList<>();
+
+        //污泥池搅拌机
+        PSwg215OneParam pSwg215OneParam01 = new PSwg215OneParam("污泥池搅拌机：","left",0.4f,2,"center");
+        if (sludgeMixerRun) {
+            pSwg215OneParam01.setValue01("运行");
+            pSwg215OneParam01.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam01.setValue01("停止");
+            pSwg215OneParam01.setColor01(normalStopColor);
+        }
+        pSwg215OneParam01.setValue01Scale(0.3f);
+        pSwg215OneParam01.setValue02(String.valueOf(sludgeMixerRunMin));
+        pSwg215OneParam01.setColor02(defaultColor);
+        pSwg215OneParam01.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam01);
+        //泥水分离机进泥泵
+        PSwg215OneParam pSwg215OneParam02 = new PSwg215OneParam("泥水分离机进泥泵：","left",0.4f,2,"center");
+        if (slySeprtInPumpRun) {
+            pSwg215OneParam02.setValue01("运行");
+            pSwg215OneParam02.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam02.setValue01("停止");
+            pSwg215OneParam02.setColor01(normalStopColor);
+        }
+        pSwg215OneParam02.setValue01Scale(0.3f);
+        pSwg215OneParam02.setValue02(String.valueOf(slySeprtInPumpRunMin));
+        pSwg215OneParam02.setColor02(defaultColor);
+        pSwg215OneParam02.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam02);
+        //絮凝剂加药泵
+        PSwg215OneParam pSwg215OneParam03 = new PSwg215OneParam("絮凝剂加药泵：","left",0.4f,2,"center");
+        if (flocltDosingRun) {
+            pSwg215OneParam03.setValue01("运行");
+            pSwg215OneParam03.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam03.setValue01("停止");
+            pSwg215OneParam03.setColor01(normalStopColor);
+        }
+        pSwg215OneParam03.setValue01Scale(0.3f);
+        pSwg215OneParam03.setValue02(String.valueOf(flocltDosingRunMin));
+        pSwg215OneParam03.setColor02(defaultColor);
+        pSwg215OneParam03.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam03);
+        //絮凝剂搅拌机
+        PSwg215OneParam pSwg215OneParam04 = new PSwg215OneParam("絮凝剂搅拌机：","left",0.4f,2,"center");
+        if (flocltMixerRun) {
+            pSwg215OneParam04.setValue01("运行");
+            pSwg215OneParam04.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam04.setValue01("停止");
+            pSwg215OneParam04.setColor01(normalStopColor);
+        }
+        pSwg215OneParam04.setValue01Scale(0.3f);
+        pSwg215OneParam04.setValue02(String.valueOf(flocltMixerRunMin));
+        pSwg215OneParam04.setColor02(defaultColor);
+        pSwg215OneParam04.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam04);
+        //泥水分离机
+        PSwg215OneParam pSwg215OneParam05 = new PSwg215OneParam("泥水分离机：","left",0.4f,2,"center");
+        if (slySeprtRun) {
+            pSwg215OneParam05.setValue01("运行");
+            pSwg215OneParam05.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam05.setValue01("停止");
+            pSwg215OneParam05.setColor01(normalStopColor);
+        }
+        pSwg215OneParam05.setValue01Scale(0.3f);
+        pSwg215OneParam05.setValue02(String.valueOf(slySeprtRunMin));
+        pSwg215OneParam05.setColor02(defaultColor);
+        pSwg215OneParam05.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam05);
+
+        return pSwg215OneParams;
+    }
+
+    public static List<PSwg215OneParam> formatA2OPart04(){
+        String defaultColor = "#000000"; //Black
+        String normalRunColor = "#00FF00"; //Green
+        String normalStopColor = "#FFA500"; //Orange
+        String alarmColor = "#CDCD00";   //LightYellow
+        List<PSwg215OneParam> pSwg215OneParams = new ArrayList<>();
+
+        //厌氧池进水泵
+        PSwg215OneParam pSwg215OneParam01 = new PSwg215OneParam("厌氧池进水泵：","left",0.4f,2,"center");
+        if (uasbInPumpRun) {
+            pSwg215OneParam01.setValue01("运行");
+            pSwg215OneParam01.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam01.setValue01("停止");
+            pSwg215OneParam01.setColor01(normalStopColor);
+        }
+        pSwg215OneParam01.setValue01Scale(0.3f);
+        pSwg215OneParam01.setValue02(String.valueOf(uasbInPumpRunMin));
+        pSwg215OneParam01.setColor02(defaultColor);
+        pSwg215OneParam01.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam01);
+        //内回流泵
+        PSwg215OneParam pSwg215OneParam02 = new PSwg215OneParam("内回流泵：","left",0.4f,2,"center");
+        if (inBfPumpRun) {
+            pSwg215OneParam02.setValue01("运行");
+            pSwg215OneParam02.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam02.setValue01("停止");
+            pSwg215OneParam02.setColor01(normalStopColor);
+        }
+        pSwg215OneParam02.setValue01Scale(0.3f);
+        pSwg215OneParam02.setValue02(String.valueOf(inBfPumpRunMin));
+        pSwg215OneParam02.setColor02(defaultColor);
+        pSwg215OneParam02.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam02);
+        //外回流泵
+        PSwg215OneParam pSwg215OneParam03 = new PSwg215OneParam("外回流泵：","left",0.4f,2,"center");
+        if (outBfPumpRun) {
+            pSwg215OneParam03.setValue01("运行");
+            pSwg215OneParam03.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam03.setValue01("停止");
+            pSwg215OneParam03.setColor01(normalStopColor);
+        }
+        pSwg215OneParam03.setValue01Scale(0.3f);
+        pSwg215OneParam03.setValue02(String.valueOf(outBfPumpRunMin));
+        pSwg215OneParam03.setColor02(defaultColor);
+        pSwg215OneParam03.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam03);
+        //厌氧池搅拌机
+        PSwg215OneParam pSwg215OneParam04 = new PSwg215OneParam("厌氧池搅拌机：","left",0.4f,2,"center");
+        if (uasbMixerRun) {
+            pSwg215OneParam04.setValue01("运行");
+            pSwg215OneParam04.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam04.setValue01("停止");
+            pSwg215OneParam04.setColor01(normalStopColor);
+        }
+        pSwg215OneParam04.setValue01Scale(0.3f);
+        pSwg215OneParam04.setValue02(String.valueOf(uasbMixerRunMin));
+        pSwg215OneParam04.setColor02(defaultColor);
+        pSwg215OneParam04.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam04);
+        //缺氧池搅拌机
+        PSwg215OneParam pSwg215OneParam05 = new PSwg215OneParam("缺氧池搅拌机：","left",0.4f,2,"center");
+        if (anoxiaMixerRun) {
+            pSwg215OneParam05.setValue01("运行");
+            pSwg215OneParam05.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam05.setValue01("停止");
+            pSwg215OneParam05.setColor01(normalStopColor);
+        }
+        pSwg215OneParam05.setValue01Scale(0.3f);
+        pSwg215OneParam05.setValue02(String.valueOf(anoxiaMixerRunMin));
+        pSwg215OneParam05.setColor02(defaultColor);
+        pSwg215OneParam05.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam05);
+        //二沉池污泥泵
+        PSwg215OneParam pSwg215OneParam06 = new PSwg215OneParam("二沉池污泥泵：","left",0.4f,2,"center");
+        if (secSinkPumpRun) {
+            pSwg215OneParam06.setValue01("运行");
+            pSwg215OneParam06.setColor01(normalRunColor);
+        } else {
+            pSwg215OneParam06.setValue01("停止");
+            pSwg215OneParam06.setColor01(normalStopColor);
+        }
+        pSwg215OneParam06.setValue01Scale(0.3f);
+        pSwg215OneParam06.setValue02(String.valueOf(secSinkPumpRunMin));
+        pSwg215OneParam06.setColor02(defaultColor);
+        pSwg215OneParam06.setValue02Scale(0.3f);
+        pSwg215OneParams.add(pSwg215OneParam06);
+
+        return pSwg215OneParams;
     }
 }
