@@ -1,11 +1,9 @@
 package com.system.po.Phone.PhoneSewageC01;
 
-import com.system.po.Device.BaseDeviceMessage;
-import com.system.po.Device.SewageC01DMHis;
-import com.system.po.Device.SewageC212DMHis;
-import com.system.po.Device.SewageC214DMHis;
+import com.system.po.Device.*;
 import com.system.po.Phone.PhoneSewageC212.PSC212HisDataContent;
 import com.system.po.Phone.PhoneSewageC214.PSC214HisDataContent;
+import com.system.po.Phone.Pswg215.PSC215HisDataContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +79,17 @@ public class PSC01HisMsgInfo {
             for (Object sewageC214DMHis : sewageCDMHisList
                     ) {
                 PSC01HisDataContent psc01HisDataContent = new PSC214HisDataContent((SewageC214DMHis)sewageC214DMHis);
+                psc01HisDataContentList.add(psc01HisDataContent);
+            }
+            this.psc01HisDataContentList = psc01HisDataContentList;
+        } else if (devType.equals("215")) {
+            this.dSerialNum = ((SwgC215DMHis)sewageCDMHisList.get(0)).getDSerialNum();
+            this.dName = ((SwgC215DMHis)sewageCDMHisList.get(0)).getDName();
+            this.psc01HisDataHeadList = ((SwgC215DMHis)sewageCDMHisList.get(0)).getDevicePhoneHead();
+            List<PSC01HisDataContent> psc01HisDataContentList = new ArrayList<PSC01HisDataContent>();
+            for (Object sewageC215DMHis : sewageCDMHisList
+            ) {
+                PSC01HisDataContent psc01HisDataContent = new PSC215HisDataContent((SwgC215DMHis)sewageC215DMHis);
                 psc01HisDataContentList.add(psc01HisDataContent);
             }
             this.psc01HisDataContentList = psc01HisDataContentList;

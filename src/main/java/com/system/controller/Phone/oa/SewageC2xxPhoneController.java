@@ -10,6 +10,8 @@ import com.system.po.Phone.PhoneSewageC01.PSC01HisMsgInfo;
 import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealData;
 import com.system.po.Phone.PhoneSewageC01.PhoneSewageC01RealMsgInfo;
 import com.system.po.Phone.PhoneTree;
+import com.system.po.Phone.Pswg215.PSwg215OnePart;
+import com.system.po.Phone.Pswg215.PSwgC215RealMsgInfo;
 import com.system.po.RoleInfo;
 import com.system.po.UserOAEas;
 import com.system.service.*;
@@ -717,8 +719,8 @@ public class SewageC2xxPhoneController extends BaseController{
         SwgC215DM sewageC215DM = getRealSewageC215DMByUserIdAndDevNum(userId, devNum);
         String jsonString = JSON.toJSONString(ResponseUtil.setResponsFaild("未查询到有效数据！"));
         if (sewageC215DM != null) {
-            PhoneSewageC01RealMsgInfo phoneSewageC215RealMsgInfo = getOneRealDeviceInfoDetail215(sewageC215DM);
-            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(phoneSewageC215RealMsgInfo));
+            PSwgC215RealMsgInfo pSwgC215RealMsgInfo = getOneRealDeviceInfoDetail215(sewageC215DM);
+            jsonString = JSON.toJSONString(ResponseUtil.setResponseOk(pSwgC215RealMsgInfo));
         }
         return jsonString;
     }
@@ -852,16 +854,16 @@ public class SewageC2xxPhoneController extends BaseController{
         return sewageC215DM;
     }
 
-    private PhoneSewageC01RealMsgInfo getOneRealDeviceInfoDetail215(SwgC215DM sewageC215DM) {
-        PhoneSewageC01RealMsgInfo phoneSewageC01RealMsgInfo = new PhoneSewageC01RealMsgInfo();
+    private PSwgC215RealMsgInfo getOneRealDeviceInfoDetail215(SwgC215DM sewageC215DM) {
+        PSwgC215RealMsgInfo pSwgC215RealMsgInfo = new PSwgC215RealMsgInfo();
 
         //形成信号信息
-        List<PhoneSewageC01RealData> phoneSewageC01RealDataList = sewageC215DM.getPhoneRealMsgInfoDetail();
+        List<PSwg215OnePart> pSwg215OneParts = sewageC215DM.getPhoneRealMsgInfoDetail();
         //形成设备信息
-        phoneSewageC01RealMsgInfo.setDevName(sewageC215DM.getDName());
-        phoneSewageC01RealMsgInfo.setDevNum(sewageC215DM.getDSerialNum());
-        phoneSewageC01RealMsgInfo.setPhoneSewageC01RealDataList(phoneSewageC01RealDataList);
-        return phoneSewageC01RealMsgInfo;
+        pSwgC215RealMsgInfo.setDevName(sewageC215DM.getDName());
+        pSwgC215RealMsgInfo.setDevNum(sewageC215DM.getDSerialNum());
+        pSwgC215RealMsgInfo.setPSwg215OneParts(pSwg215OneParts);
+        return pSwgC215RealMsgInfo;
     }
     /**************************************215 end*************************/
 }

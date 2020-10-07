@@ -2,6 +2,7 @@ package com.system.po.Device;
 
 import com.system.po.MydataTableColumn;
 import com.system.po.Phone.PhoneRealMsgInfo;
+import com.system.po.Phone.PhoneSewageC01.PSC01HisDataHead;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -3662,4 +3663,37 @@ public class SwgC215DMHis extends BaseDeviceMessage {
         return myDTCList;
     }
 
+    public List<PSC01HisDataHead> getDevicePhoneHead() {
+        List<PSC01HisDataHead> psc01HisDataHeadList = new ArrayList<PSC01HisDataHead>();
+
+        //时间
+        PSC01HisDataHead psc01HisDataHead01 = new PSC01HisDataHead("时间","0.2","sendDate");
+        psc01HisDataHeadList.add(psc01HisDataHead01);
+
+        //累计流量
+        PSC01HisDataHead psc01HisDataHead02 = new PSC01HisDataHead("累计流量","0.1","flowmeter");
+        psc01HisDataHeadList.add(psc01HisDataHead02);
+
+        //当日流量
+        PSC01HisDataHead psc01HisDataHead03 = new PSC01HisDataHead("当日流量","0.1","todayFlowmeter");
+        psc01HisDataHeadList.add(psc01HisDataHead03);
+
+        //累计电量
+        PSC01HisDataHead psc01HisDataHead04 = new PSC01HisDataHead("累计电量","0.1","impEP");
+        psc01HisDataHeadList.add(psc01HisDataHead04);
+
+        //当日电量
+        PSC01HisDataHead psc01HisDataHead05 = new PSC01HisDataHead("当日电量","0.1","todayEP");
+        psc01HisDataHeadList.add(psc01HisDataHead05);
+
+        //SBR池水温
+        PSC01HisDataHead psc01HisDataHead06 = new PSC01HisDataHead("水温","0.1","waterTemp");
+        psc01HisDataHeadList.add(psc01HisDataHead06);
+
+        //环境温度
+        PSC01HisDataHead psc01HisDataHead07 = new PSC01HisDataHead("环境","0.1","airTemp");
+        psc01HisDataHeadList.add(psc01HisDataHead07);
+
+        return psc01HisDataHeadList;
+    }
 }
