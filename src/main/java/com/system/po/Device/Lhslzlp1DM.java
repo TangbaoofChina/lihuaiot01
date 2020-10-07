@@ -150,6 +150,7 @@ public class Lhslzlp1DM extends BaseDeviceMessage {
         phoneRealMsgInfo03.setTitle("调制器温度");
         phoneRealMsgInfo03.setValue(String.valueOf(this.getTemp()));
         phoneRealMsgInfo03.setFlag("0");
+        phoneRealMsgInfo03.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();

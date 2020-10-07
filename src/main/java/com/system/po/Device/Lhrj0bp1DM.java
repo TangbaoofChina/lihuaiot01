@@ -86,6 +86,7 @@ public class Lhrj0bp1DM extends BaseDeviceMessage {
         phoneRealMsgInfo01.setTitle("饮水量");
         phoneRealMsgInfo01.setValue(String.valueOf(this.getWater())+ "℃");
         phoneRealMsgInfo01.setFlag("0");
+        phoneRealMsgInfo01.setHasHis(true);
         phoneRealMsgInfoList.add(phoneRealMsgInfo01);
 
         PhoneRealMsgInfo phoneRealMsgInfo02 = new PhoneRealMsgInfo();
