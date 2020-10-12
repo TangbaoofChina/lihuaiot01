@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+//用户绑定组织-暂停使用
 @Controller
 @RequestMapping("/peopleCombineOrg")
 public class PeopleCombineOrgController {

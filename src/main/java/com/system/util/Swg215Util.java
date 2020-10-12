@@ -23,7 +23,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart01 = new PSwg215OnePart();
         pSwg215OnePart01.setRow(9);
         pSwg215OnePart01.setTitle("基本信息");
-        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01(0,dm);
+        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01("SBR",dm);
         pSwg215OnePart01.setPSwg215OneParams(pSwg215OneParams01);
         pSwg215OneParts.add(pSwg215OnePart01);
 
@@ -31,7 +31,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart02 = new PSwg215OnePart();
         pSwg215OnePart02.setRow(15);
         pSwg215OnePart02.setTitle("预处理系统");
-        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02(0,dm);
+        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02("SBR",dm);
         pSwg215OnePart02.setPSwg215OneParams(pSwg215OneParams02);
         pSwg215OneParts.add(pSwg215OnePart02);
 
@@ -39,7 +39,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart03 = new PSwg215OnePart();
         pSwg215OnePart03.setRow(5);
         pSwg215OnePart03.setTitle("泥水分离系统");
-        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03(0,dm);
+        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03("SBR",dm);
         pSwg215OnePart03.setPSwg215OneParams(pSwg215OneParams03);
         pSwg215OneParts.add(pSwg215OnePart03);
 
@@ -69,7 +69,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart01 = new PSwg215OnePart();
         pSwg215OnePart01.setRow(9);
         pSwg215OnePart01.setTitle("基本信息");
-        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01(1,dm);
+        List<PSwg215OneParam> pSwg215OneParams01 = formatPart01("A2O",dm);
         pSwg215OnePart01.setPSwg215OneParams(pSwg215OneParams01);
         pSwg215OneParts.add(pSwg215OnePart01);
 
@@ -77,7 +77,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart02 = new PSwg215OnePart();
         pSwg215OnePart02.setRow(14);
         pSwg215OnePart02.setTitle("预处理系统");
-        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02(1,dm);
+        List<PSwg215OneParam> pSwg215OneParams02 = formatPart02("A2O",dm);
         pSwg215OnePart02.setPSwg215OneParams(pSwg215OneParams02);
         pSwg215OneParts.add(pSwg215OnePart02);
 
@@ -85,7 +85,7 @@ public class Swg215Util {
         PSwg215OnePart pSwg215OnePart03 = new PSwg215OnePart();
         pSwg215OnePart03.setRow(5);
         pSwg215OnePart03.setTitle("泥水分离系统");
-        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03(1,dm);
+        List<PSwg215OneParam> pSwg215OneParams03 = formatPart03("A2O",dm);
         pSwg215OnePart03.setPSwg215OneParams(pSwg215OneParams03);
         pSwg215OneParts.add(pSwg215OnePart03);
 
@@ -108,7 +108,7 @@ public class Swg215Util {
         return pSwg215OneParts;
     }
 
-    public static List<PSwg215OneParam> formatPart01(int sbrA2o,SwgC215DM dm){
+    public static List<PSwg215OneParam> formatPart01(String sbrA2o,SwgC215DM dm){
         String defaultColor = "#000000"; //Black
         String normalRunColor = "#00FF00"; //Green
         String normalStopColor = "#FFA500"; //Orange
@@ -175,7 +175,7 @@ public class Swg215Util {
         pSwg215OneParams.add(pSwg215OneParam08);
         //主要工艺
         PSwg215OneParam pSwg215OneParam09 = new PSwg215OneParam("工艺：","left",0.5f,1,"center");
-        if (sbrA2o == 0) {
+        if (sbrA2o .equals("SBR")) {
             pSwg215OneParam09.setValue01("SBR");
         } else {
             pSwg215OneParam09.setValue01("A2O");
@@ -187,7 +187,7 @@ public class Swg215Util {
         return pSwg215OneParams;
     }
 
-    public static List<PSwg215OneParam> formatPart02(int sbrA2o,SwgC215DM dm){
+    public static List<PSwg215OneParam> formatPart02(String sbrA2o,SwgC215DM dm){
         String defaultColor = "#000000"; //Black
         String normalRunColor = "#00FF00"; //Green
         String normalStopColor = "#FFA500"; //Orange
@@ -391,7 +391,7 @@ public class Swg215Util {
         pSwg215OneParam14.setValue02Scale(0.3f);
         pSwg215OneParams.add(pSwg215OneParam14);
         //调节初沉池污泥泵-sbr
-        if(sbrA2o == 0) {
+        if(sbrA2o .equals("SBR")) {
             PSwg215OneParam pSwg215OneParam15 = new PSwg215OneParam("调节初沉池污泥泵：", "left", 0.4f, 2, "center");
             if (dm.getPmySinkPumpRun()) {
                 pSwg215OneParam15.setValue01("运行");
@@ -410,7 +410,7 @@ public class Swg215Util {
         return pSwg215OneParams;
     }
 
-    public static List<PSwg215OneParam> formatPart03(int sbrA2o,SwgC215DM dm){
+    public static List<PSwg215OneParam> formatPart03(String sbrA2o,SwgC215DM dm){
         String defaultColor = "#000000"; //Black
         String normalRunColor = "#00FF00"; //Green
         String normalStopColor = "#FFA500"; //Orange

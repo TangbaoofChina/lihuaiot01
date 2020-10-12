@@ -3695,15 +3695,19 @@ public class SwgC215DM extends BaseDeviceMessage {
         phoneRealMsgInfoList.add(phoneRealMsgInfo03);
 
         PhoneRealMsgInfo phoneRealMsgInfo04 = new PhoneRealMsgInfo();
-        phoneRealMsgInfo04.setId("sbrCycle");
-        phoneRealMsgInfo04.setTitle("SBR周期运行：");
-        phoneRealMsgInfo04.setValue("运行");
+        phoneRealMsgInfo04.setId("spare431");
+        phoneRealMsgInfo04.setTitle("工艺流程：");
+        if(this.getSpare431() == 1) {
+            phoneRealMsgInfo04.setValue("SBR");
+        }else{
+            phoneRealMsgInfo04.setValue("A2O");
+        }
         phoneRealMsgInfo04.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo04);
 
         PhoneRealMsgInfo phoneRealMsgInfo07 = new PhoneRealMsgInfo();
         phoneRealMsgInfo07.setId("waterTemp01");
-        phoneRealMsgInfo07.setTitle("SBR池水温：");
+        phoneRealMsgInfo07.setTitle("水温：");
         phoneRealMsgInfo07.setValue(String.valueOf(waterTemp01) + "℃");
         phoneRealMsgInfo07.setFlag("0");
         phoneRealMsgInfoList.add(phoneRealMsgInfo07);
@@ -3727,8 +3731,8 @@ public class SwgC215DM extends BaseDeviceMessage {
 
     public List<PSwg215OnePart> getPhoneRealMsgInfoDetail() {
         List<PSwg215OnePart> pSwg215OneParts = new ArrayList<PSwg215OnePart>();
-        int sbrA2o = this.getSpare475476();
-        if(sbrA2o == 0){
+        int sbrA2o = this.getSpare431();
+        if(sbrA2o == 1){  //1:SBR;2:A2O
         //默认 SBR工艺
             pSwg215OneParts = Swg215Util.formatSBR(this);
         }else{

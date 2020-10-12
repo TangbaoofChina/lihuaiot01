@@ -36,6 +36,7 @@ $(function () {
     rdlInitTableLhty02p1();
     rdlInitTableLhrj0bp1();
     rdlInitTableLhslzlp1();
+    rdlInitTableLhsf0ap1();
     rdlExportStorageAction();
     //定时刷新数据
     realid_of_setintervalDeviceList = setInterval(function () {

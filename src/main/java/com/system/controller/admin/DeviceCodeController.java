@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+//报警代码管理-暂停使用
 @Controller
 @RequestMapping("/deviceCode")
 public class DeviceCodeController {

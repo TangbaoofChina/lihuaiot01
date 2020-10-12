@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+//用户管理
 @Controller
 @RequestMapping("/roleCombinePeople")
 public class RoleCombinePeopleController {

@@ -19,6 +19,7 @@ import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.List;
 
+//组织管理+树形菜单
 @Controller
 @RequestMapping("/bootStrapTreeNode")
 public class BootStrapTreeViewController {

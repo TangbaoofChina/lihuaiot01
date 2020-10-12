@@ -1,4 +1,4 @@
-//设备代码
+//设备代码-暂停使用
 var dcAlarmTableColumns;
 var dcErrorTableColumns;
 var dcSelectRole;

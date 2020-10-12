@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//设备清单
 @Controller
 @RequestMapping("/devicelistbytype")
 public class DeviceListByTypeController {
